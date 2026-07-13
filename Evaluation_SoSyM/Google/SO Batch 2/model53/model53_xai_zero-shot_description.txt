@@ -1,0 +1,69 @@
+**Multi-Perspective Declare Model: Theatrical Production Process**
+
+This model describes the end-to-end lifecycle of producing and closing a theatrical play, incorporating both **control-flow constraints** and **data-aware (multi-perspective) conditions**.
+
+### Core Activities
+The process includes the following 15 activities:
+
+- **Write Play Script**
+- **Cast Actors**
+- **Design Set**
+- **Build Set**
+- **Design Costumes**
+- **Sew Costumes**
+- **Rehearse Play**
+- **Promote Play**
+- **Sell Tickets**
+- **Perform Play**
+- **Review Performance**
+- **Pay Royalties**
+- **Strike Set**
+- **Store Costumes**
+- **Archive Script**
+
+### Data Perspectives (Bindings)
+Each activity is linked to relevant data parameters:
+
+- **Write Play Script** → *Play Genre* (Comedy, Drama, Musical, Tragedy)
+- **Cast Actors** → *Actor Count* (integer 2–20)
+- **Design Set** → *Set Complexity* (integer 1–10)
+- **Build Set** → *Budget Amount* (float 1,000.0–50,000.0)
+- **Design Costumes** → *Costume Count* (integer 5–50)
+- **Promote Play** → *Promotion Spend* (float 100.0–10,000.0)
+- **Rehearse Play** → *Rehearsal Hours* (integer 10–100)
+- **Sell Tickets** → *Ticket Price* (float 5.0–100.0)
+- **Perform Play** → *Performance Quality* (Excellent, Good, Average, Poor)
+- **Pay Royalties** → *Royalty Percentage* (integer 5–20)
+
+### Declarative Constraints
+
+#### **Mandatory & Existence Constraints**
+- **Write Play Script** must be executed **at least once** at the beginning of the process (Init).
+- **Perform Play** must occur **at least once** in every valid trace (Existence).
+
+#### **Control-Flow Constraints**
+- **Cast Actors** and **Rehearse Play** must both occur, and **Cast Actors** must precede **Rehearse Play** (Response + Precedence).
+- **Design Set** must precede **Build Set** (Precedence).
+- **Promote Play** and **Sell Tickets** are mutually dependent — if one occurs, the other must also occur (Co-Existence).
+- After **Review Performance**, **Pay Royalties** must **not** occur (Not Response).
+- **Write Play Script** must eventually be followed by **Sell Tickets** (Response), but only when the play is a **Comedy** and the **Ticket Price is ≤ $50**.
+
+#### **Timed/Data-Aware Response Constraints**
+The model also includes several **timed response constraints** with deadlines:
+
+- After **Perform Play**:
+  - Pay Royalties must occur within **7 days**.
+  - Strike Set must occur within **1 day**.
+  - Store Costumes must occur within **1 day**.
+
+- After **Write Play Script**, the **Archive Script** activity must occur within **30 days**.
+
+- After **Cast Actors**, **Rehearse Play** must begin within **1 hour**.
+
+- After **Design Costumes**, **Sew Costumes** must begin within **24 hours**.
+
+- After **Design Set**, **Build Set** must begin within **7 days**.
+
+---
+
+**Summary**: This is a **multi-perspective Declare model** for theater production that combines traditional declarative workflow constraints with data conditions (e.g., genre and pricing) and temporal deadlines, ensuring that artistic, logistical, and financial aspects of a play production are properly coordinated.

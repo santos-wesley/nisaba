@@ -1,0 +1,38 @@
+activity Submit Timesheet
+activity Approve Timesheet
+activity Calculate Gross Pay
+activity Calculate Deductions
+activity Calculate Net Pay
+activity Process Payment
+activity Update Payroll Records
+activity Review Payroll Report
+activity Generate and Distribute Paystub
+bind Submit Timesheet: Employee ID, Hours Worked, Timesheet Status
+bind Approve Timesheet: Employee ID, Timesheet Status
+bind Calculate Gross Pay: Employee ID, Hours Worked, Pay Rate, Gross Pay
+bind Calculate Deductions: Employee ID, Gross Pay, Tax Deduction, Insurance Deduction
+bind Calculate Net Pay: Employee ID, Gross Pay, Tax Deduction, Insurance Deduction, Net Pay
+bind Process Payment: Employee ID, Net Pay, Payment Method
+bind Update Payroll Records: Employee ID, Gross Pay, Tax Deduction, Insurance Deduction, Net Pay, Payment Method
+bind Review Payroll Report: Employee ID
+bind Generate and Distribute Paystub: Employee ID, Net Pay, Payment Method
+Employee ID: integer between 1000 and 9999
+Hours Worked: integer between 0 and 80
+Pay Rate: float between 10.0 and 100.0
+Gross Pay: float between 0.0 and 10000.0
+Tax Deduction: float between 0.0 and 5000.0
+Insurance Deduction: float between 0.0 and 1000.0
+Net Pay: float between 0.0 and 10000.0
+Timesheet Status: Submitted, Approved, Rejected
+Payment Method: Direct Deposit, Check
+Init[Submit Timesheet] | |
+Response[Submit Timesheet, Approve Timesheet] | | |
+Response[Approve Timesheet, Calculate Gross Pay] |A.Timesheet Status is Approved | |
+Response[Calculate Gross Pay, Calculate Deductions] | | |
+Response[Calculate Deductions, Calculate Net Pay] | | |
+Response[Calculate Net Pay, Process Payment] | | |
+Response[Process Payment, Update Payroll Records] | | |
+Response[Update Payroll Records, Review Payroll Report] | | |
+Response[Review Payroll Report, Generate and Distribute Paystub] | | |
+Not Response[Approve Timesheet, Submit Timesheet] |A.Timesheet Status is Rejected | |
+Existence[Generate and Distribute Paystub] | |

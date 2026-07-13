@@ -1,0 +1,10 @@
+# Editor/session backup files
+*bak
+
+# Python caches
+__pycache__/
+*.pyc
+
+# DMRST neural discourse parser (~1.2 GB incl. checkpoint) — third-party clone,
+# not versioned here; see README "DMRST parser" for how to obtain it
+Evaluation_SoSyM/DMRST_Parser/

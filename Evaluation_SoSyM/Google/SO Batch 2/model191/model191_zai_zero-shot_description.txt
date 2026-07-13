@@ -1,0 +1,30 @@
+This Multi-Perspective Declare model outlines a comprehensive, end-to-end business process for handling product returns. The model not only defines the sequential execution of activities but also attaches specific data attributes, variable ranges, and strict time constraints to govern the workflow. 
+
+Here is a natural language description of the model:
+
+### 1. Process Overview and Initiation
+The return process begins with the **Request Return** activity, which is the designated starting point of the workflow. When a customer initiates a return, the system binds a unique **Return ID** (an integer between 1000 and 9999), a **Return Reason** (categorizing the return as Defective, Damaged, Wrong Item, or No Longer Needed), and an initial **Return Status** of "Requested" to the case.
+
+### 2. Approval and Label Generation
+Once a return is requested, the system must respond by executing the **Approve Return** activity. This step must occur within **24 hours** of the initial request. Upon approval, the Return Status updates to "Approved". 
+Following approval, the system must generate a return label (**Generate Return Label**). This must happen almost immediately, within **30 minutes** of the approval. 
+
+### 3. Shipping and Receiving
+After the label is generated, the customer must **Ship Item Back**. This activity captures data regarding the shipment, including the **Shipping Method** (UPS, FedEx, or USPS), the **Shipping Cost** (up to $50.00), and the allowed **Days to Return** (between 1 and 60 days). 
+The customer has a window of **1 to 14 days** post-approval to actually ship the item back. Once shipped, the warehouse must **Receive Item**. Upon receipt, the Return Status updates to "Received".
+
+### 4. Item Inspection
+The received item must undergo an **Inspect Item** activity. This step is bound by a strict time constraint: it must be executed within **48 hours** of the item being received. During inspection, the warehouse evaluates the item, assigning an **Item Condition** score (an integer from 1 to 5) and an **Inspection Result** (Acceptable, Damaged, or Unacceptable). The Return Status is then updated to "Inspected".
+
+### 5. Refund Determination and Processing
+Following the inspection, the process moves to **Determine Refund**, where a **Refund Amount** (a decimal value up to $1000.00) is calculated. 
+Once the refund amount is determined, the system must **Process Refund**. This activity is constrained by a time delay: it must occur between **0 and 2 days** after the refund has been determined. Upon completion, the Return Status is marked as "Refunded".
+
+### 6. Item Disposition (Restock or Dispose)
+The fate of the physical item is determined conditionally based on the data payload generated during the Inspection activity:
+*   If the **Inspection Result is "Acceptable"**, the system must execute **Restock Item**. This activity records the **Restock Quantity** (an integer between 1 and 100) and updates the Return Status to "Restocked".
+*   If the **Inspection Result is "Damaged" or "Unacceptable"**, the system must execute **Dispose Item** instead. This updates the Return Status to "Disposed".
+
+### Summary of Data and Time Constraints
+*   **Data Payloads:** The model tracks a continuous **Return Status** throughout the lifecycle. It captures categorical data (Return Reason, Shipping Method, Inspection Result), numerical metrics (Item Condition, Days to Return, Restock Quantity), and financial/cost attributes (Refund Amount, Shipping Cost).
+*   **Time Constraints:** The process is highly time-sensitive. Approvals must happen within 24 hours, label generation within 30 minutes of approval, shipping within 1 to 14 days, inspection within 48 hours of receipt, and refund processing within 0 to 2 days of determination.

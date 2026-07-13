@@ -1,0 +1,45 @@
+activity Report Disease Outbreak
+activity Verify Outbreak Report
+activity Initiate Investigation
+activity Collect Samples
+activity Analyze Samples
+activity Confirm Disease
+activity Implement Control Measures
+activity Inform Public
+activity Monitor Disease Spread
+activity Declare End of Outbreak
+bind Report Disease Outbreak: Report Source, Number of Cases
+bind Verify Outbreak Report: Investigation Result
+bind Confirm Disease: Disease Type, Mortality Rate
+bind Implement Control Measures: Control Measures, Days to Control
+bind Inform Public: Public Response
+Report Source: Hospital, Clinic, Public, Other
+Number of Cases: integer between 1 and 1000
+Disease Type: Influenza, COVID-19, Measles, Cholera
+Mortality Rate: float between 0.0 and 100.0
+Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing
+Days to Control: integer between 1 and 365
+Investigation Result: Confirmed, False Alarm, Inconclusive
+Public Response: Cooperative, Anxious, Resistant
+Init[Report Disease Outbreak] | |
+End[Declare End of Outbreak] | |
+Existence[Collect Samples] | |
+Existence[Analyze Samples] | |
+Absence2[Declare End of Outbreak] | |
+Exactly[Confirm Disease] | |
+Responded Existence[Implement Control Measures, Inform Public] | | |
+Precedence[Initiate Investigation, Verify Outbreak Report] | |T.Investigation Result is Confirmed |
+Precedence[Confirm Disease, Analyze Samples] | | |
+Response[Report Disease Outbreak, Verify Outbreak Report] | | |
+Response[Confirm Disease, Implement Control Measures] |A.Mortality Rate > 0 | |
+Succession[Collect Samples, Analyze Samples] | | |
+Alternate Response[Implement Control Measures, Monitor Disease Spread] | | |
+Chain Response[Verify Outbreak Report, Initiate Investigation] |A.Investigation Result is Confirmed | |
+Chain Succession[Confirm Disease, Implement Control Measures] | | |
+Co-Existence[Implement Control Measures, Monitor Disease Spread] | | |
+Choice[Inform Public, Monitor Disease Spread] | | |
+Not Co-Existence[Declare End of Outbreak, Implement Control Measures] | | |
+Not Responded Existence[Declare End of Outbreak, Report Disease Outbreak] | | |
+Not Precedence[Declare End of Outbreak, Confirm Disease] | | |
+Not Response[Declare End of Outbreak, Initiate Investigation] | | |
+Not Chain Succession[Report Disease Outbreak, Declare End of Outbreak] | | |

@@ -1,0 +1,47 @@
+activity Plan Event
+activity Book Venue
+activity Send Invitations
+activity Arrange Catering
+activity Hire Staff
+activity Set Up Venue
+activity Conduct Rehearsal
+activity Welcome Guests
+activity Facilitate Activities
+activity Deliver Speech
+activity Serve Meals
+activity Coordinate Photography
+activity Distribute Gifts
+activity Collect Feedback
+activity Tear Down Venue
+bind Plan Event: Event ID, Budget
+bind Book Venue: Event ID, Venue
+bind Send Invitations: Number of Guests, Invitation Status
+bind Arrange Catering: Catering Service
+bind Hire Staff: Staff Role
+bind Conduct Rehearsal: Rehearsal ID
+bind Serve Meals: Catering Service
+bind Collect Feedback: Event ID, Venue
+Event ID: integer between 1 and 999999
+Budget: float between 1000.0 and 50000.0
+Venue: Hall A, Hall B, Hall C
+Number of Guests: integer between 10 and 500
+Invitation Status: Sent, Not Sent
+Catering Service: Buffet, Sit-down Dinner, Cocktail
+Staff Role: Waiter, Coordinator, Cleaner
+Rehearsal ID: integer between 1 and 9999
+Init[Plan Event] | |
+End[Tear Down Venue] | |
+Precedence[Book Venue, Plan Event] | | |
+Precedence[Send Invitations, Book Venue] | | |
+Precedence[Arrange Catering, Send Invitations] | | |
+Precedence[Hire Staff, Arrange Catering] | | |
+Precedence[Set Up Venue, Hire Staff] | | |
+Precedence[Conduct Rehearsal, Set Up Venue] | | |
+Precedence[Welcome Guests, Conduct Rehearsal] | | |
+Precedence[Facilitate Activities, Welcome Guests] | | |
+Precedence[Deliver Speech, Facilitate Activities] | | |
+Precedence[Serve Meals, Deliver Speech] | | |
+Precedence[Coordinate Photography, Serve Meals] | | |
+Precedence[Distribute Gifts, Coordinate Photography] | | |
+Precedence[Collect Feedback, Distribute Gifts] | | |
+Precedence[Tear Down Venue, Collect Feedback] | | |

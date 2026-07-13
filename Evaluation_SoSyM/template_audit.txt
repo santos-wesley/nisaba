@@ -1,0 +1,219 @@
+=== declare4py ORACLE (traces [A,B] [B,A] [A] [B], vacuity=True; act=#activations) ===
+Responded Existence        {'[A,B]': 'SATISFIED(act1)', '[A]': 'VIOLATED(act1)', '[B,A]': 'SATISFIED(act1)', '[B]': 'SATISFIED(act0)'}
+Response                   {'[A,B]': 'SATISFIED(act1)', '[A]': 'VIOLATED(act1)', '[B,A]': 'VIOLATED(act1)', '[B]': 'SATISFIED(act0)'}
+Alternate Response         {'[A,B]': 'SATISFIED(act1)', '[A]': 'VIOLATED(act1)', '[B,A]': 'VIOLATED(act1)', '[B]': 'SATISFIED(act0)'}
+Chain Response             {'[A,B]': 'SATISFIED(act1)', '[A]': 'VIOLATED(act1)', '[B,A]': 'VIOLATED(act1)', '[B]': 'SATISFIED(act0)'}
+Precedence                 {'[A,B]': 'SATISFIED(act1)', '[A]': 'SATISFIED(act0)', '[B,A]': 'VIOLATED(act1)', '[B]': 'VIOLATED(act1)'}
+Alternate Precedence       {'[A,B]': 'SATISFIED(act1)', '[A]': 'SATISFIED(act0)', '[B,A]': 'VIOLATED(act1)', '[B]': 'VIOLATED(act1)'}
+Chain Precedence           {'[A,B]': 'SATISFIED(act1)', '[A]': 'SATISFIED(act0)', '[B,A]': 'VIOLATED(act1)', '[B]': 'VIOLATED(act1)'}
+Succession                 {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Alternate Succession       {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Chain Succession           {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Co-Existence               {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Choice                     {'[A,B]': 'SATISFIED(actNone)', '[A]': 'SATISFIED(actNone)', '[B,A]': 'SATISFIED(actNone)', '[B]': 'SATISFIED(actNone)'}
+Exclusive Choice           {'[A,B]': 'VIOLATED(actNone)', '[A]': 'SATISFIED(actNone)', '[B,A]': 'VIOLATED(actNone)', '[B]': 'SATISFIED(actNone)'}
+Not Co-Existence           {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Not Succession             {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Not Chain Succession       {'[A,B]': 'CHK-ERR:TypeError', '[A]': 'CHK-ERR:TypeError', '[B,A]': 'CHK-ERR:TypeError', '[B]': 'CHK-ERR:TypeError'}
+Not Responded Existence    {'[A,B]': 'VIOLATED(act1)', '[A]': 'SATISFIED(act1)', '[B,A]': 'VIOLATED(act1)', '[B]': 'SATISFIED(act0)'}
+Not Response               {'[A,B]': 'VIOLATED(act1)', '[A]': 'SATISFIED(act1)', '[B,A]': 'SATISFIED(act1)', '[B]': 'SATISFIED(act0)'}
+Not Precedence             {'[A,B]': 'VIOLATED(act1)', '[A]': 'SATISFIED(act0)', '[B,A]': 'SATISFIED(act1)', '[B]': 'SATISFIED(act1)'}
+Not Chain Response         {'[A,B]': 'VIOLATED(act1)', '[A]': 'SATISFIED(act1)', '[B,A]': 'SATISFIED(act1)', '[B]': 'SATISFIED(act0)'}
+Not Chain Precedence       {'[A,B]': 'VIOLATED(act1)', '[A]': 'SATISFIED(act0)', '[B,A]': 'SATISFIED(act1)', '[B]': 'SATISFIED(act1)'}
+
+=== PROMPT TEMPLATE DEFINITIONS (semantics) ===
+
+[Absence[n][Activation]]
+  Activation must not occur n times in the process.
+
+[Exactly[n][Activation]]
+  Activation must occur exactly n times in the process.
+
+[Existence[n][Activation]]
+  Activation must occur at least n times in the process.
+
+[Init[Activation]]
+  Activation must be the first activity to occur in the process.
+
+[End[Activation]]
+  Activation must be the last activity to occur in the process.
+
+[Alternate Precedence[Target, Activation]]
+  An Activation event can occur only if it was immediately preceded by a Target event, and no other Target event is allowed between that Target and the Activation. This ensures a one-to-one and ordered pairing between Targets and Activations, preventing any Activation from occurring without the necessary prior Target and avoiding overlapping or multiple Targets before an Activation.
+
+[Alternate Response[Activation, Target]]
+  If an Activation occurs, then a Target must occur after that Activation and before any subsequent Activation occurs no other occurrence of Activation is allowed between an Activation and its corresponding Target. This ensures that each Activation is individually responded to by a Target in sequence.
+
+[Alternate Succession[Activation, Target]]
+  Each occurrence of an Activation must eventually be followed by a Target, and each occurrence of a Target must be preceded by an Activation, with no intermediate occurrences of Activation or Target between them. This ensures a strict one-to-one and ordered pairing between Activations and Targets, preventing any overlapping or interruption by additional Activations or Targets in the sequence.
+
+[Chain Precedence[Target, Activation]]
+  A Target event can occur only if it is immediately preceded by an Activation event, with no other events occurring in between. There can be multiple Activation-Target pairs within the process, each adhering to this immediate precedence rule. Activations may occur without being followed by a Target, but Targets cannot occur without such an immediate preceding Activation.
+
+[Chain Response[Activation, Target]]
+  Whenever an Activation occurs, it must be immediately followed by a Target in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from Activation to Target. Multiple Activation-Target pairs can exist in a process instance, each adhering to this immediate succession rule. Events of Target can occur elsewhere in the process but not between an Activation and its corresponding Target.
+
+[Chain Succession[Activation, Target]]
+  Whenever an Activation event occurs, it must be immediately followed by a Target event, with no other events in between. Conversely, whenever a Target event occurs, it must be immediately preceded by an Activation event, with no other events in between. This enforces a strict one-to-one and immediate pairing of Activations and Targets, ensuring that neither occurs without the other and that they occur consecutively without interruption.
+
+[Co-Existence[Activation, Target]]
+  If Activation occurs in a process instance, then Target must also occur in the same process instance, and vice versa. This mutual obligation ensures that neither event can occur without the other. The events can occur multiple times and in any order relative to each other. If neither event occurs, the constraint is still considered satisfied.
+
+[Precedence[Target, Activation]]
+  An Activation event is permitted to occur only if a Target event has occurred before it within the same process instance. Activations that occur without any prior Target are violations of the constraint. Multiple Targets can occur, and any number of events (including other Activations) can happen between a Target and a subsequent Activation. This ensures that certain actions cannot proceed without the necessary prerequisites being met first.
+
+[Responded Existence[Activation, Target]]
+  If Activation occurs in a process instance, then Target must also occur at least once within the same process instance, either before or after the Activation. If Activation does not occur, there is no requirement for Target to occur. Multiple occurrences of Activation are satisfied by at least one occurrence of Target, and multiple Targets are allowed.
+
+[Response[Activation, Target]]
+  If an Activation occurs, then a Target must eventually occur after the Activation at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple Activations can be pending at the same time, and a single Target can fulfill the obligation for all preceding Activations. If Activation does not occur, the constraint imposes no obligation on the occurrence of Target.
+
+[Succession[Activation, Target]]
+  An Activation event must be followed by a Target event at some point later in the same process instance. Conversely, a Target event can occur only if an Activation event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that Activations impose obligations for future Targets, and Targets cannot occur without prior Activations. Multiple Activations and Targets are allowed, with each Activation eventually leading to a Target and each Target being justified by a preceding Activation..
+
+[Not Chain Succession[Activation, Target]]
+  An Activation event cannot be immediately followed by a Target event; there must be at least one other event between them. Similarly, a Target event cannot be immediately preceded by an Activation event. This constraint allows multiple occurrences of Activations and Targets in any order, provided they are not adjacent in the event sequence.
+
+[Not Co-Existence[Activation, Target]]
+  The Activation event and the Target event cannot both occur within the same process instance. This means that if Activation occurs one or more times, Target must not occur at all in that process instance, and vice versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between Activation and Target, allowing for different process variants based on which event (if any) occurs.
+
+[Not Succession[Activation, Target]]
+  An Activation event and a Target event must not occur such that the Activation is followed by the Target at any point later in the same process instance. Similarly, a Target event must not be preceded by an Activation event. This means that once an Activation occurs, Target cannot occur afterward, and if a Target occurs, it cannot have been preceded by an Activation. Both events can occur in the same process instance, but not in the prohibited sequence.
+
+[Not Chain Precedence[Target, Activation]]
+  A Target event cannot be directly preceded by an Activation event, meaning that a Target cannot occur immediately after an Activation without any intervening events.
+
+[Not Chain Response[Activation, Target]]
+  An Activation event cannot be directly followed by a Target event, meaning that a Target cannot occur immediately after an Activation without any intervening events.
+
+[Not Precedence[Target, Activation]]
+  An Activation event cannot be preceded by a Target event within the same process instance. This means that if any Target event has occurred before an Activation event in the process instance, then that Activation is disallowed. Multiple Activations and Targets can occur, but all instances of the Activation must occur before any instance of the Target.
+
+[Not Responded Existence[Activation, Target]]
+  If an Activation event occurs in a process instance, then a Target event must not occur anywhere in the same process instance after the Activation. This means that the occurrence of Activation prohibits any subsequent occurrence of Target. However, if Activation does not occur, Target may occur freely. Multiple occurrences of Activation are allowed, provided Target does not occur at all in the process instance.
+
+[Not Response[Activation, Target]]
+  An Activation event must not be followed by a Target event at any point later in the same process instance. This means that once an Activation occurs, Target cannot occur afterward. However, Target events occurring before the Activation are permitted. The constraint ensures that after the occurrence of Activation, the process does not allow any further occurrences of Target.
+
+[Choice[Activation, Target]]
+  At least one of the activities Activation or Target must occur in the process instance. This means that the process is compliant if Activation occurs, Target occurs, or both occur. There is no restriction on the order or the number of times they occur. However, if neither Activation nor Target occurs, the constraint is violated.
+
+[Exclusive Choice[Activation, Target]]
+  Exactly one of the activities Activation or Target must occur in the process instance. This means that the process is compliant if only Activation occurs without any occurrence of Target, or only Target occurs without any occurrence of Activation. The process is non-compliant if both Activation and Target occur, or if neither occurs. The constraint enforces a mutual exclusivity and a mandatory occurrence of one of the specified activities.
+
+[Not Response[Submit Application, Reject Application] | | |]
+  
+
+
+=== PROMPT FEW-SHOT EXAMPLES ===
+
+[activity Plan Event]
+  The 'Plan Event' activity represents the planning phase for organizing an event.
+
+[activity Collect Feedback]
+  The 'Collect Feedback' activity includes gathering feedback from guests and staff about the event.
+
+[activity Coordinate Photography]
+  The 'Coordinate Photography' activity involves managing photography services to capture moments during the event.
+
+[User ID: Integer between 1 and 1000]
+  The attribute 'User ID: Integer between 1 and 1000' represents the user's identification number for authentication purposes.
+
+[User Password: Float between 1000000 and 9000000]
+  The attribute 'User Password: Float between 1000000 and 9000000' represents the user's password for login.
+
+[Product Type: Cloths, radio, computer, notebook, food, chocolate]
+  The attribute 'Product Type: cloths, radio, computer, notebook, food, chocolate' specifies the types of products available for purchase.
+
+[bind Driving Test: Driver, Grade]
+  The bind 'Driving Test: Driver, Grade' specifies that the activity 'Driving Test' requires the attributes 'Driver' and 'Grade'.
+
+[bind Book Venue: Event ID, Venue]
+  The bind 'Book Venue: Event ID, Venue' links the 'Book Venue' activity with the attributes 'Event ID' and 'Venue'.
+
+[bind Hire Staff: Event ID, Staff Role]
+  The bind 'Hire Staff: Event ID, Staff Role' links the 'Hire Staff' activity with the attributes 'Event ID' and 'Staff Role'.
+
+[Init[Plan Event] | |]
+  The 'Plan Event' must be the first activity to occur in the process.
+
+[End[Collect Feedback] | |]
+  The 'Collect Feedback' must be the last activity to occur in the process.
+
+[Existence[Conduct Internal Audit] | |]
+  The 'Conduct Internal Audit' activity must occur at least once in the process.
+
+[Existence4[Declare Contigency] | |]
+  The 'Declare Contigency' activity must occur at least 4 times in the process.
+
+[Absence[Stop Process] | |]
+  The 'Stop Process' must not occur in the process.
+
+[Absence3[Retry Access] | |]
+  The 'Retry Access' must not occur 3 times in the process.
+
+[Exactly[Send Message] | |]
+  The 'Send Message' activity must occur exactly once in the process.
+
+[Exactly5[Get Medicines] | |]
+  The 'Get Medicines' activity must occur exactly 5 times in the process.
+
+[Alternate Precedence[Pay Bill, Get Goods] | | |]
+  The 'Get Goods' activity can occur only if it was immediately preceded by a 'Pay Bill' activity, and no other 'Pay Bill' event is allowed between the 'Pay Bill' and the 'Get Goods'.
+
+[Alternate Response[Walk in the Park, Drink Water]]
+  If 'Walk in the Park' activity occurs, then 'Drink Water' activity  must occur after that 'Walk in the Park' event and before any subsequent 'Walk in the Park' occurs no other occurrence of 'Walk in the Park'is allowed between an 'Walk in the Park' and 'Drink Water'.
+
+[Alternate Succession[Open Browser, Login] | | |]
+  Each occurrence of a 'Open Browser' activity must eventually be followed by a 'Login' activity, and each occurrence of a 'Login' must be preceded by 'Open Browser', with no intermediate occurrences of 'Open Browser' or 'Login' between them.
+
+[Chain Precedence[Finish Process, Review Process] | | |]
+  The 'Finish Process' activity can occur only if it is immediately preceded by 'Review Process' activity, with no other activities occurring in between.
+
+[Chain Response[Buy Medicine, Recover] | | |]
+  Whenever a 'Buy Medicine' activity occurs, it must be immediately followed by a 'Recover' activity in the next event position, with no other events in between. The 'Recover' activity is allowed to happen isolated.
+
+[Chain Succession[Open the Door, Close the Door] | | |]
+  Whenever a 'Open the Door' activity occurs, it must be immediately followed by a 'Close the Door' activity, with no other events in between. Conversely, whenever a 'Close the Door' event occurs, it must be immediately preceded by a 'Open the Door' event, with no other events in between.
+
+[Co-Existence[Send Inquiry, Execute Demand] | | |]
+  If 'Send Inquiry' activity occurs, then 'Execute Demand' must also occur in the same process instance, and vice-versa.
+
+[Precedence[Serve Meals, Deliver Speech] | | |]
+  The 'Serve Meals' activity is permitted to occur only if a 'Deliver Speech' activity has occurred before it within the same process instance.
+
+[Responded Existence[Login, Logout] | | |]
+  If 'Login' activity occurs in a process instance, then 'Logout' activity must also occur at least once within the same process instance, either before or after the 'Login' event. If 'Login' does not occur, there is no requirement for 'Logout' to occur. Multiple occurrences of 'Login' are satisfied by at least one occurrence of 'Logout', and multiple 'Logout' instances are allowed.
+
+[Response[Open Browser, Fill URL] | | |]
+  If a 'Open Browser' activity occurs, then a 'Fill URL' activity must eventually occur after the 'Open Browser' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Open Browser' can be pending at the same time, and a single 'Fill URL' can fulfill the obligation for all preceding 'Open Browser'. If 'Open Browser' does not occur, the constraint imposes no obligation on the occurrence of 'Fill URL'.
+
+[Succession[Open Umbrella, Close Umbrella] | | |]
+  A 'Open Umbrella' activity must be followed by a 'Close Umbrella' activity at some point later in the same process instance. Conversely, a 'Close Umbrella' event can occur only if an 'Open Umbrella' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Open Umbrella' impose obligations for future 'Close Umbrella', and 'Close Umbrella' cannot occur without prior 'Open Umbrella'. Multiple 'Open Umbrella' and 'Close Umbrella' are allowed, with each 'Open Umbrella' eventually leading to a 'Close Umbrella' and each 'Close Umbrella' being justified by a preceding 'Open Umbrella'.
+
+[Not Chain Succession[Style Hair, Take a Shower] | | |]
+  A 'Style Hair' activity cannot be immediately followed by a 'Take a Shower' activity; there must be at least one other event between them. Similarly, a 'Take a Shower' event cannot be immediately preceded by a 'Style Hair' event. This constraint allows multiple occurrences of 'Style Hair' and 'Take a Shower' in any order, provided they are not adjacent in the event sequence.
+
+[Not Co-Existence[Go to Party, Stay at Home] | | |]
+  The 'Go to Party' activity and the 'Stay at Home' activity cannot both occur within the same process instance. This means that if 'Go to Party' event occurs one or more times, 'Stay at Home' must not occur at all in that process instance, and vice-versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between 'Go to Party' and 'Stay at Home', allowing for different process variants based on which event (if any) occurs.
+
+[Not Succession[Eat Food, Run] | | |]
+  The 'Eat Food' activity and 'Run' activity must not occur such that the 'Eat Food' event is followed by the 'Run' event at any point later in the same process instance. Similarly, a 'Run' event must not be preceded by an 'Eat Food' event. This means that once an 'Eat Food' occurs, 'Run' cannot occur afterward, and if 'Run' event occurs, it cannot have been preceded by an 'Eat Food' event. Both events can occur in the same process instance, but not in the prohibited sequence.
+
+[Not Chain Precedence[Order Confirmation, Order Placement] | | |]
+  The 'Order Confirmation' activity cannot be directly preceded by an 'Order Placement' activity, meaning that a 'Order Confirmation' event cannot occur immediately after an 'Order Placement' without any intervening events.
+
+[Not Chain Response[Submit Order, Confirm Order] | | |]
+  The 'Submit Order' activity cannot be directly followed by a 'Confirm Order' activity, meaning that a 'Confirm Order' event cannot occur immediately after a 'Submit Order' without any intervening events.
+
+[Not Precedence[Approve Order, Process Payment] | | |]
+  A 'Process Payment' activity cannot be preceded by a 'Approve Order' within the same process instance. If a 'Approve Order' event has occurred at any point before a 'Process Payment' event, then 'Process Payment' is disallowed. Multiple instances of 'Process Payment' and 'Approve Order' can occur, but all instances of 'Process Payment' must occur before any instance of 'Approve Order'.
+
+[Not Responded Existence[Submit Order, Cancel Order] | | |]
+  If a 'Submit Order' activity occur in a process instance, then a 'Cancel Order' activity must not occur anywhere in the same process instance after the 'Submit Order' event. This means that the occurrence of 'Submit Order' event prohibits any subsequent occurrence of 'Cancel Order' event. However, if 'Submit Order' does not occur, 'Cancel Order' may occur freely. Multiple occurrences of 'Submit Order' are allowed, provided 'Cancel Order' does not occur at all in the process instance.
+
+[Choice[Receive Payment, Issue Refund] | | |]
+  At least one of the activities 'Receive Payment' or 'Issue Refund' must occur in the process instance. This means that the process is compliant if 'Receive Payment' event occurs, 'Issue Refund' event occurs, or both occur. There is no restriction on the order or the number of times they occur. However, if neither 'Receive Payment' nor 'Issue Refund' occurs, the constraint is violated.
+
+[Exclusive Choice[Approve Application, Reject Application] | | |]
+  Exactly one of the activities 'Approve Application' or 'Reject Application' must occur in the process instance. This means that the process is compliant if only 'Approve Application' event occurs without any occurrence of 'Reject Application' event, or only 'Reject Application' occurs without any occurrence of 'Approve Application'. The process is non-compliant if both 'Approve Application' and 'Reject Application' occur, or if neither occurs. The constraint enforces a mutual exclusivity and a mandatory occurrence of one of the specified activities.

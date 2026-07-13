@@ -1,0 +1,9 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a disaster response workflow triggered by seismic activity. The process begins with **monitoring seismic activity**, which records a **Seismic Magnitude** (an integer from 0 to 10). Once seismic activity is detected, an **early warning** must be issued as a direct response, and the warning level can be **Low, Medium, High, or Critical**. Issuing the early warning immediately and necessarily triggers the **activation of the emergency response**, which tracks a **Response Status** (Initiated, Ongoing, or Completed).
+
+After activation, **rescue teams** are deployed (up to 50 teams), and this deployment leads to the provision of **medical assistance**, which tracks the number of **injured people** (up to 10,000). Medical assistance then leads to the **distribution of relief supplies** (up to 20,000 units), but this distribution must occur within 24 hours of the medical assistance being provided.
+
+In parallel, an **assessment of disaster risk** is conducted, producing a **Risk Score** (a float from 0.0 to 100.0). If the risk score exceeds 70, two actions must follow: the **evacuation of the affected population** (up to 50,000 people) and the **establishment of temporary shelters** (up to 20 shelters).
+
+Finally, a **damage assessment** must be completed before relief supplies can be distributed, and this assessment produces a **Damage Estimate** (a float up to 1 billion). The entire process is initiated by monitoring seismic activity, with no other starting activities.

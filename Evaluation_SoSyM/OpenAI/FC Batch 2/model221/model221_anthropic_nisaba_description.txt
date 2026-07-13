@@ -1,0 +1,147 @@
+#MP-Declare Model
+## Activities
+- **Analyze International Market**: The 'Analyze International Market' activity represents the process of examining and evaluating international market conditions.
+- **Identify Business Opportunities**: The 'Identify Business Opportunities' activity involves recognizing potential business opportunities in the market.
+- **Conduct Feasibility Study**: The 'Conduct Feasibility Study' activity involves assessing the practicality and viability of a proposed business venture.
+- **Develop Business Plan**: The 'Develop Business Plan' activity involves creating a strategic plan outlining business goals and the methods to achieve them.
+- **Acquire Necessary Permits**: The 'Acquire Necessary Permits' activity involves obtaining the required legal permits and authorizations for business operations.
+- **Set Up International Office**: The 'Set Up International Office' activity involves establishing a physical office presence in an international location.
+- **Hire Local Staff**: The 'Hire Local Staff' activity involves recruiting and hiring employees from the local workforce.
+- **Initiate Marketing Campaign**: The 'Initiate Marketing Campaign' activity involves launching promotional activities to market products or services.
+- **Establish Supply Chain**: The 'Establish Supply Chain' activity involves setting up the network of processes to deliver products or services.
+- **Negotiate with Local Vendors**: The 'Negotiate with Local Vendors' activity involves discussing and agreeing on terms with local suppliers and vendors.
+- **Monitor Market Response**: The 'Monitor Market Response' activity involves tracking and evaluating how the market reacts to business activities.
+- **Adjust Strategy**: The 'Adjust Strategy' activity involves modifying business strategies based on performance and market feedback.
+- **Manage International Logistics**: The 'Manage International Logistics' activity involves overseeing the coordination and movement of goods and resources internationally.
+- **Assess Performance**: The 'Assess Performance' activity involves evaluating the results and effectiveness of business operations.
+- **Report to Headquarters**: The 'Report to Headquarters' activity involves communicating results and updates to the central corporate office.
+
+## Attributes
+- **Market Size: Integer between 1000 and 1000000**: The attribute 'Market Size: Integer between 1000 and 1000000' represents the size of the target market.
+- **Investment Amount: Float between 10000.0 and 1000000.0**: The attribute 'Investment Amount: Float between 10000.0 and 1000000.0' represents the amount of capital invested in the business venture.
+- **Market Attractiveness: High, Medium, Low**: The attribute 'Market Attractiveness: High, Medium, Low' specifies the level of attractiveness of the market being analyzed.
+- **Feasibility Status: Positive, Negative**: The attribute 'Feasibility Status: Positive, Negative' specifies whether the feasibility study determined the venture to be viable or not.
+- **Permit Status: Approved, Pending, Rejected**: The attribute 'Permit Status: Approved, Pending, Rejected' specifies the current status of the necessary permits.
+- **Staffing Level: High, Medium, Low**: The attribute 'Staffing Level: High, Medium, Low' specifies the level of staffing achieved for local hiring.
+- **Marketing Budget: Float between 5000.0 and 500000.0**: The attribute 'Marketing Budget: Float between 5000.0 and 500000.0' represents the budget allocated for the marketing campaign.
+- **Market Response: Positive, Neutral, Negative**: The attribute 'Market Response: Positive, Neutral, Negative' specifies the nature of the market's reaction to business activities.
+- **Strategy Adjustment: Yes, No**: The attribute 'Strategy Adjustment: Yes, No' specifies whether a strategy adjustment was made.
+- **Performance Evaluation: Excellent, Good, Fair, Poor**: The attribute 'Performance Evaluation: Excellent, Good, Fair, Poor' specifies the qualitative rating given to the assessed performance.
+
+## Binds
+- **bind Analyze International Market: Market Size, Market Attractiveness**: The bind 'Analyze International Market: Market Size, Market Attractiveness' specifies that the activity 'Analyze International Market' requires the attributes 'Market Size' and 'Market Attractiveness'.
+- **bind Conduct Feasibility Study: Investment Amount, Feasibility Status**: The bind 'Conduct Feasibility Study: Investment Amount, Feasibility Status' specifies that the activity 'Conduct Feasibility Study' requires the attributes 'Investment Amount' and 'Feasibility Status'.
+- **bind Acquire Necessary Permits: Permit Status**: The bind 'Acquire Necessary Permits: Permit Status' specifies that the activity 'Acquire Necessary Permits' requires the attribute 'Permit Status'.
+- **bind Hire Local Staff: Staffing Level**: The bind 'Hire Local Staff: Staffing Level' specifies that the activity 'Hire Local Staff' requires the attribute 'Staffing Level'.
+- **bind Initiate Marketing Campaign: Marketing Budget**: The bind 'Initiate Marketing Campaign: Marketing Budget' specifies that the activity 'Initiate Marketing Campaign' requires the attribute 'Marketing Budget'.
+- **bind Monitor Market Response: Market Response**: The bind 'Monitor Market Response: Market Response' specifies that the activity 'Monitor Market Response' requires the attribute 'Market Response'.
+- **bind Adjust Strategy: Strategy Adjustment**: The bind 'Adjust Strategy: Strategy Adjustment' specifies that the activity 'Adjust Strategy' requires the attribute 'Strategy Adjustment'.
+- **bind Assess Performance: Performance Evaluation**: The bind 'Assess Performance: Performance Evaluation' specifies that the activity 'Assess Performance' requires the attribute 'Performance Evaluation'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the international business expansion process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Analyze International Market,' which establishes the initial context by examining international market conditions using the 'Market Size' and 'Market Attractiveness' attributes. This activity sets the foundation upon which all subsequent expansion decisions are built.
+
+#### **End Constraints**
+The process concludes with the activity 'Report to Headquarters,' which involves communicating final results and updates to the central corporate office. As the concluding step, this activity draws together the outcomes of all preceding activities, providing a coherent closure to the international expansion process.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Conduct Feasibility Study' activity must occur at least once in the process. This ensures that the viability of the business venture, characterized by the 'Investment Amount' and 'Feasibility Status' attributes, is thoroughly assessed, adding depth and rigor to the decision-making process before further commitments are made.
+
+#### **Absence Constraint**
+In contrast, the activity 'Adjust Strategy' is restricted from occurring more than twice within the process. This exclusion reinforces process integrity by preventing excessive strategy revisions, ensuring that adjustments remain purposeful and controlled rather than indicative of an unstable process.
+
+#### **Exactly Constraint**
+Summarizing the frequency boundaries, the activity 'Assess Performance' must occur exactly once in the process, with its 'Performance Evaluation' attribute capturing a definitive judgment—Excellent, Good, Fair, or Poor—on the outcomes of the international expansion effort.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraint**
+As a consequence of conducting 'Negotiate with Local Vendors,' the activity 'Establish Supply Chain' must also occur somewhere in the process. This dependency ensures that vendor negotiations are meaningfully connected to the broader goal of building a functioning supply chain, reinforcing coherence between related operational activities.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. Setting an initial context for legal compliance, the activity 'Set Up International Office' is permitted to occur only if an 'Acquire Necessary Permits' activity has occurred before it, with the condition that the 'Permit Status is Approved.' This ensures that office establishment follows valid legal authorization.
+2. Similarly, the activity 'Initiate Marketing Campaign' is permitted to occur only if a 'Develop Business Plan' activity has occurred before it, guiding the logical sequence so that promotional efforts are grounded in a well-defined strategic plan.
+
+#### **Response Constraints**
+1. Following a cohesive temporal structure, if the 'Identify Business Opportunities' activity occurs, then the 'Conduct Feasibility Study' activity must occur afterward, ensuring that recognized opportunities are systematically evaluated for viability.
+2. In sequence, if the 'Monitor Market Response' activity occurs with the condition 'Market Response is Negative,' then the 'Adjust Strategy' activity must occur afterward with the condition 'Strategy Adjustment is Yes,' ensuring that unfavorable market feedback triggers a timely strategic correction.
+
+#### **Succession Constraints**
+Establishing a causal progression, whenever a 'Develop Business Plan' activity occurs, it must eventually be followed by an 'Acquire Necessary Permits' activity, and conversely, every occurrence of 'Acquire Necessary Permits' must be preceded by 'Develop Business Plan.' This mutual causal link ensures that permit acquisition logically follows strategic planning, creating a cohesive progression within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraint**
+To promote balanced process flow, each occurrence of 'Hire Local Staff' must be preceded by an occurrence of 'Set Up International Office,' without another 'Hire Local Staff' occurring in between. This condition-consequence relationship ensures order consistency, so staffing efforts are always grounded in an established office presence.
+
+#### **Alternate Response Constraint**
+Supporting clear one-to-one activity pairing, each occurrence of 'Initiate Marketing Campaign' must be followed by an occurrence of 'Monitor Market Response' before another 'Initiate Marketing Campaign' can take place. This ensures that every marketing effort is matched with a corresponding evaluation of its market impact.
+
+#### **Alternate Succession Constraint**
+Enforcing an ordered structure with unique pairings, each occurrence of 'Assess Performance' must be followed by 'Report to Headquarters,' and each 'Report to Headquarters' must be preceded by 'Assess Performance,' with no intervening occurrences of either activity. This ensures a clean, coherent reporting cycle tied directly to performance evaluation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraint**
+Establishing immediate dependency, the activity 'Negotiate with Local Vendors' must be directly preceded by 'Establish Supply Chain,' with no intervening events. This makes the sequence explicit, ensuring vendor negotiations happen right after supply chain groundwork is laid.
+
+#### **Chain Response Constraint**
+Capturing a direct cause-and-effect relationship, whenever 'Acquire Necessary Permits' occurs with the condition 'Permit Status is Approved,' it must be immediately followed by 'Set Up International Office,' with no other activities intervening, reflecting the urgency of capitalizing on approved permits.
+
+#### **Chain Succession Constraint**
+Enforcing a tightly coupled sequence, whenever 'Monitor Market Response' occurs, it must be immediately followed by 'Adjust Strategy,' and every occurrence of 'Adjust Strategy' must be immediately preceded by 'Monitor Market Response.' This ensures that strategic recalibration happens directly and without delay in response to market observations.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraint**
+Establishing mutual dependency, the activities 'Establish Supply Chain' and 'Manage International Logistics' must occur together within the process flow. Whenever one is present, the other must also occur, reflecting their intertwined operational necessity.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraint**
+Introducing alternative paths, the process allows flexibility by permitting either 'Negotiate with Local Vendors' or 'Hire Local Staff' to occur, accommodating different strategic approaches to local market entry without mandating both.
+
+#### **Exclusive Choice Constraint**
+Enforcing mutually exclusive pathways, exactly one of 'Adjust Strategy' or 'Report to Headquarters' must occur immediately following 'Assess Performance' with condition 'Performance Evaluation is Poor,' ensuring a clear branching decision based on performance outcomes.
+
+#### **Not Co-Existence Constraint**
+Setting exclusion rules, the 'Acquire Necessary Permits' activity and the 'Set Up International Office' activity cannot both occur within the same process instance if the conditions 'Permit Status is Rejected' and any office setup attempt are met. This exclusion maintains process integrity by preventing office establishment when necessary permits have been denied.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraint**
+Preventing certain dependencies, the occurrence of 'Conduct Feasibility Study' with condition 'Feasibility Status is Negative' ensures that 'Set Up International Office' does not occur in response, thus disallowing expansion investment when feasibility findings are unfavorable.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraint**
+Restricting activities from occurring in a specific order, 'Hire Local Staff' must not precede 'Acquire Necessary Permits,' ensuring that recruitment efforts do not begin before legal authorization is in place, thereby preserving the intended sequence of compliance before operational buildup.
+
+#### **Not Response Constraint**
+Preventing activities from following a specific sequence, if 'Conduct Feasibility Study' occurs with condition 'Feasibility Status is Negative,' then 'Develop Business Plan' must not occur afterward, maintaining the integrity of the model by halting progression when the venture is deemed unviable.
+
+#### **Not Succession Constraint**
+Restricting overlapping sequences, 'Adjust Strategy' must not be followed at any point by 'Analyze International Market' within the same process instance, preserving the model's defined flow by preventing regression to earlier analytical phases after strategic adjustments have been made.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraint**
+Enforcing non-immediate order restrictions, 'Monitor Market Response' must not be immediately preceded by 'Analyze International Market,' maintaining separation within the sequence so that market monitoring is understood as a later-stage activity distinct from initial analysis.
+
+#### **Not Chain Response Constraint**
+Preventing immediate succession, 'Identify Business Opportunities' must not be immediately followed by 'Set Up International Office,' preserving structural integrity by requiring intermediate planning and feasibility steps before physical establishment occurs.
+
+#### **Not Chain Succession Constraint**
+Preventing direct succession in either direction, 'Report to Headquarters' and 'Analyze International Market' must not immediately precede or follow each other, thereby refining the process model by excluding an immediate transition from final reporting back into initial market analysis, ensuring each process cycle remains distinct.

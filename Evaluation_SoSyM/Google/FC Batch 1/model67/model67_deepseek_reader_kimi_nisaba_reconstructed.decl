@@ -1,0 +1,44 @@
+activity Detect Fraudulent Activity
+activity Verify Customer Identity
+activity Review Transaction Details
+activity Approve Transaction
+activity Decline Transaction
+activity Report Suspicious Activity
+activity Update Account Security
+activity Notify Customer
+activity Investigate Security Breach
+activity Implement Security Patch
+bind Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level
+bind Verify Customer Identity: Verification Attempts, Verification Status
+bind Review Transaction Details: Transaction Type, Transaction Amount
+bind Approve Transaction: Transaction Type, Transaction Amount
+bind Decline Transaction: Transaction Type, Transaction Amount
+bind Report Suspicious Activity: Transaction Type, Transaction Amount
+bind Update Account Security: Days Since Last Activity
+bind Notify Customer: Customer Notification Method
+bind Investigate Security Breach: Breach Severity
+bind Implement Security Patch: Security Patch Status
+Transaction Type: Debit, Credit, Wire Transfer, Online Payment
+Transaction Amount: float between 0.01 and 100000.0
+Fraud Risk Level: Low, Medium, High
+Verification Attempts: integer between 1 and 5
+Verification Status: Verified, Not Verified, Pending
+Breach Severity: integer between 1 and 10
+Security Patch Status: Applied, Not Applied, Scheduled
+Customer Notification Method: Email, SMS, Phone Call
+Days Since Last Activity: integer between 0 and 365
+Init[Detect Fraudulent Activity] | |
+End[Implement Security Patch] | |
+Absence5[Detect Fraudulent Activity] | |
+Precedence[Approve Transaction, Verify Customer Identity] | | |
+Precedence[Review Transaction Details, Approve Transaction] |A.Transaction Amount > 1000 | |
+Response[Detect Fraudulent Activity, Notify Customer] | | |
+Response[Decline Transaction, Report Suspicious Activity] | | |
+Response[Investigate Security Breach, Implement Security Patch] | | |0,72,h
+Response[Review Transaction Details, Verify Customer Identity] |A.Transaction Amount > 1000 | |0,10,m
+Response[Detect Fraudulent Activity, Decline Transaction] |A.Fraud Risk Level is High | |0,5,m
+Response[Notify Customer, Update Account Security] |A.Customer Notification Method is SMS | |0,24,h
+Response[Investigate Security Breach, Implement Security Patch] |A.Breach Severity > 7 | |0,48,h
+Response[Implement Security Patch, Implement Security Patch] |A.Security Patch Status is Not Applied | |0,7,d
+Not Co-Existence[Approve Transaction, Decline Transaction] |A.Transaction Type is Debit AND A.Transaction Amount > 5000 |T.Transaction Type is Debit AND T.Transaction Amount > 5000 |
+Chain Succession[Investigate Security Breach, Implement Security Patch] |A.Breach Severity > 7 |T.Security Patch Status is Applied |0,48,h

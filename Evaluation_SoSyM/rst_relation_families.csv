@@ -1,0 +1,26 @@
+constraint_type,prescribed_relation,nisaba_aligned,nisaba_mentioned,zeroshot_aligned,zeroshot_mentioned,nisaba_rate,zeroshot_rate,gap
+Response,Sequence,721,728,604,720,0.99,0.839,0.151
+Precedence,Background,278,284,204,283,0.979,0.721,0.258
+Init,Background,156,156,110,154,1.0,0.714,0.286
+Chain Response,Cause-Effect,78,136,37,134,0.574,0.276,0.298
+End,Conclusion,93,100,74,100,0.93,0.74,0.19
+Succession,Cause-Effect,45,84,15,82,0.536,0.183,0.353
+Existence,Elaboration,59,68,46,64,0.868,0.719,0.149
+Choice,Contrast,19,56,8,55,0.339,0.145,0.194
+Co-Existence,Conjunction,17,36,22,36,0.472,0.611,-0.139
+Alternate Response,Condition-Consequence,31,32,14,32,0.969,0.438,0.531
+Responded Existence,Cause-Effect,16,32,7,32,0.5,0.219,0.281
+Not Co-Existence,Contrast,10,32,11,32,0.312,0.344,-0.032
+Not Response,Contrast,6,24,3,24,0.25,0.125,0.125
+Not Chain Succession,Contrast,8,24,2,24,0.333,0.083,0.25
+Chain Succession,Cause-Effect,11,24,5,24,0.458,0.208,0.25
+Chain Precedence,Sequence,15,20,13,20,0.75,0.65,0.1
+Exclusive Choice,Alternative,17,20,17,20,0.85,0.85,0.0
+Not Precedence,Contrast,7,16,1,16,0.438,0.062,0.376
+Not Succession,Contrast,3,16,2,16,0.188,0.125,0.063
+Absence,Contrast,12,16,6,16,0.75,0.375,0.375
+Exactly,Summary,11,12,12,12,0.917,1.0,-0.083
+Alternate Succession,Condition-Consequence,8,8,7,8,1.0,0.875,0.125
+Not Responded Existence,Contrast,5,8,3,8,0.625,0.375,0.25
+Alternate Precedence,Condition-Consequence,8,8,3,8,1.0,0.375,0.625
+Not Chain Response,Contrast,0,4,0,4,0.0,0.0,0.0

@@ -1,0 +1,96 @@
+#MP-Declare Model
+## Activities
+- **Collect Data**: The 'Collect Data' activity represents the process of gathering the necessary data points for analysis.
+- **Analyze Data**: The 'Analyze Data' activity involves examining the collected data to derive insights and assess accuracy.
+- **Draft Report**: The 'Draft Report' activity includes creating the initial version of the report based on the analyzed data.
+- **Review Report**: The 'Review Report' activity involves examining the drafted report for correctness and completeness.
+- **Approve Report**: The 'Approve Report' activity represents the formal approval or rejection of the reviewed report.
+- **Publish Report**: The 'Publish Report' activity involves releasing the approved report to its intended audience.
+- **Gather Feedback**: The 'Gather Feedback' activity includes collecting feedback on the published report from stakeholders.
+- **Revise Report**: The 'Revise Report' activity involves making changes to the report based on feedback received.
+
+## Attributes
+- **Data Points: Integer between 100 and 10000**: The attribute 'Data Points: Integer between 100 and 10000' represents the number of individual data points collected for analysis.
+- **Report Accuracy: Float between 0.0 and 100.0**: The attribute 'Report Accuracy: Float between 0.0 and 100.0' represents the accuracy percentage of the analyzed data in the report.
+- **Approval Status: Pending, Approved, Rejected**: The attribute 'Approval Status: Pending, Approved, Rejected' specifies the current approval state of the report.
+- **Feedback Type: Positive, Negative, Neutral**: The attribute 'Feedback Type: Positive, Negative, Neutral' specifies the sentiment classification of the feedback gathered on the report.
+- **Revision Count: Integer between 0 and 10**: The attribute 'Revision Count: Integer between 0 and 10' represents the number of times the report has been revised.
+
+## Binds
+- **bind Collect Data: Data Points**: The bind 'Collect Data: Data Points' specifies that the activity 'Collect Data' requires the attribute 'Data Points'.
+- **bind Analyze Data: Report Accuracy**: The bind 'Analyze Data: Report Accuracy' links the 'Analyze Data' activity with the attribute 'Report Accuracy'.
+- **bind Approve Report: Approval Status**: The bind 'Approve Report: Approval Status' links the 'Approve Report' activity with the attribute 'Approval Status'.
+- **bind Gather Feedback: Feedback Type**: The bind 'Gather Feedback: Feedback Type' links the 'Gather Feedback' activity with the attribute 'Feedback Type'.
+- **bind Revise Report: Revision Count**: The bind 'Revise Report: Revision Count' links the 'Revise Report' activity with the attribute 'Revision Count'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the report management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Collect Data,' establishing the foundational context in which the necessary data points, bound to the 'Data Points' attribute ranging between 100 and 10,000, are gathered for subsequent analysis. This sets the stage for all downstream activities within the report management process.
+
+#### **End Constraints**
+Bringing the process to a coherent close, the model concludes with the activity 'Gather Feedback,' which represents the collection of stakeholder feedback on the published report, classified through the 'Feedback Type' attribute as Positive, Negative, or Neutral. This activity finalizes the process, ensuring that the report lifecycle is completed with stakeholder input duly captured.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Analyze Data' activity must occur at least once in the process. This requirement adds depth to the process by ensuring that the collected data undergoes rigorous examination, with the 'Report Accuracy' attribute capturing the derived accuracy percentage, thereby reinforcing the reliability of subsequent reporting stages.
+
+#### **Absence Constraint**
+In contrast to the mandatory presence of certain activities, the 'Revise Report' activity is constrained such that it cannot occur more than a limited number of times within the process. This exclusion reinforces process integrity by preventing excessive or redundant revisions, ensuring that the reporting cycle remains efficient and controlled.
+
+#### **Exactly Constraint**
+Setting a fixed boundary within the model, the 'Approve Report' activity must occur exactly once in the process. This precise limitation ensures that the formal approval or rejection of the report, captured through the 'Approval Status' attribute, happens in a single, definitive instance, thereby anchoring the process with clarity and predictability.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraint**
+Establishing a necessary dependency, whenever the 'Gather Feedback' activity occurs, the 'Revise Report' activity must also occur at some point in the process, though not necessarily immediately after. This cause-effect relationship ensures that stakeholder feedback, once gathered, is duly acted upon through corresponding revisions, enhancing the coherence of the feedback loop within the model.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Analyze Data' is permitted to occur only if a 'Collect Data' activity has occurred before it. This background context ensures that data analysis is always grounded in previously gathered data points, establishing a logical sequence at the outset of the process.
+2. The activity 'Publish Report' is permitted to occur only if an 'Approve Report' activity, with the condition 'Approval Status is Approved,' has occurred before it. This guiding constraint ensures that only formally approved reports can be released to their intended audience, safeguarding the credibility of published content.
+
+#### **Response Constraints**
+1. If the 'Draft Report' activity occurs, then the 'Review Report' activity must occur subsequently. This ordered flow ensures that every drafted report undergoes a thorough examination for correctness and completeness, maintaining a cohesive temporal structure within the process.
+2. If the 'Review Report' activity occurs, then the 'Approve Report' activity must occur subsequently, with the condition 'Approval Status' being set accordingly. This sequence guarantees that a reviewed report is always followed by a formal approval decision, sustaining procedural continuity.
+
+#### **Succession Constraints**
+Whenever an 'Approve Report' activity occurs with the condition 'Approval Status is Approved,' it must eventually be followed by a 'Publish Report' activity, and conversely, every 'Publish Report' activity must be preceded by such an approval. This causal link ensures that report publication logically and necessarily follows formal approval, creating a cohesive progression from validation to dissemination within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraint**
+Each occurrence of the 'Gather Feedback' activity must be followed by a unique occurrence of the 'Revise Report' activity before any subsequent 'Gather Feedback' activity can take place. This condition-consequence relationship promotes balance by ensuring a clear one-to-one pairing between feedback collection and report revision, preventing overlapping or redundant feedback cycles.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraint**
+Whenever a 'Revise Report' activity occurs, with the condition 'Revision Count' being incremented accordingly, it must be immediately followed by a 'Review Report' activity, with no intervening activities. This cause-and-effect relationship captures the immediate succession required to ensure that every revision is promptly re-examined for quality assurance.
+
+### **Exclusivity Constraints**
+
+#### **Not Co-Existence Constraint**
+The 'Approve Report' activity with the condition 'Approval Status is Rejected' and the 'Publish Report' activity cannot both occur within the same process instance. This exclusion rule ensures that a rejected report is never published, thereby maintaining process integrity by preventing conflicting and contradictory events within the reporting workflow.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraint**
+The occurrence of the 'Collect Data' activity does not necessitate the occurrence of the 'Revise Report' activity, and vice versa. This constraint prevents an unwarranted dependency between these two activities, refining the model by disallowing any implicit contingency between early-stage data collection and later-stage revision efforts.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraint**
+The 'Publish Report' activity is restricted from occurring before the 'Draft Report' activity. This restriction ensures that the logical sequence of the reporting process is preserved, preventing the premature release of a report before its initial drafting has taken place.
+
+#### **Not Response Constraint**
+The 'Publish Report' activity must not be followed by a 'Draft Report' activity within the same process instance. This constraint maintains the integrity of the model's intended progression, ensuring that the drafting phase does not recur after a report has already been published.
+
+This concludes the interleaved narrative of the MP-Declare process model governing the report management process, weaving together trace-related, frequency, dependency, ordering, exclusivity, and negative constraints into a coherent depiction of the reporting lifecycle from data collection through feedback-driven revision.

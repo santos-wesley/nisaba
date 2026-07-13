@@ -1,0 +1,23 @@
+## Activities
+- **Plan Eco-Friendly Trip**: The 'Plan Eco-Friendly Trip' activity represents the planning phase for organizing a trip with a focus on environmental sustainability.
+- **Book Sustainable Accommodation**: The 'Book Sustainable Accommodation' activity involves reserving lodging options that adhere to sustainable and eco-friendly practices.
+- **Choose Green Transportation**: The 'Choose Green Transportation' activity involves selecting environmentally friendly modes of transportation for the trip.
+- **Participate in Local Conservation Efforts**: The 'Participate in Local Conservation Efforts' activity includes engaging in local initiatives aimed at preserving the environment and natural resources.
+- **Purchase Local Products**: The 'Purchase Local Products' activity involves buying goods produced by local communities to support the local economy.
+- **Attend Cultural Workshops**: The 'Attend Cultural Workshops' activity includes participating in workshops that showcase local culture and traditions.
+- **Evaluate Environmental Impact**: The 'Evaluate Environmental Impact' activity involves assessing the environmental effects caused by the trip activities.
+- **Provide Feedback to Hosts**: The 'Provide Feedback to Hosts' activity involves giving feedback to accommodation or service providers regarding the trip experience.
+- **Share Sustainable Practices**: The 'Share Sustainable Practices' activity involves communicating and promoting sustainable habits learned or practiced during the trip to others.
+
+## Attributes
+- **Accommodation Type: Eco-Lodge, Green Hotel, Hostel**: The attribute 'Accommodation Type: Eco-Lodge, Green Hotel, Hostel' specifies the types of sustainable accommodation options available for the trip.
+- **Transportation Mode: Bicycle, Electric Car, Train**: The attribute 'Transportation Mode: Bicycle, Electric Car, Train' specifies the types of environmentally friendly transportation options available for the trip.
+- **Feedback Rating: Excellent, Good, Average, Poor**: The attribute 'Feedback Rating: Excellent, Good, Average, Poor' specifies the possible ratings that can be given as feedback to hosts.
+
+## Binds
+- **Book Sustainable Accommodation: Accommodation Type**: The bind 'Book Sustainable Accommodation: Accommodation Type' links the 'Book Sustainable Accommodation' activity with the attribute 'Accommodation Type'.
+- **Choose Green Transportation: Transportation Mode**: The bind 'Choose Green Transportation: Transportation Mode' links the 'Choose Green Transportation' activity with the attribute 'Transportation Mode'.
+- **Provide Feedback to Hosts: Feedback Rating**: The bind 'Provide Feedback to Hosts: Feedback Rating' links the 'Provide Feedback to Hosts' activity with the attribute 'Feedback Rating'.
+
+## Constraints
+

@@ -1,0 +1,40 @@
+activity Define Project Scope
+activity Develop Frontend Interface
+activity Design Database Schema
+activity Implement Backend Logic
+activity Integrate Payment Gateway
+activity Test System Functionality
+activity Deploy Application to Server
+activity Monitor System Performance
+activity Gather User Feedback
+activity Update System Based on Feedback
+bind Define Project Scope: Project Status, Development Time
+bind Implement Backend Logic: Payment Method, Number of Users
+bind Test System Functionality: Transaction Volume, Number of Users
+bind Deploy Application to Server: Deployment Environment, Number of Bugs
+bind Gather User Feedback: User Satisfaction, Feedback Type
+Project Status: On Track, Delayed
+Development Time: integer between 0 and 10000
+Budget Allocated: float between 0 and 100000000
+Payment Method: Credit Card, PayPal, Bank Transfer, Cryptocurrency
+Number of Users: integer between 0 and 1000000
+Transaction Volume: integer between 0 and 1000000000
+Deployment Environment: Development, Staging, Production, Testing
+Number of Bugs: integer between 0 and 10000
+User Satisfaction: float between 1.0 and 5.0
+Feedback Type: Bug Report, Feature Request, General Feedback, Complaint
+Init[Define Project Scope] | |
+Precedence[Design Database Schema, Develop Frontend Interface] | | |
+Response[Implement Backend Logic, Integrate Payment Gateway] | | |
+Co-Existence[Test System Functionality, Deploy Application to Server] | | |
+Chain Succession[Deploy Application to Server, Monitor System Performance] | | |
+Not Precedence[Define Project Scope, Gather User Feedback] | | |
+Not Response[Define Project Scope, Update System Based on Feedback] | | |
+Exclusive Choice[Design Database Schema, Develop Frontend Interface] | | |
+Existence[Update System Based on Feedback] | |
+Absence6[Test System Functionality] | |
+Response[Define Project Scope, Design Database Schema] |A.Project Status is Delayed AND A.Development Time > 1000 | |
+Response[Implement Backend Logic, Integrate Payment Gateway] |A.Payment Method is Credit Card AND A.Number of Users > 1000 | |0,60,m
+Response[Deploy Application to Server, Monitor System Performance] |A.Deployment Environment is Production AND A.Number of Bugs < 10 | |0,24,h
+Response[Gather User Feedback, Update System Based on Feedback] |A.User Satisfaction < 3.0 AND A.Feedback Type is Bug Report | |0,1,d
+Response[Test System Functionality, Integrate Payment Gateway] |A.Transaction Volume > 1000000 AND A.Number of Users > 10000 | |0,7,d

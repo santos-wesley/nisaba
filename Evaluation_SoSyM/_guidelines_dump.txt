@@ -1,0 +1,127 @@
+
+
+########## GUIDELINES ##########
+
+#Trace-Related:
+    - Use Background for Init constraints to establish initial context.
+    - Apply Conclusion for End constraint to close the model coherently.
+    #Frequency:
+    - Use Elaboration for Existence constraints to add depth and context regarding the presence of activities within the process.
+    - Use Contrast for Absence constraints to highlight exclusions and reinforce process integrity by specifying what is not permissible.
+    - Apply Summary for Exactly constraints to set fixed boundaries on activity occurrences, ensuring precision within the process model.
+    #Dependency:
+    - Use Cause-Effect for Responded Existence constraints to establish dependency, where one activity's occurrence necessitates the presence of another, enhancing coherence in the process.
+    #Flexible Ordering:
+    - Use Background for Precedence constraints to set up an initial context where one activity must occur before another, guiding the logical sequence within the model.
+    - Apply Sequence for Response constraints to define an ordered flow where one activity follows another, ensuring a cohesive temporal structure in the model.
+    - Use Cause-Effect for Succession constraints to establish a causal link, ensuring each activity follows logically from the previous one, creating a cohesive progression within the model.
+    #Alternate Ordering:
+    - Apply Condition-Consequence for Alternate Precedence constraints to ensure order consistency, requiring each occurrence of a target activity to be preceded by a specified activity without overlap, promoting balanced process flow.
+    - Use Condition-Consequence for Alternate Response constraints to promote balance by ensuring each occurrence of an activation is followed by a unique target, with no intervening activations, supporting clear one-to-one activity pairing.
+    - Use Condition-Consequence for Alternate Succession constraints to enforce an ordered structure with unique activity pairings, ensuring each activation is followed by a target and each target is preceded by an activation, without intervening occurrences, enhancing process coherence.
+    #Immediate Ordering:
+    - Use Sequence for Chain Precedence constraints to establish immediate dependency, ensuring that each target follows an activation directly, with no intervening events, making the sequence explicit and precise.
+    - Apply Cause-Effect for Chain Response constraints to capture immediate succession, ensuring a direct cause-and-effect relationship where each activation is immediately followed by its target.
+    - Apply Cause-Effect for Chain Succession constraints to enforce a tightly coupled sequence, ensuring each activation is directly succeeded by its target with no intervening activities.
+    #Mutual Dependency:
+    - Use Conjunction for Co-Existence constraints to establish mutual dependency, ensuring that both activities occur together within the process flow.
+    #Exclusivity:
+    - Use Contrast for Choice constraints to introduce alternative paths, allowing flexibility by permitting either activity to occur within the process.
+    - Use Alternative for Exclusive Choice constraints to enforce mutually exclusive pathways, ensuring that exactly one of the specified activities occurs within the process.
+    - Apply Contrast for Not Co-Existence constraints to set exclusion rules, ensuring that specified activities do not occur together within the same process instance, thereby maintaining process integrity by preventing conflicting events.
+    #Negative Dependency:
+    - Apply Contrast for Not Responded Existence constraints to prevent certain dependencies, ensuring that specified activities do not occur in response to one another, thus refining the model by disallowing specific contingent occurrences.
+    #Negative Flexible Ordering:
+    - Apply Contrast for Not Precedence constraints to restrict activities from occurring in a specific order, ensuring that designated activities do not precede others, thereby preserving the intended sequence within the model.
+    - Apply Contrast for Not Response constraints to prevent activities from following a specific sequence, ensuring that designated activities do not occur after certain others, thus maintaining the integrity of the model's intended progression.
+    - Apply Contrast for Not Succession constraints to restrict overlapping sequences, ensuring that certain activities do not follow others at any point, preserving the model's defined flow.
+    #Negative Immediate Ordering:
+    - Apply Contrast for Not Chain Precedence constraints to enforce non-immediate order restrictions, ensuring that specified activities are not immediately preceded by others, maintaining separation within the sequence.
+    - Apply Contrast for Not Chain Response constraints to prevent immediate succession, ensuring that specified activities do not immediately follow one another, preserving structural integrity in the sequence.
+    - Use Contrast for Not Chain Succession constraints to prevent direct succession, ensuring that specified activities do not immediately precede or follow each other, thereby refining the process model by excluding specific immediate sequences.
+
+########## RESPONSE_TEMPLATE ##########
+
+The MP-Declare process model for the property transaction process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Draft Contract,' which involves creating the initial version of the contract with 'Contract Version' and 'Contract Status' attributes.
+#### **End Constraints**
+The process concludes with the activity 'Close Deal,' which involves finalizing the property transaction and completing all necessary paperwork. This activity must be the last to occur in the process and must be completed within 30 days.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Review Contract' activity must occur at least once in the process. This ensures that the contract is examined for accuracy and completeness, adding depth and reliability to the process.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Approve Contract' is permitted to occur only if a 'Conduct Title Search' activity has occurred before it. The 'Conduct Title Search' activity must verify that the 'Contract Status is Reviewed' and the 'Title Search Result is Clear,' ensuring that the contract is thoroughly reviewed and the property ownership is legally verified before approval.
+2. The activity 'Negotiate Terms' is permitted to occur only if an 'Assess Property Value' activity has occurred before it, with the condition that the 'Property Value' is greater than 50,000. This ensures that the negotiation of terms is based on a valid and substantial property valuation.
+3. The activity 'Close Deal' is permitted to occur only if a 'Verify Funds' activity has occurred before it. The 'Verify Funds' activity must confirm that the 'Deal Status is Open' and that the 'Funds Verified' are greater than or equal to the 'Property Value,' ensuring financial readiness before finalizing the deal.
+
+#### **Response Constraints**
+1. If the 'Draft Contract' activity occurs with the condition 'Contract Status is Draft,' then the 'Review Contract' activity must occur within 2 days. This ensures a timely review of the drafted contract, maintaining the process's momentum.
+2. If the 'Sign Contract' activity occurs with the condition 'Contract Status is Signed,' then the 'Register Property' activity must occur with the condition 'Registration Status is Pending' within 5 days. This ensures that the property registration follows promptly after the contract is signed, maintaining the legal and procedural flow.
+
+#### **Succession Constraints**
+Whenever an 'Approve Contract' activity occurs with the condition 'Contract Status is Approved,' it must be immediately followed by a 'Sign Contract' activity with the condition 'Contract Status == Contract Status' within 1 day. This establishes a direct causal link between the approval and signing of the contract, ensuring a seamless progression in the process.
+
+### **Exclusivity Constraints**
+
+#### **Not Co-Existence Constraints**
+The 'Sign Contract' activity and the 'Conduct Title Search' activity cannot both occur within the same process instance if the conditions 'Contract Status is Approved' and 'Title Search Result is Issues Found' are met. This exclusion ensures that a contract cannot be signed if the title search reveals issues, thereby maintaining the integrity of the process by preventing conflicting events.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Succession Constraints**
+Whenever an 'Approve Contract' activity occurs with the condition 'Contract Status is Approved,' it must be immediately followed by a 'Sign Contract' activity with the condition 'Contract Status == Contract Status' within 1 day. This tightly coupled sequence ensures that the approval and signing of the contract occur in immediate succession, leaving no room for delays or intervening activities.
+
+
+########## DESCRIPTION_GUIDELINES ##########
+
+The model must have 1 main section (MP-Declare Model) that subdivides in 5 subsections: Activties, Attributes, Binds, Constraints and Interleaved Description. Each subsection must have the following guidelines:
+Activities: must have the activity name and a description of actiivty.
+Attributes: must have the attribute name and a description of attribute.
+Binds: must have the bind name and a description of bind.
+Constraints: must have the constraint name and a description of constraint.
+Interleaved Description: must have the description of the constraints following order and usage of rethorical relations:
+ #Trace-Related:
+    - Use Background for Init constraints to establish initial context.
+    - Apply Conclusion for End constraint to close the model coherently.
+    #Frequency:
+    - Use Elaboration for Existence constraints to add depth and context regarding the presence of activities within the process.
+    - Use Contrast for Absence constraints to highlight exclusions and reinforce process integrity by specifying what is not permissible.
+    - Apply Summary for Exactly constraints to set fixed boundaries on activity occurrences, ensuring precision within the process model.
+    #Dependency:
+    - Use Cause-Effect for Responded Existence constraints to establish dependency, where one activity's occurrence necessitates the presence of another, enhancing coherence in the process.
+    #Flexible Ordering:
+    - Use Background for Precedence constraints to set up an initial context where one activity must occur before another, guiding the logical sequence within the model.
+    - Apply Sequence for Response constraints to define an ordered flow where one activity follows another, ensuring a cohesive temporal structure in the model.
+    - Use Cause-Effect for Succession constraints to establish a causal link, ensuring each activity follows logically from the previous one, creating a cohesive progression within the model.
+    #Alternate Ordering:
+    - Apply Condition-Consequence for Alternate Precedence constraints to ensure order consistency, requiring each occurrence of a target activity to be preceded by a specified activity without overlap, promoting balanced process flow.
+    - Use Condition-Consequence for Alternate Response constraints to promote balance by ensuring each occurrence of an activation is followed by a unique target, with no intervening activations, supporting clear one-to-one activity pairing.
+    - Use Condition-Consequence for Alternate Succession constraints to enforce an ordered structure with unique activity pairings, ensuring each activation is followed by a target and each target is preceded by an activation, without intervening occurrences, enhancing process coherence.
+    #Immediate Ordering:
+    - Use Sequence for Chain Precedence constraints to establish immediate dependency, ensuring that each target follows an activation directly, with no intervening events, making the sequence explicit and precise.
+    - Apply Cause-Effect for Chain Response constraints to capture immediate succession, ensuring a direct cause-and-effect relationship where each activation is immediately followed by its target.
+    - Apply Cause-Effect for Chain Succession constraints to enforce a tightly coupled sequence, ensuring each activation is directly succeeded by its target with no intervening activities.
+    #Mutual Dependency:
+    - Use Conjunction for Co-Existence constraints to establish mutual dependency, ensuring that both activities occur together within the process flow.
+    #Exclusivity:
+    - Use Contrast for Choice constraints to introduce alternative paths, allowing flexibility by permitting either activity to occur within the process.
+    - Use Alternative for Exclusive Choice constraints to enforce mutually exclusive pathways, ensuring that exactly one of the specified activities occurs within the process.
+    - Apply Contrast for Not Co-Existence constraints to set exclusion rules, ensuring that specified activities do not occur together within the same process instance, thereby maintaining process integrity by preventing conflicting events.
+    #Negative Dependency:
+    - Apply Contrast for Not Responded Existence constraints to prevent certain dependencies, ensuring that specified activities do not occur in response to one another, thus refining the model by disallowing specific contingent occurrences.
+    #Negative Flexible Ordering:
+    - Apply Contrast for Not Precedence constraints to restrict activities from occurring in a specific order, ensuring that designated activities do not precede others, thereby preserving the intended sequence within the model.
+    - Apply Contrast for Not Response constraints to prevent activities from following a specific sequence, ensuring that designated activities do not occur after certain others, thus maintaining the integrity of the model's intended progression.
+    - Apply Contrast for Not Succession constraints to restrict overlapping sequences, ensuring that certain activities do not follow others at any point, preserving the model's defined flow.
+    #Negative Immediate Ordering:
+    - Apply Contrast for Not Chain Precedence constraints to enforce non-immediate order restrictions, ensuring that specified activities are not immediately preceded by others, maintaining separation within the sequence.
+    - Apply Contrast for Not Chain Response constraints to prevent immediate succession, ensuring that specified activities do not immediately follow one another, preserving structural integrity in the sequence.
+    - Use Contrast for Not Chain Succession constraints to prevent direct succession, ensuring that specified activities do not immediately precede or follow each other, thereby refining the process model by excluding specific immediate sequences.

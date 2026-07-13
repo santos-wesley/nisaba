@@ -1,0 +1,54 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes the expected behavior and constraints of a sustainable tourism process called **"Eco-Friendly Trip"**.
+
+### Process Overview
+The process begins with **Plan Eco-Friendly Trip** and must eventually end with **Share Sustainable Practices**. It captures a sequence of activities aimed at minimizing environmental impact while promoting responsible travel.
+
+### Core Activities
+- **Plan Eco-Friendly Trip**
+- **Book Sustainable Accommodation**
+- **Choose Green Transportation**
+- **Participate in Local Conservation Efforts**
+- **Purchase Local Products**
+- **Attend Cultural Workshops**
+- **Evaluate Environmental Impact**
+- **Provide Feedback to Hosts**
+- **Share Sustainable Practices**
+
+### Data Perspectives
+The following data attributes are associated with specific activities:
+- **Trip Duration** (integer 1–30 days) and **Carbon Emission** (float 0.0–1000.0 kg) are recorded when planning the trip.
+- **Accommodation Type** must be one of: *Eco-Lodge, Green Hotel, Hostel*.
+- **Transportation Mode** must be one of: *Bicycle, Electric Car, Train*.
+- **Feedback Rating** must be one of: *Excellent, Good, Average, Poor*.
+
+### Behavioral Constraints
+
+1. **Mandatory Start and End**: The process must start with planning the eco-friendly trip and must finish by sharing sustainable practices.
+
+2. **Sequential Flow**: 
+   - After booking sustainable accommodation, the traveler **must** eventually provide feedback to the hosts (with a maximum of 2 activities in between).
+
+3. **Causal Dependencies**:
+   - Choosing green transportation must be followed (at some point) by an evaluation of the environmental impact.
+
+4. **Mutual Participation**:
+   - Participating in local conservation efforts and attending cultural workshops **must both occur or both not occur** — they are co-existent.
+
+5. **Negative Constraints**:
+   - If the trip is planned, the traveler **must not** purchase local products immediately afterwards (i.e., purchasing local products cannot directly follow planning).
+   - If feedback is provided and rated as **Poor**, then an environmental impact evaluation **must not** occur afterwards.
+
+6. **Conditional Existence**:
+   - If the trip duration is longer than 7 days, the traveler **must** participate in local conservation efforts.
+   - The **Evaluate Environmental Impact** activity must occur at least once in every complete process.
+
+7. **Mutual Exclusivity**:
+   - The traveler chooses **either** to book sustainable accommodation **or** to choose green transportation — but not both (Exclusive Choice).
+
+---
+
+**Summary in plain English:**
+
+ Travelers must start by planning an eco-friendly trip (specifying duration and expected carbon emissions). They are required to evaluate the environmental impact at least once and must conclude the process by sharing sustainable practices. Depending on the trip length, they may be obligated to participate in conservation efforts. Booking accommodation and choosing green transport are treated as alternative paths rather than complementary ones. Feedback must be given after staying at sustainable accommodation, but if that feedback is poor, no further environmental evaluation should take place. Both cultural engagement and conservation activities tend to go hand-in-hand — you either do both or neither.

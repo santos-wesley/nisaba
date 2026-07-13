@@ -1,0 +1,49 @@
+activity Plan Integration
+activity Design System Architecture
+activity Develop Integration Components
+activity Test Integration
+activity Deploy Integration
+activity Monitor System Performance
+activity Resolve Integration Issues
+activity Train Users
+activity Document Integration Process
+activity Review Integration Plan
+activity Approve Integration Design
+activity Validate Integration Results
+activity Update System Documentation
+activity Gather User Feedback
+bind Plan Integration: Integration ID, Integration Status, Integration Type
+bind Design System Architecture: Integration ID, Integration Type
+bind Develop Integration Components: Integration ID
+bind Test Integration: Integration ID, Testing Result, Testing Coverage
+bind Deploy Integration: Integration ID, Integration Status, Downtime
+bind Monitor System Performance: Integration ID, Number of Errors
+bind Resolve Integration Issues: Integration ID, Number of Errors, Downtime
+bind Train Users: Integration ID
+bind Document Integration Process: Integration ID
+bind Review Integration Plan: Integration ID
+bind Approve Integration Design: Integration ID
+bind Validate Integration Results: Integration ID
+bind Update System Documentation: Integration ID
+bind Gather User Feedback: Integration ID
+Integration ID: integer between 1 and 1000
+Integration Status: Planned, In Progress, Completed, Failed
+Integration Type: Data, Application, Process
+Testing Result: Passed, Failed, Partial
+Testing Coverage: float between 0.0 and 100.0
+Downtime: float between 0.0 and 24.0
+Number of Errors: integer between 0 and 100
+Existence[Plan Integration] | |
+Responded Existence[Plan Integration, Document Integration Process] | | |
+Precedence[Design System Architecture, Develop Integration Components] | | |
+Response[Develop Integration Components, Test Integration] | | |
+Succession[Test Integration, Deploy Integration] | | |
+Chain Response[Deploy Integration, Monitor System Performance] | | |
+Alternate Response[Monitor System Performance, Resolve Integration Issues] | | |
+Co-Existence[Train Users, Deploy Integration] | | |
+Not Chain Succession[Review Integration Plan, Approve Integration Design] | | |
+Not Precedence[Approve Integration Design, Validate Integration Results] | | |
+Not Response[Update System Documentation, Gather User Feedback] | | |
+Choice[Plan Integration, Design System Architecture] | | |
+Exclusive Choice[Test Integration, Deploy Integration] | | |
+Response[Deploy Integration, Resolve Integration Issues] |A.Integration Status is Failed |A.Downtime >= 0 AND A.Downtime <= 24 |

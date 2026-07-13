@@ -1,0 +1,38 @@
+## Activities
+- **Submit Request**: The 'Submit Request' activity represents an employee submitting a request, such as for remote work or flexible hours.
+- **Review Request**: The 'Review Request' activity involves a manager reviewing a submitted request.
+- **Approve Request**: The 'Approve Request' activity represents the approval of a request by a manager.
+- **Reject Request**: The 'Reject Request' activity represents the rejection of a request by a manager.
+- **Setup Remote Access**: The 'Setup Remote Access' activity involves configuring remote access for an employee whose request was approved.
+- **Update Payroll**: The 'Update Payroll' activity involves updating the payroll system to reflect changes resulting from the request.
+- **Notify Employee**: The 'Notify Employee' activity involves informing the employee about the status or outcome of their request.
+- **Monitor Performance**: The 'Monitor Performance' activity involves tracking and evaluating an employee's performance.
+- **Revoke Access**: The 'Revoke Access' activity involves removing previously granted remote access for an employee.
+- **Complete Survey**: The 'Complete Survey' activity involves an employee completing a survey related to their request or experience.
+
+## Attributes
+- **Request ID: integer between 1 and 99999**: The attribute 'Request ID: integer between 1 and 99999' represents the unique identification number for a request.
+- **Employee Name: John Doe, Jane Smith, Alice Johnson**: The attribute 'Employee Name: John Doe, Jane Smith, Alice Johnson' specifies the name of the employee associated with the request.
+- **Request Type: Remote Work, Flexible Hours**: The attribute 'Request Type: Remote Work, Flexible Hours' specifies the type of request submitted by the employee.
+- **Decision: Approved, Rejected**: The attribute 'Decision: Approved, Rejected' specifies the outcome decision made regarding a request.
+- **Payroll Status: Updated, Pending**: The attribute 'Payroll Status: Updated, Pending' specifies the current status of the payroll update process.
+- **Manager ID: integer between 1 and 9999**: The attribute 'Manager ID: integer between 1 and 9999' represents the unique identification number of the manager handling the request.
+- **Access Status: Setup, Revoked**: The attribute 'Access Status: Setup, Revoked' specifies the current status of an employee's remote access.
+- **Performance Rating: Excellent, Good, Average, Poor**: The attribute 'Performance Rating: Excellent, Good, Average, Poor' specifies the evaluated performance level of an employee.
+- **Notification Status: Sent, Pending**: The attribute 'Notification Status: Sent, Pending' specifies the current status of the notification sent to the employee.
+- **Survey Score: float between 0.0 and 10.0**: The attribute 'Survey Score: float between 0.0 and 10.0' represents the numeric score given by an employee in a completed survey.
+
+## Binds
+- **Submit Request: Request ID, Employee Name, Request Type**: The bind 'Submit Request: Request ID, Employee Name, Request Type' specifies that the activity 'Submit Request' requires the attributes 'Request ID', 'Employee Name', and 'Request Type'.
+- **Review Request: Request ID, Manager ID**: The bind 'Review Request: Request ID, Manager ID' links the 'Review Request' activity with the attributes 'Request ID' and 'Manager ID'.
+- **Approve Request: Request ID, Manager ID, Decision**: The bind 'Approve Request: Request ID, Manager ID, Decision' links the 'Approve Request' activity with the attributes 'Request ID', 'Manager ID', and 'Decision'.
+- **Reject Request: Request ID, Manager ID, Decision**: The bind 'Reject Request: Request ID, Manager ID, Decision' links the 'Reject Request' activity with the attributes 'Request ID', 'Manager ID', and 'Decision'.
+- **Setup Remote Access: Request ID, Access Status, Manager ID**: The bind 'Setup Remote Access: Request ID, Access Status, Manager ID' links the 'Setup Remote Access' activity with the attributes 'Request ID', 'Access Status', and 'Manager ID'.
+- **Update Payroll: Request ID, Payroll Status**: The bind 'Update Payroll: Request ID, Payroll Status' links the 'Update Payroll' activity with the attributes 'Request ID' and 'Payroll Status'.
+- **Notify Employee: Request ID, Notification Status**: The bind 'Notify Employee: Request ID, Notification Status' links the 'Notify Employee' activity with the attributes 'Request ID' and 'Notification Status'.
+- **Monitor Performance: Manager ID, Performance Rating**: The bind 'Monitor Performance: Manager ID, Performance Rating' links the 'Monitor Performance' activity with the attributes 'Manager ID' and 'Performance Rating'.
+- **Revoke Access: Request ID, Access Status**: The bind 'Revoke Access: Request ID, Access Status' links the 'Revoke Access' activity with the attributes 'Request ID' and 'Access Status'.
+- **Complete Survey: Request ID, Survey Score**: The bind 'Complete Survey: Request ID, Survey Score' links the 'Complete Survey' activity with the attributes 'Request ID' and 'Survey Score'.
+
+## Constraints
+

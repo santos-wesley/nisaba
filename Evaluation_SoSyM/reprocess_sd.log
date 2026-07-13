@@ -1,0 +1,17 @@
+<notebook cell 25>:343: SyntaxWarning: invalid escape sequence '\A'
+<notebook cell 48>:343: SyntaxWarning: invalid escape sequence '\A'
+
+=== DATA ANALYSIS ===
+  complexity: 360 model jsons
+  readability: 320 descriptions
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/268 [00:00<?, ?it/s]Loading weights: 100%|##########| 268/268 [00:00<00:00, 3632.99it/s]
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  embedder: Alibaba-NLP/gte-large-en-v1.5 tau=0.2
+  RST relation metric: aligned_rate Nisaba 0.84 vs zero-shot 0.64 (160 runs) -> rst_metrics.csv
+  derived_summary.json written
+
+SD rows total=320  nisaba=160  zeroshot=160
+  model102/deepseek/zeroshot -> OK total=0.7329
+  model70/deepseek/zeroshot -> OK total=0.4725

@@ -1,0 +1,35 @@
+## Activities
+- **Conduct Survey**: The 'Conduct Survey' activity represents the process of carrying out a survey to gather necessary data and information for the project.
+- **Design Blueprint**: The 'Design Blueprint' activity involves creating detailed architectural or engineering plans for the project.
+- **Acquire Permits**: The 'Acquire Permits' activity represents the process of obtaining the necessary legal permits required to proceed with the project.
+- **Lay Foundation**: The 'Lay Foundation' activity involves establishing the structural base of the construction project.
+- **Construct Framework**: The 'Construct Framework' activity represents the process of building the main structural framework of the project.
+- **Install Utilities**: The 'Install Utilities' activity involves setting up essential utility systems such as plumbing, electrical, and HVAC within the project.
+- **Interior Work**: The 'Interior Work' activity represents the process of completing the interior finishing of the construction project.
+- **Final Inspection**: The 'Final Inspection' activity involves conducting a comprehensive final assessment of the completed project to ensure compliance with standards.
+- **Handover Project**: The 'Handover Project' activity represents the formal transfer of the completed project to the client or owner.
+
+## Attributes
+- **Survey ID: integer between 1 and 9999**: The attribute 'Survey ID: integer between 1 and 9999' represents the unique identification number assigned to each conducted survey.
+- **Permit Type: Environmental, Zoning, Safety**: The attribute 'Permit Type: Environmental, Zoning, Safety' specifies the categories of permits that can be acquired for the project, including Environmental, Zoning, and Safety permits.
+- **Foundation Material: Concrete, Reinforced Concrete, Steel**: The attribute 'Foundation Material: Concrete, Reinforced Concrete, Steel' specifies the types of materials that can be used for laying the foundation, including Concrete, Reinforced Concrete, and Steel.
+- **Utility Type: Plumbing, Electrical, HVAC**: The attribute 'Utility Type: Plumbing, Electrical, HVAC' specifies the categories of utilities that can be installed, including Plumbing, Electrical, and HVAC systems.
+- **Inspection Score: float between 0.0 and 10.0**: The attribute 'Inspection Score: float between 0.0 and 10.0' represents the numerical score assigned during the final inspection, ranging from 0.0 to 10.0.
+
+## Binds
+- **Conduct Survey: Survey ID**: The bind 'Conduct Survey: Survey ID' links the 'Conduct Survey' activity with the attribute 'Survey ID'.
+- **Acquire Permits: Permit Type**: The bind 'Acquire Permits: Permit Type' links the 'Acquire Permits' activity with the attribute 'Permit Type'.
+- **Lay Foundation: Foundation Material**: The bind 'Lay Foundation: Foundation Material' links the 'Lay Foundation' activity with the attribute 'Foundation Material'.
+- **Install Utilities: Utility Type**: The bind 'Install Utilities: Utility Type' links the 'Install Utilities' activity with the attribute 'Utility Type'.
+- **Final Inspection: Inspection Score**: The bind 'Final Inspection: Inspection Score' links the 'Final Inspection' activity with the attribute 'Inspection Score'.
+
+## Constraints
+- **Init[Conduct Survey] | |**: The 'Conduct Survey' activity must be the first activity to occur in the process.
+- **Precedence[Design Blueprint, Conduct Survey] | |**: The 'Conduct Survey' activity is permitted to occur only if a 'Design Blueprint' activity has occurred before it within the same process instance.
+- **Precedence[Lay Foundation, Acquire Permits] | |**: The 'Acquire Permits' activity is permitted to occur only if a 'Lay Foundation' activity has occurred before it within the same process instance.
+- **Response[Lay Foundation, Construct Framework] | | 0,3,d**: If a 'Lay Foundation' activity occurs, then a 'Construct Framework' activity must eventually occur after the 'Lay Foundation' event at some point in the same process instance, within a time constraint of 0 to 3 days. There is no requirement on how soon or what events may occur in between. Multiple 'Lay Foundation' can be pending at the same time, and a single 'Construct Framework' can fulfill the obligation for all preceding 'Lay Foundation'. If 'Lay Foundation' does not occur, the constraint imposes no obligation on the occurrence of 'Construct Framework'.
+- **Alternate Response[Construct Framework, Install Utilities] | | 0,2,d**: If a 'Construct Framework' activity occurs, then an 'Install Utilities' activity must occur after that 'Construct Framework' event and before any subsequent 'Construct Framework' occurs, within a time constraint of 0 to 2 days. No other occurrence of 'Construct Framework' is allowed between a 'Construct Framework' and its corresponding 'Install Utilities'.
+- **Precedence[Interior Work, Install Utilities] | |**: The 'Install Utilities' activity is permitted to occur only if an 'Interior Work' activity has occurred before it within the same process instance.
+- **End[Final Inspection] | |**: The 'Final Inspection' activity must be the last activity to occur in the process.
+- **Precedence[Handover Project, Final Inspection] | | 0,1,d**: The 'Final Inspection' activity is permitted to occur only if a 'Handover Project' activity has occurred before it within the same process instance, within a time constraint of 0 to 1 day.
+

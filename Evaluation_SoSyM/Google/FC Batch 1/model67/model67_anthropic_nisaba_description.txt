@@ -1,0 +1,124 @@
+#MP-Declare Model
+## Activities
+- **Detect Fraudulent Activity**: The 'Detect Fraudulent Activity' activity represents the process of identifying potentially fraudulent transactions or behaviors.
+- **Verify Customer Identity**: The 'Verify Customer Identity' activity involves confirming the identity of a customer to ensure legitimacy of the transaction or request.
+- **Review Transaction Details**: The 'Review Transaction Details' activity includes examining the specifics of a transaction to assess its validity and characteristics.
+- **Approve Transaction**: The 'Approve Transaction' activity represents the authorization of a transaction to proceed.
+- **Decline Transaction**: The 'Decline Transaction' activity represents the rejection of a transaction, preventing it from proceeding.
+- **Report Suspicious Activity**: The 'Report Suspicious Activity' activity involves formally documenting and reporting behavior or transactions deemed suspicious.
+- **Update Account Security**: The 'Update Account Security' activity includes modifying or enhancing the security settings associated with a customer account.
+- **Notify Customer**: The 'Notify Customer' activity represents informing the customer about relevant events, decisions, or actions related to their account or transactions.
+- **Investigate Security Breach**: The 'Investigate Security Breach' activity involves examining and analyzing a security incident to determine its cause and impact.
+- **Implement Security Patch**: The 'Implement Security Patch' activity represents the application of a fix or update to address a security vulnerability.
+
+## Attributes
+- **Transaction Type: Debit, Credit, Wire Transfer, Online Payment**: The attribute 'Transaction Type: Debit, Credit, Wire Transfer, Online Payment' specifies the category of the financial transaction being processed.
+- **Transaction Amount: Float between 0.01 and 100000.0**: The attribute 'Transaction Amount: Float between 0.01 and 100000.0' represents the monetary value of the transaction.
+- **Fraud Risk Level: Low, Medium, High**: The attribute 'Fraud Risk Level: Low, Medium, High' specifies the assessed level of risk that a transaction is fraudulent.
+- **Verification Attempts: Integer between 1 and 5**: The attribute 'Verification Attempts: Integer between 1 and 5' represents the number of attempts made to verify a customer's identity.
+- **Verification Status: Verified, Not Verified, Pending**: The attribute 'Verification Status: Verified, Not Verified, Pending' specifies the current state of the customer identity verification process.
+- **Breach Severity: Integer between 1 and 10**: The attribute 'Breach Severity: Integer between 1 and 10' represents the severity level assigned to a security breach.
+- **Security Patch Status: Applied, Not Applied, Scheduled**: The attribute 'Security Patch Status: Applied, Not Applied, Scheduled' specifies the current status of a security patch.
+- **Customer Notification Method: Email, SMS, Phone Call**: The attribute 'Customer Notification Method: Email, SMS, Phone Call' specifies the communication channel used to notify the customer.
+- **Days Since Last Activity: Integer between 0 and 365**: The attribute 'Days Since Last Activity: Integer between 0 and 365' represents the number of days elapsed since the last recorded account activity.
+
+## Binds
+- **Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level**: The bind 'Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level' specifies that the activity 'Detect Fraudulent Activity' requires the attributes 'Transaction Type', 'Transaction Amount', and 'Fraud Risk Level'.
+- **Verify Customer Identity: Verification Attempts, Verification Status**: The bind 'Verify Customer Identity: Verification Attempts, Verification Status' links the 'Verify Customer Identity' activity with the attributes 'Verification Attempts' and 'Verification Status'.
+- **Review Transaction Details: Transaction Type, Transaction Amount**: The bind 'Review Transaction Details: Transaction Type, Transaction Amount' links the 'Review Transaction Details' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Approve Transaction: Transaction Type, Transaction Amount**: The bind 'Approve Transaction: Transaction Type, Transaction Amount' links the 'Approve Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Decline Transaction: Transaction Type, Transaction Amount**: The bind 'Decline Transaction: Transaction Type, Transaction Amount' links the 'Decline Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Report Suspicious Activity: Transaction Type, Transaction Amount**: The bind 'Report Suspicious Activity: Transaction Type, Transaction Amount' links the 'Report Suspicious Activity' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Update Account Security: Days Since Last Activity**: The bind 'Update Account Security: Days Since Last Activity' links the 'Update Account Security' activity with the attribute 'Days Since Last Activity'.
+- **Notify Customer: Customer Notification Method**: The bind 'Notify Customer: Customer Notification Method' links the 'Notify Customer' activity with the attribute 'Customer Notification Method'.
+- **Investigate Security Breach: Breach Severity**: The bind 'Investigate Security Breach: Breach Severity' links the 'Investigate Security Breach' activity with the attribute 'Breach Severity'.
+- **Implement Security Patch: Security Patch Status**: The bind 'Implement Security Patch: Security Patch Status' links the 'Implement Security Patch' activity with the attribute 'Security Patch Status'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the fraud detection and transaction security process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Detect Fraudulent Activity,' which involves identifying potentially fraudulent transactions or behaviors, characterized by the attributes 'Transaction Type,' 'Transaction Amount,' and 'Fraud Risk Level.' This detection establishes the foundational context from which all subsequent investigative and corrective actions unfold.
+
+#### **End Constraints**
+The process concludes with the activity 'Notify Customer,' which represents informing the customer about relevant events, decisions, or actions related to their account or transactions, using the 'Customer Notification Method' attribute. As a result, every chain of fraud detection, verification, and remediation ultimately culminates in transparent communication with the customer, bringing closure to the process.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Verify Customer Identity' activity must occur at least once in the process. This ensures that customer legitimacy is confirmed through 'Verification Attempts' and 'Verification Status,' adding a layer of depth and reliability to the fraud detection workflow. Similarly, the 'Review Transaction Details' activity must occur at least once, reinforcing that every flagged transaction receives careful scrutiny of its 'Transaction Type' and 'Transaction Amount' before further action is taken.
+
+#### **Absence Constraints**
+In contrast, the 'Implement Security Patch' activity is expected to occur at most once, underscoring that security patching is a deliberate, controlled action rather than a repeated occurrence, thereby preserving the integrity of the security remediation process.
+
+#### **Exactly Constraints**
+Summarily, the 'Investigate Security Breach' activity must occur exactly once whenever triggered, with its 'Breach Severity' attribute setting a fixed and precise boundary on how many times a breach investigation is conducted within a single process instance.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraint**
+Whenever the 'Report Suspicious Activity' activity occurs, it necessitates that the 'Investigate Security Breach' activity also occurs at some point in the process. This cause-effect relationship ensures that reported suspicions are not left unexamined, reinforcing dependency and coherence between reporting and investigation.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. As background context, the activity 'Approve Transaction' is permitted to occur only if a 'Verify Customer Identity' activity has occurred before it, with the condition that 'Verification Status is Verified.' This establishes that customer legitimacy must be confirmed prior to authorizing any transaction.
+2. Likewise, the activity 'Decline Transaction' is permitted to occur only if a 'Detect Fraudulent Activity' activity has occurred before it, with the condition that 'Fraud Risk Level is High.' This sets the logical precondition that a transaction can only be declined after a high fraud risk has been identified.
+
+#### **Response Constraints**
+1. In sequence, if the 'Detect Fraudulent Activity' activity occurs with the condition 'Fraud Risk Level is High,' then the 'Review Transaction Details' activity must occur afterward. This ensures that high-risk transactions are promptly scrutinized, maintaining temporal cohesion in the process.
+2. Similarly, if the 'Report Suspicious Activity' activity occurs, then the 'Notify Customer' activity must eventually follow, with the condition 'Customer Notification Method is Email.' This guarantees that customers are informed following any suspicious activity report.
+
+#### **Succession Constraints**
+As a causal link, whenever a 'Verify Customer Identity' activity occurs with the condition 'Verification Status is Not Verified,' it must be followed by a 'Decline Transaction' activity, and conversely, a 'Decline Transaction' activity must always be preceded by such a failed verification. This establishes a cohesive, bidirectional progression ensuring that failed verifications logically culminate in transaction denial.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraint**
+To promote balance, each occurrence of the 'Investigate Security Breach' activity must be followed by an 'Implement Security Patch' activity before another investigation begins, with the condition 'Security Patch Status is Applied.' This ensures a clear one-to-one pairing between breach investigation and remediation, preventing overlapping or unresolved security incidents.
+
+#### **Alternate Precedence Constraint**
+Consequently, each occurrence of the 'Implement Security Patch' activity must be preceded by an 'Investigate Security Breach' activity, with no intervening patch implementations in between, ensuring that patches are always grounded in a prior, specific investigation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraint**
+As an immediate cause-and-effect relationship, whenever the 'Decline Transaction' activity occurs, it must be directly and immediately followed by the 'Notify Customer' activity, with the condition 'Customer Notification Method is SMS.' This ensures customers are informed without delay whenever their transaction is declined.
+
+#### **Chain Precedence Constraint**
+In establishing explicit immediate dependency, the 'Update Account Security' activity must be directly preceded by the 'Investigate Security Breach' activity, with the condition 'Breach Severity' greater than 7, with no intervening activities. This ensures that account security enhancements occur as an immediate consequence of a severe breach investigation.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraint**
+In conjunction, the 'Report Suspicious Activity' and 'Update Account Security' activities are mutually dependent: whenever one occurs, the other must also occur within the same process instance, reflecting the intertwined nature of suspicious activity reporting and subsequent security reinforcement.
+
+### **Exclusivity Constraints**
+
+#### **Exclusive Choice Constraint**
+As an alternative pairing, exactly one of the 'Approve Transaction' or 'Decline Transaction' activities must occur for any given flagged transaction, enforcing mutually exclusive pathways that prevent contradictory outcomes for the same transaction.
+
+#### **Not Co-Existence Constraint**
+In contrast, the 'Approve Transaction' activity and the 'Decline Transaction' activity cannot both occur within the same process instance when referring to the same transaction, with the condition 'Transaction Amount' matching between both. This exclusion rule ensures that a single transaction is never simultaneously approved and declined, preserving process integrity.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraint**
+To prevent unwarranted dependencies, the occurrence of the 'Approve Transaction' activity does not require, and must not trigger, the occurrence of the 'Report Suspicious Activity' activity, ensuring that legitimate approvals are not contingently linked to suspicion reporting.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraint**
+Restrictively, the 'Notify Customer' activity must not precede the 'Detect Fraudulent Activity' activity, ensuring that customers are never notified about fraud-related matters before any fraudulent activity has actually been detected.
+
+#### **Not Response Constraint**
+Furthermore, the 'Approve Transaction' activity must not be followed by the 'Decline Transaction' activity referencing the same transaction, maintaining the integrity of the model's intended progression by disallowing contradictory sequential outcomes.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Succession Constraint**
+Finally, to refine the process model, the 'Approve Transaction' activity and the 'Decline Transaction' activity must not immediately precede or follow one another under any circumstance, excluding any abrupt, contradictory immediate sequencing and preserving the coherent structure of the transaction decision process.

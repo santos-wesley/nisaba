@@ -1,0 +1,32 @@
+This Multi-Perspective Declare model outlines a comprehensive Business Continuity Management process, tracking 10 distinct activities from initial risk assessment to post-incident evaluation. The model is highly data-aware, binding specific data attributes (such as integers, floats, and categorical values) to each activity to track operational metrics. 
+
+The process is initiated by **Identify Risks** and concludes with **Evaluating Incident Response**. Below is a natural language breakdown of the model's constraints, grouped by their logical phases:
+
+### 1. Risk Identification and Monitoring
+*   **Co-Existence (Monitor Risks, Identify Risks):** If the **Monitor Risks** activity occurs with a **Monitoring Frequency** of 7 days or less, the **Identify Risks** activity must also occur within the same process trace, and vice versa. This ensures that frequent monitoring is always paired with formal risk identification.
+*   **Precedence (Activate Continuity Plan, Identify Risks):** The **Activate Continuity Plan** activity can only be executed if **Identify Risks** has already occurred beforehand. This constraint is specifically enforced when the **Incident Severity** is categorized as *Medium* or *High*.
+
+### 2. Plan Development and Communication
+*   **Response (Develop Continuity Plan, Communicate Plan):** If the **Develop Continuity Plan** activity occurs and is characterized by **High Stakeholder Engagement**, it must eventually be followed by the **Communicate Plan** activity. This follow-up communication must occur between 5 and 13 minutes later, and the **Communication Method** must be either *Email* or *Meeting*.
+*   **Responded Existence (Communicate Plan, Conduct Training):** If the **Communicate Plan** activity is executed using a *Meeting* communication method, the **Conduct Training** activity must also occur at some point during the overall process trace. 
+
+### 3. Testing and Improvement
+*   **Alternate Response (Test Continuity Plan, Review Test Results):** If the **Test Continuity Plan** activity results in a *Pass* outcome, it must be followed by the **Review Test Results** activity. This follow-up must occur between 0 and 2 days later.
+*   **Chain Response (Review Test Results, Implement Improvements):** If the **Review Test Results** activity occurs and the **Plan Effectiveness** is strictly less than 80.0%, the very next activity in the process must be **Implement Improvements**. Furthermore, this improvement implementation must happen between 0 and 48 hours later, and the resulting **Improvement Status** must be marked as *Pending*.
+
+### 4. Training and Incident Response
+*   **Existence (Conduct Training):** The **Conduct Training** activity must occur at least once during the entire process execution. Furthermore, the training must be substantial, requiring a minimum of 8 **Training Hours**.
+*   **Not Chain Succession (Activate Continuity Plan, Evaluate Incident Response):** If the **Activate Continuity Plan** activity occurs for an incident with a *High* severity level, the **Evaluate Incident Response** activity is strictly forbidden from being the immediately following activity within a 10 to 15-second window. This enforces a mandatory delay or intervening step(s) between plan activation and final evaluation during severe incidents.
+
+### Summary of Data Bindings
+Each activity in this model is measured by specific data attributes:
+*   **Identify Risks:** Measured by a Risk Level (integer 1–10).
+*   **Develop Continuity Plan:** Measured by Stakeholder Engagement (High, Moderate, Low).
+*   **Test Continuity Plan:** Measured by a Test Outcome (Pass, Fail).
+*   **Review Test Results:** Measured by Plan Effectiveness (float 0.0–100.0).
+*   **Implement Improvements:** Measured by Improvement Status (Completed, Pending).
+*   **Communicate Plan:** Measured by Communication Method (Email, Meeting, Newsletter).
+*   **Monitor Risks:** Measured by Monitoring Frequency (integer 1–30 days).
+*   **Conduct Training:** Measured by Training Hours (integer 1–40 hours).
+*   **Activate Continuity Plan:** Measured by Incident Severity (Low, Medium, High).
+*   **Evaluate Incident Response:** Measured by Response Time (float 0.0–24.0 hours).

@@ -1,0 +1,102 @@
+#MP-Declare Model
+## Activities
+- **Write Play Script**: The 'Write Play Script' activity represents the initial creation of the script for the theatrical production.
+- **Cast Actors**: The 'Cast Actors' activity involves selecting and assigning performers to roles in the play.
+- **Design Set**: The 'Design Set' activity focuses on conceptualizing the stage environment and scenery for the performance.
+- **Build Set**: The 'Build Set' activity entails the physical construction of the stage sets based on the design.
+- **Design Costumes**: The 'Design Costumes' activity includes creating designs for the clothing and attire worn by the actors.
+- **Sew Costumes**: The 'Sew Costumes' activity involves the actual fabrication and sewing of the costume pieces.
+- **Rehearse Play**: The 'Rehearse Play' activity consists of practicing the scenes and performances with the cast.
+- **Promote Play**: The 'Promote Play' activity covers marketing and advertising efforts to attract audiences.
+- **Sell Tickets**: The 'Sell Tickets' activity manages the sale of tickets for the play's performances.
+- **Perform Play**: The 'Perform Play' activity is the live execution of the theatrical show for an audience.
+- **Review Performance**: The 'Review Performance' activity includes evaluating and critiquing the quality of the show after it has been performed.
+- **Pay Royalties**: The 'Pay Royalties' activity handles the payment of fees to the script's author or rights holders.
+- **Strike Set**: The 'Strike Set' activity means dismantling and removing the stage sets after the performances conclude.
+- **Store Costumes**: The 'Store Costumes' activity involves cleaning, packing, and storing the costumes for future use.
+- **Archive Script**: The 'Archive Script' activity is the process of preserving and storing the final version of the play script.
+
+## Attributes
+- **Actor Count: integer between 2 and 20**: The attribute 'Actor Count: integer between 2 and 20' specifies the number of actors to be cast in the play, ranging from a minimum of 2 to a maximum of 20.
+- **Budget Amount: float between 1000.0 and 50000.0**: The attribute 'Budget Amount: float between 1000.0 and 50000.0' represents the financial allocation for building the set, with values from 1000.0 to 50000.0.
+- **Play Genre: Comedy, Drama, Musical, Tragedy**: The attribute 'Play Genre: Comedy, Drama, Musical, Tragedy' indicates the genre of the play, which can be one of Comedy, Drama, Musical, or Tragedy.
+- **Set Complexity: integer between 1 and 10**: The attribute 'Set Complexity: integer between 1 and 10' measures the intricacy of the set design on a scale from 1 to 10.
+- **Ticket Price: float between 5.0 and 100.0**: The attribute 'Ticket Price: float between 5.0 and 100.0' defines the cost of a ticket for the play, ranging from 5.0 to 100.0.
+- **Performance Quality: Excellent, Good, Average, Poor**: The attribute 'Performance Quality: Excellent, Good, Average, Poor' evaluates the overall quality of the performance, categorized as Excellent, Good, Average, or Poor.
+- **Royalty Percentage: integer between 5 and 20**: The attribute 'Royalty Percentage: integer between 5 and 20' sets the percentage of royalties to be paid, between 5 and 20.
+- **Costume Count: integer between 5 and 50**: The attribute 'Costume Count: integer between 5 and 50' indicates the number of costumes to be designed and sewn, from 5 to 50.
+- **Promotion Spend: float between 100.0 and 10000.0**: The attribute 'Promotion Spend: float between 100.0 and 10000.0' represents the amount spent on promoting the play, ranging from 100.0 to 10000.0.
+- **Rehearsal Hours: integer between 10 and 100**: The attribute 'Rehearsal Hours: integer between 10 and 100' specifies the total hours allocated for rehearsing the play, between 10 and 100.
+
+## Binds
+- **bind Write Play Script: Play Genre**: The bind 'Write Play Script: Play Genre' specifies that the activity 'Write Play Script' requires the attribute 'Play Genre'.
+- **bind Cast Actors: Actor Count**: The bind 'Cast Actors: Actor Count' links the 'Cast Actors' activity with the attribute 'Actor Count'.
+- **bind Design Set: Set Complexity**: The bind 'Design Set: Set Complexity' associates the 'Design Set' activity with the attribute 'Set Complexity'.
+- **bind Sell Tickets: Ticket Price**: The bind 'Sell Tickets: Ticket Price' connects the 'Sell Tickets' activity to the attribute 'Ticket Price'.
+- **bind Perform Play: Performance Quality**: The bind 'Perform Play: Performance Quality' specifies that the activity 'Perform Play' uses the attribute 'Performance Quality'.
+- **bind Pay Royalties: Royalty Percentage**: The bind 'Pay Royalties: Royalty Percentage' links the 'Pay Royalties' activity with the attribute 'Royalty Percentage'.
+- **bind Design Costumes: Costume Count**: The bind 'Design Costumes: Costume Count' associates the 'Design Costumes' activity with the attribute 'Costume Count'.
+- **bind Promote Play: Promotion Spend**: The bind 'Promote Play: Promotion Spend' connects the 'Promote Play' activity to the attribute 'Promotion Spend'.
+- **bind Rehearse Play: Rehearsal Hours**: The bind 'Rehearse Play: Rehearsal Hours' specifies that the activity 'Rehearse Play' requires the attribute 'Rehearsal Hours'.
+- **bind Build Set: Budget Amount**: The bind 'Build Set: Budget Amount' links the 'Build Set' activity with the attribute 'Budget Amount'.
+
+## Constraints
+- **Init[Write Play Script] | |**: The 'Write Play Script' must be the first activity to occur in the process.
+- **Existence[Perform Play] | |**: The 'Perform Play' activity must occur at least once in the process.
+- **Response[Cast Actors, Rehearse Play] | | |**: If a 'Cast Actors' activity occurs, then a 'Rehearse Play' activity must eventually occur after the 'Cast Actors' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Cast Actors' can be pending at the same time, and a single 'Rehearse Play' can fulfill the obligation for all preceding 'Cast Actors'. If 'Cast Actors' does not occur, the constraint imposes no obligation on the occurrence of 'Rehearse Play'.
+- **Precedence[Build Set, Design Set] | | |**: The 'Design Set' activity is permitted to occur only if a 'Build Set' activity has occurred before it within the same process instance.
+- **Co-Existence[Promote Play, Sell Tickets] | | |**: If 'Promote Play' activity occurs, then 'Sell Tickets' must also occur in the same process instance, and vice-versa.
+- **Not Response[Review Performance, Pay Royalties] | | |**: The 'Review Performance' activity must not be followed by a 'Pay Royalties' activity at any point later in the same process instance. This means that once a 'Review Performance' event occurs, 'Pay Royalties' cannot occur afterward. However, 'Pay Royalties' events occurring before the 'Review Performance' are permitted. The constraint ensures that after the occurrence of 'Review Performance', the process does not allow any further occurrences of 'Pay Royalties'.
+- **Response[Write Play Script, Sell Tickets] |A.Play Genre is Comedy |T.Ticket Price <= 50 |**: If a 'Write Play Script' activity occurs with the condition that A.Play Genre is Comedy, then a 'Sell Tickets' activity must eventually occur after the 'Write Play Script' event at some point in the same process instance where T.Ticket Price <= 50. There is no requirement on how soon or what events may occur in between. Multiple 'Write Play Script' can be pending at the same time, and a single 'Sell Tickets' can fulfill the obligation for all preceding 'Write Play Script'. If 'Write Play Script' does not occur, the constraint imposes no obligation on the occurrence of 'Sell Tickets'.
+- **Response[Promote Play, Sell Tickets] | | |0,2,d**: If a 'Promote Play' activity occurs, then a 'Sell Tickets' activity must eventually occur after the 'Promote Play' event at some point in the same process instance within 0 to 2 days. There is no requirement on how soon or what events may occur in between. Multiple 'Promote Play' can be pending at the same time, and a single 'Sell Tickets' can fulfill the obligation for all preceding 'Promote Play'. If 'Promote Play' does not occur, the constraint imposes no obligation on the occurrence of 'Sell Tickets'.
+- **Response[Perform Play, Pay Royalties] | | |0,7,d**: If a 'Perform Play' activity occurs, then a 'Pay Royalties' activity must eventually occur after the 'Perform Play' event at some point in the same process instance within 0 to 7 days. There is no requirement on how soon or what events may occur in between. Multiple 'Perform Play' can be pending at the same time, and a single 'Pay Royalties' can fulfill the obligation for all preceding 'Perform Play'. If 'Perform Play' does not occur, the constraint imposes no obligation on the occurrence of 'Pay Royalties'.
+- **Response[Perform Play, Strike Set] | | |0,1,d**: If a 'Perform Play' activity occurs, then a 'Strike Set' activity must eventually occur after the 'Perform Play' event at some point in the same process instance within 0 to 1 days. There is no requirement on how soon or what events may occur in between. Multiple 'Perform Play' can be pending at the same time, and a single 'Strike Set' can fulfill the obligation for all preceding 'Perform Play'. If 'Perform Play' does not occur, the constraint imposes no obligation on the occurrence of 'Strike Set'.
+- **Response[Perform Play, Store Costumes] | | |0,1,d**: If a 'Perform Play' activity occurs, then a 'Store Costumes' activity must eventually occur after the 'Perform Play' event at some point in the same process instance within 0 to 1 days. There is no requirement on how soon or what events may occur in between. Multiple 'Perform Play' can be pending at the same time, and a single 'Store Costumes' can fulfill the obligation for all preceding 'Perform Play'. If 'Perform Play' does not occur, the constraint imposes no obligation on the occurrence of 'Store Costumes'.
+- **Response[Write Play Script, Archive Script] | | |0,30,d**: If a 'Write Play Script' activity occurs, then a 'Archive Script' activity must eventually occur after the 'Write Play Script' event at some point in the same process instance within 0 to 30 days. There is no requirement on how soon or what events may occur in between. Multiple 'Write Play Script' can be pending at the same time, and a single 'Archive Script' can fulfill the obligation for all preceding 'Write Play Script'. If 'Write Play Script' does not occur, the constraint imposes no obligation on the occurrence of 'Archive Script'.
+- **Response[Cast Actors, Rehearse Play] | | |0,1,h**: If a 'Cast Actors' activity occurs, then a 'Rehearse Play' activity must eventually occur after the 'Cast Actors' event at some point in the same process instance within 0 to 1 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Cast Actors' can be pending at the same time, and a single 'Rehearse Play' can fulfill the obligation for all preceding 'Cast Actors'. If 'Cast Actors' does not occur, the constraint imposes no obligation on the occurrence of 'Rehearse Play'.
+- **Response[Design Costumes, Sew Costumes] | | |0,24,h**: If a 'Design Costumes' activity occurs, then a 'Sew Costumes' activity must eventually occur after the 'Design Costumes' event at some point in the same process instance within 0 to 24 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Design Costumes' can be pending at the same time, and a single 'Sew Costumes' can fulfill the obligation for all preceding 'Design Costumes'. If 'Design Costumes' does not occur, the constraint imposes no obligation on the occurrence of 'Sew Costumes'.
+- **Response[Design Set, Build Set] | | |0,7,d**: If a 'Design Set' activity occurs, then a 'Build Set' activity must eventually occur after the 'Design Set' event at some point in the same process instance within 0 to 7 days. There is no requirement on how soon or what events may occur in between. Multiple 'Design Set' can be pending at the same time, and a single 'Build Set' can fulfill the obligation for all preceding 'Design Set'. If 'Design Set' does not occur, the constraint imposes no obligation on the occurrence of 'Build Set'.
+
+
+## Interleaved Description
+The MP-Declare process model for the theatrical production process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Write Play Script,' which involves the initial creation of the script for the theatrical production and requires the 'Play Genre' attribute. This establishes the foundational context for the entire production workflow.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Perform Play' activity must occur at least once in the process. This ensures that the live execution of the theatrical show for an audience takes place, adding depth and purpose to the entire production endeavor.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Promote Play' activity, which covers marketing and advertising efforts with the associated 'Promotion Spend' attribute, and the 'Sell Tickets' activity, which manages ticket sales with the 'Ticket Price' attribute, must both occur together within the same process instance. This conjunction establishes mutual dependency, ensuring that promotional efforts are always paired with actual ticket sales.
+
+### **Negative Dependency Constraints**
+
+#### **Not Response Constraints**
+Once the 'Review Performance' activity occurs, which evaluates and critiques the quality of the show using the 'Performance Quality' attribute, the 'Pay Royalties' activity must not be followed at any point later in the same process instance. This contrast prevents the royalty payment from occurring after a performance review, thereby maintaining the integrity of the model's intended progression.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+The 'Build Set' activity, which entails the physical construction of the stage sets with the associated 'Budget Amount' attribute, must occur before the 'Design Set' activity is permitted. This background relation sets up the initial context that the set must be designed only after it has been built, which guides the logical (though counter-intuitive) sequence within the model.
+
+#### **Response Constraints**
+1. If the 'Cast Actors' activity occurs, which involves selecting performers with the 'Actor Count' attribute, then the 'Rehearse Play' activity must eventually occur after it within 0 to 1 hours, using the 'Rehearsal Hours' attribute. This sequence defines an ordered flow where casting directly leads to rehearsal, ensuring a cohesive temporal structure.
+2. If the 'Design Costumes' activity occurs, which creates designs with the 'Costume Count' attribute, then the 'Sew Costumes' activity must eventually occur after it within 0 to 24 hours. This sequence ensures that costume fabrication promptly follows design work.
+3. If the 'Design Set' activity occurs, which conceptualizes the stage with the 'Set Complexity' attribute, then the 'Build Set' activity must eventually occur after it within 0 to 7 days, using the 'Budget Amount' attribute. This sequence maintains a structured progression from design to physical construction.
+4. If the 'Write Play Script' activity occurs with the condition that the 'Play Genre' is Comedy, then the 'Sell Tickets' activity must eventually occur after it with the condition that the 'Ticket Price' is less than or equal to 50. This sequence ensures that comedic scripts lead to affordable ticket sales.
+5. If the 'Promote Play' activity occurs, then the 'Sell Tickets' activity must eventually occur after it within 0 to 2 days. This sequence defines a tight promotional-to-sales flow.
+6. If the 'Perform Play' activity occurs, which executes the show with the 'Performance Quality' attribute, then the 'Pay Royalties' activity must eventually occur after it within 0 to 7 days, using the 'Royalty Percentage' attribute. This sequence ensures royalties follow performances promptly.
+7. If the 'Perform Play' activity occurs, then the 'Strike Set' activity must eventually occur after it within 0 to 1 days. This sequence ensures the stage is dismantled shortly after the final show.
+8. If the 'Perform Play' activity occurs, then the 'Store Costumes' activity must eventually occur after it within 0 to 1 days. This sequence guarantees costumes are properly stored immediately following performances.
+9. If the 'Write Play Script' activity occurs, then the 'Archive Script' activity must eventually occur after it within 0 to 30 days. This sequence ensures the final script is preserved within a reasonable timeframe after its creation.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Response Constraints**
+The 'Review Performance' activity must not be followed by a 'Pay Royalties' activity at any point later in the same process instance. This contrast reinforces that after evaluating the show, no royalty payments may occur afterward, preserving the model's defined flow.

@@ -1,0 +1,58 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Implement Controls
+activity Monitor Compliance
+activity Report Violations
+activity Investigate Violations
+activity Take Corrective Action
+activity Review Compliance Plan
+activity Approve Compliance Plan
+activity Train Employees
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Implement Controls: Control Type
+bind Monitor Compliance: Compliance Status
+bind Report Violations: Number of Violations, Reporting Channel
+bind Investigate Violations: Violation Severity, Financial Impact
+bind Take Corrective Action: Compliance Status
+bind Review Compliance Plan: Plan Status
+bind Approve Compliance Plan: Plan Status
+bind Train Employees: Training Hours
+Risk Level: Low, Medium, High
+Compliance Status: Compliant, Non-Compliant, Pending
+Violation Severity: integer between 1 and 5
+Financial Impact: float between 0.0 and 1000000.0
+Control Type: Preventative, Detective, Corrective
+Training Hours: integer between 0 and 40
+Reporting Channel: Email, Phone, Online Portal
+Assessment Score: float between 0.0 and 100.0
+Plan Status: Draft, Approved, Implemented
+Number of Violations: integer between 0 and 100
+Init[Conduct Risk Assessment] | |
+End[Monitor Compliance] | |
+Existence[Conduct Risk Assessment] | |
+Existence[Train Employees] | |
+Absence4[Report Violations] | |
+Exactly[Approve Compliance Plan] | |
+Responded Existence[Report Violations, Investigate Violations] | | |
+Precedence[Develop Compliance Plan, Conduct Risk Assessment] | |T.Risk Level in (Medium, High) |
+Precedence[Implement Controls, Approve Compliance Plan] | |T.Plan Status is Approved |
+Precedence[Take Corrective Action, Investigate Violations] | |T.Violation Severity > 2 |
+Response[Develop Compliance Plan, Review Compliance Plan] |A.Plan Status is Draft | |0,7,d
+Response[Report Violations, Investigate Violations] |A.Number of Violations > 0 | |0,3,d
+Succession[Review Compliance Plan, Approve Compliance Plan] |A.Plan Status is Draft |T.Plan Status is Approved |
+Alternate Precedence[Take Corrective Action, Investigate Violations] | | |
+Alternate Response[Report Violations, Investigate Violations] | | |
+Chain Response[Investigate Violations, Take Corrective Action] |A.Violation Severity > 3 |T.Compliance Status is Non-Compliant |
+Chain Precedence[Review Compliance Plan, Approve Compliance Plan] | | |
+Co-Existence[Implement Controls, Monitor Compliance] | | |
+Choice[Report Violations, Monitor Compliance] | | |
+Exclusive Choice[Approve Compliance Plan, Review Compliance Plan] | | |
+Not Co-Existence[Approve Compliance Plan, Report Violations] |A.Plan Status is Draft |T.Number of Violations > 5 |
+Not Responded Existence[Train Employees, Report Violations] | | |
+Not Precedence[Investigate Violations, Take Corrective Action] | | |
+Not Response[Monitor Compliance, Report Violations] |A.Compliance Status is Compliant | |
+Not Succession[Approve Compliance Plan, Develop Compliance Plan] | | |
+Not Chain Precedence[Train Employees, Report Violations] | | |
+Not Chain Response[Conduct Risk Assessment, Report Violations] | | |
+Not Chain Succession[Implement Controls, Report Violations] | | |

@@ -1,0 +1,62 @@
+# Multi-Perspective Declare Model: Return Processing Description
+
+## Process Overview
+This model describes a product return management process, from initial return request through final disposition (restocking or disposal), incorporating control-flow, data, and temporal perspectives.
+
+## Activities
+The process consists of ten activities: **Request Return**, **Approve Return**, **Generate Return Label**, **Ship Item Back**, **Receive Item**, **Inspect Item**, **Determine Refund**, **Process Refund**, **Restock Item**, and **Dispose Item**.
+
+## Data Perspective
+Several activities carry associated data attributes:
+- **Request Return** is bound to *Return Status*, *Return Reason*, and *Days Since Purchase*
+- **Approve Return** is bound to *Return Status*
+- **Inspect Item** is bound to *Item Condition* and *Inspection Score*
+- **Process Refund** is bound to *Refund Amount* and *Return Status*
+
+The possible values for these attributes are:
+- **Return Status**: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed
+- **Item Condition**: an integer ranging from 1 to 5
+- **Refund Amount**: a floating-point value between 0.0 and 1000.0
+- **Days Since Purchase**: an integer between 0 and 365
+- **Return Reason**: Defective, Damaged, Wrong Item, No Longer Needed
+- **Inspection Score**: an integer between 1 and 10
+
+## Control-Flow and Behavioral Rules
+
+**Process Initiation**
+The process must begin with **Request Return**, which is the mandatory first activity.
+
+**Sequential Response Dependencies**
+The process follows a chain of response relations, meaning that once a triggering activity occurs, the following activity must eventually occur afterward:
+1. After **Request Return**, an **Approve Return** must eventually follow.
+2. After **Approve Return**, a **Generate Return Label** must eventually follow.
+3. After **Receive Item**, an **Inspect Item** must eventually follow.
+4. After **Inspect Item**, a **Determine Refund** must eventually follow.
+5. After **Determine Refund**, a **Process Refund** must eventually follow.
+
+**Strict Succession**
+**Generate Return Label** and **Ship Item Back** are linked by succession: whenever a return label is generated, shipping the item back must eventually follow, and shipping can only happen after label generation (this also implies Ship Item Back cannot occur without a preceding Generate Return Label).
+
+**Shipping and Receiving Chain**
+After **Ship Item Back** occurs, **Receive Item** must eventually follow.
+
+**Conditional Post-Inspection Routing**
+Following item inspection, the outcome determines the next step:
+- If the *Item Condition* is greater than 3, then after **Inspect Item**, a **Restock Item** activity must eventually occur.
+- If the *Item Condition* is 3 or lower, then after **Inspect Item**, a **Dispose Item** activity must eventually occur.
+
+## Temporal Constraints
+
+**Time-Bounded Response Relations**
+Several dependencies carry explicit time constraints on when the response must occur:
+- Once a return is requested, approval must occur within **24 hours**.
+- Once the item is received, the refund must be processed within **7 days**.
+- Once the item is received, inspection must occur within **48 hours**.
+
+## Cross-Instance / Historical Constraint
+
+**Conditional Precedence with Data Correlation**
+There is a precedence constraint linking **Inspect Item** and **Request Return**: whenever an inspection results in an *Inspection Score* of 5 or lower, this implies that a **Request Return** must have previously occurred where the *Return Reason* was recorded as "Defective." In other words, a low inspection score can only be justified if the corresponding original return request cited a defective item as the reason for return.
+
+## Summary
+This model enforces a structured, auditable return lifecycle: requests must be approved promptly, labels generated and used for shipping in strict order, received items inspected within a time window, and the inspection outcome (based on item condition) determines whether the item is restocked or disposed. Refunds must be processed shortly after the item is received, and poor inspection outcomes are only valid when correlated with a legitimately defective-item return reason.

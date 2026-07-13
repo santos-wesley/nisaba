@@ -1,0 +1,52 @@
+# Multi-Perspective Declare Model Description
+
+This model describes the process of producing a theatrical play, from initial scripting through to archiving, incorporating control-flow rules, data conditions, and time constraints.
+
+## Activities
+The process involves fifteen activities: Write Play Script, Cast Actors, Design Set, Build Set, Design Costumes, Sew Costumes, Rehearse Play, Promote Play, Sell Tickets, Perform Play, Review Performance, Pay Royalties, Strike Set, Store Costumes, and Archive Script.
+
+## Data Perspective (Attributes bound to Activities)
+Each activity carries specific data attributes:
+- **Write Play Script** is associated with **Play Genre** (Comedy, Drama, Musical, or Tragedy)
+- **Cast Actors** is associated with **Actor Count** (an integer between 2 and 20)
+- **Design Set** is associated with **Set Complexity** (an integer between 1 and 10)
+- **Build Set** is associated with **Budget Amount** (a float between 1000.0 and 50000.0)
+- **Design Costumes** is associated with **Costume Count** (an integer between 5 and 50)
+- **Sew Costumes** has no bound attribute in this model
+- **Rehearse Play** is associated with **Rehearsal Hours** (an integer between 10 and 100)
+- **Promote Play** is associated with **Promotion Spend** (a float between 100.0 and 10000.0)
+- **Sell Tickets** is associated with **Ticket Price** (a float between 5.0 and 100.0)
+- **Perform Play** is associated with **Performance Quality** (Excellent, Good, Average, or Poor)
+- **Pay Royalties** is associated with **Royalty Percentage** (an integer between 5 and 20)
+
+## Control-Flow Constraints
+
+1. **Init**: The process must **start** with "Write Play Script."
+2. **Existence**: "Perform Play" must occur **at least once** during the process.
+3. **Response**: Whenever "Cast Actors" occurs, "Rehearse Play" must eventually follow.
+4. **Precedence**: "Design Set" must occur before "Build Set" can take place.
+5. **Co-Existence**: "Promote Play" and "Sell Tickets" must either **both occur** or **neither occurs**.
+6. **Not Response**: Whenever "Review Performance" occurs, "Pay Royalties" must **never** follow afterward.
+
+## Conditional and Time-Constrained Rules
+
+7. **Conditional Response**: If "Write Play Script" occurs **and** the Play Genre is "Comedy," then "Sell Tickets" must eventually follow, and at the time "Sell Tickets" occurs, the Ticket Price must be **≤ 50**.
+
+8. **Response with Time Constraint**: Whenever "Promote Play" occurs, "Sell Tickets" must follow within **2 days**.
+
+9. **Response with Time Constraint**: Whenever "Perform Play" occurs, "Pay Royalties" must follow within **7 days**.
+
+10. **Response with Time Constraint**: Whenever "Perform Play" occurs, "Strike Set" must follow within **1 day**.
+
+11. **Response with Time Constraint**: Whenever "Perform Play" occurs, "Store Costumes" must follow within **1 day**.
+
+12. **Response with Time Constraint**: Whenever "Write Play Script" occurs, "Archive Script" must follow within **30 days**.
+
+13. **Response with Time Constraint**: Whenever "Cast Actors" occurs, "Rehearse Play" must follow within **1 hour**.
+
+14. **Response with Time Constraint**: Whenever "Design Costumes" occurs, "Sew Costumes" must follow within **24 hours**.
+
+15. **Response with Time Constraint**: Whenever "Design Set" occurs, "Build Set" must follow within **7 days**.
+
+## Summary
+This model enforces a logical production pipeline where scripting initiates the process and performing is mandatory. It ensures proper sequencing (e.g., set design before construction), enforces tight turnaround times between dependent tasks (e.g., costume design to sewing within a day), links financial data to ticket sales for comedic productions, and guarantees that post-performance activities like royalty payments, set striking, and costume storage happen promptly—while explicitly preventing royalty payments after performance reviews.

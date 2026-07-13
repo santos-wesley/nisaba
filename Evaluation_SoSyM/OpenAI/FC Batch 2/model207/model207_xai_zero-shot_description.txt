@@ -1,0 +1,35 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes the **process of organizing and executing an event** (such as a wedding, conference, or celebration). The process is centered around a unique **Event ID** and follows a strict sequential flow with data dependencies.
+
+### Process Flow
+
+The event organization must follow this exact sequence of activities:
+
+1. **Plan Event** – The process begins with planning the event, where a budget is defined.
+2. **Book Venue** – Once planned, a specific venue (Hall A, B, or C) is booked.
+3. **Send Invitations** – Invitations are sent to guests, recording the number of guests and invitation status.
+4. **Arrange Catering** – A catering service is selected (Buffet, Sit-down Dinner, or Cocktail).
+5. **Hire Staff** – Staff members are hired for specific roles (Waiter, Coordinator, or Cleaner).
+6. **Set Up Venue** – The venue is prepared for the event.
+7. **Conduct Rehearsal** – A rehearsal is carried out (identified by a Rehearsal ID).
+8. **Welcome Guests** – Guests are welcomed at the start of the actual event.
+9. **Facilitate Activities** – The main activities or program of the event are facilitated.
+10. **Deliver Speech** – One or more speeches are delivered.
+11. **Serve Meals** – Meals are served using the previously arranged catering service.
+12. **Coordinate Photography** – Photography of the event is coordinated.
+13. **Distribute Gifts** – Gifts or favors are distributed to guests.
+14. **Collect Feedback** – Feedback is collected from participants (linked to the venue).
+15. **Tear Down Venue** – The process ends with tearing down and cleaning up the venue.
+
+### Key Constraints
+
+- The process is **highly linear**: each activity must be completed before the next one can begin (enforced by Precedence constraints).
+- **Plan Event** is the **only possible starting activity**.
+- **Tear Down Venue** is the **only possible ending activity**.
+- Every activity is linked to a specific **Event ID**, allowing multiple events to be managed within the same system.
+- Several activities bind and reuse data:
+  - The **Catering Service** chosen in "Arrange Catering" is later referenced during "Serve Meals".
+  - The **Venue** booked early in the process is referenced again when collecting feedback.
+
+This model ensures that events are organized in a controlled, step-by-step manner, with clear data flow and strong ordering constraints from initial planning through to final cleanup and feedback collection.

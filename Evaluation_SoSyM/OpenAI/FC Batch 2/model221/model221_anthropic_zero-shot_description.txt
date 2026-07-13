@@ -1,0 +1,56 @@
+# Multi-Perspective Declare Model Description
+
+This model describes a business process for international market expansion, encompassing control flow, data, and temporal perspectives.
+
+## Process Overview
+
+The process begins with **Analyze International Market** and concludes with **Report to Headquarters**, guiding an organization through the journey of entering and establishing operations in a new international market.
+
+## Data Perspective
+
+Several activities carry associated data attributes that are recorded when they occur:
+
+- **Analyze International Market** captures the **Market Size** (an integer between 1,000 and 1,000,000) and **Market Attractiveness** (High, Medium, or Low)
+- **Conduct Feasibility Study** records the **Investment Amount** (a float between 10,000.0 and 1,000,000.0) and the **Feasibility Status** (Positive or Negative)
+- **Acquire Necessary Permits** tracks the **Permit Status** (Approved, Pending, or Rejected)
+- **Hire Local Staff** logs the **Staffing Level** (High, Medium, or Low)
+- **Initiate Marketing Campaign** records the **Marketing Budget** (a float between 5,000.0 and 500,000.0)
+- **Monitor Market Response** captures the **Market Response** (Positive, Neutral, or Negative)
+- **Adjust Strategy** notes whether a **Strategy Adjustment** occurred (Yes or No)
+- **Assess Performance** documents the **Performance Evaluation** (Excellent, Good, Fair, or Poor)
+
+## Control Flow and Behavioral Constraints
+
+1. **Process Initiation**: The process must start with **Analyze International Market**.
+
+2. **Market Analysis Leads to Opportunity Identification**: Whenever **Analyze International Market** occurs, it must eventually be followed by **Identify Business Opportunities**.
+
+3. **Conditional Business Planning**: If a **Conduct Feasibility Study** results in a **Positive** feasibility status, this must eventually be followed by **Develop Business Plan**.
+
+4. **Plan to Permits**: Whenever **Develop Business Plan** occurs, **Acquire Necessary Permits** must eventually follow.
+
+5. **Timely Office Setup**: Immediately after **Acquire Necessary Permits**, the activity **Set Up International Office** must follow directly, and this transition must occur within **5 days**.
+
+6. **Staffing Follows Office Setup**: Whenever **Set Up International Office** occurs, **Hire Local Staff** must eventually follow.
+
+7. **Marketing Campaign Requirement**: The activity **Initiate Marketing Campaign** must occur at least once during the process.
+
+8. **Vendor Negotiations**: Whenever **Hire Local Staff** occurs, **Negotiate with Local Vendors** must eventually follow.
+
+9. **Market Monitoring After Marketing**: Whenever **Initiate Marketing Campaign** occurs, **Monitor Market Response** must eventually follow.
+
+10. **Rapid Strategy Adjustment on Negative Feedback**: If **Monitor Market Response** results in a **Negative** response, **Adjust Strategy** must immediately follow, and this must happen within **7 days**.
+
+11. **Performance Assessment After Adjustment**: Whenever **Adjust Strategy** occurs, **Assess Performance** must eventually follow.
+
+12. **Prompt Reporting**: Immediately after **Assess Performance**, the activity **Report to Headquarters** must directly follow, within **48 hours**.
+
+13. **Single Final Report**: **Report to Headquarters** must occur **exactly once** in the entire process.
+
+14. **Logistics Management Requirement**: The activity **Manage International Logistics** must occur at least once during the process (though its exact position relative to other activities is unconstrained).
+
+15. **Process Completion**: The process must conclude with **Report to Headquarters** as the final activity.
+
+## Summary
+
+This model represents a structured, sequential approach to international market entry — starting with market research and feasibility analysis, progressing through legal/administrative setup, staffing, and vendor relationships, followed by marketing initiatives with responsive strategy adjustments based on market feedback, and culminating in performance evaluation and mandatory reporting to headquarters, all while ensuring logistics management occurs somewhere in the process.

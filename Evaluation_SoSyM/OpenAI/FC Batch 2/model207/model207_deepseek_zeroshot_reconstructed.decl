@@ -1,0 +1,56 @@
+activity Plan Event
+activity Book Venue
+activity Send Invitations
+activity Arrange Catering
+activity Hire Staff
+activity Set Up Venue
+activity Conduct Rehearsal
+activity Welcome Guests
+activity Facilitate Activities
+activity Deliver Speech
+activity Serve Meals
+activity Coordinate Photography
+activity Distribute Gifts
+activity Collect Feedback
+activity Tear Down Venue
+bind Plan Event: Event ID, Budget
+bind Book Venue: Event ID, Venue
+bind Send Invitations: Number of Guests, Invitation Status
+bind Arrange Catering: Catering Service
+bind Hire Staff: Staff Role
+bind Set Up Venue: 
+bind Conduct Rehearsal: Rehearsal ID
+bind Welcome Guests: 
+bind Facilitate Activities: 
+bind Deliver Speech: 
+bind Serve Meals: Catering Service
+bind Coordinate Photography: 
+bind Distribute Gifts: 
+bind Collect Feedback: Event ID, Venue
+bind Tear Down Venue: 
+Event ID: integer between 1 and 999999
+Budget: float between 1000.0 and 50000.0
+Venue: Hall A, Hall B, Hall C
+Number of Guests: integer between 10 and 500
+Invitation Status: Sent, Not Sent
+Catering Service: Buffet, Sit-down Dinner, Cocktail
+Staff Role: Waiter, Coordinator, Cleaner
+Rehearsal ID: integer between 1 and 9999
+Init[Plan Event] | |
+Existence[Plan Event] | |
+End[Tear Down Venue] | |
+Existence[Tear Down Venue] | |
+Chain Precedence[Book Venue, Plan Event] | | |
+Chain Precedence[Send Invitations, Book Venue] | | |
+Chain Precedence[Arrange Catering, Send Invitations] | | |
+Chain Precedence[Hire Staff, Arrange Catering] | | |
+Chain Precedence[Set Up Venue, Hire Staff] | | |
+Chain Precedence[Conduct Rehearsal, Set Up Venue] | | |
+Chain Precedence[Welcome Guests, Conduct Rehearsal] | | |
+Chain Precedence[Facilitate Activities, Welcome Guests] | | |
+Chain Precedence[Deliver Speech, Facilitate Activities] | | |
+Chain Precedence[Serve Meals, Deliver Speech] | | |
+Chain Precedence[Coordinate Photography, Serve Meals] | | |
+Chain Precedence[Distribute Gifts, Coordinate Photography] | | |
+Chain Precedence[Collect Feedback, Distribute Gifts] | | |
+Chain Precedence[Tear Down Venue, Collect Feedback] | | |

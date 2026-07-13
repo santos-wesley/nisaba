@@ -1,0 +1,16 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+The process begins with the **Draft Contract** activity, which must be the first step. Once a contract is drafted, it must eventually be **Reviewed**. However, the review is not mandatory for every draft; it can occur up to 2 times, and if it happens, it must follow the draft.
+
+After the review, if the outcome is **"Requires Changes"**, the process moves to **Negotiate Terms**. This negotiation can happen up to 3 times in response to a review that demands changes. Following negotiation, the contract proceeds to **Approve Contract**, which can occur up to 2 times after negotiation.
+
+Approval is conditional: the contract can only be **Signed** if the **Approval Status** is **"Approved"** and the **Signature Status** is currently **"Unsigned"**. This signing step can happen at most once after approval. Once the contract is **Fully Signed**, it must be **Archived**, which is the final step in the process.
+
+There are also important constraints to prevent invalid sequences:
+- A contract cannot be signed before it has been approved. Specifically, if the signature is still **Unsigned**, the approval must already be **Approved**.
+- A contract that has been **Rejected** during review cannot later be signed if it remains **Unsigned**.
+- The **Review Contract** activity must occur at least once somewhere in the process.
+
+In summary, the process flows from drafting, through review and possible negotiation, to approval, then signing, and finally archiving—with strict conditions on the data values (like approval status and signature status) at each step.

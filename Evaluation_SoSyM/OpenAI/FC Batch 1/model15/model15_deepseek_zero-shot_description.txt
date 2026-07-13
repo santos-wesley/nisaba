@@ -1,0 +1,15 @@
+Based on the provided model, here is a natural language description of the business process:
+
+This process manages employee requests for remote work or flexible hours. It begins when an employee submits a request, which must include a unique Request ID, their name, and the type of request. The process is initiated by this submission, and importantly, a request can never be rejected outright—the "Absence" constraint on the "Reject Request" activity means that rejection is not allowed to occur at all.
+
+Once submitted, the request must be reviewed by a manager. The "Chain Precedence" rule ensures that a review can only happen immediately after a submission, and the "Response" constraint guarantees that every submission will eventually be reviewed within 24 hours.
+
+After review, a manager must make a decision, choosing exclusively between approving or rejecting the request (the "Choice" constraint). If the request is approved, the process follows a strict sequence: remote access must be set up first ("Precedence"), and then the employee must be notified immediately afterward ("Chain Succession").
+
+Throughout the process, managers monitor employee performance. The "Alternate Response" rule states that for every performance monitoring event, an update to payroll must occur within 48 hours, but these two activities cannot happen consecutively.
+
+There is also a critical separation between access states: the "Not Co-Existence" constraint ensures that remote access can never be both set up and revoked at the same time for the same request.
+
+Finally, after the employee is notified, they must complete a survey within 72 hours. The "Chain Response" rule ensures that every notification is directly followed by a survey completion. The survey score is recorded as a float between 0.0 and 10.0.
+
+In summary, the process flows from submission through review, a binary decision, setup and notification, with periodic performance monitoring linked to payroll updates, and ends with a mandatory employee survey—all while preventing rejections and ensuring access states are mutually exclusive.

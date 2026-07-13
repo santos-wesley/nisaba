@@ -1,0 +1,40 @@
+activity Submit Request
+activity Review Request
+activity Approve Request
+activity Reject Request
+activity Setup Remote Access
+activity Update Payroll
+activity Notify Employee
+activity Monitor Performance
+activity Revoke Access
+activity Complete Survey
+bind Submit Request: Request ID, Employee Name, Request Type
+bind Review Request: Request ID, Manager ID
+bind Approve Request: Request ID, Manager ID, Decision
+bind Reject Request: Request ID, Manager ID, Decision
+bind Setup Remote Access: Request ID, Access Status, Manager ID
+bind Update Payroll: Request ID, Payroll Status
+bind Notify Employee: Request ID, Notification Status
+bind Monitor Performance: Manager ID, Performance Rating
+bind Revoke Access: Request ID, Access Status
+bind Complete Survey: Request ID, Survey Score
+Request ID: integer between 1 and 99999
+Employee Name: John Doe, Jane Smith, Alice Johnson
+Request Type: Remote Work, Flexible Hours
+Manager ID: integer between 1 and 9999
+Decision: Approved, Rejected
+Access Status: Setup, Revoked
+Payroll Status: Updated, Pending
+Notification Status: Sent, Pending
+Performance Rating: Excellent, Good, Average, Poor
+Survey Score: float between 0.0 and 10.0
+Init[Submit Request] | |
+Absence[Reject Request] | |
+Response[Submit Request, Review Request] | |A.Request ID == T.Request ID |0,24,h
+Chain Precedence[Review Request, Submit Request] | |A.Request ID == T.Request ID |
+Choice[Approve Request, Reject Request] | | |
+Precedence[Setup Remote Access, Approve Request] | |A.Request ID == T.Request ID |
+Chain Succession[Approve Request, Notify Employee] | |A.Request ID == T.Request ID |
+Alternate Response[Update Payroll, Monitor Performance] | |A.Manager ID == T.Manager ID |0,48,h
+Not Co-Existence[Revoke Access, Setup Remote Access] | | |
+Chain Response[Notify Employee, Complete Survey] | |A.Request ID == T.Request ID |0,72,h

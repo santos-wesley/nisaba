@@ -1,0 +1,45 @@
+activity Collect Digital Evidence
+activity Preserve Digital Evidence
+activity Analyze Digital Evidence
+activity Dispose Digital Evidence
+activity Audit Evidence Access
+activity Document Chain Custody
+activity Generate Evidence Report
+activity Secure Evidence Storage
+activity Validate Evidence Integrity
+activity Report Security Breach
+activity Classify Evidence
+activity Index Evidence
+activity Update Evidence Metadata
+activity Authorize Evidence Release
+activity Review Evidence Report
+bind Collect Digital Evidence: Evidence Type, Evidence Size
+bind Preserve Digital Evidence: Custody Status, Integrity Score
+bind Analyze Digital Evidence: Analysis Time, Security Level
+bind Dispose Digital Evidence: Disposal Method, Retention Period
+bind Audit Evidence Access: Access Count, Legal Hold
+Evidence Type: Document, Image, Video, Audio, Log File
+Evidence Size: integer between 1 and 1000
+Custody Status: Collected, Preserved, Analyzed, Released, Disposed
+Integrity Score: float between 0 and 1
+Analysis Time: float between 0.1 and 24
+Security Level: Confidential, Restricted, Unclassified
+Disposal Method: Shredding, Wiping, Deletion
+Retention Period: integer between 30 and 3650
+Access Count: integer between 0 and 100
+Legal Hold: Yes, No
+Init[Collect Digital Evidence] | |
+End[Dispose Digital Evidence] | |
+Existence[Analyze Digital Evidence] | |
+Succession[Collect Digital Evidence, Preserve Digital Evidence] | | |
+Response[Preserve Digital Evidence, Analyze Digital Evidence] | | |
+Precedence[Document Chain Custody, Analyze Digital Evidence] | | |
+Responded Existence[Audit Evidence Access, Collect Digital Evidence] |A.Legal Hold is Yes | |
+Chain Response[Analyze Digital Evidence, Generate Evidence Report] | | |
+Co-Existence[Secure Evidence Storage, Validate Evidence Integrity] | | |
+Not Chain Succession[Report Security Breach, Dispose Digital Evidence] | | |
+Not Co-Existence[Classify Evidence, Dispose Digital Evidence] | | |
+Choice[Index Evidence, Update Evidence Metadata] | | |
+Exclusive Choice[Authorize Evidence Release, Dispose Digital Evidence] | | |
+Alternate Response[Review Evidence Report, Authorize Evidence Release] | | |
+Chain Response[Preserve Digital Evidence, Validate Evidence Integrity] | | |

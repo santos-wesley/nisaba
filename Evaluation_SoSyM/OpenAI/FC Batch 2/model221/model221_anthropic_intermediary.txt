@@ -1,0 +1,41 @@
+## Activities
+- **Analyze International Market**: The 'Analyze International Market' activity represents the process of examining and evaluating international market conditions.
+- **Identify Business Opportunities**: The 'Identify Business Opportunities' activity involves recognizing potential business opportunities in the market.
+- **Conduct Feasibility Study**: The 'Conduct Feasibility Study' activity involves assessing the practicality and viability of a proposed business venture.
+- **Develop Business Plan**: The 'Develop Business Plan' activity involves creating a strategic plan outlining business goals and the methods to achieve them.
+- **Acquire Necessary Permits**: The 'Acquire Necessary Permits' activity involves obtaining the required legal permits and authorizations for business operations.
+- **Set Up International Office**: The 'Set Up International Office' activity involves establishing a physical office presence in an international location.
+- **Hire Local Staff**: The 'Hire Local Staff' activity involves recruiting and hiring employees from the local workforce.
+- **Initiate Marketing Campaign**: The 'Initiate Marketing Campaign' activity involves launching promotional activities to market products or services.
+- **Establish Supply Chain**: The 'Establish Supply Chain' activity involves setting up the network of processes to deliver products or services.
+- **Negotiate with Local Vendors**: The 'Negotiate with Local Vendors' activity involves discussing and agreeing on terms with local suppliers and vendors.
+- **Monitor Market Response**: The 'Monitor Market Response' activity involves tracking and evaluating how the market reacts to business activities.
+- **Adjust Strategy**: The 'Adjust Strategy' activity involves modifying business strategies based on performance and market feedback.
+- **Manage International Logistics**: The 'Manage International Logistics' activity involves overseeing the coordination and movement of goods and resources internationally.
+- **Assess Performance**: The 'Assess Performance' activity involves evaluating the results and effectiveness of business operations.
+- **Report to Headquarters**: The 'Report to Headquarters' activity involves communicating results and updates to the central corporate office.
+
+## Attributes
+- **Market Size: Integer between 1000 and 1000000**: The attribute 'Market Size: Integer between 1000 and 1000000' represents the size of the target market.
+- **Investment Amount: Float between 10000.0 and 1000000.0**: The attribute 'Investment Amount: Float between 10000.0 and 1000000.0' represents the amount of capital invested in the business venture.
+- **Market Attractiveness: High, Medium, Low**: The attribute 'Market Attractiveness: High, Medium, Low' specifies the level of attractiveness of the market being analyzed.
+- **Feasibility Status: Positive, Negative**: The attribute 'Feasibility Status: Positive, Negative' specifies whether the feasibility study determined the venture to be viable or not.
+- **Permit Status: Approved, Pending, Rejected**: The attribute 'Permit Status: Approved, Pending, Rejected' specifies the current status of the necessary permits.
+- **Staffing Level: High, Medium, Low**: The attribute 'Staffing Level: High, Medium, Low' specifies the level of staffing achieved for local hiring.
+- **Marketing Budget: Float between 5000.0 and 500000.0**: The attribute 'Marketing Budget: Float between 5000.0 and 500000.0' represents the budget allocated for the marketing campaign.
+- **Market Response: Positive, Neutral, Negative**: The attribute 'Market Response: Positive, Neutral, Negative' specifies the nature of the market's reaction to business activities.
+- **Strategy Adjustment: Yes, No**: The attribute 'Strategy Adjustment: Yes, No' specifies whether a strategy adjustment was made.
+- **Performance Evaluation: Excellent, Good, Fair, Poor**: The attribute 'Performance Evaluation: Excellent, Good, Fair, Poor' specifies the qualitative rating given to the assessed performance.
+
+## Binds
+- **bind Analyze International Market: Market Size, Market Attractiveness**: The bind 'Analyze International Market: Market Size, Market Attractiveness' specifies that the activity 'Analyze International Market' requires the attributes 'Market Size' and 'Market Attractiveness'.
+- **bind Conduct Feasibility Study: Investment Amount, Feasibility Status**: The bind 'Conduct Feasibility Study: Investment Amount, Feasibility Status' specifies that the activity 'Conduct Feasibility Study' requires the attributes 'Investment Amount' and 'Feasibility Status'.
+- **bind Acquire Necessary Permits: Permit Status**: The bind 'Acquire Necessary Permits: Permit Status' specifies that the activity 'Acquire Necessary Permits' requires the attribute 'Permit Status'.
+- **bind Hire Local Staff: Staffing Level**: The bind 'Hire Local Staff: Staffing Level' specifies that the activity 'Hire Local Staff' requires the attribute 'Staffing Level'.
+- **bind Initiate Marketing Campaign: Marketing Budget**: The bind 'Initiate Marketing Campaign: Marketing Budget' specifies that the activity 'Initiate Marketing Campaign' requires the attribute 'Marketing Budget'.
+- **bind Monitor Market Response: Market Response**: The bind 'Monitor Market Response: Market Response' specifies that the activity 'Monitor Market Response' requires the attribute 'Market Response'.
+- **bind Adjust Strategy: Strategy Adjustment**: The bind 'Adjust Strategy: Strategy Adjustment' specifies that the activity 'Adjust Strategy' requires the attribute 'Strategy Adjustment'.
+- **bind Assess Performance: Performance Evaluation**: The bind 'Assess Performance: Performance Evaluation' specifies that the activity 'Assess Performance' requires the attribute 'Performance Evaluation'.
+
+## Constraints
+

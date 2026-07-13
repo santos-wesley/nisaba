@@ -1,0 +1,38 @@
+## Activities
+- **Define Requirements**: The 'Define Requirements' activity represents the process of specifying and documenting the requirements needed for the prototype.
+- **Develop Initial Prototype**: The 'Develop Initial Prototype' activity involves creating the first version of the prototype based on the defined requirements.
+- **Test Prototype**: The 'Test Prototype' activity includes conducting tests on the prototype to evaluate its functionality and performance.
+- **Gather Feedback**: The 'Gather Feedback' activity involves collecting feedback from stakeholders regarding the prototype.
+- **Analyze Feedback**: The 'Analyze Feedback' activity includes reviewing and interpreting the feedback collected from stakeholders.
+- **Revise Prototype**: The 'Revise Prototype' activity represents making improvements or changes to the prototype based on the analyzed feedback.
+- **Final Testing**: The 'Final Testing' activity involves conducting the final round of tests on the revised prototype.
+- **Document Findings**: The 'Document Findings' activity includes recording the results and insights obtained throughout the prototype development process.
+- **Present Prototype**: The 'Present Prototype' activity involves showcasing the prototype to relevant parties for review.
+- **Approve Prototype**: The 'Approve Prototype' activity represents the formal approval of the prototype after review.
+
+## Attributes
+- **Stakeholder Name: John Doe, Jane Smith, Alice Johnson**: The attribute 'Stakeholder Name: John Doe, Jane Smith, Alice Johnson' specifies the possible stakeholders providing feedback on the prototype.
+- **Feedback Rating: Integer between 1 and 10**: The attribute 'Feedback Rating: Integer between 1 and 10' represents the numeric rating given by a stakeholder as feedback on the prototype.
+- **Improvement Cost: Float between 100.0 and 10000.0**: The attribute 'Improvement Cost: Float between 100.0 and 10000.0' represents the monetary cost associated with revising and improving the prototype.
+- **Test Result: Pass, Fail**: The attribute 'Test Result: Pass, Fail' specifies the outcome of a test conducted on the prototype.
+- **Revision Version: Integer between 1 and 20**: The attribute 'Revision Version: Integer between 1 and 20' represents the version number assigned to a particular revision of the prototype.
+
+## Binds
+- **bind Gather Feedback: Stakeholder Name, Feedback Rating**: The bind 'Gather Feedback: Stakeholder Name, Feedback Rating' specifies that the activity 'Gather Feedback' requires the attributes 'Stakeholder Name' and 'Feedback Rating'.
+- **bind Analyze Feedback: Stakeholder Name, Feedback Rating**: The bind 'Analyze Feedback: Stakeholder Name, Feedback Rating' specifies that the activity 'Analyze Feedback' requires the attributes 'Stakeholder Name' and 'Feedback Rating'.
+- **bind Revise Prototype: Improvement Cost, Revision Version**: The bind 'Revise Prototype: Improvement Cost, Revision Version' specifies that the activity 'Revise Prototype' requires the attributes 'Improvement Cost' and 'Revision Version'.
+- **bind Test Prototype: Test Result**: The bind 'Test Prototype: Test Result' specifies that the activity 'Test Prototype' requires the attribute 'Test Result'.
+- **bind Final Testing: Test Result**: The bind 'Final Testing: Test Result' specifies that the activity 'Final Testing' requires the attribute 'Test Result'.
+
+## Constraints
+- **Init[Define Requirements] | |**: The 'Define Requirements' must be the first activity to occur in the process.
+- **Response[Define Requirements, Develop Initial Prototype] | | |**: If a 'Define Requirements' activity occurs, then a 'Develop Initial Prototype' activity must eventually occur after the 'Define Requirements' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Define Requirements' can be pending at the same time, and a single 'Develop Initial Prototype' can fulfill the obligation for all preceding 'Define Requirements'. If 'Define Requirements' does not occur, the constraint imposes no obligation on the occurrence of 'Develop Initial Prototype'.
+- **Response[Develop Initial Prototype, Test Prototype] | | |**: If a 'Develop Initial Prototype' activity occurs, then a 'Test Prototype' activity must eventually occur after the 'Develop Initial Prototype' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Develop Initial Prototype' can be pending at the same time, and a single 'Test Prototype' can fulfill the obligation for all preceding 'Develop Initial Prototype'. If 'Develop Initial Prototype' does not occur, the constraint imposes no obligation on the occurrence of 'Test Prototype'.
+- **Response[Test Prototype, Gather Feedback] | | |**: If a 'Test Prototype' activity occurs, then a 'Gather Feedback' activity must eventually occur after the 'Test Prototype' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Test Prototype' can be pending at the same time, and a single 'Gather Feedback' can fulfill the obligation for all preceding 'Test Prototype'. If 'Test Prototype' does not occur, the constraint imposes no obligation on the occurrence of 'Gather Feedback'.
+- **Response[Gather Feedback, Analyze Feedback] | | |**: If a 'Gather Feedback' activity occurs, then an 'Analyze Feedback' activity must eventually occur after the 'Gather Feedback' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Gather Feedback' can be pending at the same time, and a single 'Analyze Feedback' can fulfill the obligation for all preceding 'Gather Feedback'. If 'Gather Feedback' does not occur, the constraint imposes no obligation on the occurrence of 'Analyze Feedback'.
+- **Response[Analyze Feedback, Revise Prototype] | | |**: If an 'Analyze Feedback' activity occurs, then a 'Revise Prototype' activity must eventually occur after the 'Analyze Feedback' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Analyze Feedback' can be pending at the same time, and a single 'Revise Prototype' can fulfill the obligation for all preceding 'Analyze Feedback'. If 'Analyze Feedback' does not occur, the constraint imposes no obligation on the occurrence of 'Revise Prototype'.
+- **Response[Revise Prototype, Final Testing] | | |**: If a 'Revise Prototype' activity occurs, then a 'Final Testing' activity must eventually occur after the 'Revise Prototype' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Revise Prototype' can be pending at the same time, and a single 'Final Testing' can fulfill the obligation for all preceding 'Revise Prototype'. If 'Revise Prototype' does not occur, the constraint imposes no obligation on the occurrence of 'Final Testing'.
+- **Chain Response[Present Prototype, Approve Prototype] | | |**: Whenever a 'Present Prototype' activity occurs, it must be immediately followed by an 'Approve Prototype' activity in the next event position, with no other events in between. The 'Approve Prototype' activity is allowed to happen isolated.
+- **End[Approve Prototype] | |**: The 'Approve Prototype' must be the last activity to occur in the process.
+- **Existence2[Test Prototype] | |**: The 'Test Prototype' activity must occur at least 2 times in the process.
+

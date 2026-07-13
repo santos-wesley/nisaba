@@ -1,0 +1,49 @@
+# Multi-Perspective Declare Model Description
+
+This model describes a case management process for social service delivery, integrating control-flow, data, and temporal perspectives.
+
+## Process Overview
+
+The process manages a client's journey through social services, from initial assessment through case closure, with data attributes attached to each activity that influence process behavior.
+
+## Activities and Data
+
+Each activity in the process captures specific case-related information:
+
+- **Assess Client Needs** records the **Client Risk Level** (Low, Medium, or High)
+- **Develop Service Plan** records the **Service Plan Duration** (1–12 months)
+- **Obtain Funding Approval** records the **Funding Amount Requested** ($100.0–$10,000.0)
+- **Provide Counseling Services** records the **Counseling Type** (Individual, Group, or Family)
+- **Coordinate Support Services** records the **Support Service Type** (Housing, Job Training, or Childcare)
+- **Monitor Client Progress** records the **Progress Score** (0–100)
+- **Adjust Service Plan** records the **Plan Adjustment Reason** (Progress, Setback, or New Needs)
+- **Conduct Home Visit** records the **Home Visit Outcome** (Positive, Neutral, or Negative)
+- **Close Client File** records the **File Closure Reason** (Goals Met, Client Moved, or Services Declined)
+- **Refer to Specialist** records the **Specialist Type** (Psychiatrist, Addiction Counselor, or Legal Aid)
+
+## Process Flow and Constraints
+
+**Mandatory Start and End**
+The process must begin with **Assess Client Needs** and must end with **Close Client File**, ensuring every case starts with an evaluation and concludes with formal closure.
+
+**Sequential Structure**
+- **Develop Service Plan** must be preceded at some point by **Assess Client Needs**, ensuring needs are assessed before planning.
+- **Provide Counseling Services** and **Monitor Client Progress** are mutually dependent in strict order (succession): counseling must be followed by progress monitoring, and progress monitoring must be preceded by counseling.
+- Whenever **Obtain Funding Approval** occurs, **Provide Counseling Services** must eventually follow, ensuring approved funding leads to service delivery.
+
+**Progress Monitoring and Adjustments**
+- **Adjust Service Plan** cannot immediately and repeatedly follow **Monitor Client Progress** in direct succession (there must be some variation in the pattern), discouraging mechanical, unexamined plan changes.
+- If a client's **Progress Score** falls below 50 during monitoring, an **Adjust Service Plan** activity must occur within 7 days, ensuring timely intervention for clients showing insufficient progress.
+
+**Risk-Based Home Visits**
+- If a client is assessed with a **High** Risk Level, a **Conduct Home Visit** must take place within 24 hours of the assessment, reflecting urgent in-person follow-up for high-risk cases.
+
+**Specialist Referral Based on Plan Duration**
+- If the **Service Plan Duration** exceeds 6 months, a **Refer to Specialist** activity must occur within 30 days of plan development, ensuring longer-term cases receive specialized support.
+
+**Home Visit Outcomes Driving Plan Changes**
+- If a **Conduct Home Visit** results in a **Negative** outcome, the service plan must be adjusted within 3 days, ensuring rapid response to concerning in-home findings.
+
+## Summary
+
+This model enforces a client-centered workflow where risk levels, progress scores, plan duration, and home visit outcomes dynamically trigger specific follow-up actions within defined time windows, ensuring responsive, data-driven case management from intake through closure.

@@ -1,0 +1,9 @@
+Based on the provided model, here is a natural language description of the payroll process:
+
+The payroll process begins with an employee submitting a timesheet. This activity requires an **Employee ID**, the **Hours Worked** (an integer from 0 to 80), and a **Timesheet Status** (which is initially set to "Submitted"). Once the timesheet is submitted, a manager must subsequently **Approve the Timesheet**. This approval step also tracks the **Employee ID** and updates the **Timesheet Status** to either "Approved" or "Rejected". Critically, if the status is "Rejected", the process cannot loop back: the manager is strictly forbidden from resubmitting the timesheet after a rejection.
+
+If the timesheet is approved, the process moves forward sequentially. First, the system **Calculates Gross Pay** using the **Hours Worked** and a **Pay Rate** (a float between 10.0 and 100.0), producing a **Gross Pay** value. Next, it **Calculates Deductions** based on that **Gross Pay**, resulting in a **Tax Deduction** and an **Insurance Deduction**. Following this, the system **Calculates Net Pay** by subtracting the deductions from the gross pay, locking in the **Net Pay** amount.
+
+With the net pay determined, the system **Processes Payment** using the **Employee ID**, the **Net Pay**, and a **Payment Method** (either "Direct Deposit" or "Check"). After processing the payment, the process **Updates Payroll Records** and then **Reviews a Payroll Report**. Finally—but this step must happen within 24 hours of processing the payment—the system **Distributes the Paystub** to the employee.
+
+In summary, this is a strictly linear, approval-driven payroll workflow. Every step (from submission through to distribution) must happen in order, and the only allowed deviation is that a rejected timesheet cannot be re-submitted.

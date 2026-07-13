@@ -1,0 +1,41 @@
+This model describes an administrative workflow for processing employee requests, such as remote work or flexible hours. The process is governed by a set of business rules, data attributes, and time-based constraints. Below is a natural language description of the Multi-Perspective Declare model:
+
+### **Activities and Data Attributes**
+The workflow consists of 10 activities, each bound to specific data variables that define the context of the process:
+*   **Submit Request**: Captures the *Request ID* (an integer from 1 to 99999), *Employee Name* (John Doe, Jane Smith, or Alice Johnson), and *Request Type* (Remote Work or Flexible Hours).
+*   **Review Request**: Captures the *Request ID* and the *Manager ID* (an integer from 1 to 9999) responsible for the review.
+*   **Approve Request / Reject Request**: Both capture the *Request ID*, *Manager ID*, and the final *Decision* (Approved or Rejected).
+*   **Setup Remote Access**: Captures the *Request ID*, *Access Status* (Setup or Revoked), and *Manager ID*.
+*   **Update Payroll**: Captures the *Request ID* and *Payroll Status* (Updated or Pending).
+*   **Notify Employee**: Captures the *Request ID* and *Notification Status* (Sent or Pending).
+*   **Monitor Performance**: Captures the *Manager ID* and a *Performance Rating* (Excellent, Good, Average, or Poor).
+*   **Revoke Access**: Captures the *Request ID* and *Access Status*.
+*   **Complete Survey**: Captures the *Request ID* and a *Survey Score* (a decimal number from 0.0 to 10.0).
+
+### **Workflow Constraints and Rules**
+The sequence and execution of these activities are strictly governed by the following constraints:
+
+**1. Process Initiation and Exclusions**
+*   The process must begin with the **Submit Request** activity. 
+*   The **Reject Request** activity is entirely absent from this model, meaning rejection is not a valid execution path in this specific configuration.
+
+**2. Request Review Logic**
+*   Every **Submit Request** must be followed by a **Review Request**. 
+*   Furthermore, a **Review Request** cannot occur unless it is immediately preceded by a **Submit Request** (Chain Precedence). 
+*   Time Constraint: The review must occur within 24 hours of the initial request submission.
+
+**3. Approval and Notification**
+*   Managers must make a choice, meaning either **Approve Request** or **Reject Request** must eventually be executed. *(Note: While the Choice constraint dictates one of these must happen, the Absence constraint paradoxically forbids the Reject Request activity. In a practical execution trace, this implies the request must be approved).*
+*   **Setup Remote Access** can only occur if it is preceded by an **Approve Request**.
+*   Once a request is approved, it must immediately be followed by a **Notify Employee** action (Chain Succession).
+
+**4. Payroll and Performance Monitoring**
+*   Every time **Update Payroll** occurs, it must eventually be followed by **Monitor Performance** (Alternate Response). 
+*   Time Constraint: The performance monitoring must happen within 48 hours of the payroll update.
+
+**5. Access Management**
+*   **Revoke Access** and **Setup Remote Access** cannot co-exist in the same process trace. If remote access is set up, it cannot be revoked, and vice versa.
+
+**6. Survey Completion**
+*   Every time **Notify Employee** occurs, it must be immediately followed by **Complete Survey** (Chain Response). 
+*   Time Constraint: The survey must be completed within 72 hours of the employee being notified.

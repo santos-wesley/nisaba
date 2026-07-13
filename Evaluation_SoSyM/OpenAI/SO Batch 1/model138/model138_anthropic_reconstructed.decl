@@ -1,0 +1,54 @@
+activity Identify Risks
+activity Develop Continuity Plan
+activity Test Continuity Plan
+activity Review Test Results
+activity Implement Improvements
+activity Communicate Plan
+activity Monitor Risks
+activity Conduct Training
+activity Activate Continuity Plan
+activity Evaluate Incident Response
+bind Identify Risks: Risk Level
+bind Develop Continuity Plan: Improvement Status
+bind Test Continuity Plan: Test Outcome
+bind Review Test Results: Plan Effectiveness
+bind Implement Improvements: Improvement Status
+bind Communicate Plan: Communication Method
+bind Monitor Risks: Monitoring Frequency
+bind Conduct Training: Training Hours
+bind Activate Continuity Plan: Incident Severity
+bind Evaluate Incident Response: Response Time, Incident Severity
+Risk Level: integer between 1 and 10
+Plan Effectiveness: float between 0.0 and 100.0
+Test Outcome: Pass, Fail
+Improvement Status: Completed, Pending
+Communication Method: Email, Meeting, Newsletter
+Training Hours: integer between 1 and 40
+Incident Severity: Low, Medium, High
+Response Time: float between 0.0 and 24.0
+Stakeholder Engagement: High, Moderate, Low
+Monitoring Frequency: integer between 1 and 30
+Init[Identify Risks] | |
+End[Evaluate Incident Response] | |
+Existence[Develop Continuity Plan] | |
+Existence[Monitor Risks] | |
+Absence2[Activate Continuity Plan] |A.Incident Severity is Low |
+Exactly2[Test Continuity Plan] | |
+Responded Existence[Test Continuity Plan, Implement Improvements] |A.Test Outcome is Fail | |
+Precedence[Identify Risks, Develop Continuity Plan] |A.Risk Level > 5 | |
+Precedence[Review Test Results, Communicate Plan] |A.Plan Effectiveness > 70.0 | |
+Precedence[Conduct Training, Activate Continuity Plan] |A.Training Hours >= 10 | |
+Response[Test Continuity Plan, Review Test Results] |A.Test Outcome is Fail | |0,3,d
+Response[Review Test Results, Implement Improvements] |A.Plan Effectiveness < 50.0 |T.Improvement Status is Pending |0,7,d
+Succession[Identify Risks, Monitor Risks] |A.Risk Level > 7 |T.Monitoring Frequency <= 7 |
+Alternate Response[Activate Continuity Plan, Evaluate Incident Response] |A.Incident Severity is High | |
+Chain Response[Review Test Results, Communicate Plan] |A.Plan Effectiveness > 90.0 |T.Communication Method is Meeting |
+Chain Precedence[Review Test Results, Implement Improvements] | |T.Improvement Status is Completed |
+Co-Existence[Conduct Training, Communicate Plan] | | |
+Choice[Conduct Training, Communicate Plan] | | |
+Not Co-Existence[Activate Continuity Plan, Develop Continuity Plan] |A.Incident Severity is High |T.Improvement Status is Pending |
+Not Responded Existence[Monitor Risks, Activate Continuity Plan] |A.Monitoring Frequency > 20 | |
+Not Precedence[Develop Continuity Plan, Communicate Plan] | | |
+Not Response[Evaluate Incident Response, Activate Continuity Plan] |A.Response Time < 2.0 | |
+Not Succession[Implement Improvements, Communicate Plan] |A.Improvement Status is Pending | |
+Not Chain Succession[Test Continuity Plan, Communicate Plan] |A.Test Outcome is Fail | |

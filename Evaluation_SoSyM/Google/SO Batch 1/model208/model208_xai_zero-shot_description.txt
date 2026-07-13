@@ -1,0 +1,80 @@
+**Multi-Perspective Declare Model: Train Operations Management**
+
+This model describes a railway operations process using a combination of control-flow, data, and temporal constraints. The process revolves around the lifecycle of a train from initial scheduling to final reception or cancellation.
+
+### Activities
+The process consists of the following 10 activities:
+- **Schedule Train**
+- **Allocate Resources**
+- **Monitor Train**
+- **Manage Delay**
+- **Perform Maintenance**
+- **Inspect Track**
+- **Dispatch Train**
+- **Receive Train**
+- **Update Schedule**
+- **Cancel Train**
+
+### Data Perspectives
+Each activity is associated with specific data parameters:
+
+- **Schedule Train**: Train ID, Schedule Version
+- **Allocate Resources**: Train ID, Track Number
+- **Monitor Train**: Train ID, Train Status
+- **Manage Delay**: Train ID, Delay Duration
+- **Perform Maintenance**: Train ID, Maintenance Type
+- **Inspect Track**: Track Number, Inspection Score
+- **Dispatch Train**: Train ID, Priority Level
+- **Receive Train**: Train ID, Passenger Count
+- **Update Schedule**: Train ID, Schedule Version
+- **Cancel Train**: Train ID, Reason Cancel
+
+**Data Domains:**
+- Train ID: integer ∈ [1000, 9999]
+- Train Status: {On Time, Delayed, Cancelled, Completed}
+- Delay Duration: float ∈ [0.0, 300.0]
+- Track Number: integer ∈ [1, 10]
+- Maintenance Type: {Routine, Emergency, Scheduled}
+- Inspection Score: float ∈ [0.0, 10.0]
+- Priority Level: {High, Medium, Low}
+- Passenger Count: integer ∈ [0, 1500]
+- Reason Cancel: {Weather, Maintenance, Technical Issue}
+- Schedule Version: integer ∈ [1, 100]
+
+### Constraints
+
+**Control-Flow & Temporal Constraints:**
+
+1. **Init[Schedule Train]**  
+   The process must always start with scheduling a train.
+
+2. **Precedence[Dispatch Train, Allocate Resources]**  
+   Allocate Resources cannot occur before Dispatch Train has occurred.
+
+3. **Response[Monitor Train, Manage Delay] (with condition)**  
+   If a train is **Delayed** (i.e., `A.Train Status is Delayed`), then Manage Delay must eventually occur after Monitor Train.
+
+4. **Chain Precedence[Dispatch Train, Perform Maintenance]**  
+   Perform Maintenance must be immediately preceded by Dispatch Train (no other activity in between).
+
+5. **Succession[Inspect Track, Allocate Resources]**  
+   Inspect Track must be followed by Allocate Resources, and Allocate Resources must be preceded by Inspect Track (strong bidirectional relation).
+
+6. **Responded Existence[Dispatch Train, Receive Train]**  
+   If a train is dispatched, it must eventually be received (somewhere in the trace).
+
+7. **Not Co-Existence[Dispatch Train, Cancel Train]**  
+   A train cannot be both dispatched and cancelled in the same process instance.
+
+8. **Not Chain Succession[Update Schedule, Schedule Train]**  
+   Update Schedule cannot directly follow Schedule Train (they cannot be executed immediately one after another).
+
+9. **Choice[Dispatch Train, Cancel Train]**  
+   At least one of Dispatch Train or Cancel Train must occur.
+
+10. **Absence2[Cancel Train]**  
+    Cancel Train can occur **at most twice** in any trace.
+
+---
+
+This model enforces a structured yet flexible railway operations workflow, ensuring safety, resource coordination, and proper handling of delays and cancellations while maintaining strong data awareness.

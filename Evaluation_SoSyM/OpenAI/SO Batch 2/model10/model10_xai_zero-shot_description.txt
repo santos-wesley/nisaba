@@ -1,0 +1,45 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a **material testing and certification workflow** for laboratory samples (e.g., metals, alloys, or composites). The process is centered around a **Sample ID** that links all related activities.
+
+### Process Flow
+
+The process **must begin** with **Prepare Sample**. After performing various material characterization tests, the process **ends** in one of two final states: either **Approve Material** or **Reject Material**.
+
+### Core Testing Sequence
+
+The laboratory must perform several analytical activities, with the following mandatory ordering and dependencies:
+
+- **Conduct X-ray Diffraction** must be performed **before** **Analyze Microstructure** (with the same Sample ID). Up to 2 occurrences of each activity are allowed.
+- **Measure Hardness** must be directly followed (chained) by **Conduct Tensile Test** on the same sample, with no other activities in between.
+- **Perform Thermal Analysis** must be executed **before** **Evaluate Corrosion Resistance** on the same sample.
+- **Document Results** must occur **before** **Review Findings**.
+- **Review Findings** must occur **before** both **Approve Material** and **Reject Material**.
+
+### Equipment and Quality Constraints
+
+All testing equipment must be properly calibrated before use. Specifically:
+- **Calibrate Equipment** (which sets the *Equipment Status* to "Calibrated") must occur **before** any of the following activities: Conduct X-ray Diffraction, Measure Hardness, Conduct Tensile Test, Perform Thermal Analysis, or Evaluate Corrosion Resistance.
+
+### Data Perspectives
+
+Each activity is associated with specific data attributes:
+
+- **Prepare Sample** → captures *Sample ID* (integer 1–1000)
+- **Measure Hardness** → records *Hardness Value* (float 0.0–100.0)
+- **Conduct Tensile Test** → records *Tensile Strength* (float 0.0–2000.0)
+- **Evaluate Corrosion Resistance** → assigns *Corrosion Resistance* level (High/Medium/Low)
+- **Perform Thermal Analysis** → measures *Thermal Conductivity* (float 0.0–500.0)
+- **Analyze Microstructure** → determines *Microstructure Type* (Grain/Fiber/Amorphous)
+- **Conduct X-ray Diffraction** → measures *X-ray Intensity* (integer 0–10000)
+- **Perform Chemical Analysis** → determines *Chemical Purity* (float 0.0–100.0)
+- **Calibrate Equipment** → sets *Equipment Status* (Calibrated/Not Calibrated)
+- **Approve Material** → sets *Approval Status* (Approved/Rejected/Pending)
+
+### Additional Requirements
+
+- **Prepare Report** must be completed **before** **Document Results**.
+- **Perform Chemical Analysis** and **Store Sample** are available activities but are not strictly constrained by the declared rules.
+- **Review Findings** serves as a quality gate before final approval or rejection.
+
+The model enforces a structured, quality-controlled laboratory workflow where proper equipment calibration, logical test ordering, and complete documentation are mandatory before a material can be either approved or rejected.

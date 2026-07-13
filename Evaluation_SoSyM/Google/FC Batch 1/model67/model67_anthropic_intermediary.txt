@@ -1,0 +1,37 @@
+## Activities
+- **Detect Fraudulent Activity**: The 'Detect Fraudulent Activity' activity represents the process of identifying potentially fraudulent transactions or behaviors.
+- **Verify Customer Identity**: The 'Verify Customer Identity' activity involves confirming the identity of a customer to ensure legitimacy of the transaction or request.
+- **Review Transaction Details**: The 'Review Transaction Details' activity includes examining the specifics of a transaction to assess its validity and characteristics.
+- **Approve Transaction**: The 'Approve Transaction' activity represents the authorization of a transaction to proceed.
+- **Decline Transaction**: The 'Decline Transaction' activity represents the rejection of a transaction, preventing it from proceeding.
+- **Report Suspicious Activity**: The 'Report Suspicious Activity' activity involves formally documenting and reporting behavior or transactions deemed suspicious.
+- **Update Account Security**: The 'Update Account Security' activity includes modifying or enhancing the security settings associated with a customer account.
+- **Notify Customer**: The 'Notify Customer' activity represents informing the customer about relevant events, decisions, or actions related to their account or transactions.
+- **Investigate Security Breach**: The 'Investigate Security Breach' activity involves examining and analyzing a security incident to determine its cause and impact.
+- **Implement Security Patch**: The 'Implement Security Patch' activity represents the application of a fix or update to address a security vulnerability.
+
+## Attributes
+- **Transaction Type: Debit, Credit, Wire Transfer, Online Payment**: The attribute 'Transaction Type: Debit, Credit, Wire Transfer, Online Payment' specifies the category of the financial transaction being processed.
+- **Transaction Amount: Float between 0.01 and 100000.0**: The attribute 'Transaction Amount: Float between 0.01 and 100000.0' represents the monetary value of the transaction.
+- **Fraud Risk Level: Low, Medium, High**: The attribute 'Fraud Risk Level: Low, Medium, High' specifies the assessed level of risk that a transaction is fraudulent.
+- **Verification Attempts: Integer between 1 and 5**: The attribute 'Verification Attempts: Integer between 1 and 5' represents the number of attempts made to verify a customer's identity.
+- **Verification Status: Verified, Not Verified, Pending**: The attribute 'Verification Status: Verified, Not Verified, Pending' specifies the current state of the customer identity verification process.
+- **Breach Severity: Integer between 1 and 10**: The attribute 'Breach Severity: Integer between 1 and 10' represents the severity level assigned to a security breach.
+- **Security Patch Status: Applied, Not Applied, Scheduled**: The attribute 'Security Patch Status: Applied, Not Applied, Scheduled' specifies the current status of a security patch.
+- **Customer Notification Method: Email, SMS, Phone Call**: The attribute 'Customer Notification Method: Email, SMS, Phone Call' specifies the communication channel used to notify the customer.
+- **Days Since Last Activity: Integer between 0 and 365**: The attribute 'Days Since Last Activity: Integer between 0 and 365' represents the number of days elapsed since the last recorded account activity.
+
+## Binds
+- **Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level**: The bind 'Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level' specifies that the activity 'Detect Fraudulent Activity' requires the attributes 'Transaction Type', 'Transaction Amount', and 'Fraud Risk Level'.
+- **Verify Customer Identity: Verification Attempts, Verification Status**: The bind 'Verify Customer Identity: Verification Attempts, Verification Status' links the 'Verify Customer Identity' activity with the attributes 'Verification Attempts' and 'Verification Status'.
+- **Review Transaction Details: Transaction Type, Transaction Amount**: The bind 'Review Transaction Details: Transaction Type, Transaction Amount' links the 'Review Transaction Details' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Approve Transaction: Transaction Type, Transaction Amount**: The bind 'Approve Transaction: Transaction Type, Transaction Amount' links the 'Approve Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Decline Transaction: Transaction Type, Transaction Amount**: The bind 'Decline Transaction: Transaction Type, Transaction Amount' links the 'Decline Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Report Suspicious Activity: Transaction Type, Transaction Amount**: The bind 'Report Suspicious Activity: Transaction Type, Transaction Amount' links the 'Report Suspicious Activity' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Update Account Security: Days Since Last Activity**: The bind 'Update Account Security: Days Since Last Activity' links the 'Update Account Security' activity with the attribute 'Days Since Last Activity'.
+- **Notify Customer: Customer Notification Method**: The bind 'Notify Customer: Customer Notification Method' links the 'Notify Customer' activity with the attribute 'Customer Notification Method'.
+- **Investigate Security Breach: Breach Severity**: The bind 'Investigate Security Breach: Breach Severity' links the 'Investigate Security Breach' activity with the attribute 'Breach Severity'.
+- **Implement Security Patch: Security Patch Status**: The bind 'Implement Security Patch: Security Patch Status' links the 'Implement Security Patch' activity with the attribute 'Security Patch Status'.
+
+## Constraints
+

@@ -1,0 +1,38 @@
+## Activities
+- **Assess Client Needs**: The 'Assess Client Needs' activity represents the evaluation of a client's needs to determine appropriate services.
+- **Develop Service Plan**: The 'Develop Service Plan' activity involves creating a structured plan of services tailored to the client's needs.
+- **Obtain Funding Approval**: The 'Obtain Funding Approval' activity involves securing approval for the funding required to provide services to the client.
+- **Provide Counseling Services**: The 'Provide Counseling Services' activity involves delivering counseling support to the client.
+- **Coordinate Support Services**: The 'Coordinate Support Services' activity involves organizing and arranging additional support services for the client.
+- **Monitor Client Progress**: The 'Monitor Client Progress' activity involves tracking and evaluating the client's progress over time.
+- **Adjust Service Plan**: The 'Adjust Service Plan' activity involves modifying the client's service plan based on new information or circumstances.
+- **Conduct Home Visit**: The 'Conduct Home Visit' activity involves visiting the client's home to assess their living situation and needs.
+- **Close Client File**: The 'Close Client File' activity involves finalizing and closing the client's case file.
+- **Refer to Specialist**: The 'Refer to Specialist' activity involves referring the client to a specialist for additional expert services.
+
+## Attributes
+- **Client Risk Level: Low, Medium, High**: The attribute 'Client Risk Level: Low, Medium, High' represents the assessed level of risk associated with the client.
+- **Service Plan Duration: Integer between 1 and 12**: The attribute 'Service Plan Duration: Integer between 1 and 12' represents the duration, in months, of the client's service plan.
+- **Funding Amount Requested: Float between 100.0 and 10000.0**: The attribute 'Funding Amount Requested: Float between 100.0 and 10000.0' represents the amount of funding requested for the client's services.
+- **Counseling Type: Individual, Group, Family**: The attribute 'Counseling Type: Individual, Group, Family' specifies the type of counseling provided to the client.
+- **Support Service Type: Housing, Job Training, Childcare**: The attribute 'Support Service Type: Housing, Job Training, Childcare' specifies the type of support service coordinated for the client.
+- **Progress Score: Integer between 0 and 100**: The attribute 'Progress Score: Integer between 0 and 100' represents a numeric score indicating the client's progress.
+- **Plan Adjustment Reason: Progress, Setback, New Needs**: The attribute 'Plan Adjustment Reason: Progress, Setback, New Needs' specifies the reason for adjusting the client's service plan.
+- **Home Visit Outcome: Positive, Neutral, Negative**: The attribute 'Home Visit Outcome: Positive, Neutral, Negative' represents the outcome assessment of a home visit.
+- **File Closure Reason: Goals Met, Client Moved, Services Declined**: The attribute 'File Closure Reason: Goals Met, Client Moved, Services Declined' specifies the reason for closing the client's file.
+- **Specialist Type: Psychiatrist, Addiction Counselor, Legal Aid**: The attribute 'Specialist Type: Psychiatrist, Addiction Counselor, Legal Aid' specifies the type of specialist to whom the client is referred.
+
+## Binds
+- **Assess Client Needs: Client Risk Level**: The bind 'Assess Client Needs: Client Risk Level' links the 'Assess Client Needs' activity with the attribute 'Client Risk Level'.
+- **Develop Service Plan: Service Plan Duration**: The bind 'Develop Service Plan: Service Plan Duration' links the 'Develop Service Plan' activity with the attribute 'Service Plan Duration'.
+- **Obtain Funding Approval: Funding Amount Requested**: The bind 'Obtain Funding Approval: Funding Amount Requested' links the 'Obtain Funding Approval' activity with the attribute 'Funding Amount Requested'.
+- **Provide Counseling Services: Counseling Type**: The bind 'Provide Counseling Services: Counseling Type' links the 'Provide Counseling Services' activity with the attribute 'Counseling Type'.
+- **Coordinate Support Services: Support Service Type**: The bind 'Coordinate Support Services: Support Service Type' links the 'Coordinate Support Services' activity with the attribute 'Support Service Type'.
+- **Monitor Client Progress: Progress Score**: The bind 'Monitor Client Progress: Progress Score' links the 'Monitor Client Progress' activity with the attribute 'Progress Score'.
+- **Adjust Service Plan: Plan Adjustment Reason**: The bind 'Adjust Service Plan: Plan Adjustment Reason' links the 'Adjust Service Plan' activity with the attribute 'Plan Adjustment Reason'.
+- **Conduct Home Visit: Home Visit Outcome**: The bind 'Conduct Home Visit: Home Visit Outcome' links the 'Conduct Home Visit' activity with the attribute 'Home Visit Outcome'.
+- **Close Client File: File Closure Reason**: The bind 'Close Client File: File Closure Reason' links the 'Close Client File' activity with the attribute 'File Closure Reason'.
+- **Refer to Specialist: Specialist Type**: The bind 'Refer to Specialist: Specialist Type' links the 'Refer to Specialist' activity with the attribute 'Specialist Type'.
+
+## Constraints
+

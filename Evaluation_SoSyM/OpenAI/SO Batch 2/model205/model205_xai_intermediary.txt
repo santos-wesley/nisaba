@@ -1,0 +1,48 @@
+## Activities
+- **Submit Benefit Request**: The 'Submit Benefit Request' activity represents the initial submission of a benefit request by an employee.
+- **Review Benefit Request**: The 'Review Benefit Request' activity involves evaluating the submitted benefit request for eligibility and completeness.
+- **Approve Benefit Request**: The 'Approve Benefit Request' activity signifies the official approval of the benefit request after review.
+- **Reject Benefit Request**: The 'Reject Benefit Request' activity indicates the rejection of the benefit request, possibly due to ineligibility or other reasons.
+- **Notify Employee**: The 'Notify Employee' activity includes communicating the decision regarding the benefit request to the employee.
+- **Process Payment**: The 'Process Payment' activity handles the financial disbursement for approved benefits.
+- **Update Employee Record**: The 'Update Employee Record' activity updates the employee's records to reflect the approved benefits.
+- **Audit Benefit Process**: The 'Audit Benefit Process' activity involves auditing the benefit processing for compliance and accuracy.
+- **Submit Appeal**: The 'Submit Appeal' activity allows the employee to appeal a rejected benefit request.
+- **Review Appeal**: The 'Review Appeal' activity entails reviewing the submitted appeal for the benefit request.
+- **Approve Appeal**: The 'Approve Appeal' activity represents the approval of the appealed benefit request.
+- **Reject Appeal**: The 'Reject Appeal' activity denotes the rejection of the appeal for the benefit request.
+- **Notify Appeal Decision**: The 'Notify Appeal Decision' activity communicates the outcome of the appeal to the employee.
+- **Conduct Benefit Orientation**: The 'Conduct Benefit Orientation' activity involves conducting an orientation session on available benefits.
+- **Evaluate Benefit Utilization**: The 'Evaluate Benefit Utilization' activity assesses how benefits are being utilized by employees.
+
+## Attributes
+- **Request ID: integer between 1 and 10000**: The attribute 'Request ID: integer between 1 and 10000' uniquely identifies each benefit request submitted in the process.
+- **Benefit Type: Health Insurance, Retirement Plan, Paid Leave, Education Assistance**: The attribute 'Benefit Type: Health Insurance, Retirement Plan, Paid Leave, Education Assistance' specifies the type of benefit being requested or processed.
+- **Request Status: Pending, Approved, Rejected**: The attribute 'Request Status: Pending, Approved, Rejected' indicates the current status of the benefit request or appeal.
+- **Benefit Amount: float between 100.0 and 10000.0**: The attribute 'Benefit Amount: float between 100.0 and 10000.0' represents the monetary value associated with the approved benefit.
+- **Employee ID: integer between 1 and 5000**: The attribute 'Employee ID: integer between 1 and 5000' uniquely identifies the employee involved in the benefit process.
+- **Appeal Status: Pending, Approved, Rejected**: The attribute 'Appeal Status: Pending, Approved, Rejected' tracks the status of an appeal submitted against a benefit request decision.
+- **Audit ID: integer between 1 and 1000**: The attribute 'Audit ID: integer between 1 and 1000' serves as a unique identifier for the audit conducted on the benefit process.
+- **Notification Type: Approval, Rejection, Appeal Decision**: The attribute 'Notification Type: Approval, Rejection, Appeal Decision' specifies the type of notification sent to the employee.
+- **Utilization Rate: float between 0.0 and 100.0**: The attribute 'Utilization Rate: float between 0.0 and 100.0' measures the percentage of benefits utilized by employees.
+- **Orientation ID: integer between 1 and 500**: The attribute 'Orientation ID: integer between 1 and 500' uniquely identifies each benefit orientation session conducted.
+
+## Binds
+- **bind Submit Benefit Request: Request ID, Benefit Type, Employee ID**: The bind 'Submit Benefit Request: Request ID, Benefit Type, Employee ID' links the 'Submit Benefit Request' activity with the attributes 'Request ID', 'Benefit Type', and 'Employee ID'.
+- **bind Review Benefit Request: Request ID, Request Status**: The bind 'Review Benefit Request: Request ID, Request Status' associates the 'Review Benefit Request' activity with the attributes 'Request ID' and 'Request Status'.
+- **bind Approve Benefit Request: Request ID, Request Status**: The bind 'Approve Benefit Request: Request ID, Request Status' connects the 'Approve Benefit Request' activity to the attributes 'Request ID' and 'Request Status'.
+- **bind Reject Benefit Request: Request ID, Request Status**: The bind 'Reject Benefit Request: Request ID, Request Status' ties the 'Reject Benefit Request' activity to the attributes 'Request ID' and 'Request Status'.
+- **bind Notify Employee: Employee ID, Notification Type**: The bind 'Notify Employee: Employee ID, Notification Type' links the 'Notify Employee' activity with the attributes 'Employee ID' and 'Notification Type'.
+- **bind Process Payment: Request ID, Benefit Amount**: The bind 'Process Payment: Request ID, Benefit Amount' associates the 'Process Payment' activity with the attributes 'Request ID' and 'Benefit Amount'.
+- **bind Update Employee Record: Employee ID, Benefit Type**: The bind 'Update Employee Record: Employee ID, Benefit Type' connects the 'Update Employee Record' activity to the attributes 'Employee ID' and 'Benefit Type'.
+- **bind Audit Benefit Process: Audit ID**: The bind 'Audit Benefit Process: Audit ID' links the 'Audit Benefit Process' activity with the attribute 'Audit ID'.
+- **bind Submit Appeal: Request ID, Appeal Status**: The bind 'Submit Appeal: Request ID, Appeal Status' associates the 'Submit Appeal' activity with the attributes 'Request ID' and 'Appeal Status'.
+- **bind Review Appeal: Request ID, Appeal Status**: The bind 'Review Appeal: Request ID, Appeal Status' ties the 'Review Appeal' activity to the attributes 'Request ID' and 'Appeal Status'.
+- **bind Approve Appeal: Request ID, Appeal Status**: The bind 'Approve Appeal: Request ID, Appeal Status' connects the 'Approve Appeal' activity to the attributes 'Request ID' and 'Appeal Status'.
+- **bind Reject Appeal: Request ID, Appeal Status**: The bind 'Reject Appeal: Request ID, Appeal Status' links the 'Reject Appeal' activity with the attributes 'Request ID' and 'Appeal Status'.
+- **bind Notify Appeal Decision: Employee ID, Notification Type**: The bind 'Notify Appeal Decision: Employee ID, Notification Type' associates the 'Notify Appeal Decision' activity with the attributes 'Employee ID' and 'Notification Type'.
+- **bind Conduct Benefit Orientation: Orientation ID**: The bind 'Conduct Benefit Orientation: Orientation ID' ties the 'Conduct Benefit Orientation' activity to the attribute 'Orientation ID'.
+- **bind Evaluate Benefit Utilization: Utilization Rate**: The bind 'Evaluate Benefit Utilization: Utilization Rate' links the 'Evaluate Benefit Utilization' activity with the attribute 'Utilization Rate'.
+
+## Constraints
+

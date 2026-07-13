@@ -1,0 +1,43 @@
+# Multi-Perspective Declare Model Description
+
+## Overview
+This model describes a **cybersecurity threat management process**, covering the lifecycle from threat identification through mitigation, monitoring, and knowledge base updates.
+
+## Activities and Data
+
+The process consists of nine activities, each associated with specific data attributes:
+
+- **Identify Threat**: records a *Threat ID* (1–999999) and *Threat Type* (Phishing, Malware, DDoS, or Ransomware)
+- **Collect Data**: records a *Threat ID* and *Data Source ID* (1–9999)
+- **Analyze Data**: records a *Threat ID* and *Analysis Result* (Confirmed, False Positive, or Inconclusive)
+- **Report Threat**: records a *Threat ID* and *Report ID* (1–999999)
+- **Mitigate Threat**: records a *Threat ID* and *Mitigation Success Rate* (a float between 0.0 and 100.0)
+- **Monitor Systems**: records a *Threat ID* and *Monitoring Status* (Ongoing or Completed)
+- **Update Threat Intelligence**: records an *Update ID* (1–999999) and *Threat ID*
+- **Conduct Training** and **Perform Incident Response**: standalone activities with no bound data constraints
+
+## Control-Flow and Data Constraints
+
+**Process Initialization**
+- The process must **start** with **Identify Threat**.
+
+**Threat Investigation Chain**
+- Every occurrence of **Identify Threat** must be immediately followed by **Collect Data**, and this response must occur within **0 to 10 time units** (measured in months, based on the "m" unit), and the two activities must share the same Threat ID (implied by the chain response semantics).
+- Every occurrence of **Collect Data** must be immediately followed by **Analyze Data**, within **0 to 30 months**.
+- Every occurrence of **Analyze Data**, **only when its Analysis Result is "Confirmed"**, must be immediately followed by **Report Threat**, within **0 to 1 hour**. If the analysis result is *False Positive* or *Inconclusive*, no reporting is required.
+
+**Response and Mitigation Chain**
+- Every occurrence of **Report Threat** must be immediately followed by **Mitigate Threat**, within **0 to 2 hours**.
+- Every occurrence of **Mitigate Threat** must be immediately followed by **Monitor Systems** (no time constraint specified).
+
+**Process Termination**
+- The process must **end** with **Monitor Systems**.
+
+**Knowledge Base Update**
+- Every occurrence of **Mitigate Threat**, **only when its Mitigation Success Rate exceeds 90.0%**, must be immediately followed by **Update Threat Intelligence** (no time constraint specified). Lower success rates do not trigger this obligation.
+
+## Unconstrained Activities
+**Conduct Training** and **Perform Incident Response** are not bound by any control-flow constraints in this model, meaning they can occur freely at any point (or not at all) without affecting compliance with the above rules.
+
+## Summary
+This model enforces a **strict, time-bounded sequential workflow** for handling detected threats: identification triggers data collection, which triggers analysis; confirmed threats are reported and mitigated promptly; mitigation always leads to system monitoring; and highly successful mitigations (>90% success rate) additionally trigger an update to the organization's threat intelligence database.

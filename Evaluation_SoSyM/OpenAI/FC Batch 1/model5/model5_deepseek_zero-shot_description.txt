@@ -1,0 +1,13 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+The process begins with the **Conduct Survey** activity, which is mandatory as the starting point. During this survey, a **Survey ID** (an integer between 1 and 9999) must be recorded.
+
+Before the **Design Blueprint** can be created, the **Conduct Survey** must have already been completed. Similarly, before **Lay Foundation** can begin, the **Acquire Permits** activity must have been executed, and the specific **Permit Type** (Environmental, Zoning, or Safety) must be captured.
+
+Once the foundation is laid, the **Construct Framework** must eventually follow. However, there is a time constraint: the **Construct Framework** must start within **3 days** of the **Lay Foundation** completion. Additionally, the **Foundation Material** (Concrete, Reinforced Concrete, or Steel) is recorded during the laying process.
+
+After the framework is constructed, the **Install Utilities** activity must eventually occur, but it cannot happen immediately after the framework. Specifically, at least **2 days** must pass between the end of **Construct Framework** and the start of **Install Utilities**. During installation, the **Utility Type** (Plumbing, Electrical, or HVAC) is recorded.
+
+The **Interior Work** can only begin after the **Install Utilities** have been completed.
+
+The process must end with the **Final Inspection**, where an **Inspection Score** (a float between 0.0 and 10.0) is recorded. Finally, the **Handover Project** can only occur after the **Final Inspection** has been completed, and this handover must happen within **1 day** of the inspection.

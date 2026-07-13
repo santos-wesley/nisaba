@@ -1,0 +1,61 @@
+activity Analyze International Market
+activity Identify Business Opportunities
+activity Conduct Feasibility Study
+activity Develop Business Plan
+activity Acquire Necessary Permits
+activity Set Up International Office
+activity Hire Local Staff
+activity Initiate Marketing Campaign
+activity Establish Supply Chain
+activity Negotiate with Local Vendors
+activity Monitor Market Response
+activity Adjust Strategy
+activity Manage International Logistics
+activity Assess Performance
+activity Report to Headquarters
+bind Analyze International Market: Market Size, Market Attractiveness
+bind Conduct Feasibility Study: Investment Amount, Feasibility Status
+bind Acquire Necessary Permits: Permit Status
+bind Hire Local Staff: Staffing Level
+bind Initiate Marketing Campaign: Marketing Budget
+bind Monitor Market Response: Market Response
+bind Adjust Strategy: Strategy Adjustment
+bind Assess Performance: Performance Evaluation
+Market Size: integer between 1000 and 1000000
+Investment Amount: float between 10000.0 and 1000000.0
+Market Attractiveness: High, Medium, Low
+Feasibility Status: Positive, Negative
+Permit Status: Approved, Pending, Rejected
+Staffing Level: High, Medium, Low
+Marketing Budget: float between 5000.0 and 500000.0
+Market Response: Positive, Neutral, Negative
+Strategy Adjustment: Yes, No
+Performance Evaluation: Excellent, Good, Fair, Poor
+Init[Analyze International Market] | |
+End[Report to Headquarters] | |
+Existence[Conduct Feasibility Study] | |
+Absence3[Adjust Strategy] | |
+Exactly[Assess Performance] | |
+Responded Existence[Negotiate with Local Vendors, Establish Supply Chain] | | |
+Precedence[Acquire Necessary Permits, Set Up International Office] | |A.Permit Status is Approved |
+Precedence[Develop Business Plan, Initiate Marketing Campaign] | | |
+Response[Identify Business Opportunities, Conduct Feasibility Study] | | |
+Response[Monitor Market Response, Adjust Strategy] |A.Market Response is Negative |T.Strategy Adjustment is Yes |
+Succession[Develop Business Plan, Acquire Necessary Permits] | | |
+Alternate Precedence[Set Up International Office, Hire Local Staff] | | |
+Alternate Response[Initiate Marketing Campaign, Monitor Market Response] | | |
+Alternate Succession[Assess Performance, Report to Headquarters] | | |
+Chain Precedence[Establish Supply Chain, Negotiate with Local Vendors] | | |
+Chain Response[Acquire Necessary Permits, Set Up International Office] |A.Permit Status is Approved | |
+Chain Succession[Monitor Market Response, Adjust Strategy] | | |
+Co-Existence[Establish Supply Chain, Manage International Logistics] | | |
+Choice[Negotiate with Local Vendors, Hire Local Staff] | | |
+Exclusive Choice[Adjust Strategy, Report to Headquarters] |A.Performance Evaluation is Poor | |
+Not Co-Existence[Acquire Necessary Permits, Set Up International Office] |A.Permit Status is Rejected | |
+Not Responded Existence[Conduct Feasibility Study, Set Up International Office] |A.Feasibility Status is Negative | |
+Not Precedence[Acquire Necessary Permits, Hire Local Staff] | | |
+Not Response[Conduct Feasibility Study, Develop Business Plan] |A.Feasibility Status is Negative | |
+Not Succession[Adjust Strategy, Analyze International Market] | | |
+Not Chain Precedence[Analyze International Market, Monitor Market Response] | | |
+Not Chain Response[Identify Business Opportunities, Set Up International Office] | | |
+Not Chain Succession[Report to Headquarters, Analyze International Market] | | |

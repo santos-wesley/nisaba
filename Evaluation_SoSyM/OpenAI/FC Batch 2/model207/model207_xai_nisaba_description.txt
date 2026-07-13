@@ -1,0 +1,92 @@
+#MP-Declare Model
+## Activities
+- **Plan Event**: The 'Plan Event' activity represents the initial planning phase for organizing the event.
+- **Book Venue**: The 'Book Venue' activity involves reserving the selected venue for the event.
+- **Send Invitations**: The 'Send Invitations' activity includes preparing and dispatching invitations to the guests.
+- **Arrange Catering**: The 'Arrange Catering' activity entails selecting and contracting a catering service for the event.
+- **Hire Staff**: The 'Hire Staff' activity involves recruiting personnel for various roles during the event.
+- **Set Up Venue**: The 'Set Up Venue' activity covers preparing and decorating the venue before the event starts.
+- **Conduct Rehearsal**: The 'Conduct Rehearsal' activity is for practicing the event flow and activities.
+- **Welcome Guests**: The 'Welcome Guests' activity includes greeting and registering arriving guests.
+- **Facilitate Activities**: The 'Facilitate Activities' activity involves managing and overseeing the planned activities during the event.
+- **Deliver Speech**: The 'Deliver Speech' activity is for giving speeches or presentations at the event.
+- **Serve Meals**: The 'Serve Meals' activity entails providing and serving food to the guests.
+- **Coordinate Photography**: The 'Coordinate Photography' activity involves managing photography and capturing moments of the event.
+- **Distribute Gifts**: The 'Distribute Gifts' activity includes handing out gifts or favors to the guests.
+- **Tear Down Venue**: The 'Tear Down Venue' activity covers dismantling setups and cleaning up after the event.
+- **Collect Feedback**: The 'Collect Feedback' activity involves gathering opinions and suggestions from participants post-event.
+
+## Attributes
+- **Event ID: integer between 1 and 999999**: The attribute 'Event ID: integer between 1 and 999999' represents a unique identifier for the event.
+- **Venue: Hall A, Hall B, Hall C**: The attribute 'Venue: Hall A, Hall B, Hall C' specifies the possible venues where the event can be held.
+- **Catering Service: Buffet, Sit-down Dinner, Cocktail**: The attribute 'Catering Service: Buffet, Sit-down Dinner, Cocktail' indicates the type of catering service chosen for the event.
+- **Number of Guests: integer between 10 and 500**: The attribute 'Number of Guests: integer between 10 and 500' represents the expected number of attendees at the event.
+- **Invitation Status: Sent, Not Sent**: The attribute 'Invitation Status: Sent, Not Sent' tracks whether invitations have been sent or not.
+- **Staff Role: Waiter, Coordinator, Cleaner**: The attribute 'Staff Role: Waiter, Coordinator, Cleaner' defines the roles for hired staff members.
+- **Rehearsal ID: integer between 1 and 9999**: The attribute 'Rehearsal ID: integer between 1 and 9999' is a unique identifier for the rehearsal session.
+- **Budget: float between 1000 and 50000**: The attribute 'Budget: float between 1000 and 50000' represents the allocated financial budget for the event.
+
+## Binds
+- **bind Plan Event: Event ID, Budget**: The bind 'Plan Event: Event ID, Budget' links the 'Plan Event' activity with the attributes 'Event ID' and 'Budget'.
+- **bind Book Venue: Event ID, Venue**: The bind 'Book Venue: Event ID, Venue' links the 'Book Venue' activity with the attributes 'Event ID' and 'Venue'.
+- **bind Send Invitations: Event ID, Number of Guests, Invitation Status**: The bind 'Send Invitations: Event ID, Number of Guests, Invitation Status' links the 'Send Invitations' activity with the attributes 'Event ID', 'Number of Guests', and 'Invitation Status'.
+- **bind Arrange Catering: Event ID, Catering Service**: The bind 'Arrange Catering: Event ID, Catering Service' links the 'Arrange Catering' activity with the attributes 'Event ID' and 'Catering Service'.
+- **bind Hire Staff: Event ID, Staff Role**: The bind 'Hire Staff: Event ID, Staff Role' links the 'Hire Staff' activity with the attributes 'Event ID' and 'Staff Role'.
+- **bind Conduct Rehearsal: Event ID, Rehearsal ID**: The bind 'Conduct Rehearsal: Event ID, Rehearsal ID' links the 'Conduct Rehearsal' activity with the attributes 'Event ID' and 'Rehearsal ID'.
+- **bind Serve Meals: Event ID, Catering Service**: The bind 'Serve Meals: Event ID, Catering Service' links the 'Serve Meals' activity with the attributes 'Event ID' and 'Catering Service'.
+- **bind Collect Feedback: Event ID, Venue**: The bind 'Collect Feedback: Event ID, Venue' links the 'Collect Feedback' activity with the attributes 'Event ID' and 'Venue'.
+
+## Constraints
+- **Init[Plan Event] | |**: The 'Plan Event' must be the first activity to occur in the process.
+- **Precedence[Plan Event, Book Venue] | | |**: The 'Book Venue' activity is permitted to occur only if a 'Plan Event' activity has occurred before it within the same process instance.
+- **Precedence[Book Venue, Send Invitations] | | |**: The 'Send Invitations' activity is permitted to occur only if a 'Book Venue' activity has occurred before it within the same process instance.
+- **Precedence[Send Invitations, Arrange Catering] | | |**: The 'Arrange Catering' activity is permitted to occur only if a 'Send Invitations' activity has occurred before it within the same process instance.
+- **Precedence[Arrange Catering, Hire Staff] | | |**: The 'Hire Staff' activity is permitted to occur only if a 'Arrange Catering' activity has occurred before it within the same process instance.
+- **Precedence[Hire Staff, Set Up Venue] | | |**: The 'Set Up Venue' activity is permitted to occur only if a 'Hire Staff' activity has occurred before it within the same process instance.
+- **Precedence[Set Up Venue, Conduct Rehearsal] | | |**: The 'Conduct Rehearsal' activity is permitted to occur only if a 'Set Up Venue' activity has occurred before it within the same process instance.
+- **Precedence[Conduct Rehearsal, Welcome Guests] | | |**: The 'Welcome Guests' activity is permitted to occur only if a 'Conduct Rehearsal' activity has occurred before it within the same process instance.
+- **Precedence[Welcome Guests, Facilitate Activities] | | |**: The 'Facilitate Activities' activity is permitted to occur only if a 'Welcome Guests' activity has occurred before it within the same process instance.
+- **Precedence[Facilitate Activities, Deliver Speech] | | |**: The 'Deliver Speech' activity is permitted to occur only if a 'Facilitate Activities' activity has occurred before it within the same process instance.
+- **Precedence[Deliver Speech, Serve Meals] | | |**: The 'Serve Meals' activity is permitted to occur only if a 'Deliver Speech' activity has occurred before it within the same process instance.
+- **Precedence[Serve Meals, Coordinate Photography] | | |**: The 'Coordinate Photography' activity is permitted to occur only if a 'Serve Meals' activity has occurred before it within the same process instance.
+- **Precedence[Coordinate Photography, Distribute Gifts] | | |**: The 'Distribute Gifts' activity is permitted to occur only if a 'Coordinate Photography' activity has occurred before it within the same process instance.
+- **Precedence[Distribute Gifts, Collect Feedback] | | |**: The 'Collect Feedback' activity is permitted to occur only if a 'Distribute Gifts' activity has occurred before it within the same process instance.
+- **End[Tear Down Venue] | |**: The 'Tear Down Venue' must be the last activity to occur in the process.
+
+
+## Interleaved Description
+The MP-Declare process model for the event organization process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Plan Event,' which involves creating the foundational plan for the entire event and binds the unique 'Event ID' along with the overall 'Budget' attributes. This establishes the initial context for all subsequent planning and execution steps.
+#### **End Constraints**
+The process concludes with the activity 'Tear Down Venue,' which covers dismantling setups, cleaning up, and finalizing all post-event tasks. This activity must be the last to occur in the process, providing a coherent closure to the entire event lifecycle.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Book Venue' is permitted to occur only if a 'Plan Event' activity has occurred before it within the same process instance. The 'Plan Event' activity must define the 'Event ID' and allocate the 'Budget,' setting up the initial context where foundational planning guides the logical sequence of reserving an appropriate 'Venue' such as Hall A, Hall B, or Hall C.
+2. The activity 'Send Invitations' is permitted to occur only if a 'Book Venue' activity has occurred before it within the same process instance. This ensures that the venue reservation provides the necessary context before preparing and dispatching invitations tied to the 'Event ID,' 'Number of Guests' (between 10 and 500), and 'Invitation Status.'
+3. The activity 'Arrange Catering' is permitted to occur only if a 'Send Invitations' activity has occurred before it within the same process instance. The prior sending of invitations, which updates the 'Invitation Status' to Sent, guides the logical sequence for selecting a 'Catering Service' such as Buffet, Sit-down Dinner, or Cocktail.
+4. The activity 'Hire Staff' is permitted to occur only if an 'Arrange Catering' activity has occurred before it within the same process instance. This background ensures that catering decisions inform the recruitment of personnel for roles like Waiter, Coordinator, or Cleaner, all linked to the 'Event ID.'
+5. The activity 'Set Up Venue' is permitted to occur only if a 'Hire Staff' activity has occurred before it within the same process instance. The staffing assignments establish the initial context for preparing and decorating the venue.
+6. The activity 'Conduct Rehearsal' is permitted to occur only if a 'Set Up Venue' activity has occurred before it within the same process instance. This sets up the logical sequence for practicing the event flow, identified by a unique 'Rehearsal ID.'
+7. The activity 'Welcome Guests' is permitted to occur only if a 'Conduct Rehearsal' activity has occurred before it within the same process instance. The rehearsal provides the necessary background for greeting and registering arriving guests.
+8. The activity 'Facilitate Activities' is permitted to occur only if a 'Welcome Guests' activity has occurred before it within the same process instance. This guides the orderly management of planned activities during the event.
+9. The activity 'Deliver Speech' is permitted to occur only if a 'Facilitate Activities' activity has occurred before it within the same process instance. The facilitation ensures speeches or presentations follow in proper sequence.
+10. The activity 'Serve Meals' is permitted to occur only if a 'Deliver Speech' activity has occurred before it within the same process instance. This background context, linked to the chosen 'Catering Service,' ensures meals are served at the appropriate time.
+11. The activity 'Coordinate Photography' is permitted to occur only if a 'Serve Meals' activity has occurred before it within the same process instance. The meal service sets the stage for managing photography and capturing event moments.
+12. The activity 'Distribute Gifts' is permitted to occur only if a 'Coordinate Photography' activity has occurred before it within the same process instance. This maintains the logical flow for handing out gifts or favors to guests.
+13. The activity 'Collect Feedback' is permitted to occur only if a 'Distribute Gifts' activity has occurred before it within the same process instance. The 'Event ID' and 'Venue' attributes in feedback collection are grounded in this prior sequence, ensuring all post-event opinions are gathered after the main activities conclude.
+
+#### **Response Constraints**
+No Response constraints are defined in this model.
+
+#### **Succession Constraints**
+No Succession constraints are defined in this model.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Succession Constraints**
+No Chain Succession constraints are defined in this model.

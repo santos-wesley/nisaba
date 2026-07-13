@@ -1,0 +1,44 @@
+activity Collect Digital Evidence
+activity Preserve Digital Evidence
+activity Analyze Digital Evidence
+activity Generate Evidence Report
+activity Document Chain Custody
+activity Review Evidence Report
+activity Authorize Evidence Release
+activity Dispose Digital Evidence
+activity Validate Evidence Integrity
+activity Secure Evidence Storage
+activity Index Digital Evidence
+activity Update Evidence Metadata
+activity Classify Digital Evidence
+activity Audit Evidence Access
+activity Report Security Breach
+bind Collect Digital Evidence: Evidence Type, Evidence Size, Custody Status, Security Level, Legal Hold
+bind Preserve Digital Evidence: Custody Status, Integrity Score, Retention Period
+bind Analyze Digital Evidence: Custody Status, Analysis Time
+bind Dispose Digital Evidence: Custody Status, Disposal Method
+Evidence Type: Document, Image, Video, Audio, Log File
+Evidence Size: integer between 1 and 1000
+Custody Status: Collected, Preserved, Analyzed, Released, Disposed
+Integrity Score: float between 0.0 and 1.0
+Security Level: Confidential, Restricted, Unclassified
+Access Count: integer between 0 and 100
+Legal Hold: Yes, No
+Analysis Time: float between 0.1 and 24.0
+Retention Period: integer between 30 and 3650
+Disposal Method: Shredding, Wiping, Deletion
+Init[Collect Digital Evidence] | |
+End[Dispose Digital Evidence] | |
+Chain Response[Collect Digital Evidence, Preserve Digital Evidence] | | |
+Response[Analyze Digital Evidence, Generate Evidence Report] | | |
+Chain Response[Generate Evidence Report, Review Evidence Report] | | |
+Precedence[Analyze Digital Evidence, Document Chain Custody] | | |
+Alternate Response[Review Evidence Report, Authorize Evidence Release] | | |
+Chain Response[Preserve Digital Evidence, Validate Evidence Integrity] | | |
+Existence[Analyze Digital Evidence] | |
+Co-Existence[Secure Evidence Storage, Validate Evidence Integrity] | | |
+Choice[Index Digital Evidence, Update Evidence Metadata] | | |
+Exclusive Choice[Authorize Evidence Release, Dispose Digital Evidence] | | |
+Not Co-Existence[Classify Digital Evidence, Dispose Digital Evidence] | | |
+Responded Existence[Audit Evidence Access, Collect Digital Evidence] |A.Legal Hold is Yes | |
+Not Chain Succession[Report Security Breach, Dispose Digital Evidence] | | |

@@ -1,0 +1,48 @@
+## Activities
+- **Prepare Solution**: 
+- **Heat Mixture**: 
+- **Add Catalyst**: 
+- **Monitor Reaction**: 
+- **Cool Solution**: 
+- **Filter Product**: 
+- **Dry Product**: 
+- **Analyze Sample**: 
+- **Store Product**: 
+- **Dispose Waste**: 
+
+## Attributes
+- **Temperature: float between 0.0 and 500.0**: 
+- **Reaction Time: integer between 1 and 600**: 
+- **Catalyst Type: Platinum, Palladium, Nickel, Iron**: 
+- **Concentration: float between 0.1 and 10.0**: 
+- **Solvent Type: Water, Ethanol, Toluene**: 
+- **Yield: float between 0.0 and 100.0**: 
+- **Purity: integer between 0 and 100**: 
+- **Reaction Status: Initiated, Ongoing, Completed, Failed**: 
+- **Batch Number: integer between 1 and 1000**: 
+
+## Binds
+- **Prepare Solution: Concentration, Solvent Type**: 
+- **Heat Mixture: Temperature, Reaction Time**: 
+- **Add Catalyst: Catalyst Type**: 
+- **Monitor Reaction: Reaction Status, Reaction Time**: 
+- **Analyze Sample: Purity, Yield**: 
+- **Store Product: Batch Number**: 
+
+## Constraints
+- **Init[Prepare Solution] | |**: 
+- **Succession[Prepare Solution, Heat Mixture] | | |**: 
+- **Response[Heat Mixture, Add Catalyst] | | |**: 
+- **Responded Existence[Add Catalyst, Monitor Reaction] | | |**: 
+- **Chain Response[Monitor Reaction, Cool Solution] | | |**: 
+- **Precedence[Filter Product, Cool Solution] | | |**: 
+- **Chain Succession[Filter Product, Dry Product] | | |**: 
+- **Response[Dry Product, Analyze Sample] | | |**: 
+- **Alternate Response[Analyze Sample, Store Product] | | |**: 
+- **Precedence[Dispose Waste, Store Product] | | |**: 
+- **Response[Add Catalyst, Monitor Reaction] | | |0,10,m**: 
+- **Response[Monitor Reaction, Cool Solution] | | |0,5,m**: 
+- **Response[Cool Solution, Filter Product] | | |0,2,h**: 
+- **Response[Dry Product, Analyze Sample] | | |0,1,d**: 
+- **Response[Store Product, Dispose Waste] | | |0,1,h**: 
+

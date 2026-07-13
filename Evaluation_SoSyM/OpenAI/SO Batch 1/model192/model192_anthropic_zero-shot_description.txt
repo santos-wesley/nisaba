@@ -1,0 +1,39 @@
+# Multi-Perspective Declare Model Description
+
+## Overview
+This model describes an **eco-friendly travel process**, encompassing planning, execution, and post-trip activities, with associated data attributes and business rules governing their behavior.
+
+## Activities and Data Attributes
+The process involves nine activities, four of which carry specific data attributes:
+
+- **Plan Eco-Friendly Trip**: captures the *Trip Duration* (an integer from 1 to 30 days) and *Carbon Emission* (a float ranging from 0.0 to 1000.0)
+- **Book Sustainable Accommodation**: records the *Accommodation Type*, chosen from Eco-Lodge, Green Hotel, or Hostel
+- **Choose Green Transportation**: records the *Transportation Mode*, selected from Bicycle, Electric Car, or Train
+- **Provide Feedback to Hosts**: captures a *Feedback Rating* of Excellent, Good, Average, or Poor
+
+Other activities (Participate in Local Conservation Efforts, Purchase Local Products, Attend Cultural Workshops, Evaluate Environmental Impact, Share Sustainable Practices) have no bound data attributes.
+
+## Control-Flow Rules
+
+1. **Trip must begin with planning**: "Plan Eco-Friendly Trip" is the mandatory **first activity** of every process instance.
+
+2. **Trip must end with knowledge sharing**: "Share Sustainable Practices" is the mandatory **last activity** of every process instance.
+
+3. **Feedback follows accommodation, exclusively and immediately**: Whenever "Book Sustainable Accommodation" occurs, it must be **eventually followed by** "Provide Feedback to Hosts" (chain response), and this relationship is constrained by a data condition — however, no other activity may occur strictly between them (they must occur consecutively when linked), following an exclusive chain response pattern.
+
+4. **Green transportation implies impact evaluation**: Every time "Choose Green Transportation" occurs, it must eventually be followed by "Evaluate Environmental Impact" at some later point.
+
+5. **Conservation and cultural activities coexist**: If "Participate in Local Conservation Efforts" occurs, then "Attend Cultural Workshops" must also occur in the trace, and vice versa (co-existence).
+
+6. **Local purchases must not immediately follow planning**: "Plan Eco-Friendly Trip" must **not** be directly followed by "Purchase Local Products" (they cannot occur consecutively in that order).
+
+7. **Accommodation and transportation choices are mutually exclusive**: Exactly one of "Book Sustainable Accommodation" or "Choose Green Transportation" may occur in a trace — never both, and never neither.
+
+8. **Extended trips require conservation involvement**: If "Plan Eco-Friendly Trip" occurs **and** its Trip Duration exceeds 7 days, then "Participate in Local Conservation Efforts" must also occur somewhere in the trace (responded existence with data condition).
+
+9. **Poor feedback disassociates from impact evaluation**: If "Provide Feedback to Hosts" occurs with a Feedback Rating of "Poor," then "Evaluate Environmental Impact" must **not** occur anywhere in the same trace (negative responded existence with data condition).
+
+10. **Environmental impact must be evaluated**: "Evaluate Environmental Impact" must occur **at least once** in every trace (existence constraint).
+
+## Summary
+This model enforces a structured sustainable travel journey: it always starts with trip planning and ends with sharing practices, ensures accountability through feedback and environmental impact evaluation, links cultural and conservation engagement, prevents impulsive post-planning purchases, restricts accommodation/transportation choices to one option, and enforces stricter conservation requirements for longer trips while penalizing poor host feedback by excluding impact evaluation.

@@ -1,0 +1,31 @@
+This natural language description outlines the workflow, data attributes, and behavioral constraints of the Multi-Perspective Declare model for managing a disease outbreak.
+
+### **Process Overview**
+The model defines a highly structured emergency response workflow for disease outbreaks. It dictates how an outbreak is reported, verified, investigated, controlled, and eventually resolved, while binding specific data attributes to key activities and enforcing strict temporal and data-driven constraints.
+
+### **Activities and Data Attributes**
+As the process unfolds, specific data must be recorded for certain activities:
+*   **Report Disease Outbreak:** Must capture the *Report Source* (Hospital, Clinic, Public, or Other) and the *Number of Cases* (an integer between 1 and 1000).
+*   **Verify Outbreak Report:** Must record the *Investigation Result* (Confirmed, False Alarm, or Inconclusive).
+*   **Confirm Disease:** Must identify the *Disease Type* (Influenza, COVID-19, Measles, or Cholera) and the *Mortality Rate* (a float between 0.0 and 100.0).
+*   **Implement Control Measures:** Must specify the *Control Measures* taken (Vaccination, Quarantine, Hygiene Campaign, or Social Distancing) and the *Days to Control* (an integer between 1 and 365).
+*   **Inform Public:** Must track the *Public Response* (Cooperative, Anxious, or Resistant).
+
+### **Behavioral Constraints**
+The flow of the process is governed by the following declarative rules, which include standard, temporal, and data-aware constraints:
+
+**1. Starting and Ending the Process**
+*   The process must begin with the **Report Disease Outbreak** activity.
+*   The **Declare End of Outbreak** activity is the designated end event of the process.
+
+**2. Core Workflow Sequence**
+*   Every time a disease outbreak is reported, the report must eventually be verified (**Response**).
+*   If the *Investigation Result* during verification is marked as "Confirmed", the **Verify Outbreak Report** activity must be followed by **Initiate Investigation** (Data-aware Response).
+*   Whenever **Collect Samples** occurs, **Analyze Samples** must eventually follow. Furthermore, this must happen within a time frame of 0 to 48 hours (Temporal Response).
+*   **Analyze Samples** is a mandatory prerequisite for **Confirm Disease**; the disease cannot be confirmed without first analyzing samples (**Precedence**).
+*   **Confirm Disease** and **Implement Control Measures** form a strict sequence. Confirming the disease requires implementing control measures, and implementing control measures cannot happen without confirming the disease first (**Succession**).
+*   Whenever **Implement Control Measures** occurs, it must be followed by **Inform Public** (**Response**).
+*   **Inform Public** and **Monitor Disease Spread** form a strict sequence. Informing the public requires monitoring the disease spread, and monitoring cannot occur without informing the public first (**Succession**).
+
+**3. Emergency Bypass Constraint**
+*   If a report is filed with a *Number of Cases* greater than 500, **Implement Control Measures** must be executed as a direct response. This is a critical emergency protocol that must occur within 0 to 24 hours of the initial report (Data-aware and Temporal Response).

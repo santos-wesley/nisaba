@@ -1,0 +1,31 @@
+Here is a natural language description of the provided Multi-Perspective Declare model, broken down into logical sections for clarity:
+
+### **Overview and Data Attributes**
+The model represents a business process for handling contracts, consisting of six activities: **Draft Contract**, **Review Contract**, **Negotiate Terms**, **Approve Contract**, **Sign Contract**, and **Archive Contract**. 
+
+Each activity is associated with specific data attributes:
+*   **Draft Contract** captures a **Contract ID** (an integer between 1000 and 9999) and a **Contract Value** (a decimal number between 10,000.0 and 1,000,000.0).
+*   **Review Contract** captures a **Review Outcome**, which can be *Accepted*, *Requires Changes*, or *Rejected*.
+*   **Approve Contract** captures an **Approval Status**, which can be *Pending*, *Approved*, or *Rejected*.
+*   **Sign Contract** captures a **Signature Status**, which can be *Unsigned*, *Partially Signed*, or *Fully Signed*.
+
+### **Process Start and End**
+The process strictly begins with the **Draft Contract** activity. The process is considered complete when the **Archive Contract** activity is executed, which serves as the sole end event of this workflow.
+
+### **Core Workflow and Temporal Constraints**
+The flow of the process is governed by a series of response constraints, meaning that if the first activity occurs, the second activity must eventually occur within a specific time frame:
+*   After drafting a contract, it must be reviewed within 2 days.
+*   If a review indicates that changes are needed, the contract must be negotiated within 3 days.
+*   After negotiating terms, the contract must be approved within 2 days.
+*   If a contract is approved, it must be signed within 1 day.
+*   Once a contract is fully signed, it must be archived. (There is no time limit specified for archiving after signing).
+
+### **Data and Conditional Constraints**
+The transitions between activities are heavily dependent on the data generated during execution:
+*   **Approval before Signing:** A contract can only be signed if it has already been approved. Specifically, the **Sign Contract** activity can only occur if the **Approval Status** is *Approved* and the **Signature Status** is currently *Unsigned*. This must happen within 1 day of the approval.
+*   **Signing to Archive:** The **Archive Contract** activity can only be triggered by a **Sign Contract** event where the **Signature Status** is *Fully Signed*.
+*   **Negotiation Trigger:** The obligation to negotiate terms is only activated if the **Review Outcome** is specifically *Requires Changes*.
+
+### **Existence and Negative Constraints**
+*   **Mandatory Review:** The **Review Contract** activity is mandatory and must occur at least once in every process execution.
+*   **No Signing on Rejected Reviews:** A contract cannot be signed if its review was rejected. Specifically, the **Sign Contract** activity is forbidden from occurring before a **Review Contract** activity if the **Signature Status** is *Unsigned* and the **Review Outcome** is *Rejected*.

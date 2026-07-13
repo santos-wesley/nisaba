@@ -1,0 +1,47 @@
+**Multi-Perspective Declare Model: Cyber Threat Management Process**
+
+This model describes a **cybersecurity threat management lifecycle** that combines control-flow constraints with data-driven decisions. It captures how threats are identified, investigated, reported, mitigated, and followed up on, while incorporating data perspectives (payloads) and conditional branching.
+
+### Process Overview
+
+The process begins with the **identification of a threat**. Once a threat is identified, the organization must **collect relevant data**, **analyze it**, and — only if the analysis **confirms** a real threat — proceed to **report** it. After reporting, the threat must be **mitigated**, followed by **monitoring** of the affected systems. The process officially ends after monitoring is completed.
+
+In parallel (or as a follow-up), if the mitigation is highly successful (success rate > 90%), the organization **updates its threat intelligence**. The model also includes two supporting activities — **Conduct Training** and **Perform Incident Response** — that are part of the overall process but are not strictly constrained by the main control-flow chain.
+
+### Detailed Constraints
+
+**Control-Flow & Temporal Constraints:**
+
+- The process **must start** with `Identify Threat`.
+- There is a strict sequential chain:
+  - `Identify Threat` must be followed (eventually) by `Collect Data`
+  - `Collect Data` must be followed by `Analyze Data`
+  - `Analyze Data` must be followed by `Report Threat` **only if** the analysis result is `Confirmed`
+  - `Report Threat` must be followed by `Mitigate Threat`
+  - `Mitigate Threat` must be followed by `Monitor Systems`
+- The process **must end** with `Monitor Systems`.
+
+**Data Perspective (Payloads):**
+
+Each activity carries specific data attributes:
+- **Identify Threat**: Threat ID, Threat Type (Phishing, Malware, DDoS, Ransomware)
+- **Collect Data**: Threat ID, Data Source ID
+- **Analyze Data**: Threat ID, Analysis Result (Confirmed, False Positive, Inconclusive)
+- **Report Threat**: Threat ID, Report ID
+- **Mitigate Threat**: Threat ID, Mitigation Success Rate (0.0–100.0)
+- **Monitor Systems**: Threat ID, Monitoring Status (Ongoing, Completed)
+- **Update Threat Intelligence**: Update ID, Threat ID
+
+**Conditional & Decision Logic:**
+
+- The transition from `Analyze Data` to `Report Threat` is **conditional**: it is only mandatory if `Analysis Result = Confirmed`. This implies that False Positives or Inconclusive results may skip formal reporting.
+- After `Mitigate Threat`, if the `Mitigation Success Rate > 90.0`, the activity `Update Threat Intelligence` must be performed.
+
+**Cardinality & Timing:**
+
+- Most activities in the main chain have tight upper bounds (e.g., Report and Mitigate can occur at most twice and once respectively in the high-priority path), indicating a relatively linear and controlled process.
+- Time windows are defined (e.g., max 10 and 30 time units between certain activities), suggesting deadlines for investigation and analysis.
+
+### Summary in Natural Language
+
+> The process models a structured cybersecurity response workflow. Every threat must be formally identified, investigated through data collection and analysis, and — if confirmed — formally reported and mitigated. After mitigation, systems are monitored until the incident is considered closed. Highly successful mitigations (>90% effectiveness) trigger an update to the organization’s threat intelligence database. The model enforces a clear sequence of activities while allowing data-driven decisions (especially at the analysis stage) and attaches rich data payloads to each activity to support auditing, compliance, and performance measurement.

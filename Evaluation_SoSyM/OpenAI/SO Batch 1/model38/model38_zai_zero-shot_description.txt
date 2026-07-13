@@ -1,0 +1,39 @@
+This natural language description breaks down the provided Multi-Perspective Declare model into the process flow, data attributes, and the specific constraints that govern the lifecycle of a report.
+
+### Process Overview
+The business process revolves around the lifecycle of a report, beginning with data collection and ending with publication and feedback gathering. The main activities include: **Collect Data**, **Analyze Data**, **Draft Report**, **Review Report**, **Approve Report**, **Publish Report**, **Gather Feedback**, and **Revise Report**.
+
+### Data Attributes
+Throughout the process, specific data variables are bound to certain activities to track progress and quality:
+*   **Collect Data** captures *Data Points*, which must be an integer between 100 and 10,000.
+*   **Analyze Data** captures *Report Accuracy*, a floating-point number ranging from 0.0 to 100.0.
+*   **Approve Report** records the *Approval Status*, which can be Pending, Approved, or Rejected.
+*   **Gather Feedback** records the *Feedback Type*, categorized as Positive, Negative, or Neutral.
+*   **Revise Report** tracks the *Revision Count*, an integer between 0 and 10.
+
+### Process Rules and Constraints
+
+**1. Initialization and Completion**
+*   The process must always begin with the **Collect Data** activity. 
+*   At some point during the process lifecycle, the **Publish Report** activity must be executed at least once.
+
+**2. Analysis and Drafting**
+*   **Analyze Data** must be completed before **Draft Report** can occur. Furthermore, this is governed by a strict alternating sequence: every execution of **Analyze Data** must be directly followed by **Draft Report**, and vice versa. 
+*   This alternating sequence is highly time-bound. The time elapsed between analyzing the data and drafting the report (and vice versa) cannot exceed 48 hours.
+
+**3. Drafting and Reviewing**
+*   Once a **Draft Report** is completed, it must be immediately followed by a **Review Report**. There can be no intervening activities between drafting and reviewing.
+*   This handover must happen quickly; the time between drafting and reviewing cannot exceed 1 hour.
+
+**4. Approval Prerequisites**
+*   **Review Report** is a mandatory prerequisite for **Approve Report**. You cannot approve a report without having reviewed it first.
+*   Furthermore, **Approve Report** cannot occur unless the **Analyze Data** activity has already taken place AND the *Report Accuracy* attribute from that analysis is greater than or equal to 90.0.
+
+**5. Approval and Publication**
+*   If **Approve Report** is executed and the resulting *Approval Status* is "Approved", it triggers a mandatory response to **Publish Report**. 
+*   This publication must happen relatively quickly: the time between approval and publishing cannot exceed 2 days.
+*   Additionally, the transition from approval to publishing is strict (a chain response). If the *Approval Status* is "Approved", **Publish Report** must be the very next activity to occur, and this must happen within 3 days.
+
+**6. Feedback and Revisions**
+*   If **Gather Feedback** occurs and the resulting *Feedback Type* is "Negative", the process must respond by executing the **Revise Report** activity. This revision must occur within 5 days of receiving the negative feedback.
+*   To prevent endless editing loops, **Revise Report** cannot be immediately followed by another **Revise Report** if the *Revision Count* attribute has already exceeded 3.

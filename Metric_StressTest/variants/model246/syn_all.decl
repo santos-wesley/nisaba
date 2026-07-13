@@ -1,0 +1,44 @@
+activity Requisition Apparatus
+activity Authorize Requisition
+activity Purchase Apparatus
+activity Accept Apparatus
+activity Examine Apparatus
+activity Set up Apparatus
+activity Educate Personnel
+activity Operate Apparatus
+activity Service Apparatus
+activity Retire Apparatus
+bind Requisition Apparatus: Requisition Identifier
+bind Authorize Requisition: Authorization State
+bind Purchase Apparatus: Apparatus Price
+bind Examine Apparatus: Apparatus State, Examination Rating
+bind Educate Personnel: Instruction Duration
+bind Set up Apparatus: Setup State
+bind Service Apparatus: Servicing State
+bind Retire Apparatus: Retire Cause
+bind Operate Apparatus: Utilization Rate
+Requisition Identifier: integer between 1 and 10000
+Apparatus Price: float between 100.0 and 100000.0
+Authorization State: Pending, Accepted, Rejected
+Apparatus State: New, Good, Broken
+Instruction Duration: integer between 1 and 40
+Setup State: Not Started, In Progress, Finished
+Servicing State: Current, Due, Overdue
+Utilization Rate: integer between 0 and 100
+Retire Cause: Outdated, Faulty, Replaced
+Examination Rating: float between 0.0 and 10.0
+Init[Requisition Apparatus] | |
+End[Retire Apparatus] | |
+Existence[Examine Apparatus] | |
+Absence[Requisition Apparatus] | |
+Precedence[Purchase Apparatus, Authorize Requisition] | |A.Authorization State is Accepted |
+Chain Response[Accept Apparatus, Examine Apparatus] | | |0,2,d
+Response[Set up Apparatus, Educate Personnel] |A.Setup State is Finished | |
+Precedence[Operate Apparatus, Educate Personnel] | | |
+Precedence[Operate Apparatus, Service Apparatus] | |T.Servicing State is Current |
+Not Chain Succession[Operate Apparatus, Retire Apparatus] | | |
+Responded Existence[Examine Apparatus, Retire Apparatus] |A.Apparatus State is Broken | |
+Precedence[Purchase Apparatus, Authorize Requisition] |A.Apparatus Price > 1000 |T.Authorization State is Accepted |
+Chain Response[Operate Apparatus, Service Apparatus] | | |0,30,d
+Precedence[Set up Apparatus, Examine Apparatus] | | |
+Responded Existence[Retire Apparatus, Examine Apparatus] |A.Retire Cause is Outdated | |

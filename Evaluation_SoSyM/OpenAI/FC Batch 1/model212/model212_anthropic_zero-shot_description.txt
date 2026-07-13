@@ -1,0 +1,34 @@
+# Vendor Contract Management Process Description
+
+This is a procurement and vendor management process governed by a set of behavioral and data-related rules.
+
+## Activities and Data
+
+The process involves eight activities: **Identify Needs**, **Select Vendor**, **Negotiate Contract**, **Sign Contract**, **Monitor Performance**, **Review Compliance**, **Issue Payment**, and **Conduct Review**.
+
+Several activities carry associated data:
+- **Select Vendor** records a *Vendor ID* (an integer between 1 and 9999) and a *Vendor Name* (one of Vendor A, Vendor B, or Vendor C).
+- **Negotiate Contract** records the *Vendor ID* and a *Contract Amount* (an integer between 1,000 and 1,000,000).
+- **Monitor Performance** records the *Vendor ID* and a *KPI Score* (a float between 0.0 and 10.0).
+- **Review Compliance** records the *Vendor ID* and a *Compliance Status* (either Compliant or Non-Compliant).
+- **Issue Payment** records the *Vendor ID* and a *Payment Status* (either Pending or Completed).
+- **Conduct Review** records the *Vendor ID* and a *Review Outcome* (either Satisfactory or Unsatisfactory).
+
+## Process Behavior
+
+**Process Start and End:**
+The process must always begin with **Identify Needs**, and it must always conclude with **Conduct Review** as the final activity.
+
+**Ordering Constraints:**
+- **Select Vendor** can only occur after **Identify Needs** has already taken place.
+- **Negotiate Contract** can only occur after **Select Vendor** has already taken place.
+- **Review Compliance** can only occur after **Monitor Performance** has already taken place.
+- **Issue Payment** can only occur after **Review Compliance** has already taken place.
+
+**Chained Response Constraints (with time and data conditions):**
+- Whenever **Negotiate Contract** occurs, it must be directly followed by **Sign Contract** within a time frame of 0 to 7 days, and the corresponding data conditions between the two activities must hold.
+- Whenever **Sign Contract** occurs, it must be directly followed by **Monitor Performance** within a time frame of 0 to 2 days, with matching data conditions.
+- Whenever **Issue Payment** occurs, it must be directly followed by **Conduct Review** within a time frame of 0 to 2 days, with matching data conditions.
+
+**Cardinality Constraint:**
+Despite the precedence relations mentioned above, the activity **Select Vendor** is *never allowed to occur* in the process (Absence constraint), effectively meaning that in valid process executions, this activity cannot appear — which conflicts with and overrides the possibility of executing dependent activities like Negotiate Contract if strictly enforced.

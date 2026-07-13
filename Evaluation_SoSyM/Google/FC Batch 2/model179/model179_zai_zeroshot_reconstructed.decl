@@ -1,0 +1,32 @@
+activity Request Return
+activity Approve Return
+activity Generate Return Label
+activity Ship Item Back
+activity Receive Item
+activity Inspect Item
+activity Determine Refund
+activity Process Refund
+activity Restock Item
+activity Dispose Item
+bind Request Return: Return Status, Return Reason, Days Since Purchase
+bind Approve Return: Return Status
+bind Inspect Item: Item Condition, Inspection Score
+bind Process Refund: Return Status, Refund Amount
+Return Status: Requested, Approved, Shipped, Received, Inspected, Refunded, Restocked, Disposed
+Return Reason: Defective, Damaged, Wrong Item, No Longer Needed
+Days Since Purchase: integer between 0 and 365
+Item Condition: integer between 1 and 5
+Inspection Score: integer between 1 and 10
+Refund Amount: float between 0.0 and 1000.0
+Init[Request Return] | |
+Response[Request Return, Approve Return] | | |0,24,h
+Response[Approve Return, Generate Return Label] | | |
+Chain Succession[Generate Return Label, Ship Item Back] | | |
+Response[Ship Item Back, Receive Item] | | |
+Response[Receive Item, Inspect Item] | | |0,48,h
+Response[Inspect Item, Determine Refund] | | |
+Response[Determine Refund, Process Refund] | | |
+Response[Receive Item, Process Refund] | | |0,7,d
+Response[Inspect Item, Restock Item] |A.Item Condition > 3 | |
+Response[Inspect Item, Dispose Item] |A.Item Condition <= 3 | |
+Precedence[Request Return, Inspect Item] |A.Return Reason is Defective |T.Inspection Score <= 5 |

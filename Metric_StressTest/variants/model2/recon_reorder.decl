@@ -1,0 +1,27 @@
+activity Threat Identify
+activity Threat Analyze
+activity Threat Prioritize
+activity Threat Mitigate
+activity Threat Report
+activity Threat Review
+bind Threat Identify: Status Threat
+bind Threat Analyze: Level Threat, Score Impact
+bind Threat Prioritize: Level Threat
+bind Threat Mitigate: Strategy Mitigation
+bind Threat Report: Status Threat
+bind Threat Review: Time Response
+Level Threat: integer between 1 and 10
+Score Impact: float between 0.0 and 100.0
+Status Threat: Identified, Analyzed, Mitigated, Reported
+Strategy Mitigation: Isolation, Patch, Monitor
+Time Response: integer between 1 and 72
+Init[Threat Identify] | |
+End[Threat Review] | |
+Chain Response[Threat Identify, Threat Analyze] | | |0,2,h
+Response[Threat Analyze, Threat Prioritize] | | |
+Precedence[Threat Mitigate, Threat Prioritize] |A.Level Threat > 5 | |
+Response[Threat Mitigate, Threat Report] | | |
+Chain Succession[Threat Report, Threat Review] |A.Status Threat is Reported | |
+Existence[Threat Analyze] | |
+Chain Response[Threat Mitigate, Threat Review] | | |0,48,h
+Not Chain Succession[Threat Mitigate, Threat Mitigate] | |A.Strategy Mitigation != T.Strategy Mitigation |

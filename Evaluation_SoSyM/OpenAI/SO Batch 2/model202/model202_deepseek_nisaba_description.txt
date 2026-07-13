@@ -1,0 +1,87 @@
+#MP-Declare Model
+## Activities
+- **Receive Currency**: 
+- **Verify Currency Authenticity**: 
+- **Calculate Exchange Rate**: 
+- **Approve Exchange**: 
+- **Reject Exchange**: 
+- **Process Exchange**: 
+- **Issue Receipt**: 
+- **Notify Customer**: 
+- **Record Transaction**: 
+- **Update Exchange Rates**: 
+
+## Attributes
+- **Amount: integer between 1 and 10000**: 
+- **Exchange Rate: float between 0.5 and 1.5**: 
+- **Currency Type: USD, EUR, GBP, JPY**: 
+- **Exchange Status: Pending, Approved, Rejected**: 
+- **Transaction ID: integer between 1000 and 9999**: 
+
+## Binds
+- **Receive Currency: Amount, Currency Type**: 
+- **Verify Currency Authenticity: Currency Type**: 
+- **Calculate Exchange Rate: Exchange Rate**: 
+- **Approve Exchange: Exchange Status**: 
+- **Reject Exchange: Exchange Status**: 
+- **Process Exchange: Transaction ID**: 
+- **Issue Receipt: Transaction ID**: 
+- **Notify Customer: Exchange Status**: 
+- **Record Transaction: Transaction ID**: 
+- **Update Exchange Rates: Exchange Rate**: 
+
+## Constraints
+- **Init[Receive Currency] | |**: 
+- **End[Issue Receipt] | |**: 
+- **Precedence[Approve Exchange, Verify Currency Authenticity] | | |**: 
+- **Response[Approve Exchange, Process Exchange] |A.Exchange Status is Approved | |0,2,h**: 
+- **Response[Reject Exchange, Notify Customer] |A.Exchange Status is Rejected | |0,1,h**: 
+- **Response[Process Exchange, Record Transaction] | |A.Transaction ID == T.Transaction ID |0,1,h**: 
+- **Precedence[Process Exchange, Calculate Exchange Rate] | | |**: 
+- **Precedence[Verify Currency Authenticity, Receive Currency] | | |**: 
+- **Responded Existence[Process Exchange, Update Exchange Rates] | | |**: 
+- **Existence[Calculate Exchange Rate] | |**: 
+- **Not Co-Existence[Verify Currency Authenticity, Approve Exchange] | | |**: 
+- **Not Succession[Receive Currency, Reject Exchange] | | |**: 
+- **Chain Succession[Calculate Exchange Rate, Update Exchange Rates] | | |0,30,m**: 
+- **Chain Succession[Receive Currency, Record Transaction] | |A.Transaction ID == T.Transaction ID |0,1,d**: 
+- **Exactly[Approve Exchange] | |**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the currency exchange process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Receive Currency,' which involves accepting the customer's currency with the 'Amount' and 'Currency Type' attributes. This establishes the initial context for the exchange process.
+#### **End Constraints**
+The process concludes with the activity 'Issue Receipt,' which involves providing a transaction receipt to the customer. This activity must be the last to occur in the process, ensuring a formal closure to the exchange.
+
+### **Frequency Constraints**
+#### **Existence Constraint**
+The 'Calculate Exchange Rate' activity must occur at least once in the process. This ensures that an exchange rate is determined, adding depth and reliability to the process by guaranteeing that a rate is computed for the transaction.
+#### **Exactly Constraint**
+The 'Approve Exchange' activity must occur exactly once in the process. This sets a fixed boundary on the approval step, ensuring that the exchange is approved precisely one time, maintaining precision and control over the process flow.
+
+### **Flexible Ordering Constraints**
+#### **Precedence Constraints**
+1. The activity 'Approve Exchange' is permitted to occur only if a 'Verify Currency Authenticity' activity has occurred before it. This ensures that the currency's authenticity is verified prior to any approval, guiding the logical sequence within the model.
+2. The activity 'Process Exchange' is permitted to occur only if a 'Calculate Exchange Rate' activity has occurred before it. This ensures that the exchange rate is calculated before processing the exchange, maintaining a coherent order.
+3. The activity 'Verify Currency Authenticity' is permitted to occur only if a 'Receive Currency' activity has occurred before it. This ensures that the currency is received before its authenticity is checked, establishing a logical initial sequence.
+#### **Response Constraints**
+1. If the 'Approve Exchange' activity occurs with the condition 'Exchange Status is Approved,' then the 'Process Exchange' activity must occur within 2 hours. This ensures a timely processing of the exchange following approval, maintaining the process's momentum.
+2. If the 'Reject Exchange' activity occurs with the condition 'Exchange Status is Rejected,' then the 'Notify Customer' activity must occur within 1 hour. This ensures that the customer is promptly notified of a rejection, maintaining clear communication.
+3. If the 'Process Exchange' activity occurs, then the 'Record Transaction' activity must occur with the condition 'Transaction ID == Transaction ID' within 1 hour. This ensures that the transaction is recorded immediately after processing, preserving data integrity.
+#### **Responded Existence Constraint**
+If the 'Process Exchange' activity occurs, then the 'Update Exchange Rates' activity must also occur at some point in the process. This establishes a dependency where processing an exchange necessitates updating the exchange rates, enhancing coherence in the process.
+
+### **Exclusivity Constraints**
+#### **Not Co-Existence Constraints**
+The 'Verify Currency Authenticity' activity and the 'Approve Exchange' activity cannot both occur within the same process instance. This exclusion ensures that verification and approval do not happen together, preventing conflicting events and maintaining process integrity.
+#### **Not Succession Constraints**
+The 'Receive Currency' activity cannot be followed by the 'Reject Exchange' activity at any point in the process. This restricts overlapping sequences, ensuring that receiving currency does not lead to a rejection, preserving the model's defined flow.
+
+### **Immediate Ordering Constraints**
+#### **Chain Succession Constraints**
+1. Whenever a 'Calculate Exchange Rate' activity occurs, it must be immediately followed by an 'Update Exchange Rates' activity within 30 minutes. This tightly coupled sequence ensures that the exchange rate calculation is directly succeeded by updating the rates, leaving no room for delays or intervening activities.
+2. Whenever a 'Receive Currency' activity occurs, it must be immediately followed by a 'Record Transaction' activity with the condition 'Transaction ID == Transaction ID' within 1 day. This ensures that the receipt of currency is directly followed by recording the transaction, maintaining a seamless progression.

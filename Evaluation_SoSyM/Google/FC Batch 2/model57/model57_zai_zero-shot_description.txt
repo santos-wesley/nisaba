@@ -1,0 +1,31 @@
+This Multi-Perspective Declare model outlines a highly structured digital forensics workflow, governing the lifecycle of digital evidence from its initial collection to its final disposal. The model integrates control-flow constraints with data attributes to ensure strict chain-of-custody, security, and legal compliance. 
+
+Here is a natural language description of the model:
+
+### **1. Lifecycle and Core Workflow**
+The process strictly **begins** with the *Collect Digital Evidence* activity and **ends** with the *Dispose Digital Evidence* activity. 
+Once evidence is collected, it must directly transition to being preserved (*Succession*). Following preservation, the evidence must eventually be analyzed (*Response*). The analysis phase is a mandatory step in the process (*Existence*), and once completed, it must be immediately followed by the generation of an evidence report (*Chain Response*). 
+
+### **2. Custody, Integrity, and Security**
+Maintaining the integrity of the evidence is a core focus:
+*   Before analysis can occur, the chain of custody must be documented (*Precedence*).
+*   Whenever evidence is preserved, its integrity must be validated immediately afterward (*Chain Response*).
+*   The activities *Secure Evidence Storage* and *Validate Evidence Integrity* are entirely dependent on one another; if one occurs, the other must also occur in the process (*Co-Existence*).
+*   If a security breach is reported, the digital evidence cannot be disposed of immediately afterward (*Not Chain Succession*).
+
+### **3. Auditing and Legal Holds**
+The process includes strict auditing constraints. Notably, the *Collect Digital Evidence* activity can only be executed if the *Audit Evidence Access* activity occurs at some point in the process, but this constraint is specifically activated when the evidence is under a legal hold (*Responded Existence* with the condition `A.Legal Hold is Yes`).
+
+### **4. Review, Release, and Disposal**
+Before evidence can be authorized for release, the evidence report must be reviewed. Specifically, every time the report is reviewed, the *Authorize Evidence Release* activity must eventually occur (*Alternate Response*). Ultimately, the process reaches a terminal decision point where exactly one of two paths is taken: either the evidence is authorized for release, or it is disposed of (*Exclusive Choice*). 
+
+### **5. Data Management and Classification**
+Throughout the process, data attributes are bound to specific activities to track forensic metadata:
+*   **Collection** tracks the *Evidence Type* (Document, Image, Video, Audio, Log File) and *Evidence Size* (an integer between 1 and 1000).
+*   **Preservation** tracks the *Custody Status* (Collected, Preserved, Analyzed, Released, Disposed) and an *Integrity Score* (a float between 0.0 and 1.0).
+*   **Analysis** tracks the *Security Level* (Confidential, Restricted, Unclassified) and *Analysis Time* (a float between 0.1 and 24.0 hours).
+*   **Disposal** tracks the *Disposal Method* (Shredding, Wiping, Deletion) and *Retention Period* (an integer between 30 and 3650 days).
+*   **Auditing** tracks the *Access Count* (an integer between 0 and 100) and whether a *Legal Hold* is applied (Yes/No).
+
+### **6. Indexing and Final Constraints**
+For data management, the process requires exactly one of two activities to be executed: either *Index Digital Evidence* or *Update Evidence Metadata* (*Choice*). Finally, the model enforces a strict rule that evidence cannot be classified if it is slated for disposal; the activities *Classify Digital Evidence* and *Dispose Digital Evidence* are mutually exclusive and cannot co-exist in the same process instance (*Not Co-Existence*).

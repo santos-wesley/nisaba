@@ -1,0 +1,41 @@
+# Description of the Multi-Perspective Declare Model
+
+This process model describes the management of a disease outbreak, from initial reporting through resolution, incorporating control-flow rules, data constraints, and temporal conditions.
+
+## Activities and Data
+
+The process consists of ten activities, several of which capture specific data attributes when executed:
+
+- **Report Disease Outbreak**: records the *Report Source* (Hospital, Clinic, Public, or Other) and the *Number of Cases* (an integer between 1 and 1000).
+- **Verify Outbreak Report**: records the *Investigation Result* (Confirmed, False Alarm, or Inconclusive).
+- **Confirm Disease**: records the *Disease Type* (Influenza, COVID-19, Measles, or Cholera) and the *Mortality Rate* (a float between 0.0 and 100.0).
+- **Implement Control Measures**: records the *Control Measures* taken (Vaccination, Quarantine, Hygiene Campaign, or Social Distancing) and the *Days to Control* (an integer between 1 and 365).
+- **Inform Public**: records the *Public Response* (Cooperative, Anxious, or Resistant).
+
+The remaining activities (Initiate Investigation, Collect Samples, Analyze Samples, Monitor Disease Spread, Declare End of Outbreak) do not carry associated data attributes.
+
+## Process Flow Rules
+
+1. **Process initiation**: The process must start with **Report Disease Outbreak**.
+
+2. **Mandatory verification**: Whenever **Report Disease Outbreak** occurs, it must eventually be followed by **Verify Outbreak Report**.
+
+3. **Conditional investigation**: Whenever **Verify Outbreak Report** occurs *and* the Investigation Result is recorded as "Confirmed," it must eventually be followed by **Initiate Investigation**. If the outbreak is not confirmed, no investigation is required.
+
+4. **Sample analysis timing**: Whenever **Collect Samples** occurs, it must eventually be followed by **Analyze Samples**, and this must happen within 48 hours of the sample collection.
+
+5. **Diagnosis requires prior analysis**: **Confirm Disease** can only occur if **Analyze Samples** has already occurred beforehand.
+
+6. **Strict order between diagnosis and control**: **Confirm Disease** and **Implement Control Measures** must both occur, and **Implement Control Measures** must always follow **Confirm Disease** (and vice versa - they are mutually dependent in sequence).
+
+7. **Public notification after control**: Whenever **Implement Control Measures** occurs, it must eventually be followed by **Inform Public**.
+
+8. **Strict order between informing and monitoring**: **Inform Public** and **Monitor Disease Spread** must both occur, with **Monitor Disease Spread** always following **Inform Public**.
+
+9. **Process conclusion**: The process must end with **Declare End of Outbreak**.
+
+10. **Urgent response for large outbreaks**: Whenever **Report Disease Outbreak** occurs *and* the Number of Cases exceeds 500, **Implement Control Measures** must eventually follow, and this must occur within 24 hours of the report.
+
+## Summary
+
+This model enforces a logical outbreak-response lifecycle: reporting triggers verification, which (if confirmed) triggers investigation and sampling; samples must be analyzed promptly; disease confirmation must precede control measures, which in turn must precede public communication and monitoring; and severe outbreaks (over 500 cases) demand rapid intervention within 24 hours, while lab results must be analyzed within 48 hours of sample collection.

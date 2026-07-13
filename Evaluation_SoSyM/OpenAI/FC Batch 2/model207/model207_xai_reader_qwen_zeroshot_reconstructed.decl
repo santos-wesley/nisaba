@@ -1,0 +1,54 @@
+activity Plan Event
+activity Book Venue
+activity Send Invitations
+activity Arrange Catering
+activity Hire Staff
+activity Set Up Venue
+activity Conduct Rehearsal
+activity Welcome Guests
+activity Facilitate Activities
+activity Deliver Speech
+activity Serve Meals
+activity Coordinate Photography
+activity Distribute Gifts
+activity Collect Feedback
+activity Tear Down Venue
+bind Plan Event: Event ID, Budget
+bind Book Venue: Event ID, Venue
+bind Send Invitations: Event ID, Number of Guests, Invitation Status
+bind Arrange Catering: Event ID, Catering Service
+bind Hire Staff: Event ID, Staff Role
+bind Set Up Venue: Event ID
+bind Conduct Rehearsal: Event ID, Rehearsal ID
+bind Welcome Guests: Event ID
+bind Facilitate Activities: Event ID
+bind Deliver Speech: Event ID
+bind Serve Meals: Event ID, Catering Service
+bind Coordinate Photography: Event ID
+bind Distribute Gifts: Event ID
+bind Collect Feedback: Event ID, Venue
+bind Tear Down Venue: Event ID
+Event ID: integer between None and None
+Budget: float between 0.0 and 1000000.0
+Venue: Hall A, Hall B, Hall C
+Number of Guests: integer between 1 and 10000
+Invitation Status: Sent, Pending, Confirmed
+Catering Service: Buffet, Sit-down Dinner, Cocktail
+Staff Role: Waiter, Coordinator, Cleaner
+Rehearsal ID: integer between 1 and 1000
+Init[Plan Event] | |
+End[Tear Down Venue] | |
+Precedence[Book Venue, Plan Event] | |A.Event ID == T.Event ID |
+Precedence[Send Invitations, Book Venue] | |A.Event ID == T.Event ID |
+Precedence[Arrange Catering, Send Invitations] | |A.Event ID == T.Event ID |
+Precedence[Hire Staff, Arrange Catering] | |A.Event ID == T.Event ID |
+Precedence[Set Up Venue, Hire Staff] | |A.Event ID == T.Event ID |
+Precedence[Conduct Rehearsal, Set Up Venue] | |A.Event ID == T.Event ID |
+Precedence[Welcome Guests, Conduct Rehearsal] | |A.Event ID == T.Event ID |
+Precedence[Facilitate Activities, Welcome Guests] | |A.Event ID == T.Event ID |
+Precedence[Deliver Speech, Facilitate Activities] | |A.Event ID == T.Event ID |
+Precedence[Serve Meals, Deliver Speech] | |A.Event ID == T.Event ID |
+Precedence[Coordinate Photography, Serve Meals] | |A.Event ID == T.Event ID |
+Precedence[Distribute Gifts, Coordinate Photography] | |A.Event ID == T.Event ID |
+Precedence[Collect Feedback, Distribute Gifts] | |A.Event ID == T.Event ID |
+Precedence[Tear Down Venue, Collect Feedback] | |A.Event ID == T.Event ID |

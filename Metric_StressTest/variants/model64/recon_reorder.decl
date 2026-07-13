@@ -1,0 +1,48 @@
+activity Impact Opportunity Identify
+activity Due Diligence Conduct
+activity Deal Structure
+activity Funding Secure
+activity Terms Negotiate
+activity Agreement Finalize
+activity Investment Implement
+activity Progress Monitor
+activity Impact Measure
+activity Impact Report
+activity Investment Exit
+activity Returns Distribute
+activity Performance Evaluate
+activity Feedback Gather
+activity Next Investment Plan
+bind Impact Opportunity Identify: ID Opportunity
+bind Due Diligence Conduct: ID Opportunity, Level Risk
+bind Funding Secure: ID Investor, Amount Investment
+bind Impact Measure: Metric Impact
+bind Returns Distribute: ROI Expected, ID Investor
+bind Feedback Gather: Feedback Stakeholder
+bind Investment Exit: Strategy Exit
+bind Performance Evaluate: Score Performance
+ID Opportunity: integer between 1 and 99999
+ROI Expected: float between 0 and 100
+Level Risk: Low, Medium, High
+ID Investor: integer between 1 and 9999
+Investment Type: Equity, Debt, Grant
+Amount Investment: float between 1000 and 10000000
+Metric Impact: Social, Environmental, Economic
+Feedback Stakeholder: Positive, Neutral, Negative
+Strategy Exit: Acquisition, Public Offering, Liquidation
+Score Performance: integer between 1 and 10
+Init[Impact Opportunity Identify] | |
+Response[Impact Opportunity Identify, Due Diligence Conduct] | | |
+Absence[Terms Negotiate] | |
+Response[Terms Negotiate, Agreement Finalize] | | |
+Precedence[Funding Secure, Due Diligence Conduct] | | |
+Chain Succession[Agreement Finalize, Investment Implement] | | |
+Existence[Progress Monitor] | |
+Response[Progress Monitor, Impact Measure] | | |
+Precedence[Impact Measure, Impact Report] | | |0,7,d
+Response[Impact Report, Investment Exit] | | |
+Chain Succession[Investment Exit, Returns Distribute] | | |
+Response[Returns Distribute, Performance Evaluate] | | |
+End[Feedback Gather] | |
+Response[Feedback Gather, Next Investment Plan] | | |
+Not Co-Existence[Agreement Finalize, Funding Secure] | | |

@@ -1,0 +1,53 @@
+activity Report Animal Abuse
+activity Investigation
+activity Rescue the Abused Animal
+activity Veterinary Care
+activity Find a Foster Home
+activity Adoption Screening
+activity Finalize the Animal Adoption
+activity Monitor the Animal's Welfare
+activity Euthanize the Animal
+activity Public Education
+activity Process Donation
+activity Volunteer Application
+activity Approve Volunteer Application
+activity Schedule Follow-up Checkup
+activity Facility Inspection
+activity Conduct Background Check
+bind Report Animal Abuse: Abuse Severity
+bind Investigation: Abuse Severity
+bind Rescue the Abused Animal: Animal Species, Animal Age
+bind Veterinary Care: Animal Health, Animal Species, Animal Age
+bind Find a Foster Home: Shelter Capacity, Animal Species
+bind Adoption Screening: Adoption Status, Animal Species
+bind Finalize the Animal Adoption: Adoption Status, Animal Species
+bind Monitor the Animal's Welfare: Animal Species, Animal Age
+bind Euthanize the Animal: Animal Health, Animal Species
+bind Process Donation: Donation Amount
+bind Volunteer Application: Volunteer ID
+bind Conduct Background Check: Volunteer Background Check, Volunteer ID
+bind Approve Volunteer Application: Volunteer Background Check, Volunteer ID
+bind Schedule Follow-up Checkup: Checkup Frequency, Animal Species
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Animal Age: integer between 0 and 25
+Animal Health: Healthy, Injured, Sick
+Shelter Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Donation Amount: float between 1.0 and 10000.0
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Volunteer ID: integer between 1 and 999999
+Response[Report Animal Abuse, Investigation] | | |
+Response[Investigation, Rescue the Abused Animal] |A.Abuse Severity is High | |
+Chain Response[Rescue the Abused Animal, Veterinary Care] |A.Animal Health is Injured | |
+Response[Veterinary Care, Find a Foster Home] | | |
+Precedence[Finalize the Animal Adoption, Adoption Screening] | | |
+Chain Response[Adoption Screening, Finalize the Animal Adoption] |A.Adoption Status is Approved | |0,7,d
+Response[Finalize the Animal Adoption, Monitor the Animal's Welfare] | | |
+Choice[Veterinary Care, Euthanize the Animal] |A.Animal Health is Sick | |
+Existence[Public Education] | |
+Responded Existence[Report Animal Abuse, Process Donation] | | |
+Not Response[Conduct Background Check, Approve Volunteer Application] |A.Volunteer Background Check is Fail | |
+Chain Response[Veterinary Care, Schedule Follow-up Checkup] | | |0,30,d
+Existence[Facility Inspection] | |

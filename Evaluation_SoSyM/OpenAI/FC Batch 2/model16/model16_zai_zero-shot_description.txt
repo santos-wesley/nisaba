@@ -1,0 +1,38 @@
+This Multi-Perspective Declare model outlines a comprehensive fundraising and event management process, integrating control-flow rules, data constraints, and time boundaries. 
+
+Here is a natural language description of how the process operates:
+
+### **Process Lifecycle**
+The process strictly begins with the **Identify Donor** activity and must conclude with the **Evaluate Campaign** activity. 
+
+### **Data Attributes and Constraints**
+As activities are executed, specific data attributes are recorded and must adhere to strict constraints:
+*   **Identify Donor** requires a **Donor ID**, which must be an integer between 1 and 10,000.
+*   **Request Donation** captures the **Donor ID** and a **Donation Type**, which can only be Cash, Check, or Online Transfer.
+*   **Receive Donation** logs a **Donation Amount**, which must be a decimal number between 10 and 100,000.
+*   **Promote Event** records an **Event Type**, restricted to either a Gala, Auction, or Online Campaign.
+*   **Collect Feedback** logs a **Feedback Type**, which must be Positive, Neutral, or Negative.
+
+### **Process Rules and Constraints**
+The model enforces several strict behavioral and temporal rules to ensure proper workflow execution:
+
+**1. Donation Workflow:**
+*   Once a donor is contacted, a donation request must eventually follow.
+*   If a donation is requested, a donation must be received within **24 days**. 
+*   Upon receiving a donation, a **Thank You Note** must be sent immediately after (as a chain response) and within **48 hours**. 
+*   *Conditional Rule:* If the received **Donation Amount is greater than 100**, the requirement to send a Thank You Note immediately after is specifically activated.
+
+**2. Event Management Workflow:**
+*   The **Promote Event** activity must be executed **exactly once** during the entire process.
+*   Once an event is promoted, the **Host Event** activity must eventually follow.
+
+**3. Feedback and Improvement Workflow:**
+*   The organization must collect feedback from stakeholders or donors at least **3 times** throughout the process.
+*   Every time feedback is collected, it must be followed by the **Analyze Feedback** activity.
+*   Analyzing feedback must subsequently trigger the identification of improvement areas.
+*   Once improvement areas are identified, the **Implement Improvements** activity must immediately follow (as a chain response) within **7 days**.
+
+**4. Campaign Conclusion Workflow:**
+*   After an event is hosted, the organization must eventually **Report Results**.
+*   Reporting results triggers the need to **Archive Records**.
+*   Finally, once records are archived, the process must conclude by evaluating the overall campaign (**Evaluate Campaign**).

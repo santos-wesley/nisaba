@@ -1,0 +1,37 @@
+activity Donor Identify
+activity Contact Initiate
+activity Meeting Perform
+activity Proposal Compose
+activity Proposal Assess
+activity Proposal Authorize
+activity Proposal Submit
+activity Response Accept
+activity Terms Negotiate
+activity Agreement Finalize
+bind Donor Identify: Identifier Donor
+bind Contact Initiate: Identifier Donor, Method Contact
+bind Meeting Perform: Identifier Donor, Duration Meeting
+bind Proposal Compose: Identifier Donor, Amount Donation, State Proposal
+bind Proposal Assess: Identifier Donor, State Proposal
+bind Proposal Authorize: Identifier Donor, State Proposal
+bind Proposal Submit: Identifier Donor, State Proposal
+bind Response Accept: Identifier Donor, Category Response
+bind Terms Negotiate: Identifier Donor, Category Response
+bind Agreement Finalize: Identifier Donor, State Agreement
+Identifier Donor: integer between 1 and 1000
+Amount Donation: float between 1000.0 and 1000000.0
+Method Contact: Email, Phone, In-Person
+State Proposal: Drafted, Reviewed, Approved, Submitted
+Duration Meeting: integer between 15 and 180
+Category Response: Positive, Negative, Neutral
+State Agreement: Pending, Finalized
+Init[Donor Identify] | |
+End[Agreement Finalize] | |
+Existence[Proposal Assess] | |
+Precedence[Proposal Submit, Proposal Authorize] | |A.Identifier Donor == T.Identifier Donor |
+Response[Response Accept, Terms Negotiate] | |A.Identifier Donor == T.Identifier Donor |0,2,d
+Chain Response[Meeting Perform, Proposal Compose] | |A.Identifier Donor == T.Identifier Donor |0,48,h
+Responded Existence[Proposal Submit, Response Accept] | |A.Identifier Donor == T.Identifier Donor |
+Precedence[Proposal Assess, Proposal Compose] | |A.Identifier Donor == T.Identifier Donor |
+Co-Existence[Contact Initiate, Meeting Perform] |A.Method Contact is Phone |A.Method Contact == T.Method Contact |
+Not Chain Succession[Response Accept, Agreement Finalize] |A.Category Response is Negative |A.Identifier Donor == T.Identifier Donor |

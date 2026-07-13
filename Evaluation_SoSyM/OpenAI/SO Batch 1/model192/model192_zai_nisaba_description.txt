@@ -1,0 +1,85 @@
+#MP-Declare Model
+## Activities
+- **Plan Eco-Friendly Trip**: The 'Plan Eco-Friendly Trip' activity represents the planning phase for organizing an environmentally sustainable trip.
+- **Book Sustainable Accommodation**: The 'Book Sustainable Accommodation' activity involves reserving lodging that follows sustainable and eco-friendly practices.
+- **Choose Green Transportation**: The 'Choose Green Transportation' activity entails selecting environmentally friendly modes of transportation for the trip.
+- **Participate in Local Conservation Efforts**: The 'Participate in Local Conservation Efforts' activity includes engaging in activities that support local environmental conservation initiatives.
+- **Purchase Local Products**: The 'Purchase Local Products' activity involves buying goods produced locally to support the community and reduce environmental impact.
+- **Attend Cultural Workshops**: The 'Attend Cultural Workshops' activity comprises taking part in educational sessions focused on local culture and traditions.
+- **Evaluate Environmental Impact**: The 'Evaluate Environmental Impact' activity consists of assessing the environmental consequences of the trip activities.
+- **Provide Feedback to Hosts**: The 'Provide Feedback to Hosts' activity involves sharing feedback with accommodation hosts about the sustainability experience.
+- **Share Sustainable Practices**: The 'Share Sustainable Practices' activity entails disseminating knowledge and experiences related to sustainable travel practices.
+
+## Attributes
+- **Accommodation Type: Eco-Lodge, Green Hotel, Hostel**: The attribute 'Accommodation Type: Eco-Lodge, Green Hotel, Hostel' specifies the types of sustainable accommodations available for booking during the eco-friendly trip.
+- **Transportation Mode: Bicycle, Electric Car, Train**: The attribute 'Transportation Mode: Bicycle, Electric Car, Train' defines the environmentally friendly transportation options available for the trip.
+- **Feedback Rating: Excellent, Good, Average, Poor**: The attribute 'Feedback Rating: Excellent, Good, Average, Poor' represents the possible ratings that can be assigned when providing feedback to hosts.
+
+## Binds
+- **Book Sustainable Accommodation: Accommodation Type**: The bind 'Book Sustainable Accommodation: Accommodation Type' links the 'Book Sustainable Accommodation' activity with the attribute 'Accommodation Type'.
+- **Choose Green Transportation: Transportation Mode**: The bind 'Choose Green Transportation: Transportation Mode' links the 'Choose Green Transportation' activity with the attribute 'Transportation Mode'.
+- **Provide Feedback to Hosts: Feedback Rating**: The bind 'Provide Feedback to Hosts: Feedback Rating' links the 'Provide Feedback to Hosts' activity with the attribute 'Feedback Rating'.
+
+## Constraints
+- **Init[Plan Eco-Friendly Trip] | |**: The 'Plan Eco-Friendly Trip' activity must be the first activity to occur in the process.
+- **End[Share Sustainable Practices] | |**: The 'Share Sustainable Practices' activity must be the last activity to occur in the process.
+- **Chain Response[Book Sustainable Accommodation, Provide Feedback to Hosts] | | |0,2,d**: Whenever a 'Book Sustainable Accommodation' activity occurs, it must be immediately followed by a 'Provide Feedback to Hosts' activity in the next event position, with no other events in between. The 'Provide Feedback to Hosts' activity is allowed to happen isolated. Additionally, the time between the 'Book Sustainable Accommodation' event and the 'Provide Feedback to Hosts' event must be between 0 and 2 days.
+- **Response[Choose Green Transportation, Evaluate Environmental Impact] | | |**: If a 'Choose Green Transportation' activity occurs, then an 'Evaluate Environmental Impact' activity must eventually occur after the 'Choose Green Transportation' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Choose Green Transportation' events can be pending at the same time, and a single 'Evaluate Environmental Impact' can fulfill the obligation for all preceding 'Choose Green Transportation' events. If 'Choose Green Transportation' does not occur, the constraint imposes no obligation on the occurrence of 'Evaluate Environmental Impact'.
+- **Co-Existence[Participate in Local Conservation Efforts, Attend Cultural Workshops] | | |**: If 'Participate in Local Conservation Efforts' activity occurs, then 'Attend Cultural Workshops' must also occur in the same process instance, and vice-versa. This mutual obligation ensures that neither event can occur without the other. The events can occur multiple times and in any order relative to each other. If neither event occurs, the constraint is still considered satisfied.
+- **Not Chain Response[Plan Eco-Friendly Trip, Purchase Local Products] | | |**: The 'Plan Eco-Friendly Trip' activity cannot be directly followed by a 'Purchase Local Products' activity, meaning that a 'Purchase Local Products' event cannot occur immediately after a 'Plan Eco-Friendly Trip' event without any intervening events.
+- **Exclusive Choice[Book Sustainable Accommodation, Choose Green Transportation] | | |**: Exactly one of the activities 'Book Sustainable Accommodation' or 'Choose Green Transportation' must occur in the process instance. This means that the process is compliant if only 'Book Sustainable Accommodation' occurs without any occurrence of 'Choose Green Transportation', or only 'Choose Green Transportation' occurs without any occurrence of 'Book Sustainable Accommodation'. The process is non-compliant if both 'Book Sustainable Accommodation' and 'Choose Green Transportation' occur, or if neither occurs. The constraint enforces a mutual exclusivity and a mandatory occurrence of one of the specified activities.
+- **Responded Existence[Plan Eco-Friendly Trip, Participate in Local Conservation Efforts] |A.Trip Duration > 7| |**: If 'Plan Eco-Friendly Trip' activity occurs in a process instance with an activation condition where the trip duration is greater than 7, then 'Participate in Local Conservation Efforts' activity must also occur at least once within the same process instance, either before or after the 'Plan Eco-Friendly Trip' event. If 'Plan Eco-Friendly Trip' does not occur or the trip duration is not greater than 7, there is no requirement for 'Participate in Local Conservation Efforts' to occur. Multiple occurrences of 'Plan Eco-Friendly Trip' are satisfied by at least one occurrence of 'Participate in Local Conservation Efforts', and multiple 'Participate in Local Conservation Efforts' instances are allowed.
+- **Not Responded Existence[Provide Feedback to Hosts, Evaluate Environmental Impact] |A.Feedback Rating is Poor| |**: If a 'Provide Feedback to Hosts' activity occurs in a process instance with an activation condition where the feedback rating is 'Poor', then an 'Evaluate Environmental Impact' activity must not occur anywhere in the same process instance. This means that the occurrence of 'Provide Feedback to Hosts' with a poor rating prohibits any occurrence of 'Evaluate Environmental Impact'. However, if 'Provide Feedback to Hosts' does not occur or the feedback rating is not 'Poor', 'Evaluate Environmental Impact' may occur freely. Multiple occurrences of 'Provide Feedback to Hosts' with a poor rating are allowed, provided 'Evaluate Environmental Impact' does not occur at all in the process instance.
+- **Existence[Evaluate Environmental Impact] | |**: The 'Evaluate Environmental Impact' activity must occur at least once in the process.
+
+
+## Interleaved Description
+The MP-Declare process model for the eco-friendly trip process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Plan Eco-Friendly Trip,' which represents the planning phase for organizing an environmentally sustainable trip. This activity must be the first to occur in the process, establishing the initial context for all subsequent activities.
+
+#### **End Constraints**
+The process concludes with the activity 'Share Sustainable Practices,' which entails disseminating knowledge and experiences related to sustainable travel practices. This activity must be the last to occur in the process, providing a coherent closure to the eco-friendly trip journey.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Evaluate Environmental Impact' activity must occur at least once in the process. This ensures that the environmental consequences of the trip activities are assessed, adding depth and context to the process by guaranteeing that sustainability is measured and verified.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+If the 'Plan Eco-Friendly Trip' activity occurs in a process instance with a trip duration greater than 7 days, then the 'Participate in Local Conservation Efforts' activity must also occur at least once within the same process instance, either before or after the planning event. This establishes a cause-effect dependency where planning an extended eco-friendly trip necessitates engagement in local conservation efforts, enhancing coherence in the process. Multiple occurrences of 'Plan Eco-Friendly Trip' are satisfied by at least one occurrence of 'Participate in Local Conservation Efforts,' and multiple conservation efforts are allowed.
+
+### **Flexible Ordering Constraints**
+
+#### **Response Constraints**
+If a 'Choose Green Transportation' activity occurs, then an 'Evaluate Environmental Impact' activity must eventually occur after the transportation event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Choose Green Transportation' events can be pending at the same time, and a single 'Evaluate Environmental Impact' can fulfill the obligation for all preceding transportation events. This defines an ordered flow where environmental evaluation follows the selection of green transportation, ensuring a cohesive temporal structure in the model. If 'Choose Green Transportation' does not occur, the constraint imposes no obligation on the occurrence of 'Evaluate Environmental Impact.'
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Whenever a 'Book Sustainable Accommodation' activity occurs, it must be immediately followed by a 'Provide Feedback to Hosts' activity in the next event position, with no other events in between. The 'Provide Feedback to Hosts' activity is allowed to happen in isolation as well. Additionally, the time between the 'Book Sustainable Accommodation' event and the 'Provide Feedback to Hosts' event must be between 0 and 2 days. This captures an immediate cause-and-effect relationship where each accommodation booking is directly followed by feedback provision, ensuring a tightly coupled sequence. The 'Book Sustainable Accommodation' activity is linked to the 'Accommodation Type' attribute, which specifies the types of sustainable accommodations available, including Eco-Lodge, Green Hotel, and Hostel. The 'Provide Feedback to Hosts' activity is linked to the 'Feedback Rating' attribute, which represents the possible ratings that can be assigned, including Excellent, Good, Average, and Poor.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+If the 'Participate in Local Conservation Efforts' activity occurs, then the 'Attend Cultural Workshops' activity must also occur in the same process instance, and vice-versa. This mutual obligation ensures that neither event can occur without the other, establishing a conjunction between environmental conservation engagement and cultural education. The events can occur multiple times and in any order relative to each other. If neither event occurs, the constraint is still considered satisfied.
+
+### **Exclusivity Constraints**
+
+#### **Exclusive Choice Constraints**
+Exactly one of the activities 'Book Sustainable Accommodation' or 'Choose Green Transportation' must occur in the process instance. This means that the process is compliant if only 'Book Sustainable Accommodation' occurs without any occurrence of 'Choose Green Transportation,' or only 'Choose Green Transportation' occurs without any occurrence of 'Book Sustainable Accommodation.' The process is non-compliant if both activities occur or if neither occurs. This enforces mutually exclusive pathways, ensuring that exactly one of the specified activities occurs within the process. The 'Choose Green Transportation' activity is linked to the 'Transportation Mode' attribute, which defines the environmentally friendly transportation options available, including Bicycle, Electric Car, and Train.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+If a 'Provide Feedback to Hosts' activity occurs in a process instance with a feedback rating of 'Poor,' then an 'Evaluate Environmental Impact' activity must not occur anywhere in the same process instance. This means that the occurrence of 'Provide Feedback to Hosts' with a poor rating prohibits any occurrence of 'Evaluate Environmental Impact.' However, if 'Provide Feedback to Hosts' does not occur or the feedback rating is not 'Poor,' 'Evaluate Environmental Impact' may occur freely. Multiple occurrences of 'Provide Feedback to Hosts' with a poor rating are allowed, provided 'Evaluate Environmental Impact' does not occur at all in the process instance. This contrast prevents certain dependencies, ensuring that poor feedback does not coexist with environmental impact evaluation, thus refining the model by disallowing specific contingent occurrences.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Response Constraints**
+The 'Plan Eco-Friendly Trip' activity cannot be directly followed by a 'Purchase Local Products' activity, meaning that a 'Purchase Local Products' event cannot occur immediately after a 'Plan Eco-Friendly Trip' event without any intervening events. This contrast prevents immediate succession, ensuring that the planning phase and the purchase of local goods do not occur in direct sequence, thereby preserving structural integrity in the process flow and requiring other activities to occur between planning and purchasing.

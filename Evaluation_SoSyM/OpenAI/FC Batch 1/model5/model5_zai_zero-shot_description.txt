@@ -1,0 +1,32 @@
+This Multi-Perspective Declare model describes a structured, rule-based process for a construction project, spanning from the initial land survey to the final handover of the completed building. The model defines nine specific activities, assigns mandatory data attributes to five of them, and enforces strict temporal and logical constraints on how the project must be executed.
+
+Here is a natural language description of the model:
+
+### **Activities and Data Attributes**
+As the project progresses, specific data must be recorded and validated for certain tasks:
+*   **Conduct Survey:** Must be assigned a **Survey ID**, which is an integer between 1 and 9999.
+*   **Acquire Permits:** Must record the **Permit Type**, which is restricted to *Environmental*, *Zoning*, or *Safety*.
+*   **Lay Foundation:** Must specify the **Foundation Material**, limited to *Concrete*, *Reinforced Concrete*, or *Steel*.
+*   **Install Utilities:** Must identify the **Utility Type** being installed, categorized as *Plumbing*, *Electrical*, or *HVAC*.
+*   **Final Inspection:** Must be given an **Inspection Score**, which is a decimal (float) value ranging from 0.0 to 10.0.
+
+The remaining activities—**Design Blueprint**, **Construct Framework**, **Interior Work**, and **Handover Project**—do not require bound data attributes in this model.
+
+### **Process Execution Rules**
+The lifecycle of the construction project is governed by a specific set of temporal and logical constraints:
+
+**1. Project Initiation and Planning**
+*   The process must strictly begin with the **Conduct Survey** activity. No other activity can occur before the initial survey is executed.
+*   Before the **Conduct Survey** can take place, the **Design Blueprint** must have already been completed. This means the blueprint design is a strict prerequisite for surveying the land. 
+
+**2. Permitting and Groundwork**
+*   Before **Lay Foundation** can occur, the project must have already **Acquire Permits**. Permits are a strict prerequisite for laying the foundation.
+*   Once the **Lay Foundation** activity is completed, it triggers a mandatory **Response**: the **Construct Framework** must be executed. Furthermore, this must happen within a specific time constraint; the framework construction must occur between 0 and 3 days after the foundation is laid.
+
+**3. Framework and Utilities**
+*   Following the construction of the framework, the **Install Utilities** activity must occur. This is governed by an **Alternate Response** constraint, meaning that every time the Construct Framework activity is executed, it must eventually be followed by Install Utilities before the framework can be constructed again. Additionally, this must happen within 0 to 2 days of the framework's construction.
+*   Before **Interior Work** can begin, the **Install Utilities** must have already been completed. Utilities act as a strict prerequisite for any interior work.
+
+**4. Inspection and Handover**
+*   The process must end with the **Final Inspection**. No other activities may occur after the final inspection is completed.
+*   Before the **Handover Project** activity can occur, the **Final Inspection** must have already been completed. Furthermore, there is a time constraint on this relationship: the handover must occur between 0 and 1 day after the Final Inspection is concluded, ensuring a swift transition from passing inspection to handing over the keys.

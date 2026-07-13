@@ -1,0 +1,11 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a tsunami response process, triggered by seismic monitoring. The process begins with the **Monitor Seismic Activity** activity, which is the initial step. When a seismic event is detected, if the **Magnitude** exceeds 7.0, a **Response** constraint requires that an **Issue Tsunami Alert** must eventually be issued.
+
+The **Issue Tsunami Alert** activity is bound to three data attributes: **Alert Level** (which can be Watch, Warning, or Cancel), **Estimated Arrival Time** (in minutes, from 0 to 360), and the magnitude from the monitoring step. Once an alert is issued, a **Response** constraint mandates that **Evacuate Coastal Areas** must follow, and this evacuation must occur within a **time window of 0 to 60 minutes** after the alert.
+
+The model also defines several other constraints. There is a **Precedence** relationship between **Provide Medical Assistance** and **Dispatch Emergency Services**, meaning medical assistance can only be provided after emergency services have been dispatched. Notably, there is a **Not Co-Existence** constraint between **Conduct Search and Rescue** and **Assess Infrastructure Damage**, meaning these two activities cannot both occur in the same process instance—only one of them can be performed.
+
+For communication recovery, there is a self-loop **Response** on **Restore Communication Networks**: if the **Communication Status** is "Down," it must eventually become "Operational." This activity must be completed within **72 hours** after **Assess Infrastructure Damage** is performed.
+
+Finally, several time-based constraints link other activities: **Dispatch Emergency Services** must occur within **24 hours** of **Provide Medical Assistance**, and **Establish Emergency Shelters** must be followed by **Distribute Relief Supplies** within **48 hours**. Each activity is associated with specific data attributes (e.g., Number of Evacuees, Damage Severity, Number of Injuries, Supply Cost) that capture key operational metrics throughout the response.

@@ -1,0 +1,19 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This process describes a structured intelligence lifecycle, beginning with the initiation of **Gather Intelligence** and ending with **Disseminate Information**. The workflow is governed by a series of temporal and conditional constraints that define how activities must be ordered and how their data attributes interact.
+
+**Process Flow and Constraints:**
+
+The process starts automatically with the **Gather Intelligence** activity, which collects data from various **Source Types** (Human, Signal, Open Source, or Cyber) using a specified **Number of Sources** (1 to 50). Once intelligence is gathered, it must be followed by **Analyze Data** (Response constraint). Furthermore, these two activities must always occur together in the same process instance (Co-Existence constraint).
+
+After analysis, **Analyze Data** must be directly followed by **Identify Threats** (Succession constraint), meaning the analysis must happen before threat identification, and if threats are identified, analysis must have occurred. The **Identify Threats** activity evaluates **Threat Level** (1-10) and **Risk Factor** (0.0-100.0). Before strategies can be developed, threats must first be identified (Precedence constraint).
+
+**Develop Strategies** must be immediately preceded by **Implement Countermeasures** (Chain Precedence), meaning countermeasures must be implemented right before strategy development. Conversely, after implementing countermeasures, the system must immediately begin **Monitor Activity** (Chain Response). The **Implement Countermeasures** activity tracks **Cost of Countermeasures** (100.0-1,000,000.0) and **Days to Respond** (1-365).
+
+Monitoring leads to reporting: **Monitor Activity** must be followed by **Report Findings**, but not consecutively—other activities can occur between them (Alternate Response). The **Report Findings** activity records **Report Status** (Draft, Review, Final, Disseminated) and **Geographic Region** (North America, Europe, Asia, Africa, South America).
+
+Before the final activity, **Review Intelligence** must occur at some point before **Disseminate Information**, but not necessarily immediately before (Alternate Precedence). The process concludes with **Disseminate Information**, which must be the last activity executed (End constraint).
+
+**Data Perspective:**
+
+Each activity is bound to specific data attributes that must be provided when the activity executes. The model enforces type constraints: **Threat Level** and **Number of Sources** are integers within defined ranges; **Confidence Score**, **Risk Factor**, and **Cost of Countermeasures** are floats; **Analysis Technique** is a categorical choice; and **Geographic Region** and **Source Type** are enumerated values. This ensures that every instance of an activity carries valid, structured data throughout the intelligence workflow.

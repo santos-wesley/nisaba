@@ -1,0 +1,51 @@
+activity Prepare Sample
+activity X-ray Diffraction
+activity Microstructure Analysis
+activity Hardness Measurement
+activity Tensile Test
+activity Thermal Analysis
+activity Corrosion Resistance Evaluation
+activity Calibrate Equipment
+activity Document Results
+activity Review Findings
+activity Approve Material
+activity Reject Material
+activity Prepare Report
+bind Prepare Sample: Sample ID
+bind X-ray Diffraction: Sample ID, Equipment Status, Crystal Structure
+bind Microstructure Analysis: Sample ID, Microstructure Type
+bind Hardness Measurement: Sample ID, Equipment Status, Hardness Value
+bind Tensile Test: Sample ID, Equipment Status, Tensile Strength
+bind Thermal Analysis: Sample ID, Equipment Status, Thermal Property
+bind Corrosion Resistance Evaluation: Sample ID, Equipment Status, Corrosion Resistance
+bind Calibrate Equipment: Equipment Status
+bind Document Results: Sample ID, Test Results
+bind Review Findings: Sample ID, Test Results
+bind Approve Material: Sample ID, Approval Status
+bind Reject Material: Sample ID, Approval Status
+bind Prepare Report: Sample ID
+Sample ID: integer between 1 and 1000
+Equipment Status: Calibrated, Not Calibrated, Needs Calibration
+Hardness Value: float between 0.0 and 1000.0
+Tensile Strength: float between 0.0 and 5000.0
+Corrosion Resistance: Excellent, Good, Fair, Poor
+Approval Status: Approved, Rejected, Pending
+Crystal Structure: Cubic, Hexagonal, Tetragonal, Orthorhombic, Monoclinic, Triclinic
+Microstructure Type: Ferrite, Pearlite, Martensite, Austenite, Cementite, Bainite
+Thermal Property: Glass Transition, Melting Point, Crystallization, Decomposition, Phase Transition
+Test Results: Pass, Fail, Partial, Inconclusive
+Init[Prepare Sample] | |
+End[Approve Material] | |
+End[Reject Material] | |
+Response[X-ray Diffraction, Microstructure Analysis] | |A.Sample ID == T.Sample ID |0,2,h
+Chain Response[Hardness Measurement, Tensile Test] | |A.Sample ID == T.Sample ID |0,1,h
+Succession[Thermal Analysis, Corrosion Resistance Evaluation] | |A.Sample ID == T.Sample ID |0,1,d
+Precedence[Document Results, Review Findings] | |A.Sample ID == T.Sample ID |
+Precedence[Review Findings, Approve Material] | |A.Sample ID == T.Sample ID |
+Precedence[Review Findings, Reject Material] | |A.Sample ID == T.Sample ID |
+Precedence[Calibrate Equipment, X-ray Diffraction] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Hardness Measurement] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Tensile Test] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Thermal Analysis] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Corrosion Resistance Evaluation] |A.Equipment Status is Calibrated | |
+Precedence[Document Results, Prepare Report] | |A.Sample ID == T.Sample ID |0,1,d

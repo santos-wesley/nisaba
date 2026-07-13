@@ -1,0 +1,28 @@
+activity Draft Contract
+activity Review Contract
+activity Negotiate Terms
+activity Approve Contract
+activity Sign Contract
+activity Archive Contract
+bind Draft Contract: 
+bind Review Contract: Review Outcome
+bind Negotiate Terms: 
+bind Approve Contract: Approval Status
+bind Sign Contract: Approval Status, Signature Status
+bind Archive Contract: 
+Review Outcome: Requires Changes, Approved, Rejected
+Approval Status: Approved, Not Approved
+Signature Status: Signed, Unsigned
+Init[Draft Contract] | |
+End[Archive Contract] | |
+Existence[Review Contract] | |
+Response[Draft Contract, Review Contract] | | |
+Absence2[Review Contract] | |
+Absence3[Negotiate Terms] | |
+Response[Review Contract, Negotiate Terms] |A.Review Outcome is Requires Changes | |
+Response[Negotiate Terms, Approve Contract] | | |
+Absence2[Approve Contract] | |
+Response[Sign Contract, Archive Contract] | | |
+Precedence[Sign Contract, Approve Contract] | | |
+Precedence[Approve Contract, Sign Contract] | |A.Approval Status is Approved AND T.Signature Status is Unsigned |
+Exactly[Sign Contract] | |

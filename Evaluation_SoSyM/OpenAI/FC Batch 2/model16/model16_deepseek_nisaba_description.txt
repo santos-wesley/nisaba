@@ -1,0 +1,81 @@
+#MP-Declare Model
+## Activities
+- **Identify Donor**: 
+- **Contact Donor**: 
+- **Request Donation**: 
+- **Receive Donation**: 
+- **Send Thank You Note**: 
+- **Plan Fundraiser**: 
+- **Promote Event**: 
+- **Host Event**: 
+- **Collect Feedback**: 
+- **Analyze Feedback**: 
+- **Identify Improvement Areas**: 
+- **Implement Improvements**: 
+- **Report Results**: 
+- **Archive Records**: 
+- **Evaluate Campaign**: 
+
+## Attributes
+- **Donor ID: integer between 1 and 10000**: 
+- **Donation Type: Cash, Check, Online Transfer**: 
+- **Donation Amount: float between 10 and 100000**: 
+- **Event Type: Gala, Auction, Online Campaign**: 
+- **Feedback Type: Positive, Neutral, Negative**: 
+
+## Binds
+- **Identify Donor: Donor ID**: 
+- **Request Donation: Donor ID, Donation Type**: 
+- **Receive Donation: Donation Amount**: 
+- **Promote Event: Event Type**: 
+- **Collect Feedback: Feedback Type**: 
+
+## Constraints
+- **Init[Identify Donor] | |**: 
+- **End[Evaluate Campaign] | |**: 
+- **Existence3[Collect Feedback] | |**: 
+- **Response[Contact Donor, Request Donation] | | |**: 
+- **Chain Response[Receive Donation, Send Thank You Note] | | |0,48,h**: 
+- **Response[Promote Event, Host Event] | | |**: 
+- **Response[Collect Feedback, Analyze Feedback] | | |**: 
+- **Response[Analyze Feedback, Identify Improvement Areas] | | |**: 
+- **Chain Response[Identify Improvement Areas, Implement Improvements] | | |0,7,d**: 
+- **Response[Host Event, Report Results] | | |**: 
+- **Response[Report Results, Archive Records] | | |**: 
+- **Response[Archive Records, Evaluate Campaign] | | |**: 
+- **Chain Response[Receive Donation, Send Thank You Note] |A.Donation Amount > 100 | |**: 
+- **Exactly[Promote Event] | |**: 
+- **Chain Response[Request Donation, Receive Donation] | | |0,24,d**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the donation campaign process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Identify Donor,' which involves recording the 'Donor ID' attribute to establish the initial context for the campaign.
+#### **End Constraints**
+The process concludes with the activity 'Evaluate Campaign,' which must be the last activity to occur, providing a coherent closure to the entire campaign lifecycle.
+
+### **Frequency Constraints**
+#### **Existence Constraint**
+The 'Collect Feedback' activity must occur at least once in the process. This ensures that feedback is gathered, adding depth and context to the evaluation phase of the campaign.
+#### **Exactly Constraint**
+The 'Promote Event' activity must occur exactly once in the process. This sets a fixed boundary on the promotion of events, ensuring precision and preventing redundant or missing promotional efforts.
+
+### **Flexible Ordering Constraints**
+#### **Response Constraints**
+1. If the 'Contact Donor' activity occurs, then the 'Request Donation' activity must occur at some point afterward. This establishes an ordered flow where contacting a donor leads to a donation request, ensuring a cohesive temporal structure.
+2. If the 'Promote Event' activity occurs, then the 'Host Event' activity must occur at some point afterward. This defines a sequence where event promotion is followed by the event itself, maintaining logical progression.
+3. If the 'Collect Feedback' activity occurs, then the 'Analyze Feedback' activity must occur at some point afterward. This ensures that collected feedback is systematically analyzed, creating a cause-effect dependency.
+4. If the 'Analyze Feedback' activity occurs, then the 'Identify Improvement Areas' activity must occur at some point afterward. This establishes a sequential flow from analysis to identifying areas for improvement.
+5. If the 'Host Event' activity occurs, then the 'Report Results' activity must occur at some point afterward. This ensures that event outcomes are reported, maintaining a structured progression.
+6. If the 'Report Results' activity occurs, then the 'Archive Records' activity must occur at some point afterward. This defines a sequence where results are archived for future reference.
+7. If the 'Archive Records' activity occurs, then the 'Evaluate Campaign' activity must occur at some point afterward. This ensures that the campaign is evaluated after records are archived, providing a logical conclusion.
+
+### **Immediate Ordering Constraints**
+#### **Chain Response Constraints**
+1. Whenever the 'Receive Donation' activity occurs, it must be immediately followed by the 'Send Thank You Note' activity within 48 hours. This captures a direct cause-and-effect relationship, ensuring that donors are promptly thanked after a donation is received.
+2. Whenever the 'Identify Improvement Areas' activity occurs, it must be immediately followed by the 'Implement Improvements' activity within 7 days. This enforces a tightly coupled sequence where improvements are implemented directly after being identified, with no intervening activities.
+3. Whenever the 'Request Donation' activity occurs, it must be immediately followed by the 'Receive Donation' activity within 24 days. This ensures a direct succession from requesting a donation to receiving it, maintaining process efficiency.
+4. Whenever the 'Receive Donation' activity occurs with the condition 'Donation Amount > 100,' it must be immediately followed by the 'Send Thank You Note' activity. This adds a conditional layer to the immediate succession, ensuring that larger donations trigger an immediate thank-you response.

@@ -1,0 +1,52 @@
+activity Submit Benefit Request
+activity Review Benefit Request
+activity Approve Benefit Request
+activity Reject Benefit Request
+activity Process Payment
+activity Update Employee Record
+activity Notify Employee
+activity Audit Benefit Process
+activity Submit Appeal
+activity Review Appeal
+activity Approve Appeal
+activity Reject Appeal
+activity Notify Appeal Decision
+activity Conduct Benefit Orientation
+activity Evaluate Benefit Utilization
+bind Submit Benefit Request: Request ID, Employee ID
+bind Review Benefit Request: Request ID
+bind Approve Benefit Request: Request ID, Request Status
+bind Reject Benefit Request: Request ID, Request Status
+bind Process Payment: Request ID, Benefit Amount
+bind Update Employee Record: Employee ID, Request ID
+bind Notify Employee: Request ID, Employee ID
+bind Audit Benefit Process: Request ID, Audit ID
+bind Submit Appeal: Request ID, Employee ID
+bind Review Appeal: Request ID
+bind Approve Appeal: Request ID
+bind Reject Appeal: Request ID
+bind Notify Appeal Decision: Request ID, Employee ID
+bind Conduct Benefit Orientation: Employee ID
+bind Evaluate Benefit Utilization: Utilization Rate
+Request ID: integer between 1 and 10000
+Employee ID: integer between 1 and 1000
+Request Status: Submitted, Approved, Rejected
+Benefit Amount: float between 100.0 and 10000.0
+Audit ID: integer between 1 and 500
+Utilization Rate: float between 0.0 and 100.0
+Existence[Review Benefit Request] | |
+Precedence[Approve Benefit Request, Review Benefit Request] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Precedence[Reject Benefit Request, Review Benefit Request] |A.Request Status is Rejected |A.Request ID == T.Request ID |
+Response[Approve Benefit Request, Process Payment] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Response[Approve Benefit Request, Update Employee Record] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Response[Approve Benefit Request, Notify Employee] |A.Request Status is Approved |A.Request ID == T.Request ID |0,2,d
+Response[Reject Benefit Request, Notify Employee] |A.Request Status is Rejected |A.Request ID == T.Request ID |0,2,d
+Response[Process Payment, Audit Benefit Process] | |A.Request ID == T.Request ID |0,30,d
+Precedence[Review Appeal, Submit Appeal] | |A.Request ID == T.Request ID |
+Response[Review Appeal, Approve Appeal] | |A.Request ID == T.Request ID |
+Response[Review Appeal, Reject Appeal] | |A.Request ID == T.Request ID |
+Response[Approve Appeal, Notify Appeal Decision] | |A.Request ID == T.Request ID |0,2,d
+Response[Reject Appeal, Notify Appeal Decision] | |A.Request ID == T.Request ID |0,2,d
+Existence[Conduct Benefit Orientation] | |
+Existence[Evaluate Benefit Utilization] | |
+Response[Submit Appeal, Review Appeal] | |A.Request ID == T.Request ID |0,5,d

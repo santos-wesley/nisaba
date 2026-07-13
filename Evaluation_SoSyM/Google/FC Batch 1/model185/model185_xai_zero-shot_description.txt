@@ -1,0 +1,63 @@
+**Multi-Perspective Declare Model: Intelligence Cycle for Threat Management**
+
+This model describes a structured **intelligence and counter-threat process** consisting of 10 activities. It captures both the control-flow (temporal ordering) of the process and multiple data perspectives attached to the activities.
+
+### Process Activities
+- **Gather Intelligence**
+- **Analyze Data**
+- **Assess Credibility**
+- **Identify Threats**
+- **Develop Strategies**
+- **Implement Countermeasures**
+- **Monitor Activity**
+- **Report Findings**
+- **Review Intelligence**
+- **Disseminate Information**
+
+### Data Perspectives (Attributes)
+
+**Bound to specific activities:**
+
+- **Gather Intelligence**: 
+  - *Source Type* (Human, Signal, Open Source, Cyber)
+  - *Number of Sources* (integer 1–50)
+
+- **Analyze Data**: 
+  - *Analysis Technique* (Link Analysis, Statistical Analysis, Pattern Recognition)
+  - *Confidence Score* (float 0.0–1.0)
+
+- **Identify Threats**: 
+  - *Threat Level* (integer 1–10)
+  - *Risk Factor* (float 0.0–100.0)
+
+- **Implement Countermeasures**: 
+  - *Cost of Countermeasures* (float 100.0–1,000,000.0)
+  - *Days to Respond* (integer 1–365)
+
+- **Report Findings**: 
+  - *Report Status* (Draft, Review, Final, Disseminated)
+  - *Geographic Region* (North America, Europe, Asia, Africa, South America)
+
+### Declarative Constraints
+
+**Control-flow constraints:**
+
+- The process **must start** with `Gather Intelligence`.
+- `Gather Intelligence` must be **directly followed** by `Analyze Data` (Response).
+- `Analyze Data` must be **directly followed** by `Identify Threats` (Succession).
+- `Develop Strategies` can only occur **after** `Identify Threats` (Precedence).
+- `Develop Strategies` must be **immediately followed** by `Implement Countermeasures` (Chain Precedence).
+- `Implement Countermeasures` must be **immediately followed** by `Monitor Activity` (Chain Response).
+- After `Monitor Activity`, `Report Findings` can occur, but only **once per instance** of monitoring (Alternate Response).
+- `Review Intelligence` must occur **before** `Disseminate Information`, and `Disseminate Information` can only happen once after each review (Alternate Precedence).
+- The process **must end** with `Disseminate Information`.
+
+**Data-aware / Multi-perspective constraints:**
+
+- `Gather Intelligence` and `Analyze Data` **must both occur** in every process instance (Co-Existence).
+
+---
+
+**Summary in natural language:**
+
+The model represents an intelligence-driven threat response lifecycle. It begins with intelligence gathering from various sources, which must immediately be followed by data analysis. The process then follows a strict sequence: analysis leads to threat identification, which informs strategy development. Once strategies are developed, countermeasures must be implemented without delay, immediately triggering a monitoring phase. Monitoring is followed (possibly multiple times) by reporting findings. Before information can be officially disseminated, a review step is required. The entire process ends with the dissemination of intelligence products. Throughout the process, rich data attributes are captured — such as source reliability, confidence scores, threat levels, costs, and geographic scope — enabling a multi-perspective analysis of the intelligence operation.

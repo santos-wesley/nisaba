@@ -1,0 +1,77 @@
+#MP-Declare Model
+## Activities
+- **Submit Application**: The 'Submit Application' activity represents the submission of a flexible work arrangement application by an employee.
+- **Review Application**: The 'Review Application' activity involves evaluating the submitted application for completeness and eligibility.
+- **Approve Application**: The 'Approve Application' activity represents the formal approval of a flexible work arrangement application.
+- **Reject Application**: The 'Reject Application' activity represents the formal rejection of a flexible work arrangement application.
+- **Implement Arrangement**: The 'Implement Arrangement' activity involves putting the approved flexible work arrangement into effect.
+- **Monitor Arrangement**: The 'Monitor Arrangement' activity involves overseeing and tracking the ongoing flexible work arrangement.
+- **Adjust Arrangement**: The 'Adjust Arrangement' activity involves making modifications to the existing flexible work arrangement.
+- **Terminate Arrangement**: The 'Terminate Arrangement' activity represents the ending of a flexible work arrangement.
+
+## Attributes
+- **Arrangement Type: Remote Work, Flextime, Compressed Workweek, Job Sharing**: The attribute 'Arrangement Type: Remote Work, Flextime, Compressed Workweek, Job Sharing' specifies the types of flexible work arrangements available for selection.
+- **Application ID: integer between 1 and 1000**: The attribute 'Application ID: integer between 1 and 1000' represents the unique identification number assigned to each application.
+- **Application Status: Submitted, Reviewed, Approved, Rejected, Implemented, Terminated**: The attribute 'Application Status: Submitted, Reviewed, Approved, Rejected, Implemented, Terminated' tracks the current status of an application throughout its lifecycle.
+- **Hours Per Week: float between 10.0 and 40.0**: The attribute 'Hours Per Week: float between 10.0 and 40.0' represents the number of hours per week allocated to the flexible work arrangement.
+- **Review Score: integer between 1 and 5**: The attribute 'Review Score: integer between 1 and 5' represents the score assigned during the review of an application.
+
+## Binds
+- **bind Submit Application: Arrangement Type, Application ID**: The bind 'Submit Application: Arrangement Type, Application ID' specifies that the activity 'Submit Application' requires the attributes 'Arrangement Type' and 'Application ID'.
+- **bind Review Application: Application ID, Application Status, Review Score**: The bind 'Review Application: Application ID, Application Status, Review Score' links the 'Review Application' activity with the attributes 'Application ID', 'Application Status', and 'Review Score'.
+- **bind Approve Application: Application ID, Application Status**: The bind 'Approve Application: Application ID, Application Status' links the 'Approve Application' activity with the attributes 'Application ID' and 'Application Status'.
+- **bind Reject Application: Application ID, Application Status**: The bind 'Reject Application: Application ID, Application Status' links the 'Reject Application' activity with the attributes 'Application ID' and 'Application Status'.
+- **bind Implement Arrangement: Application ID, Application Status, Hours Per Week**: The bind 'Implement Arrangement: Application ID, Application Status, Hours Per Week' links the 'Implement Arrangement' activity with the attributes 'Application ID', 'Application Status', and 'Hours Per Week'.
+- **bind Monitor Arrangement: Application ID**: The bind 'Monitor Arrangement: Application ID' links the 'Monitor Arrangement' activity with the attribute 'Application ID'.
+- **bind Adjust Arrangement: Application ID, Hours Per Week**: The bind 'Adjust Arrangement: Application ID, Hours Per Week' links the 'Adjust Arrangement' activity with the attributes 'Application ID' and 'Hours Per Week'.
+- **bind Terminate Arrangement: Application ID, Application Status**: The bind 'Terminate Arrangement: Application ID, Application Status' links the 'Terminate Arrangement' activity with the attributes 'Application ID' and 'Application Status'.
+
+## Constraints
+- **Init[Submit Application] | |**: The 'Submit Application' must be the first activity to occur in the process.
+- **Response[Submit Application, Review Application] | | |**: If a 'Submit Application' activity occurs, then a 'Review Application' activity must eventually occur after the 'Submit Application' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Submit Application' can be pending at the same time, and a single 'Review Application' can fulfill the obligation for all preceding 'Submit Application'. If 'Submit Application' does not occur, the constraint imposes no obligation on the occurrence of 'Review Application'.
+- **Choice[Approve Application, Reject Application] | | |**: At least one of the activities 'Approve Application' or 'Reject Application' must occur in the process instance. This means that the process is compliant if 'Approve Application' event occurs, 'Reject Application' event occurs, or both occur. There is no restriction on the order or the number of times they occur. However, if neither 'Approve Application' nor 'Reject Application' occurs, the constraint is violated.
+- **Response[Approve Application, Implement Arrangement] | | |**: If an 'Approve Application' activity occurs, then an 'Implement Arrangement' activity must eventually occur after the 'Approve Application' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Approve Application' can be pending at the same time, and a single 'Implement Arrangement' can fulfill the obligation for all preceding 'Approve Application'. If 'Approve Application' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Arrangement'.
+- **Succession[Implement Arrangement, Monitor Arrangement] | | |**: An 'Implement Arrangement' activity must be followed by a 'Monitor Arrangement' activity at some point later in the same process instance. Conversely, a 'Monitor Arrangement' event can occur only if an 'Implement Arrangement' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Implement Arrangement' impose obligations for future 'Monitor Arrangement', and 'Monitor Arrangement' cannot occur without prior 'Implement Arrangement'. Multiple 'Implement Arrangement' and 'Monitor Arrangement' are allowed, with each 'Implement Arrangement' eventually leading to a 'Monitor Arrangement' and each 'Monitor Arrangement' being justified by a preceding 'Implement Arrangement'.
+- **Response[Monitor Arrangement, Adjust Arrangement] | | |**: If a 'Monitor Arrangement' activity occurs, then an 'Adjust Arrangement' activity must eventually occur after the 'Monitor Arrangement' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Monitor Arrangement' can be pending at the same time, and a single 'Adjust Arrangement' can fulfill the obligation for all preceding 'Monitor Arrangement'. If 'Monitor Arrangement' does not occur, the constraint imposes no obligation on the occurrence of 'Adjust Arrangement'.
+- **Not Response[Reject Application, Terminate Arrangement] | |A.Application Status is Rejected**: The 'Reject Application' activity must not be followed by a 'Terminate Arrangement' activity at any point later in the same process instance, when the activation condition 'A.Application Status is Rejected' is met. This means that once a 'Reject Application' event occurs with 'Application Status' set to 'Rejected', 'Terminate Arrangement' cannot occur afterward. However, 'Terminate Arrangement' events occurring before the 'Reject Application' are permitted. The constraint ensures that after the occurrence of 'Reject Application' with status 'Rejected', the process does not allow any further occurrences of 'Terminate Arrangement'.
+- **Response[Approve Application, Terminate Arrangement] | |A.Application Status is Approved**: If an 'Approve Application' activity occurs with 'Application Status' set to 'Approved', then a 'Terminate Arrangement' activity must eventually occur after the 'Approve Application' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Approve Application' can be pending at the same time, and a single 'Terminate Arrangement' can fulfill the obligation for all preceding 'Approve Application'. If 'Approve Application' does not occur, the constraint imposes no obligation on the occurrence of 'Terminate Arrangement'.
+- **Precedence[Approve Application, Review Application] | | |**: The 'Review Application' activity is permitted to occur only if an 'Approve Application' activity has occurred before it within the same process instance. 'Review Application' events that occur without any prior 'Approve Application' are violations of the constraint. Multiple 'Approve Application' can occur, and any number of events (including other 'Review Application') can happen between an 'Approve Application' and a subsequent 'Review Application'. This ensures that certain actions cannot proceed without the necessary prerequisites being met first.
+- **Not Co-Existence[Submit Application, Review Application] | | |**: The 'Submit Application' activity and the 'Review Application' activity cannot both occur within the same process instance. This means that if 'Submit Application' event occurs one or more times, 'Review Application' must not occur at all in that process instance, and vice-versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between 'Submit Application' and 'Review Application', allowing for different process variants based on which event (if any) occurs.
+
+
+## Interleaved Description
+The MP-Declare process model for the flexible work arrangement process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Submit Application,' which involves an employee submitting a flexible work arrangement application with the 'Arrangement Type' and 'Application ID' attributes.
+
+### **Frequency Constraints**
+
+#### **Choice Constraint**
+At least one of the activities 'Approve Application' or 'Reject Application' must occur in the process. This introduces alternative paths, allowing flexibility by permitting either approval or rejection to take place within the process.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Review Application' is permitted to occur only if an 'Approve Application' activity has occurred before it. This sets up an initial context where approval must precede review, guiding the logical sequence within the model.
+2. The activity 'Monitor Arrangement' is permitted to occur only if an 'Implement Arrangement' activity has occurred before it. This establishes a dependency where monitoring can only begin after implementation, ensuring a logical progression.
+
+#### **Response Constraints**
+1. If a 'Submit Application' activity occurs, then a 'Review Application' activity must eventually occur after it. This defines an ordered flow where submission is followed by review, ensuring a cohesive temporal structure in the process.
+2. If an 'Approve Application' activity occurs, then an 'Implement Arrangement' activity must eventually occur after it. This ensures that approval leads to implementation, maintaining a clear sequence of events.
+3. If a 'Monitor Arrangement' activity occurs, then an 'Adjust Arrangement' activity must eventually occur after it. This establishes a follow-up relationship where monitoring prompts adjustments, enhancing the process's responsiveness.
+4. If an 'Approve Application' activity occurs with 'Application Status' set to 'Approved', then a 'Terminate Arrangement' activity must eventually occur after it. This creates a conditional response where approved applications ultimately lead to termination, ensuring the arrangement lifecycle is completed.
+
+#### **Succession Constraints**
+An 'Implement Arrangement' activity must be followed by a 'Monitor Arrangement' activity at some point later, and conversely, a 'Monitor Arrangement' event can occur only if an 'Implement Arrangement' event has occurred before it. This establishes a causal link, ensuring each implementation logically leads to monitoring, creating a cohesive progression within the model.
+
+### **Exclusivity Constraints**
+
+#### **Not Co-Existence Constraints**
+The 'Submit Application' activity and the 'Review Application' activity cannot both occur within the same process instance. This sets exclusion rules, ensuring that these two activities do not occur together, thereby maintaining process integrity by preventing conflicting events.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Response Constraints**
+The 'Reject Application' activity must not be followed by a 'Terminate Arrangement' activity at any point later in the same process instance, when the activation condition 'A.Application Status is Rejected' is met. This prevents activities from following a specific sequence, ensuring that rejection does not lead to termination, thus maintaining the integrity of the model's intended progression.

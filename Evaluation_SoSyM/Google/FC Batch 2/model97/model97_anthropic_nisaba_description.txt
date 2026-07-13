@@ -1,0 +1,108 @@
+#MP-Declare Model
+## Activities
+- **Define Project Scope**: The 'Define Project Scope' activity represents the process of establishing the boundaries, objectives, and requirements of the project.
+- **Design Database Schema**: The 'Design Database Schema' activity involves creating the structural design of the database, including tables, relationships, and fields.
+- **Develop Frontend Interface**: The 'Develop Frontend Interface' activity includes building the user-facing interface of the application.
+- **Implement Backend Logic**: The 'Implement Backend Logic' activity involves coding the server-side logic and functionality of the application.
+- **Integrate Payment Gateway**: The 'Integrate Payment Gateway' activity represents the integration of a payment processing service into the application.
+- **Test System Functionality**: The 'Test System Functionality' activity involves verifying that the system operates correctly and meets requirements.
+- **Deploy Application to Server**: The 'Deploy Application to Server' activity represents the process of releasing the application onto a server environment.
+- **Monitor System Performance**: The 'Monitor System Performance' activity includes tracking and evaluating the operational performance of the deployed system.
+- **Gather User Feedback**: The 'Gather User Feedback' activity involves collecting feedback from users regarding their experience with the system.
+- **Update System Based on Feedback**: The 'Update System Based on Feedback' activity represents making changes or improvements to the system based on collected user feedback.
+
+## Attributes
+- **Project Status: Initiated, In Progress, Completed, Delayed**: The attribute 'Project Status: Initiated, In Progress, Completed, Delayed' specifies the current state of the project.
+- **Development Time: Integer between 10 and 2000**: The attribute 'Development Time: Integer between 10 and 2000' represents the amount of time, in units, spent on development.
+- **Budget Allocated: Float between 1000.0 and 500000.0**: The attribute 'Budget Allocated: Float between 1000.0 and 500000.0' represents the amount of budget assigned for a given activity.
+- **Payment Method: Credit Card, PayPal, Stripe**: The attribute 'Payment Method: Credit Card, PayPal, Stripe' specifies the method used to process payments.
+- **Number of Users: Integer between 0 and 1000000**: The attribute 'Number of Users: Integer between 0 and 1000000' represents the count of users interacting with the system.
+- **Transaction Volume: Float between 0.0 and 10000000.0**: The attribute 'Transaction Volume: Float between 0.0 and 10000000.0' represents the total volume of transactions processed.
+- **Deployment Environment: Development, Staging, Production**: The attribute 'Deployment Environment: Development, Staging, Production' specifies the environment in which the application is deployed.
+- **Number of Bugs: Integer between 0 and 1000**: The attribute 'Number of Bugs: Integer between 0 and 1000' represents the count of bugs identified in the system.
+- **User Satisfaction: Float between 1.0 and 5.0**: The attribute 'User Satisfaction: Float between 1.0 and 5.0' represents the level of satisfaction reported by users.
+- **Feedback Type: Bug Report, Feature Request, Improvement Suggestion**: The attribute 'Feedback Type: Bug Report, Feature Request, Improvement Suggestion' specifies the category of feedback provided by users.
+
+## Binds
+- **bind Define Project Scope: Project Status**: The bind 'Define Project Scope: Project Status' specifies that the activity 'Define Project Scope' requires the attribute 'Project Status'.
+- **bind Design Database Schema: Development Time**: The bind 'Design Database Schema: Development Time' specifies that the activity 'Design Database Schema' requires the attribute 'Development Time'.
+- **bind Develop Frontend Interface: Budget Allocated**: The bind 'Develop Frontend Interface: Budget Allocated' specifies that the activity 'Develop Frontend Interface' requires the attribute 'Budget Allocated'.
+- **bind Implement Backend Logic: Payment Method**: The bind 'Implement Backend Logic: Payment Method' specifies that the activity 'Implement Backend Logic' requires the attribute 'Payment Method'.
+- **bind Integrate Payment Gateway: Number of Users**: The bind 'Integrate Payment Gateway: Number of Users' specifies that the activity 'Integrate Payment Gateway' requires the attribute 'Number of Users'.
+- **bind Test System Functionality: Transaction Volume**: The bind 'Test System Functionality: Transaction Volume' specifies that the activity 'Test System Functionality' requires the attribute 'Transaction Volume'.
+- **bind Deploy Application to Server: Deployment Environment**: The bind 'Deploy Application to Server: Deployment Environment' specifies that the activity 'Deploy Application to Server' requires the attribute 'Deployment Environment'.
+- **bind Monitor System Performance: Number of Bugs**: The bind 'Monitor System Performance: Number of Bugs' specifies that the activity 'Monitor System Performance' requires the attribute 'Number of Bugs'.
+- **bind Gather User Feedback: User Satisfaction**: The bind 'Gather User Feedback: User Satisfaction' specifies that the activity 'Gather User Feedback' requires the attribute 'User Satisfaction'.
+- **bind Update System Based on Feedback: Feedback Type**: The bind 'Update System Based on Feedback: Feedback Type' specifies that the activity 'Update System Based on Feedback' requires the attribute 'Feedback Type'.
+
+## Constraints
+- **Init[Define Project Scope] | |**: The 'Define Project Scope' must be the first activity to occur in the process.
+- **Precedence[Develop Frontend Interface, Design Database Schema] | | |**: The 'Design Database Schema' activity is permitted to occur only if a 'Develop Frontend Interface' activity has occurred before it within the same process instance.
+- **Response[Integrate Payment Gateway, Implement Backend Logic] | | |**: If an 'Integrate Payment Gateway' activity occurs, then an 'Implement Backend Logic' activity must eventually occur after the 'Integrate Payment Gateway' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Integrate Payment Gateway' can be pending at the same time, and a single 'Implement Backend Logic' can fulfill the obligation for all preceding 'Integrate Payment Gateway'. If 'Integrate Payment Gateway' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Backend Logic'.
+- **Co-Existence[Test System Functionality, Deploy Application to Server] | | |**: If 'Test System Functionality' activity occurs, then 'Deploy Application to Server' must also occur in the same process instance, and vice-versa.
+- **Succession[Deploy Application to Server, Monitor System Performance] | | |**: A 'Deploy Application to Server' activity must be followed by a 'Monitor System Performance' activity at some point later in the same process instance. Conversely, a 'Monitor System Performance' event can occur only if a 'Deploy Application to Server' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Deploy Application to Server' impose obligations for future 'Monitor System Performance', and 'Monitor System Performance' cannot occur without prior 'Deploy Application to Server'. Multiple 'Deploy Application to Server' and 'Monitor System Performance' are allowed, with each 'Deploy Application to Server' eventually leading to a 'Monitor System Performance' and each 'Monitor System Performance' being justified by a preceding 'Deploy Application to Server'.
+- **Not Precedence[Define Project Scope, Gather User Feedback] | | |**: A 'Gather User Feedback' activity cannot be preceded by a 'Define Project Scope' activity within the same process instance. If a 'Define Project Scope' event has occurred at any point before a 'Gather User Feedback' event, then 'Gather User Feedback' is disallowed. Multiple instances of 'Gather User Feedback' and 'Define Project Scope' can occur, but all instances of 'Gather User Feedback' must occur before any instance of 'Define Project Scope'.
+- **Not Response[Define Project Scope, Update System Based on Feedback] | | |**: The 'Define Project Scope' activity must not be followed by an 'Update System Based on Feedback' activity at any point later in the same process instance. This means that once a 'Define Project Scope' event occurs, 'Update System Based on Feedback' cannot occur afterward. However, 'Update System Based on Feedback' events occurring before the 'Define Project Scope' are permitted. The constraint ensures that after the occurrence of 'Define Project Scope', the process does not allow any further occurrences of 'Update System Based on Feedback'.
+- **Choice[Design Database Schema, Develop Frontend Interface] | | |**: At least one of the activities 'Design Database Schema' or 'Develop Frontend Interface' must occur in the process instance. This means that the process is compliant if 'Design Database Schema' event occurs, 'Develop Frontend Interface' event occurs, or both occur. There is no restriction on the order or the number of times they occur. However, if neither 'Design Database Schema' nor 'Develop Frontend Interface' occurs, the constraint is violated.
+- **Existence[Update System Based on Feedback] | |**: The 'Update System Based on Feedback' activity must occur at least once in the process.
+- **Absence5[Test System Functionality] | |**: The 'Test System Functionality' must not occur 5 times in the process.
+- **Response[Define Project Scope, Design Database Schema] |A.Project Status is Delayed |T.Development Time > 1000 |**: If a 'Define Project Scope' activity occurs with the attribute condition 'A.Project Status is Delayed', then a 'Design Database Schema' activity must eventually occur after the 'Define Project Scope' event at some point in the same process instance, satisfying the correlation condition 'T.Development Time > 1000'. There is no requirement on how soon or what events may occur in between. Multiple 'Define Project Scope' can be pending at the same time, and a single 'Design Database Schema' can fulfill the obligation for all preceding 'Define Project Scope'. If 'Define Project Scope' does not occur, or occurs without satisfying the activation condition, the constraint imposes no obligation on the occurrence of 'Design Database Schema'.
+- **Response[Implement Backend Logic, Integrate Payment Gateway] |A.Payment Method is Credit Card |T.Number of Users > 1000 |0,1,h**: If an 'Implement Backend Logic' activity occurs with the attribute condition 'A.Payment Method is Credit Card', then an 'Integrate Payment Gateway' activity must eventually occur after the 'Implement Backend Logic' event, within a time frame of between 0 and 1 hour, satisfying the correlation condition 'T.Number of Users > 1000'. Multiple 'Implement Backend Logic' can be pending at the same time, and a single 'Integrate Payment Gateway' can fulfill the obligation for all preceding 'Implement Backend Logic'. If 'Implement Backend Logic' does not occur, or occurs without satisfying the activation condition, the constraint imposes no obligation on the occurrence of 'Integrate Payment Gateway'.
+- **Response[Deploy Application to Server, Monitor System Performance] |A.Deployment Environment is Production |T.Number of Bugs < 10 |0,24,h**: If a 'Deploy Application to Server' activity occurs with the attribute condition 'A.Deployment Environment is Production', then a 'Monitor System Performance' activity must eventually occur after the 'Deploy Application to Server' event, within a time frame of between 0 and 24 hours, satisfying the correlation condition 'T.Number of Bugs < 10'. Multiple 'Deploy Application to Server' can be pending at the same time, and a single 'Monitor System Performance' can fulfill the obligation for all preceding 'Deploy Application to Server'. If 'Deploy Application to Server' does not occur, or occurs without satisfying the activation condition, the constraint imposes no obligation on the occurrence of 'Monitor System Performance'.
+- **Response[Gather User Feedback, Update System Based on Feedback] |A.User Satisfaction < 3 |T.Feedback Type is Bug Report |0,1,d**: If a 'Gather User Feedback' activity occurs with the attribute condition 'A.User Satisfaction < 3', then an 'Update System Based on Feedback' activity must eventually occur after the 'Gather User Feedback' event, within a time frame of between 0 and 1 day, satisfying the correlation condition 'T.Feedback Type is Bug Report'. Multiple 'Gather User Feedback' can be pending at the same time, and a single 'Update System Based on Feedback' can fulfill the obligation for all preceding 'Gather User Feedback'. If 'Gather User Feedback' does not occur, or occurs without satisfying the activation condition, the constraint imposes no obligation on the occurrence of 'Update System Based on Feedback'.
+- **Response[Test System Functionality, Integrate Payment Gateway] |A.Transaction Volume > 1000000 |T.Number of Users > 10000 |0,7,d**: If a 'Test System Functionality' activity occurs with the attribute condition 'A.Transaction Volume > 1000000', then an 'Integrate Payment Gateway' activity must eventually occur after the 'Test System Functionality' event, within a time frame of between 0 and 7 days, satisfying the correlation condition 'T.Number of Users > 10000'. Multiple 'Test System Functionality' can be pending at the same time, and a single 'Integrate Payment Gateway' can fulfill the obligation for all preceding 'Test System Functionality'. If 'Test System Functionality' does not occur, or occurs without satisfying the activation condition, the constraint imposes no obligation on the occurrence of 'Integrate Payment Gateway'.
+
+
+## Interleaved Description
+The MP-Declare process model for the software development process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Define Project Scope,' which establishes the boundaries, objectives, and requirements of the project, bound to the 'Project Status' attribute. This foundational step sets the stage for all subsequent development activities, providing the essential background against which the entire process unfolds.
+
+### **Frequency Constraints**
+
+#### **Elaboration (Existence Constraint)**
+The 'Update System Based on Feedback' activity must occur at least once in the process. This requirement elaborates on the importance of responsiveness within the system's lifecycle, ensuring that user-driven improvements are not merely optional but a guaranteed component of the development cycle, adding depth to the iterative nature of the process.
+
+#### **Contrast (Absence Constraint)**
+In contrast to activities that are encouraged to repeat, the 'Test System Functionality' activity must not occur 5 times in the process. This exclusion reinforces process integrity by capping excessive repetition, highlighting a boundary that distinguishes acceptable testing cycles from redundant or inefficient ones.
+
+### **Dependency Constraints**
+
+#### **Cause-Effect (Response as Dependency)**
+The occurrence of 'Integrate Payment Gateway' necessitates that 'Implement Backend Logic' eventually takes place afterward. This dependency establishes a clear cause-and-effect relationship: once payment integration begins, the backend logic must follow to support it, ensuring the technical foundation aligns with the payment functionality.
+
+### **Flexible Ordering Constraints**
+
+#### **Background (Precedence Constraint)**
+Setting up the necessary context for structural development, the activity 'Design Database Schema' is permitted to occur only if a 'Develop Frontend Interface' activity has occurred before it. This ordering establishes the groundwork upon which the schema design logically depends, guiding the sequence of the model.
+
+#### **Sequence (Response Constraints)**
+1. Consequently, if 'Define Project Scope' occurs with the condition 'Project Status is Delayed,' then 'Design Database Schema' must eventually follow, satisfying the correlation condition that 'Development Time > 1000.' This sequential flow ensures that delays in scoping are compensated by a thorough, extended schema design effort.
+2. Furthermore, when 'Implement Backend Logic' occurs with the condition 'Payment Method is Credit Card,' an 'Integrate Payment Gateway' activity must follow within a window of 0 to 1 hour, satisfying 'Number of Users > 1000.' This tight temporal sequence ensures that credit card processing capabilities are rapidly matched with payment gateway integration.
+3. Similarly, when 'Deploy Application to Server' occurs under the condition 'Deployment Environment is Production,' a 'Monitor System Performance' activity must follow within 0 to 24 hours, satisfying 'Number of Bugs < 10.' This ensures that production deployments are swiftly followed by performance oversight.
+4. Additionally, if 'Gather User Feedback' occurs with 'User Satisfaction < 3,' then 'Update System Based on Feedback' must occur within 0 to 1 day, satisfying 'Feedback Type is Bug Report.' This sequence guarantees that dissatisfaction expressed through feedback is addressed promptly.
+5. Finally, when 'Test System Functionality' occurs with 'Transaction Volume > 1000000,' an 'Integrate Payment Gateway' activity must follow within 0 to 7 days, satisfying 'Number of Users > 10000.' This sequence ties high-volume testing outcomes to necessary payment infrastructure adjustments.
+
+#### **Cause-Effect (Succession Constraint)**
+Establishing a firm causal progression, a 'Deploy Application to Server' activity must eventually be followed by a 'Monitor System Performance' activity, and conversely, 'Monitor System Performance' cannot occur without a prior 'Deploy Application to Server.' This bidirectional linkage ensures that deployment and monitoring are inseparably and logically connected, forming a cohesive operational cycle within the model.
+
+### **Mutual Dependency Constraints**
+
+#### **Conjunction (Co-Existence Constraint)**
+The activities 'Test System Functionality' and 'Deploy Application to Server' are bound in mutual dependency: if one occurs, the other must also occur within the same process instance. This conjunction ensures that testing and deployment are treated as inseparable partners in verifying and releasing the system.
+
+### **Exclusivity Constraints**
+
+#### **Contrast (Choice Constraint)**
+Offering flexibility within the model, at least one of 'Design Database Schema' or 'Develop Frontend Interface' must occur, though neither is strictly mandated over the other. This contrast introduces alternative paths, allowing the process to adapt to different development priorities while still requiring foundational structural or interface work.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Contrast (Not Precedence Constraint)**
+In direct opposition to typical sequencing, a 'Gather User Feedback' activity cannot be preceded by a 'Define Project Scope' activity within the same process instance. This restriction preserves the intended sequence by ensuring that feedback collection is not contingent upon or triggered by the initial scoping stage, thereby safeguarding the process's structural boundaries.
+
+#### **Contrast (Not Response Constraint)**
+Further reinforcing this exclusion, the 'Define Project Scope' activity must not be followed by an 'Update System Based on Feedback' activity at any later point in the process. While updates occurring before scoping are permitted, this contrast ensures that once scoping is finalized, the process does not loop back into feedback-driven revisions, maintaining the integrity of the model's forward progression.

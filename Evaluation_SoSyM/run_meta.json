@@ -1,0 +1,264 @@
+{
+  "providers": {
+    "anthropic": {
+      "gen": "anthropic/claude-sonnet-5",
+      "gp": {
+        "reasoning_effort": "none"
+      }
+    },
+    "xai": {
+      "gen": "x-ai/grok-4.20",
+      "gp": {
+        "reasoning_effort": "none"
+      }
+    },
+    "deepseek": {
+      "gen": "deepseek/deepseek-v4-flash",
+      "gp": {
+        "reasoning_effort": "none"
+      }
+    },
+    "zai": {
+      "gen": "z-ai/glm-5.2",
+      "gp": {
+        "reasoning_effort": "none"
+      }
+    }
+  },
+  "models": [
+    {
+      "id": "model132",
+      "provider": "Google",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model185",
+      "provider": "Google",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model28",
+      "provider": "Google",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model67",
+      "provider": "Google",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model78",
+      "provider": "Google",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model179",
+      "provider": "Google",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model248",
+      "provider": "Google",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model35",
+      "provider": "Google",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model57",
+      "provider": "Google",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model97",
+      "provider": "Google",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model102",
+      "provider": "Google",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model109",
+      "provider": "Google",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model148",
+      "provider": "Google",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model208",
+      "provider": "Google",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model70",
+      "provider": "Google",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model186",
+      "provider": "Google",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model191",
+      "provider": "Google",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model234",
+      "provider": "Google",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model53",
+      "provider": "Google",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model81",
+      "provider": "Google",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model107",
+      "provider": "OpenAI",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model15",
+      "provider": "OpenAI",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model200",
+      "provider": "OpenAI",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model212",
+      "provider": "OpenAI",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model5",
+      "provider": "OpenAI",
+      "batch": "FC Batch 1"
+    },
+    {
+      "id": "model144",
+      "provider": "OpenAI",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model16",
+      "provider": "OpenAI",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model207",
+      "provider": "OpenAI",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model221",
+      "provider": "OpenAI",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model9",
+      "provider": "OpenAI",
+      "batch": "FC Batch 2"
+    },
+    {
+      "id": "model130",
+      "provider": "OpenAI",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model138",
+      "provider": "OpenAI",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model192",
+      "provider": "OpenAI",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model38",
+      "provider": "OpenAI",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model44",
+      "provider": "OpenAI",
+      "batch": "SO Batch 1"
+    },
+    {
+      "id": "model10",
+      "provider": "OpenAI",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model172",
+      "provider": "OpenAI",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model202",
+      "provider": "OpenAI",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model205",
+      "provider": "OpenAI",
+      "batch": "SO Batch 2"
+    },
+    {
+      "id": "model247",
+      "provider": "OpenAI",
+      "batch": "SO Batch 2"
+    }
+  ],
+  "usage_by_model": {
+    "anthropic/claude-sonnet-5": {
+      "prompt": 729016,
+      "completion": 269307,
+      "calls": 200,
+      "cost_usd": 4.1511
+    },
+    "deepseek/deepseek-v4-flash": {
+      "prompt": 456457,
+      "completion": 148313,
+      "calls": 205,
+      "cost_usd": 0.0633
+    },
+    "google/gemini-3-flash-preview": {
+      "prompt": 6830,
+      "completion": 1875,
+      "calls": 1,
+      "cost_usd": 0.0
+    },
+    "z-ai/glm-5.2": {
+      "prompt": 460333,
+      "completion": 210253,
+      "calls": 200,
+      "cost_usd": 0.4395
+    },
+    "x-ai/grok-4.20": {
+      "prompt": 463970,
+      "completion": 156055,
+      "calls": 200,
+      "cost_usd": 0.9701
+    }
+  },
+  "est_cost_usd": 5.624,
+  "seconds": 433.7
+}

@@ -1,0 +1,47 @@
+# Process Description: Employee Request Management System
+
+This process model describes the lifecycle of an employee request (such as remote work or flexible hours) from submission through approval/rejection, implementation, and follow-up monitoring.
+
+## Activities and Their Data
+
+The process consists of ten activities, each carrying specific data attributes:
+
+- **Submit Request**: Captures the Request ID, Employee Name, and Request Type (Remote Work or Flexible Hours)
+- **Review Request**: Records the Request ID and the reviewing Manager ID
+- **Approve Request**: Documents the Request ID, Manager ID, and Decision (set to Approved)
+- **Reject Request**: Documents the Request ID, Manager ID, and Decision (set to Rejected)
+- **Setup Remote Access**: Tracks Request ID, Access Status, and Manager ID
+- **Update Payroll**: Records Request ID and Payroll Status (Updated or Pending)
+- **Notify Employee**: Captures Request ID and Notification Status (Sent or Pending)
+- **Monitor Performance**: Logs Manager ID and Performance Rating (Excellent, Good, Average, Poor)
+- **Revoke Access**: Tracks Request ID and Access Status
+- **Complete Survey**: Records Request ID and Survey Score (0.0 to 10.0)
+
+## Process Flow and Control Rules
+
+**Starting the Process**
+Every process instance must begin with the **Submit Request** activity.
+
+**Request Rejection is Forbidden**
+Interestingly, although a "Reject Request" activity exists, the model specifies that it can **never occur** in the process. This suggests that, in practice, all requests must eventually be approved, or the rejection path is handled outside this model's scope.
+
+**Review Sequencing**
+Whenever a request is submitted, it must eventually be followed by a **Review Request** activity within 24 hours. Additionally, the review must be immediately preceded by a submission — meaning reviews cannot happen without a directly prior submission action.
+
+**Approval or Rejection (Exclusive Choice)**
+When a decision point is reached, the process must choose *either* **Approve Request** *or* **Reject Request**, but not both, for a given request.
+
+**Access Setup Before Approval**
+The **Setup Remote Access** activity must always be preceded by an **Approve Request** activity, meaning remote access can only be arranged once the request has been officially approved.
+
+**Approval Leads to Notification**
+Every **Approve Request** must be immediately and eventually followed by exactly one **Notify Employee** activity, establishing a direct chain between approval and notification (no other activities can occur between them).
+
+**Performance Monitoring Alternates with Payroll Updates**
+The **Monitor Performance** and **Update Payroll** activities must alternate with one another — each performance monitoring event must be followed by a payroll update before another monitoring event occurs (and vice versa), and this must happen within a 48-hour window.
+
+**Access Setup and Revocation are Mutually Exclusive**
+The **Setup Remote Access** and **Revoke Access** activities cannot both occur within the same process instance — once access setup is chosen as a path, revocation cannot happen, and vice versa.
+
+**Survey Follows Notification**
+Each **Complete Survey** activity must be immediately followed by a **Notify Employee** activity within a 72-hour window, creating a tight temporal and sequential link between employee feedback and subsequent notification.

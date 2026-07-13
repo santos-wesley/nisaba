@@ -1,0 +1,48 @@
+activity Identify Effect Opportunity
+activity Perform Due Diligence
+activity Structure Deal
+activity Secure Funding
+activity Negotiate Terms
+activity Finalize Agreement
+activity Execute Investment
+activity Track Progress
+activity Measure Effect
+activity Document Effect
+activity Exit Investment
+activity Distribute Returns
+activity Assess Efficiency
+activity Collect Response
+activity Scheme Next Investment
+bind Identify Effect Opportunity: Opportunity Identifier
+bind Perform Due Diligence: Opportunity Identifier, Hazard Degree
+bind Secure Funding: Investor Identifier, Investment Amount
+bind Measure Effect: Effect Metric
+bind Distribute Returns: Expected ROI, Investor Identifier
+bind Collect Response: Stakeholder Response
+bind Exit Investment: Exit Strategy
+bind Assess Efficiency: Efficiency Rating
+Opportunity Identifier: integer between 1 and 99999
+Expected ROI: float between 0 and 100
+Hazard Degree: Reduced, Moderate, Elevated
+Investor Identifier: integer between 1 and 9999
+Investment Type: Equity, Debt, Grant
+Investment Amount: float between 1000 and 10000000
+Effect Metric: Societal, Ecological, Economic
+Stakeholder Response: Favorable, Impartial, Unfavorable
+Exit Strategy: Acquisition, Public Offering, Liquidation
+Efficiency Rating: integer between 1 and 10
+Init[Identify Effect Opportunity] | |
+Response[Identify Effect Opportunity, Perform Due Diligence] | | |
+Absence[Negotiate Terms] | |
+Response[Negotiate Terms, Finalize Agreement] | | |
+Precedence[Secure Funding, Perform Due Diligence] | | |
+Chain Succession[Finalize Agreement, Execute Investment] | | |
+Existence[Track Progress] | |
+Response[Track Progress, Measure Effect] | | |
+Precedence[Measure Effect, Document Effect] | | |0,7,d
+Response[Document Effect, Exit Investment] | | |
+Chain Succession[Exit Investment, Distribute Returns] | | |
+Response[Distribute Returns, Assess Efficiency] | | |
+End[Collect Response] | |
+Response[Collect Response, Scheme Next Investment] | | |
+Not Co-Existence[Finalize Agreement, Secure Funding] | | |

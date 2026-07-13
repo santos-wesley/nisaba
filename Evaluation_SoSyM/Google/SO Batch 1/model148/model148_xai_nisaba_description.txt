@@ -1,0 +1,80 @@
+#MP-Declare Model
+## Activities
+- **Conduct Risk Assessment**: The 'Conduct Risk Assessment' activity represents the initial evaluation of potential risks in the compliance process.
+- **Develop Compliance Plan**: The 'Develop Compliance Plan' activity involves creating a structured plan to address identified risks and ensure regulatory adherence.
+- **Implement Controls**: The 'Implement Controls' activity focuses on putting in place specific measures to mitigate risks as outlined in the compliance plan.
+- **Monitor Compliance**: The 'Monitor Compliance' activity entails ongoing observation and assessment to ensure that controls are effective and the organization remains compliant.
+- **Report Violations**: The 'Report Violations' activity includes documenting and communicating any instances of non-compliance or breaches identified during monitoring.
+- **Investigate Violations**: The 'Investigate Violations' activity involves a thorough examination of reported violations to determine their causes and impacts.
+- **Take Corrective Action**: The 'Take Corrective Action' activity consists of implementing remedies to address and resolve identified violations.
+- **Review Compliance Plan**: The 'Review Compliance Plan' activity is the process of evaluating the existing compliance plan for effectiveness and necessary updates.
+- **Approve Compliance Plan**: The 'Approve Compliance Plan' activity requires formal authorization of the compliance plan by relevant authorities.
+- **Train Employees**: The 'Train Employees' activity involves educating staff on compliance policies, procedures, and their responsibilities.
+
+## Attributes
+- **Risk Level: Low, Medium, High**: The attribute 'Risk Level: Low, Medium, High' indicates the severity categorization of identified risks in the compliance assessment.
+- **Compliance Status: Compliant, Non-Compliant, Pending**: The attribute 'Compliance Status: Compliant, Non-Compliant, Pending' reflects the current state of adherence to regulatory requirements.
+- **Violation Severity: integer between 1 and 5**: The attribute 'Violation Severity: integer between 1 and 5' quantifies the seriousness of a compliance violation on a scale from 1 to 5.
+- **Financial Impact: float between 0.0 and 1000000.0**: The attribute 'Financial Impact: float between 0.0 and 1000000.0' measures the monetary consequences resulting from a compliance violation.
+- **Control Type: Preventative, Detective, Corrective**: The attribute 'Control Type: Preventative, Detective, Corrective' classifies the type of control measures implemented to manage risks.
+- **Training Hours: integer between 0 and 40**: The attribute 'Training Hours: integer between 0 and 40' specifies the duration of compliance training provided to employees, ranging from 0 to 40 hours.
+- **Reporting Channel: Email, Phone, Online Portal**: The attribute 'Reporting Channel: Email, Phone, Online Portal' denotes the method used to report compliance violations.
+- **Assessment Score: float between 0.0 and 100.0**: The attribute 'Assessment Score: float between 0.0 and 100.0' represents the numerical evaluation score from the risk assessment, on a scale from 0.0 to 100.0.
+- **Plan Status: Draft, Approved, Implemented**: The attribute 'Plan Status: Draft, Approved, Implemented' tracks the progress stage of the compliance plan.
+- **Number of Violations: integer between 0 and 100**: The attribute 'Number of Violations: integer between 0 and 100' counts the instances of compliance breaches, ranging from 0 to 100.
+
+## Binds
+- **bind Conduct Risk Assessment: Risk Level, Assessment Score**: The bind 'Conduct Risk Assessment: Risk Level, Assessment Score' specifies that the activity 'Conduct Risk Assessment' requires the attributes 'Risk Level' and 'Assessment Score'.
+- **bind Develop Compliance Plan: Plan Status**: The bind 'Develop Compliance Plan: Plan Status' links the 'Develop Compliance Plan' activity with the attribute 'Plan Status'.
+- **bind Implement Controls: Control Type**: The bind 'Implement Controls: Control Type' links the 'Implement Controls' activity with the attribute 'Control Type'.
+- **bind Monitor Compliance: Compliance Status**: The bind 'Monitor Compliance: Compliance Status' links the 'Monitor Compliance' activity with the attribute 'Compliance Status'.
+- **bind Report Violations: Number of Violations, Reporting Channel**: The bind 'Report Violations: Number of Violations, Reporting Channel' links the 'Report Violations' activity with the attributes 'Number of Violations' and 'Reporting Channel'.
+- **bind Investigate Violations: Violation Severity, Financial Impact**: The bind 'Investigate Violations: Violation Severity, Financial Impact' links the 'Investigate Violations' activity with the attributes 'Violation Severity' and 'Financial Impact'.
+- **bind Take Corrective Action: Compliance Status**: The bind 'Take Corrective Action: Compliance Status' links the 'Take Corrective Action' activity with the attribute 'Compliance Status'.
+- **bind Review Compliance Plan: Plan Status**: The bind 'Review Compliance Plan: Plan Status' links the 'Review Compliance Plan' activity with the attribute 'Plan Status'.
+- **bind Approve Compliance Plan: Plan Status**: The bind 'Approve Compliance Plan: Plan Status' links the 'Approve Compliance Plan' activity with the attribute 'Plan Status'.
+- **bind Train Employees: Training Hours**: The bind 'Train Employees: Training Hours' links the 'Train Employees' activity with the attribute 'Training Hours'.
+
+## Constraints
+- **Init[Conduct Risk Assessment] | |**: The 'Conduct Risk Assessment' must be the first activity to occur in the process.
+- **Response[Develop Compliance Plan, Approve Compliance Plan] | | |**: If a 'Develop Compliance Plan' activity occurs, then an 'Approve Compliance Plan' activity must eventually occur after the 'Develop Compliance Plan' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Develop Compliance Plan' can be pending at the same time, and a single 'Approve Compliance Plan' can fulfill the obligation for all preceding 'Develop Compliance Plan'. If 'Develop Compliance Plan' does not occur, the constraint imposes no obligation on the occurrence of 'Approve Compliance Plan'.
+- **Response[Report Violations, Investigate Violations] | | |**: If a 'Report Violations' activity occurs, then an 'Investigate Violations' activity must eventually occur after the 'Report Violations' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Report Violations' can be pending at the same time, and a single 'Investigate Violations' can fulfill the obligation for all preceding 'Report Violations'. If 'Report Violations' does not occur, the constraint imposes no obligation on the occurrence of 'Investigate Violations'.
+- **Response[Investigate Violations, Take Corrective Action] | | |**: If an 'Investigate Violations' activity occurs, then a 'Take Corrective Action' activity must eventually occur after the 'Investigate Violations' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Investigate Violations' can be pending at the same time, and a single 'Take Corrective Action' can fulfill the obligation for all preceding 'Investigate Violations'. If 'Investigate Violations' does not occur, the constraint imposes no obligation on the occurrence of 'Take Corrective Action'.
+- **Alternate Succession[Approve Compliance Plan, Review Compliance Plan] | | |0,365,d**: Each occurrence of an 'Approve Compliance Plan' activity must eventually be followed by a 'Review Compliance Plan' activity, and each occurrence of a 'Review Compliance Plan' must be preceded by 'Approve Compliance Plan', with no intermediate occurrences of 'Approve Compliance Plan' or 'Review Compliance Plan' between them. This constraint is activated when the time between 'Approve Compliance Plan' and 'Review Compliance Plan' is between 0 and 365 days.
+- **Existence[Train Employees] | |**: The 'Train Employees' activity must occur at least once in the process.
+- **Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d**: If a 'Conduct Risk Assessment' activity occurs, then an 'Implement Controls' activity must eventually occur after the 'Conduct Risk Assessment' event at some point in the same process instance, provided that the activation condition 'A.Risk Level is High' is met. There is no requirement on how soon or what events may occur in between. Multiple 'Conduct Risk Assessment' can be pending at the same time, and a single 'Implement Controls' can fulfill the obligation for all preceding 'Conduct Risk Assessment'. If 'Conduct Risk Assessment' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Controls'. This constraint is activated when the time between 'Conduct Risk Assessment' and 'Implement Controls' is between 0 and 30 days.
+- **Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d**: If a 'Monitor Compliance' activity occurs, then a 'Take Corrective Action' activity must eventually occur after the 'Monitor Compliance' event at some point in the same process instance, provided that the activation condition 'A.Compliance Status is Non-Compliant' is met. There is no requirement on how soon or what events may occur in between. Multiple 'Monitor Compliance' can be pending at the same time, and a single 'Take Corrective Action' can fulfill the obligation for all preceding 'Monitor Compliance'. If 'Monitor Compliance' does not occur, the constraint imposes no obligation on the occurrence of 'Take Corrective Action'. This constraint is activated when the time between 'Monitor Compliance' and 'Take Corrective Action' is between 0 and 7 days.
+- **Response[Report Violations, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d**: If a 'Report Violations' activity occurs, then a 'Review Compliance Plan' activity must eventually occur after the 'Report Violations' event at some point in the same process instance, provided that the activation condition 'A.Number of Violations > 5' is met. There is no requirement on how soon or what events may occur in between. Multiple 'Report Violations' can be pending at the same time, and a single 'Review Compliance Plan' can fulfill the obligation for all preceding 'Report Violations'. If 'Report Violations' does not occur, the constraint imposes no obligation on the occurrence of 'Review Compliance Plan'. This constraint is activated when the time between 'Report Violations' and 'Review Compliance Plan' is between 0 and 14 days.
+- **Response[Investigate Violations, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d**: If an 'Investigate Violations' activity occurs, then a 'Review Compliance Plan' activity must eventually occur after the 'Investigate Violations' event at some point in the same process instance, provided that the activation condition 'A.Financial Impact > 10000' is met. There is no requirement on how soon or what events may occur in between. Multiple 'Investigate Violations' can be pending at the same time, and a single 'Review Compliance Plan' can fulfill the obligation for all preceding 'Investigate Violations'. If 'Investigate Violations' does not occur, the constraint imposes no obligation on the occurrence of 'Review Compliance Plan'. This constraint is activated when the time between 'Investigate Violations' and 'Review Compliance Plan' is between 0 and 3 days.
+
+
+## Interleaved Description
+The MP-Declare process model for the compliance management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Conduct Risk Assessment,' which involves the initial evaluation of potential risks using the 'Risk Level' and 'Assessment Score' attributes. This establishes the foundational context for all subsequent compliance activities.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Train Employees' activity must occur at least once in the process. This ensures that staff education on compliance policies, procedures, and responsibilities takes place, adding depth and reinforcing organizational adherence throughout the compliance lifecycle.
+
+### **Flexible Ordering Constraints**
+
+#### **Response Constraints**
+1. If the 'Develop Compliance Plan' activity occurs, then the 'Approve Compliance Plan' activity must eventually occur after it. This defines an ordered flow where plan development is followed by formal authorization, ensuring a cohesive temporal structure.
+2. If the 'Report Violations' activity occurs, then the 'Investigate Violations' activity must eventually occur after it. This sequences the documentation of breaches with their subsequent thorough examination, maintaining procedural momentum.
+3. If the 'Investigate Violations' activity occurs, then the 'Take Corrective Action' activity must eventually occur after it. This establishes that every investigation leads to the implementation of remedies, creating a logical progression from analysis to resolution.
+4. If the 'Conduct Risk Assessment' activity occurs with the condition that 'Risk Level is High,' then the 'Implement Controls' activity must eventually occur after it within 0 to 30 days. This ensures that high-severity risks trigger the placement of preventative, detective, or corrective measures in a timely manner.
+5. If the 'Monitor Compliance' activity occurs with the condition that 'Compliance Status is Non-Compliant,' then the 'Take Corrective Action' activity must eventually occur after it within 0 to 7 days. This guarantees rapid remediation when ongoing observation identifies failures in control effectiveness.
+6. If the 'Report Violations' activity occurs with the condition that 'Number of Violations > 5,' then the 'Review Compliance Plan' activity must eventually occur after it within 0 to 14 days. This links excessive breaches to an evaluation of the existing plan for necessary updates.
+7. If the 'Investigate Violations' activity occurs with the condition that 'Financial Impact > 10000,' then the 'Review Compliance Plan' activity must eventually occur after it within 0 to 3 days. This ensures that significant monetary consequences prompt a prompt reassessment of the compliance strategy.
+
+#### **Succession Constraints**
+The 'Approve Compliance Plan' and 'Review Compliance Plan' activities are linked by an Alternate Succession constraint activated when the time between them is between 0 and 365 days. This establishes a causal link ensuring each approval is followed by a review and each review is preceded by an approval, with no intermediate occurrences of either activity, thereby creating a cohesive and balanced progression in plan management.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Succession Constraints**
+Each occurrence of an 'Approve Compliance Plan' activity must eventually be followed by a 'Review Compliance Plan' activity, and each 'Review Compliance Plan' must be preceded by an 'Approve Compliance Plan,' with no intermediate occurrences of either activity between them when the time window is 0 to 365 days. This enforces an ordered structure with unique activity pairings, promoting process coherence by preventing overlapping or unbalanced plan evaluations.

@@ -1,0 +1,30 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This process model describes a complete employee benefits management workflow, from initial request through potential appeals and ongoing evaluation. The process is centered around a **Benefit Request**, which is identified by a unique **Request ID** (an integer between 1 and 10,000) and includes a **Benefit Type** (such as Health Insurance, Retirement Plan, Paid Leave, or Education Assistance) and an **Employee ID** (between 1 and 5,000).
+
+**Process Start and Core Flow:**
+The process begins with the activity **Submit Benefit Request**. After submission, a **Review Benefit Request** activity must occur at least once (Existence constraint). Following the review, the request can either be **Approved** or **Rejected**, but only if the review previously set the **Request Status** to "Approved" or "Rejected" respectively (Precedence constraints, linked by matching Request ID). 
+
+**Notification and Follow-Up:**
+Whenever a request is approved or rejected, the system must eventually **Notify the Employee** (Response constraints). This notification is triggered only when the request status matches ("Approved" or "Rejected") and the **Employee ID** in the notification matches the employee who submitted the request. Notifications can occur up to 2 times, but must happen within a deadline (indicated by "d").
+
+**Approved Request Processing:**
+If a request is approved, two additional activities must follow within specific deadlines:
+- **Process Payment** must occur within 7 time units (Response constraint, matching Request ID).
+- **Update Employee Record** must occur within 5 time units (Response constraint, matching Employee ID).
+
+**Audit Requirement:**
+After a payment is processed, an **Audit Benefit Process** must be conducted within 30 time units (Response constraint, linking the Request ID from the payment to the Audit ID).
+
+**Appeal Process:**
+If an employee wishes to challenge a decision, they can **Submit Appeal** (with a new **Appeal Status** set to "Pending"). This triggers a **Review Appeal** activity within 5 time units (Response constraint, matching Request ID). After review, the appeal can be **Approved** or **Rejected**, and in either case, the employee must be notified via **Notify Appeal Decision** within 2 time units (Response constraints, matching Employee ID).
+
+**Ongoing Activities:**
+The model also requires that at least one **Conduct Benefit Orientation** and one **Evaluate Benefit Utilization** activity occur at some point during the process (Existence constraints). The **Utilization Rate** is a float between 0.0 and 100.0, and the **Orientation ID** is an integer between 1 and 500.
+
+**Process End:**
+The process formally ends with the **Notify Employee** activity (End constraint), meaning the workflow is considered complete once the employee has been notified of the outcome of their request.
+
+In summary, this model captures a structured, rule-driven benefits lifecycle with conditional branching, time-bound responses, data-aware constraints (matching IDs and statuses), and mandatory auditing and orientation activities.

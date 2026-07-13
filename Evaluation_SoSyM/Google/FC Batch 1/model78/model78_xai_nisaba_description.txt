@@ -1,0 +1,69 @@
+#MP-Declare Model
+## Activities
+- **Report Disease Outbreak**: The 'Report Disease Outbreak' activity represents the initial reporting of a potential disease outbreak from various sources.
+- **Verify Outbreak Report**: The 'Verify Outbreak Report' activity involves confirming the validity of the reported disease outbreak.
+- **Initiate Investigation**: The 'Initiate Investigation' activity starts the formal investigation into the verified disease outbreak.
+- **Collect Samples**: The 'Collect Samples' activity includes gathering biological or environmental samples for analysis.
+- **Analyze Samples**: The 'Analyze Samples' activity entails laboratory examination of the collected samples to identify the disease.
+- **Confirm Disease**: The 'Confirm Disease' activity officially confirms the presence and type of the disease based on analysis.
+- **Implement Control Measures**: The 'Implement Control Measures' activity involves putting in place strategies to control the spread of the disease.
+- **Inform Public**: The 'Inform Public' activity communicates information about the outbreak and control measures to the public.
+- **Monitor Disease Spread**: The 'Monitor Disease Spread' activity tracks the progression and impact of the disease over time.
+- **Declare End of Outbreak**: The 'Declare End of Outbreak' activity officially announces that the disease outbreak has been contained and ended.
+
+## Attributes
+- **Report Source: Hospital, Clinic, Public, Other**: The attribute 'Report Source: Hospital, Clinic, Public, Other' indicates the origin of the disease outbreak report, which can be from a hospital, clinic, the public, or other sources.
+- **Number of Cases: integer between 1 and 1000**: The attribute 'Number of Cases: integer between 1 and 1000' represents the count of reported cases in the outbreak, ranging from 1 to 1000.
+- **Investigation Result: Confirmed, False Alarm, Inconclusive**: The attribute 'Investigation Result: Confirmed, False Alarm, Inconclusive' specifies the outcome of the initial verification, which can be confirmed, a false alarm, or inconclusive.
+- **Disease Type: Influenza, COVID-19, Measles, Cholera**: The attribute 'Disease Type: Influenza, COVID-19, Measles, Cholera' identifies the specific disease involved in the outbreak from the listed options.
+- **Mortality Rate: float between 0.0 and 100.0**: The attribute 'Mortality Rate: float between 0.0 and 100.0' quantifies the percentage of deaths among confirmed cases, ranging from 0.0 to 100.0.
+- **Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing**: The attribute 'Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing' lists the types of measures implemented to control the outbreak.
+- **Days to Control: integer between 1 and 365**: The attribute 'Days to Control: integer between 1 and 365' indicates the number of days required to bring the outbreak under control, ranging from 1 to 365.
+- **Public Response: Cooperative, Anxious, Resistant**: The attribute 'Public Response: Cooperative, Anxious, Resistant' describes the public's reaction to the information and measures, which can be cooperative, anxious, or resistant.
+
+## Binds
+- **bind Report Disease Outbreak: Report Source, Number of Cases**: The bind 'Report Disease Outbreak: Report Source, Number of Cases' links the 'Report Disease Outbreak' activity with the attributes 'Report Source' and 'Number of Cases'.
+- **bind Verify Outbreak Report: Investigation Result**: The bind 'Verify Outbreak Report: Investigation Result' associates the 'Verify Outbreak Report' activity with the 'Investigation Result' attribute.
+- **bind Confirm Disease: Disease Type, Mortality Rate**: The bind 'Confirm Disease: Disease Type, Mortality Rate' connects the 'Confirm Disease' activity to the attributes 'Disease Type' and 'Mortality Rate'.
+- **bind Implement Control Measures: Control Measures, Days to Control**: The bind 'Implement Control Measures: Control Measures, Days to Control' ties the 'Implement Control Measures' activity to the 'Control Measures' and 'Days to Control' attributes.
+- **bind Inform Public: Public Response**: The bind 'Inform Public: Public Response' relates the 'Inform Public' activity with the 'Public Response' attribute.
+
+## Constraints
+- **Init[Report Disease Outbreak] | |**: The 'Report Disease Outbreak' must be the first activity to occur in the process.
+- **Response[Report Disease Outbreak, Verify Outbreak Report] | | |**: If a 'Report Disease Outbreak' activity occurs, then a 'Verify Outbreak Report' activity must eventually occur after the 'Report Disease Outbreak' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Report Disease Outbreak' can be pending at the same time, and a single 'Verify Outbreak Report' can fulfill the obligation for all preceding 'Report Disease Outbreak'. If 'Report Disease Outbreak' does not occur, the constraint imposes no obligation on the occurrence of 'Verify Outbreak Report'.
+- **Response[Verify Outbreak Report, Initiate Investigation] |A.Investigation Result is Confirmed | |**: If a 'Verify Outbreak Report' activity occurs, then an 'Initiate Investigation' activity must eventually occur after the 'Verify Outbreak Report' event at some point in the same process instance, but only when A.Investigation Result is Confirmed. There is no requirement on how soon or what events may occur in between. Multiple 'Verify Outbreak Report' can be pending at the same time, and a single 'Initiate Investigation' can fulfill the obligation for all preceding 'Verify Outbreak Report'. If 'Verify Outbreak Report' does not occur, the constraint imposes no obligation on the occurrence of 'Initiate Investigation'.
+- **Response[Collect Samples, Analyze Samples] | | |0,48,h**: If a 'Collect Samples' activity occurs, then an 'Analyze Samples' activity must eventually occur after the 'Collect Samples' event at some point in the same process instance within a time frame between 0 and 48 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Collect Samples' can be pending at the same time, and a single 'Analyze Samples' can fulfill the obligation for all preceding 'Collect Samples'. If 'Collect Samples' does not occur, the constraint imposes no obligation on the occurrence of 'Analyze Samples'.
+- **Precedence[Confirm Disease, Analyze Samples] | | |**: The 'Analyze Samples' activity is permitted to occur only if a 'Confirm Disease' activity has occurred before it within the same process instance.
+- **Succession[Confirm Disease, Implement Control Measures] | | |**: A 'Confirm Disease' activity must be followed by an 'Implement Control Measures' activity at some point later in the same process instance. Conversely, an 'Implement Control Measures' event can occur only if a 'Confirm Disease' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Confirm Disease' impose obligations for future 'Implement Control Measures', and 'Implement Control Measures' cannot occur without prior 'Confirm Disease'. Multiple 'Confirm Disease' and 'Implement Control Measures' are allowed, with each 'Confirm Disease' eventually leading to an 'Implement Control Measures' and each 'Implement Control Measures' being justified by a preceding 'Confirm Disease'.
+- **Response[Implement Control Measures, Inform Public] | | |**: If an 'Implement Control Measures' activity occurs, then an 'Inform Public' activity must eventually occur after the 'Implement Control Measures' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Implement Control Measures' can be pending at the same time, and a single 'Inform Public' can fulfill the obligation for all preceding 'Implement Control Measures'. If 'Implement Control Measures' does not occur, the constraint imposes no obligation on the occurrence of 'Inform Public'.
+- **Succession[Inform Public, Monitor Disease Spread] | | |**: An 'Inform Public' activity must be followed by a 'Monitor Disease Spread' activity at some point later in the same process instance. Conversely, a 'Monitor Disease Spread' event can occur only if an 'Inform Public' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Inform Public' impose obligations for future 'Monitor Disease Spread', and 'Monitor Disease Spread' cannot occur without prior 'Inform Public'. Multiple 'Inform Public' and 'Monitor Disease Spread' are allowed, with each 'Inform Public' eventually leading to a 'Monitor Disease Spread' and each 'Monitor Disease Spread' being justified by a preceding 'Inform Public'.
+- **End[Declare End of Outbreak] | |**: The 'Declare End of Outbreak' must be the last activity to occur in the process.
+- **Response[Report Disease Outbreak, Implement Control Measures] |A.Number of Cases > 500 | |0,24,h**: If a 'Report Disease Outbreak' activity occurs, then an 'Implement Control Measures' activity must eventually occur after the 'Report Disease Outbreak' event at some point in the same process instance within a time frame between 0 and 24 hours, but only when A.Number of Cases > 500. There is no requirement on how soon or what events may occur in between. Multiple 'Report Disease Outbreak' can be pending at the same time, and a single 'Implement Control Measures' can fulfill the obligation for all preceding 'Report Disease Outbreak'. If 'Report Disease Outbreak' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Control Measures'.
+
+
+## Interleaved Description
+The MP-Declare process model for the disease outbreak management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Report Disease Outbreak,' which involves the initial reporting of a potential disease outbreak from various sources such as Hospital, Clinic, Public, or Other, along with the Number of Cases (an integer between 1 and 1000). This activity must be the first to occur in the process, establishing the initial context for all subsequent outbreak management steps.
+#### **End Constraints**
+The process concludes with the activity 'Declare End of Outbreak,' which officially announces that the disease outbreak has been contained and ended. This activity must be the last to occur in the process, providing a coherent closure to the entire outbreak management lifecycle.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+The 'Analyze Samples' activity is permitted to occur only if a 'Confirm Disease' activity has occurred before it within the same process instance. This background establishes that laboratory examination of collected samples can only proceed once the disease has been officially confirmed based on prior analysis, ensuring logical sequencing and data integrity.
+
+#### **Response Constraints**
+1. If a 'Report Disease Outbreak' activity occurs, then a 'Verify Outbreak Report' activity must eventually occur after it. This sequenced flow ensures that every reported outbreak, regardless of source or case count, undergoes confirmation of validity, maintaining the process's momentum toward formal handling.
+2. If a 'Verify Outbreak Report' activity occurs with the condition that the Investigation Result is Confirmed, then an 'Initiate Investigation' activity must eventually occur after it. This ensures that only verified true outbreaks trigger formal investigation, guiding the logical temporal structure of the response.
+3. If a 'Collect Samples' activity occurs, then an 'Analyze Samples' activity must eventually occur after it within a time frame between 0 and 48 hours. This sequenced dependency guarantees timely laboratory examination following sample collection, preventing delays in disease identification.
+4. If an 'Implement Control Measures' activity occurs, then an 'Inform Public' activity must eventually occur after it. This ensures that once control strategies such as Vaccination, Quarantine, Hygiene Campaign, or Social Distancing are put in place (along with the associated Days to Control), the public is promptly communicated with regarding the outbreak and measures taken.
+5. If a 'Report Disease Outbreak' activity occurs with the condition that the Number of Cases is greater than 500, then an 'Implement Control Measures' activity must eventually occur after it within a time frame between 0 and 24 hours. This urgent sequenced response guarantees rapid deployment of control measures for large-scale outbreaks, preserving public health momentum.
+
+#### **Succession Constraints**
+1. A 'Confirm Disease' activity must be followed by an 'Implement Control Measures' activity at some point later in the same process instance, while an 'Implement Control Measures' event can occur only if a 'Confirm Disease' event has occurred before it. This cause-effect relationship, linking the Disease Type (Influenza, COVID-19, Measles, or Cholera) and Mortality Rate to subsequent control actions, creates a cohesive progression from confirmation to containment.
+2. An 'Inform Public' activity must be followed by a 'Monitor Disease Spread' activity at some point later in the same process instance, while a 'Monitor Disease Spread' event can occur only if an 'Inform Public' event has occurred before it. This causal link, incorporating the Public Response (Cooperative, Anxious, or Resistant), ensures that communication always precedes ongoing tracking of the outbreak's progression and impact, forming a tightly integrated monitoring phase.
+
+The interleaved narrative of the given MP-Declare process model's constraints.

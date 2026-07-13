@@ -1,0 +1,27 @@
+activity Define Requirements
+activity Develop an Initial Prototype
+activity Test Prototype
+activity Gather Feedback
+activity Analyze Feedback
+activity Revise Prototype
+activity Final Testing
+activity Present Prototype
+activity Approve Prototype
+bind Define Requirements: 
+bind Develop an Initial Prototype: 
+bind Test Prototype: Test Result
+bind Gather Feedback: Stakeholder Name, Feedback Rating
+bind Analyze Feedback: Stakeholder Name, Feedback Rating
+bind Revise Prototype: Revision Version, Improvement Cost
+bind Final Testing: Test Result
+bind Present Prototype: 
+bind Approve Prototype: 
+Test Result: Pass, Fail
+Stakeholder Name: John Doe, Jane Smith, Alice Johnson
+Feedback Rating: integer between 1 and 10
+Revision Version: integer between 1 and 20
+Improvement Cost: float between 100.0 and 10000.0
+Init[Define Requirements] | |
+Existence2[Test Prototype] | |
+Chain Response[Present Prototype, Approve Prototype] | | |
+End[Approve Prototype] | |

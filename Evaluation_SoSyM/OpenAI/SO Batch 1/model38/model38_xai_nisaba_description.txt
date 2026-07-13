@@ -1,0 +1,82 @@
+#MP-Declare Model
+## Activities
+- **Collect Data**: The 'Collect Data' activity represents the initial phase of gathering raw data for analysis.
+- **Analyze Data**: The 'Analyze Data' activity involves examining the collected data to derive insights and assess accuracy.
+- **Draft Report**: The 'Draft Report' activity includes creating an initial version of the report based on the analyzed data.
+- **Review Report**: The 'Review Report' activity entails evaluating the drafted report for quality and completeness.
+- **Approve Report**: The 'Approve Report' activity is the formal endorsement of the reviewed report.
+- **Publish Report**: The 'Publish Report' activity involves making the approved report available to the intended audience.
+- **Gather Feedback**: The 'Gather Feedback' activity focuses on collecting responses regarding the published report.
+- **Revise Report**: The 'Revise Report' activity includes updating the report based on the gathered feedback.
+
+## Attributes
+- **Data Points: integer between 100 and 10000**: The attribute 'Data Points: integer between 100 and 10000' represents the number of data entries collected during the data gathering phase.
+- **Report Accuracy: float between 0.0 and 100.0**: The attribute 'Report Accuracy: float between 0.0 and 100.0' indicates the percentage accuracy level of the analyzed data in the report.
+- **Approval Status: Pending, Approved, Rejected**: The attribute 'Approval Status: Pending, Approved, Rejected' specifies the current status of the report's approval process.
+- **Feedback Type: Positive, Negative, Neutral**: The attribute 'Feedback Type: Positive, Negative, Neutral' categorizes the nature of the feedback received on the report.
+- **Revision Count: integer between 0 and 10**: The attribute 'Revision Count: integer between 0 and 10' tracks the number of revisions made to the report.
+
+## Binds
+- **bind Collect Data: Data Points**: The bind 'Collect Data: Data Points' specifies that the activity 'Collect Data' requires the attribute 'Data Points'.
+- **bind Analyze Data: Report Accuracy**: The bind 'Analyze Data: Report Accuracy' links the 'Analyze Data' activity with the attribute 'Report Accuracy'.
+- **bind Approve Report: Approval Status**: The bind 'Approve Report: Approval Status' links the 'Approve Report' activity with the attribute 'Approval Status'.
+- **bind Gather Feedback: Feedback Type**: The bind 'Gather Feedback: Feedback Type' links the 'Gather Feedback' activity with the attribute 'Feedback Type'.
+- **bind Revise Report: Revision Count**: The bind 'Revise Report: Revision Count' links the 'Revise Report' activity with the attribute 'Revision Count'.
+
+## Constraints
+- **Init[Collect Data] | |**: The 'Collect Data' must be the first activity to occur in the process.
+- **Existence[Publish Report] | |**: The 'Publish Report' activity must occur at least once in the process.
+- **Precedence[Approve Report, Review Report] | | |**: The 'Review Report' activity is permitted to occur only if an 'Approve Report' activity has occurred before it within the same process instance.
+- **Response[Approve Report, Publish Report] |A.Approval Status is Approved | |0,2,d**: If an 'Approve Report' activity occurs, then a 'Publish Report' activity must eventually occur after the 'Approve Report' event at some point in the same process instance, provided that A.Approval Status is Approved. There is no requirement on how soon or what events may occur in between. Multiple 'Approve Report' can be pending at the same time, and a single 'Publish Report' can fulfill the obligation for all preceding 'Approve Report'. If 'Approve Report' does not occur, the constraint imposes no obligation on the occurrence of 'Publish Report'. The time condition must be triggered in at most 2 days.
+- **Response[Gather Feedback, Revise Report] |A.Feedback Type is Negative | |0,5,d**: If a 'Gather Feedback' activity occurs, then a 'Revise Report' activity must eventually occur after the 'Gather Feedback' event at some point in the same process instance, provided that A.Feedback Type is Negative. There is no requirement on how soon or what events may occur in between. Multiple 'Gather Feedback' can be pending at the same time, and a single 'Revise Report' can fulfill the obligation for all preceding 'Gather Feedback'. If 'Gather Feedback' does not occur, the constraint imposes no obligation on the occurrence of 'Revise Report'. The time condition must be triggered in at most 5 days.
+- **Not Succession[Revise Report, Revise Report] |A.Revision Count > 3 | |**: A 'Revise Report' activity and a 'Revise Report' activity must not occur such that the first 'Revise Report' event is followed by the second 'Revise Report' event at any point later in the same process instance, provided that A.Revision Count > 3. Similarly, a 'Revise Report' event must not be preceded by a 'Revise Report' event. This means that once a 'Revise Report' occurs, another 'Revise Report' cannot occur afterward, and if a 'Revise Report' event occurs, it cannot have been preceded by a 'Revise Report' event. Both events can occur in the same process instance, but not in the prohibited sequence.
+- **Precedence[Approve Report, Analyze Data] |A.Report Accuracy >= 90 | |**: The 'Analyze Data' activity is permitted to occur only if an 'Approve Report' activity has occurred before it within the same process instance, provided that A.Report Accuracy >= 90.
+- **Alternate Succession[Analyze Data, Draft Report] | | |0,48,h**: Each occurrence of an 'Analyze Data' activity must eventually be followed by a 'Draft Report' activity, and each occurrence of a 'Draft Report' must be preceded by 'Analyze Data', with no intermediate occurrences of 'Analyze Data' or 'Draft Report' between them. The time condition must be triggered in at most 48 hours.
+- **Chain Response[Approve Report, Publish Report] |A.Approval Status is Approved | |0,3,d**: Whenever an 'Approve Report' activity occurs, it must be immediately followed by a 'Publish Report' activity in the next event position, with no other events in between, provided that A.Approval Status is Approved. This immediate succession ensures a direct and uninterrupted transition from 'Approve Report' to 'Publish Report'. Multiple 'Approve Report'-'Publish Report' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Publish Report' are allowed to happen isolated. The time condition must be triggered in at most 3 days.
+- **Chain Succession[Draft Report, Review Report] | | |0,1,h**: Whenever a 'Draft Report' activity occurs, it must be immediately followed by a 'Review Report' activity, with no other events in between. Conversely, whenever a 'Review Report' activity occurs, it must be immediately preceded by a 'Draft Report' activity, with no other events in between. This enforces a strict one-to-one and immediate pairing of 'Draft Report' and 'Review Report', ensuring that neither occurs without the other and that they occur consecutively without interruption. The time condition must be triggered in at most 1 hour.
+
+
+## Interleaved Description
+The MP-Declare process model for the data analysis and reporting process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Collect Data,' which involves gathering raw data for analysis along with the 'Data Points' attribute (an integer between 100 and 10000). This establishes the initial context for the entire workflow.
+#### **End Constraints**
+The process concludes with the activity 'Publish Report,' which involves making the approved report available to the intended audience. This activity must occur at least once in the process.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Publish Report' activity must occur at least once in the process. This ensures that the final output is always delivered to the audience, adding depth and reliability to the overall reporting workflow.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Review Report' is permitted to occur only if an 'Approve Report' activity has occurred before it. This sets up the initial context that formal endorsement must precede quality evaluation, guiding the logical sequence of report handling.
+2. The activity 'Analyze Data' is permitted to occur only if an 'Approve Report' activity has occurred before it, provided that the 'Report Accuracy' is greater than or equal to 90. This background condition ensures that high-accuracy analysis is grounded in a prior approval step, maintaining process integrity when precision thresholds are met.
+
+#### **Response Constraints**
+1. If an 'Approve Report' activity occurs with the condition that 'Approval Status is Approved,' then a 'Publish Report' activity must eventually occur after it. This defines an ordered flow where endorsement directly leads to dissemination, and the obligation must be fulfilled within at most 2 days.
+2. If a 'Gather Feedback' activity occurs with the condition that 'Feedback Type is Negative,' then a 'Revise Report' activity must eventually occur after it. This sequence ensures that critical input triggers updates, and the response must be triggered within at most 5 days.
+
+#### **Succession Constraints**
+Whenever a 'Revise Report' activity occurs with the condition that 'Revision Count > 3,' another 'Revise Report' activity must not follow it at any later point. This establishes a causal link that prevents excessive iteration once the revision threshold is crossed, preserving a controlled progression in the reporting cycle.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Succession Constraints**
+Each occurrence of an 'Analyze Data' activity must eventually be followed by a 'Draft Report' activity, and each 'Draft Report' must be preceded by an 'Analyze Data' activity, with no intermediate occurrences of either between them, provided the time condition is met within at most 48 hours. This enforces an ordered structure with unique activity pairings, ensuring balanced one-to-one progression from insight generation to initial documentation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Whenever an 'Approve Report' activity occurs with the condition that 'Approval Status is Approved,' it must be immediately followed by a 'Publish Report' activity in the next event position. This captures an immediate cause-and-effect relationship, ensuring direct transition from endorsement to release within at most 3 days and allowing no intervening events.
+
+#### **Chain Succession Constraints**
+Whenever a 'Draft Report' activity occurs, it must be immediately followed by a 'Review Report' activity, and conversely, every 'Review Report' must be immediately preceded by a 'Draft Report,' with no other events in between. This tightly coupled sequence, which must occur within at most 1 hour, enforces strict consecutive pairing between documentation and evaluation.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Succession Constraints**
+A 'Revise Report' activity and a subsequent 'Revise Report' activity must not occur in that order if the 'Revision Count > 3.' This contrast restriction prevents overlapping revision sequences beyond the defined limit, thereby preserving the model's intended flow and avoiding uncontrolled iteration.

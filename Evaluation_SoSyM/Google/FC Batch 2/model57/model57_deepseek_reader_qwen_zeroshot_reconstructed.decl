@@ -1,0 +1,42 @@
+activity Collect Digital Evidence
+activity Preserve Evidence
+activity Document Chain of Custody
+activity Analyze Evidence
+activity Generate Evidence Report
+activity Secure in Storage
+activity Validate Integrity
+activity Audit Evidence Access
+activity Classify Evidence
+activity Index Evidence
+activity Update Metadata
+activity Review Evidence Report
+activity Authorize Release
+activity Dispose Digital Evidence
+bind Collect Digital Evidence: Evidence Type, Size
+bind Preserve Evidence: Custody Status, Integrity Score
+bind Analyze Evidence: Analysis Time, Security Level
+bind Audit Evidence Access: Access Count, Legal Hold
+bind Dispose Digital Evidence: Disposal Method, Retention Period
+Evidence Type: Document, Image, Video, Audio, Log File
+Size: integer between 1 and 1000
+Custody Status: Collected, Preserved, Analyzed, Stored, Disposed
+Integrity Score: float between 0.0 and 1.0
+Analysis Time: float between 0.1 and 24.0
+Security Level: Confidential, Restricted, Unclassified
+Access Count: integer between 0 and 100
+Legal Hold: Yes, No
+Disposal Method: Shredding, Wiping, Deletion
+Retention Period: integer between 30 and 3650
+Init[Collect Digital Evidence] | |
+Chain Response[Collect Digital Evidence, Preserve Evidence] | | |
+Existence[Analyze Evidence] | |
+Precedence[Analyze Evidence, Document Chain of Custody] | | |
+Chain Response[Analyze Evidence, Generate Evidence Report] | | |
+Co-Existence[Secure in Storage, Validate Integrity] | | |
+Chain Response[Preserve Evidence, Validate Integrity] | | |1,2,h
+Response[Audit Evidence Access, Audit Evidence Access] |A.Legal Hold is Yes | |
+Choice[Index Evidence, Update Metadata] | | |
+Not Co-Existence[Classify Evidence, Dispose Digital Evidence] | | |
+Alternate Precedence[Authorize Release, Review Evidence Report] | | |
+End[Dispose Digital Evidence] | |
+Exclusive Choice[Authorize Release, Dispose Digital Evidence] | | |

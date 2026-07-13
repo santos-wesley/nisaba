@@ -1,0 +1,41 @@
+# Multi-Perspective Declare Model Description
+
+## Overview
+This model describes a **Benefits Enrollment and Claims Management Process**, covering activities related to employee benefits enrollment, eligibility verification, claims processing, and inquiry handling. The model integrates control-flow, data, and temporal perspectives.
+
+## Activities
+The process consists of the following 15 activities:
+- Submit Benefits Enrollment, Verify Employee Eligibility, Process Benefits Claim, Approve Benefits Claim, Deny Benefits Claim, Update Benefits Record, Audit Benefits Enrollment, Send Enrollment Confirmation, Receive Employee Inquiry, Resolve Employee Inquiry, Request Additional Information, Review Benefits Options, Calculate Premium Cost, Process Premium Payment, Generate Benefits Report
+
+## Data Perspective
+Several activities carry associated data attributes:
+
+- **Submit Benefits Enrollment** records the *Employee ID* (an integer between 1000–9999), the *Enrollment Status* (Submitted, Verified, Approved, or Rejected), and the *Benefit Plan* selected (Health, Dental, Vision, or Life).
+- **Process Benefits Claim** records the *Employee ID*, the *Claim Amount* (an integer between 0 and 10,000), and the *Claim Status* (Received, Processed, Approved, Denied, or Paid).
+- **Calculate Premium Cost** records the *Premium Rate* (a float between 0.0 and 1.0), the *Benefit Plan*, and the *Deduction Amount* (a float between 0.0 and 5000.0).
+- **Receive Employee Inquiry** records the *Employee ID* and the *Inquiry Type* (Enrollment, Claim, Eligibility, or Payment).
+
+## Control-Flow Perspective
+
+- The process **must start** with the activity *Submit Benefits Enrollment*.
+- Whenever *Submit Benefits Enrollment* occurs, it must eventually be followed by *Verify Employee Eligibility* (a response relationship).
+- *Approve Benefits Claim* and *Deny Benefits Claim* are mutually exclusive alternatives — exactly one of them may occur per case (choice constraint), but not both.
+- *Approve Benefits Claim* must occur **before** *Process Benefits Claim* whenever the latter is executed (precedence).
+- Similarly, *Deny Benefits Claim* must occur **before** *Process Benefits Claim* whenever the latter is executed (precedence).
+
+## Temporal Perspective (Timed Responses)
+After *Submit Benefits Enrollment* occurs, several time-bound follow-up activities are required to happen within specific deadlines:
+
+- *Send Enrollment Confirmation* must follow within **24 hours**.
+- *Verify Employee Eligibility* must follow within **48 hours**.
+- *Audit Benefits Enrollment* must follow within **7 days**.
+- *Calculate Premium Cost* must follow within **24 hours**.
+- *Process Premium Payment* must follow within **7 days**.
+- *Generate Benefits Report* must follow within **30 days**.
+- *Update Benefits Record* must follow within **7 days**.
+- *Review Benefits Options* must follow within **24 hours**.
+- *Request Additional Information* must follow within **24 hours**.
+- *Resolve Employee Inquiry* must follow within **24 hours**.
+
+## Summary
+This model enforces a structured benefits enrollment lifecycle: enrollment submission triggers a cascade of time-constrained downstream activities (eligibility checks, premium calculations, confirmations, audits, and reporting), while claims processing follows a clear approval/denial decision gate that must precede any claim processing action.

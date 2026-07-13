@@ -1,0 +1,15 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a business continuity management process with 10 activities, each associated with specific data attributes. The process begins with **Identify Risks** (where a risk level from 1 to 10 is assigned) and ends with **Evaluate Incident Response** (tracking response time in hours).
+
+The core logic is governed by several temporal and data-driven constraints:
+
+1.  **Testing and Improvement Loop:** After **Test Continuity Plan** (which must result in a "Pass" outcome), the process must eventually lead to **Review Test Results**. If the reviewed **Plan Effectiveness** is below 80.0% and the **Improvement Status** is "Pending", then **Implement Improvements** must occur immediately after the review (within 48 hours).
+
+2.  **Communication and Training:** If **Develop Continuity Plan** involves **High Stakeholder Engagement**, then **Communicate Plan** must eventually happen (within 5 to 13 months), using either Email or a Meeting. Furthermore, if the communication method is a Meeting, then **Conduct Training** must also occur at some point.
+
+3.  **Risk Monitoring and Activation:** **Monitor Risks** and **Identify Risks** must both occur (co-exist) if the **Monitoring Frequency** is 7 days or less. If an incident occurs with **Medium or High Severity**, **Activate Continuity Plan** must happen before **Identify Risks** (precedence). However, if the incident severity is **High**, **Activate Continuity Plan** must *not* be immediately followed by **Evaluate Incident Response** (within a 10 to 15 second window).
+
+4.  **Training Requirement:** The activity **Conduct Training** must occur at least once, and when it does, the **Training Hours** must be 8 or more.
+
+In summary, the model enforces a structured cycle of risk identification, plan development, testing with conditional improvements, targeted communication and training, and incident activation—all constrained by specific data values and time windows.

@@ -1,0 +1,52 @@
+**Multi-Perspective Declare Model: Store Security and Incident Management**
+
+This model describes a comprehensive security management process for a retail store environment. It captures both the operational security activities and various constraints that govern how and when these activities should be performed.
+
+### Core Activities
+The process revolves around **15 security-related activities**, including:
+- **Monitor Store Entrance** (the designated starting point of the process)
+- **Inspect Security Cameras**, **Review Security Footage**, and **Verify Alarm Trigger** for surveillance
+- **Conduct Bag Check**, **Handle Customer Complaint**, and **Check Inventory Discrepancies** for customer and inventory management
+- **Alert Security Personnel**, **Escort Suspect**, and **Report Incident** for incident response
+- **Perform Security Audit**, **Update Security Protocols**, **Train Security Staff**, and **Conduct Emergency Drill** for continuous improvement
+- **Deactivate Alarm** (the designated end point of the process)
+
+### Data Perspectives
+Several activities are enriched with **data parameters**:
+- Camera inspections are linked to a specific **Camera ID** (1–1000).
+- Incident reporting includes **Incident Type** (Theft, Vandalism, Assault) and **Incident Severity** (0.1–10.0).
+- Personnel alerts carry **Personnel ID** (1–500) and **Security Level** (Low, Medium, High).
+- Customer-related activities (bag checks and complaint handling) are bound to **Customer ID** (1–10000) and **Complaint Status** (Resolved/Unresolved).
+- Security audits track an **Audit Score** (0.0–100.0).
+- Alarm verification tracks **Alarm Status** (Active, Inactive, Triggered).
+
+### Behavioral Constraints
+
+**Mandatory Flow:**
+- The process **must start** with `Monitor Store Entrance` and **must end** with `Deactivate Alarm`.
+- `Report Incident` **must occur at least once** during every process execution.
+- `Conduct Emergency Drill` **must never occur**.
+
+**Sequential and Response Rules:**
+- After `Inspect Security Cameras`, `Review Security Footage` must eventually follow (with matching Camera ID).
+- If `Alert Security Personnel` is performed with **High** security level, it must be **immediately** followed (within 0–5 minutes) by `Escort Suspect` using the same Personnel ID.
+- `Verify Alarm Trigger` (when alarm status is **Triggered**) must be followed by `Alert Security Personnel` within 0–10 minutes.
+- `Conduct Bag Check` must be followed (at most once, within a "high" time window) by `Handle Customer Complaint` for the same customer.
+- `Escort Suspect` can only occur **after** a `Report Incident` involving **Theft**.
+
+**Co-existence and Mutual Exclusions:**
+- If a `Perform Security Audit` yields a score **below 50**, then `Update Security Protocols` must also occur.
+- `Train Security Staff` and `Conduct Emergency Drill` are mutually exclusive (only one can occur).
+- `Review Security Footage` and `Inspect Security Cameras` cannot occur in succession (you cannot inspect immediately after reviewing).
+
+**Customer Complaint Logic:**
+- If a customer complaint is **Resolved**, then a `Conduct Bag Check` for that same customer must have occurred earlier.
+
+**Negative Constraints:**
+- `Check Inventory Discrepancies` and `Report Incident` can never occur in direct succession.
+- `Deactivate Alarm` cannot occur before `Verify Alarm Trigger`.
+- Once a complaint is resolved, it should not trigger further bag checks for that customer.
+
+---
+
+This model combines **control-flow**, **time**, **data**, and **resource** perspectives to create a rich, realistic security operations process with strong compliance and safety constraints.

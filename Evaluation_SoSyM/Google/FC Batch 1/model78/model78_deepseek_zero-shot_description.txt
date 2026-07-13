@@ -1,0 +1,15 @@
+Based on the provided model, here is a natural language description of the outbreak management process:
+
+The process begins with the **Report Disease Outbreak** activity, which is the only allowed starting point. This report must include the **Report Source** (Hospital, Clinic, Public, or Other) and the **Number of Cases** (an integer between 1 and 1,000).
+
+Once a report is filed, the system requires a **Verify Outbreak Report** activity to follow. The verification produces an **Investigation Result** (Confirmed, False Alarm, or Inconclusive). If the result is **Confirmed**, the process must then proceed to **Initiate Investigation**.
+
+After the investigation is initiated, the team must **Collect Samples**. Within 48 hours of collection, they must **Analyze Samples**. The analysis must be completed before the disease can be **Confirmed**. The confirmation step requires specifying the **Disease Type** (Influenza, COVID-19, Measles, or Cholera) and the **Mortality Rate** (a float between 0.0 and 100.0).
+
+Once the disease is confirmed, the process must eventually lead to **Implement Control Measures**, and this step must occur after the confirmation (Succession). The control measures require specifying the **Control Measures** used (Vaccination, Quarantine, Hygiene Campaign, or Social Distancing) and the **Days to Control** (an integer between 1 and 365).
+
+After control measures are implemented, the system requires that the public be **Informed**. The **Public Response** (Cooperative, Anxious, or Resistant) is recorded. Following the public notification, the process must continue to **Monitor Disease Spread**.
+
+The process ends only with the **Declare End of Outbreak** activity, which is the sole allowed termination point.
+
+Additionally, there is a special fast-track rule: if the initial **Number of Cases** exceeds 500, then **Implement Control Measures** must be initiated within 24 hours of the initial **Report Disease Outbreak**, regardless of the normal verification and investigation sequence.

@@ -1,0 +1,37 @@
+activity Fund Transfer Initiate
+activity Transfer Request Validate
+activity Transfer Approve
+activity Transfer Execute
+activity Transfer Report Generate
+activity Transfer Report Review
+activity Stakeholders Notify
+activity Accounts Reconcile
+activity Transfer Process Close
+bind Fund Transfer Initiate: ID Transfer, Amount Transfer, Type Account
+bind Transfer Request Validate: ID Transfer, Status Transfer, ID Validator
+bind Transfer Approve: ID Transfer, ID Approver
+bind Transfer Execute: ID Transfer
+bind Transfer Report Generate: ID Transfer
+bind Transfer Report Review: ID Transfer, Level Discrepancy, ID Reviewer
+bind Stakeholders Notify: ID Transfer, Method Notification
+bind Accounts Reconcile: ID Transfer
+bind Transfer Process Close: ID Transfer
+ID Transfer: integer between 1 and 999999
+Amount Transfer: float between 0.01 and 1000000.0
+Status Transfer: Pending, Validated, Approved, Completed, Rejected
+Type Account: Checking, Savings, Business
+ID Validator: integer between 1 and 9999
+ID Approver: integer between 1 and 9999
+Method Notification: Email, SMS, Push Notification
+Level Discrepancy: Low, Medium, High
+ID Reviewer: integer between 1 and 9999
+Init[Fund Transfer Initiate] | |
+Chain Succession[Fund Transfer Initiate, Transfer Request Validate] | | |
+Chain Succession[Transfer Request Validate, Transfer Approve] | | |
+Chain Succession[Transfer Approve, Transfer Execute] | | |0,2,h
+Chain Succession[Transfer Execute, Transfer Report Generate] | | |
+Chain Succession[Transfer Report Generate, Transfer Report Review] | | |
+Chain Succession[Transfer Report Review, Stakeholders Notify] | | |0,1,h
+Chain Succession[Stakeholders Notify, Accounts Reconcile] | | |
+Chain Succession[Accounts Reconcile, Transfer Process Close] | | |
+End[Transfer Process Close] | |

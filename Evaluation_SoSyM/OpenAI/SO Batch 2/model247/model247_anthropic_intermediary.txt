@@ -1,0 +1,28 @@
+## Activities
+- **File Patent Application**: The 'File Patent Application' activity represents the submission of a patent application for review.
+- **Conduct Patent Search**: The 'Conduct Patent Search' activity involves searching for prior art or existing patents related to the filed patent application.
+- **Examine Patent Application**: The 'Examine Patent Application' activity represents the examination process of a filed patent application to determine its validity.
+- **Grant Patent**: The 'Grant Patent' activity represents the formal approval and granting of a patent.
+- **Reject Patent Application**: The 'Reject Patent Application' activity represents the formal rejection of a patent application.
+- **File Trademark Application**: The 'File Trademark Application' activity represents the submission of a trademark application for review.
+- **Conduct Trademark Search**: The 'Conduct Trademark Search' activity involves searching for existing trademarks that may conflict with the filed trademark application.
+- **Examine Trademark Application**: The 'Examine Trademark Application' activity represents the examination process of a filed trademark application to determine its validity.
+- **Grant Trademark**: The 'Grant Trademark' activity represents the formal approval and granting of a trademark.
+- **Reject Trademark Application**: The 'Reject Trademark Application' activity represents the formal rejection of a trademark application.
+- **File Copyright Registration**: The 'File Copyright Registration' activity represents the submission of a copyright registration for review.
+- **Examine Copyright Application**: The 'Examine Copyright Application' activity represents the examination process of a filed copyright application to determine its validity.
+- **Grant Copyright**: The 'Grant Copyright' activity represents the formal approval and granting of a copyright.
+- **Reject Copyright Application**: The 'Reject Copyright Application' activity represents the formal rejection of a copyright application.
+- **Appeal Decision**: The 'Appeal Decision' activity represents the process of formally challenging a rejection decision made on an application.
+
+## Attributes
+- **Application ID: Integer between 1 and 1000000**: The attribute 'Application ID: Integer between 1 and 1000000' represents the unique identification number assigned to an application.
+- **Application Fee: Float between 50.0 and 10000.0**: The attribute 'Application Fee: Float between 50.0 and 10000.0' represents the monetary fee charged for filing an application.
+- **Application Status: Pending, Approved, Rejected**: The attribute 'Application Status: Pending, Approved, Rejected' specifies the current status of an application during its examination process.
+- **Search Result: Clear, Conflict**: The attribute 'Search Result: Clear, Conflict' specifies the outcome of a search process, indicating whether a conflict was found or not.
+- **Decision: Granted, Rejected**: The attribute 'Decision: Granted, Rejected' specifies the final decision made regarding an application.
+
+## Binds
+
+## Constraints
+

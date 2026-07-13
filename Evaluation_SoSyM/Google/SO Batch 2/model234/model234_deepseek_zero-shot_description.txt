@@ -1,0 +1,71 @@
+Here is a natural language description of the provided Multi-Perspective Declare model, structured to explain the process flow, data bindings, constraints, and conditional rules.
+
+---
+
+### Overview of the Risk Management Process
+
+This model describes a structured **Risk Management Workflow** designed to identify, assess, prioritize, and mitigate risks. The process is data-driven, using a unique **Risk ID** to link all activities. It enforces a strict sequence of steps while allowing for conditional behaviors based on risk severity, cost, and timing.
+
+---
+
+### Core Process Flow (The "Happy Path")
+
+The process begins with **Identify Risk**, which is the only activity that can start the workflow (marked as `Init`). Once a risk is identified, the following sequence is enforced:
+
+1.  **Assess Impact** must come *after* **Identify Risk** (`Precedence`).
+2.  **Assess Impact** must be followed by **Evaluate Probability** (`Response`).
+3.  **Prioritize Risks** must come *after* **Evaluate Probability** (`Precedence`).
+4.  **Prioritize Risks** must be followed by **Develop Mitigation Plan** (`Response`).
+5.  **Implement Mitigation** must come *after* **Develop Mitigation Plan** (`Precedence`).
+6.  **Implement Mitigation** must be followed by **Monitor Risks** (`Response`).
+7.  **Monitor Risks** and **Review Risk Assessment** are in a **Succession** relationship: one must follow the other, and both must occur together.
+8.  **Review Risk Assessment** must be followed by **Update Risk Register** (`Response`).
+9.  **Update Risk Register** and **Communicate Risks** are in a **Succession** relationship: they must occur together in order.
+
+This creates a linear, mandatory chain from identification through communication.
+
+---
+
+### Data Bindings & Attributes
+
+Each activity is associated with specific data fields. The process uses a shared **Risk ID** (integer 1–1000) to link all tasks. Key data includes:
+
+- **Risk Category**: Financial, Operational, Compliance, Strategic, or Reputational.
+- **Impact Score**: Integer 1–10.
+- **Probability**: Float 0.0–1.0.
+- **Exposure Value**: Float 0.0–1,000,000.0 (calculated during prioritization).
+- **Mitigation Strategy**: Avoidance, Transference, Mitigation, or Acceptance.
+- **Mitigation Cost**: Float 0.0–100,000.0.
+- **Risk Status**: Open, Mitigated, Closed, or Accepted.
+- **Review Frequency**: Integer 1–12 (months).
+- **Risk Owner**: John Smith, Alice Johnson, or Bob Williams.
+
+---
+
+### Conditional & Time Constraints (The "Multi-Perspective" Rules)
+
+The model includes several conditional rules that modify the standard flow:
+
+1.  **Financial Risks with High Mitigation Cost**  
+    If a risk is categorized as **Financial** (`A.Risk Category is Financial`) and its **Mitigation Cost exceeds 1000**, then **Identify Risk** must be followed by **Develop Mitigation Plan** (`Response`). This ensures that costly financial risks are immediately addressed with a plan.
+
+2.  **Open Risks Trigger Immediate Mitigation**  
+    If a risk has a **Status of "Open"**, then **Identify Risk** must be followed by **Implement Mitigation** within **0 to 30 days** (time constraint `0,30,d`). This forces rapid action on newly identified open risks.
+
+3.  **Periodic Review of Monitored Risks**  
+    After **Monitor Risks**, the **Review Risk Assessment** must occur within a window of **90 to 180 days** (time constraint `90,180,d`). This enforces a regular review cycle (e.g., quarterly or semi-annually).
+
+4.  **Escalation for High-Impact Risks**  
+    If the **Impact Score is greater than 7**, then **Assess Impact** must be followed by **Escalate Critical Risks** within **0 to 24 hours** (time constraint `0,24,h`). This is a critical safety valve for severe risks.
+
+---
+
+### Global Constraints
+
+- **Absence3[Escalate Critical Risks]**: The activity **Escalate Critical Risks** can occur at most **three times** in the entire process. This prevents over-escalation and ensures it is used only for truly critical situations.
+
+---
+
+### Summary
+
+This model defines a rigorous, data-aware risk management workflow. It ensures that risks are identified, assessed, prioritized, mitigated, monitored, reviewed, updated, and communicated in a strict order. Conditional rules add flexibility for financial risks, open status, high impact, and periodic reviews, while time constraints enforce urgency where needed. The process is designed to be both thorough and responsive, with clear escalation paths for critical issues.

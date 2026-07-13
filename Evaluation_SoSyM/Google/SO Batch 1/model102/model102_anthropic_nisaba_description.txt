@@ -1,0 +1,131 @@
+#MP-Declare Model
+## Activities
+- **Submit Timesheet**: The 'Submit Timesheet' activity represents an employee submitting their worked hours for a given period.
+- **Approve Timesheet**: The 'Approve Timesheet' activity involves a manager or supervisor reviewing and approving a submitted timesheet.
+- **Calculate Gross Pay**: The 'Calculate Gross Pay' activity involves computing the total earnings of an employee before deductions, based on hours worked and pay rate.
+- **Calculate Deductions**: The 'Calculate Deductions' activity involves determining the tax and insurance deductions to be subtracted from an employee's gross pay.
+- **Calculate Net Pay**: The 'Calculate Net Pay' activity involves computing the final take-home pay for an employee after all deductions have been subtracted from the gross pay.
+- **Generate Paystub**: The 'Generate Paystub' activity involves creating a detailed pay statement document for the employee reflecting earnings and deductions.
+- **Process Payment**: The 'Process Payment' activity involves executing the actual payment transaction to the employee based on the calculated net pay.
+- **Update Payroll Records**: The 'Update Payroll Records' activity involves recording the completed payroll transaction details into the payroll system.
+- **Review Payroll Report**: The 'Review Payroll Report' activity involves examining the payroll report for accuracy and compliance after records have been updated.
+- **Distribute Paystub**: The 'Distribute Paystub' activity involves delivering the generated paystub to the employee.
+
+## Attributes
+- **Hours Worked: integer between 0 and 80**: The attribute 'Hours Worked: Integer between 0 and 80' represents the number of hours an employee has worked in the given pay period.
+- **Pay Rate: float between 10.0 and 100.0**: The attribute 'Pay Rate: Float between 10.0 and 100.0' represents the hourly rate of pay for the employee.
+- **Gross Pay: float between 0.0 and 10000.0**: The attribute 'Gross Pay: Float between 0.0 and 10000.0' represents the total earnings of the employee before any deductions.
+- **Tax Deduction: float between 0.0 and 5000.0**: The attribute 'Tax Deduction: Float between 0.0 and 5000.0' represents the amount deducted from gross pay for taxes.
+- **Insurance Deduction: float between 0.0 and 1000.0**: The attribute 'Insurance Deduction: Float between 0.0 and 1000.0' represents the amount deducted from gross pay for insurance coverage.
+- **Net Pay: float between 0.0 and 10000.0**: The attribute 'Net Pay: Float between 0.0 and 10000.0' represents the final take-home pay for the employee after all deductions are subtracted.
+- **Timesheet Status: Submitted, Approved, Rejected**: The attribute 'Timesheet Status: Submitted, Approved, Rejected' specifies the current approval state of a submitted timesheet.
+- **Payment Method: Direct Deposit, Check**: The attribute 'Payment Method: Direct Deposit, Check' specifies the method by which the employee's payment is delivered.
+- **Employee ID: integer between 1000 and 9999**: The attribute 'Employee ID: Integer between 1000 and 9999' represents the unique identification number assigned to an employee.
+
+## Binds
+- **Submit Timesheet: Employee ID, Hours Worked, Timesheet Status**: The bind 'Submit Timesheet: Employee ID, Hours Worked, Timesheet Status' links the 'Submit Timesheet' activity with the attributes 'Employee ID', 'Hours Worked', and 'Timesheet Status'.
+- **Approve Timesheet: Employee ID, Timesheet Status**: The bind 'Approve Timesheet: Employee ID, Timesheet Status' links the 'Approve Timesheet' activity with the attributes 'Employee ID' and 'Timesheet Status'.
+- **Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay**: The bind 'Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay' links the 'Calculate Gross Pay' activity with the attributes 'Hours Worked', 'Pay Rate', and 'Gross Pay'.
+- **Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction**: The bind 'Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction' links the 'Calculate Deductions' activity with the attributes 'Gross Pay', 'Tax Deduction', and 'Insurance Deduction'.
+- **Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay**: The bind 'Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay' links the 'Calculate Net Pay' activity with the attributes 'Gross Pay', 'Tax Deduction', 'Insurance Deduction', and 'Net Pay'.
+- **Process Payment: Employee ID, Net Pay, Payment Method**: The bind 'Process Payment: Employee ID, Net Pay, Payment Method' links the 'Process Payment' activity with the attributes 'Employee ID', 'Net Pay', and 'Payment Method'.
+
+## Constraints
+
+
+## Interleaved Description
+# The MP-Declare process model for the payroll processing process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Submit Timesheet,' establishing the initial context in which an employee reports their worked hours for a given period. This activity is bound to the attributes 'Employee ID,' 'Hours Worked,' and 'Timesheet Status,' setting the foundation upon which all subsequent payroll operations depend.
+
+#### **End Constraints**
+In conclusion, the process closes with the activity 'Distribute Paystub.' Following the completion of all preceding calculations, approvals, and record updates, the delivery of the paystub to the employee serves as the definitive final act, coherently bringing the payroll cycle to a close.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Approve Timesheet' activity must occur at least once in the process, elaborating on the necessity of managerial oversight: a submitted timesheet cannot advance through payroll without being reviewed and validated by a supervisor, adding a layer of accountability to the process. Likewise, the 'Calculate Net Pay' activity must occur at least once, reinforcing that the determination of an employee's final take-home earnings is an indispensable step, elaborating on the depth of financial computation embedded in the model.
+
+#### **Absence Constraints**
+In contrast, the 'Review Payroll Report' activity is constrained to occur at most once, highlighting that repeated report reviews are excluded from the process; this exclusion reinforces process integrity by ensuring that once payroll records are reviewed for accuracy and compliance, the matter is considered settled rather than subject to redundant re-examination.
+
+#### **Exactly Constraints**
+Summarizing the precision expected in financial computation, the 'Calculate Gross Pay' activity must occur exactly once for each process instance, setting a fixed boundary that ensures gross earnings are computed a single, definitive time based on 'Hours Worked' and 'Pay Rate,' without duplication or omission.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+Establishing a necessary dependency, if the 'Calculate Deductions' activity occurs, then the 'Calculate Net Pay' activity must also occur somewhere in the process, as an effect that logically follows the cause: deductions computed from gross pay only find their purpose once they are incorporated into the final net pay calculation, enhancing the coherence of the financial workflow.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+Setting up the initial context for order, the activity 'Approve Timesheet' is permitted to occur only if a 'Submit Timesheet' activity, bound to 'Employee ID,' 'Hours Worked,' and 'Timesheet Status,' has occurred before it—establishing that approval cannot precede submission. Similarly, the activity 'Calculate Gross Pay' is permitted to occur only if 'Approve Timesheet' has occurred beforehand, with the condition that 'Timesheet Status' is 'Approved,' ensuring gross pay is calculated strictly on the basis of validated hours. Furthering this logical sequence, 'Process Payment' is permitted to occur only if 'Calculate Net Pay' has occurred before it, guaranteeing that payments are always grounded in a finalized net pay figure.
+
+#### **Response Constraints**
+Following this background, a cohesive temporal flow is established: if the 'Submit Timesheet' activity occurs with 'Timesheet Status' as 'Submitted,' then the 'Approve Timesheet' activity must occur afterward, ensuring that every submission is eventually met with a decision. In sequence, if 'Calculate Net Pay' occurs, then 'Generate Paystub' must occur afterward, ensuring that the pay statement always follows the finalized calculation of take-home pay. Continuing this ordered flow, if 'Process Payment' occurs, then 'Update Payroll Records' must occur afterward, ensuring that every completed transaction is properly logged.
+
+#### **Succession Constraints**
+Establishing a causal link that binds cause to effect, whenever 'Calculate Gross Pay' occurs, it must be both preceded by 'Approve Timesheet' and followed by 'Calculate Deductions,' ensuring that gross earnings serve as the necessary bridge between timesheet approval and the deduction process, creating a cohesive progression from validated hours to final compensation figures. In a similar causal chain, 'Update Payroll Records' must be preceded by 'Process Payment' and followed by 'Review Payroll Report,' cementing the logical succession from transaction execution to compliance review.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Promoting balance within the model, each occurrence of 'Calculate Net Pay' must be followed by a unique occurrence of 'Generate Paystub' before 'Calculate Net Pay' can occur again, ensuring that every net pay calculation is paired with a paystub generation without overlapping instances, supporting a clean one-to-one correspondence between financial computation and documentation.
+
+#### **Alternate Succession Constraints**
+Enforcing an ordered structure with unique pairings, each occurrence of 'Process Payment' must be followed by 'Update Payroll Records,' and each 'Update Payroll Records' must be preceded by 'Process Payment,' with no intervening occurrences of either activity, ensuring that payment execution and record-keeping remain tightly and exclusively paired throughout the process.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Capturing an immediate cause-and-effect relationship, whenever 'Calculate Gross Pay' occurs, it must be immediately followed by 'Calculate Deductions,' with no intervening activities, ensuring that the transition from gross earnings to deduction computation happens without delay or disruption.
+
+#### **Chain Succession Constraints**
+Enforcing a tightly coupled sequence, whenever 'Calculate Deductions' occurs, it must be immediately preceded by 'Calculate Gross Pay' and immediately followed by 'Calculate Net Pay,' ensuring that the three core financial calculations—gross pay, deductions, and net pay—occur in an unbroken, direct chain with no intervening activities disrupting the flow of monetary computation.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Establishing mutual dependency between critical activities, 'Generate Paystub' and 'Distribute Paystub' must occur together within the same process instance, ensuring that the creation of a pay statement is always matched by its delivery to the employee, and vice versa, reinforcing the conjunction between documentation and communication.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing a degree of flexibility, either the 'Calculate Net Pay' activity or the 'Process Payment' activity may occur following the deduction calculations, permitting alternative paths depending on the specific procedural branch taken by the payroll system, though at least one of these must be present to move the process forward.
+
+#### **Exclusive Choice Constraints**
+Enforcing mutually exclusive pathways regarding payment delivery, exactly one of 'Payment Method: Direct Deposit' or 'Payment Method: Check' may be selected during 'Process Payment,' ensuring that an employee's compensation is delivered through precisely one method, never both simultaneously.
+
+#### **Not Co-Existence Constraints**
+Setting exclusion rules to preserve process integrity, the 'Approve Timesheet' activity with the condition 'Timesheet Status is Rejected' and the 'Calculate Gross Pay' activity cannot both occur within the same process instance, ensuring that a rejected timesheet can never trigger downstream gross pay calculations, thereby preventing conflicting and erroneous financial computations.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Preventing an unwarranted dependency, the occurrence of 'Review Payroll Report' does not require nor imply the subsequent occurrence of 'Submit Timesheet,' ensuring that the reporting review, once completed, does not inadvertently trigger a new timesheet submission cycle, thus refining the model by disallowing this specific contingent relationship.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Restricting the sequence to preserve intended order, the 'Distribute Paystub' activity must not precede the 'Generate Paystub' activity at any point in the process, ensuring that a paystub can never be delivered to an employee before it has actually been created.
+
+#### **Not Response Constraints**
+Maintaining the integrity of the model's intended progression, the 'Update Payroll Records' activity must not be followed by a 'Submit Timesheet' activity, ensuring that the finalization of payroll records does not inadvertently trigger or precede a new timesheet submission within the same instance.
+
+#### **Not Succession Constraints**
+Preserving the model's defined flow, the 'Distribute Paystub' activity must never be followed by a 'Calculate Gross Pay' activity at any subsequent point, restricting any overlapping or reversed sequence that would suggest gross pay recalculation after paystub delivery has already occurred.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+Enforcing non-immediate order restrictions, the 'Calculate Net Pay' activity must not be immediately preceded by the 'Submit Timesheet' activity, maintaining necessary separation and ensuring that all intermediate calculation steps—gross pay and deductions—are respected rather than skipped.
+
+#### **Not Chain Response Constraints**
+Preventing immediate succession that would disrupt structural integrity, the 'Approve Timesheet' activity must not be immediately followed by the 'Generate Paystub' activity, ensuring that the necessary financial calculations intervene between timesheet approval and paystub generation.
+
+#### **Not Chain Succession Constraints**
+Refining the process model by excluding specific immediate sequences, the 'Submit Timesheet' activity and the 'Process Payment' activity must not immediately precede or follow one another, ensuring that these two activities, representing the very beginning and near-end of the payroll cycle, are always separated by the requisite intermediate steps of approval, calculation, and documentation.

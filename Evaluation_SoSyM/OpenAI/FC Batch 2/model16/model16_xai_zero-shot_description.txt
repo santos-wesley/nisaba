@@ -1,0 +1,50 @@
+**Multi-Perspective Declare Model: Charity Fundraising Campaign**
+
+This model describes the end-to-end process of a nonprofit organization’s fundraising activities, combining donor management, event organization, and continuous improvement.
+
+### Process Overview
+
+The process always begins with **Identify Donor** and must eventually reach **Evaluate Campaign**, which marks the official end of the campaign cycle.
+
+### Main Process Flow
+
+1. **Donor Management Stream**
+   - After identifying a donor, the organization must **Contact Donor**.
+   - Once contact is made, a **Request Donation** must follow.
+   - If a donation is received, the organization is obligated to **Send Thank You Note** (within 48 hours).
+   - Donations over $100 have a particularly strict requirement to send the thank-you note.
+
+2. **Event Organization Stream**
+   - The organization **Promotes** exactly one fundraising **Event** (Gala, Auction, or Online Campaign).
+   - After promotion, the **Host Event** must occur.
+   - Following the event, the organization must **Report Results**.
+
+3. **Feedback & Improvement Cycle**
+   - The process requires collecting feedback **at least 3 times** during the campaign.
+   - Every collection of feedback must eventually lead to its **Analysis**.
+   - Analysis must lead to the identification of **Improvement Areas**.
+   - Once improvement areas are identified, they must be implemented within **7 days**.
+
+4. **Closure**
+   - After hosting the event, results are reported.
+   - Records are then **Archived**.
+   - Finally, the entire campaign is **Evaluated**.
+
+### Data Perspective
+
+The model tracks the following data elements:
+- **Donor ID**: Integer (1–10,000)
+- **Donation Type**: Cash, Check, or Online Transfer
+- **Donation Amount**: Floating point value between $10 and $100,000
+- **Event Type**: Gala, Auction, or Online Campaign
+- **Feedback Type**: Positive, Neutral, or Negative
+
+### Key Constraints
+
+- **Exactly one** event promotion is allowed per campaign.
+- There is a maximum **24-day** window between requesting and receiving a donation.
+- A thank-you note must be sent no later than **48 hours** after receiving a donation (especially critical for donations > $100).
+- Improvement actions must be implemented quickly — within **7 days** of identification.
+- Feedback collection is mandatory and must occur at least three times.
+
+The model enforces a well-structured, accountable fundraising lifecycle that combines donor stewardship, event execution, systematic feedback collection, and continuous organizational improvement.

@@ -1,0 +1,11 @@
+Based on the provided model, here is a natural language description of the processes and constraints governing the animal shelter's operations:
+
+The shelter's workflow begins with the **reporting of animal abuse**, which must include details on the **Abuse Severity** (Low, Medium, or High) and the **Animal Species** (Dog, Cat, or Other). Every reported case **must** be followed by an **investigation** of the abuse report. If the abuse severity is **High**, the investigation **must** lead directly to a **rescue** of the abused animal, which records the animal's **Health** (Healthy, Injured, or Sick) and **Age** (0 to 25 years).
+
+After a rescue, the animal **must** receive **veterinary care**. If the animal is **Injured**, this care must happen **immediately** (within 0 hours and 24 hours of the rescue). Following veterinary care, the animal **must** be placed in a **foster home**, which depends on the shelter's current **Capacity** (0 to 500 animals). However, if the animal is **Sick**, the shelter faces a critical choice: it must either provide **veterinary care** or **euthanize** the animal.
+
+For adoption, a **final adoption** can only occur **after** an **adoption screening** has been conducted. The screening determines the **Adoption Status** (Pending, Approved, or Rejected). If the status is **Approved**, the adoption must be finalized **within 7 days**. Every finalized adoption **must** be followed by **ongoing monitoring** of the animal's welfare.
+
+The shelter also has several ongoing obligations. **Public awareness education** must occur at least once. Whenever an abuse report is made, a **donation process** must also be triggered (though not necessarily in response to that specific report). Donations are tracked by **Amount** (between $1.00 and $10,000.00).
+
+Staff and facility management are tightly regulated. **Volunteer applications** can only be approved if the **Volunteer Background Check** is a **Pass**; if it is a **Fail**, the application must **never** be approved. After providing veterinary care, a **checkup** must be scheduled within **30 days**, with a frequency between 7 and 365 days. The shelter facility itself must be **inspected** every **90 days** (repeatedly). Finally, all **staff members** must be **trained**.

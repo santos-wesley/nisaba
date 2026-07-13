@@ -1,0 +1,38 @@
+activity Assess Client Needs
+activity Develop Service Plan
+activity Refer to Specialist
+activity Obtain Funding Approval
+activity Provide Counseling Services
+activity Monitor Client Progress
+activity Adjust Service Plan
+activity Conduct Home Visit
+activity Close Client File
+bind Assess Client Needs: Client Risk Level
+bind Develop Service Plan: Service Plan Duration
+bind Refer to Specialist: Specialist Type
+bind Obtain Funding Approval: Funding Amount Requested
+bind Provide Counseling Services: Counseling Type
+bind Monitor Client Progress: Progress Score
+bind Adjust Service Plan: Adjustment Reason
+bind Conduct Home Visit: Home Visit Outcome
+bind Close Client File: Closure Reason
+Client Risk Level: Low, Medium, High
+Service Plan Duration: integer between 1 and 12
+Specialist Type: Psychiatrist, Addiction Counselor, Legal Aid
+Funding Amount Requested: float between 100.0 and 10000.0
+Counseling Type: Individual, Group, Family
+Progress Score: integer between 0 and 100
+Adjustment Reason: Progress, Setback, New Needs
+Home Visit Outcome: Positive, Neutral, Negative
+Closure Reason: Goals Met, Client Moved, Services Declined
+Init[Assess Client Needs] | |
+End[Close Client File] | |
+Precedence[Develop Service Plan, Assess Client Needs] | | |
+Response[Develop Service Plan, Refer to Specialist] |A.Service Plan Duration > 6 | |0,30,d
+Precedence[Obtain Funding Approval, Develop Service Plan] | | |
+Precedence[Provide Counseling Services, Obtain Funding Approval] | | |
+Response[Provide Counseling Services, Monitor Client Progress] | | |
+Response[Monitor Client Progress, Adjust Service Plan] |A.Progress Score < 50 | |0,7,d
+Not Chain Response[Monitor Client Progress, Adjust Service Plan] | | |
+Response[Assess Client Needs, Conduct Home Visit] |A.Client Risk Level is High | |0,24,h
+Response[Conduct Home Visit, Adjust Service Plan] |A.Home Visit Outcome is Negative | |0,3,d

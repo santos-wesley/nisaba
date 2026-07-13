@@ -1,0 +1,33 @@
+This model describes a structured product return and refund process, incorporating control flow, data attributes, and time constraints. Here is a natural language description of how the process operates:
+
+### **Process Overview**
+The process governs the lifecycle of a customer return, starting from the initial request and moving through approval, shipping, inspection, and final resolution (either refunding, restocking, or disposing of the item). 
+
+### **Data and Attributes**
+Throughout the process, various data attributes are recorded and influence the flow:
+*   **Return Status** (bound to *Request Return, Approve Return, Process Refund*): Tracks the high-level state of the return, transitioning through stages like *Requested, Approved, Shipped, Received, Inspected,* and *Refunded*, all the way to *Restocked* or *Disposed*.
+*   **Return Reason** (bound to *Request Return*): Categorizes the return as *Defective, Damaged, Wrong Item,* or *No Longer Needed*.
+*   **Days Since Purchase** (bound to *Request Return*): An integer between 0 and 365 days.
+*   **Item Condition** (bound to *Inspect Item*): Rated on a scale from 1 to 5.
+*   **Inspection Score** (bound to *Inspect Item*): Rated on a scale from 1 to 10.
+*   **Refund Amount** (bound to *Process Refund*): A monetary value between $0.00 and $1000.00.
+
+### **Control Flow and Sequential Execution**
+1.  **Initiation:** The process strictly begins with the **Request Return** activity.
+2.  **Approval & Labeling:** Once a return is requested, an **Approve Return** activity must eventually follow. Following approval, a **Generate Return Label** activity is triggered.
+3.  **Shipping & Receipt:** Generating a return label establishes a direct succession: the label generation must be followed by the customer **Ship Item Back**, which in turn must eventually be followed by the facility **Receive Item**.
+4.  **Inspection & Refund Determination:** Upon receiving the item, it must be **Inspect Item**. After inspection, the process requires **Determine Refund**, which is subsequently followed by **Process Refund**.
+
+### **Data-Dependent Routing**
+The outcome of the inspection dictates the physical fate of the returned item, based on its condition:
+*   If the **Item Condition** is strictly greater than 3 (meaning the item is in relatively good shape), the system must eventually trigger **Restock Item**.
+*   If the **Item Condition** is 3 or lower (meaning the item is in poor shape), the system must eventually trigger **Dispose Item**.
+
+### **Time Constraints**
+The process enforces strict deadlines to ensure timely operations:
+*   Once a return is requested, it must be approved within **24 hours**.
+*   Once the item is received by the facility, it must be inspected within **48 hours**.
+*   Once the item is received, the refund must be fully processed within **7 days**.
+
+### **Special Conditions for Defective Items**
+There is a specific rule for items returned due to being defective. If the **Return Reason** is "Defective", a **Precedence** constraint is activated: the **Request Return** activity can only occur if the **Inspect Item** activity has already been executed, and this is specifically enforced when the **Inspection Score** is 5 or lower. *(Note: In a real-world execution context, this implies a specific scenario—such as a return system for previously inspected/repaired items—where past inspection data is required before a new return request can be authorized for defective goods).*

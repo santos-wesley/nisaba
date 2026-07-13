@@ -1,0 +1,33 @@
+activity Data Gather
+activity Data Analyze
+activity Report Draft
+activity Report Review
+activity Report Revise
+activity Report Approve
+activity Report Publish
+activity Feedback Collect
+activity Action Plan Create
+activity Actions Implement
+bind Data Gather: ID Data, Type Data
+bind Data Analyze: ID Data, Score Impact
+bind Report Review: ID Reviewer
+bind Report Approve: ID Approval
+bind Feedback Collect: Type Feedback
+bind Report Revise: Type Revision
+ID Data: integer between 1 and 10000
+Type Data: Environmental, Social, Governance
+ID Reviewer: integer between 1 and 5000
+ID Approval: integer between 1 and 5000
+Score Impact: float between 0.0 and 10.0
+Type Feedback: Positive, Negative, Neutral
+Type Revision: Minor, Major
+Init[Data Gather] | |
+End[Report Publish] | |
+Precedence[Data Analyze, Data Gather] | | |
+Chain Response[Data Analyze, Report Draft] | | |
+Precedence[Report Review, Report Draft] | | |
+Chain Succession[Report Review, Report Revise] | | |
+Response[Report Revise, Report Approve] | | |0,48,h
+Chain Response[Report Approve, Report Publish] | | |0,24,h
+Chain Succession[Feedback Collect, Action Plan Create] | | |0,7,d
+Chain Succession[Action Plan Create, Actions Implement] | | |0,30,d

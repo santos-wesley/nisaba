@@ -1,0 +1,22 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a structured campaign and donation management process, beginning with the identification of a donor and ending with a final campaign evaluation. The process is governed by several behavioral rules, data constraints, and timing conditions.
+
+**Process Overview:**
+The workflow starts with the **Identify Donor** activity, which requires a **Donor ID** (an integer between 1 and 10,000). From there, the process branches into two main tracks: donation handling and event management.
+
+**Donation Track:**
+After identifying a donor, the **Contact Donor** activity must eventually be followed by a **Request Donation**. This request is bound to a **Donor ID** and a **Donation Type** (Cash, Check, or Online Transfer). Once a donation is requested, it must be followed by a **Receive Donation** within 24 days (as specified by the time constraint `0,24,d`). The **Receive Donation** activity records a **Donation Amount** (a float between 10 and 100,000). If the donation amount exceeds 100, a **Send Thank You Note** must follow immediately (Chain Response with a data condition). For all donations, the Thank You Note must be sent within 48 hours of receiving the donation.
+
+**Event Track:**
+The model requires exactly one **Promote Event** activity, which is bound to an **Event Type** (Gala, Auction, or Online Campaign). After promoting the event, a **Host Event** must eventually occur. Following the event, the process requires **Report Results**, then **Archive Records**, and finally **Evaluate Campaign** to conclude the process.
+
+**Feedback and Improvement Loop:**
+The model mandates that **Collect Feedback** occurs at least three times (Existence3 constraint). Each feedback instance is bound to a **Feedback Type** (Positive, Neutral, or Negative). Collected feedback must be followed by **Analyze Feedback**, which in turn must be followed by **Identify Improvement Areas**. Once improvement areas are identified, **Implement Improvements** must follow within 7 days (Chain Response with time constraint `0,7,d`).
+
+**Key Constraints:**
+- The process must start with **Identify Donor** and end with **Evaluate Campaign**.
+- All donation requests must eventually lead to a donation receipt (within 24 days).
+- High-value donations (over 100) trigger an immediate thank-you note.
+- Feedback must be collected at least three times and processed through analysis and improvement implementation within strict timeframes.
+- The event promotion occurs exactly once, followed by hosting, reporting, archiving, and final evaluation.

@@ -1,0 +1,37 @@
+activity Fund Transfer Initiate
+activity Transfer Requisition Validate
+activity Transfer Authorize
+activity Transfer Execute
+activity Transfer Document Generate
+activity Transfer Document Assess
+activity Stakeholders Notify
+activity Accounts Reconcile
+activity Transfer Process Close
+bind Fund Transfer Initiate: Identifier Transfer, Amount Transfer, Category Account
+bind Transfer Requisition Validate: Identifier Transfer, State Transfer, Identifier Validator
+bind Transfer Authorize: Identifier Transfer, Identifier Approver
+bind Transfer Execute: Identifier Transfer
+bind Transfer Document Generate: Identifier Transfer
+bind Transfer Document Assess: Identifier Transfer, Degree Discrepancy, Identifier Reviewer
+bind Stakeholders Notify: Identifier Transfer, Method Notification
+bind Accounts Reconcile: Identifier Transfer
+bind Transfer Process Close: Identifier Transfer
+Identifier Transfer: integer between 1 and 999999
+Amount Transfer: float between 0.01 and 1000000.0
+State Transfer: Pending, Validated, Approved, Completed, Rejected
+Category Account: Checking, Savings, Business
+Identifier Validator: integer between 1 and 9999
+Identifier Approver: integer between 1 and 9999
+Method Notification: Email, SMS, Push Notification
+Degree Discrepancy: Low, Medium, High
+Identifier Reviewer: integer between 1 and 9999
+Init[Fund Transfer Initiate] | |
+Chain Succession[Fund Transfer Initiate, Transfer Requisition Validate] | | |
+Chain Succession[Transfer Requisition Validate, Transfer Authorize] | | |
+Chain Succession[Transfer Authorize, Transfer Execute] | | |0,2,h
+Chain Succession[Transfer Execute, Transfer Document Generate] | | |
+Chain Succession[Transfer Document Generate, Transfer Document Assess] | | |
+Chain Succession[Transfer Document Assess, Stakeholders Notify] | | |0,1,h
+Chain Succession[Stakeholders Notify, Accounts Reconcile] | | |
+Chain Succession[Accounts Reconcile, Transfer Process Close] | | |
+End[Transfer Process Close] | |

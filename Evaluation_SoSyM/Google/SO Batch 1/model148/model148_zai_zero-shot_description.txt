@@ -1,0 +1,30 @@
+This natural language description translates the provided Multi-Perspective Declare model into a comprehensive compliance management workflow. 
+
+### **Overview of Activities**
+The compliance process consists of ten core activities: **Conduct Risk Assessment**, **Develop Compliance Plan**, **Implement Controls**, **Monitor Compliance**, **Report Violations**, **Investigate Violations**, **Take Corrective Action**, **Review Compliance Plan**, **Approve Compliance Plan**, and **Train Employees**.
+
+### **Data and Attributes**
+Each activity tracks specific data attributes to provide context:
+*   **Conduct Risk Assessment:** Tracks the *Risk Level* (Low, Medium, High) and an *Assessment Score* (a decimal from 0.0 to 100.0).
+*   **Develop Compliance Plan, Review Compliance Plan, & Approve Compliance Plan:** Track the *Plan Status*, which transitions through Draft, Approved, and Implemented.
+*   **Implement Controls:** Tracks the *Control Type* (Preventative, Detective, or Corrective).
+*   **Monitor Compliance & Take Corrective Action:** Track the *Compliance Status* (Compliant, Non-Compliant, or Pending).
+*   **Report Violations:** Tracks the *Number of Violations* (0 to 100) and the *Reporting Channel* (Email, Phone, or Online Portal).
+*   **Investigate Violations:** Tracks *Violation Severity* (1 to 5) and *Financial Impact* ($0.0 to $1,000,000.0).
+*   **Train Employees:** Tracks the *Training Hours* completed (0 to 40 hours).
+
+### **Process Rules and Constraints**
+
+**1. General Workflow Rules**
+*   The process must begin with **Conducting a Risk Assessment**.
+*   Whenever a **Compliance Plan is Developed**, it must eventually be **Approved**.
+*   If **Violations are Reported**, they must subsequently be **Investigated**.
+*   Once **Violations are Investigated**, **Corrective Action** must be taken.
+*   After a Compliance Plan is **Approved**, it must be **Reviewed**. Conversely, every **Review of the Compliance Plan** must be preceded by its **Approval**. This review must occur within 365 days of the approval.
+*   **Training Employees** must occur at least once during the process.
+
+**2. Conditional and Data-Driven Rules**
+*   **High-Risk Responses:** If a Risk Assessment is conducted and the resulting **Risk Level is "High"**, **Controls must be Implemented** within 30 days of the assessment.
+*   **Non-Compliance Responses:** If Compliance is Monitored and the **Compliance Status is "Non-Compliant"**, **Corrective Action** must be taken within 7 days of the monitoring activity.
+*   **High Volume of Violations:** If **Violations are Reported** and the **Number of Violations exceeds 5**, the **Compliance Plan must be Reviewed** within 14 days of the report.
+*   **High Financial Impact:** If **Violations are Investigated** and the **Financial Impact exceeds $10,000**, the **Compliance Plan must be Reviewed** within 3 days of the investigation.

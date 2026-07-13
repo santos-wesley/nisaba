@@ -1,0 +1,32 @@
+## Activities
+- **Report Animal Abuse**: The 'Report Animal Abuse' activity represents the submission of a report indicating suspected or confirmed animal abuse.
+- **Investigate Abuse Report**: The 'Investigate Abuse Report' activity involves examining and verifying the details of a reported animal abuse case.
+- **Rescue Abused Animal**: The 'Rescue Abused Animal' activity involves physically removing an animal from an abusive situation and bringing it to safety.
+- **Provide Veterinary Care**: The 'Provide Veterinary Care' activity includes administering medical treatment and care to an animal in need.
+- **Find Foster Home**: The 'Find Foster Home' activity involves locating a temporary home for an animal awaiting adoption or recovery.
+- **Conduct Adoption Screening**: The 'Conduct Adoption Screening' activity involves evaluating potential adopters to determine their suitability for adopting an animal.
+- **Finalize Animal Adoption**: The 'Finalize Animal Adoption' activity represents the completion of the legal and administrative process of adopting out an animal.
+- **Monitor Animal Welfare**: The 'Monitor Animal Welfare' activity involves tracking and assessing the ongoing wellbeing of an animal after adoption or placement.
+- **Educate Public Awareness**: The 'Educate Public Awareness' activity involves informing the public about animal welfare issues and responsible pet ownership.
+- **Process Donation**: The 'Process Donation' activity includes receiving and recording monetary or material contributions made to support animal welfare efforts.
+- **Train Staff Member**: The 'Train Staff Member' activity involves providing training to personnel to improve their skills in animal care and welfare.
+- **Inspect Shelter Facility**: The 'Inspect Shelter Facility' activity involves examining the shelter's premises to ensure compliance with safety and welfare standards.
+- **Approve Volunteer Application**: The 'Approve Volunteer Application' activity involves reviewing and granting approval to individuals applying to volunteer.
+- **Schedule Animal Checkup**: The 'Schedule Animal Checkup' activity involves arranging routine medical examinations for animals under care.
+- **Euthanize Animal**: The 'Euthanize Animal' activity represents the humane ending of an animal's life, typically due to severe suffering or illness.
+
+## Attributes
+- **Abuse Severity: Low, Medium, High**: The attribute 'Abuse Severity: Low, Medium, High' specifies the level of severity associated with a reported case of animal abuse.
+- **Animal Species: Dog, Cat, Other**: The attribute 'Animal Species: Dog, Cat, Other' specifies the species classification of the animal involved.
+- **Animal Age: Integer between 0 and 25**: The attribute 'Animal Age: Integer between 0 and 25' represents the age of the animal in years.
+- **Animal Health: Healthy, Injured, Sick**: The attribute 'Animal Health: Healthy, Injured, Sick' specifies the current health condition of the animal.
+- **Donation Amount: Float between 1.0 and 10000.0**: The attribute 'Donation Amount: Float between 1.0 and 10000.0' represents the monetary value of a donation made.
+- **Adoption Status: Pending, Approved, Rejected**: The attribute 'Adoption Status: Pending, Approved, Rejected' specifies the current status of an adoption application.
+- **Shelter Capacity: Integer between 0 and 500**: The attribute 'Shelter Capacity: Integer between 0 and 500' represents the number of animals the shelter or foster facility can accommodate.
+- **Volunteer Background Check: Pass, Fail**: The attribute 'Volunteer Background Check: Pass, Fail' specifies the outcome of the background check performed on a volunteer applicant.
+- **Checkup Frequency: Integer between 7 and 365**: The attribute 'Checkup Frequency: Integer between 7 and 365' represents the number of days between scheduled animal checkups.
+
+## Binds
+
+## Constraints
+

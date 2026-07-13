@@ -1,0 +1,48 @@
+# Multi-Perspective Declare Model Description
+
+This model describes a **client therapy treatment process**, encompassing the workflow from initial assessment through treatment completion, along with the data attributes and constraints governing each activity.
+
+## Activities and Data Attributes
+
+The process consists of ten activities, each associated with specific data fields:
+
+- **Assess Initial Condition**: records a Client ID
+- **Develop Treatment Plan**: records a Client ID and the assigned Therapist ID
+- **Schedule First Session**: records a Client ID
+- **Conduct Therapy Session**: records a Client ID and the Session Type (Initial, Follow-Up, or Crisis)
+- **Evaluate Progress**: records a Client ID and a Progress Score (0.0–100.0)
+- **Adjust Treatment Plan**: records a Client ID, Progress Score, and Treatment Status (Ongoing, Adjusted, or Completed)
+- **Provide Feedback**: records a Client ID and Feedback Type (Positive, Neutral, or Negative)
+- **Schedule Follow-Up**: records a Client ID
+- **Complete Treatment**: records a Client ID
+- **Conduct Final Assessment**: records a Client ID, Therapist ID, and Progress Score
+
+Client IDs range from 1 to 999,999, and Therapist IDs range from 1 to 9,999.
+
+## Control-Flow Behavior
+
+**Process Start and End**
+The process must **begin** with *Assess Initial Condition* and must **end** with *Conduct Final Assessment*.
+
+**Ordering Constraints**
+- *Develop Treatment Plan* must be preceded by *Assess Initial Condition* at some earlier point.
+- Once *Develop Treatment Plan* occurs, it must be **immediately followed** by *Schedule First Session* (chain response).
+- Every occurrence of *Schedule First Session* must eventually be followed by *Conduct Therapy Session*.
+- Conversely, *Conduct Therapy Session* must be preceded by *Schedule First Session*, and this precedence relationship must occur within **30 minutes**.
+- *Evaluate Progress* must be preceded by *Conduct Therapy Session*.
+- Every *Evaluate Progress* must eventually be followed by *Adjust Treatment Plan*.
+- *Adjust Treatment Plan* must be **immediately followed** by *Provide Feedback* (chain response).
+- *Provide Feedback* must be **immediately followed** by *Schedule Follow-Up*, and this must happen within a window of **48 hours**.
+- *Conduct Final Assessment* must be preceded by *Complete Treatment*.
+
+**Frequency Constraints**
+- *Conduct Therapy Session* must occur **at least 3 times** during the process.
+- *Provide Feedback* may occur **at most 5 times**.
+
+**Mutual Exclusion and Negative Relations**
+- *Schedule First Session* and *Schedule Follow-Up* cannot both occur within the same process instance (not co-existence).
+- If *Adjust Treatment Plan* occurs, it must **never be followed** by *Complete Treatment* later in the trace (not succession) — implying treatment adjustments should not lead directly into treatment completion without further evaluation.
+
+## Summary
+
+This model enforces a structured therapeutic workflow: assessment initiates the process, followed by treatment planning, scheduling, and repeated therapy sessions (at least three). Progress evaluations trigger plan adjustments, which are tightly coupled with feedback provision and follow-up scheduling within strict timing constraints. The process concludes with a final assessment, contingent on treatment completion, while ensuring that adjusted treatment plans are not conflated with treatment completion.

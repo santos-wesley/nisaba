@@ -1,0 +1,50 @@
+# Multi-Perspective Declare Model Description
+
+This process model describes a **software development and deployment lifecycle**, encompassing project planning, development, testing, deployment, and ongoing maintenance based on user feedback.
+
+## Activities and Their Associated Data
+
+The process consists of ten activities, each of which captures a specific data attribute when executed:
+
+1. **Define Project Scope** – records the *Project Status* (Initiated, In Progress, Completed, or Delayed)
+2. **Design Database Schema** – records the *Development Time* (an integer between 10 and 2000, presumably in hours or days)
+3. **Develop Frontend Interface** – records the *Budget Allocated* (a monetary value between 1,000.0 and 500,000.0)
+4. **Implement Backend Logic** – records the *Payment Method* used (Credit Card, PayPal, or Stripe)
+5. **Integrate Payment Gateway** – records the *Number of Users* (between 0 and 1,000,000)
+6. **Test System Functionality** – records the *Transaction Volume* (between 0.0 and 10,000,000.0)
+7. **Deploy Application to Server** – records the *Deployment Environment* (Development, Staging, or Production)
+8. **Monitor System Performance** – records the *Number of Bugs* found (between 0 and 1,000)
+9. **Gather User Feedback** – records the *User Satisfaction* score (between 1.0 and 5.0)
+10. **Update System Based on Feedback** – records the *Feedback Type* (Bug Report, Feature Request, or Improvement Suggestion)
+
+## Control-Flow Behavior
+
+- **The process must begin with "Define Project Scope"**, as it is the mandatory initial activity.
+
+- **Ordering constraints**: "Develop Frontend Interface" cannot happen unless "Design Database Schema" has occurred beforehand. Additionally, exactly one of "Design Database Schema" or "Develop Frontend Interface" must eventually occur (they represent alternative choices, though not mutually exclusive in strict terms).
+
+- **Dependency constraints**: Whenever "Implement Backend Logic" occurs, "Integrate Payment Gateway" must eventually follow. Similarly, whenever "Deploy Application to Server" happens, "Monitor System Performance" must eventually follow — and these two activities have a strict succession relationship, meaning deployment always precedes and necessitates monitoring, and monitoring never happens without a prior deployment.
+
+- **Co-occurrence**: "Test System Functionality" and "Deploy Application to Server" are linked such that if one occurs in the process, the other must occur as well (in either order).
+
+- **Negative constraints**: "Define Project Scope" and "Gather User Feedback" cannot be ordered such that scope definition precedes feedback gathering (Not Precedence) — feedback gathering must not follow project scope definition in that causal sense. Likewise, "Update System Based on Feedback" must not be triggered as a direct response to "Define Project Scope" (Not Response).
+
+- **Frequency constraints**: "Update System Based on Feedback" must occur **at least once** during the process. Conversely, "Test System Functionality" must occur **no more than 5 times** (Absence5).
+
+## Data-Aware and Time-Aware Conditions
+
+Several rules combine control-flow with data conditions and timing constraints:
+
+- If **"Define Project Scope"** is executed with *Project Status = Delayed*, then **"Design Database Schema"** must eventually follow, and when it does, its *Development Time* must exceed 1000.
+
+- If **"Implement Backend Logic"** is executed using *Credit Card* as the payment method, then **"Integrate Payment Gateway"** must follow within **1 hour**, and at that point the *Number of Users* must exceed 1,000.
+
+- If **"Deploy Application to Server"** occurs in a *Production* environment, then **"Monitor System Performance"** must follow within **24 hours**, recording *fewer than 10 bugs*.
+
+- If **"Gather User Feedback"** results in a *User Satisfaction* score below 3, then **"Update System Based on Feedback"** must follow within **1 day**, and the feedback must be classified as a *Bug Report*.
+
+- If **"Test System Functionality"** reveals a *Transaction Volume* exceeding 1,000,000, then **"Integrate Payment Gateway"** must follow within **7 days**, at which point the *Number of Users* must exceed 10,000.
+
+## Summary
+
+This model represents a realistic software delivery pipeline where project scoping initiates all work, development and testing activities are interlinked, deployment triggers mandatory monitoring, and user feedback loops drive system updates — with strict data-dependent thresholds and time-bound responses ensuring quality control, scalability readiness, and responsiveness to critical issues (like low satisfaction scores or bug-heavy deployments).

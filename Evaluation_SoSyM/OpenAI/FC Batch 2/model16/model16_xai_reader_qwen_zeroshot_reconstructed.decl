@@ -1,0 +1,49 @@
+activity Identify Donor
+activity Contact Donor
+activity Request Donation
+activity Receive Donation
+activity Send Thank You Note
+activity Promote Event
+activity Host Event
+activity Report Results
+activity Collect Feedback
+activity Analyze Feedback
+activity Identify Improvement Areas
+activity Implement Improvements
+activity Archive Records
+activity Evaluate Campaign
+bind Identify Donor: Donor ID
+bind Contact Donor: Donor ID
+bind Request Donation: Donor ID
+bind Receive Donation: Donor ID, Donation Type, Donation Amount
+bind Send Thank You Note: Donor ID
+bind Promote Event: Event Type
+bind Host Event: Event Type
+bind Report Results: Event Type
+bind Collect Feedback: Feedback Type
+bind Analyze Feedback: Feedback Type
+bind Identify Improvement Areas: 
+bind Implement Improvements: 
+bind Archive Records: 
+bind Evaluate Campaign: 
+Donor ID: integer between 1 and 10000
+Donation Type: Cash, Check, Online Transfer
+Donation Amount: float between 10.0 and 100000.0
+Event Type: Gala, Auction, Online Campaign
+Feedback Type: Positive, Neutral, Negative
+Init[Identify Donor] | |
+End[Evaluate Campaign] | |
+Chain Precedence[Contact Donor, Identify Donor] | |A.Donor ID == T.Donor ID |
+Chain Precedence[Request Donation, Contact Donor] | |A.Donor ID == T.Donor ID |
+Response[Request Donation, Receive Donation] | |A.Donor ID == T.Donor ID |0,24,d
+Response[Receive Donation, Send Thank You Note] | |A.Donor ID == T.Donor ID |0,48,h
+Response[Receive Donation, Send Thank You Note] |A.Donation Amount > 100 |A.Donor ID == T.Donor ID |0,48,h
+Exactly[Promote Event] | |
+Chain Precedence[Host Event, Promote Event] | |A.Event Type == T.Event Type |
+Chain Precedence[Report Results, Host Event] | |A.Event Type == T.Event Type |
+Existence3[Collect Feedback] | |
+Response[Collect Feedback, Analyze Feedback] | |A.Feedback Type == T.Feedback Type |
+Response[Analyze Feedback, Identify Improvement Areas] | | |
+Response[Identify Improvement Areas, Implement Improvements] | | |0,7,d
+Precedence[Archive Records, Report Results] | | |
+Precedence[Evaluate Campaign, Archive Records] | | |

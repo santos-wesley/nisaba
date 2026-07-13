@@ -1,0 +1,58 @@
+activity Report Incident
+activity Assess Impact
+activity Prioritize Incident
+activity Assign Incident
+activity Investigate Incident
+activity Resolve Incident
+activity Verify Resolution
+activity Close Incident
+activity Escalate Incident
+activity Document Incident
+bind Report Incident: Status
+bind Assess Impact: Impact Level, Assessment Time
+bind Prioritize Incident: Priority
+bind Assign Incident: Assigned Team ID
+bind Investigate Incident: Investigation Time
+bind Resolve Incident: Resolution Time
+bind Verify Resolution: Verification Result
+bind Close Incident: Status
+bind Escalate Incident: Escalation Level
+bind Document Incident: Document ID
+Impact Level: integer between 1 and 5
+Priority: Low, Medium, High, Critical
+Resolution Time: float between 0.1 and 72.0
+Status: New, In Progress, Resolved, Closed
+Assigned Team ID: integer between 1 and 100
+Verification Result: Successful, Failed
+Investigation Time: float between 0.5 and 48.0
+Escalation Level: None, Level 1, Level 2, Level 3
+Document ID: integer between 1000 and 9999
+Assessment Time: float between 0.1 and 24.0
+Init[Report Incident] | |
+End[Close Incident] | |
+Existence[Assess Impact] | |
+Existence[Investigate Incident] | |
+Absence3[Escalate Incident] | |
+Exactly[Verify Resolution] | |
+Responded Existence[Escalate Incident, Document Incident] | | |
+Precedence[Prioritize Incident, Assess Impact] | | |
+Precedence[Assign Incident, Prioritize Incident] | | |
+Precedence[Resolve Incident, Investigate Incident] | | |
+Response[Report Incident, Assess Impact] |A.Status is New | |
+Response[Assign Incident, Investigate Incident] | | |
+Response[Resolve Incident, Verify Resolution] | | |
+Succession[Verify Resolution, Close Incident] |A.Verification Result is Successful | |
+Alternate Precedence[Close Incident, Verify Resolution] | | |
+Alternate Response[Assess Impact, Prioritize Incident] | | |
+Chain Response[Assign Incident, Investigate Incident] | | |
+Chain Precedence[Close Incident, Verify Resolution] | | |
+Co-Existence[Escalate Incident, Document Incident] | | |
+Choice[Resolve Incident, Escalate Incident] | | |
+Not Co-Existence[Close Incident, Escalate Incident] |A.Status is Closed |T.Escalation Level is Level 3 |
+Not Responded Existence[Report Incident, Close Incident] |A.Status is New | |
+Not Precedence[Close Incident, Assess Impact] | | |
+Not Response[Close Incident, Investigate Incident] | | |
+Not Succession[Verify Resolution, Close Incident] |A.Verification Result is Failed | |
+Not Chain Precedence[Close Incident, Report Incident] | | |
+Not Chain Response[Escalate Incident, Close Incident] | | |
+Not Chain Succession[Document Incident, Report Incident] | | |

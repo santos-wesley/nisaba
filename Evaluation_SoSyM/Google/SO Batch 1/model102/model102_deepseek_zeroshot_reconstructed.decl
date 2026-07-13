@@ -1,0 +1,38 @@
+activity Submit Timesheet
+activity Approve Timesheet
+activity Calculate Gross Pay
+activity Calculate Deductions
+activity Calculate Net Pay
+activity Process Payment
+activity Update Payroll Records
+activity Review Payroll Report
+activity Distribute Paystub
+bind Submit Timesheet: Employee ID, Hours Worked, Timesheet Status
+bind Approve Timesheet: Employee ID, Timesheet Status
+bind Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay
+bind Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction
+bind Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay
+bind Process Payment: Employee ID, Net Pay, Payment Method
+bind Update Payroll Records: 
+bind Review Payroll Report: 
+bind Distribute Paystub: 
+Employee ID: integer between 0 and 999999
+Hours Worked: integer between 0 and 80
+Timesheet Status: Submitted, Approved, Rejected
+Pay Rate: float between 10.0 and 100.0
+Gross Pay: float between None and None
+Tax Deduction: float between None and None
+Insurance Deduction: float between None and None
+Net Pay: float between None and None
+Payment Method: Direct Deposit, Check
+Init[Submit Timesheet] | |
+Succession[Submit Timesheet, Approve Timesheet] | | |
+Succession[Approve Timesheet, Calculate Gross Pay] | | |
+Succession[Calculate Gross Pay, Calculate Deductions] | | |
+Succession[Calculate Deductions, Calculate Net Pay] | | |
+Succession[Calculate Net Pay, Process Payment] | | |
+Succession[Process Payment, Update Payroll Records] | | |
+Succession[Update Payroll Records, Review Payroll Report] | | |
+Succession[Review Payroll Report, Distribute Paystub] | | |
+Not Succession[Approve Timesheet, Submit Timesheet] | | |
+Succession[Process Payment, Distribute Paystub] | | |0,24,h

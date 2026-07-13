@@ -1,0 +1,56 @@
+## Activities
+- **Prepare Sample**: The 'Prepare Sample' activity represents the preparation of a material sample for subsequent testing and analysis.
+- **Conduct X-ray Diffraction**: The 'Conduct X-ray Diffraction' activity involves performing X-ray diffraction analysis to determine the crystalline structure of the material.
+- **Measure Hardness**: The 'Measure Hardness' activity involves measuring the hardness of the material sample using appropriate testing methods.
+- **Analyze Microstructure**: The 'Analyze Microstructure' activity involves examining and characterizing the microstructure of the material sample.
+- **Perform Thermal Analysis**: The 'Perform Thermal Analysis' activity involves conducting thermal analysis to evaluate the thermal properties of the material.
+- **Conduct Tensile Test**: The 'Conduct Tensile Test' activity involves performing a tensile test to measure the material's tensile strength.
+- **Evaluate Corrosion Resistance**: The 'Evaluate Corrosion Resistance' activity involves assessing the material's ability to resist corrosion under specified conditions.
+- **Perform Chemical Analysis**: The 'Perform Chemical Analysis' activity involves conducting chemical analysis to determine the chemical composition and purity of the material.
+- **Document Results**: The 'Document Results' activity involves recording and documenting all test results and findings from the material analysis.
+- **Review Findings**: The 'Review Findings' activity involves reviewing the documented results and findings to make informed decisions about the material.
+- **Approve Material**: The 'Approve Material' activity represents the formal approval of the material based on satisfactory test results and review.
+- **Reject Material**: The 'Reject Material' activity represents the formal rejection of the material due to unsatisfactory test results or findings.
+- **Store Sample**: The 'Store Sample' activity involves storing the material sample for future reference or further testing.
+- **Calibrate Equipment**: The 'Calibrate Equipment' activity involves calibrating testing equipment to ensure accurate and reliable measurements.
+- **Prepare Report**: The 'Prepare Report' activity involves compiling and preparing a comprehensive report summarizing all tests, results, and conclusions.
+
+## Attributes
+- **Sample ID: integer between 1 and 1000**: The attribute 'Sample ID: integer between 1 and 1000' represents the unique identification number assigned to each material sample for tracking purposes.
+- **Hardness Value: float between 0.0 and 100.0**: The attribute 'Hardness Value: float between 0.0 and 100.0' represents the measured hardness value of the material sample.
+- **Tensile Strength: float between 0.0 and 2000.0**: The attribute 'Tensile Strength: float between 0.0 and 2000.0' represents the measured tensile strength of the material sample.
+- **Corrosion Resistance: High, Medium, Low**: The attribute 'Corrosion Resistance: High, Medium, Low' specifies the corrosion resistance rating of the material sample.
+- **Approval Status: Approved, Rejected, Pending**: The attribute 'Approval Status: Approved, Rejected, Pending' indicates the current approval status of the material sample.
+- **Thermal Conductivity: float between 0.0 and 500.0**: The attribute 'Thermal Conductivity: float between 0.0 and 500.0' represents the measured thermal conductivity of the material sample.
+- **Microstructure Type: Grain, Fiber, Amorphous**: The attribute 'Microstructure Type: Grain, Fiber, Amorphous' specifies the type of microstructure observed in the material sample.
+- **Chemical Purity: float between 0.0 and 100.0**: The attribute 'Chemical Purity: float between 0.0 and 100.0' represents the chemical purity percentage of the material sample.
+- **Equipment Status: Calibrated, Not Calibrated**: The attribute 'Equipment Status: Calibrated, Not Calibrated' indicates whether the testing equipment has been calibrated.
+
+## Binds
+- **Prepare Sample: Sample ID**: The bind 'Prepare Sample: Sample ID' specifies that the activity 'Prepare Sample' requires the attribute 'Sample ID'.
+- **Measure Hardness: Hardness Value**: The bind 'Measure Hardness: Hardness Value' links the 'Measure Hardness' activity with the attribute 'Hardness Value'.
+- **Conduct Tensile Test: Tensile Strength**: The bind 'Conduct Tensile Test: Tensile Strength' links the 'Conduct Tensile Test' activity with the attribute 'Tensile Strength'.
+- **Evaluate Corrosion Resistance: Corrosion Resistance**: The bind 'Evaluate Corrosion Resistance: Corrosion Resistance' links the 'Evaluate Corrosion Resistance' activity with the attribute 'Corrosion Resistance'.
+- **Approve Material: Approval Status**: The bind 'Approve Material: Approval Status' links the 'Approve Material' activity with the attribute 'Approval Status'.
+- **Perform Thermal Analysis: Thermal Conductivity**: The bind 'Perform Thermal Analysis: Thermal Conductivity' links the 'Perform Thermal Analysis' activity with the attribute 'Thermal Conductivity'.
+- **Analyze Microstructure: Microstructure Type**: The bind 'Analyze Microstructure: Microstructure Type' links the 'Analyze Microstructure' activity with the attribute 'Microstructure Type'.
+- **Perform Chemical Analysis: Chemical Purity**: The bind 'Perform Chemical Analysis: Chemical Purity' links the 'Perform Chemical Analysis' activity with the attribute 'Chemical Purity'.
+- **Calibrate Equipment: Equipment Status**: The bind 'Calibrate Equipment: Equipment Status' links the 'Calibrate Equipment' activity with the attribute 'Equipment Status'.
+
+## Constraints
+- **Init[Prepare Sample] | |**: The 'Prepare Sample' must be the first activity to occur in the process.
+- **End[Approve Material] | |**: The 'Approve Material' must be the last activity to occur in the process.
+- **End[Reject Material] | |**: The 'Reject Material' must be the last activity to occur in the process.
+- **Response[Conduct X-ray Diffraction, Analyze Microstructure] | |A.Sample ID == T.Sample ID |0,2,h**: If a 'Conduct X-ray Diffraction' activity occurs, then an 'Analyze Microstructure' activity must eventually occur after the 'Conduct X-ray Diffraction' event at some point in the same process instance, with the condition that the Sample ID of the 'Conduct X-ray Diffraction' activity equals the Sample ID of the 'Analyze Microstructure' activity, and this must happen within 0 to 2 hours.
+- **Chain Response[Measure Hardness, Conduct Tensile Test] | |A.Sample ID == T.Sample ID |0,1,h**: Whenever a 'Measure Hardness' activity occurs, it must be immediately followed by a 'Conduct Tensile Test' activity in the next event position, with no other events in between, with the condition that the Sample ID of the 'Measure Hardness' activity equals the Sample ID of the 'Conduct Tensile Test' activity, and this must happen within 0 to 1 hour.
+- **Succession[Perform Thermal Analysis, Evaluate Corrosion Resistance] | |A.Sample ID == T.Sample ID |0,1,d**: A 'Perform Thermal Analysis' activity must be followed by an 'Evaluate Corrosion Resistance' activity at some point later in the same process instance. Conversely, an 'Evaluate Corrosion Resistance' event can occur only if a 'Perform Thermal Analysis' event has occurred before it within the same process instance, with the condition that the Sample ID of the 'Perform Thermal Analysis' activity equals the Sample ID of the 'Evaluate Corrosion Resistance' activity, and this must happen within 0 to 1 day.
+- **Precedence[Document Results, Review Findings] | |A.Sample ID == T.Sample ID |**: The 'Review Findings' activity is permitted to occur only if a 'Document Results' activity has occurred before it within the same process instance, with the condition that the Sample ID of the 'Document Results' activity equals the Sample ID of the 'Review Findings' activity.
+- **Precedence[Approve Material, Review Findings] | |A.Sample ID == T.Sample ID |**: The 'Review Findings' activity is permitted to occur only if an 'Approve Material' activity has occurred before it within the same process instance, with the condition that the Sample ID of the 'Approve Material' activity equals the Sample ID of the 'Review Findings' activity.
+- **Precedence[Reject Material, Review Findings] | |A.Sample ID == T.Sample ID |**: The 'Review Findings' activity is permitted to occur only if a 'Reject Material' activity has occurred before it within the same process instance, with the condition that the Sample ID of the 'Reject Material' activity equals the Sample ID of the 'Review Findings' activity.
+- **Precedence[Conduct X-ray Diffraction, Calibrate Equipment] | |A.Equipment Status is Calibrated |**: The 'Calibrate Equipment' activity is permitted to occur only if a 'Conduct X-ray Diffraction' activity has occurred before it within the same process instance, with the condition that the Equipment Status of the 'Conduct X-ray Diffraction' activity is 'Calibrated'.
+- **Precedence[Measure Hardness, Calibrate Equipment] | |A.Equipment Status is Calibrated |**: The 'Calibrate Equipment' activity is permitted to occur only if a 'Measure Hardness' activity has occurred before it within the same process instance, with the condition that the Equipment Status of the 'Measure Hardness' activity is 'Calibrated'.
+- **Precedence[Conduct Tensile Test, Calibrate Equipment] | |A.Equipment Status is Calibrated |**: The 'Calibrate Equipment' activity is permitted to occur only if a 'Conduct Tensile Test' activity has occurred before it within the same process instance, with the condition that the Equipment Status of the 'Conduct Tensile Test' activity is 'Calibrated'.
+- **Precedence[Perform Thermal Analysis, Calibrate Equipment] | |A.Equipment Status is Calibrated |**: The 'Calibrate Equipment' activity is permitted to occur only if a 'Perform Thermal Analysis' activity has occurred before it within the same process instance, with the condition that the Equipment Status of the 'Perform Thermal Analysis' activity is 'Calibrated'.
+- **Precedence[Evaluate Corrosion Resistance, Calibrate Equipment] | |A.Equipment Status is Calibrated |**: The 'Calibrate Equipment' activity is permitted to occur only if an 'Evaluate Corrosion Resistance' activity has occurred before it within the same process instance, with the condition that the Equipment Status of the 'Evaluate Corrosion Resistance' activity is 'Calibrated'.
+- **Precedence[Prepare Report, Document Results] | |A.Sample ID == T.Sample ID |0,1,d**: The 'Document Results' activity is permitted to occur only if a 'Prepare Report' activity has occurred before it within the same process instance, with the condition that the Sample ID of the 'Prepare Report' activity equals the Sample ID of the 'Document Results' activity, and this must happen within 0 to 1 day.
+

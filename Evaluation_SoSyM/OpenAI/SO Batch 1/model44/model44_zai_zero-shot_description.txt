@@ -1,0 +1,35 @@
+This Multi-Perspective Declare model outlines a structured IT Incident Management process, defining the lifecycle of an incident from the moment it is reported until it is closed and documented. The model integrates control-flow constraints with specific data attributes, time limits, and conditional rules. 
+
+Here is a natural language description of the model:
+
+### 1. Process Start and End
+The incident management process strictly begins with the **Report Incident** activity and concludes with the **Close Incident** activity. 
+
+### 2. Initial Assessment and Prioritization
+Once an incident is reported, the system mandates that an **Assess Impact** activity must follow within 24 hours. Following the impact assessment, a **Prioritize Incident** activity must occur. The model enforces a strict succession here: assessing the impact is a prerequisite for prioritizing the incident, and prioritization cannot happen without a prior impact assessment.
+
+### 3. Assignment and Investigation
+Before an incident can be prioritized as "High" or "Critical", it must have been previously assigned to a team via the **Assign Incident** activity. Once assigned, the incident enters the investigation phase. The **Investigate Incident** activity is a strict prerequisite for the **Resolve Incident** activity, meaning no incident can be resolved without having been investigated first.
+
+### 4. Resolution and Verification
+After an incident is resolved, a **Verify Resolution** activity must be executed within 48 hours. The outcome of this verification dictates the next steps based on data conditions:
+*   If the verification is **Successful**, the process moves toward closure.
+*   If the verification **Fails**, it triggers a mandatory **Escalate Incident** activity. 
+
+### 5. Documentation and Closure
+To successfully close an incident, the incident must first be documented via the **Document Incident** activity. The model enforces a strict succession between these two: documentation is required before closure, and closure is the ultimate conclusion of the documentation step.
+
+### 6. Escalation Constraints
+The model imposes a strict limitation on escalations: the **Escalate Incident** activity can occur at most once during the entire lifecycle of a single incident (Absence2 constraint). 
+
+### 7. Data and Attribute Bindings
+Throughout this process, specific data attributes are bound to activities to track the incident's progress and enforce the rules mentioned above:
+*   **Report Incident & Close Incident:** Both track the overall **Status** of the incident (New, In Progress, Resolved, Closed).
+*   **Assess Impact:** Records the **Impact Level** (an integer from 1 to 5) and the **Assessment Time** (a float between 0.1 and 24.0 hours).
+*   **Prioritize Incident:** Assigns a **Priority** level (Low, Medium, High, Critical). This attribute is crucial for the conditional assignment rule mentioned in Section 3.
+*   **Assign Incident:** Records the **Assigned Team ID** (an integer between 1 and 100).
+*   **Investigate Incident:** Logs the **Investigation Time** (a float between 0.5 and 48.0 hours).
+*   **Resolve Incident:** Logs the **Resolution Time** (a float between 0.1 and 72.0 hours).
+*   **Verify Resolution:** Records the **Verification Result** (Successful or Failed). This attribute drives the conditional escalation rule mentioned in Section 4.
+*   **Escalate Incident:** Assigns an **Escalation Level** (None, Level 1, Level 2, Level 3).
+*   **Document Incident:** Generates a **Document ID** (an integer between 1000 and 9999).

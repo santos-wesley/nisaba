@@ -1,0 +1,47 @@
+activity Prepare Sample
+activity Calibrate Equipment
+activity X-ray Diffraction
+activity Microstructure Analysis
+activity Hardness Measurement
+activity Tensile Test
+activity Thermal Analysis
+activity Corrosion Resistance Evaluation
+activity Document Results
+activity Review Findings
+activity Prepare Report
+activity Approve Material
+activity Reject Material
+bind Prepare Sample: Sample ID
+bind Calibrate Equipment: Equipment Status
+bind X-ray Diffraction: Sample ID
+bind Microstructure Analysis: Sample ID
+bind Hardness Measurement: Sample ID, Hardness Value
+bind Tensile Test: Sample ID, Tensile Strength
+bind Thermal Analysis: Sample ID, Thermal Conductivity
+bind Corrosion Resistance Evaluation: Sample ID, Corrosion Rate
+bind Document Results: Sample ID
+bind Review Findings: Sample ID
+bind Prepare Report: Sample ID
+bind Approve Material: Sample ID, Approval Status
+bind Reject Material: Sample ID, Approval Status
+Sample ID: integer between 1 and 1000
+Equipment Status: Calibrated, Not Calibrated
+Hardness Value: float between 0.0 and 1000.0
+Tensile Strength: float between 0.0 and 10000.0
+Corrosion Rate: float between 0.0 and 100.0
+Thermal Conductivity: float between 0.0 and 1000.0
+Approval Status: Approved, Rejected
+Init[Prepare Sample] | |
+Choice[Approve Material, Reject Material] | | |
+Response[X-ray Diffraction, Microstructure Analysis] | |A.Sample ID == T.Sample ID |0,2,h
+Chain Response[Hardness Measurement, Tensile Test] | |A.Sample ID == T.Sample ID |0,1,h
+Succession[Thermal Analysis, Corrosion Resistance Evaluation] | |A.Sample ID == T.Sample ID |0,1,d
+Precedence[Review Findings, Document Results] | |A.Sample ID == T.Sample ID |
+Precedence[Approve Material, Review Findings] | |A.Sample ID == T.Sample ID |
+Precedence[Reject Material, Review Findings] | |A.Sample ID == T.Sample ID |
+Precedence[X-ray Diffraction, Calibrate Equipment] |A.Equipment Status is Calibrated | |
+Precedence[Hardness Measurement, Calibrate Equipment] |A.Equipment Status is Calibrated | |
+Precedence[Tensile Test, Calibrate Equipment] |A.Equipment Status is Calibrated | |
+Precedence[Thermal Analysis, Calibrate Equipment] |A.Equipment Status is Calibrated | |
+Precedence[Corrosion Resistance Evaluation, Calibrate Equipment] |A.Equipment Status is Calibrated | |
+Precedence[Prepare Report, Document Results] | |A.Sample ID == T.Sample ID |0,1,d

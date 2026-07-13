@@ -1,0 +1,42 @@
+# Compliance Management Process Description
+
+This process model describes a compliance management system involving ten key activities, each with specific data attributes, along with the business rules governing their execution.
+
+## Activities and Their Data Attributes
+
+1. **Conduct Risk Assessment** – captures the **Risk Level** (Low, Medium, or High) and an **Assessment Score** (a numeric value between 0.0 and 100.0)
+2. **Develop Compliance Plan** – tracks the **Plan Status** (Draft, Approved, or Implemented)
+3. **Implement Controls** – records the **Control Type** used (Preventative, Detective, or Corrective)
+4. **Monitor Compliance** – records the current **Compliance Status** (Compliant, Non-Compliant, or Pending)
+5. **Report Violations** – logs the **Number of Violations** (0–100) and the **Reporting Channel** used (Email, Phone, or Online Portal)
+6. **Investigate Violations** – documents the **Violation Severity** (an integer from 1 to 5) and the **Financial Impact** (a monetary value between 0.0 and 1,000,000.0)
+7. **Take Corrective Action** – updates the **Compliance Status**
+8. **Review Compliance Plan** – tracks the **Plan Status**
+9. **Approve Compliance Plan** – tracks the **Plan Status**
+10. **Train Employees** – records the **Training Hours** delivered (an integer between 0 and 40)
+
+## Process Flow and Control Rules
+
+**Mandatory Start:**
+The process must begin with a **Conduct Risk Assessment** activity, marking it as the initial step.
+
+**Sequential Dependencies (Response Constraints):**
+- Whenever a **Develop Compliance Plan** occurs, it must eventually be followed by an **Approve Compliance Plan**.
+- Whenever violations are reported (**Report Violations**), an **Investigate Violations** activity must eventually follow.
+- Whenever violations are investigated (**Investigate Violations**), a **Take Corrective Action** activity must eventually follow.
+
+**Alternating Requirement:**
+- **Approve Compliance Plan** and **Review Compliance Plan** must alternate strictly with one another — each approval must be followed by a review before another approval can occur, and vice versa. This alternation must happen within a maximum window of 365 days between occurrences.
+
+**Mandatory Activity:**
+- **Train Employees** must occur at least once during the process, ensuring all personnel receive some compliance training.
+
+**Conditional Time-Bound Responses:**
+- If a **Conduct Risk Assessment** results in a **High** Risk Level, then **Implement Controls** must occur within 30 days afterward.
+- If **Monitor Compliance** reveals a **Non-Compliant** status, then **Take Corrective Action** must be executed within 7 days.
+- If **Report Violations** records more than 5 violations, then a **Review Compliance Plan** must take place within 14 days.
+- If **Investigate Violations** finds a **Financial Impact** exceeding 10,000, then a **Review Compliance Plan** must occur within 3 days, reflecting the urgency of high-impact issues.
+
+## Summary
+
+This model represents a structured compliance lifecycle: starting with risk assessment, proceeding through plan development and approval, implementing controls, continuously monitoring compliance, and reactively investigating and correcting violations. The model enforces strict time-sensitive escalation paths — especially for high-risk assessments, non-compliance findings, and financially significant violations — ensuring that compliance issues are addressed promptly and that governance activities (plan approval and review) remain properly synchronized throughout the process lifecycle.

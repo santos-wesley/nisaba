@@ -1,0 +1,25 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a **compliance and risk management process** within an organization. The process consists of ten key activities that form a structured compliance lifecycle with several conditional and time-sensitive constraints.
+
+### Process Flow
+
+The process begins with **Conduct Risk Assessment**, which is the only activity that can start the process. After the risk assessment is completed, the organization must **Develop a Compliance Plan** and have it **Approved**. Once approved, **Controls are Implemented**, employees receive **Training**, and the organization enters a phase of **Monitoring Compliance**.
+
+The model defines several mandatory response chains:
+- Any **reported violations** must be followed by an **investigation**.
+- Every **investigation** must lead to **corrective action**.
+- If the risk assessment identifies a **High** risk level, **control implementation** must occur within **30 days**.
+- If monitoring reveals a **Non-Compliant** status, **corrective action** must be taken within **7 days**.
+- If more than **5 violations** are reported, the **Compliance Plan must be reviewed** within **14 days**.
+- If an investigation reveals a **Financial Impact greater than $10,000**, the **Compliance Plan must also be reviewed** within **3 days**.
+
+### Key Constraints
+
+- **Existence**: Employee training must occur at least once during the process.
+- **Review Cycle**: Once the Compliance Plan is approved, it can be reviewed multiple times, but each review must eventually lead to re-approval (Alternate Succession between Approve and Review).
+- **Data Perspectives**: The model tracks various data attributes including Risk Level, Assessment Score, Plan Status, Compliance Status, Violation Severity, Financial Impact, Control Types, Training Hours, and Number of Violations.
+
+### Summary in Natural Language:
+
+The model represents a risk-driven compliance management process that starts with a risk assessment and progresses through planning, approval, implementation, training, and monitoring. It enforces strict response patterns: violations must be investigated, investigations must lead to corrective actions, and certain critical conditions (high risk, non-compliance, high volume of violations, or significant financial impact) trigger mandatory and time-bound reviews or corrective measures. The compliance plan follows an iterative review-and-approval cycle, and employee training is mandatory. All activities are enriched with relevant data attributes that influence the execution and timing of subsequent tasks.

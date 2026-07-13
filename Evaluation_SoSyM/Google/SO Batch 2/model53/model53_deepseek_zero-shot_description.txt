@@ -1,0 +1,35 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes the process of producing a theatrical play, from initial writing to final archiving. It involves 14 key activities, each associated with specific data attributes that define the scope and constraints of the production.
+
+**Process Overview and Data Attributes**
+
+The process begins with **Write Play Script**, which is characterized by the **Play Genre** (Comedy, Drama, Musical, or Tragedy). The number of actors is determined by **Cast Actors**, with an **Actor Count** between 2 and 20. The set design and construction are governed by **Set Complexity** (1–10) and a **Budget Amount** (between $1,000 and $50,000). Costume work is driven by a **Costume Count** (5–50). Promotion and ticketing involve **Promotion Spend** ($100–$10,000) and a **Ticket Price** ($5–$100). Rehearsals require **Rehearsal Hours** (10–100), and the final **Performance Quality** can be Excellent, Good, Average, or Poor. Royalties are paid based on a **Royalty Percentage** (5–20%).
+
+**Mandatory and Core Constraints**
+
+- The process must start with **Write Play Script** (Init constraint).
+- A **Perform Play** activity must eventually occur (Existence constraint).
+- Whenever **Cast Actors** happens, **Rehearse Play** must eventually follow (Response).
+- **Build Set** can only occur after **Design Set** has been completed (Precedence).
+- **Promote Play** and **Sell Tickets** must either both occur or both be absent (Co-Existence).
+- **Review Performance** must never be followed by **Pay Royalties** (Not Response).
+
+**Conditional and Timed Constraints**
+
+- **Conditional Response (Genre & Price):** If the play is a **Comedy**, then **Write Play Script** must be followed by **Sell Tickets**, but only if the **Ticket Price** is $50 or less.
+- **Timed Responses (with deadlines):**
+  - **Promote Play** must be followed by **Sell Tickets** within **2 days**.
+  - **Perform Play** must be followed by **Pay Royalties** within **7 days**.
+  - **Perform Play** must be followed by **Strike Set** within **1 day**.
+  - **Perform Play** must be followed by **Store Costumes** within **1 day**.
+  - **Write Play Script** must be followed by **Archive Script** within **30 days**.
+- **Timed Responses (with hours):**
+  - **Cast Actors** must be followed by **Rehearse Play** within **1 hour**.
+  - **Design Costumes** must be followed by **Sew Costumes** within **24 hours**.
+- **Timed Response (with days):**
+  - **Design Set** must be followed by **Build Set** within **7 days**.
+
+**Summary of the Workflow**
+
+The production starts with writing the script. Actors are cast, and rehearsals must begin within one hour of casting. Set design and costume design happen in parallel: the set must be built within 7 days of its design, and costumes must be sewn within 24 hours of their design. Promotion and ticket selling are linked—either both happen or neither. For comedies, ticket sales must follow the script writing, but only if tickets are priced at $50 or less. After the performance, royalties must be paid within 7 days, the set must be struck within 1 day, and costumes must be stored within 1 day. Finally, the script must be archived within 30 days of being written. Notably, reviewing the performance does not lead to paying royalties, and the entire process is driven by the specific numeric and categorical constraints on each activity's data.

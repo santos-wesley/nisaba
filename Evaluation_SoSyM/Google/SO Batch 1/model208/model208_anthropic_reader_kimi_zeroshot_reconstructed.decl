@@ -1,0 +1,40 @@
+activity Schedule Train
+activity Allocate Resources
+activity Monitor Train
+activity Manage Delay
+activity Perform Maintenance
+activity Inspect Track
+activity Dispatch Train
+activity Receive Train
+activity Update Schedule
+activity Cancel Train
+bind Schedule Train: Train ID, Schedule Version
+bind Allocate Resources: Train ID, Track Number
+bind Monitor Train: Train ID, Train Status
+bind Manage Delay: Train ID, Delay Duration
+bind Perform Maintenance: Train ID, Maintenance Type
+bind Inspect Track: Track Number, Inspection Score
+bind Dispatch Train: Train ID, Priority Level
+bind Receive Train: Train ID, Passenger Count
+bind Update Schedule: Train ID, Schedule Version
+bind Cancel Train: Train ID, Reason Cancel
+Train ID: integer between 1000 and 9999
+Schedule Version: integer between 1 and 100
+Track Number: integer between 1 and 100
+Train Status: On Time, Delayed, Cancelled, Completed
+Delay Duration: float between 0.0 and 300.0
+Maintenance Type: Routine, Emergency, Scheduled
+Inspection Score: float between 0.0 and 10.0
+Priority Level: High, Medium, Low
+Passenger Count: integer between 0 and 1500
+Reason Cancel: Weather, Maintenance, Technical Issue
+Init[Schedule Train] | |
+Precedence[Allocate Resources, Dispatch Train] | | |
+Response[Monitor Train, Manage Delay] |A.Train Status is Delayed | |
+Chain Precedence[Perform Maintenance, Dispatch Train] | | |
+Succession[Inspect Track, Allocate Resources] | | |
+Responded Existence[Dispatch Train, Receive Train] | | |
+Not Co-Existence[Dispatch Train, Cancel Train] | | |
+Not Chain Succession[Update Schedule, Schedule Train] | | |
+Choice[Dispatch Train, Cancel Train] | | |
+Absence3[Cancel Train] | |

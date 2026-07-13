@@ -1,0 +1,41 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Implement Controls
+activity Monitor Compliance
+activity Report Violations
+activity Investigate Violations
+activity Take Corrective Action
+activity Review Compliance Plan
+activity Approve Compliance Plan
+activity Train Employees
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Implement Controls: Control Type
+bind Monitor Compliance: Compliance Status
+bind Report Violations: Number of Violations, Reporting Channel
+bind Investigate Violations: Violation Severity, Financial Impact
+bind Take Corrective Action: Compliance Status
+bind Review Compliance Plan: Plan Status
+bind Approve Compliance Plan: Plan Status
+bind Train Employees: Training Hours
+Risk Level: Low, Medium, High
+Assessment Score: float between 0.0 and 100.0
+Plan Status: Draft, Approved, Implemented
+Control Type: Preventative, Detective, Corrective
+Compliance Status: Compliant, Non-Compliant, Pending
+Number of Violations: integer between 0 and 100
+Reporting Channel: Email, Phone, Online Portal
+Violation Severity: integer between 1 and 5
+Financial Impact: float between 0.0 and 1000000.0
+Training Hours: integer between 0 and 40
+Init[Conduct Risk Assessment] | |
+Response[Develop Compliance Plan, Approve Compliance Plan] | | |
+Response[Report Violations, Investigate Violations] | | |
+Response[Investigate Violations, Take Corrective Action] | | |
+Response[Approve Compliance Plan, Review Compliance Plan] | | |0,365,d
+Precedence[Review Compliance Plan, Approve Compliance Plan] | | |
+Existence[Train Employees] | |
+Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d
+Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d
+Response[Report Violations, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d
+Response[Investigate Violations, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d

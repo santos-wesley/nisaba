@@ -1,0 +1,55 @@
+# Description of the Multi-Perspective Declare Model
+
+## Overview
+This model describes a fraud detection and security incident management process, encompassing activities related to transaction monitoring, customer verification, security breach handling, and customer communication.
+
+## Activities and Their Data Attributes
+
+The process involves the following activities, each associated with specific data attributes:
+
+- **Detect Fraudulent Activity**: characterized by Transaction Type, Transaction Amount, and Fraud Risk Level
+- **Verify Customer Identity**: characterized by Verification Attempts and Verification Status
+- **Review Transaction Details**: characterized by Transaction Type and Transaction Amount
+- **Approve Transaction**: characterized by Transaction Type and Transaction Amount
+- **Decline Transaction**: characterized by Transaction Type and Transaction Amount
+- **Report Suspicious Activity**: characterized by Transaction Type and Transaction Amount
+- **Update Account Security**: characterized by Days Since Last Activity
+- **Notify Customer**: characterized by Customer Notification Method
+- **Investigate Security Breach**: characterized by Breach Severity
+- **Implement Security Patch**: characterized by Security Patch Status
+
+## Business Rules and Constraints
+
+### 1. Cardinality Constraint
+- **Detect Fraudulent Activity** must occur **no more than 5 times** throughout the process.
+
+### 2. Ordering Constraint
+- **Approve Transaction** can only happen if **Verify Customer Identity** has occurred beforehand (Precedence relationship). In other words, a transaction cannot be approved without prior identity verification.
+
+### 3. Response Constraints (General)
+- Whenever **Detect Fraudulent Activity** occurs, **Notify Customer** must eventually follow.
+- Whenever **Decline Transaction** occurs, **Report Suspicious Activity** must eventually follow.
+
+### 4. Response Constraints with Conditions and Time Limits
+
+- **If a suspicious transaction is reviewed with an amount greater than $1,000**, then **Verify Customer Identity** must occur within **10 minutes**.
+
+- **If fraud is detected with a High risk level**, then **Decline Transaction** must occur within **5 minutes**.
+
+- **If a customer is notified via SMS**, then **Update Account Security** must occur within **24 hours**.
+
+- **If a security breach investigation reveals a severity greater than 7**, then **Implement Security Patch** must occur within **48 hours**. (This constraint appears twice, reinforcing the criticality of high-severity breaches, with a general version also requiring patch implementation within 72 hours after any breach investigation.)
+
+- **If a security patch has not been applied** (Status = Not Applied), then a subsequent **Implement Security Patch** activity must occur within **7 days**, ensuring recurring attempts to resolve unpatched vulnerabilities.
+
+## Summary of Process Logic
+
+This model enforces a structured fraud-prevention workflow:
+1. Fraudulent activity detection triggers mandatory customer notification and, in high-risk cases, rapid transaction decline.
+2. Declined transactions must be reported as suspicious activity.
+3. High-value transaction reviews require prompt identity verification.
+4. Transactions can only be approved after identity has been verified.
+5. Security breaches — especially severe ones — require timely patching, with escalating urgency (72h general, 48h if severity > 7).
+6. Unapplied security patches must be revisited within a week.
+7. SMS-based customer notifications must be followed by account security updates within a day, ensuring immediate risk mitigation.
+8. Fraud detection activity itself is capped at 5 occurrences, likely reflecting system or reporting thresholds.

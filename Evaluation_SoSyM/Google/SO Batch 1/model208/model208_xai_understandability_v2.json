@@ -1,0 +1,85 @@
+{
+  "recon_nisaba": 0.0416,
+  "recon_zeroshot": 0.0833,
+  "qa_nisaba": 0.8585,
+  "qa_zeroshot": 0.817,
+  "qaraw_nisaba": 0.8635,
+  "qaraw_zeroshot": 0.818,
+  "qa_n": 11,
+  "qa_yes": 5,
+  "qa_no": 6,
+  "ac1_nisaba": 0.747,
+  "ac1_zeroshot": 0.752,
+  "rawagree_nisaba": 0.818,
+  "rawagree_zeroshot": 0.818,
+  "per_reader": {
+    "qwen": {
+      "recon_nisaba": 0.0833,
+      "recon_zeroshot": 0.0833,
+      "qa_nisaba": 0.9,
+      "qaraw_nisaba": 0.909,
+      "answers_nisaba": [
+        "no",
+        "yes",
+        "unknown",
+        "no",
+        "no",
+        "yes",
+        "no",
+        "yes",
+        "no",
+        "no",
+        "yes"
+      ],
+      "qa_zeroshot": 0.817,
+      "qaraw_zeroshot": 0.818,
+      "answers_zeroshot": [
+        "no",
+        "yes",
+        "no",
+        "no",
+        "no",
+        "yes",
+        "no",
+        "yes",
+        "no",
+        "yes",
+        "yes"
+      ]
+    },
+    "kimi": {
+      "recon_nisaba": 0.0,
+      "recon_zeroshot": 0.0833,
+      "qa_nisaba": 0.817,
+      "qaraw_nisaba": 0.818,
+      "answers_nisaba": [
+        "no",
+        "yes",
+        "no",
+        "unknown",
+        "no",
+        "yes",
+        "no",
+        "yes",
+        "no",
+        "no",
+        "yes"
+      ],
+      "qa_zeroshot": 0.817,
+      "qaraw_zeroshot": 0.818,
+      "answers_zeroshot": [
+        "no",
+        "yes",
+        "no",
+        "unknown",
+        "no",
+        "yes",
+        "no",
+        "yes",
+        "no",
+        "no",
+        "yes"
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+This process describes the steps a company takes to expand into a new international market. The workflow is divided into three main phases: **initial analysis and planning**, **setup and local operations**, and **monitoring and reporting**.
+
+The process begins with the mandatory activity **Analyze International Market**, which triggers the subsequent **Identify Business Opportunities**. Before any planning can proceed, the company must assess the market’s size (between 1,000 and 1,000,000) and attractiveness (High, Medium, or Low).
+
+Once opportunities are identified, the company must **Conduct a Feasibility Study**. This step is critical because the next activity, **Develop Business Plan**, can only happen if the study’s result is **Positive** (based on an Investment Amount between $10,000 and $1,000,000). If the feasibility is Negative, the business plan cannot proceed.
+
+After the business plan is developed, the company must **Acquire Necessary Permits**. The permit status can be Approved, Pending, or Rejected. **Set Up International Office** is then linked via a **chain response**: the office setup must occur within **5 days** of acquiring the permits, and this step must happen eventually (with a deadline of 5 days).
+
+With the office set up, the company **Hires Local Staff** (at a High, Medium, or Low level). This must be followed by **Negotiate with Local Vendors**. Concurrently, the **Initiate Marketing Campaign** activity (with a budget between $5,000 and $500,000) is mandatory and will trigger **Monitor Market Response**. The market response can be Positive, Neutral, or Negative.
+
+If the market response is **Negative**, the company must **Adjust Strategy** (choosing Yes or No) within **7 days**. This adjustment then leads to an **Assess Performance** evaluation (Excellent, Good, Fair, or Poor). The entire process also requires the **Manage International Logistics** activity to occur at some point.
+
+Finally, the performance assessment must be followed by **Report to Headquarters**, which is a **chain response** with a strict deadline of **48 hours**. The process ends with exactly one execution of **Report to Headquarters**—no more, no less.
+
+**Key constraints in plain language:**
+- You must analyze the international market first.
+- You can only develop a business plan if the feasibility study is positive.
+- The office must be set up within 5 days of getting permits.
+- If the market responds negatively, you must adjust your strategy within 7 days.
+- A performance assessment must always be followed by a report to headquarters within 48 hours.
+- Marketing, logistics, and reporting are mandatory; only one final report is allowed.

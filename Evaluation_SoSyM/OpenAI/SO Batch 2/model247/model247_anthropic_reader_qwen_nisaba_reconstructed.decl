@@ -1,0 +1,80 @@
+activity File Patent Application
+activity Conduct Patent Search
+activity Examine Patent Application
+activity Grant Patent
+activity Reject Patent Application
+activity File Trademark Application
+activity Conduct Trademark Search
+activity Examine Trademark Application
+activity Grant Trademark
+activity Reject Trademark Application
+activity File Copyright Registration
+activity Examine Copyright Application
+activity Grant Copyright
+activity Reject Copyright Application
+activity Appeal Decision
+bind File Patent Application: Application ID, Application Fee
+bind Examine Patent Application: Application ID, Application Status
+bind Grant Patent: Application ID, Decision
+bind Reject Patent Application: Application ID, Decision
+bind File Trademark Application: Application ID, Application Fee
+bind Conduct Trademark Search: Application ID, Search Result
+bind Examine Trademark Application: Application ID, Application Status
+bind Grant Trademark: Application ID, Decision
+bind Reject Trademark Application: Application ID, Decision
+bind File Copyright Registration: Application ID, Application Fee
+bind Examine Copyright Application: Application ID, Application Status
+bind Grant Copyright: Application ID, Decision
+bind Reject Copyright Application: Application ID, Decision
+bind Appeal Decision: Application ID
+Application ID: integer between 1 and 1000000
+Application Fee: float between 50.0 and 10000.0
+Application Status: Pending, Approved, Rejected
+Search Result: Clear, Conflict
+Decision: Granted, Rejected
+Init[File Patent Application] | |
+End[Grant Patent] | |
+End[Reject Patent Application] | |
+End[Grant Trademark] | |
+End[Reject Trademark Application] | |
+End[Grant Copyright] | |
+End[Reject Copyright Application] | |
+Existence[Examine Patent Application] | |
+Existence[Examine Trademark Application] | |
+Existence[Examine Copyright Application] | |
+Exactly[File Patent Application] | |
+Exactly[File Trademark Application] | |
+Exactly[File Copyright Registration] | |
+Absence2[Grant Patent] | |
+Absence2[Grant Trademark] | |
+Absence2[Grant Copyright] | |
+Responded Existence[Conduct Patent Search, File Patent Application] | | |
+Responded Existence[Conduct Trademark Search, File Trademark Application] | | |
+Precedence[Grant Patent, Examine Patent Application] |A.Decision is Granted |A.Application ID == T.Application ID AND T.Application Status is Approved |
+Precedence[Grant Trademark, Examine Trademark Application] |A.Decision is Granted |A.Application ID == T.Application ID AND T.Application Status is Approved |
+Precedence[Grant Copyright, Examine Copyright Application] |A.Decision is Granted |A.Application ID == T.Application ID AND T.Application Status is Approved |
+Response[File Patent Application, Conduct Patent Search] | | |
+Response[File Trademark Application, Conduct Trademark Search] | | |
+Succession[Examine Patent Application, Reject Patent Application] |A.Application Status is Rejected |A.Application ID == T.Application ID |
+Succession[Examine Trademark Application, Reject Trademark Application] |A.Application Status is Rejected |A.Application ID == T.Application ID |
+Succession[Examine Copyright Application, Reject Copyright Application] |A.Application Status is Rejected |A.Application ID == T.Application ID |
+Alternate Precedence[Grant Patent, Examine Patent Application] | |A.Application ID == T.Application ID |
+Alternate Response[File Copyright Registration, Examine Copyright Application] | |A.Application ID == T.Application ID |
+Alternate Succession[File Trademark Application, Examine Trademark Application] | |A.Application ID == T.Application ID |
+Chain Precedence[Grant Copyright, Examine Copyright Application] | |A.Application ID == T.Application ID |
+Chain Response[Examine Patent Application, Grant Patent] |A.Application Status is Approved |A.Application ID == T.Application ID |
+Chain Succession[File Copyright Registration, Examine Copyright Application] | |A.Application ID == T.Application ID |
+Co-Existence[File Trademark Application, Conduct Trademark Search] | |A.Application ID == T.Application ID |
+Choice[Grant Patent, Reject Patent Application] | | |
+Exclusive Choice[Grant Trademark, Reject Trademark Application] | | |
+Exclusive Choice[Grant Copyright, Reject Copyright Application] | | |
+Not Co-Existence[Grant Patent, Reject Patent Application] | | |
+Not Co-Existence[Grant Trademark, Reject Trademark Application] | | |
+Not Co-Existence[Grant Copyright, Reject Copyright Application] | | |
+Not Responded Existence[Reject Copyright Application, Appeal Decision] | | |
+Not Precedence[Grant Patent, Examine Patent Application] | | |
+Not Response[Reject Patent Application, Grant Patent] | |A.Application ID == T.Application ID |
+Not Succession[Reject Trademark Application, Grant Trademark] | |A.Application ID == T.Application ID |
+Not Chain Precedence[Grant Copyright, File Copyright Registration] | | |
+Not Chain Response[Reject Patent Application, Appeal Decision] | | |
+Not Chain Succession[Examine Trademark Application, File Trademark Application] | | |

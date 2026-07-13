@@ -1,0 +1,26 @@
+## Activities
+- **Collect Data**: The 'Collect Data' activity represents the process of gathering the necessary data points for analysis.
+- **Analyze Data**: The 'Analyze Data' activity involves examining the collected data to derive insights and assess accuracy.
+- **Draft Report**: The 'Draft Report' activity includes creating the initial version of the report based on the analyzed data.
+- **Review Report**: The 'Review Report' activity involves examining the drafted report for correctness and completeness.
+- **Approve Report**: The 'Approve Report' activity represents the formal approval or rejection of the reviewed report.
+- **Publish Report**: The 'Publish Report' activity involves releasing the approved report to its intended audience.
+- **Gather Feedback**: The 'Gather Feedback' activity includes collecting feedback on the published report from stakeholders.
+- **Revise Report**: The 'Revise Report' activity involves making changes to the report based on feedback received.
+
+## Attributes
+- **Data Points: Integer between 100 and 10000**: The attribute 'Data Points: Integer between 100 and 10000' represents the number of individual data points collected for analysis.
+- **Report Accuracy: Float between 0.0 and 100.0**: The attribute 'Report Accuracy: Float between 0.0 and 100.0' represents the accuracy percentage of the analyzed data in the report.
+- **Approval Status: Pending, Approved, Rejected**: The attribute 'Approval Status: Pending, Approved, Rejected' specifies the current approval state of the report.
+- **Feedback Type: Positive, Negative, Neutral**: The attribute 'Feedback Type: Positive, Negative, Neutral' specifies the sentiment classification of the feedback gathered on the report.
+- **Revision Count: Integer between 0 and 10**: The attribute 'Revision Count: Integer between 0 and 10' represents the number of times the report has been revised.
+
+## Binds
+- **bind Collect Data: Data Points**: The bind 'Collect Data: Data Points' specifies that the activity 'Collect Data' requires the attribute 'Data Points'.
+- **bind Analyze Data: Report Accuracy**: The bind 'Analyze Data: Report Accuracy' links the 'Analyze Data' activity with the attribute 'Report Accuracy'.
+- **bind Approve Report: Approval Status**: The bind 'Approve Report: Approval Status' links the 'Approve Report' activity with the attribute 'Approval Status'.
+- **bind Gather Feedback: Feedback Type**: The bind 'Gather Feedback: Feedback Type' links the 'Gather Feedback' activity with the attribute 'Feedback Type'.
+- **bind Revise Report: Revision Count**: The bind 'Revise Report: Revision Count' links the 'Revise Report' activity with the attribute 'Revision Count'.
+
+## Constraints
+

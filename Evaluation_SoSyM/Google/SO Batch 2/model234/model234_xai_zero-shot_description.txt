@@ -1,0 +1,75 @@
+**Multi-Perspective Declare Model: Risk Management Process**
+
+This model describes a comprehensive **enterprise risk management (ERM)** lifecycle with strong data-driven constraints and temporal dependencies.
+
+### Process Overview
+
+The process begins with the identification of risks and follows a structured sequence through assessment, prioritization, mitigation, monitoring, and continuous improvement. It incorporates multiple perspectives including control-flow (precedence, response, succession), data (attribute bindings and conditions), and time (timed responses).
+
+### Core Activities
+
+**Main Risk Lifecycle:**
+- **Identify Risk** – Initial detection and logging of a risk
+- **Assess Impact** – Evaluate the potential severity of the risk
+- **Evaluate Probability** – Determine the likelihood of occurrence
+- **Prioritize Risks** – Rank risks based on exposure
+- **Develop Mitigation Plan** – Create a strategy to address the risk
+- **Approve Mitigation Plan** – (implied governance step)
+- **Implement Mitigation** – Execute the mitigation actions
+- **Monitor Risks** – Ongoing surveillance of the risk and controls
+- **Review Risk Assessment** – Periodic re-evaluation
+- **Update Risk Register** – Maintain the official record
+- **Communicate Risks** – Inform stakeholders and risk owners
+- **Document Lessons Learned** – Capture knowledge at the end of the cycle
+
+**Supporting Activities:**
+- **Conduct Risk Workshop**
+- **Validate Risk Controls**
+- **Escalate Critical Risks**
+
+### Data Perspective
+
+Each activity is bound to specific data attributes:
+
+- **Risk ID** (1–1000) serves as the central unique identifier throughout the process.
+- **Risk Category**: Financial, Operational, Compliance, Strategic, Reputational
+- **Impact Score**: Integer 1–10
+- **Probability**: Float between 0.0 and 1.0
+- **Exposure Value**: Calculated risk value (0.0–1,000,000.0)
+- **Mitigation Strategy**: Avoidance, Transference, Mitigation, Acceptance
+- **Mitigation Cost**: 0.0–100,000.0
+- **Risk Status**: Open, Mitigated, Closed, Accepted
+- **Review Frequency**: 1–12 (months)
+- **Risk Owner**: John Smith, Alice Johnson, Bob Williams
+
+### Control-Flow Constraints
+
+**Sequential Dependencies:**
+- `Assess Impact` must follow `Identify Risk`
+- `Evaluate Probability` must precede `Prioritize Risks`
+- `Develop Mitigation Plan` must follow both `Prioritize Risks` and `Identify Risk`
+- `Implement Mitigation` must follow `Develop Mitigation Plan`
+- `Monitor Risks` follows `Implement Mitigation`
+- `Review Risk Assessment` and `Update Risk Register` follow in succession after monitoring
+- `Communicate Risks` follows updating the risk register
+
+**Response Constraints:**
+- After `Assess Impact` comes `Evaluate Probability`
+- After `Prioritize Risks` comes `Develop Mitigation Plan`
+- After `Review Risk Assessment` comes `Update Risk Register`
+
+### Data-Driven and Temporal Constraints
+
+1. **High-Cost Financial Risks**: If a risk is categorized as **Financial** and its **Mitigation Cost > 1000**, then `Develop Mitigation Plan` must eventually be followed by `Identify Risk` (looping back for re-evaluation).
+
+2. **Open Risk Response**: When a risk has **Status = Open**, `Identify Risk` must be followed by `Implement Mitigation` within **0 to 30 days**.
+
+3. **Monitoring Cadence**: After `Monitor Risks`, a `Review Risk Assessment` must occur within **90 to 180 days**.
+
+4. **Critical Risk Escalation**: If **Impact Score > 7** during `Assess Impact`, then `Escalate Critical Risks` must occur within **0 to 24 hours**.
+
+5. **Absence Constraint**: The activity `Escalate Critical Risks` can occur **at most 3 times** in the entire trace (`Absence3`).
+
+### Summary
+
+This is a **highly structured, data-aware, and time-sensitive** risk management process. It enforces a logical progression from risk identification through mitigation and monitoring, while applying dynamic rules based on risk characteristics (especially financial impact and criticality). The model ensures that high-impact risks are escalated quickly, open risks are addressed within a month, and regular reviews are maintained — all while maintaining a clean audit trail through the risk register and lessons learned.

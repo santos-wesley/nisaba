@@ -1,0 +1,40 @@
+activity Monitor Seismic Activity
+activity Issue Tsunami Alert
+activity Evacuate Coastal Areas
+activity Dispatch Emergency Services
+activity Establish Emergency Shelters
+activity Assess Infrastructure Damage
+activity Provide Medical Assistance
+activity Distribute Relief Supplies
+activity Restore Communication Networks
+activity Conduct Search and Rescue
+bind Monitor Seismic Activity: Magnitude
+bind Issue Tsunami Alert: Alert Level, Estimated Arrival Time
+bind Evacuate Coastal Areas: Number of Evacuees
+bind Assess Infrastructure Damage: Damage Severity
+bind Provide Medical Assistance: Number of Injuries
+bind Establish Emergency Shelters: Number of Shelters
+bind Restore Communication Networks: Communication Status
+bind Conduct Search and Rescue: Number of Rescued
+bind Distribute Relief Supplies: Supply Cost
+bind Dispatch Emergency Services: 
+Magnitude: float between 0.0 and 10.0
+Alert Level: Watch, Warning, Cancel
+Estimated Arrival Time: integer between 0 and 360
+Number of Evacuees: integer between 0 and 1000000
+Damage Severity: Minor, Moderate, Severe
+Number of Injuries: integer between 0 and 5000
+Number of Shelters: integer between 0 and 100
+Communication Status: Operational, Partially Operational, Down
+Number of Rescued: integer between 0 and 1000
+Supply Cost: float between 0.0 and 1000000.0
+Init[Monitor Seismic Activity] | |
+Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |
+Precedence[Dispatch Emergency Services, Provide Medical Assistance] | | |
+Not Co-Existence[Conduct Search and Rescue, Assess Infrastructure Damage] | | |
+Response[Restore Communication Networks, Restore Communication Networks] |A.Communication Status is Down |T.Communication Status is Operational |
+Response[Monitor Seismic Activity, Issue Tsunami Alert] |A.Magnitude > 7 | |
+Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |0,60,m
+Response[Dispatch Emergency Services, Provide Medical Assistance] | | |0,24,h
+Response[Establish Emergency Shelters, Distribute Relief Supplies] | | |0,48,h
+Response[Assess Infrastructure Damage, Restore Communication Networks] | | |0,72,h

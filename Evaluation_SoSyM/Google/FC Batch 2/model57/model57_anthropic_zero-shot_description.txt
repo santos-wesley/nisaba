@@ -1,0 +1,41 @@
+# Digital Evidence Management Process Description
+
+This Multi-Perspective Declare model describes a digital forensics evidence handling process, encompassing the complete lifecycle of digital evidence from collection through disposal, with specific data attributes and constraints governing each step.
+
+## Activities and Data Attributes
+
+The process consists of 15 activities, five of which carry specific data attributes:
+
+- **Collect Digital Evidence** records the *Evidence Type* (Document, Image, Video, Audio, or Log File) and *Evidence Size* (an integer between 1 and 1000).
+- **Preserve Digital Evidence** captures the *Custody Status* (Collected, Preserved, Analyzed, Released, or Disposed) and an *Integrity Score* (a float between 0.0 and 1.0).
+- **Analyze Digital Evidence** logs the *Analysis Time* (a float between 0.1 and 24.0 hours) and *Security Level* (Confidential, Restricted, or Unclassified).
+- **Dispose Digital Evidence** specifies the *Disposal Method* (Shredding, Wiping, or Deletion) and *Retention Period* (an integer between 30 and 3650 days).
+- **Audit Evidence Access** tracks the *Access Count* (an integer between 0 and 100) and whether there is a *Legal Hold* (Yes or No).
+
+## Process Control-Flow Rules
+
+**Process boundaries:** The process must always begin with **Collect Digital Evidence** and must always end with **Dispose Digital Evidence**, establishing a clear start and finish to the evidence lifecycle.
+
+**Sequential progression:** Whenever evidence is collected, it must be immediately followed by preservation (**Succession** between Collect and Preserve Digital Evidence), ensuring no gap between these two critical early steps. Similarly, whenever evidence is preserved, an analysis must eventually follow (**Response** relationship), and once documented in chain of custody, analysis must have occurred before it (**Precedence** relationship for Document Chain Custody before Analyze Digital Evidence).
+
+**Conditional audit requirement:** If an evidence item is under legal hold (Legal Hold = Yes), then whenever evidence access is audited, evidence must also have been collected at some point, and vice versa (**Responded Existence** between Audit Evidence Access and Collect Digital Evidence, conditioned on Legal Hold being Yes).
+
+**Reporting chain:** Every instance of analyzing evidence must be immediately and directly followed by generating an evidence report (**Chain Response**), ensuring reports are generated right after analysis without delay.
+
+**Co-occurrence requirements:** Secure Evidence Storage and Validate Evidence Integrity must occur together in the same process instance — if one occurs, the other must also occur (**Co-Existence**).
+
+**Negative constraints:** Reporting a security breach must never be immediately followed by disposing of evidence (**Not Chain Succession**), likely to prevent premature or suspicious evidence destruction following an incident. Additionally, classifying evidence and disposing of evidence cannot both occur in the same case (**Not Co-Existence**), suggesting classified evidence follows a different disposal path or handling protocol.
+
+**Flexible ordering:** Indexing evidence and updating evidence metadata are related by a **Choice** constraint, meaning at least one of these two activities must occur in each case.
+
+**Mutual exclusivity:** Authorizing evidence release and disposing of evidence are mutually exclusive (**Exclusive Choice**) — exactly one of these two outcomes must happen for any given evidence item, but never both, reflecting that evidence is either released or destroyed, not both.
+
+**Mandatory analysis:** Every case must contain at least one occurrence of **Analyze Digital Evidence** (**Existence** constraint), confirming analysis is a required step in this process.
+
+**Alternating review-authorization cycle:** Each time an evidence report is reviewed, it must be followed by an authorization for evidence release before another review occurs (**Alternate Response**), establishing a strict alternating pattern between review and authorization.
+
+**Immediate validation:** Every time evidence is preserved, it must be immediately followed by validating evidence integrity (**Chain Response**), tightly coupling preservation with immediate integrity verification.
+
+## Summary
+
+This model enforces a rigorous, auditable digital evidence lifecycle where evidence must be collected, preserved, analyzed, documented, and either released or disposed of under strict controls. The constraints ensure chain-of-custody integrity, mandate immediate integrity validation after preservation, require prompt reporting after analysis, and prevent conflicting or suspicious activity patterns (such as disposing evidence right after a security breach report) — all while tracking rich metadata such as evidence type, size, custody status, integrity scores, security classification, and legal hold status throughout the process.

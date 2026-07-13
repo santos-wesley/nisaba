@@ -1,0 +1,53 @@
+# Multi-Perspective Declare Model Description
+
+This model describes a **material testing and certification process**, covering sample preparation, various analytical tests, quality evaluation, and final reporting/approval procedures.
+
+## Activities and Data Attributes
+
+The process involves 14 activities, several of which are associated with specific data attributes recorded during execution:
+
+- **Prepare Sample** records a **Sample ID** (integer, 1–1000), uniquely identifying each material sample.
+- **Measure Hardness** captures a **Hardness Value** (float, 0.0–100.0).
+- **Conduct Tensile Test** captures **Tensile Strength** (float, 0.0–2000.0).
+- **Evaluate Corrosion Resistance** records **Corrosion Resistance** (categorical: High, Medium, Low).
+- **Approve Material** records an **Approval Status** (categorical: Approved, Rejected, Pending).
+- **Perform Thermal Analysis** captures **Thermal Conductivity** (float, 0.0–500.0).
+- **Analyze Microstructure** records the **Microstructure Type** (categorical: Grain, Fiber, Amorphous).
+- **Conduct X-ray Diffraction** captures **X-ray Intensity** (integer, 0–10000).
+- **Perform Chemical Analysis** records **Chemical Purity** (float, 0.0–100.0).
+- **Calibrate Equipment** tracks **Equipment Status** (categorical: Calibrated, Not Calibrated).
+
+## Process Flow and Control-Flow Constraints
+
+**Process boundaries:**
+The process must **start** with **Prepare Sample** and must **end** with either **Approve Material** or **Reject Material**, meaning every sample eventually reaches a final decision.
+
+**Sample identity consistency:**
+Throughout the process, most constraints require that the **Sample ID** associated with one activity's execution matches the Sample ID of related activities, ensuring traceability of a specific sample across all testing steps.
+
+**Testing relationships:**
+
+- Whenever **Conduct X-ray Diffraction** occurs, it must eventually be followed by **Analyze Microstructure** for the same sample (Response relation), and this must happen within a time constraint (0 to 2 time units, discrete time).
+- Whenever **Measure Hardness** occurs, it must be **directly and immediately followed** by **Conduct Tensile Test** for the same sample (Chain Response), within 0 to 1 time units.
+- **Perform Thermal Analysis** and **Evaluate Corrosion Resistance** form a strict **succession**: whenever thermal analysis is performed, corrosion resistance evaluation must follow (and vice versa — evaluation only occurs if preceded by thermal analysis), within 0 to 1 time units (using a specific timing measure, "d").
+
+**Reporting and review dependencies:**
+
+- **Review Findings** can only happen if **Document Results** has already occurred beforehand for the same sample (Precedence).
+- **Review Findings** must also be preceded by either **Approve Material** or **Reject Material** for the same sample — meaning the approval/rejection decision must occur before findings are reviewed.
+- **Prepare Report** requires that **Document Results** has already taken place for the same sample beforehand, within a 0–1 time unit window.
+
+**Equipment calibration requirements:**
+
+Before any of the following measurement/testing activities can occur, the equipment must have been calibrated (Equipment Status = Calibrated):
+- Conduct X-ray Diffraction
+- Measure Hardness
+- Conduct Tensile Test
+- Perform Thermal Analysis
+- Evaluate Corrosion Resistance
+
+This ensures that all critical measurements are taken only with properly calibrated instruments.
+
+## Summary
+
+This model enforces a rigorous **quality assurance workflow** for material sample testing, ensuring: (1) traceability via Sample ID across related test steps, (2) mandatory equipment calibration before key measurements, (3) proper sequencing of documentation, review, and approval/rejection decisions, and (4) specific timing constraints linking diagnostic tests (X-ray diffraction, hardness, tensile strength, thermal/corrosion analysis) to ensure timely completion of dependent activities.

@@ -1,0 +1,15 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This process describes a structured vendor management workflow, beginning with the identification of needs and ending with a final review. The process is constrained by specific data attributes and temporal rules.
+
+**Process Overview:**
+The workflow starts with the activity **Identify Needs**. Once needs are identified, a vendor must be selected (**Select Vendor**), which requires a valid **Vendor ID** (an integer from 1 to 9999) and a **Vendor Name** (one of "Vendor A", "Vendor B", or "Vendor C"). After selecting a vendor, a contract must be negotiated (**Negotiate Contract**), which is associated with a **Vendor ID** and a **Contract Amount** (an integer between 1000 and 1,000,000). The negotiation must be immediately followed by signing the contract (**Sign Contract**), with a time constraint of 0 to 7 days.
+
+Once the contract is signed, performance monitoring (**Monitor Performance**) must begin within 0 to 2 days. This activity records a **Vendor ID** and a **KPI Score** (a float between 0.0 and 10.0). After monitoring, a compliance review (**Review Compliance**) must occur, capturing the **Vendor ID** and a **Compliance Status** (either "Compliant" or "Non-Compliant"). Following the compliance review, payment must be issued (**Issue Payment**), which records the **Vendor ID** and a **Payment Status** (either "Pending" or "Completed"). Finally, within 0 to 2 days of issuing payment, a conduct review (**Conduct Review**) must be performed, recording the **Vendor ID** and a **Review Outcome** (either "Satisfactory" or "Unsatisfactory"). The process must end with this conduct review.
+
+**Key Constraints:**
+- The process must start with **Identify Needs** and end with **Conduct Review**.
+- **Select Vendor** can only occur at most once (Absence constraint).
+- Each step must follow the specified order: Identify Needs → Select Vendor → Negotiate Contract → Sign Contract → Monitor Performance → Review Compliance → Issue Payment → Conduct Review.
+- The transitions from Negotiate Contract to Sign Contract, from Sign Contract to Monitor Performance, and from Issue Payment to Conduct Review are all immediate (chain response) with specific time windows (0-7 days, 0-2 days, and 0-2 days respectively).
+- All activities are linked by a common **Vendor ID**, ensuring traceability across the entire process for a single vendor engagement.

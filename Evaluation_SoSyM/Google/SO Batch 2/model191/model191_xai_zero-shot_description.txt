@@ -1,0 +1,75 @@
+**Multi-Perspective Declare Model: Return Handling Process**
+
+This model describes a structured **return and refund process** for an e-commerce or retail organization. It defines a sequence of activities with strong temporal, data, and conditional dependencies.
+
+### Process Overview
+
+The process begins when a customer initiates a return and follows a controlled workflow involving approval, shipping, inspection, and final resolution (either refund with restocking or disposal).
+
+### Activities
+
+* **Request Return** – Customer or system initiates a return request.
+* **Approve Return** – Staff reviews and approves (or rejects) the return.
+* **Generate Return Label** – System creates a return shipping label.
+* **Ship Item Back** – Customer ships the item back using the provided label.
+* **Receive Item** – Warehouse receives the returned item.
+* **Inspect Item** – Staff physically inspects the returned product.
+* **Determine Refund** – Decision is made on the refund amount based on inspection.
+* **Process Refund** – Financial refund is issued to the customer.
+* **Restock Item** – Item is returned to inventory (only if acceptable).
+* **Dispose Item** – Item is discarded (if damaged or unacceptable).
+
+### Data Perspectives (Bindings)
+
+Each activity is linked to relevant data attributes:
+
+* **Request Return** captures: `Return ID`, `Return Reason`, and initial `Return Status`.
+* **Approve Return** updates `Return Status`.
+* **Ship Item Back** records `Shipping Method`, `Shipping Cost`, `Days to Return`, and updates status.
+* **Inspect Item** records `Item Condition` and `Inspection Result`.
+* **Determine Refund** / **Process Refund** handle `Refund Amount`.
+* **Restock Item** records `Restock Quantity`.
+
+### Control-Flow Constraints (Response Relations)
+
+The model enforces a strict sequential flow using **response** constraints:
+
+1. `Request Return` must be followed by `Approve Return`.
+2. `Approve Return` must be followed by `Generate Return Label`.
+3. `Generate Return Label` must be followed by `Ship Item Back`.
+4. `Ship Item Back` must be followed by `Receive Item`.
+5. `Receive Item` must be followed by `Inspect Item`.
+6. `Inspect Item` must be followed by `Determine Refund`.
+7. `Determine Refund` must be followed by `Process Refund`.
+
+Additionally:
+* After `Inspect Item`:
+  * If `Inspection Result` is **Acceptable** → `Restock Item` must occur.
+  * If `Inspection Result` is **Damaged** or **Unacceptable** → `Dispose Item` must occur.
+
+### Temporal Constraints (Time & Deadline Perspectives)
+
+The model includes the following deadlines:
+
+* `Request Return` → `Approve Return`: must occur **within 24 hours**.
+* `Approve Return` → `Generate Return Label`: must occur **within 30 minutes**.
+* `Approve Return` → `Ship Item Back`: customer has **up to 14 days**.
+* `Receive Item` → `Inspect Item`: must occur **within 48 hours**.
+* `Determine Refund` → `Process Refund`: must occur **within 2 days**.
+
+### Data Domains
+
+* **Return Status**: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed.
+* **Return Reason**: Defective, Damaged, Wrong Item, No Longer Needed.
+* **Inspection Result**: Acceptable, Damaged, Unacceptable.
+* **Item Condition**: Integer scale from 1 to 5.
+* **Refund Amount**: 0.0 to 1000.0.
+* **Shipping Cost**: 0.0 to 50.0.
+* **Days to Return**: 1 to 60.
+* **Restock Quantity**: 1 to 100.
+* **Shipping Method**: UPS, FedEx, USPS.
+* **Return ID**: 1000–9999.
+
+---
+
+**Summary**: This is a highly prescriptive, data-aware, and time-sensitive Declare model that ensures returns are handled in a standardized, auditable, and timely manner, with clear branching logic based on inspection outcomes.

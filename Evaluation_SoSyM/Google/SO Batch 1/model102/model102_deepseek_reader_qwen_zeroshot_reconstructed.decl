@@ -1,0 +1,38 @@
+activity Submit Timesheet
+activity Approve Timesheet
+activity Calculate Gross Pay
+activity Calculate Deductions
+activity Calculate Net Pay
+activity Process Payment
+activity Update Payroll Records
+activity Review Payroll Report
+activity Distribute Paystub
+bind Submit Timesheet: Employee ID, Hours Worked, Timesheet Status
+bind Approve Timesheet: Employee ID, Timesheet Status
+bind Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay
+bind Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction
+bind Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay
+bind Process Payment: Employee ID, Net Pay, Payment Method
+bind Update Payroll Records: Employee ID
+bind Review Payroll Report: Employee ID
+bind Distribute Paystub: Employee ID
+Employee ID: integer between 1 and 99999
+Hours Worked: integer between 0 and 80
+Timesheet Status: Submitted, Approved, Rejected
+Pay Rate: float between 10.0 and 100.0
+Gross Pay: float between 0.0 and 100000.0
+Tax Deduction: float between 0.0 and 100000.0
+Insurance Deduction: float between 0.0 and 100000.0
+Net Pay: float between 0.0 and 100000.0
+Payment Method: Direct Deposit, Check
+Init[Submit Timesheet] | |
+Chain Precedence[Approve Timesheet, Submit Timesheet] | | |
+Not Response[Approve Timesheet, Submit Timesheet] |A.Timesheet Status is Rejected | |
+Chain Precedence[Calculate Gross Pay, Approve Timesheet] |A.Timesheet Status is Approved | |
+Chain Precedence[Calculate Deductions, Calculate Gross Pay] | | |
+Chain Precedence[Calculate Net Pay, Calculate Deductions] | | |
+Chain Precedence[Process Payment, Calculate Net Pay] | | |
+Chain Precedence[Update Payroll Records, Process Payment] | | |
+Chain Precedence[Review Payroll Report, Update Payroll Records] | | |
+Response[Process Payment, Distribute Paystub] | | |0,24,h
+Chain Precedence[Distribute Paystub, Review Payroll Report] | | |

@@ -1,0 +1,54 @@
+This document describes a Multi-Perspective Declare model for a psychological therapy treatment process. The model outlines the sequence of activities, the data attributes associated with each activity, and the specific temporal and data-based constraints governing the workflow.
+
+### 1. Activities and Data Bindings
+The process consists of ten activities, each bound to specific data attributes that are recorded during execution:
+*   **Assess Initial Condition**: Requires a *Client ID*.
+*   **Develop Treatment Plan**: Requires a *Client ID* and *Therapist ID*.
+*   **Schedule First Session**: Requires a *Client ID*.
+*   **Conduct Therapy Session**: Requires a *Client ID* and *Session Type*.
+*   **Evaluate Progress**: Requires a *Client ID* and *Progress Score*.
+*   **Adjust Treatment Plan**: Requires a *Client ID*, *Progress Score*, and *Treatment Status*.
+*   **Provide Feedback**: Requires a *Client ID* and *Feedback Type*.
+*   **Schedule Follow-Up**: Requires a *Client ID*.
+*   **Complete Treatment**: Requires a *Client ID*.
+*   **Conduct Final Assessment**: Requires a *Client ID*, *Therapist ID*, and *Progress Score*.
+
+### 2. Data Attributes and Domains
+The data attributes bound to the activities have the following constraints:
+*   **Client ID**: An integer between 1 and 999,999.
+*   **Therapist ID**: An integer between 1 and 9,999.
+*   **Progress Score**: A floating-point number between 0.0 and 100.0.
+*   **Session Type**: Categorical value restricted to *Initial*, *Follow-Up*, or *Crisis*.
+*   **Feedback Type**: Categorical value restricted to *Positive*, *Neutral*, or *Negative*.
+*   **Treatment Status**: Categorical value restricted to *Ongoing*, *Adjusted*, or *Completed*.
+
+### 3. Process Flow and Behavioral Constraints
+The model enforces a strict behavioral lifecycle for client treatment, governed by the following Declare constraints:
+
+**Initialization and Planning**
+*   The process must begin with the **Assess Initial Condition** activity.
+*   **Develop Treatment Plan** can only occur after the initial condition has been assessed. 
+*   Once the treatment plan is developed, it must be immediately followed by **Schedule First Session** (Chain Response).
+
+**Therapy Sessions**
+*   Scheduling the first session requires that a therapy session is eventually conducted (Response).
+*   Conversely, a therapy session cannot be conducted unless a first session has been scheduled beforehand (Precedence).
+*   The patient must undergo at least three therapy sessions in total (Existence3).
+
+**Evaluation and Adjustments**
+*   Progress can only be evaluated after at least one therapy session has been conducted (Precedence).
+*   If progress is evaluated, the treatment plan must eventually be adjusted (Response).
+*   Adjusting the treatment plan must be immediately followed by providing feedback to the client (Chain Response).
+*   Providing feedback must, in turn, be immediately followed by scheduling a follow-up appointment (Chain Response).
+
+**Treatment Conclusion**
+*   The process must end with the **Conduct Final Assessment** activity (End).
+*   The treatment cannot be marked as complete until the final assessment has been conducted (Precedence).
+
+### 4. Negative and Data-Aware Constraints
+The model includes several restrictions to prevent illogical process flows, some of which are activated based on specific data conditions:
+*   **Mutual Exclusivity of Scheduling**: **Schedule First Session** and **Schedule Follow-Up** cannot both occur in the same process instance (Not Co-Existence).
+*   **Feedback Limit**: The **Provide Feedback** activity can occur at most four times during the entire process (Absence5).
+*   **No Completion After Adjustment**: If the treatment plan is adjusted, the treatment can never be directly completed afterward (Not Succession).
+*   **Time-based Constraint**: There is a specific constraint between **Conduct Therapy Session** (preceding) and **Schedule First Session** (succeeding). Under standard conditions, this is a precedence rule (a first session must be scheduled before a therapy session). However, this constraint is modified by a time condition: if the time elapsed is between 0 and 30 minutes, an alternate rule applies. *(Note: The notation `0,30,m` typically indicates a time window of 0 to 30 minutes where this specific precedence relation is evaluated or altered).*
+*   **Data-based Constraint**: The Chain Response between **Provide Feedback** and **Schedule Follow-Up** is conditionally enforced. Specifically, the immediate succession must occur when the data payload falls within a specific range (indicated by the notation `0,48,h`, which typically represents a time or data attribute threshold of 0 to 48 hours/units).

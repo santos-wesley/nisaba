@@ -1,0 +1,32 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This model describes a currency exchange process with several constraints on the order, timing, data, and frequency of activities.
+
+The process begins with **Receive Currency**, which must be the first activity. It ends with **Issue Receipt**, which must be the last activity. The process involves ten activities in total, each associated with specific data objects: **Amount** (1–10,000), **Currency Type** (USD, EUR, GBP, JPY), **Exchange Rate** (0.5–1.5), **Exchange Status** (Pending, Approved, Rejected), and **Transaction ID** (1000–9999).
+
+**Ordering constraints:**
+- **Verify Currency Authenticity** must occur before **Approve Exchange** (Precedence).
+- **Receive Currency** must occur before **Verify Currency Authenticity** (Precedence).
+- **Calculate Exchange Rate** must occur before **Process Exchange** (Precedence).
+- **Process Exchange** must occur before **Record Transaction** (Precedence, with a data condition: the Transaction ID must match).
+- **Calculate Exchange Rate** and **Update Exchange Rates** must occur immediately one after the other (Chain Succession), within 30 time units, and this pair must occur at least once per month.
+- **Receive Currency** and **Record Transaction** must occur immediately one after the other (Chain Succession), within 1 time unit, and the Transaction ID must match. This pair must occur at least once per day.
+
+**Conditional responses:**
+- If **Approve Exchange** occurs with status "Approved", then **Process Exchange** must eventually occur (Response), within 2 time units, and this can happen at most 0 times per hour (i.e., it is forbidden to happen more than once per hour).
+- If **Reject Exchange** occurs with status "Rejected", then **Notify Customer** must eventually occur (Response), within 1 time unit, and this can happen at most once per hour.
+
+**Existence and frequency:**
+- **Calculate Exchange Rate** must occur at least once.
+- **Approve Exchange** must occur exactly once.
+
+**Negative constraints:**
+- **Verify Currency Authenticity** and **Approve Exchange** must never both occur in the same process instance (Not Co-Existence).
+- **Receive Currency** must never be directly followed by **Reject Exchange** (Not Succession).
+
+**Optional relationship:**
+- If **Process Exchange** occurs, **Update Exchange Rates** may also occur at some point (Responded Existence), but it is not required.
+
+In summary, the process ensures that currency is received, verified, and either approved (leading to processing, recording, and receipt issuance) or rejected (leading to customer notification). Exchange rates are calculated and updated in a tightly coupled manner, and the entire workflow is governed by strict timing, data matching, and frequency rules.

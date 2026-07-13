@@ -1,0 +1,43 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a comprehensive **Employee Benefits Management Process** that handles benefit requests, appeals, payments, compliance activities, and HR analytics.
+
+### Process Overview
+
+The process begins when an **Employee** submits a benefit request (e.g., Health Insurance, Retirement Plan, Paid Leave, or Education Assistance). Each request is uniquely identified by a Request ID and linked to an Employee ID.
+
+### Main Benefit Request Flow
+
+1. After submission, a **Review Benefit Request** activity must occur (Existence constraint).
+2. Following the review, the request is either **Approved** or **Rejected**.
+3. Once a decision is made:
+   - If **approved**, the system must eventually **Process Payment** and **Update Employee Record**.
+   - In all cases (approval or rejection), the **Employee** must be **Notified** of the decision.
+4. After payment processing, an **Audit Benefit Process** activity must eventually occur to ensure compliance.
+
+### Appeal Handling
+
+If an employee is dissatisfied with the initial decision, they may **Submit an Appeal**. The appeal goes through a similar lifecycle:
+- **Review Appeal** → **Approve Appeal** or **Reject Appeal**
+- The employee is then notified of the appeal decision via **Notify Appeal Decision**.
+
+### Additional Mandatory Activities
+
+The model mandates two ongoing HR activities that must occur at least once during the process lifecycle:
+- **Conduct Benefit Orientation** (e.g., for new employees or open enrollment periods)
+- **Evaluate Benefit Utilization** (to analyze how benefits are being used across the organization)
+
+### Key Constraints and Data Perspectives
+
+- **Control-flow constraints** ensure proper sequencing: a benefit request cannot be approved or rejected before it is reviewed; payments and record updates only follow approved requests.
+- **Data constraints** are tightly integrated:
+  - Request Status must be "Approved" or "Rejected" for corresponding decision activities.
+  - Activities are linked via matching **Request ID**, **Employee ID**, or **Audit ID**.
+  - Temporal constraints specify maximum delays (e.g., notification must occur within 2 days of approval/rejection, appeals must be reviewed within 5 days, audits within 30 days of payment).
+- **Data domains** are clearly defined: Request IDs range from 1–10,000, Benefit Amounts between $100 and $10,000, Utilization Rates from 0% to 100%, etc.
+
+### Termination
+
+The process is considered complete when the employee has been notified of the final decision (either initial request or appeal), although some background activities (audit, orientation, utilization evaluation) may still be pending.
+
+This model combines declarative flexibility with strong data-aware and temporal constraints, making it suitable for a compliant, auditable benefits administration system.

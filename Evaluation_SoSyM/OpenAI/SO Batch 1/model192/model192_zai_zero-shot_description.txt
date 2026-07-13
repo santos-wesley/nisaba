@@ -1,0 +1,15 @@
+Here is a natural language description of the Multi-Perspective Declare model:
+
+This model outlines the process of planning and executing an eco-friendly trip, starting with the **Plan Eco-Friendly Trip** activity and ending with the **Share Sustainable Practices** activity. 
+
+**Data and Attributes:**
+When planning the trip, you must specify a **Trip Duration** (an integer between 1 and 30 days) and an estimated **Carbon Emission** (a decimal between 0.0 and 1000.0). If you book sustainable accommodation, you must declare the **Accommodation Type**, which must be an Eco-Lodge, Green Hotel, or Hostel. When choosing green transportation, you must specify the **Transportation Mode**, limited to Bicycle, Electric Car, or Train. Finally, when providing feedback to hosts, you must assign a **Feedback Rating** of Excellent, Good, Average, or Poor.
+
+**Mandatory and Relational Rules:**
+*   **Mandatory Evaluation:** The **Evaluate Environmental Impact** activity is mandatory and must occur at least once during the process. Furthermore, every time you **Choose Green Transportation**, you must subsequently **Evaluate Environmental Impact**.
+*   **Feedback Loop:** If you **Book Sustainable Accommodation**, you must eventually **Provide Feedback to Hosts**. This must happen immediately after the accommodation is booked, with a maximum allowed delay of 2 days. 
+*   **Conservation and Culture:** If you **Participate in Local Conservation Efforts**, you must also **Attend Cultural Workshops**, and vice versa. These two activities must always co-exist. Additionally, participating in local conservation efforts is required for any trip where the **Trip Duration is strictly greater than 7 days**.
+*   **Mutual Exclusivity:** You must choose between either **Book Sustainable Accommodation** or **Choose Green Transportation**. These two activities are mutually exclusive; if one occurs, the other cannot occur in the same process trace.
+*   **Prohibitions (Negative Constraints):** 
+    *   You are not allowed to **Purchase Local Products** immediately after **Planning an Eco-Friendly Trip**. 
+    *   If the **Feedback Rating** provided to the hosts is "Poor", you are prohibited from evaluating your environmental impact. In other words, a poor rating and the evaluation activity cannot exist in the same process trace.

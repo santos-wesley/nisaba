@@ -1,0 +1,142 @@
+#MP-Declare Model
+## Activities
+- **Report Animal Abuse**: The 'Report Animal Abuse' activity represents the submission of a report indicating suspected or confirmed animal abuse.
+- **Investigate Abuse Report**: The 'Investigate Abuse Report' activity involves examining and verifying the details of a reported animal abuse case.
+- **Rescue Abused Animal**: The 'Rescue Abused Animal' activity involves physically removing an animal from an abusive situation and bringing it to safety.
+- **Provide Veterinary Care**: The 'Provide Veterinary Care' activity includes administering medical treatment and care to an animal in need.
+- **Find Foster Home**: The 'Find Foster Home' activity involves locating a temporary home for an animal awaiting adoption or recovery.
+- **Conduct Adoption Screening**: The 'Conduct Adoption Screening' activity involves evaluating potential adopters to determine their suitability for adopting an animal.
+- **Finalize Animal Adoption**: The 'Finalize Animal Adoption' activity represents the completion of the legal and administrative process of adopting out an animal.
+- **Monitor Animal Welfare**: The 'Monitor Animal Welfare' activity involves tracking and assessing the ongoing wellbeing of an animal after adoption or placement.
+- **Educate Public Awareness**: The 'Educate Public Awareness' activity involves informing the public about animal welfare issues and responsible pet ownership.
+- **Process Donation**: The 'Process Donation' activity includes receiving and recording monetary or material contributions made to support animal welfare efforts.
+- **Train Staff Member**: The 'Train Staff Member' activity involves providing training to personnel to improve their skills in animal care and welfare.
+- **Inspect Shelter Facility**: The 'Inspect Shelter Facility' activity involves examining the shelter's premises to ensure compliance with safety and welfare standards.
+- **Approve Volunteer Application**: The 'Approve Volunteer Application' activity involves reviewing and granting approval to individuals applying to volunteer.
+- **Schedule Animal Checkup**: The 'Schedule Animal Checkup' activity involves arranging routine medical examinations for animals under care.
+- **Euthanize Animal**: The 'Euthanize Animal' activity represents the humane ending of an animal's life, typically due to severe suffering or illness.
+
+## Attributes
+- **Abuse Severity: Low, Medium, High**: The attribute 'Abuse Severity: Low, Medium, High' specifies the level of severity associated with a reported case of animal abuse.
+- **Animal Species: Dog, Cat, Other**: The attribute 'Animal Species: Dog, Cat, Other' specifies the species classification of the animal involved.
+- **Animal Age: Integer between 0 and 25**: The attribute 'Animal Age: Integer between 0 and 25' represents the age of the animal in years.
+- **Animal Health: Healthy, Injured, Sick**: The attribute 'Animal Health: Healthy, Injured, Sick' specifies the current health condition of the animal.
+- **Donation Amount: Float between 1.0 and 10000.0**: The attribute 'Donation Amount: Float between 1.0 and 10000.0' represents the monetary value of a donation made.
+- **Adoption Status: Pending, Approved, Rejected**: The attribute 'Adoption Status: Pending, Approved, Rejected' specifies the current status of an adoption application.
+- **Shelter Capacity: Integer between 0 and 500**: The attribute 'Shelter Capacity: Integer between 0 and 500' represents the number of animals the shelter or foster facility can accommodate.
+- **Volunteer Background Check: Pass, Fail**: The attribute 'Volunteer Background Check: Pass, Fail' specifies the outcome of the background check performed on a volunteer applicant.
+- **Checkup Frequency: Integer between 7 and 365**: The attribute 'Checkup Frequency: Integer between 7 and 365' represents the number of days between scheduled animal checkups.
+
+## Binds
+
+## Constraints
+
+
+## Interleaved Description
+# The MP-Declare Process Model for Animal Welfare Management
+
+The MP-Declare process model for the animal welfare management process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Report Animal Abuse,' establishing the foundational context for all subsequent actions. This initial report, which may specify an 'Abuse Severity' ranging from Low to High, sets the process in motion by identifying a case requiring attention and intervention.
+
+#### **End Constraints**
+The process draws to a close with the activity 'Monitor Animal Welfare.' In conclusion, this final activity ensures that the animal's ongoing wellbeing is tracked and assessed even after adoption or placement has occurred, providing a coherent and responsible closure to the entire welfare journey.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Investigate Abuse Report' activity must occur at least once within the process. This requirement adds essential depth to the model, ensuring that every reported case receives proper scrutiny and verification before further action is taken. Furthermore, the 'Provide Veterinary Care' activity must also occur at least once, reinforcing the process's commitment to elaborating on the animal's medical needs whenever health issues, such as 'Animal Health is Injured' or 'Animal Health is Sick,' are present.
+
+#### **Absence Constraints**
+In contrast to the mandatory occurrence of care-related activities, the 'Euthanize Animal' activity is constrained to not occur at all in the standard welfare pathway, highlighting an exclusion that reinforces the process's integrity by prioritizing rescue and rehabilitation over termination whenever possible.
+
+#### **Exactly Constraints**
+By way of summary, the 'Conduct Adoption Screening' activity must occur exactly once for each animal moving toward adoption, setting a fixed and precise boundary that prevents redundant or repeated screenings within a single adoption case.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+As a direct consequence of the 'Rescue Abused Animal' activity occurring, the 'Provide Veterinary Care' activity must also be present somewhere in the process. This cause-effect relationship establishes that rescued animals are never left without the necessary medical attention, thereby enhancing the coherence and reliability of the care pathway.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. As background context, the activity 'Rescue Abused Animal' is permitted to occur only if an 'Investigate Abuse Report' activity has occurred before it, with the condition that the 'Abuse Severity is High' or 'Medium.' This establishes that verification must precede physical intervention, guiding the logical sequence of the rescue operation.
+2. Setting up further initial conditions, the activity 'Finalize Animal Adoption' is permitted to occur only if a 'Conduct Adoption Screening' activity has occurred before it, with the condition that the 'Adoption Status is Approved.' This ensures that no adoption is finalized without proper vetting of the prospective adopter.
+3. Similarly, the activity 'Find Foster Home' is permitted to occur only if 'Provide Veterinary Care' has occurred before it, when 'Animal Health is Healthy' is confirmed as the resulting status, ensuring animals are medically stable before temporary placement.
+
+#### **Response Constraints**
+1. In sequence, if the 'Report Animal Abuse' activity occurs with the condition 'Abuse Severity is High,' then the 'Investigate Abuse Report' activity must occur afterward, ensuring urgent cases are promptly addressed and maintaining the process's responsive momentum.
+2. Following this temporal structure, if the 'Rescue Abused Animal' activity occurs, then the 'Provide Veterinary Care' activity must occur afterward, ensuring that physical safety is always followed by medical attention in a cohesive flow.
+3. Continuing the ordered sequence, if the 'Finalize Animal Adoption' activity occurs, then the 'Monitor Animal Welfare' activity must occur afterward, ensuring that adopted animals continue to receive oversight following their placement.
+
+#### **Succession Constraints**
+Establishing a causal link, whenever the 'Investigate Abuse Report' activity occurs with the condition 'Abuse Severity is High' or 'Medium,' it must be followed by the 'Rescue Abused Animal' activity, and conversely, the rescue activity must always be preceded by the investigation. This creates a cohesive progression ensuring that neither step occurs in isolation from the other.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraints**
+Under the condition-consequence relationship governing balanced process flow, each occurrence of the 'Finalize Animal Adoption' activity must be preceded by a 'Conduct Adoption Screening' activity, with no other 'Finalize Animal Adoption' occurring in between. This ensures that each adoption screening corresponds uniquely to a single finalized adoption, promoting consistent, non-overlapping order.
+
+#### **Alternate Response Constraints**
+Promoting balance through condition-consequence logic, each occurrence of the 'Approve Volunteer Application' activity must be followed by a unique 'Train Staff Member' activity before any subsequent volunteer application is approved. This clear one-to-one pairing ensures that trained oversight accompanies every volunteer approval without interference from overlapping activations.
+
+#### **Alternate Succession Constraints**
+Enforcing a fully ordered structure, the 'Schedule Animal Checkup' activity and the 'Monitor Animal Welfare' activity are bound in an alternating pattern: each scheduled checkup must be followed by a monitoring activity, and each monitoring activity must be preceded by a checkup, with no repeated activations or targets occurring out of turn. This enhances the coherence of ongoing animal care tracking.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+Making the sequence explicit, the 'Inspect Shelter Facility' activity must be immediately preceded by an 'Approve Volunteer Application' activity whenever facility inspections coincide with new volunteer onboarding, ensuring no intervening events disrupt this direct dependency.
+
+#### **Chain Response Constraints**
+Capturing an immediate cause-and-effect relationship, whenever the 'Rescue Abused Animal' activity occurs, it must be immediately followed by the 'Provide Veterinary Care' activity, with the condition 'Animal Health is Injured' or 'Sick' triggering urgent, uninterrupted medical response.
+
+#### **Chain Succession Constraints**
+Enforcing a tightly coupled sequence, whenever the 'Conduct Adoption Screening' activity occurs with the condition 'Adoption Status is Approved,' it must be immediately followed by the 'Finalize Animal Adoption' activity, and this finalization must never occur without having been immediately preceded by the approved screening, leaving no room for delays or intervening activities.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+In conjunction with one another, the 'Process Donation' activity and the 'Educate Public Awareness' activity are mutually dependent: whenever one occurs within the process, the other must also occur, ensuring that fundraising efforts and public education campaigns consistently reinforce one another within the organization's outreach strategy.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing flexibility through alternative pathways, either the 'Find Foster Home' activity or the 'Finalize Animal Adoption' activity may occur for a given animal, allowing the process to accommodate different outcomes depending on the animal's circumstances.
+
+#### **Exclusive Choice Constraints**
+Enforcing mutually exclusive pathways, exactly one of the 'Finalize Animal Adoption' or 'Euthanize Animal' activities may occur for any given animal case, ensuring that these two fundamentally divergent outcomes never coexist within the same instance.
+
+#### **Not Co-Existence Constraints**
+Setting firm exclusion rules, the 'Finalize Animal Adoption' activity and the 'Euthanize Animal' activity cannot both occur within the same process instance. This exclusion maintains process integrity by preventing contradictory outcomes for a single animal's welfare journey.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+In contrast to typical dependency patterns, the occurrence of the 'Process Donation' activity does not require, and must not be linked to, the occurrence of the 'Euthanize Animal' activity. This refinement disallows any implied contingency between financial contributions and end-of-life decisions.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Restricting activity order, the 'Euthanize Animal' activity must not precede the 'Provide Veterinary Care' activity, ensuring that medical treatment options are always considered and exhausted before any irreversible decision is made, thereby preserving the intended sequence of compassionate care.
+
+#### **Not Response Constraints**
+Preventing an unwanted sequence, the 'Process Donation' activity must not be followed by the 'Euthanize Animal' activity in a manner that implies causal linkage, maintaining the integrity of the model's intended progression and separating financial operations from clinical decisions.
+
+#### **Not Succession Constraints**
+Restricting overlapping sequences entirely, the 'Educate Public Awareness' activity must not, at any point, be followed by or follow the 'Euthanize Animal' activity within the same instance, preserving the model's defined flow between outreach and clinical operations.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+Maintaining necessary separation within the sequence, the 'Euthanize Animal' activity must not be immediately preceded by the 'Report Animal Abuse' activity, ensuring that intermediate steps such as investigation and veterinary evaluation always occur between the initial report and any end-of-life decision.
+
+#### **Not Chain Response Constraints**
+Preserving structural integrity, the 'Rescue Abused Animal' activity must not be immediately followed by the 'Euthanize Animal' activity, ensuring that veterinary care and assessment always intervene between rescue and any consideration of euthanasia.
+
+#### **Not Chain Succession Constraints**
+Refining the process model by excluding specific immediate sequences, the 'Process Donation' activity and the 'Inspect Shelter Facility' activity must not immediately precede or follow one another, ensuring that administrative financial processes remain distinct and separate from operational facility inspections.

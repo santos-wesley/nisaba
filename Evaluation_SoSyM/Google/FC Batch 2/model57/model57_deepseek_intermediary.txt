@@ -1,0 +1,53 @@
+## Activities
+- **Collect Digital Evidence**: 
+- **Preserve Digital Evidence**: 
+- **Analyze Digital Evidence**: 
+- **Document Chain Custody**: 
+- **Secure Evidence Storage**: 
+- **Review Evidence Report**: 
+- **Authorize Evidence Release**: 
+- **Dispose Digital Evidence**: 
+- **Validate Evidence Integrity**: 
+- **Generate Evidence Report**: 
+- **Classify Digital Evidence**: 
+- **Index Digital Evidence**: 
+- **Audit Evidence Access**: 
+- **Report Security Breach**: 
+- **Update Evidence Metadata**: 
+
+## Attributes
+- **Evidence Type: Document, Image, Video, Audio, Log File**: 
+- **Evidence Size: integer between 1 and 1000**: 
+- **Custody Status: Collected, Preserved, Analyzed, Released, Disposed**: 
+- **Integrity Score: float between 0.0 and 1.0**: 
+- **Security Level: Confidential, Restricted, Unclassified**: 
+- **Access Count: integer between 0 and 100**: 
+- **Legal Hold: Yes, No**: 
+- **Analysis Time: float between 0.1 and 24.0**: 
+- **Retention Period: integer between 30 and 3650**: 
+- **Disposal Method: Shredding, Wiping, Deletion**: 
+
+## Binds
+- **Collect Digital Evidence: Evidence Type, Evidence Size**: 
+- **Preserve Digital Evidence: Custody Status, Integrity Score**: 
+- **Analyze Digital Evidence: Analysis Time, Security Level**: 
+- **Dispose Digital Evidence: Disposal Method, Retention Period**: 
+- **Audit Evidence Access: Access Count, Legal Hold**: 
+
+## Constraints
+- **Init[Collect Digital Evidence] | |**: 
+- **End[Dispose Digital Evidence] | |**: 
+- **Succession[Collect Digital Evidence, Preserve Digital Evidence] | | |**: 
+- **Response[Preserve Digital Evidence, Analyze Digital Evidence] | | |**: 
+- **Precedence[Document Chain Custody, Analyze Digital Evidence] | | |**: 
+- **Responded Existence[Audit Evidence Access, Collect Digital Evidence] |A.Legal Hold is Yes | |**: 
+- **Chain Response[Analyze Digital Evidence, Generate Evidence Report] | | |**: 
+- **Co-Existence[Secure Evidence Storage, Validate Evidence Integrity] | | |**: 
+- **Not Chain Succession[Report Security Breach, Dispose Digital Evidence] | | |**: 
+- **Not Co-Existence[Classify Digital Evidence, Dispose Digital Evidence] | | |**: 
+- **Choice[Index Digital Evidence, Update Evidence Metadata] | | |**: 
+- **Exclusive Choice[Authorize Evidence Release, Dispose Digital Evidence] | | |**: 
+- **Existence[Analyze Digital Evidence] | |**: 
+- **Alternate Response[Review Evidence Report, Authorize Evidence Release] | | |**: 
+- **Chain Response[Preserve Digital Evidence, Validate Evidence Integrity] | | |1,2,h**: 
+

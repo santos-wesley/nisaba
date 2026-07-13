@@ -1,0 +1,35 @@
+# Process Description: Prototype Development and Approval Workflow
+
+This process model describes a prototype development lifecycle involving ten key activities, governed by control-flow rules, data constraints, and value ranges.
+
+## Activities Involved
+The process consists of the following steps: **Define Requirements**, **Develop Initial Prototype**, **Test Prototype**, **Gather Feedback**, **Analyze Feedback**, **Revise Prototype**, **Final Testing**, **Document Findings**, **Present Prototype**, and **Approve Prototype**.
+
+## Data Attributes
+Several activities carry associated data:
+
+- **Gather Feedback** and **Analyze Feedback** are both linked to a **Stakeholder Name** (one of: John Doe, Jane Smith, or Alice Johnson) and a **Feedback Rating** (an integer from 1 to 10).
+- **Revise Prototype** is associated with an **Improvement Cost** (a float ranging from 100.0 to 10000.0) and a **Revision Version** (an integer from 1 to 20).
+- **Test Prototype** and **Final Testing** are both linked to a **Test Result**, which can be either "Pass" or "Fail".
+
+## Control-Flow Rules
+
+1. **Process Initiation**: The process must begin with the **Define Requirements** activity.
+
+2. **Sequential Dependencies (Response Constraints)**:
+   - Whenever **Define Requirements** occurs, **Develop Initial Prototype** must eventually follow.
+   - Whenever **Develop Initial Prototype** occurs, **Test Prototype** must eventually follow.
+   - Whenever **Test Prototype** occurs, **Gather Feedback** must eventually follow.
+   - Whenever **Gather Feedback** occurs, **Analyze Feedback** must eventually follow.
+   - Whenever **Analyze Feedback** occurs, **Revise Prototype** must eventually follow.
+   - Whenever **Revise Prototype** occurs, **Final Testing** must eventually follow.
+
+3. **Strict Sequencing (Chain Response)**:
+   - Whenever **Present Prototype** occurs, it must be **immediately followed** by **Approve Prototype** (no other activity can occur in between).
+
+4. **Process Termination**: The process must end with the **Approve Prototype** activity.
+
+5. **Frequency Constraint**: The **Test Prototype** activity must occur **at least twice** during the process execution.
+
+## Summary
+In essence, this model enforces a structured development cycle that starts with defining requirements and ends with approval. It ensures that prototyping, testing, feedback collection, analysis, and revision happen in a logical cascading sequence, with each phase triggering the necessity of the next. Additionally, testing must occur multiple times, and any presentation of the prototype must be directly and immediately followed by its approval, without allowing other actions to intervene.

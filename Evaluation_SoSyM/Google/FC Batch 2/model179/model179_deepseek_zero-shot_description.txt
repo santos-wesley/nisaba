@@ -1,0 +1,20 @@
+Based on the provided model, here is a natural language description of the return process:
+
+The process begins with a **Request Return** activity, which must be the first step. This request captures the **Return Reason** (Defective, Damaged, Wrong Item, or No Longer Needed), the **Days Since Purchase** (0-365), and sets the initial **Return Status** to "Requested".
+
+After a request is made, it must eventually be followed by an **Approve Return** activity. This approval updates the **Return Status** to either "Approved" or "Rejected". If approved, the process continues with a **Generate Return Label** activity, which must then be immediately followed by **Ship Item Back** (the two activities form a strict succession). Shipping updates the status to "Shipped".
+
+Once the item is shipped, it must be followed by **Receive Item** (status becomes "Received"), which in turn must be followed by **Inspect Item** (status becomes "Inspected"). The inspection records the **Item Condition** (1-5) and an **Inspection Score** (1-10).
+
+After inspection, the process branches based on the item's condition:
+- If the **Item Condition is greater than 3**, the system must respond with **Restock Item** (status becomes "Restocked").
+- If the **Item Condition is 3 or less**, the system must respond with **Dispose Item** (status becomes "Disposed").
+
+Regardless of the condition, after inspection, the process must also eventually perform **Determine Refund**, which must then be followed by **Process Refund**. The Process Refund activity records the **Refund Amount** (0.0-1000.0) and updates the **Return Status** to "Refunded".
+
+The model also enforces several time constraints:
+- The **Approve Return** must occur within 24 hours of the **Request Return**.
+- The **Process Refund** must occur within 7 days of **Receive Item**.
+- The **Inspect Item** must occur within 48 hours of **Receive Item**.
+
+Finally, a special condition applies: if the **Inspection Score is 5 or less** and the **Return Reason is "Defective"**, then the **Inspect Item** activity must have been preceded by the **Request Return** activity (i.e., the inspection cannot happen without a prior return request in this specific scenario).

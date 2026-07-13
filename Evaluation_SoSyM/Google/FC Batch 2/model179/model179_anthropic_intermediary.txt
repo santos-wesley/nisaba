@@ -1,0 +1,28 @@
+## Activities
+- **Request Return**: The 'Request Return' activity represents the initiation of a return request by a customer for a purchased item.
+- **Approve Return**: The 'Approve Return' activity involves the review and authorization of a submitted return request.
+- **Generate Return Label**: The 'Generate Return Label' activity includes the creation of a shipping label to be used for returning the item.
+- **Ship Item Back**: The 'Ship Item Back' activity represents the shipping of the item by the customer back to the retailer or warehouse.
+- **Receive Item**: The 'Receive Item' activity involves the receipt of the returned item at the retailer's or warehouse's facility.
+- **Inspect Item**: The 'Inspect Item' activity includes the examination of the returned item to assess its condition.
+- **Determine Refund**: The 'Determine Refund' activity involves calculating the refund amount owed to the customer based on the return.
+- **Process Refund**: The 'Process Refund' activity represents the execution of the refund payment to the customer.
+- **Restock Item**: The 'Restock Item' activity involves returning the inspected item back into inventory for resale.
+- **Dispose Item**: The 'Dispose Item' activity includes the disposal of the returned item when it is not suitable for restocking.
+
+## Attributes
+- **Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed**: The attribute 'Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed' represents the current stage or state of a return within the return process.
+- **Item Condition: integer between 1 and 5**: The attribute 'Item Condition: integer between 1 and 5' represents the physical condition rating assigned to the returned item during inspection.
+- **Refund Amount: float between 0.0 and 1000.0**: The attribute 'Refund Amount: float between 0.0 and 1000.0' represents the monetary amount to be refunded to the customer for the returned item.
+- **Days Since Purchase: integer between 0 and 365**: The attribute 'Days Since Purchase: integer between 0 and 365' represents the number of days that have elapsed since the item was originally purchased.
+- **Return Reason: Defective, Damaged, Wrong Item, No Longer Needed**: The attribute 'Return Reason: Defective, Damaged, Wrong Item, No Longer Needed' specifies the reason provided by the customer for returning the item.
+- **Inspection Score: integer between 1 and 10**: The attribute 'Inspection Score: integer between 1 and 10' represents the numeric score assigned to the returned item as a result of the inspection process.
+
+## Binds
+- **bind Request Return: Return Status, Return Reason, Days Since Purchase**: The bind 'Request Return: Return Status, Return Reason, Days Since Purchase' specifies that the activity 'Request Return' requires the attributes 'Return Status', 'Return Reason', and 'Days Since Purchase'.
+- **bind Approve Return: Return Status**: The bind 'Approve Return: Return Status' links the 'Approve Return' activity with the attribute 'Return Status'.
+- **bind Inspect Item: Item Condition, Inspection Score**: The bind 'Inspect Item: Item Condition, Inspection Score' links the 'Inspect Item' activity with the attributes 'Item Condition' and 'Inspection Score'.
+- **bind Process Refund: Refund Amount, Return Status**: The bind 'Process Refund: Refund Amount, Return Status' links the 'Process Refund' activity with the attributes 'Refund Amount' and 'Return Status'.
+
+## Constraints
+

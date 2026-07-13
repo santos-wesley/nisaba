@@ -1,0 +1,6 @@
+# DMRST parser + checkpoint (~1.2 GB) — not versioned; see README for how to obtain it
+DMRST_Parser/
+
+# Python caches
+__pycache__/
+*.pyc

@@ -1,0 +1,40 @@
+activity Receive Currency
+activity Verify Currency Authenticity
+activity Approve Exchange
+activity Reject Exchange
+activity Process Exchange
+activity Calculate Exchange Rate
+activity Update Exchange Rates
+activity Record Transaction
+activity Notify Customer
+activity Issue Receipt
+bind Receive Currency: Amount, Currency Type, Transaction ID
+bind Verify Currency Authenticity: Transaction ID
+bind Approve Exchange: Exchange Status, Transaction ID
+bind Reject Exchange: Exchange Status, Transaction ID
+bind Process Exchange: Exchange Rate, Transaction ID
+bind Calculate Exchange Rate: Exchange Rate
+bind Update Exchange Rates: Exchange Rate
+bind Record Transaction: Transaction ID
+bind Notify Customer: Transaction ID
+bind Issue Receipt: Transaction ID
+Amount: integer between 1 and 10000
+Currency Type: USD, EUR, GBP, JPY
+Exchange Rate: float between 0.5 and 1.5
+Exchange Status: Pending, Approved, Rejected
+Transaction ID: integer between 1000 and 9999
+Init[Receive Currency] | |
+End[Issue Receipt] | |
+Precedence[Verify Currency Authenticity, Approve Exchange] | | |
+Precedence[Receive Currency, Verify Currency Authenticity] | | |
+Precedence[Calculate Exchange Rate, Process Exchange] | | |
+Precedence[Process Exchange, Record Transaction] | |A.Transaction ID == T.Transaction ID |
+Chain Succession[Calculate Exchange Rate, Update Exchange Rates] | | |0,30,s
+Chain Succession[Receive Currency, Record Transaction] | |A.Transaction ID == T.Transaction ID |0,1,s
+Response[Approve Exchange, Process Exchange] |A.Exchange Status is Approved | |0,2,s
+Response[Reject Exchange, Notify Customer] |A.Exchange Status is Rejected | |0,1,s
+Existence[Calculate Exchange Rate] | |
+Exactly[Approve Exchange] | |
+Not Co-Existence[Verify Currency Authenticity, Approve Exchange] | | |
+Not Succession[Receive Currency, Reject Exchange] | | |
+Responded Existence[Process Exchange, Update Exchange Rates] | | |

@@ -1,0 +1,132 @@
+#MP-Declare Model
+## Activities
+- **Request Return**: The 'Request Return' activity represents the initiation of a return request by a customer for a purchased item.
+- **Approve Return**: The 'Approve Return' activity involves the review and authorization of a submitted return request.
+- **Generate Return Label**: The 'Generate Return Label' activity includes the creation of a shipping label to be used for returning the item.
+- **Ship Item Back**: The 'Ship Item Back' activity represents the shipping of the item by the customer back to the retailer or warehouse.
+- **Receive Item**: The 'Receive Item' activity involves the receipt of the returned item at the retailer's or warehouse's facility.
+- **Inspect Item**: The 'Inspect Item' activity includes the examination of the returned item to assess its condition.
+- **Determine Refund**: The 'Determine Refund' activity involves calculating the refund amount owed to the customer based on the return.
+- **Process Refund**: The 'Process Refund' activity represents the execution of the refund payment to the customer.
+- **Restock Item**: The 'Restock Item' activity involves returning the inspected item back into inventory for resale.
+- **Dispose Item**: The 'Dispose Item' activity includes the disposal of the returned item when it is not suitable for restocking.
+
+## Attributes
+- **Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed**: The attribute 'Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed' represents the current stage or state of a return within the return process.
+- **Item Condition: integer between 1 and 5**: The attribute 'Item Condition: integer between 1 and 5' represents the physical condition rating assigned to the returned item during inspection.
+- **Refund Amount: float between 0.0 and 1000.0**: The attribute 'Refund Amount: float between 0.0 and 1000.0' represents the monetary amount to be refunded to the customer for the returned item.
+- **Days Since Purchase: integer between 0 and 365**: The attribute 'Days Since Purchase: integer between 0 and 365' represents the number of days that have elapsed since the item was originally purchased.
+- **Return Reason: Defective, Damaged, Wrong Item, No Longer Needed**: The attribute 'Return Reason: Defective, Damaged, Wrong Item, No Longer Needed' specifies the reason provided by the customer for returning the item.
+- **Inspection Score: integer between 1 and 10**: The attribute 'Inspection Score: integer between 1 and 10' represents the numeric score assigned to the returned item as a result of the inspection process.
+
+## Binds
+- **bind Request Return: Return Status, Return Reason, Days Since Purchase**: The bind 'Request Return: Return Status, Return Reason, Days Since Purchase' specifies that the activity 'Request Return' requires the attributes 'Return Status', 'Return Reason', and 'Days Since Purchase'.
+- **bind Approve Return: Return Status**: The bind 'Approve Return: Return Status' links the 'Approve Return' activity with the attribute 'Return Status'.
+- **bind Inspect Item: Item Condition, Inspection Score**: The bind 'Inspect Item: Item Condition, Inspection Score' links the 'Inspect Item' activity with the attributes 'Item Condition' and 'Inspection Score'.
+- **bind Process Refund: Refund Amount, Return Status**: The bind 'Process Refund: Refund Amount, Return Status' links the 'Process Refund' activity with the attributes 'Refund Amount' and 'Return Status'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the return process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Request Return,' which involves the initiation of a return request by a customer for a purchased item. This activity establishes the initial context of the process, requiring the attributes 'Return Status' to be set to 'Requested,' along with the 'Return Reason' and 'Days Since Purchase,' thereby grounding the entire return process in a well-defined starting point.
+
+#### **End Constraints**
+The process concludes with either the 'Restock Item' or 'Dispose Item' activity, bringing the return process to a coherent close. Once the item has been inspected and a final determination made, the process reaches its natural endpoint through one of these two terminal outcomes, ensuring that every returned item reaches a definitive disposition.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Inspect Item' activity must occur at least once in the process. This ensures that every returned item undergoes an examination of its condition, adding depth and reliability to the process by guaranteeing that no return proceeds toward refund or restocking without proper assessment. Similarly, the 'Determine Refund' activity must occur at least once, reinforcing that a refund calculation is always performed as part of a thorough return evaluation.
+
+#### **Absence Constraints**
+In contrast to activities that must occur, the 'Dispose Item' activity should not occur more than once within a single process instance. This exclusion reinforces process integrity by ensuring that an item is disposed of only a single time, preventing redundant or conflicting disposal actions.
+
+#### **Exactly Constraints**
+The 'Approve Return' activity must occur exactly once in the process. This sets a fixed boundary on its occurrence, ensuring precision within the process model by guaranteeing that each return request is reviewed and authorized a single, definitive time.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+If the 'Ship Item Back' activity occurs, then the 'Generate Return Label' activity must also occur somewhere in the process. This establishes a necessary dependency: the customer cannot ship the item back without a corresponding return label having been generated, enhancing coherence between these two related steps.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Generate Return Label' is permitted to occur only if an 'Approve Return' activity has occurred before it, with the condition that 'Return Status is Approved.' This sets up an initial context in which authorization must precede the creation of shipping documentation, guiding the logical sequence of the return process.
+2. The activity 'Process Refund' is permitted to occur only if a 'Determine Refund' activity has occurred before it. This ensures that the refund amount is always calculated prior to the execution of the actual payment, establishing a necessary logical foundation before financial transactions occur.
+3. The activity 'Restock Item' is permitted to occur only if an 'Inspect Item' activity has occurred before it, with the condition that 'Item Condition' is rated favorably. This guarantees that only properly assessed items are returned to inventory.
+
+#### **Response Constraints**
+1. If the 'Request Return' activity occurs with the condition 'Return Status is Requested,' then the 'Approve Return' activity must occur afterward. This ensures a cohesive temporal structure whereby every request is followed, in due course, by a review and authorization decision.
+2. If the 'Receive Item' activity occurs, then the 'Inspect Item' activity must occur afterward with the condition 'Return Status is Inspected.' This defines an ordered flow ensuring that received items are always subsequently examined.
+
+#### **Succession Constraints**
+Whenever an 'Inspect Item' activity occurs, it establishes a causal link requiring that either 'Restock Item' or 'Dispose Item' logically follows, based on the inspection outcome. This ensures each activity follows logically from the inspection, creating a cohesive progression from assessment to final disposition within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraints**
+Each occurrence of the 'Inspect Item' activity must be preceded by a 'Receive Item' activity, with no other 'Inspect Item' activity intervening beforehand. This ensures order consistency, requiring that each inspection is grounded in a distinct, freshly received item, promoting a balanced process flow without overlap.
+
+#### **Alternate Response Constraints**
+Each occurrence of the 'Approve Return' activity must be followed by a unique 'Generate Return Label' activity, with no other 'Approve Return' activity intervening in between. This promotes balance by ensuring a clear one-to-one pairing between approval decisions and label generation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+The 'Ship Item Back' activity must be immediately preceded by the 'Generate Return Label' activity, with no intervening events between them. This establishes immediate dependency, making explicit that the label generation directly and immediately enables the shipping step.
+
+#### **Chain Response Constraints**
+Whenever the 'Receive Item' activity occurs, it must be immediately followed by the 'Inspect Item' activity, with the condition 'Return Status is Received' transitioning directly to 'Return Status is Inspected.' This captures an immediate succession, ensuring a direct cause-and-effect relationship between receiving and inspecting the item, with no delay or intervening activity.
+
+#### **Chain Succession Constraints**
+Whenever a 'Determine Refund' activity occurs, it must be immediately succeeded by a 'Process Refund' activity, and conversely, every 'Process Refund' activity must be immediately preceded by a 'Determine Refund' activity, with the condition that 'Refund Amount' and 'Return Status' are set to 'Refunded.' This enforces a tightly coupled sequence, ensuring that refund calculation and refund execution occur back-to-back with no intervening activities.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Determine Refund' activity and the 'Process Refund' activity are mutually dependent, ensuring that whenever one occurs, the other occurs as well within the same process instance. This conjunction guarantees that a refund is never calculated without eventually being paid, and never paid without first being calculated.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Either the 'Restock Item' activity or the 'Dispose Item' activity may occur, introducing alternative paths and allowing flexibility in how an inspected item's final handling is resolved.
+
+#### **Exclusive Choice Constraints**
+Exactly one of 'Restock Item' or 'Dispose Item' must occur for any given returned item, enforcing mutually exclusive pathways. An item cannot be both restocked and disposed of, ensuring the process reaches one clear, unambiguous outcome.
+
+#### **Not Co-Existence Constraints**
+The 'Restock Item' activity and the 'Dispose Item' activity cannot both occur within the same process instance for the same item. This exclusion rule maintains process integrity by preventing the contradictory outcome of an item being simultaneously returned to inventory and discarded.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+If the 'Request Return' activity occurs with the condition 'Return Status is Rejected,' then the 'Process Refund' activity must not occur in the same process instance. This prevents an unwarranted dependency, ensuring that rejected returns do not contingently trigger a refund payment.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+The 'Dispose Item' activity must not precede the 'Inspect Item' activity. This restriction ensures that disposal decisions are never made in advance of an item's examination, preserving the intended sequence of assessment before action.
+
+#### **Not Response Constraints**
+If the 'Approve Return' activity occurs with the condition 'Return Status is Rejected,' then the 'Ship Item Back' activity must not occur afterward. This prevents rejected return requests from progressing into a shipping stage, maintaining the integrity of the model's intended progression.
+
+#### **Not Succession Constraints**
+The 'Dispose Item' activity must not be followed at any later point by a 'Restock Item' activity referencing the same item, nor may 'Restock Item' be followed by 'Dispose Item' for that same item. This restricts overlapping sequences, preserving the model's defined, singular flow toward one final disposition.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+The 'Request Return' activity must not be immediately preceded by the 'Inspect Item' activity. This enforces a non-immediate order restriction, maintaining clear separation between the initiation of a new request and the inspection phase of a prior one.
+
+#### **Not Chain Response Constraints**
+The 'Approve Return' activity must not be immediately followed by the 'Process Refund' activity. This prevents an inappropriate immediate succession, preserving the structural integrity of the sequence by requiring intermediate steps such as inspection and refund determination.
+
+#### **Not Chain Succession Constraints**
+The 'Request Return' activity and the 'Process Refund' activity must not immediately precede or follow one another. This refines the process model by excluding this specific immediate sequence, ensuring that the necessary intermediate stages of approval, shipping, receipt, inspection, and refund determination are never bypassed.

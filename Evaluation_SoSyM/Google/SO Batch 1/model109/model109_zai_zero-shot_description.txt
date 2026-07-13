@@ -1,0 +1,35 @@
+This Multi-Perspective Declare model outlines a flexible, constraint-driven process for client case management. The model specifies a set of activities, the data attributes associated with those activities, and the temporal and data-based rules that govern how and when these activities must occur.
+
+### **Activities and Data Attributes**
+The process consists of ten distinct activities, each bound to specific data attributes that must be recorded during execution:
+*   **Assess Client Needs**: Records the *Client Risk Level* (Low, Medium, High).
+*   **Develop Service Plan**: Records the *Service Plan Duration* (an integer from 1 to 12 months).
+*   **Obtain Funding Approval**: Records the *Funding Amount Requested* (a decimal value between $100.00 and $10,000.00).
+*   **Provide Counseling Services**: Records the *Counseling Type* (Individual, Group, or Family).
+*   **Coordinate Support Services**: Records the *Support Service Type* (Housing, Job Training, or Childcare).
+*   **Monitor Client Progress**: Records a *Progress Score* (an integer from 0 to 100).
+*   **Adjust Service Plan**: Records the *Plan Adjustment Reason* (Progress, Setback, or New Needs).
+*   **Conduct Home Visit**: Records the *Home Visit Outcome* (Positive, Neutral, or Negative).
+*   **Close Client File**: Records the *File Closure Reason* (Goals Met, Client Moved, or Services Declined).
+*   **Refer to Specialist**: Records the *Specialist Type* (Psychiatrist, Addiction Counselor, or Legal Aid).
+
+### **Process Rules and Constraints**
+The model uses Declare constraints to define the lifecycle of the case, including standard rules and conditional rules that trigger based on specific data values.
+
+#### **Standard Execution Rules**
+*   **Starting the Process**: The process must begin with the **Assess Client Needs** activity (*Init* constraint).
+*   **Ending the Process**: The process must end with the **Close Client File** activity (*End* constraint).
+*   **Planning Precedence**: **Develop Service Plan** can only occur after **Assess Client Needs** has been completed (*Precedence* constraint).
+*   **Funding for Counseling**: If **Provide Counseling Services** occurs, it must be preceded by **Obtain Funding Approval** (*Response* constraint).
+*   **Counseling and Monitoring**: **Provide Counseling Services** must be followed by **Monitor Client Progress**, and vice versa. The monitoring activity cannot happen until counseling is provided, and once counseling is done, monitoring is required (*Succession* constraint).
+*   **Adjustment and Monitoring Separation**: **Adjust Service Plan** and **Monitor Client Progress** cannot occur directly one after the other (*Not Chain Succession* constraint). There must be at least one other activity between them.
+
+#### **Data-Driven Conditional Rules**
+The model includes several conditional rules that mandate specific follow-up actions if certain data thresholds or outcomes are met:
+*   **High-Risk Clients**: If the *Client Risk Level* is assessed as **High**, a **Conduct Home Visit** activity must be executed within 24 hours of the assessment.
+*   **Low Progress Scores**: If the *Progress Score* recorded during monitoring is **less than 50**, the system must respond by executing **Adjust Service Plan** within 7 days.
+*   **Long-Term Service Plans**: If the *Service Plan Duration* is developed for **more than 6 months**, a **Refer to Specialist** activity must be executed within 30 days of the plan's development.
+*   **Negative Home Visits**: If the *Home Visit Outcome* is recorded as **Negative**, the system must respond by executing **Adjust Service Plan** within 3 days. 
+
+### **Summary**
+In natural language terms, this process dictates that a case begins with assessing a client's needs, which must happen before a service plan is developed. If the client is high-risk, a home visit is required within a day. If the service plan is long-term (over 6 months), a specialist referral is required within a month. Counseling requires prior funding approval, and counseling must be followed by progress monitoring. If the monitoring reveals a low progress score (under 50), the service plan must be adjusted within a week. Furthermore, if a home visit yields a negative outcome, the service plan must also be adjusted within 3 days. Adjusting the plan and monitoring progress cannot happen back-to-back. Finally, the case must be closed by closing the client file, recording the reason for closure.

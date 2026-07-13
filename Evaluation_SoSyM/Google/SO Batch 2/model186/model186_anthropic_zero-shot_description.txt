@@ -1,0 +1,56 @@
+# Multi-Perspective Declare Model Description
+
+## Overview
+This model describes an animal welfare organization's workflow, covering the process from abuse reporting through rescue, care, adoption, and ongoing monitoring, along with supporting operations like staff training, donations, and facility inspections.
+
+## Data Attributes
+The model tracks several data perspectives associated with activities:
+- **Report Animal Abuse** records the *Abuse Severity* (Low, Medium, High) and *Animal Species* (Dog, Cat, Other)
+- **Investigate Abuse Report** records the *Abuse Severity*
+- **Rescue Abused Animal** records *Animal Health* (Healthy, Injured, Sick) and *Animal Age* (0–25 years)
+- **Provide Veterinary Care** records *Animal Health*
+- **Find Foster Home** records *Shelter Capacity* (0–500)
+- **Conduct Adoption Screening** and **Finalize Animal Adoption** both record *Adoption Status* (Pending, Approved, Rejected)
+- **Process Donation** records *Donation Amount* (1.0–10000.0)
+- **Approve Volunteer Application** records *Volunteer Background Check* (Pass, Fail)
+- **Schedule Animal Checkup** records *Checkup Frequency* (7–365 days)
+
+## Control-Flow Rules
+
+**Process Initiation**
+- The process must start with **Report Animal Abuse**.
+
+**Abuse Handling Chain**
+- Whenever abuse is reported, an investigation must eventually follow (**Response**: Report Animal Abuse → Investigate Abuse Report).
+- If the abuse severity is rated **High**, an investigation must eventually be followed by a rescue operation (**Response**: Investigate Abuse Report → Rescue Abused Animal).
+
+**Rescue and Veterinary Care**
+- Every rescue must be immediately followed by veterinary care, with no other activities in between (**Chain Response**: Rescue Abused Animal → Provide Veterinary Care).
+- If the rescued animal's health is **Injured**, veterinary care must be provided within 24 hours of the rescue (**Response** with time constraint 0–24 hours).
+
+**Foster and Adoption Pipeline**
+- Veterinary care and finding a foster home must occur together in strict order: veterinary care must happen, and if a foster home is found, veterinary care must have preceded it, and vice versa is enforced through succession (**Succession**: Provide Veterinary Care → Find Foster Home).
+- Adoption screening must always occur before finalizing an adoption (**Precedence**: Finalize Animal Adoption requires prior Conduct Adoption Screening).
+- If the adoption status is **Approved**, the screening must be followed by finalization within 7 days (**Response** with time constraint 0–7 days).
+- Finalizing an adoption must be followed by ongoing welfare monitoring, and this pairing is mutually enforced (**Succession**: Finalize Animal Adoption → Monitor Animal Welfare).
+
+**Mandatory Awareness Activity**
+- The activity **Educate Public Awareness** must occur at least once during the process (**Existence**).
+
+**Donation Correlation**
+- If **Report Animal Abuse** occurs, then **Process Donation** must also occur at some point (and vice versa), though no strict ordering is required (**Responded Existence**).
+
+**Volunteer Management**
+- If a volunteer's background check **Fails**, no subsequent **Approve Volunteer Application** activity may follow this instance (**Not Response**) — preventing repeated approval attempts after a failed check.
+
+**Checkup Scheduling**
+- After veterinary care is provided, a checkup must eventually be scheduled within 30 days (**Response** with time constraint 0–30 days).
+
+**Facility Inspections**
+- Facility inspections must recur: each inspection should be followed by another inspection within 90 days, ensuring regular auditing (**Response**, self-relation, 0–90 days).
+
+**Health-Based Decision Point**
+- If the animal's health is **Sick**, the process allows a choice between **Provide Veterinary Care** and **Euthanize Animal**, meaning at least one of these two activities must occur (**Choice**).
+
+## Summary
+This model enforces a structured animal welfare pipeline—from abuse reporting and urgent rescue response, through medical treatment and foster/adoption placement, to long-term welfare monitoring—while embedding supporting governance processes such as donations, volunteer vetting, staff training, and periodic facility inspections, with time-sensitive constraints ensuring timely intervention for critical cases.

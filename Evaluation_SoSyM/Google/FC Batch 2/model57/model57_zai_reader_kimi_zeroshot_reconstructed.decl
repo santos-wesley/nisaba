@@ -1,0 +1,45 @@
+activity Collect Digital Evidence
+activity Preserve Digital Evidence
+activity Analyze Digital Evidence
+activity Generate Evidence Report
+activity Document Chain of Custody
+activity Validate Evidence Integrity
+activity Secure Evidence Storage
+activity Report Security Breach
+activity Audit Evidence Access
+activity Review Evidence Report
+activity Authorize Evidence Release
+activity Dispose Digital Evidence
+activity Index Digital Evidence
+activity Update Evidence Metadata
+activity Classify Digital Evidence
+bind Collect Digital Evidence: Evidence Type, Evidence Size
+bind Preserve Digital Evidence: Custody Status, Integrity Score
+bind Analyze Digital Evidence: Security Level, Analysis Time
+bind Dispose Digital Evidence: Disposal Method, Retention Period
+bind Audit Evidence Access: Access Count, Legal Hold
+Evidence Type: Document, Image, Video, Audio, Log File
+Evidence Size: integer between 1 and 1000
+Custody Status: Collected, Preserved, Analyzed, Released, Disposed
+Integrity Score: float between 0.0 and 1.0
+Security Level: Confidential, Restricted, Unclassified
+Analysis Time: float between 0.1 and 24.0
+Disposal Method: Shredding, Wiping, Deletion
+Retention Period: integer between 30 and 3650
+Access Count: integer between 0 and 100
+Legal Hold: Yes, No
+Init[Collect Digital Evidence] | |
+End[Dispose Digital Evidence] | |
+Succession[Collect Digital Evidence, Preserve Digital Evidence] | | |
+Response[Preserve Digital Evidence, Analyze Digital Evidence] | | |
+Existence[Analyze Digital Evidence] | |
+Chain Response[Analyze Digital Evidence, Generate Evidence Report] | | |
+Precedence[Analyze Digital Evidence, Document Chain of Custody] | | |
+Chain Response[Preserve Digital Evidence, Validate Evidence Integrity] | | |
+Co-Existence[Secure Evidence Storage, Validate Evidence Integrity] | | |
+Not Chain Succession[Report Security Breach, Dispose Digital Evidence] | | |
+Responded Existence[Collect Digital Evidence, Audit Evidence Access] |A.Legal Hold is Yes | |
+Alternate Response[Review Evidence Report, Authorize Evidence Release] | | |
+Exclusive Choice[Authorize Evidence Release, Dispose Digital Evidence] | | |
+Choice[Index Digital Evidence, Update Evidence Metadata] | | |
+Not Co-Existence[Classify Digital Evidence, Dispose Digital Evidence] | | |

@@ -1,0 +1,62 @@
+**Multi-Perspective Declare Model: Software Development Lifecycle with Data Constraints**
+
+This model describes a flexible yet constrained software development process that combines traditional control-flow constraints with data-aware (multi-perspective) rules.
+
+### **Activities**
+The process consists of 10 key activities:
+- Define Project Scope
+- Design Database Schema
+- Develop Frontend Interface
+- Implement Backend Logic
+- Integrate Payment Gateway
+- Test System Functionality
+- Deploy Application to Server
+- Monitor System Performance
+- Gather User Feedback
+- Update System Based on Feedback
+
+### **Data Perspectives (Attributes)**
+Each activity is associated with a specific data attribute:
+
+- **Define Project Scope** → Project Status (`Initiated`, `In Progress`, `Completed`, `Delayed`)
+- **Design Database Schema** → Development Time (integer: 10–2000)
+- **Develop Frontend Interface** → Budget Allocated (float: 1,000.0–500,000.0)
+- **Implement Backend Logic** → Payment Method (`Credit Card`, `PayPal`, `Stripe`)
+- **Integrate Payment Gateway** → Number of Users (integer: 0–1,000,000)
+- **Test System Functionality** → Transaction Volume (float: 0.0–10,000,000.0)
+- **Deploy Application to Server** → Deployment Environment (`Development`, `Staging`, `Production`)
+- **Monitor System Performance** → Number of Bugs (integer: 0–1000)
+- **Gather User Feedback** → User Satisfaction (float: 1.0–5.0)
+- **Update System Based on Feedback** → Feedback Type (`Bug Report`, `Feature Request`, `Improvement Suggestion`)
+
+### **Control-Flow Constraints**
+
+**Basic Declarative Constraints:**
+- The process **must start** with `Define Project Scope`.
+- `Develop Frontend Interface` must **precede** `Design Database Schema` (they cannot occur in reverse order).
+- `Integrate Payment Gateway` can only occur **after** `Implement Backend Logic` (Response constraint).
+- `Test System Functionality` and `Deploy Application to Server` **must co-occur** (if one happens, the other must also happen).
+- `Monitor System Performance` must **follow** `Deploy Application to Server` (Succession).
+- `Gather User Feedback` **cannot occur before** `Define Project Scope` (Not Precedence).
+- `Update System Based on Feedback` **cannot be triggered directly** by `Define Project Scope` (Not Response).
+- Exactly **one** of `Design Database Schema` or `Develop Frontend Interface` must occur (Exclusive Choice).
+- `Update System Based on Feedback` **must occur at least once** (Existence).
+- `Test System Functionality` can occur **at most 5 times** (Absence5).
+
+### **Data-Aware (Multi-Perspective) Constraints**
+
+The model includes four conditional response rules that combine control-flow with data conditions:
+
+1. **If** `Define Project Scope` is executed **and** *Project Status is Delayed*, **then** `Design Database Schema` must eventually follow **and** *Development Time must exceed 1000 hours*.
+
+2. **If** `Implement Backend Logic` is executed **and** *Payment Method is Credit Card*, **then** `Integrate Payment Gateway` must follow within **0 to 1 hour** **and** *Number of Users must exceed 1000*.
+
+3. **If** `Deploy Application to Server` is executed **and** *Deployment Environment is Production*, **then** `Monitor System Performance` must follow within **0 to 24 hours** **and** *Number of Bugs must be less than 10*.
+
+4. **If** `Gather User Feedback` is executed **and** *User Satisfaction is less than 3*, **then** `Update System Based on Feedback` must follow within **0 to 1 day** **and** *Feedback Type must be Bug Report*.
+
+5. **If** `Test System Functionality` is executed **and** *Transaction Volume exceeds 1,000,000*, **then** `Integrate Payment Gateway` must follow within **0 to 7 days** **and** *Number of Users must exceed 10,000*.
+
+---
+
+This model represents a **hybrid declarative process** that allows flexibility in execution order while enforcing critical compliance rules, temporal constraints, and data-driven obligations — particularly useful for managing software projects with varying scopes, budgets, and quality requirements.

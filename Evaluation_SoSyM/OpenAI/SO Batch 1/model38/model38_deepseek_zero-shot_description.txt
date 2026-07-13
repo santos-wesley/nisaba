@@ -1,0 +1,19 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This process describes a structured reporting workflow that begins with data collection and ends with publication, with built-in quality checks and feedback loops.
+
+**Core Workflow:**
+The process must start by **Collecting Data**, which involves gathering between 100 and 10,000 data points. After collection, the data must be **Analyzed** to ensure a **Report Accuracy** score of at least 90.0 (on a scale from 0.0 to 100.0). Once analysis is complete, a **Draft Report** must be written within 48 hours. This draft must then be immediately followed by a **Review Report** activity (within 1 hour).
+
+**Approval and Publication:**
+Before the report can be published, it must first be **Reviewed** and then **Approved**. The approval status can be *Pending*, *Approved*, or *Rejected*. If the report is **Approved**, it must be **Published** immediately (within 3 days), and this publication can only happen if the approval status is "Approved". The report must eventually be published at least once.
+
+**Feedback and Revision Loop:**
+After publication, **Feedback** can be gathered, which is categorized as *Positive*, *Negative*, or *Neutral*. If the feedback is **Negative**, the report must be **Revised** (up to 5 times). However, if the **Revision Count** exceeds 3, the report cannot be revised again (no two consecutive revisions are allowed).
+
+**Key Constraints:**
+- The entire process starts with data collection.
+- Analysis must occur before approval.
+- Approval must happen before publication.
+- Negative feedback triggers mandatory revisions, but revisions are capped at 5 total and cannot repeat if the count exceeds 3.
+- The draft-to-review and approval-to-publication steps must happen in immediate succession within strict time windows.

@@ -1,0 +1,37 @@
+This Multi-Perspective Declare model outlines the operational processes, rules, and data attributes of an animal welfare and shelter organization. The model tracks 14 distinct activities, ranging from initial abuse reporting to animal adoption, facility inspection, and administrative tasks. 
+
+Here is a natural language description of the model, broken down by data attributes, the animal rescue and adoption lifecycle, and operational/administrative rules.
+
+### Data Attributes and Bindings
+The model incorporates various data attributes that are bound to specific activities to provide context and govern conditional logic:
+*   **Report Animal Abuse** captures the *Abuse Severity* (Low, Medium, High) and *Animal Species* (Dog, Cat, Other).
+*   **Investigate Abuse Report** also captures *Abuse Severity*.
+*   **Rescue Abused Animal** records the *Animal Health* (Healthy, Injured, Sick) and *Animal Age* (an integer from 0 to 25).
+*   **Provide Veterinary Care** tracks *Animal Health*.
+*   **Find Foster Home** is bound to *Shelter Capacity* (an integer from 0 to 500).
+*   **Conduct Adoption Screening** and **Finalize Animal Adoption** track the *Adoption Status* (Pending, Approved, Rejected).
+*   **Process Donation** records the *Donation Amount* (a decimal from 1.0 to 10,000.0).
+*   **Approve Volunteer Application** records the *Volunteer Background Check* result (Pass, Fail).
+*   **Schedule Animal Checkup** is bound to *Checkup Frequency* (an integer from 7 to 365 days).
+
+### Animal Rescue and Care Lifecycle
+The core workflow follows a structured path from rescue to adoption, governed by strict temporal and data-based rules:
+
+1.  **Intake and Rescue:** The process begins with the **Report Animal Abuse** activity. Once a report is filed, the organization must eventually execute the **Investigate Abuse Report** activity. Following the investigation, a rescue must take place. Specifically, if the reported *Abuse Severity is High*, the organization is obligated to execute **Rescue Abused Animal**.
+2.  **Medical Care:** Whenever **Rescue Abused Animal** occurs, it must be immediately followed by **Provide Veterinary Care** (Chain Response). Furthermore, if the rescued animal's *Animal Health is Injured*, veterinary care must occur within 24 hours. 
+3.  **Medical Outcomes:** After an animal receives veterinary care, there is a branching path based on its health status. If the *Animal Health is Sick*, the organization faces a choice: they must eventually execute either **Provide Veterinary Care** (again) or **Euthanize Animal**. 
+4.  **Ongoing Monitoring:** Regardless of the specific medical outcome, once **Provide Veterinary Care** is completed, the organization must schedule a follow-up by executing **Schedule Animal Checkup** within 30 days.
+5.  **Fostering:** If an animal successfully clears veterinary care, the organization must find a foster home. **Provide Veterinary Care** and **Find Foster Home** operate in a strict succession: veterinary care must happen before fostering, and if fostering happens, veterinary care must have preceded it.
+
+### Adoption Process
+The adoption workflow is strictly controlled to ensure animals are properly vetted before going to a new home:
+*   **Screening Precedence:** **Conduct Adoption Screening** must strictly occur before **Finalize Animal Adoption**. An adoption cannot be finalized unless a screening has taken place.
+*   **Conditional Finalization:** If an animal's *Adoption Status is Approved* during the screening phase, the organization is required to execute **Finalize Animal Adoption** within 7 days.
+*   **Post-Adoption Monitoring:** Finalizing an adoption and monitoring the animal's welfare operate in a strict succession. Once an adoption is finalized, **Monitor Animal Welfare** must eventually occur, and monitoring cannot occur unless the adoption was finalized first.
+
+### Administrative, Facility, and Volunteer Rules
+The model also defines constraints for general shelter operations:
+*   **Public Awareness:** The organization must execute **Educate Public Awareness** at least once during the process's execution (Existence).
+*   **Donations:** Whenever **Report Animal Abuse** occurs, **Process Donation** must eventually occur at some point in the process (Responded Existence), suggesting that abuse reports trigger funding or donation cycles.
+*   **Volunteer Management:** If a volunteer's *Volunteer Background Check is Fail*, the organization is strictly forbidden from executing **Approve Volunteer Application** (Not Response). 
+*   **Facility Inspections:** The shelter must regularly conduct **Inspect Shelter Facility**. Once an inspection occurs, another one must be executed within 90 days.

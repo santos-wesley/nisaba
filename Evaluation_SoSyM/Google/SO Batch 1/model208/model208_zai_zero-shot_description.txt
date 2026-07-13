@@ -1,0 +1,33 @@
+This document provides a natural language description of the given Multi-Perspective Declare (MP-Declare) model, which outlines the execution rules, data attributes, and constraints of a train management process.
+
+### 1. Process Overview and Data Attributes
+The model consists of 10 activities related to railway operations. Each activity is bound to specific data attributes that have defined data types and ranges:
+
+*   **Schedule Train**: Involves a `Train ID` (integer between 1000 and 9999) and a `Schedule Version` (integer between 1 and 100).
+*   **Allocate Resources**: Involves a `Train ID` and a `Track Number` (integer between 1 and 10).
+*   **Monitor Train**: Involves a `Train ID` and a `Train Status` (enumeration: On Time, Delayed, Cancelled, Completed).
+*   **Manage Delay**: Involves a `Train ID` and a `Delay Duration` (float between 0.0 and 300.0).
+*   **Perform Maintenance**: Involves a `Train ID` and a `Maintenance Type` (enumeration: Routine, Emergency, Scheduled).
+*   **Inspect Track**: Involves a `Track Number` (integer 1-10) and an `Inspection Score` (float between 0.0 and 10.0).
+*   **Dispatch Train**: Involves a `Train ID` and a `Priority Level` (enumeration: High, Medium, Low).
+*   **Receive Train**: Involves a `Train ID` and a `Passenger Count` (integer between 0 and 1500).
+*   **Update Schedule**: Involves a `Train ID` and a `Schedule Version` (integer 1-100).
+*   **Cancel Train**: Involves a `Train ID` and a `Reason Cancel` (enumeration: Weather, Maintenance, Technical Issue).
+
+### 2. Behavioral and Data Constraints
+The process is governed by a set of MP-Declare constraints that dictate the order, existence, and data conditions under which these activities must or must not occur:
+
+*   **Initiation**: The process must always begin with the **Schedule Train** activity.
+*   **Ordering and Succession**:
+    *   **Precedence**: The **Dispatch Train** activity must occur before the **Allocate Resources** activity.
+    *   **Chain Precedence**: The **Perform Maintenance** activity must be immediately preceded by the **Dispatch Train** activity.
+    *   **Succession**: **Inspect Track** and **Allocate Resources** must follow each other. If **Inspect Track** occurs, **Allocate Resources** must eventually occur, and vice versa.
+    *   **Not Chain Succession**: An **Update Schedule** activity can never be immediately followed by a **Schedule Train** activity.
+*   **Conditional Responses**:
+    *   **Response (Data-Driven)**: If a **Monitor Train** activity occurs and its data attribute `Train Status` is evaluated as "Delayed", then a **Manage Delay** activity must eventually occur afterward.
+*   **Co-occurrence and Exclusivity**:
+    *   **Responded Existence**: If a **Dispatch Train** activity occurs, a **Receive Train** activity must also occur at some point during the process (either before or after the dispatch).
+    *   **Not Co-Existence**: The activities **Dispatch Train** and **Cancel Train** are mutually exclusive; they cannot both occur within the same process execution trace.
+*   **Choices and Absence**:
+    *   **Choice**: The process forces a strict choice between **Dispatch Train** and **Cancel Train**; exactly one of these two activities must occur in the execution.
+    *   **Absence2**: The **Cancel Train** activity can be executed at most once during the entire process.

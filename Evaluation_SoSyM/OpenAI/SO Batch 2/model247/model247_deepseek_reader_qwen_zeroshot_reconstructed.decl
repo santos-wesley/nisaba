@@ -1,0 +1,54 @@
+activity File Patent Application
+activity Conduct Patent Search
+activity Examine Patent Application
+activity Grant Patent
+activity Reject Patent Application
+activity File Trademark Application
+activity Conduct Trademark Search
+activity Examine Trademark Application
+activity Grant Trademark
+activity Reject Trademark Application
+activity File Copyright Registration
+activity Examine Copyright Application
+activity Grant Copyright
+activity Reject Copyright Application
+activity Appeal Decision
+bind File Patent Application: Application ID, Application Fee
+bind Conduct Patent Search: Search Result
+bind Examine Patent Application: Application Status
+bind Grant Patent: Decision
+bind Reject Patent Application: Application ID, Decision
+bind File Trademark Application: Application ID, Application Fee
+bind Conduct Trademark Search: Search Result
+bind Examine Trademark Application: Application Status
+bind Grant Trademark: Decision
+bind Reject Trademark Application: Application ID, Decision
+bind File Copyright Registration: Application ID, Application Fee
+bind Examine Copyright Application: Application Status
+bind Grant Copyright: Decision
+bind Reject Copyright Application: Application ID, Decision
+bind Appeal Decision: Application ID
+Application ID: integer between 1 and 1000000
+Application Fee: float between 50.0 and 10000.0
+Search Result: Clear, Conflict
+Application Status: Pending, Approved, Rejected
+Decision: Granted, Rejected
+Init[File Patent Application] | |
+End[Grant Patent] | |
+Precedence[Conduct Patent Search, File Patent Application] | | |
+Precedence[Examine Patent Application, Conduct Patent Search] |A.Application Status is Pending |T.Search Result is Clear |
+Response[Examine Patent Application, Grant Patent] |A.Application Status is Approved | |
+Response[Examine Patent Application, Reject Patent Application] |A.Application Status is Rejected | |
+Exclusive Choice[Grant Patent, Reject Patent Application] | | |
+Precedence[Conduct Trademark Search, File Trademark Application] | | |
+Precedence[Examine Trademark Application, Conduct Trademark Search] |A.Application Status is Pending |T.Search Result is Clear |
+Response[Examine Trademark Application, Grant Trademark] |A.Application Status is Approved | |
+Response[Examine Trademark Application, Reject Trademark Application] |A.Application Status is Rejected | |
+Exclusive Choice[Grant Trademark, Reject Trademark Application] | | |
+Precedence[Examine Copyright Application, File Copyright Registration] | | |
+Response[Examine Copyright Application, Grant Copyright] |A.Application Status is Approved | |
+Response[Examine Copyright Application, Reject Copyright Application] |A.Application Status is Rejected | |
+Exclusive Choice[Grant Copyright, Reject Copyright Application] | | |
+Precedence[Reject Patent Application, Appeal Decision] | |A.Application ID == T.Application ID |
+Precedence[Reject Trademark Application, Appeal Decision] | |A.Application ID == T.Application ID |
+Precedence[Reject Copyright Application, Appeal Decision] | |A.Application ID == T.Application ID |

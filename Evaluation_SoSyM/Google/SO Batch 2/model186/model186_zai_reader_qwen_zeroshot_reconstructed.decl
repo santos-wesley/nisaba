@@ -1,0 +1,47 @@
+activity Report Animal Abuse
+activity Investigate Abuse Report
+activity Rescue Abused Animal
+activity Provide Veterinary Care
+activity Euthanize Animal
+activity Schedule Animal Checkup
+activity Find Foster Home
+activity Conduct Adoption Screening
+activity Finalize Animal Adoption
+activity Monitor Animal Welfare
+activity Educate Public Awareness
+activity Process Donation
+activity Approve Volunteer Application
+activity Inspect Shelter Facility
+bind Report Animal Abuse: Abuse Severity, Animal Species
+bind Investigate Abuse Report: Abuse Severity
+bind Rescue Abused Animal: Animal Health, Animal Age
+bind Provide Veterinary Care: Animal Health
+bind Find Foster Home: Shelter Capacity
+bind Conduct Adoption Screening: Adoption Status
+bind Finalize Animal Adoption: Adoption Status
+bind Process Donation: Donation Amount
+bind Approve Volunteer Application: Volunteer Background Check
+bind Schedule Animal Checkup: Checkup Frequency
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Animal Health: Healthy, Injured, Sick
+Animal Age: integer between 0 and 25
+Shelter Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Donation Amount: float between 1.0 and 10000.0
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Response[Report Animal Abuse, Investigate Abuse Report] | | |
+Response[Report Animal Abuse, Rescue Abused Animal] |A.Abuse Severity is High | |
+Chain Response[Rescue Abused Animal, Provide Veterinary Care] | | |
+Chain Response[Rescue Abused Animal, Provide Veterinary Care] |A.Animal Health is Injured | |0,24,h
+Choice[Provide Veterinary Care, Euthanize Animal] |A.Animal Health is Sick | |
+Response[Provide Veterinary Care, Schedule Animal Checkup] | | |0,30,d
+Succession[Provide Veterinary Care, Find Foster Home] | | |
+Precedence[Finalize Animal Adoption, Conduct Adoption Screening] | | |
+Response[Conduct Adoption Screening, Finalize Animal Adoption] |A.Adoption Status is Approved | |0,7,d
+Succession[Finalize Animal Adoption, Monitor Animal Welfare] | | |
+Existence[Educate Public Awareness] | |
+Responded Existence[Report Animal Abuse, Process Donation] | | |
+Not Response[Approve Volunteer Application, Approve Volunteer Application] |A.Volunteer Background Check is Fail | |
+Response[Inspect Shelter Facility, Inspect Shelter Facility] | | |0,90,d

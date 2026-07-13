@@ -1,0 +1,33 @@
+## Activities
+- **Identify Donor**: The 'Identify Donor' activity represents the process of identifying a potential donor for the fundraising campaign.
+- **Contact Donor**: The 'Contact Donor' activity involves reaching out to a donor to initiate communication regarding a donation.
+- **Request Donation**: The 'Request Donation' activity involves formally asking a donor to make a donation.
+- **Receive Donation**: The 'Receive Donation' activity represents the receipt of a donation from a donor.
+- **Send Thank You Note**: The 'Send Thank You Note' activity involves sending a note of appreciation to a donor for their contribution.
+- **Plan Fundraiser**: The 'Plan Fundraiser' activity represents the planning phase for organizing a fundraising event.
+- **Promote Event**: The 'Promote Event' activity involves advertising and promoting the fundraising event to attract participants and donors.
+- **Host Event**: The 'Host Event' activity represents the execution and hosting of the fundraising event.
+- **Collect Feedback**: The 'Collect Feedback' activity includes gathering feedback from participants and stakeholders about the event.
+- **Analyze Feedback**: The 'Analyze Feedback' activity involves examining the collected feedback to derive insights.
+- **Identify Improvement Areas**: The 'Identify Improvement Areas' activity involves determining aspects of the campaign or event that require improvement based on feedback analysis.
+- **Implement Improvements**: The 'Implement Improvements' activity involves applying changes and enhancements based on identified improvement areas.
+- **Report Results**: The 'Report Results' activity involves compiling and presenting the outcomes of the fundraising event or campaign.
+- **Archive Records**: The 'Archive Records' activity involves storing and preserving documentation and records related to the campaign for future reference.
+- **Evaluate Campaign**: The 'Evaluate Campaign' activity represents the overall assessment of the fundraising campaign's success and outcomes.
+
+## Attributes
+- **Donor ID: Integer between 1 and 10000**: The attribute 'Donor ID: Integer between 1 and 10000' represents the unique identification number assigned to a donor.
+- **Donation Type: Cash, Check, Online Transfer**: The attribute 'Donation Type: Cash, Check, Online Transfer' specifies the method used by the donor to make a donation.
+- **Donation Amount: Float between 10 and 100000**: The attribute 'Donation Amount: Float between 10 and 100000' represents the monetary value of the donation received.
+- **Event Type: Gala, Auction, Online Campaign**: The attribute 'Event Type: Gala, Auction, Online Campaign' specifies the type of fundraising event being organized.
+- **Feedback Type: Positive, Neutral, Negative**: The attribute 'Feedback Type: Positive, Neutral, Negative' specifies the sentiment or nature of the feedback collected from participants.
+
+## Binds
+- **Identify Donor: Donor ID**: The bind 'Identify Donor: Donor ID' specifies that the activity 'Identify Donor' requires the attribute 'Donor ID'.
+- **Request Donation: Donor ID, Donation Type**: The bind 'Request Donation: Donor ID, Donation Type' links the 'Request Donation' activity with the attributes 'Donor ID' and 'Donation Type'.
+- **Receive Donation: Donation Amount**: The bind 'Receive Donation: Donation Amount' specifies that the activity 'Receive Donation' requires the attribute 'Donation Amount'.
+- **Promote Event: Event Type**: The bind 'Promote Event: Event Type' specifies that the activity 'Promote Event' requires the attribute 'Event Type'.
+- **Collect Feedback: Feedback Type**: The bind 'Collect Feedback: Feedback Type' specifies that the activity 'Collect Feedback' requires the attribute 'Feedback Type'.
+
+## Constraints
+

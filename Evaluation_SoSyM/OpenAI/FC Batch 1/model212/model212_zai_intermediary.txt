@@ -1,0 +1,39 @@
+## Activities
+- **Identify Needs**: The 'Identify Needs' activity represents the process of identifying and defining the requirements that need to be fulfilled.
+- **Select Vendor**: The 'Select Vendor' activity involves evaluating and choosing a suitable vendor to meet the identified needs.
+- **Negotiate Contract**: The 'Negotiate Contract' activity entails discussing and agreeing upon the terms and conditions of the contract with the selected vendor.
+- **Sign Contract**: The 'Sign Contract' activity represents the formal execution of the contract by both parties, making the agreement official.
+- **Monitor Performance**: The 'Monitor Performance' activity involves tracking and assessing the vendor's performance against agreed-upon metrics and standards.
+- **Review Compliance**: The 'Review Compliance' activity includes verifying that the vendor adheres to contractual obligations and regulatory requirements.
+- **Issue Payment**: The 'Issue Payment' activity represents the process of releasing payment to the vendor for services or goods rendered.
+- **Conduct Review**: The 'Conduct Review' activity entails performing a comprehensive review of the overall vendor engagement and outcomes.
+
+## Attributes
+- **Vendor ID: integer between 1 and 9999**: The attribute 'Vendor ID: integer between 1 and 9999' represents the unique identification number assigned to each vendor in the system.
+- **Vendor Name: Vendor A, Vendor B, Vendor C**: The attribute 'Vendor Name: Vendor A, Vendor B, Vendor C' specifies the possible names of vendors available for selection.
+- **Contract Amount: integer between 1000 and 1000000**: The attribute 'Contract Amount: integer between 1000 and 1000000' represents the monetary value of the contract negotiated with the vendor.
+- **KPI Score: float between 0.0 and 10.0**: The attribute 'KPI Score: float between 0.0 and 10.0' represents the key performance indicator score assigned to the vendor during performance monitoring.
+- **Compliance Status: Compliant, Non-Compliant**: The attribute 'Compliance Status: Compliant, Non-Compliant' specifies whether the vendor is compliant or non-compliant with contractual and regulatory requirements.
+- **Review Outcome: Satisfactory, Unsatisfactory**: The attribute 'Review Outcome: Satisfactory, Unsatisfactory' indicates the result of the overall review conducted on the vendor engagement.
+- **Payment Status: Pending, Completed**: The attribute 'Payment Status: Pending, Completed' specifies the current status of the payment issued to the vendor.
+
+## Binds
+- **Select Vendor: Vendor ID, Vendor Name**: The bind 'Select Vendor: Vendor ID, Vendor Name' links the 'Select Vendor' activity with the attributes 'Vendor ID' and 'Vendor Name'.
+- **Negotiate Contract: Vendor ID, Contract Amount**: The bind 'Negotiate Contract: Vendor ID, Contract Amount' links the 'Negotiate Contract' activity with the attributes 'Vendor ID' and 'Contract Amount'.
+- **Monitor Performance: Vendor ID, KPI Score**: The bind 'Monitor Performance: Vendor ID, KPI Score' links the 'Monitor Performance' activity with the attributes 'Vendor ID' and 'KPI Score'.
+- **Review Compliance: Vendor ID, Compliance Status**: The bind 'Review Compliance: Vendor ID, Compliance Status' links the 'Review Compliance' activity with the attributes 'Vendor ID' and 'Compliance Status'.
+- **Issue Payment: Vendor ID, Payment Status**: The bind 'Issue Payment: Vendor ID, Payment Status' links the 'Issue Payment' activity with the attributes 'Vendor ID' and 'Payment Status'.
+- **Conduct Review: Vendor ID, Review Outcome**: The bind 'Conduct Review: Vendor ID, Review Outcome' links the 'Conduct Review' activity with the attributes 'Vendor ID' and 'Review Outcome'.
+
+## Constraints
+- **Init[Identify Needs] | |**: The 'Identify Needs' activity must be the first activity to occur in the process.
+- **Precedence[Select Vendor, Identify Needs] | | |**: The 'Identify Needs' activity is permitted to occur only if a 'Select Vendor' activity has occurred before it within the same process instance.
+- **Precedence[Negotiate Contract, Select Vendor] | | |**: The 'Select Vendor' activity is permitted to occur only if a 'Negotiate Contract' activity has occurred before it within the same process instance.
+- **Chain Response[Negotiate Contract, Sign Contract] | | |0,7,d**: Whenever a 'Negotiate Contract' activity occurs, it must be immediately followed by a 'Sign Contract' activity in the next event position, with no other events in between. This must occur within 0 to 7 days. The 'Sign Contract' activity is allowed to happen elsewhere in the process but not between a 'Negotiate Contract' and its corresponding 'Sign Contract'.
+- **Chain Response[Sign Contract, Monitor Performance] | | |0,2,d**: Whenever a 'Sign Contract' activity occurs, it must be immediately followed by a 'Monitor Performance' activity in the next event position, with no other events in between. This must occur within 0 to 2 days. The 'Monitor Performance' activity is allowed to happen elsewhere in the process but not between a 'Sign Contract' and its corresponding 'Monitor Performance'.
+- **Precedence[Review Compliance, Monitor Performance] | | |**: The 'Monitor Performance' activity is permitted to occur only if a 'Review Compliance' activity has occurred before it within the same process instance.
+- **Precedence[Issue Payment, Review Compliance] | | |**: The 'Review Compliance' activity is permitted to occur only if a 'Issue Payment' activity has occurred before it within the same process instance.
+- **Chain Response[Issue Payment, Conduct Review] | | |0,2,d**: Whenever a 'Issue Payment' activity occurs, it must be immediately followed by a 'Conduct Review' activity in the next event position, with no other events in between. This must occur within 0 to 2 days. The 'Conduct Review' activity is allowed to happen elsewhere in the process but not between an 'Issue Payment' and its corresponding 'Conduct Review'.
+- **End[Conduct Review] | |**: The 'Conduct Review' activity must be the last activity to occur in the process.
+- **Absence[Select Vendor] | |**: The 'Select Vendor' activity must not occur in the process.
+

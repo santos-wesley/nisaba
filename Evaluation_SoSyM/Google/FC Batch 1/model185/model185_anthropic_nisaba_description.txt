@@ -1,0 +1,87 @@
+#MP-Declare Model
+## Activities
+- **Gather Intelligence**: The 'Gather Intelligence' activity represents the process of collecting information from various sources for intelligence purposes.
+- **Analyze Data**: The 'Analyze Data' activity involves examining and interpreting collected data to extract meaningful insights.
+- **Assess Credibility**: The 'Assess Credibility' activity involves evaluating the reliability and trustworthiness of information or sources.
+- **Identify Threats**: The 'Identify Threats' activity involves detecting and recognizing potential threats based on analyzed information.
+- **Develop Strategies**: The 'Develop Strategies' activity involves formulating plans and approaches to address identified threats.
+- **Implement Countermeasures**: The 'Implement Countermeasures' activity involves executing actions designed to mitigate or neutralize identified threats.
+- **Monitor Activity**: The 'Monitor Activity' activity involves continuously observing and tracking ongoing situations or countermeasure effects.
+- **Report Findings**: The 'Report Findings' activity involves documenting and communicating the results of the intelligence process.
+- **Review Intelligence**: The 'Review Intelligence' activity involves examining and validating gathered intelligence for accuracy and completeness.
+- **Disseminate Information**: The 'Disseminate Information' activity involves distributing finalized intelligence to relevant stakeholders.
+
+## Attributes
+- **Source Type: Human, Signal, Open Source, Cyber**: The attribute 'Source Type: Human, Signal, Open Source, Cyber' specifies the type of source from which intelligence was gathered.
+- **Threat Level: Integer between 1 and 10**: The attribute 'Threat Level: Integer between 1 and 10' represents the severity level of an identified threat.
+- **Confidence Score: Float between 0.0 and 1.0**: The attribute 'Confidence Score: Float between 0.0 and 1.0' represents the level of confidence in the accuracy of the analyzed data.
+- **Report Status: Draft, Review, Final, Disseminated**: The attribute 'Report Status: Draft, Review, Final, Disseminated' specifies the current stage of the report in its lifecycle.
+- **Number of Sources: Integer between 1 and 50**: The attribute 'Number of Sources: Integer between 1 and 50' represents the quantity of sources used to gather intelligence.
+- **Risk Factor: Float between 0.0 and 100.0**: The attribute 'Risk Factor: Float between 0.0 and 100.0' represents the calculated degree of risk associated with an identified threat.
+- **Analysis Technique: Link Analysis, Statistical Analysis, Pattern Recognition**: The attribute 'Analysis Technique: Link Analysis, Statistical Analysis, Pattern Recognition' specifies the method used to analyze data.
+- **Days to Respond: Integer between 1 and 365**: The attribute 'Days to Respond: Integer between 1 and 365' represents the number of days allotted to respond with countermeasures.
+- **Cost of Countermeasures: Float between 100.0 and 1000000.0**: The attribute 'Cost of Countermeasures: Float between 100.0 and 1000000.0' represents the monetary cost associated with implementing countermeasures.
+- **Geographic Region: North America, Europe, Asia, Africa, South America**: The attribute 'Geographic Region: North America, Europe, Asia, Africa, South America' specifies the geographic area relevant to the report findings.
+
+## Binds
+- **Gather Intelligence: Source Type, Number of Sources**: The bind 'Gather Intelligence: Source Type, Number of Sources' specifies that the activity 'Gather Intelligence' requires the attributes 'Source Type' and 'Number of Sources'.
+- **Analyze Data: Analysis Technique, Confidence Score**: The bind 'Analyze Data: Analysis Technique, Confidence Score' links the 'Analyze Data' activity with the attributes 'Analysis Technique' and 'Confidence Score'.
+- **Identify Threats: Threat Level, Risk Factor**: The bind 'Identify Threats: Threat Level, Risk Factor' links the 'Identify Threats' activity with the attributes 'Threat Level' and 'Risk Factor'.
+- **Implement Countermeasures: Cost of Countermeasures, Days to Respond**: The bind 'Implement Countermeasures: Cost of Countermeasures, Days to Respond' links the 'Implement Countermeasures' activity with the attributes 'Cost of Countermeasures' and 'Days to Respond'.
+- **Report Findings: Report Status, Geographic Region**: The bind 'Report Findings: Report Status, Geographic Region' links the 'Report Findings' activity with the attributes 'Report Status' and 'Geographic Region'.
+
+## Constraints
+- **Init[Gather Intelligence]**: The 'Gather Intelligence' must be the first activity to occur in the process.
+- **Response[Gather Intelligence, Analyze Data]**: If a 'Gather Intelligence' activity occurs, then an 'Analyze Data' activity must eventually occur after the 'Gather Intelligence' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Gather Intelligence' can be pending at the same time, and a single 'Analyze Data' can fulfill the obligation for all preceding 'Gather Intelligence'. If 'Gather Intelligence' does not occur, the constraint imposes no obligation on the occurrence of 'Analyze Data'.
+- **Succession[Analyze Data, Identify Threats]**: An 'Analyze Data' activity must be followed by an 'Identify Threats' activity at some point later in the same process instance. Conversely, an 'Identify Threats' event can occur only if an 'Analyze Data' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Analyze Data' imposes obligations for future 'Identify Threats', and 'Identify Threats' cannot occur without prior 'Analyze Data'. Multiple 'Analyze Data' and 'Identify Threats' are allowed, with each 'Analyze Data' eventually leading to an 'Identify Threats' and each 'Identify Threats' being justified by a preceding 'Analyze Data'.
+- **Precedence[Develop Strategies, Identify Threats]**: The 'Identify Threats' activity is permitted to occur only if a 'Develop Strategies' activity has occurred before it within the same process instance.
+- **Chain Precedence[Implement Countermeasures, Develop Strategies]**: The 'Develop Strategies' activity can occur only if it is immediately preceded by an 'Implement Countermeasures' activity, with no other activities occurring in between.
+- **Chain Response[Implement Countermeasures, Monitor Activity]**: Whenever an 'Implement Countermeasures' activity occurs, it must be immediately followed by a 'Monitor Activity' activity in the next event position, with no other events in between. The 'Monitor Activity' activity is allowed to happen isolated.
+- **Alternate Response[Monitor Activity, Report Findings]**: If a 'Monitor Activity' activity occurs, then a 'Report Findings' activity must occur after that 'Monitor Activity' event and before any subsequent 'Monitor Activity' occurs. No other occurrence of 'Monitor Activity' is allowed between a 'Monitor Activity' and 'Report Findings'.
+- **Alternate Precedence[Disseminate Information, Review Intelligence]**: A 'Review Intelligence' activity can occur only if it was immediately preceded by a 'Disseminate Information' activity, and no other 'Disseminate Information' event is allowed between that 'Disseminate Information' and the 'Review Intelligence'.
+- **End[Disseminate Information]**: The 'Disseminate Information' must be the last activity to occur in the process.
+- **Co-Existence[Gather Intelligence, Analyze Data]**: If 'Gather Intelligence' activity occurs, then 'Analyze Data' must also occur in the same process instance, and vice-versa.
+
+
+## Interleaved Description
+The MP-Declare process model for the intelligence process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Gather Intelligence,' which involves collecting information from various sources—Human, Signal, Open Source, or Cyber—characterized by the 'Number of Sources' attribute. This establishes the foundational context from which all subsequent intelligence operations proceed.
+
+#### **End Constraints**
+Ultimately, the process concludes with the activity 'Disseminate Information,' which involves distributing finalized intelligence to relevant stakeholders. This activity must be the final event in the process, bringing coherent closure to the entire intelligence lifecycle after all analysis, strategy formulation, and reporting have been completed.
+
+### **Dependency Constraints**
+
+#### **Responded Existence / Co-Existence Constraints**
+Because 'Gather Intelligence' occurs, 'Analyze Data' must also occur somewhere within the same process instance, and conversely, the presence of 'Analyze Data' necessitates that 'Gather Intelligence' has occurred as well. This mutual dependency ensures that raw information collection—characterized by 'Source Type' and 'Number of Sources'—is always paired with a corresponding analytical effort using 'Analysis Technique' and yielding a 'Confidence Score,' so that neither activity exists in isolation from the other.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+The activity 'Identify Threats' is permitted to occur only if a 'Develop Strategies' activity has occurred before it within the same process instance. This sets up an initial logical context in which strategic planning must already be underway—or at least initiated—before any threats bound by 'Threat Level' and 'Risk Factor' can be formally identified, guiding the overall sequence of the intelligence workflow.
+
+#### **Response Constraints**
+Whenever a 'Gather Intelligence' activity occurs, an 'Analyze Data' activity must eventually follow it at some later point in the same process instance, though not necessarily immediately. There is no restriction on what may happen in between, and multiple instances of 'Gather Intelligence' can be resolved by a single subsequent 'Analyze Data' activity, which draws upon 'Analysis Technique' and 'Confidence Score' to interpret the gathered material. This establishes an ordered flow ensuring that every act of collection is eventually followed by meaningful interpretation.
+
+#### **Succession Constraints**
+An 'Analyze Data' activity must be followed at some later point by an 'Identify Threats' activity, and conversely, 'Identify Threats' cannot occur unless it was preceded by an 'Analyze Data' activity earlier in the process. This causal link ensures that the insights derived through 'Analysis Technique' and 'Confidence Score' logically give rise to the identification of threats, measured through 'Threat Level' and 'Risk Factor,' creating a cohesive progression from analysis to threat recognition, with multiple pairings permitted throughout the process.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Each time a 'Monitor Activity' activity occurs, it must be followed by a 'Report Findings' activity before any subsequent 'Monitor Activity' can take place, with no repeated 'Monitor Activity' occurring in between. This condition-consequence relationship ensures a balanced one-to-one pairing between ongoing observation and the documentation of results, which is further tied to 'Report Status' and 'Geographic Region,' promoting a disciplined and non-overlapping rhythm of monitoring and reporting.
+
+#### **Alternate Precedence Constraints**
+A 'Review Intelligence' activity can only occur if it was immediately preceded by a 'Disseminate Information' activity, without any other 'Disseminate Information' event intervening between them. This condition-consequence structure ensures order consistency, requiring that validation of intelligence accuracy always follows directly from a distribution event, thereby promoting a balanced and controlled process flow between dissemination and review.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+The 'Develop Strategies' activity can only occur if it is immediately preceded by an 'Implement Countermeasures' activity, with absolutely no other activities intervening between them. This establishes an immediate dependency, making explicit that strategic planning—bound eventually to threat identification—must emerge directly out of the execution of countermeasures, themselves characterized by 'Cost of Countermeasures' and 'Days to Respond.'
+
+#### **Chain Response Constraints**
+Whenever an 'Implement Countermeasures' activity occurs, it must be immediately followed by a 'Monitor Activity' activity in the very next position, with no other events permitted in between; however, 'Monitor Activity' is also allowed to occur independently, isolated from any preceding countermeasure. This cause-and-effect relationship captures the immediate necessity of observing the effects of any executed countermeasure, ensuring that mitigation efforts—defined by their cost and response time—are always followed directly by vigilant tracking of outcomes.

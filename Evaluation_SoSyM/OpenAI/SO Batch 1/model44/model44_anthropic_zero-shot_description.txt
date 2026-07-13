@@ -1,0 +1,44 @@
+# Multi-Perspective Declare Model: Incident Management Process
+
+## Overview
+This model describes an **incident management workflow**, tracking incidents from initial reporting through resolution, verification, and closure, with support for escalation when resolutions fail.
+
+## Activities and Their Data Attributes
+
+The process consists of ten activities, each producing specific data:
+
+- **Report Incident** – records the *Status* of the incident (New, In Progress, Resolved, Closed)
+- **Assess Impact** – captures the *Impact Level* (an integer from 1–5) and the *Assessment Time* (0.1–24.0 hours)
+- **Prioritize Incident** – sets the *Priority* (Low, Medium, High, Critical)
+- **Assign Incident** – records the *Assigned Team ID* (an integer from 1–100)
+- **Investigate Incident** – logs the *Investigation Time* (0.5–48.0 hours)
+- **Resolve Incident** – logs the *Resolution Time* (0.1–72.0 hours)
+- **Verify Resolution** – records the *Verification Result* (Successful or Failed)
+- **Close Incident** – updates the *Status*
+- **Escalate Incident** – records the *Escalation Level* (None, Level 1, Level 2, Level 3)
+- **Document Incident** – assigns a *Document ID* (an integer from 1000–9999)
+
+## Control-Flow and Data Constraints
+
+1. **Process Start**: Every case must begin with **Report Incident** (it is the mandatory first activity).
+
+2. **Process End**: Every case must end with **Close Incident** (it is the mandatory last activity).
+
+3. **Timely Impact Assessment**: Whenever an incident is **Reported**, it must eventually be followed by an **Assess Impact** activity, and this must occur within **24 hours**.
+
+4. **Assessment Leads to Prioritization**: **Assess Impact** must be directly followed by **Prioritize Incident** — these two activities must occur consecutively in that exact order (succession).
+
+5. **Conditional Assignment Before Prioritization**: If an incident is ultimately prioritized as **High** or **Critical**, then an **Assign Incident** activity must have occurred beforehand.
+
+6. **Investigation Before Resolution**: An incident cannot be **Resolved** unless it has first been **Investigated**.
+
+7. **Timely Verification**: Whenever an incident is **Resolved**, a **Verify Resolution** activity must eventually follow, within **48 hours** of the resolution.
+
+8. **Escalation on Failed Verification**: If the **Verification Result** is *Failed*, then an **Escalate Incident** activity must eventually occur afterward.
+
+9. **Closure Leads to Documentation**: **Close Incident** must be directly followed by **Document Incident**, and these two must occur consecutively in that exact order (succession) — meaning closure is always immediately documented.
+
+10. **Limited Escalation**: The **Escalate Incident** activity can occur **at most once** in the entire case (escalation is not a repeatable action, occurring zero or one time).
+
+## Summary
+This model enforces a structured incident lifecycle: incidents are reported, assessed, prioritized (with mandatory team assignment for high-priority cases), investigated, resolved, and verified — with time-bound constraints ensuring responsiveness. Failed verifications trigger a single possible escalation, and every closed incident is immediately documented for record-keeping.

@@ -1,0 +1,40 @@
+activity Detect Fraudulent Activity
+activity Notify Customer
+activity Decline Transaction
+activity Report Suspicious Activity
+activity Approve Transaction
+activity Verify Customer Identity
+activity Review Transaction Details
+activity Investigate Security Breach
+activity Implement Security Patch
+activity Update Account Security
+bind Detect Fraudulent Activity: Fraud Risk Level, Transaction Type, Transaction Amount
+bind Notify Customer: Notification Method
+bind Decline Transaction: Transaction Amount, Transaction Type
+bind Report Suspicious Activity: 
+bind Approve Transaction: Transaction Amount, Transaction Type
+bind Verify Customer Identity: Verification Attempt, Verification Status
+bind Review Transaction Details: Transaction Amount, Transaction Type
+bind Investigate Security Breach: Breach Severity
+bind Implement Security Patch: Security Patch Status
+bind Update Account Security: 
+Transaction Type: Debit, Credit, Wire Transfer, Online Payment
+Transaction Amount: float between 0.01 and 100000.0
+Fraud Risk Level: Low, Medium, High
+Verification Attempt: integer between 1 and 5
+Verification Status: Verified, Not Verified, Pending
+Breach Severity: integer between 1 and 10
+Security Patch Status: Applied, Not Applied, Scheduled
+Notification Method: Email, SMS, Phone Call
+Days Since Last Activity: integer between 0 and 365
+Absence5[Detect Fraudulent Activity] | |
+Response[Detect Fraudulent Activity, Notify Customer] | | |
+Chain Response[Detect Fraudulent Activity, Decline Transaction] |A.Fraud Risk Level is High | |0,5,m
+Response[Decline Transaction, Report Suspicious Activity] | | |
+Precedence[Approve Transaction, Verify Customer Identity] | | |
+Chain Precedence[Verify Customer Identity, Review Transaction Details] |A.Transaction Amount > 1000 | |0,10,m
+Response[Investigate Security Breach, Implement Security Patch] |A.Breach Severity > 7 | |0,48,h
+Response[Investigate Security Breach, Implement Security Patch] | | |
+Response[Implement Security Patch, Implement Security Patch] |A.Security Patch Status is Not Applied | |0,7,d
+Response[Notify Customer, Update Account Security] |A.Notification Method is SMS | |0,24,h
+Response[Notify Customer, Update Account Security] | | |

@@ -1,0 +1,56 @@
+activity Schedule Train
+activity Allocate Resources
+activity Monitor Train
+activity Manage Delay
+activity Perform Maintenance
+activity Inspect Track
+activity Dispatch Train
+activity Receive Train
+activity Update Schedule
+activity Cancel Train
+bind Schedule Train: Train ID, Schedule Version
+bind Allocate Resources: Train ID, Track Number
+bind Monitor Train: Train ID, Train Status
+bind Manage Delay: Train ID, Delay Duration
+bind Perform Maintenance: Train ID, Maintenance Type
+bind Inspect Track: Track Number, Inspection Score
+bind Dispatch Train: Train ID, Priority Level
+bind Receive Train: Train ID, Passenger Count
+bind Update Schedule: Train ID, Schedule Version
+bind Cancel Train: Train ID, Reason Cancel
+Train ID: integer between 1000 and 9999
+Train Status: On Time, Delayed, Cancelled, Completed
+Delay Duration: float between 0.0 and 300.0
+Track Number: integer between 1 and 10
+Maintenance Type: Routine, Emergency, Scheduled
+Inspection Score: float between 0.0 and 10.0
+Priority Level: High, Medium, Low
+Passenger Count: integer between 0 and 1500
+Reason Cancel: Weather, Maintenance, Technical Issue
+Schedule Version: integer between 1 and 100
+Init[Schedule Train] | |
+End[Receive Train] | |
+Existence[Allocate Resources] | |
+Absence2[Cancel Train] | |
+Exactly[Dispatch Train] | |
+Responded Existence[Manage Delay, Monitor Train] | | |
+Precedence[Dispatch Train, Allocate Resources] | | |
+Precedence[Manage Delay, Monitor Train] |T.Train Status is Delayed | |
+Response[Schedule Train, Allocate Resources] | | |
+Response[Monitor Train, Manage Delay] |A.Train Status is Delayed | |
+Succession[Inspect Track, Perform Maintenance] |A.Inspection Score < 5 | |
+Alternate Precedence[Update Schedule, Schedule Train] | | |
+Alternate Response[Schedule Train, Allocate Resources] | | |
+Chain Response[Dispatch Train, Monitor Train] | | |
+Chain Succession[Perform Maintenance, Inspect Track] |A.Maintenance Type is Emergency | |
+Co-Existence[Allocate Resources, Inspect Track] | | |
+Choice[Manage Delay, Dispatch Train] | | |
+Exclusive Choice[Cancel Train, Dispatch Train] | | |
+Not Co-Existence[Cancel Train, Receive Train] | | |
+Not Responded Existence[Cancel Train, Perform Maintenance] | | |
+Not Precedence[Receive Train, Dispatch Train] | | |
+Not Response[Cancel Train, Update Schedule] | | |
+Not Succession[Cancel Train, Dispatch Train] | | |
+Not Chain Precedence[Receive Train, Cancel Train] | | |
+Not Chain Response[Cancel Train, Schedule Train] | | |
+Not Chain Succession[Perform Maintenance, Cancel Train] | | |

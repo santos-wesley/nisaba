@@ -1,0 +1,15 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This process model describes a sustainable travel workflow, beginning with the mandatory activity **Plan Eco-Friendly Trip**, which requires specifying a **Trip Duration** (between 1 and 30 days) and a **Carbon Emission** budget (a float between 0.0 and 1000.0). The process ends with the mandatory activity **Share Sustainable Practices**.
+
+During the trip, travelers must choose between two mutually exclusive options: either **Book Sustainable Accommodation** (choosing an **Accommodation Type** from Eco-Lodge, Green Hotel, or Hostel) or **Choose Green Transportation** (selecting a **Transportation Mode** from Bicycle, Electric Car, or Train). These two activities cannot both occur in the same process instance.
+
+If the traveler books sustainable accommodation, they are required to later **Provide Feedback to Hosts**, including a **Feedback Rating** (Excellent, Good, Average, or Poor). This feedback must be provided immediately after the booking, with a maximum allowed delay of 2 steps and a maximum distance of 0 steps between them (i.e., they must be consecutive activities).
+
+Whenever the traveler chooses green transportation, they must eventually also **Evaluate Environmental Impact**. However, if the traveler provides poor feedback to hosts, they are strictly forbidden from later evaluating the environmental impact.
+
+The model encourages cultural and conservation engagement: **Participate in Local Conservation Efforts** and **Attend Cultural Workshops** must either both occur or both be absent in any given process instance. Additionally, if the trip duration exceeds 7 days, planning the eco-friendly trip must eventually lead to participation in local conservation efforts.
+
+Finally, the model explicitly forbids a direct chain response from **Plan Eco-Friendly Trip** to **Purchase Local Products**—meaning that purchasing local products cannot immediately follow the trip planning activity. The activity **Evaluate Environmental Impact** must occur at least once in every process instance.

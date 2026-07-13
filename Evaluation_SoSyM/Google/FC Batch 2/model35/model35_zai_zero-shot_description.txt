@@ -1,0 +1,38 @@
+This natural language description outlines the behavior of a Multi-Perspective Declare model governing an organizational Benefits Administration and Enrollment process. The model defines the lifecycle of benefits enrollment, claims processing, and employee inquiries, enriched with specific data constraints and time-based service level agreements (SLAs).
+
+### 1. Process Initialization
+The process strictly begins when an employee submits their benefits enrollment. 
+* **Data Context:** When this occurs, the system must record the employee's **Employee ID** (an integer between 1000 and 9999), their **Enrollment Status** (which starts as "Submitted"), and their selected **Benefit Plan** (which must be one of: Health, Dental, Vision, or Life).
+
+### 2. Core Workflow Constraints
+Once the enrollment is submitted, several mandatory and conditional workflows are triggered:
+* **Eligibility & Confirmation:** The submission of enrollment mandates that the employee's eligibility is eventually verified. Furthermore, an enrollment confirmation must be sent to the employee.
+* **Claims Processing:** If a benefits claim is processed, it must be preceded by either an approval or a denial of that specific claim. Conversely, once a claim is either approved or denied, the system is required to eventually process that claim. 
+* **Claim Data:** When processing a benefits claim, the system must bind the **Employee ID**, the **Claim Amount** (an integer between 0 and 10,000), and the **Claim Status** (which transitions through Received, Processed, Approved, Denied, or Paid).
+
+### 3. Time-Bound Response Rules (SLAs)
+Following the initial enrollment submission, a network of delayed obligations is activated, requiring specific activities to be completed within strict time limits:
+
+**24-Hour Obligations:**
+Within 24 hours of submitting the enrollment, the following activities must be executed:
+* Verify Employee Eligibility
+* Send Enrollment Confirmation
+* Calculate Premium Cost
+* Review Benefits Options
+* Request Additional Information (if needed)
+* Resolve Employee Inquiry (if one was received)
+
+**7-Day Obligations:**
+Within 7 days of submitting the enrollment, the following activities must be executed:
+* Audit Benefits Enrollment
+* Process Premium Payment
+* Update Benefits Record
+
+**30-Day Obligations:**
+Within 30 days of submitting the enrollment, the system must:
+* Generate a Benefits Report
+
+### 4. Data and Attribute Constraints
+Throughout the process, specific activities generate and bind distinct data attributes:
+* **Calculate Premium Cost:** This activity requires a **Premium Rate** (a float between 0.0 and 1.0), the chosen **Benefit Plan**, and a **Deduction Amount** (a float between 0.0 and 5000.0).
+* **Receive Employee Inquiry:** If an employee submits an inquiry, it must be categorized by their **Employee ID** and an **Inquiry Type** (strictly categorized as Enrollment, Claim, Eligibility, or Payment). As noted above, any such inquiry must be resolved within 24 hours of the initial benefits enrollment submission.

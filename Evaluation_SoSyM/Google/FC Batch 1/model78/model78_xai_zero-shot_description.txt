@@ -1,0 +1,42 @@
+**Multi-Perspective Declare Model: Disease Outbreak Management**
+
+This model describes a structured yet flexible process for handling reported disease outbreaks, from initial reporting through to official closure. It combines control-flow constraints with data-driven decisions and temporal requirements.
+
+### Process Overview
+
+The process begins when a **Report Disease Outbreak** is received from one of four possible sources (Hospital, Clinic, Public, or Other), accompanied by the reported number of cases (1–1000).
+
+### Core Process Flow
+
+1. Every outbreak report **must** be followed by a **Verify Outbreak Report** activity, which produces an Investigation Result (Confirmed, False Alarm, or Inconclusive).
+
+2. If the investigation confirms the outbreak (Investigation Result = Confirmed), the process **must** continue with **Initiate Investigation**.
+
+3. Once an investigation is initiated, field teams **must** **Collect Samples**, which must then be followed (within 0–48 hours) by **Analyze Samples**.
+
+4. **Confirm Disease** can only occur **after** sample analysis has been completed. When confirmation occurs, the specific **Disease Type** (Influenza, COVID-19, Measles, or Cholera) and **Mortality Rate** (0.0–100.0%) must be recorded.
+
+5. After disease confirmation, the process **must** proceed to **Implement Control Measures**. This activity records the chosen measures (Vaccination, Quarantine, Hygiene Campaign, or Social Distancing) and the number of days required to bring the outbreak under control (1–365 days).
+
+6. Control measures **must** be followed by **Inform Public**, which captures the Public Response (Cooperative, Anxious, or Resistant).
+
+7. After informing the public, the process **must** move into **Monitor Disease Spread**.
+
+8. The process can only terminate with the **Declare End of Outbreak** activity, which marks the official end.
+
+### Additional Constraints
+
+- There is a **strong response** constraint between **Report Disease Outbreak** and **Implement Control Measures** with a **conditional activation**: if the reported number of cases exceeds 500, control measures must be implemented **within 24 hours**.
+
+- The model uses a combination of **Response**, **Precedence**, **Succession**, **Init**, and **End** constraints to enforce a logical and safe sequence while still allowing some flexibility when the investigation result is not "Confirmed".
+
+### Data Perspective
+
+The model is data-aware. Key data elements are bound to specific activities:
+- Report Source and Number of Cases (at reporting)
+- Investigation Result (at verification)
+- Disease Type and Mortality Rate (at confirmation)
+- Control Measures and Days to Control (during intervention)
+- Public Response (when informing the public)
+
+This Multi-Perspective Declare model ensures that serious outbreaks are handled urgently and systematically, while still permitting the process to adapt based on verification outcomes and real-time data.

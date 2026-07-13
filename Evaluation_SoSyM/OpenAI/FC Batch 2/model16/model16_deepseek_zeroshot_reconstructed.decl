@@ -1,0 +1,39 @@
+activity Identify Donor
+activity Contact Donor
+activity Request Donation
+activity Receive Donation
+activity Send Thank You Note
+activity Promote Event
+activity Host Event
+activity Report Results
+activity Archive Records
+activity Evaluate Campaign
+activity Collect Feedback
+activity Analyze Feedback
+activity Identify Improvement Areas
+activity Implement Improvements
+bind Identify Donor: Donor ID
+bind Contact Donor: Donor ID
+bind Request Donation: Donor ID, Donation Type
+bind Receive Donation: Donation Amount
+bind Send Thank You Note: 
+Donor ID: integer between 1 and 10000
+Donation Type: Cash, Check, Online Transfer
+Donation Amount: float between 10.0 and 100000.0
+Event Type: Gala, Auction, Online Campaign
+Feedback Type: Positive, Neutral, Negative
+Init[Identify Donor] | |
+End[Evaluate Campaign] | |
+Exactly[Promote Event] | |
+Existence3[Collect Feedback] | |
+Response[Contact Donor, Request Donation] | | |
+Response[Request Donation, Receive Donation] | | |0,24,d
+Chain Response[Receive Donation, Send Thank You Note] |A.Donation Amount > 100 | |
+Response[Receive Donation, Send Thank You Note] | | |0,48,h
+Response[Promote Event, Host Event] | | |
+Response[Host Event, Report Results] | | |
+Response[Report Results, Archive Records] | | |
+Response[Archive Records, Evaluate Campaign] | | |
+Response[Collect Feedback, Analyze Feedback] | | |
+Response[Analyze Feedback, Identify Improvement Areas] | | |
+Chain Response[Identify Improvement Areas, Implement Improvements] | | |0,7,d

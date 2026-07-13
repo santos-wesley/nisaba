@@ -1,0 +1,40 @@
+activity Identify Risks
+activity Monitor Risks
+activity Develop Continuity Plan
+activity Test Continuity Plan
+activity Review Test Results
+activity Implement Improvements
+activity Communicate Plan
+activity Conduct Training
+activity Activate Continuity Plan
+activity Evaluate Incident Response
+bind Identify Risks: Risk Level
+bind Monitor Risks: Monitoring Frequency
+bind Develop Continuity Plan: Stakeholder Engagement
+bind Test Continuity Plan: Test Outcome
+bind Review Test Results: Plan Effectiveness
+bind Implement Improvements: Improvement Status
+bind Communicate Plan: Communication Method
+bind Conduct Training: Training Hours
+bind Activate Continuity Plan: Incident Severity
+bind Evaluate Incident Response: Response Time
+Risk Level: integer between 1 and 10
+Monitoring Frequency: integer between 1 and 30
+Stakeholder Engagement: High, Moderate, Low
+Test Outcome: Pass, Fail
+Plan Effectiveness: float between 0.0 and 100.0
+Improvement Status: Completed, Pending
+Communication Method: Email, Meeting, Newsletter
+Training Hours: integer between 1 and 40
+Incident Severity: Low, Medium, High
+Response Time: float between 0.0 and 24.0
+Co-Existence[Monitor Risks, Identify Risks] |A.Monitoring Frequency <= 7 | |
+Precedence[Activate Continuity Plan, Identify Risks] |A.Incident Severity in (Medium, High) | |
+Response[Develop Continuity Plan, Communicate Plan] |A.Stakeholder Engagement is High |T.Communication Method in (Email, Meeting) |5,13,m
+Responded Existence[Communicate Plan, Conduct Training] |A.Communication Method is Meeting | |
+Alternate Response[Test Continuity Plan, Review Test Results] |A.Test Outcome is Pass | |0,2,d
+Chain Response[Review Test Results, Implement Improvements] |A.Plan Effectiveness < 80.0 |T.Improvement Status is Pending |0,48,h
+Existence[Conduct Training] |A.Training Hours >= 8 |
+Not Chain Succession[Activate Continuity Plan, Evaluate Incident Response] |A.Incident Severity is High | |10,15,s
+Init[Identify Risks] | |
+End[Evaluate Incident Response] | |

@@ -1,0 +1,77 @@
+**Multi-Perspective Declare Model: Currency Exchange Process**
+
+This model describes a **currency exchange office** workflow with strong control-flow, data, and temporal constraints.
+
+### Process Overview
+
+The process begins when a customer brings in foreign currency. After authenticity verification and rate calculation, the exchange is either approved or rejected. If approved, the exchange is processed, a receipt is issued, the customer is notified, and the transaction is recorded. The system also maintains up-to-date exchange rates.
+
+### Activities
+- **Receive Currency**
+- **Verify Currency Authenticity**
+- **Calculate Exchange Rate**
+- **Approve Exchange**
+- **Reject Exchange**
+- **Process Exchange**
+- **Issue Receipt**
+- **Notify Customer**
+- **Record Transaction**
+- **Update Exchange Rates**
+
+### Data Perspectives
+
+**Data Objects & Domains:**
+- **Amount**: integer between 1 and 10000
+- **Currency Type**: {USD, EUR, GBP, JPY}
+- **Exchange Rate**: float between 0.5 and 1.5
+- **Exchange Status**: {Pending, Approved, Rejected}
+- **Transaction ID**: integer between 1000 and 9999
+
+**Data Bindings:**
+- `Receive Currency` captures **Amount** and **Currency Type**
+- `Verify Currency Authenticity` uses **Currency Type**
+- `Calculate Exchange Rate` and `Update Exchange Rates` produce **Exchange Rate**
+- `Approve Exchange` and `Reject Exchange` set **Exchange Status**
+- `Process Exchange`, `Issue Receipt`, `Record Transaction` work with **Transaction ID**
+- `Notify Customer` uses **Exchange Status**
+
+### Control-Flow Constraints
+
+**Mandatory Flow:**
+- The process **must start** with `Receive Currency`
+- The process **must end** with `Issue Receipt`
+- `Calculate Exchange Rate` must occur **at least once**
+- `Approve Exchange` can occur **at most once** (Exactly[1])
+
+**Sequential Dependencies:**
+- `Receive Currency` must precede `Verify Currency Authenticity`
+- `Verify Currency Authenticity` must precede `Approve Exchange`
+- `Calculate Exchange Rate` must precede `Process Exchange`
+- `Approve Exchange` must be followed (eventually) by `Process Exchange` **if** the Exchange Status is "Approved"
+- `Reject Exchange` must be followed by `Notify Customer` **if** the Exchange Status is "Rejected"
+- `Process Exchange` must be followed by `Record Transaction` (with matching Transaction ID)
+
+**Mutual Exclusions & Negative Constraints:**
+- `Verify Currency Authenticity` and `Approve Exchange` **cannot both occur** in the same trace (Not Co-Existence)
+- `Receive Currency` cannot be directly followed by `Reject Exchange` (Not Succession)
+
+**Existence & Correlation:**
+- If `Process Exchange` occurs, `Update Exchange Rates` must have occurred at some point (Responded Existence)
+- `Process Exchange` and `Record Transaction` are tightly linked via matching **Transaction ID**
+
+### Temporal & Metric Constraints
+
+- **Chain Succession** between `Calculate Exchange Rate` and `Update Exchange Rates` with a **maximum delay of 30 minutes** (medium confidence)
+- **Chain Succession** between `Receive Currency` and `Record Transaction` with a **maximum delay of 1 day**, requiring matching Transaction ID (high confidence)
+
+### Summary
+
+This is a **data-aware, temporally constrained** currency exchange process that enforces:
+1. Strong sequencing (receive → verify → approve/reject → process)
+2. Data-driven branching via `Exchange Status`
+3. Tight correlation between process steps using `Transaction ID`
+4. Real-time rate management (rates must be updated shortly after calculation)
+5. Clear separation between verification and approval (they cannot both happen in one case)
+6. Mandatory recording and receipt issuance for completed exchanges
+
+The model ensures both regulatory compliance and operational efficiency in a currency exchange business.

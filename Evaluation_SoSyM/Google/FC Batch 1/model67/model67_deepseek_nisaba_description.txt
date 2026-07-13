@@ -1,0 +1,89 @@
+#MP-Declare Model
+## Activities
+- **Detect Fraudulent Activity**: The 'Detect Fraudulent Activity' activity involves identifying potentially fraudulent transactions or behaviors within the system.
+- **Verify Customer Identity**: The 'Verify Customer Identity' activity includes confirming the identity of the customer through various verification methods.
+- **Review Transaction Details**: The 'Review Transaction Details' activity involves examining the specifics of a transaction for accuracy and legitimacy.
+- **Approve Transaction**: The 'Approve Transaction' activity authorizes a transaction to proceed after validation.
+- **Decline Transaction**: The 'Decline Transaction' activity rejects a transaction that does not meet the required criteria.
+- **Report Suspicious Activity**: The 'Report Suspicious Activity' activity involves documenting and escalating potentially fraudulent or unusual activities.
+- **Update Account Security**: The 'Update Account Security' activity involves enhancing or modifying security measures for a customer account.
+- **Notify Customer**: The 'Notify Customer' activity involves sending communications to the customer regarding their account or transactions.
+- **Investigate Security Breach**: The 'Investigate Security Breach' activity involves examining a security incident to determine its cause and impact.
+- **Implement Security Patch**: The 'Implement Security Patch' activity involves deploying a software or system update to address a security vulnerability.
+
+## Attributes
+- **Transaction Type: Debit, Credit, Wire Transfer, Online Payment**: The attribute 'Transaction Type: Debit, Credit, Wire Transfer, Online Payment' specifies the category of the financial transaction.
+- **Transaction Amount: float between 0.01 and 100000.0**: The attribute 'Transaction Amount: float between 0.01 and 100000.0' represents the monetary value of the transaction.
+- **Fraud Risk Level: Low, Medium, High**: The attribute 'Fraud Risk Level: Low, Medium, High' indicates the assessed likelihood of fraudulent activity associated with a transaction.
+- **Verification Attempts: integer between 1 and 5**: The attribute 'Verification Attempts: integer between 1 and 5' represents the number of times a customer identity verification has been attempted.
+- **Verification Status: Verified, Not Verified, Pending**: The attribute 'Verification Status: Verified, Not Verified, Pending' indicates the current state of the customer identity verification process.
+- **Breach Severity: integer between 1 and 10**: The attribute 'Breach Severity: integer between 1 and 10' represents the severity level of a security breach on a scale from 1 (lowest) to 10 (highest).
+- **Security Patch Status: Applied, Not Applied, Scheduled**: The attribute 'Security Patch Status: Applied, Not Applied, Scheduled' indicates the current status of a security patch implementation.
+- **Customer Notification Method: Email, SMS, Phone Call**: The attribute 'Customer Notification Method: Email, SMS, Phone Call' specifies the communication channel used to notify the customer.
+- **Days Since Last Activity: integer between 0 and 365**: The attribute 'Days Since Last Activity: integer between 0 and 365' represents the number of days elapsed since the customer's last account activity.
+
+## Binds
+- **Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level**: The bind 'Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level' specifies that the activity 'Detect Fraudulent Activity' requires the attributes 'Transaction Type', 'Transaction Amount', and 'Fraud Risk Level'.
+- **Verify Customer Identity: Verification Attempts, Verification Status**: The bind 'Verify Customer Identity: Verification Attempts, Verification Status' links the 'Verify Customer Identity' activity with the attributes 'Verification Attempts' and 'Verification Status'.
+- **Review Transaction Details: Transaction Type, Transaction Amount**: The bind 'Review Transaction Details: Transaction Type, Transaction Amount' links the 'Review Transaction Details' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Approve Transaction: Transaction Type, Transaction Amount**: The bind 'Approve Transaction: Transaction Type, Transaction Amount' links the 'Approve Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Decline Transaction: Transaction Type, Transaction Amount**: The bind 'Decline Transaction: Transaction Type, Transaction Amount' links the 'Decline Transaction' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Report Suspicious Activity: Transaction Type, Transaction Amount**: The bind 'Report Suspicious Activity: Transaction Type, Transaction Amount' links the 'Report Suspicious Activity' activity with the attributes 'Transaction Type' and 'Transaction Amount'.
+- **Update Account Security: Days Since Last Activity**: The bind 'Update Account Security: Days Since Last Activity' links the 'Update Account Security' activity with the attribute 'Days Since Last Activity'.
+- **Notify Customer: Customer Notification Method**: The bind 'Notify Customer: Customer Notification Method' links the 'Notify Customer' activity with the attribute 'Customer Notification Method'.
+- **Investigate Security Breach: Breach Severity**: The bind 'Investigate Security Breach: Breach Severity' links the 'Investigate Security Breach' activity with the attribute 'Breach Severity'.
+- **Implement Security Patch: Security Patch Status**: The bind 'Implement Security Patch: Security Patch Status' links the 'Implement Security Patch' activity with the attribute 'Security Patch Status'.
+
+## Constraints
+- **Response[Detect Fraudulent Activity, Notify Customer] | | |**: If a 'Detect Fraudulent Activity' activity occurs, then a 'Notify Customer' activity must eventually occur after the 'Detect Fraudulent Activity' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Detect Fraudulent Activity' can be pending at the same time, and a single 'Notify Customer' can fulfill the obligation for all preceding 'Detect Fraudulent Activity'. If 'Detect Fraudulent Activity' does not occur, the constraint imposes no obligation on the occurrence of 'Notify Customer'.
+- **Response[Decline Transaction, Report Suspicious Activity] | | |**: If a 'Decline Transaction' activity occurs, then a 'Report Suspicious Activity' activity must eventually occur after the 'Decline Transaction' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Decline Transaction' can be pending at the same time, and a single 'Report Suspicious Activity' can fulfill the obligation for all preceding 'Decline Transaction'. If 'Decline Transaction' does not occur, the constraint imposes no obligation on the occurrence of 'Report Suspicious Activity'.
+- **Precedence[Approve Transaction, Verify Customer Identity] | | |**: The 'Verify Customer Identity' activity is permitted to occur only if a 'Approve Transaction' activity has occurred before it within the same process instance. 'Verify Customer Identity' occurrences that occur without any prior 'Approve Transaction' are violations of the constraint. Multiple 'Approve Transaction' can occur, and any number of events (including other 'Verify Customer Identity') can happen between a 'Approve Transaction' and a subsequent 'Verify Customer Identity'. This ensures that certain actions cannot proceed without the necessary prerequisites being met first.
+- **Absence5[Detect Fraudulent Activity] | |**: The 'Detect Fraudulent Activity' must not occur 5 times in the process.
+- **Response[Investigate Security Breach, Implement Security Patch] | | |0,72,h**: If an 'Investigate Security Breach' activity occurs, then an 'Implement Security Patch' activity must eventually occur after the 'Investigate Security Breach' event at some point in the same process instance, within 0 to 72 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Investigate Security Breach' can be pending at the same time, and a single 'Implement Security Patch' can fulfill the obligation for all preceding 'Investigate Security Breach'. If 'Investigate Security Breach' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Security Patch'.
+- **Response[Review Transaction Details, Verify Customer Identity] |A.Transaction Amount > 1000 | |0,10,m**: If a 'Review Transaction Details' activity occurs where the attribute 'Transaction Amount' is greater than 1000, then a 'Verify Customer Identity' activity must eventually occur after the 'Review Transaction Details' event at some point in the same process instance, within 0 to 10 minutes. There is no requirement on how soon or what events may occur in between. Multiple 'Review Transaction Details' can be pending at the same time, and a single 'Verify Customer Identity' can fulfill the obligation for all preceding 'Review Transaction Details'. If 'Review Transaction Details' does not occur, the constraint imposes no obligation on the occurrence of 'Verify Customer Identity'.
+- **Response[Detect Fraudulent Activity, Decline Transaction] |A.Fraud Risk Level is High | |0,5,m**: If a 'Detect Fraudulent Activity' activity occurs where the attribute 'Fraud Risk Level' is High, then a 'Decline Transaction' activity must eventually occur after the 'Detect Fraudulent Activity' event at some point in the same process instance, within 0 to 5 minutes. There is no requirement on how soon or what events may occur in between. Multiple 'Detect Fraudulent Activity' can be pending at the same time, and a single 'Decline Transaction' can fulfill the obligation for all preceding 'Detect Fraudulent Activity'. If 'Detect Fraudulent Activity' does not occur, the constraint imposes no obligation on the occurrence of 'Decline Transaction'.
+- **Response[Notify Customer, Update Account Security] |A.Customer Notification Method is SMS | |0,24,h**: If a 'Notify Customer' activity occurs where the attribute 'Customer Notification Method' is SMS, then an 'Update Account Security' activity must eventually occur after the 'Notify Customer' event at some point in the same process instance, within 0 to 24 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Notify Customer' can be pending at the same time, and a single 'Update Account Security' can fulfill the obligation for all preceding 'Notify Customer'. If 'Notify Customer' does not occur, the constraint imposes no obligation on the occurrence of 'Update Account Security'.
+- **Response[Investigate Security Breach, Implement Security Patch] |A.Breach Severity > 7 | |0,48,h**: If an 'Investigate Security Breach' activity occurs where the attribute 'Breach Severity' is greater than 7, then an 'Implement Security Patch' activity must eventually occur after the 'Investigate Security Breach' event at some point in the same process instance, within 0 to 48 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Investigate Security Breach' can be pending at the same time, and a single 'Implement Security Patch' can fulfill the obligation for all preceding 'Investigate Security Breach'. If 'Investigate Security Breach' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Security Patch'.
+- **Response[Implement Security Patch, Implement Security Patch] |A.Security Patch Status is Not Applied | |0,7,d**: If an 'Implement Security Patch' activity occurs where the attribute 'Security Patch Status' is Not Applied, then another 'Implement Security Patch' activity must eventually occur after the first 'Implement Security Patch' event at some point in the same process instance, within 0 to 7 days. There is no requirement on how soon or what events may occur in between. Multiple 'Implement Security Patch' can be pending at the same time, and a single 'Implement Security Patch' can fulfill the obligation for all preceding 'Implement Security Patch'. If 'Implement Security Patch' does not occur, the constraint imposes no obligation on the occurrence of 'Implement Security Patch'.
+
+
+## Interleaved Description
+The MP-Declare process model for the fraud detection and security management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Detect Fraudulent Activity,' which involves identifying potentially fraudulent transactions or behaviors within the system, using the attributes 'Transaction Type,' 'Transaction Amount,' and 'Fraud Risk Level' to assess the initial risk.
+
+#### **End Constraints**
+The process concludes with the activity 'Implement Security Patch,' which involves deploying a software or system update to address a security vulnerability, with the 'Security Patch Status' attribute indicating the final state of the patch. This activity must be the last to occur in the process, ensuring that all security measures are finalized.
+
+### **Frequency Constraints**
+
+#### **Absence Constraint**
+The 'Detect Fraudulent Activity' activity must not occur 5 times in the process. This exclusion reinforces process integrity by specifying what is not permissible, preventing excessive fraud detection attempts that could indicate system inefficiency or abuse.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Verify Customer Identity' is permitted to occur only if an 'Approve Transaction' activity has occurred before it. This ensures that customer identity verification is based on a prior transaction approval, guiding the logical sequence within the model.
+2. The activity 'Approve Transaction' is permitted to occur only if a 'Review Transaction Details' activity has occurred before it, with the condition that the 'Transaction Amount' is greater than 1000. This ensures that high-value transactions are reviewed before approval, setting up an initial context for financial validation.
+
+#### **Response Constraints**
+1. If the 'Detect Fraudulent Activity' activity occurs, then the 'Notify Customer' activity must eventually occur after it. This defines an ordered flow where fraud detection leads to customer notification, ensuring a cohesive temporal structure in the process.
+2. If the 'Decline Transaction' activity occurs, then the 'Report Suspicious Activity' activity must eventually occur after it. This ensures that declined transactions are followed by reporting, maintaining a clear sequence for handling suspicious cases.
+3. If the 'Investigate Security Breach' activity occurs, then the 'Implement Security Patch' activity must eventually occur within 0 to 72 hours. This ensures a timely response to security breaches, with a defined temporal window for patch implementation.
+4. If the 'Review Transaction Details' activity occurs with the condition 'Transaction Amount' is greater than 1000, then the 'Verify Customer Identity' activity must eventually occur within 0 to 10 minutes. This ensures that high-value transactions prompt immediate identity verification, maintaining process momentum.
+5. If the 'Detect Fraudulent Activity' activity occurs with the condition 'Fraud Risk Level' is High, then the 'Decline Transaction' activity must eventually occur within 0 to 5 minutes. This ensures that high-risk fraud detection leads to rapid transaction decline, preventing potential losses.
+6. If the 'Notify Customer' activity occurs with the condition 'Customer Notification Method' is SMS, then the 'Update Account Security' activity must eventually occur within 0 to 24 hours. This ensures that SMS notifications trigger timely security updates, maintaining customer protection.
+7. If the 'Investigate Security Breach' activity occurs with the condition 'Breach Severity' is greater than 7, then the 'Implement Security Patch' activity must eventually occur within 0 to 48 hours. This ensures that severe breaches prompt faster patch implementation, prioritizing critical security issues.
+8. If the 'Implement Security Patch' activity occurs with the condition 'Security Patch Status' is Not Applied, then another 'Implement Security Patch' activity must eventually occur within 0 to 7 days. This ensures that failed patch attempts are followed by a retry, maintaining security integrity.
+
+### **Exclusivity Constraints**
+
+#### **Not Co-Existence Constraints**
+The 'Approve Transaction' activity and the 'Decline Transaction' activity cannot both occur within the same process instance if the conditions 'Transaction Type' is Debit and 'Transaction Amount' is greater than 5000. This exclusion ensures that a transaction cannot be both approved and declined under the same conditions, thereby maintaining process integrity by preventing conflicting events.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Succession Constraints**
+Whenever an 'Investigate Security Breach' activity occurs with the condition 'Breach Severity' is greater than 7, it must be immediately followed by an 'Implement Security Patch' activity with the condition 'Security Patch Status' is Applied within 0 to 48 hours. This tightly coupled sequence ensures that severe security breaches are directly succeeded by patch implementation, leaving no room for delays or intervening activities.

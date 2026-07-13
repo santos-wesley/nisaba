@@ -1,0 +1,40 @@
+activity Prepare Solution
+activity Heat Mixture
+activity Add Catalyst
+activity Monitor Reaction
+activity Cool Solution
+activity Filter Product
+activity Dry Product
+activity Analyze Sample
+activity Store Product
+activity Dispose Waste
+bind Prepare Solution: Concentration, Solvent Type
+bind Heat Mixture: Temperature, Reaction Time
+bind Add Catalyst: Catalyst Type
+bind Monitor Reaction: Reaction Status, Reaction Time
+bind Analyze Sample: Purity, Yield
+bind Store Product: Batch Number
+bind Cool Solution: 
+bind Filter Product: 
+bind Dry Product: 
+bind Dispose Waste: 
+Concentration: float between 0.1 and 10.0
+Solvent Type: Water, Ethanol, Toluene
+Temperature: float between 0.0 and 500.0
+Reaction Time: integer between 1 and 600
+Catalyst Type: Platinum, Palladium, Nickel, Iron
+Reaction Status: Initiated, Ongoing, Completed, Failed
+Purity: integer between 0 and 100
+Yield: float between 0.0 and 100.0
+Batch Number: integer between 1 and 1000
+Init[Prepare Solution] | |
+Succession[Prepare Solution, Heat Mixture] | | |
+Response[Heat Mixture, Add Catalyst] | | |
+Responded Existence[Add Catalyst, Monitor Reaction] | | |
+Response[Add Catalyst, Monitor Reaction] | | |0,10,m
+Chain Response[Monitor Reaction, Cool Solution] | | |0,5,m
+Precedence[Cool Solution, Filter Product] | | |
+Chain Succession[Filter Product, Dry Product] | | |0,2,h
+Response[Dry Product, Analyze Sample] | | |0,1,d
+Alternate Response[Analyze Sample, Store Product] | | |
+Succession[Store Product, Dispose Waste] | | |0,1,h

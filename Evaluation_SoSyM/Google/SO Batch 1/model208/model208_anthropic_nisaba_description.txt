@@ -1,0 +1,138 @@
+#MP-Declare Model
+## Activities
+- **Schedule Train**: The 'Schedule Train' activity represents the scheduling of a train, including its timing and version details.
+- **Allocate Resources**: The 'Allocate Resources' activity involves assigning resources, such as tracks, to a train.
+- **Monitor Train**: The 'Monitor Train' activity includes tracking the current status of a train during its operation.
+- **Manage Delay**: The 'Manage Delay' activity involves handling and addressing delays experienced by a train.
+- **Perform Maintenance**: The 'Perform Maintenance' activity represents carrying out maintenance tasks on a train.
+- **Inspect Track**: The 'Inspect Track' activity involves examining a track to assess its condition and safety.
+- **Dispatch Train**: The 'Dispatch Train' activity represents releasing a train for its journey.
+- **Receive Train**: The 'Receive Train' activity involves accepting a train upon its arrival, including passenger handling.
+- **Update Schedule**: The 'Update Schedule' activity includes modifying an existing train schedule.
+- **Cancel Train**: The 'Cancel Train' activity represents the cancellation of a scheduled train along with the reason for cancellation.
+
+## Attributes
+- **Train ID: Integer between 1000 and 9999**: The attribute 'Train ID: Integer between 1000 and 9999' represents the unique identification number assigned to a train.
+- **Train Status: On Time, Delayed, Cancelled, Completed**: The attribute 'Train Status: On Time, Delayed, Cancelled, Completed' specifies the current operational status of a train.
+- **Delay Duration: Float between 0.0 and 300.0**: The attribute 'Delay Duration: Float between 0.0 and 300.0' represents the amount of time, in minutes, that a train has been delayed.
+- **Track Number: Integer between 1 and 10**: The attribute 'Track Number: Integer between 1 and 10' represents the identifier of the track allocated or inspected.
+- **Maintenance Type: Routine, Emergency, Scheduled**: The attribute 'Maintenance Type: Routine, Emergency, Scheduled' specifies the category of maintenance performed on a train.
+- **Inspection Score: Float between 0.0 and 10.0**: The attribute 'Inspection Score: Float between 0.0 and 10.0' represents the numeric score given during a track inspection to assess its condition.
+- **Priority Level: High, Medium, Low**: The attribute 'Priority Level: High, Medium, Low' specifies the priority assigned to a train when dispatched.
+- **Passenger Count: Integer between 0 and 1500**: The attribute 'Passenger Count: Integer between 0 and 1500' represents the number of passengers on a received train.
+- **Reason Cancel: Weather, Maintenance, Technical Issue**: The attribute 'Reason Cancel: Weather, Maintenance, Technical Issue' specifies the cause behind the cancellation of a train.
+- **Schedule Version: Integer between 1 and 100**: The attribute 'Schedule Version: Integer between 1 and 100' represents the version number of a train's schedule.
+
+## Binds
+- **Schedule Train: Train ID, Schedule Version**: The bind 'Schedule Train: Train ID, Schedule Version' specifies that the activity 'Schedule Train' requires the attributes 'Train ID' and 'Schedule Version'.
+- **Allocate Resources: Train ID, Track Number**: The bind 'Allocate Resources: Train ID, Track Number' links the 'Allocate Resources' activity with the attributes 'Train ID' and 'Track Number'.
+- **Monitor Train: Train ID, Train Status**: The bind 'Monitor Train: Train ID, Train Status' links the 'Monitor Train' activity with the attributes 'Train ID' and 'Train Status'.
+- **Manage Delay: Train ID, Delay Duration**: The bind 'Manage Delay: Train ID, Delay Duration' links the 'Manage Delay' activity with the attributes 'Train ID' and 'Delay Duration'.
+- **Perform Maintenance: Train ID, Maintenance Type**: The bind 'Perform Maintenance: Train ID, Maintenance Type' links the 'Perform Maintenance' activity with the attributes 'Train ID' and 'Maintenance Type'.
+- **Inspect Track: Track Number, Inspection Score**: The bind 'Inspect Track: Track Number, Inspection Score' links the 'Inspect Track' activity with the attributes 'Track Number' and 'Inspection Score'.
+- **Dispatch Train: Train ID, Priority Level**: The bind 'Dispatch Train: Train ID, Priority Level' links the 'Dispatch Train' activity with the attributes 'Train ID' and 'Priority Level'.
+- **Receive Train: Train ID, Passenger Count**: The bind 'Receive Train: Train ID, Passenger Count' links the 'Receive Train' activity with the attributes 'Train ID' and 'Passenger Count'.
+- **Update Schedule: Train ID, Schedule Version**: The bind 'Update Schedule: Train ID, Schedule Version' links the 'Update Schedule' activity with the attributes 'Train ID' and 'Schedule Version'.
+- **Cancel Train: Train ID, Reason Cancel**: The bind 'Cancel Train: Train ID, Reason Cancel' links the 'Cancel Train' activity with the attributes 'Train ID' and 'Reason Cancel'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the train operations process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Schedule Train,' which establishes the initial context by recording the 'Train ID' and 'Schedule Version' for a train entering the operational pipeline. This foundational step ensures that every train journey originates from a formally scheduled record before any further operational activity can take place.
+
+#### **End Constraints**
+The process concludes with the activity 'Receive Train,' which finalizes the journey by handling passenger disembarkation and recording the 'Passenger Count.' As the concluding activity, 'Receive Train' brings coherent closure to the process, confirming that the train has completed its journey and passengers have been accounted for.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Allocate Resources' activity must occur at least once in the process. This ensures that tracks are properly assigned to trains, adding depth to the resource management aspect of the process and reinforcing that no train can operate without designated infrastructure.
+
+#### **Absence Constraints**
+In contrast, the 'Cancel Train' activity must not occur more than once for a given train. This exclusion reinforces process integrity by ensuring that a cancellation, once recorded, is not redundantly repeated, thereby preserving the clarity of the train's final status.
+
+#### **Exactly Constraints**
+The 'Dispatch Train' activity must occur exactly once within the process. This fixed boundary ensures precision in the model, guaranteeing that each train is dispatched a single, definitive time, without ambiguity or repetition.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+If the 'Manage Delay' activity occurs, then the 'Monitor Train' activity must also occur somewhere in the process. This dependency establishes that any handling of a delay is necessarily linked to prior or subsequent monitoring of the train's status, enhancing coherence between tracking and delay management.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Dispatch Train' is permitted to occur only if an 'Allocate Resources' activity has occurred before it. This sets up the initial context that resources, such as tracks, must be secured before a train can be released for its journey.
+2. The activity 'Manage Delay' is permitted to occur only if a 'Monitor Train' activity, with the condition 'Train Status is Delayed,' has occurred before it. This guides the logical sequence, ensuring that delay management is grounded in an observed delayed status.
+
+#### **Response Constraints**
+1. If the 'Schedule Train' activity occurs, then the 'Allocate Resources' activity must occur afterward. This defines an ordered flow in which resource allocation follows scheduling, ensuring a cohesive temporal structure in the process.
+2. If the 'Monitor Train' activity occurs with the condition 'Train Status is Delayed,' then the 'Manage Delay' activity must occur afterward. This sequence guarantees that delays observed during monitoring are followed by appropriate management actions.
+
+#### **Succession Constraints**
+Whenever an 'Inspect Track' activity occurs with the condition 'Inspection Score' below a safe threshold, it must be causally linked to a subsequent 'Perform Maintenance' activity. This establishes a causal chain ensuring that unsafe track conditions logically lead to maintenance action, creating a cohesive progression within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraints**
+Each occurrence of the 'Update Schedule' activity must be preceded by a 'Schedule Train' activity, without another 'Update Schedule' occurring in between. This condition-consequence relationship ensures order consistency, promoting a balanced process flow where schedule updates are always grounded in a prior scheduling event.
+
+#### **Alternate Response Constraints**
+Each occurrence of the 'Schedule Train' activity must be followed by a unique 'Allocate Resources' activity, with no intervening 'Schedule Train' activities in between. This promotes balance by ensuring clear one-to-one pairing between scheduling and resource allocation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Whenever a 'Dispatch Train' activity occurs, it must be immediately followed by a 'Monitor Train' activity, with no intervening activities. This captures an immediate cause-and-effect relationship, ensuring that every dispatched train is promptly tracked.
+
+#### **Chain Succession Constraints**
+Whenever a 'Perform Maintenance' activity occurs with the condition 'Maintenance Type is Emergency,' it must be immediately succeeded by an 'Inspect Track' activity, with no intervening events. This enforces a tightly coupled sequence, ensuring that emergency maintenance is directly validated by a subsequent track inspection.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Allocate Resources' activity and the 'Inspect Track' activity are mutually dependent, establishing that whenever tracks are allocated to a train, a corresponding track inspection must also occur within the same process flow, ensuring safety and reliability are jointly maintained.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Either the 'Manage Delay' activity or the 'Dispatch Train' activity may occur, introducing alternative paths and allowing flexibility in how the process addresses timing issues versus straightforward dispatch.
+
+#### **Exclusive Choice Constraints**
+Exactly one of the 'Cancel Train' or 'Dispatch Train' activities must occur for a given train, enforcing mutually exclusive pathways: a train is either cancelled or dispatched, but never both, ensuring clarity in the train's operational outcome.
+
+#### **Not Co-Existence Constraints**
+The 'Cancel Train' activity and the 'Receive Train' activity cannot both occur within the same process instance. This exclusion rule ensures that a train which has been cancelled is never subsequently received, thereby maintaining process integrity by preventing conflicting events.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+If the 'Cancel Train' activity occurs, then the 'Perform Maintenance' activity must not occur in response within the same process instance. This contrast prevents an unnecessary or contradictory dependency, refining the model by disallowing maintenance actions contingent upon a cancellation.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+The 'Receive Train' activity must not precede the 'Dispatch Train' activity. This restriction preserves the intended sequence within the model, ensuring that a train cannot be received before it has even been dispatched.
+
+#### **Not Response Constraints**
+If the 'Cancel Train' activity occurs, then the 'Update Schedule' activity must not occur afterward. This prevents the model from allowing schedule updates to follow a cancellation, maintaining the integrity of the process's intended progression.
+
+#### **Not Succession Constraints**
+The 'Cancel Train' activity must not be followed at any point by the 'Dispatch Train' activity for the same train. This restriction preserves the model's defined flow, ensuring that once a train is cancelled, it cannot later be dispatched.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+The 'Receive Train' activity must not be immediately preceded by the 'Cancel Train' activity. This enforces a non-immediate order restriction, maintaining clear separation between cancellation and reception events in the sequence.
+
+#### **Not Chain Response Constraints**
+The 'Cancel Train' activity must not be immediately followed by the 'Schedule Train' activity. This prevents immediate succession between these two activities, preserving structural integrity by disallowing an abrupt rescheduling right after a cancellation.
+
+#### **Not Chain Succession Constraints**
+The 'Perform Maintenance' activity and the 'Cancel Train' activity must not immediately precede or follow one another. This refines the process model by excluding a direct, immediate sequential relationship between performing maintenance and cancelling a train, thereby preserving the distinctiveness of these two operational paths.

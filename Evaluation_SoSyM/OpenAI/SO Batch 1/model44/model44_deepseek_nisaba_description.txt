@@ -1,0 +1,76 @@
+#MP-Declare Model
+## Activities
+- **Report Incident**: The 'Report Incident' activity involves reporting an incident that has occurred.
+- **Assess Impact**: The 'Assess Impact' activity involves evaluating the impact of the reported incident.
+- **Prioritize Incident**: The 'Prioritize Incident' activity involves determining the priority level of the incident.
+- **Assign Incident**: The 'Assign Incident' activity involves assigning the incident to a specific team for handling.
+- **Investigate Incident**: The 'Investigate Incident' activity involves conducting an investigation into the incident.
+- **Resolve Incident**: The 'Resolve Incident' activity involves resolving the incident.
+- **Verify Resolution**: The 'Verify Resolution' activity involves verifying that the incident has been properly resolved.
+- **Close Incident**: The 'Close Incident' activity involves closing the incident after resolution and verification.
+- **Escalate Incident**: The 'Escalate Incident' activity involves escalating the incident to a higher level of authority.
+- **Document Incident**: The 'Document Incident' activity involves documenting all details related to the incident.
+
+## Attributes
+- **Impact Level: integer between 1 and 5**: The attribute 'Impact Level: integer between 1 and 5' represents the severity level of the incident's impact, ranging from 1 (lowest) to 5 (highest).
+- **Priority: Low, Medium, High, Critical**: The attribute 'Priority: Low, Medium, High, Critical' specifies the priority level assigned to the incident.
+- **Resolution Time: float between 0.1 and 72.0**: The attribute 'Resolution Time: float between 0.1 and 72.0' represents the time taken to resolve the incident, measured in hours.
+- **Status: New, In Progress, Resolved, Closed**: The attribute 'Status: New, In Progress, Resolved, Closed' indicates the current status of the incident.
+- **Assigned Team ID: integer between 1 and 100**: The attribute 'Assigned Team ID: integer between 1 and 100' represents the identifier of the team assigned to handle the incident.
+- **Verification Result: Successful, Failed**: The attribute 'Verification Result: Successful, Failed' indicates whether the resolution verification was successful or failed.
+- **Investigation Time: float between 0.5 and 48.0**: The attribute 'Investigation Time: float between 0.5 and 48.0' represents the time spent investigating the incident, measured in hours.
+- **Escalation Level: None, Level 1, Level 2, Level 3**: The attribute 'Escalation Level: None, Level 1, Level 2, Level 3' specifies the escalation level of the incident.
+- **Document ID: integer between 1000 and 9999**: The attribute 'Document ID: integer between 1000 and 9999' represents the unique identifier for the incident documentation.
+- **Assessment Time: float between 0.1 and 24.0**: The attribute 'Assessment Time: float between 0.1 and 24.0' represents the time taken to assess the impact of the incident, measured in hours.
+
+## Binds
+- **Report Incident: Status**: The bind 'Report Incident: Status' specifies that the activity 'Report Incident' requires the attribute 'Status'.
+- **Assess Impact: Impact Level, Assessment Time**: The bind 'Assess Impact: Impact Level, Assessment Time' links the 'Assess Impact' activity with the attributes 'Impact Level' and 'Assessment Time'.
+- **Prioritize Incident: Priority**: The bind 'Prioritize Incident: Priority' links the 'Prioritize Incident' activity with the attribute 'Priority'.
+- **Assign Incident: Assigned Team ID**: The bind 'Assign Incident: Assigned Team ID' links the 'Assign Incident' activity with the attribute 'Assigned Team ID'.
+- **Investigate Incident: Investigation Time**: The bind 'Investigate Incident: Investigation Time' links the 'Investigate Incident' activity with the attribute 'Investigation Time'.
+- **Resolve Incident: Resolution Time**: The bind 'Resolve Incident: Resolution Time' links the 'Resolve Incident' activity with the attribute 'Resolution Time'.
+- **Verify Resolution: Verification Result**: The bind 'Verify Resolution: Verification Result' links the 'Verify Resolution' activity with the attribute 'Verification Result'.
+- **Close Incident: Status**: The bind 'Close Incident: Status' specifies that the activity 'Close Incident' requires the attribute 'Status'.
+- **Escalate Incident: Escalation Level**: The bind 'Escalate Incident: Escalation Level' links the 'Escalate Incident' activity with the attribute 'Escalation Level'.
+- **Document Incident: Document ID**: The bind 'Document Incident: Document ID' links the 'Document Incident' activity with the attribute 'Document ID'.
+
+## Constraints
+- **Init[Report Incident] | |**: The 'Report Incident' must be the first activity to occur in the process.
+- **End[Close Incident] | |**: The 'Close Incident' must be the last activity to occur in the process.
+- **Response[Report Incident, Assess Impact] | | |0,24,h**: If a 'Report Incident' activity occurs, then an 'Assess Impact' activity must eventually occur after the 'Report Incident' event at some point in the same process instance, within 0 to 24 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Report Incident' can be pending at the same time, and a single 'Assess Impact' can fulfill the obligation for all preceding 'Report Incident'. If 'Report Incident' does not occur, the constraint imposes no obligation on the occurrence of 'Assess Impact'.
+- **Succession[Assess Impact, Prioritize Incident] | | |**: An 'Assess Impact' activity must be followed by a 'Prioritize Incident' activity at some point later in the same process instance. Conversely, a 'Prioritize Incident' event can occur only if an 'Assess Impact' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Assess Impact' impose obligations for future 'Prioritize Incident', and 'Prioritize Incident' cannot occur without prior 'Assess Impact'. Multiple 'Assess Impact' and 'Prioritize Incident' are allowed, with each 'Assess Impact' eventually leading to a 'Prioritize Incident' and each 'Prioritize Incident' being justified by a preceding 'Assess Impact'.
+- **Precedence[Assign Incident, Prioritize Incident] | |T.Priority in (High, Critical) |**: The 'Prioritize Incident' activity is permitted to occur only if an 'Assign Incident' activity has occurred before it within the same process instance, and only when the 'Priority' attribute of the 'Prioritize Incident' activity is either 'High' or 'Critical'. 'Prioritize Incident' events that occur without any prior 'Assign Incident' are violations of the constraint. Multiple 'Assign Incident' can occur, and any number of events (including other 'Prioritize Incident') can happen between an 'Assign Incident' and a subsequent 'Prioritize Incident'. This ensures that certain actions cannot proceed without the necessary prerequisites being met first.
+- **Precedence[Resolve Incident, Investigate Incident] | | |**: The 'Investigate Incident' activity is permitted to occur only if a 'Resolve Incident' activity has occurred before it within the same process instance. 'Investigate Incident' events that occur without any prior 'Resolve Incident' are violations of the constraint. Multiple 'Resolve Incident' can occur, and any number of events (including other 'Investigate Incident') can happen between a 'Resolve Incident' and a subsequent 'Investigate Incident'. This ensures that certain actions cannot proceed without the necessary prerequisites being met first.
+- **Response[Resolve Incident, Verify Resolution] | | |0,48,h**: If a 'Resolve Incident' activity occurs, then a 'Verify Resolution' activity must eventually occur after the 'Resolve Incident' event at some point in the same process instance, within 0 to 48 hours. There is no requirement on how soon or what events may occur in between. Multiple 'Resolve Incident' can be pending at the same time, and a single 'Verify Resolution' can fulfill the obligation for all preceding 'Resolve Incident'. If 'Resolve Incident' does not occur, the constraint imposes no obligation on the occurrence of 'Verify Resolution'.
+- **Response[Verify Resolution, Escalate Incident] |A.Verification Result is Failed | |**: If a 'Verify Resolution' activity occurs and the 'Verification Result' attribute of that activity is 'Failed', then an 'Escalate Incident' activity must eventually occur after the 'Verify Resolution' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Verify Resolution' can be pending at the same time, and a single 'Escalate Incident' can fulfill the obligation for all preceding 'Verify Resolution'. If 'Verify Resolution' does not occur or the verification result is not 'Failed', the constraint imposes no obligation on the occurrence of 'Escalate Incident'.
+- **Succession[Close Incident, Document Incident] | | |**: A 'Close Incident' activity must be followed by a 'Document Incident' activity at some point later in the same process instance. Conversely, a 'Document Incident' event can occur only if a 'Close Incident' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Close Incident' impose obligations for future 'Document Incident', and 'Document Incident' cannot occur without prior 'Close Incident'. Multiple 'Close Incident' and 'Document Incident' are allowed, with each 'Close Incident' eventually leading to a 'Document Incident' and each 'Document Incident' being justified by a preceding 'Close Incident'.
+- **Absence2[Escalate Incident] | |**: The 'Escalate Incident' must not occur 2 times in the process.
+
+
+## Interleaved Description
+The MP-Declare process model for the incident management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Report Incident,' which involves reporting an incident that has occurred. This activity sets the initial context by recording the incident's 'Status' as 'New'.
+#### **End Constraints**
+The process concludes with the activity 'Close Incident,' which involves closing the incident after resolution and verification. This activity must be the last to occur in the process, ensuring that the incident is formally closed with its 'Status' updated to 'Closed'.
+
+### **Frequency Constraints**
+#### **Absence Constraint**
+The 'Escalate Incident' activity must not occur 2 times in the process. This contrast highlights that escalation is a rare and controlled action, reinforcing process integrity by limiting its frequency to prevent unnecessary or repeated escalations.
+
+### **Flexible Ordering Constraints**
+#### **Precedence Constraints**
+1. The activity 'Prioritize Incident' is permitted to occur only if an 'Assign Incident' activity has occurred before it, and only when the 'Priority' attribute of the 'Prioritize Incident' activity is either 'High' or 'Critical'. This background condition ensures that prioritization to high or critical levels is based on prior assignment, guiding the logical sequence within the model.
+2. The activity 'Investigate Incident' is permitted to occur only if a 'Resolve Incident' activity has occurred before it. This background condition ensures that investigation follows resolution, establishing a prerequisite that maintains the intended order of activities.
+
+#### **Response Constraints**
+1. If a 'Report Incident' activity occurs, then an 'Assess Impact' activity must eventually occur within 0 to 24 hours. This sequence defines an ordered flow where reporting an incident triggers a timely impact assessment, ensuring a cohesive temporal structure.
+2. If a 'Resolve Incident' activity occurs, then a 'Verify Resolution' activity must eventually occur within 0 to 48 hours. This sequence ensures that resolution is followed by verification within a defined timeframe, maintaining process momentum.
+3. If a 'Verify Resolution' activity occurs and the 'Verification Result' attribute of that activity is 'Failed', then an 'Escalate Incident' activity must eventually occur. This cause-effect relationship establishes that a failed verification directly necessitates escalation, enhancing coherence in the process.
+
+#### **Succession Constraints**
+1. An 'Assess Impact' activity must be followed by a 'Prioritize Incident' activity at some point later, and conversely, a 'Prioritize Incident' event can occur only if an 'Assess Impact' event has occurred before it. This cause-effect link ensures that impact assessment logically leads to prioritization, creating a cohesive progression.
+2. A 'Close Incident' activity must be followed by a 'Document Incident' activity at some point later, and conversely, a 'Document Incident' event can occur only if a 'Close Incident' event has occurred before it. This cause-effect link ensures that closing an incident is followed by documentation, establishing a causal dependency that completes the process.

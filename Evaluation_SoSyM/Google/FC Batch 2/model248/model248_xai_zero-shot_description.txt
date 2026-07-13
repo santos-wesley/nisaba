@@ -1,0 +1,53 @@
+**Multi-Perspective Declare Model: Chemical Process Workflow**
+
+This model describes a laboratory-scale chemical synthesis and product handling procedure with both control-flow constraints and data perspectives.
+
+### Activities
+The process consists of the following 10 activities:
+- **Prepare Solution**
+- **Heat Mixture**
+- **Add Catalyst**
+- **Monitor Reaction**
+- **Cool Solution**
+- **Filter Product**
+- **Dry Product**
+- **Analyze Sample**
+- **Store Product**
+- **Dispose Waste**
+
+### Data Perspective (Bindings)
+Each activity is associated with specific data attributes:
+
+- **Prepare Solution**: Concentration (0.1–10.0), Solvent Type (Water, Ethanol, Toluene)
+- **Heat Mixture**: Temperature (0.0–500.0 °C), Reaction Time (1–600)
+- **Add Catalyst**: Catalyst Type (Platinum, Palladium, Nickel, Iron)
+- **Monitor Reaction**: Reaction Status (Initiated, Ongoing, Completed, Failed), Reaction Time
+- **Analyze Sample**: Purity (0–100%), Yield (0.0–100.0%)
+- **Store Product**: Batch Number (1–1000)
+
+The remaining activities (Cool Solution, Filter Product, Dry Product, Dispose Waste) have no data attributes defined.
+
+### Control-Flow Constraints
+
+#### Core Declarative Constraints:
+- The process **must start** with **Prepare Solution**.
+- **Prepare Solution** must be directly followed by **Heat Mixture** (Succession).
+- **Heat Mixture** must eventually be followed by **Add Catalyst** (Response).
+- **Add Catalyst** and **Monitor Reaction** are mutually dependent — if one occurs, the other must also occur (Responded Existence).
+- **Monitor Reaction** must be immediately followed by **Cool Solution** (Chain Response).
+- **Cool Solution** must occur before **Filter Product** (Precedence).
+- **Filter Product** and **Dry Product** must occur strictly one after the other (Chain Succession).
+- **Dry Product** must eventually lead to **Analyze Sample** (Response).
+- After **Analyze Sample**, **Store Product** may occur, but not repeatedly in an alternating fashion (Alternate Response).
+- **Dispose Waste** cannot occur after **Store Product** (Precedence).
+
+#### Timed Response Constraints:
+- After **Add Catalyst**, **Monitor Reaction** must occur **within 10 minutes**.
+- After **Monitor Reaction**, **Cool Solution** must occur **within 5 minutes**.
+- After **Cool Solution**, **Filter Product** must occur **within 2 hours**.
+- After **Dry Product**, **Analyze Sample** must occur **within 1 day**.
+- After **Store Product**, **Dispose Waste** must occur **within 1 hour**.
+
+---
+
+This model represents a **partially ordered, data-aware chemical workflow** that enforces a logical sequence of laboratory steps while allowing some flexibility (e.g., when to dispose of waste), but with strict timing requirements between critical reaction and post-processing steps.

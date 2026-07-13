@@ -1,0 +1,41 @@
+activity Submit Request
+activity Review Request
+activity Approve Request
+activity Reject Request
+activity Setup Remote Access
+activity Notify Employee
+activity Update Payroll
+activity Monitor Performance
+activity Complete Survey
+activity Send Notification
+activity Revoke Access
+bind Submit Request: Request ID, Employee Name, Request Type
+bind Review Request: Request ID, Manager ID
+bind Approve Request: Request ID, Decision
+bind Reject Request: Request ID, Decision
+bind Setup Remote Access: Request ID, Access Status
+bind Notify Employee: Request ID, Notification Status
+bind Update Payroll: Request ID, Payroll Status
+bind Monitor Performance: Request ID, Performance Rating
+bind Complete Survey: Request ID, Survey Score
+bind Send Notification: Request ID, Notification Status
+bind Revoke Access: Request ID, Access Status
+Request ID: integer between 1 and 999999
+Employee Name: John Doe, Jane Smith, Alice Johnson
+Request Type: Remote Work, Flexible Hours
+Manager ID: integer between 1 and 9999
+Decision: Approved, Rejected
+Access Status: Setup, Revoked
+Payroll Status: Updated, Pending
+Notification Status: Sent, Pending
+Performance Rating: Excellent, Good, Average, Poor
+Survey Score: float between 0.0 and 10.0
+Precedence[Reject Request, Submit Request] | | |
+Chain Precedence[Review Request, Submit Request] | | |0,24,h
+Exclusive Choice[Approve Request, Reject Request] | | |
+Precedence[Setup Remote Access, Approve Request] | | |
+Chain Succession[Approve Request, Notify Employee] | | |
+Not Co-Existence[Setup Remote Access, Revoke Access] | | |
+Alternate Response[Monitor Performance, Update Payroll] | | |
+Response[Approve Request, Monitor Performance] | | |0,48,h
+Response[Complete Survey, Send Notification] | | |0,72,h

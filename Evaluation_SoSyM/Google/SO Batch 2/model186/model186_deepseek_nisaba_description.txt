@@ -1,0 +1,111 @@
+#MP-Declare Model
+## Activities
+- **Report Animal Abuse**: 
+- **Investigate Abuse Report**: 
+- **Rescue Abused Animal**: 
+- **Provide Veterinary Care**: 
+- **Find Foster Home**: 
+- **Conduct Adoption Screening**: 
+- **Finalize Animal Adoption**: 
+- **Monitor Animal Welfare**: 
+- **Educate Public Awareness**: 
+- **Process Donation**: 
+- **Train Staff Member**: 
+- **Inspect Shelter Facility**: 
+- **Approve Volunteer Application**: 
+- **Schedule Animal Checkup**: 
+- **Euthanize Animal**: 
+
+## Attributes
+- **Abuse Severity: Low, Medium, High**: 
+- **Animal Species: Dog, Cat, Other**: 
+- **Animal Age: integer between 0 and 25**: 
+- **Animal Health: Healthy, Injured, Sick**: 
+- **Donation Amount: float between 1.0 and 10000.0**: 
+- **Adoption Status: Pending, Approved, Rejected**: 
+- **Shelter Capacity: integer between 0 and 500**: 
+- **Volunteer Background Check: Pass, Fail**: 
+- **Checkup Frequency: integer between 7 and 365**: 
+
+## Binds
+- **Report Animal Abuse: Abuse Severity, Animal Species**: 
+- **Investigate Abuse Report: Abuse Severity**: 
+- **Rescue Abused Animal: Animal Health, Animal Age**: 
+- **Provide Veterinary Care: Animal Health**: 
+- **Find Foster Home: Shelter Capacity**: 
+- **Conduct Adoption Screening: Adoption Status**: 
+- **Finalize Animal Adoption: Adoption Status**: 
+- **Process Donation: Donation Amount**: 
+- **Approve Volunteer Application: Volunteer Background Check**: 
+- **Schedule Animal Checkup: Checkup Frequency**: 
+
+## Constraints
+- **Init[Report Animal Abuse] | |**: 
+- **Response[Report Animal Abuse, Investigate Abuse Report] | | |**: 
+- **Response[Investigate Abuse Report, Rescue Abused Animal] |A.Abuse Severity is High | |**: 
+- **Chain Response[Rescue Abused Animal, Provide Veterinary Care] | | |**: 
+- **Response[Rescue Abused Animal, Provide Veterinary Care] |A.Animal Health is Injured | |0,24,h**: 
+- **Succession[Provide Veterinary Care, Find Foster Home] | | |**: 
+- **Precedence[Finalize Animal Adoption, Conduct Adoption Screening] | | |**: 
+- **Response[Conduct Adoption Screening, Finalize Animal Adoption] |A.Adoption Status is Approved | |0,7,d**: 
+- **Succession[Finalize Animal Adoption, Monitor Animal Welfare] | | |**: 
+- **Existence[Educate Public Awareness] | |**: 
+- **Responded Existence[Report Animal Abuse, Process Donation] | | |**: 
+- **Not Response[Approve Volunteer Application, Approve Volunteer Application] |A.Volunteer Background Check is Fail | |**: 
+- **Response[Provide Veterinary Care, Schedule Animal Checkup] | | |0,30,d**: 
+- **Response[Inspect Shelter Facility, Inspect Shelter Facility] | | |0,90,d**: 
+- **Choice[Provide Veterinary Care, Euthanize Animal] |A.Animal Health is Sick | |**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the animal welfare process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Report Animal Abuse,' which involves documenting the incident with 'Abuse Severity' and 'Animal Species' attributes. This establishes the initial context for the entire process, setting the stage for subsequent actions based on the nature of the reported abuse.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Educate Public Awareness' activity must occur at least once in the process. This adds depth and context by ensuring that public education is a fundamental component of the process, reinforcing the organization's commitment to preventing future abuse through awareness.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraint**
+If the 'Report Animal Abuse' activity occurs, then the 'Process Donation' activity must also occur at some point in the process. This establishes a causal link where the act of reporting abuse necessitates the processing of donations, enhancing coherence by linking incident reporting to financial support for the shelter's operations.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Finalize Animal Adoption' is permitted to occur only if a 'Conduct Adoption Screening' activity has occurred before it. This sets up the initial context that adoption screening must precede finalization, guiding the logical sequence to ensure that all adoptions are properly vetted before completion.
+
+#### **Response Constraints**
+1. If the 'Report Animal Abuse' activity occurs, then the 'Investigate Abuse Report' activity must occur. This defines an ordered flow where reporting abuse is followed by an investigation, ensuring a cohesive temporal structure in the process.
+2. If the 'Investigate Abuse Report' activity occurs with the condition 'Abuse Severity is High,' then the 'Rescue Abused Animal' activity must occur. This ensures that high-severity abuse cases trigger an immediate rescue response, maintaining the process's integrity.
+3. If the 'Rescue Abused Animal' activity occurs with the condition 'Animal Health is Injured,' then the 'Provide Veterinary Care' activity must occur within 24 hours. This ensures that injured animals receive timely medical attention, reinforcing the process's focus on animal welfare.
+4. If the 'Conduct Adoption Screening' activity occurs with the condition 'Adoption Status is Approved,' then the 'Finalize Animal Adoption' activity must occur within 7 days. This ensures that approved adoptions are finalized promptly, maintaining the efficiency of the adoption process.
+
+#### **Succession Constraints**
+1. Whenever a 'Provide Veterinary Care' activity occurs, it must be followed by a 'Find Foster Home' activity. This establishes a causal link, ensuring that veterinary care logically leads to finding a foster home, creating a cohesive progression in the process.
+2. Whenever a 'Finalize Animal Adoption' activity occurs, it must be followed by a 'Monitor Animal Welfare' activity. This ensures that after an adoption is finalized, the animal's welfare is monitored, creating a seamless progression from adoption to ongoing care.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraint**
+If the 'Rescue Abused Animal' activity occurs, then the 'Provide Veterinary Care' activity must occur immediately after, with no intervening activities. This captures a direct cause-and-effect relationship where rescue is immediately followed by veterinary care, ensuring that rescued animals receive urgent medical attention without delay.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraint**
+If the 'Animal Health is Sick' condition is met, then either the 'Provide Veterinary Care' activity or the 'Euthanize Animal' activity must occur. This introduces alternative paths, allowing flexibility by permitting either treatment or euthanasia for sick animals, depending on the severity and prognosis.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Response Constraint**
+If the 'Approve Volunteer Application' activity occurs with the condition 'Volunteer Background Check is Fail,' then the 'Approve Volunteer Application' activity must not occur again. This prevents activities from following a specific sequence, ensuring that a failed background check cannot lead to a subsequent approval, maintaining the integrity of the volunteer screening process.
+
+### **Frequency Constraints (Timed)**
+
+#### **Response Constraints (Timed)**
+1. If the 'Provide Veterinary Care' activity occurs, then the 'Schedule Animal Checkup' activity must occur within 30 days. This ensures that animals receiving veterinary care are scheduled for follow-up checkups in a timely manner, maintaining ongoing health monitoring.
+2. If the 'Inspect Shelter Facility' activity occurs, then another 'Inspect Shelter Facility' activity must occur within 90 days. This ensures that shelter facilities are regularly inspected, maintaining compliance and safety standards through periodic evaluations.

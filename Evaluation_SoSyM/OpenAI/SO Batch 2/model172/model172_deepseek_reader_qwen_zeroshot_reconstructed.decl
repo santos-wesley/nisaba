@@ -1,0 +1,48 @@
+activity Monitor Store Entrance
+activity Deactivate Alarm
+activity Report Incident
+activity Conduct Emergency Drill
+activity Inspect Security Cameras
+activity Review Security Footage
+activity Alert Security Personnel
+activity Escort Suspect
+activity Verify Alarm Trigger
+activity Perform Security Audit
+activity Update Security Protocols
+activity Conduct Bag Check
+activity Handle Customer Complaint
+activity Check Inventory Discrepancies
+activity Train Security Staff
+bind Inspect Security Cameras: Camera ID
+bind Review Security Footage: Camera ID
+bind Alert Security Personnel: Personnel ID, Security Level
+bind Escort Suspect: Personnel ID
+bind Verify Alarm Trigger: Alarm Status
+bind Perform Security Audit: Audit Score
+bind Update Security Protocols: Audit Score
+bind Conduct Bag Check: Customer ID
+bind Handle Customer Complaint: Customer ID, Complaint Status
+bind Report Incident: Incident Type
+Camera ID: integer between 1 and 1000
+Personnel ID: integer between 1 and 500
+Security Level: Low, Medium, High
+Alarm Status: Triggered, False Alarm, Unverified
+Audit Score: float between 0.0 and 100.0
+Customer ID: integer between 1 and 10000
+Incident Type: Theft, Vandalism, Trespassing, Other
+Complaint Status: Resolved, Pending, Escalated
+Init[Monitor Store Entrance] | |
+End[Deactivate Alarm] | |
+Existence[Report Incident] | |
+Absence[Conduct Emergency Drill] | |
+Response[Inspect Security Cameras, Review Security Footage] |A.Camera ID >= 1 and A.Camera ID <= 1000 |A.Camera ID == T.Camera ID |
+Chain Response[Alert Security Personnel, Escort Suspect] |A.Personnel ID >= 1 and A.Personnel ID <= 500 and A.Security Level is High |A.Personnel ID == T.Personnel ID |0,5,m
+Chain Precedence[Alert Security Personnel, Verify Alarm Trigger] |A.Alarm Status is Triggered | |0,10,m
+Co-Existence[Perform Security Audit, Update Security Protocols] |A.Audit Score < 50 | |
+Succession[Conduct Bag Check, Handle Customer Complaint] |A.Customer ID >= 1 and A.Customer ID <= 10000 |A.Customer ID == T.Customer ID |0,1,m
+Not Chain Succession[Check Inventory Discrepancies, Report Incident] | | |
+Exclusive Choice[Train Security Staff, Conduct Emergency Drill] | | |
+Precedence[Report Incident, Escort Suspect] |A.Incident Type is Theft | |
+Not Precedence[Verify Alarm Trigger, Deactivate Alarm] | | |
+Not Responded Existence[Handle Customer Complaint, Conduct Bag Check] |A.Complaint Status is Resolved |A.Customer ID == T.Customer ID |
+Not Succession[Review Security Footage, Inspect Security Cameras] | | |

@@ -1,0 +1,52 @@
+activity Assess Client Needs
+activity Develop Service Plan
+activity Obtain Funding Approval
+activity Provide Counseling Services
+activity Coordinate Support Services
+activity Monitor Client Progress
+activity Adjust Service Plan
+activity Conduct Home Visit
+activity Close Client File
+activity Refer to Specialist
+bind Assess Client Needs: Client Risk Level
+bind Develop Service Plan: Service Plan Duration
+bind Obtain Funding Approval: Funding Amount Requested
+bind Provide Counseling Services: Counseling Type
+bind Coordinate Support Services: Support Service Type
+bind Monitor Client Progress: Progress Score
+bind Adjust Service Plan: Plan Adjustment Reason
+bind Conduct Home Visit: Home Visit Outcome
+bind Close Client File: File Closure Reason
+bind Refer to Specialist: Specialist Type
+Client Risk Level: Low, Medium, High
+Service Plan Duration: integer between 1 and 12
+Funding Amount Requested: float between 100.0 and 10000.0
+Counseling Type: Individual, Group, Family
+Support Service Type: Housing, Job Training, Childcare
+Progress Score: integer between 0 and 100
+Plan Adjustment Reason: Progress, Setback, New Needs
+Home Visit Outcome: Positive, Neutral, Negative
+File Closure Reason: Goals Met, Client Moved, Services Declined
+Specialist Type: Psychiatrist, Addiction Counselor, Legal Aid
+Init[Assess Client Needs] | |
+End[Close Client File] | |
+Existence[Monitor Client Progress] | |
+Absence3[Refer to Specialist] | |
+Exactly[Develop Service Plan] | |
+Responded Existence[Adjust Service Plan, Monitor Client Progress] | | |
+Precedence[Develop Service Plan, Assess Client Needs] | |T.Client Risk Level in (Low, Medium, High) |
+Precedence[Provide Counseling Services, Develop Service Plan] | | |
+Precedence[Coordinate Support Services, Obtain Funding Approval] | |T.Funding Amount Requested >= 100.0 AND T.Funding Amount Requested <= 10000.0 |
+Response[Assess Client Needs, Conduct Home Visit] |A.Client Risk Level is High |T.Home Visit Outcome in (Positive, Neutral, Negative) |
+Response[Develop Service Plan, Obtain Funding Approval] | |T.Funding Amount Requested >= 100.0 AND T.Funding Amount Requested <= 10000.0 |
+Succession[Monitor Client Progress, Adjust Service Plan] | |T.Plan Adjustment Reason in (Progress, Setback, New Needs) |
+Alternate Response[Refer to Specialist, Monitor Client Progress] |A.Specialist Type in (Psychiatrist, Addiction Counselor, Legal Aid) | |
+Chain Response[Conduct Home Visit, Adjust Service Plan] |A.Home Visit Outcome is Negative |T.Plan Adjustment Reason is Setback |
+Chain Precedence[Close Client File, Monitor Client Progress] | | |
+Co-Existence[Coordinate Support Services, Obtain Funding Approval] | | |
+Choice[Provide Counseling Services, Refer to Specialist] | | |
+Not Co-Existence[Close Client File, Adjust Service Plan] |A.File Closure Reason is Goals Met | |
+Not Responded Existence[Close Client File, Refer to Specialist] |A.File Closure Reason is Client Moved | |
+Not Precedence[Close Client File, Develop Service Plan] | | |
+Not Response[Close Client File, Assess Client Needs] | | |
+Not Chain Succession[Close Client File, Assess Client Needs] | | |

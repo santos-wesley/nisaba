@@ -1,0 +1,35 @@
+# Process Description: Employee Benefit Request Management System
+
+This model describes a business process for managing employee benefit requests, appeals, and related administrative activities. The process involves the following activities: **Submit Benefit Request**, **Review Benefit Request**, **Approve Benefit Request**, **Reject Benefit Request**, **Notify Employee**, **Process Payment**, **Update Employee Record**, **Audit Benefit Process**, **Submit Appeal**, **Review Appeal**, **Approve Appeal**, **Reject Appeal**, **Notify Appeal Decision**, **Conduct Benefit Orientation**, and **Evaluate Benefit Utilization**.
+
+## Data Objects and Attributes
+
+Each activity carries specific data attributes:
+- **Submit Benefit Request** captures a *Request ID* (1–10000), *Benefit Type* (Health Insurance, Retirement Plan, Paid Leave, or Education Assistance), and *Employee ID* (1–5000).
+- **Review Benefit Request**, **Approve Benefit Request**, and **Reject Benefit Request** all track *Request ID* and *Request Status* (Pending, Approved, or Rejected).
+- **Notify Employee** records *Employee ID* and *Notification Type* (Approval, Rejection, or Appeal Decision).
+- **Process Payment** logs *Request ID* and *Benefit Amount* (a float between 100.0 and 10000.0).
+- **Update Employee Record** notes *Employee ID* and *Benefit Type*.
+- **Audit Benefit Process** uses an *Audit ID* (1–1000).
+- **Submit Appeal**, **Review Appeal**, **Approve Appeal**, and **Reject Appeal** track *Request ID* and *Appeal Status* (Pending, Approved, or Rejected).
+- **Notify Appeal Decision** records *Employee ID* and *Notification Type*.
+- **Conduct Benefit Orientation** uses an *Orientation ID* (1–500).
+- **Evaluate Benefit Utilization** tracks a *Utilization Rate* (a float between 0.0 and 100.0).
+
+## Control-Flow and Behavioral Rules
+
+**Process boundaries:** The process must always **start** with a *Submit Benefit Request* activity and must always **end** with a *Notify Employee* activity.
+
+**Mandatory activities:** The activities *Review Benefit Request*, *Conduct Benefit Orientation*, and *Evaluate Benefit Utilization* must each occur at least once during the process, though their exact position is unconstrained beyond that requirement.
+
+**Approval/Rejection notification flow:** Whenever a benefit request is approved (with *Request Status* = Approved), a corresponding *Notify Employee* activity must eventually follow within 2 time units (for the same employee), notifying them of the approval. Similarly, if a benefit request is rejected, a *Notify Employee* activity must follow within 2 time units for the same employee, informing them of the rejection.
+
+**Review precedence:** Before a benefit request can be approved, it must first have been reviewed (via *Review Benefit Request*) for the same *Request ID*. The same precedence rule applies to rejections — a request must be reviewed before it can be rejected.
+
+**Payment and record updates after approval:** After a benefit request is approved, a *Process Payment* activity must occur within 7 time units for the same *Request ID*. Additionally, after approval, the employee's *Update Employee Record* activity must occur within 5 time units for the same employee.
+
+**Auditing after payment:** Following any *Process Payment* activity, an *Audit Benefit Process* activity must occur within 30 time units, linking the processed request's ID to the corresponding audit's ID.
+
+**Appeal handling:** If an employee submits an appeal with a *Pending* status, a *Review Appeal* activity must follow within 5 time units for the same *Request ID*. When an appeal is approved, a *Notify Appeal Decision* activity must follow within 2 time units for the same employee. Likewise, when an appeal is rejected, a *Notify Appeal Decision* activity must occur within 2 time units, notifying the same employee of the rejection.
+
+This model ensures that benefit requests are properly reviewed before decisions are made, that employees are promptly notified of outcomes, that approved benefits are paid and recorded, that payments are audited, and that appeals follow a structured review and notification cycle.

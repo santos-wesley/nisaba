@@ -1,0 +1,18 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This process model describes the lifecycle of a flexible work arrangement request, such as Remote Work, Flextime, Compressed Workweek, or Job Sharing. Each arrangement is uniquely identified by an **Application ID** (an integer between 1 and 1000), and its progress is tracked through a series of statuses: *Submitted, Reviewed, Approved, Rejected, Implemented,* and *Terminated*.
+
+The process begins with the **Submit Application** activity, which must be the first step in any case. After submission, the application must eventually be **Reviewed**. However, the model explicitly forbids the **Review Application** activity from occurring at the same time as the **Submit Application** activity—they cannot coexist in the same execution state.
+
+Following the review, the process branches into a choice: the application must be either **Approved** or **Rejected**. If it is approved, the system must then **Implement Arrangement**, which records the agreed **Hours Per Week** (a float between 10.0 and 40.0). Once implemented, the arrangement enters a monitoring phase: **Monitor Arrangement** must occur after implementation, and it can be followed by **Adjust Arrangement** (which may update the hours per week).
+
+The model also defines conditional termination rules based on the **Application Status**:
+
+- If the application is **Rejected**, the **Terminate Arrangement** activity must **not** occur. This means a rejected application is simply closed without a formal termination step.
+- If the application is **Approved**, the **Terminate Arrangement** activity **must** eventually occur, signaling that the approved arrangement will be ended at some point.
+
+Finally, there is a **Precedence** constraint: the **Approve Application** activity can only happen after the **Review Application** activity has already taken place.
+
+In summary, the model enforces a structured workflow where applications are submitted, reviewed, and either approved (leading to implementation, monitoring, adjustment, and eventual termination) or rejected (with no further termination step). All activities are bound to specific data attributes that must be consistent throughout the process.

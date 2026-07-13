@@ -1,0 +1,35 @@
+activity Gather Intelligence
+activity Analyze Data
+activity Assess Credibility
+activity Identify Threats
+activity Develop Strategies
+activity Implement Countermeasures
+activity Monitor Activity
+activity Report Findings
+activity Review Intelligence
+activity Disseminate Information
+bind Gather Intelligence: Source Type, Number of Sources
+bind Analyze Data: Analysis Technique, Confidence Score
+bind Identify Threats: Threat Level, Risk Factor
+bind Implement Countermeasures: Cost of Countermeasures, Days to Respond
+bind Report Findings: Report Status, Geographic Region
+Source Type: Human, Signal, Open Source, Cyber
+Threat Level: integer between 1 and 10
+Confidence Score: float between 0.0 and 1.0
+Report Status: Draft, Review, Final, Disseminated
+Number of Sources: integer between 1 and 50
+Risk Factor: float between 0.0 and 100.0
+Analysis Technique: Link Analysis, Statistical Analysis, Pattern Recognition
+Days to Respond: integer between 1 and 365
+Cost of Countermeasures: float between 100.0 and 1000000.0
+Geographic Region: North America, Europe, Asia, Africa, South America
+Init[Gather Intelligence] | |
+Response[Gather Intelligence, Analyze Data] | | |
+Succession[Analyze Data, Identify Threats] | | |
+Precedence[Develop Strategies, Identify Threats] | | |
+Chain Precedence[Implement Countermeasures, Develop Strategies] | | |
+Chain Response[Implement Countermeasures, Monitor Activity] | | |
+Alternate Response[Monitor Activity, Report Findings] | | |
+Alternate Precedence[Disseminate Information, Review Intelligence] | | |
+End[Disseminate Information] | |
+Co-Existence[Gather Intelligence, Analyze Data] | | |

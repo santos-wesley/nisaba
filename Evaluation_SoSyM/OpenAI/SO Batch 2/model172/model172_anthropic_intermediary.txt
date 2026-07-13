@@ -1,0 +1,32 @@
+## Activities
+- **Monitor Store Entrance**: The 'Monitor Store Entrance' activity represents the surveillance of the store's entrance to detect and observe incoming and outgoing individuals.
+- **Inspect Security Cameras**: The 'Inspect Security Cameras' activity involves checking the functionality and coverage of security cameras installed in the premises.
+- **Conduct Bag Check**: The 'Conduct Bag Check' activity involves inspecting customer bags to ensure security and prevent theft.
+- **Alert Security Personnel**: The 'Alert Security Personnel' activity involves notifying security staff about a potential security concern requiring their attention.
+- **Review Security Footage**: The 'Review Security Footage' activity involves examining recorded video footage to identify security incidents or irregularities.
+- **Report Incident**: The 'Report Incident' activity involves documenting and formally reporting a security-related incident.
+- **Escort Suspect**: The 'Escort Suspect' activity involves accompanying a suspected individual to ensure security and control during an incident.
+- **Verify Alarm Trigger**: The 'Verify Alarm Trigger' activity involves confirming whether an alarm activation is valid or a false alert.
+- **Perform Security Audit**: The 'Perform Security Audit' activity involves systematically reviewing security measures and procedures to assess their effectiveness.
+- **Update Security Protocols**: The 'Update Security Protocols' activity involves revising and improving existing security procedures and guidelines.
+- **Train Security Staff**: The 'Train Security Staff' activity involves providing training and instructions to security personnel to enhance their skills and readiness.
+- **Handle Customer Complaint**: The 'Handle Customer Complaint' activity involves addressing and resolving complaints raised by customers.
+- **Check Inventory Discrepancies**: The 'Check Inventory Discrepancies' activity involves identifying and investigating differences between recorded and actual inventory.
+- **Conduct Emergency Drill**: The 'Conduct Emergency Drill' activity involves performing a practice exercise to prepare staff for emergency situations.
+- **Deactivate Alarm**: The 'Deactivate Alarm' activity involves turning off an active or triggered alarm system.
+
+## Attributes
+- **Camera ID: Integer between 1 and 1000**: The attribute 'Camera ID: Integer between 1 and 1000' represents the unique identification number of a security camera.
+- **Incident Severity: Float between 0.1 and 10.0**: The attribute 'Incident Severity: Float between 0.1 and 10.0' represents the severity level assigned to a reported security incident.
+- **Alarm Status: Active, Inactive, Triggered**: The attribute 'Alarm Status: Active, Inactive, Triggered' specifies the current state of the alarm system.
+- **Security Level: Low, Medium, High**: The attribute 'Security Level: Low, Medium, High' specifies the degree of security risk or priority associated with a situation.
+- **Personnel ID: Integer between 1 and 500**: The attribute 'Personnel ID: Integer between 1 and 500' represents the unique identification number of a security personnel member.
+- **Incident Type: Theft, Vandalism, Assault**: The attribute 'Incident Type: Theft, Vandalism, Assault' specifies the category of the security incident that occurred.
+- **Customer ID: Integer between 1 and 10000**: The attribute 'Customer ID: Integer between 1 and 10000' represents the unique identification number of a customer.
+- **Audit Score: Float between 0.0 and 100.0**: The attribute 'Audit Score: Float between 0.0 and 100.0' represents the numerical score assigned during a security audit reflecting compliance and effectiveness.
+- **Complaint Status: Resolved, Unresolved**: The attribute 'Complaint Status: Resolved, Unresolved' specifies whether a customer complaint has been addressed and closed or remains open.
+
+## Binds
+
+## Constraints
+

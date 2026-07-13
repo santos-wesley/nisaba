@@ -1,0 +1,43 @@
+This Multi-Perspective Declare model outlines the lifecycle of a theatrical production, capturing the sequence of activities from writing the script to archiving the final production, while also tracking specific data attributes and constraints for each step. 
+
+Here is a natural language description of the model:
+
+### **Activities and Data Bindings**
+The model consists of 14 activities involved in staging a play. Several of these activities are bound to specific data attributes that have defined constraints:
+*   **Write Play Script**: Bound to the **Play Genre**, which must be a Comedy, Drama, Musical, or Tragedy.
+*   **Cast Actors**: Bound to the **Actor Count**, an integer between 2 and 20.
+*   **Design Set**: Bound to **Set Complexity**, rated on an integer scale from 1 to 10.
+*   **Build Set**: Bound to a **Budget Amount**, a float between $1,000.00 and $50,000.00.
+*   **Design Costumes**: Bound to the **Costume Count**, an integer between 5 and 50.
+*   **Rehearse Play**: Bound to **Rehearsal Hours**, an integer between 10 and 100.
+*   **Promote Play**: Bound to **Promotion Spend**, a float between $100.00 and $10,000.00.
+*   **Sell Tickets**: Bound to **Ticket Price**, a float between $5.00 and $100.00.
+*   **Perform Play**: Bound to **Performance Quality**, rated as Excellent, Good, Average, or Poor.
+*   **Pay Royalties**: Bound to a **Royalty Percentage**, an integer between 5% and 20%.
+
+### **Standard Declare Constraints**
+*   **Initiation**: The process must begin with the **Write Play Script** activity.
+*   **Existence**: The **Perform Play** activity must occur at least once during the process.
+*   **Precedence**: The **Design Set** activity must occur before the **Build Set** activity can take place.
+*   **Co-Existence**: If either **Promote Play** or **Sell Tickets** occurs, the other must also occur at some point in the process.
+*   **Not Response**: If **Review Performance** occurs, it does not trigger or require **Pay Royalties** to happen afterward.
+
+### **Temporal and Data-Driven Constraints**
+The model features several Response constraints, dictating that if the first event occurs, the second event must eventually follow. Many of these are bound by strict time limits (using a time-based metric of days 'd' or hours 'h') and specific data conditions:
+
+**Standard Response Constraints (No Time Limits):**
+*   If **Cast Actors** occurs, **Rehearse Play** must eventually follow.
+*   If **Write Play Script** occurs, **Sell Tickets** must eventually follow. 
+
+**Time-Bound Response Constraints:**
+*   If **Promote Play** occurs, **Sell Tickets** must follow within **2 days**.
+*   If **Perform Play** occurs, **Pay Royalties** must follow within **7 days**.
+*   If **Perform Play** occurs, **Strike Set** must follow within **1 day**.
+*   If **Perform Play** occurs, **Store Costumes** must follow within **1 day**.
+*   If **Write Play Script** occurs, **Archive Script** must follow within **30 days**.
+*   If **Cast Actors** occurs, **Rehearse Play** must follow within **1 hour**.
+*   If **Design Costumes** occurs, **Sew Costumes** must follow within **24 hours**.
+*   If **Design Set** occurs, **Build Set** must follow within **7 days**.
+
+**Conditional Response Constraint:**
+*   If **Write Play Script** occurs, **Sell Tickets** must eventually follow, *but only if* the Play Genre is a **Comedy** *and* the Ticket Price is **$50.00 or less**. (If the play is not a comedy, or if tickets are priced above $50, this specific response requirement is not enforced).

@@ -1,0 +1,37 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a **remote work / flexible hours request process** with performance monitoring and access management.
+
+### Process Flow
+
+The process begins when an **employee submits a request** (either for Remote Work or Flexible Hours). Once submitted, the responsible **manager must review the request** within **24 hours**. After reviewing, the manager must choose **exactly one** of the following actions: either **approve** or **reject** the request.
+
+- If the request is **approved**, the system must **set up remote access** for the employee. After access is granted, the manager is required to **notify the employee** about the outcome (this notification must occur immediately after approval, as a chained succession).
+- Following approval and notification, the manager must **update the payroll** system. This update must be performed in response to monitoring the employee’s performance, and the performance must be monitored **within 48 hours** after approval.
+- The employee is also required to **complete a survey** (e.g., satisfaction or onboarding survey), which must trigger a **notification** to the employee or manager within **72 hours**.
+
+### Constraints and Rules
+
+- A request **cannot be rejected** if it has not been submitted (Absence constraint).
+- Every **Review Request** must be preceded by a **Submit Request** (Chain Precedence).
+- **Setup Remote Access** can only occur **after** the request has been approved (Precedence).
+- **Revoke Access** and **Setup Remote Access** **cannot both occur** in the same process instance (Not Co-Existence) — once access is set up, it cannot be revoked in the same case.
+- **Monitor Performance** and **Update Payroll** follow an **Alternate Response** pattern: after monitoring performance, payroll must eventually be updated, but not repeatedly for the same monitoring event.
+- **Complete Survey** must be followed by a notification within 72 hours (Chain Response).
+
+### Data Perspective
+
+The model tracks the following data attributes:
+
+- **Request ID** (unique integer identifier)
+- **Employee Name** (John Doe, Jane Smith, or Alice Johnson)
+- **Request Type** (Remote Work or Flexible Hours)
+- **Manager ID** (integer)
+- **Decision** (Approved or Rejected)
+- **Access Status** (Setup or Revoked)
+- **Payroll Status** (Updated or Pending)
+- **Notification Status** (Sent or Pending)
+- **Performance Rating** (Excellent, Good, Average, Poor)
+- **Survey Score** (decimal value between 0.0 and 10.0)
+
+This model ensures a structured, time-aware, and data-rich workflow for handling employee requests while enforcing separation of duties, temporal deadlines, and mutual exclusion between access setup and revocation.

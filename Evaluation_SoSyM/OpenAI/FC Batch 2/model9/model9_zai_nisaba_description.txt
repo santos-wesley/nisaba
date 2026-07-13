@@ -1,0 +1,126 @@
+#MP-Declare Model
+## Activities
+- **Extract DNA**: The 'Extract DNA' activity represents the process of isolating DNA from a biological sample.
+- **Quantify DNA**: The 'Quantify DNA' activity involves measuring the concentration of extracted DNA to ensure sufficient quantity for downstream applications.
+- **PCR Amplify**: The 'PCR Amplify' activity represents the amplification of specific DNA regions using the Polymerase Chain Reaction technique.
+- **Gel Electrophoresis**: The 'Gel Electrophoresis' activity involves separating DNA fragments by size using an electrophoretic gel matrix.
+- **Purify PCR Product**: The 'Purify PCR Product' activity represents the purification of amplified DNA to remove residual primers, nucleotides, and enzymes.
+- **Sanger Sequence**: The 'Sanger Sequence' activity involves determining the nucleotide sequence of a DNA fragment using Sanger sequencing methodology.
+- **Analyze Sequences**: The 'Analyze Sequences' activity represents the bioinformatic analysis and interpretation of obtained DNA sequence data.
+- **Clone DNA**: The 'Clone DNA' activity involves inserting a DNA fragment into a vector for propagation and further study.
+- **Transform Cells**: The 'Transform Cells' activity represents the introduction of recombinant DNA into competent host cells.
+- **Culture Cells**: The 'Culture Cells' activity involves growing and maintaining transformed cells under controlled conditions.
+- **Harvest Cells**: The 'Harvest Cells' activity represents the collection of cultured cells for downstream protein or DNA extraction.
+- **Extract Protein**: The 'Extract Protein' activity involves isolating proteins from harvested cells using appropriate lysis and extraction methods.
+- **Quantify Protein**: The 'Quantify Protein' activity represents the measurement of total protein concentration in an extracted sample.
+- **Western Blot**: The 'Western Blot' activity involves detecting specific proteins within a sample using antibody-based immunodetection.
+- **Analyze Protein Expression**: The 'Analyze Protein Expression' activity represents the interpretation and analysis of protein expression levels based on experimental results.
+
+## Attributes
+- **Sample ID: integer between 1 and 99999**: The attribute 'Sample ID: integer between 1 and 99999' represents the unique identifier assigned to each biological sample used throughout the workflow.
+- **DNA Concentration: float between 0.1 and 1000.0**: The attribute 'DNA Concentration: float between 0.1 and 1000.0' specifies the measured concentration of DNA in a sample, expressed in nanograms per microliter.
+- **PCR Primers: Primer Set A, Primer Set B, Primer Set C**: The attribute 'PCR Primers: Primer Set A, Primer Set B, Primer Set C' specifies the set of oligonucleotide primers used for PCR amplification of the target DNA region.
+- **Gel Type: Agarose, Polyacrylamide**: The attribute 'Gel Type: Agarose, Polyacrylamide' specifies the type of gel matrix used for electrophoretic separation of DNA fragments.
+- **Sequencing Run ID: integer between 1 and 9999**: The attribute 'Sequencing Run ID: integer between 1 and 9999' represents the unique identifier assigned to each Sanger sequencing run.
+- **Sequence Quality Score: float between 0.0 and 100.0**: The attribute 'Sequence Quality Score: float between 0.0 and 100.0' specifies the quality metric assigned to a sequencing result, indicating the reliability of the obtained sequence data.
+- **Vector Type: Plasmid A, Plasmid B, Plasmid C**: The attribute 'Vector Type: Plasmid A, Plasmid B, Plasmid C' specifies the type of cloning vector used for DNA insertion and propagation.
+- **Colony Count: integer between 0 and 1000**: The attribute 'Colony Count: integer between 0 and 1000' represents the number of bacterial colonies grown on a plate following cell transformation.
+- **Protein Concentration: float between 0.01 and 500.0**: The attribute 'Protein Concentration: float between 0.01 and 500.0' specifies the measured concentration of protein in a sample, expressed in milligrams per milliliter.
+- **Antibody Type: Primary Antibody A, Primary Antibody B, Primary Antibody C**: The attribute 'Antibody Type: Primary Antibody A, Primary Antibody B, Primary Antibody C' specifies the primary antibody used for immunodetection in Western blot analysis.
+
+## Binds
+- **Extract DNA: Sample ID**: The bind 'Extract DNA: Sample ID' links the 'Extract DNA' activity with the attribute 'Sample ID', ensuring that each DNA extraction is associated with a unique sample identifier.
+- **Quantify DNA: Sample ID, DNA Concentration**: The bind 'Quantify DNA: Sample ID, DNA Concentration' links the 'Quantify DNA' activity with the attributes 'Sample ID' and 'DNA Concentration', ensuring that DNA quantification results are tied to a specific sample and its measured concentration.
+- **PCR Amplify: Sample ID, PCR Primers**: The bind 'PCR Amplify: Sample ID, PCR Primers' links the 'PCR Amplify' activity with the attributes 'Sample ID' and 'PCR Primers', ensuring that each amplification is associated with a specific sample and the primer set used.
+- **Gel Electrophoresis: Sample ID, Gel Type**: The bind 'Gel Electrophoresis: Sample ID, Gel Type' links the 'Gel Electrophoresis' activity with the attributes 'Sample ID' and 'Gel Type', ensuring that each electrophoresis run is associated with a specific sample and the type of gel used.
+- **Purify PCR Product: Sample ID**: The bind 'Purify PCR Product: Sample ID' links the 'Purify PCR Product' activity with the attribute 'Sample ID', ensuring that each purification is associated with a specific sample.
+- **Sanger Sequence: Sample ID, Sequencing Run ID**: The bind 'Sanger Sequence: Sample ID, Sequencing Run ID' links the 'Sanger Sequence' activity with the attributes 'Sample ID' and 'Sequencing Run ID', ensuring that each sequencing event is associated with a specific sample and a unique run identifier.
+- **Analyze Sequences: Sample ID, Sequence Quality Score**: The bind 'Analyze Sequences: Sample ID, Sequence Quality Score' links the 'Analyze Sequences' activity with the attributes 'Sample ID' and 'Sequence Quality Score', ensuring that sequence analysis is associated with a specific sample and its quality assessment.
+- **Clone DNA: Sample ID, Vector Type**: The bind 'Clone DNA: Sample ID, Vector Type' links the 'Clone DNA' activity with the attributes 'Sample ID' and 'Vector Type', ensuring that each cloning event is associated with a specific sample and the vector used.
+- **Transform Cells: Sample ID**: The bind 'Transform Cells: Sample ID' links the 'Transform Cells' activity with the attribute 'Sample ID', ensuring that each transformation is associated with a specific sample.
+- **Culture Cells: Sample ID**: The bind 'Culture Cells: Sample ID' links the 'Culture Cells' activity with the attribute 'Sample ID', ensuring that each cell culture is associated with a specific sample.
+- **Harvest Cells: Sample ID, Colony Count**: The bind 'Harvest Cells: Sample ID, Colony Count' links the 'Harvest Cells' activity with the attributes 'Sample ID' and 'Colony Count', ensuring that each cell harvest is associated with a specific sample and the number of colonies collected.
+- **Extract Protein: Sample ID, Protein Concentration**: The bind 'Extract Protein: Sample ID, Protein Concentration' links the 'Extract Protein' activity with the attributes 'Sample ID' and 'Protein Concentration', ensuring that each protein extraction is associated with a specific sample and its measured protein concentration.
+- **Quantify Protein: Sample ID, Protein Concentration**: The bind 'Quantify Protein: Sample ID, Protein Concentration' links the 'Quantify Protein' activity with the attributes 'Sample ID' and 'Protein Concentration', ensuring that protein quantification is associated with a specific sample and its measured concentration.
+- **Western Blot: Sample ID, Antibody Type**: The bind 'Western Blot: Sample ID, Antibody Type' links the 'Western Blot' activity with the attributes 'Sample ID' and 'Antibody Type', ensuring that each Western blot is associated with a specific sample and the primary antibody used for detection.
+- **Analyze Protein Expression: Sample ID**: The bind 'Analyze Protein Expression: Sample ID' links the 'Analyze Protein Expression' activity with the attribute 'Sample ID', ensuring that protein expression analysis is associated with a specific sample.
+
+## Constraints
+- **Init[Extract DNA] | |**: The 'Extract DNA' activity must be the first activity to occur in the process.
+- **Existence[Quantify DNA] | |**: The 'Quantify DNA' activity must occur at least once in the process.
+- **Absence[Extract Protein] | |**: The 'Extract Protein' activity must not occur in the process.
+- **End[Analyze Protein Expression] | |**: The 'Analyze Protein Expression' activity must be the last activity to occur in the process.
+- **Precedence[Purify PCR Product, Gel Electrophoresis] | | |**: The 'Gel Electrophoresis' activity is permitted to occur only if a 'Purify PCR Product' activity has occurred before it within the same process instance.
+- **Response[Sanger Sequence, Analyze Sequences] | | |**: If a 'Sanger Sequence' activity occurs, then an 'Analyze Sequences' activity must eventually occur after the 'Sanger Sequence' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Sanger Sequence' events can be pending at the same time, and a single 'Analyze Sequences' can fulfill the obligation for all preceding 'Sanger Sequence' events. If 'Sanger Sequence' does not occur, the constraint imposes no obligation on the occurrence of 'Analyze Sequences'.
+- **Succession[Transform Cells, Culture Cells] | | |**: A 'Transform Cells' activity must be followed by a 'Culture Cells' activity at some point later in the same process instance. Conversely, a 'Culture Cells' event can occur only if a 'Transform Cells' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Transform Cells' imposes obligations for future 'Culture Cells', and 'Culture Cells' cannot occur without prior 'Transform Cells'. Multiple 'Transform Cells' and 'Culture Cells' are allowed, with each 'Transform Cells' eventually leading to a 'Culture Cells' and each 'Culture Cells' being justified by a preceding 'Transform Cells'.
+- **Chain Precedence[Quantify Protein, Extract Protein] | | |**: The 'Extract Protein' activity can occur only if it is immediately preceded by a 'Quantify Protein' activity, with no other activities occurring in between.
+- **Chain Response[Western Blot, Analyze Protein Expression] | | |**: Whenever a 'Western Blot' activity occurs, it must be immediately followed by an 'Analyze Protein Expression' activity in the next event position, with no other events in between. The 'Analyze Protein Expression' activity is allowed to happen elsewhere in the process but not between a 'Western Blot' and its corresponding 'Analyze Protein Expression'.
+- **Co-Existence[PCR Amplify, Gel Electrophoresis] | | |**: If 'PCR Amplify' activity occurs, then 'Gel Electrophoresis' must also occur in the same process instance, and vice versa. This mutual obligation ensures that neither event can occur without the other. The events can occur multiple times and in any order relative to each other. If neither event occurs, the constraint is still considered satisfied.
+- **Alternate Precedence[Quantify DNA, PCR Amplify] | | |0,30,m**: The 'PCR Amplify' activity can occur only if it was immediately preceded by a 'Quantify DNA' activity, and no other 'Quantify DNA' event is allowed between the 'Quantify DNA' and the 'PCR Amplify'. Additionally, the time between the 'Quantify DNA' and the 'PCR Amplify' events must be between 0 and 30 minutes.
+- **Alternate Response[Culture Cells, Harvest Cells] | | |0,1,h**: If a 'Culture Cells' activity occurs, then a 'Harvest Cells' activity must occur after that 'Culture Cells' event and before any subsequent 'Culture Cells' occurs, with no other occurrence of 'Culture Cells' allowed between a 'Culture Cells' and its corresponding 'Harvest Cells'. Additionally, the time between the 'Culture Cells' and the 'Harvest Cells' events must be between 0 and 1 hour.
+- **Chain Succession[PCR Amplify, Gel Electrophoresis] | | |0,15,m**: Whenever a 'PCR Amplify' activity occurs, it must be immediately followed by a 'Gel Electrophoresis' activity, with no other events in between. Conversely, whenever a 'Gel Electrophoresis' event occurs, it must be immediately preceded by a 'PCR Amplify' event, with no other events in between. Additionally, the time between the 'PCR Amplify' and the 'Gel Electrophoresis' events must be between 0 and 15 minutes.
+- **Not Co-Existence[Extract Protein, Quantify Protein] | | |**: The 'Extract Protein' activity and the 'Quantify Protein' activity cannot both occur within the same process instance. This means that if 'Extract Protein' occurs one or more times, 'Quantify Protein' must not occur at all in that process instance, and vice versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between 'Extract Protein' and 'Quantify Protein', allowing for different process variants based on which event (if any) occurs.
+- **Exclusive Choice[Clone DNA, Transform Cells] | | |**: Exactly one of the activities 'Clone DNA' or 'Transform Cells' must occur in the process instance. This means that the process is compliant if only 'Clone DNA' occurs without any occurrence of 'Transform Cells', or only 'Transform Cells' occurs without any occurrence of 'Clone DNA'. The process is non-compliant if both 'Clone DNA' and 'Transform Cells' occur, or if neither occurs. The constraint enforces a mutual exclusivity and a mandatory occurrence of one of the specified activities.
+
+
+## Interleaved Description
+The MP-Declare process model for the molecular biology workflow is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Extract DNA,' which involves isolating DNA from a biological sample. This activity is associated with the 'Sample ID' attribute, ensuring that each DNA extraction is linked to a unique sample identifier, establishing the initial context for the entire workflow.
+
+#### **End Constraints**
+The process concludes with the activity 'Analyze Protein Expression,' which represents the interpretation and analysis of protein expression levels based on experimental results. This activity must be the last to occur in the process and is associated with the 'Sample ID' attribute, ensuring that the final analysis is tied to a specific sample, thereby closing the model coherently.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Quantify DNA' activity must occur at least once in the process. This activity involves measuring the concentration of extracted DNA to ensure sufficient quantity for downstream applications and is associated with the 'Sample ID' and 'DNA Concentration' attributes. This requirement adds depth and context to the process by guaranteeing that DNA quantification is performed, ensuring reliability in subsequent steps.
+
+#### **Absence Constraints**
+The 'Extract Protein' activity must not occur in the process. This exclusion highlights a critical restriction, reinforcing process integrity by specifying that the isolation of proteins from harvested cells is not permissible within this particular workflow variant.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+The 'Gel Electrophoresis' activity is permitted to occur only if a 'Purify PCR Product' activity has occurred before it within the same process instance. The 'Purify PCR Product' activity, which represents the purification of amplified DNA to remove residual primers, nucleotides, and enzymes, is associated with the 'Sample ID' attribute. The 'Gel Electrophoresis' activity, which involves separating DNA fragments by size using an electrophoretic gel matrix, is associated with the 'Sample ID' and 'Gel Type' attributes. This precedence sets up an initial context where purification must logically precede electrophoretic separation, guiding the sequence within the model.
+
+#### **Response Constraints**
+If a 'Sanger Sequence' activity occurs, then an 'Analyze Sequences' activity must eventually occur after the 'Sanger Sequence' event at some point in the same process instance. The 'Sanger Sequence' activity, which involves determining the nucleotide sequence of a DNA fragment using Sanger sequencing methodology, is associated with the 'Sample ID' and 'Sequencing Run ID' attributes. The 'Analyze Sequences' activity, which represents the bioinformatic analysis and interpretation of obtained DNA sequence data, is associated with the 'Sample ID' and 'Sequence Quality Score' attributes. This response defines an ordered flow where sequence analysis follows sequencing, ensuring a cohesive temporal structure. Multiple 'Sanger Sequence' events can be pending simultaneously, and a single 'Analyze Sequences' can fulfill the obligation for all preceding sequencing events.
+
+#### **Succession Constraints**
+A 'Transform Cells' activity must be followed by a 'Culture Cells' activity at some point later in the same process instance, and conversely, a 'Culture Cells' event can occur only if a 'Transform Cells' event has occurred before it. The 'Transform Cells' activity, which represents the introduction of recombinant DNA into competent host cells, is associated with the 'Sample ID' attribute. The 'Culture Cells' activity, which involves growing and maintaining transformed cells under controlled conditions, is also associated with the 'Sample ID' attribute. This bidirectional and ordered dependency establishes a causal link, ensuring that cell transformation logically leads to cell culture, creating a cohesive progression within the model. Multiple 'Transform Cells' and 'Culture Cells' events are allowed, with each transformation eventually leading to a culture and each culture being justified by a preceding transformation.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraints**
+The 'PCR Amplify' activity can occur only if it was immediately preceded by a 'Quantify DNA' activity, and no other 'Quantify DNA' event is allowed between the 'Quantify DNA' and the 'PCR Amplify.' Additionally, the time between the 'Quantify DNA' and the 'PCR Amplify' events must be between 0 and 30 minutes. The 'PCR Amplify' activity, which represents the amplification of specific DNA regions using the Polymerase Chain Reaction technique, is associated with the 'Sample ID' and 'PCR Primers' attributes. This condition-consequence relationship ensures order consistency, requiring each amplification to be preceded by a unique quantification without overlap, promoting balanced process flow within the specified time window.
+
+#### **Alternate Response Constraints**
+If a 'Culture Cells' activity occurs, then a 'Harvest Cells' activity must occur after that 'Culture Cells' event and before any subsequent 'Culture Cells' occurs, with no other occurrence of 'Culture Cells' allowed between a 'Culture Cells' and its corresponding 'Harvest Cells.' Additionally, the time between the 'Culture Cells' and the 'Harvest Cells' events must be between 0 and 1 hour. The 'Harvest Cells' activity, which represents the collection of cultured cells for downstream protein or DNA extraction, is associated with the 'Sample ID' and 'Colony Count' attributes. This condition-consequence relationship promotes balance by ensuring each cell culture is followed by a unique harvest, with no intervening cultures, supporting clear one-to-one activity pairing within the specified time frame.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+The 'Extract Protein' activity can occur only if it is immediately preceded by a 'Quantify Protein' activity, with no other activities occurring in between. The 'Quantify Protein' activity, which represents the measurement of total protein concentration in an extracted sample, is associated with the 'Sample ID' and 'Protein Concentration' attributes. This sequence establishes an immediate dependency, ensuring that protein extraction directly follows protein quantification, making the sequence explicit and precise.
+
+#### **Chain Response Constraints**
+Whenever a 'Western Blot' activity occurs, it must be immediately followed by an 'Analyze Protein Expression' activity in the next event position, with no other events in between. The 'Western Blot' activity, which involves detecting specific proteins within a sample using antibody-based immunodetection, is associated with the 'Sample ID' and 'Antibody Type' attributes. The 'Analyze Protein Expression' activity is associated with the 'Sample ID' attribute. This cause-effect relationship captures immediate succession, ensuring a direct link where each Western blot is immediately followed by protein expression analysis. The 'Analyze Protein Expression' activity is allowed to happen elsewhere in the process but not between a 'Western Blot' and its corresponding 'Analyze Protein Expression.'
+
+#### **Chain Succession Constraints**
+Whenever a 'PCR Amplify' activity occurs, it must be immediately followed by a 'Gel Electrophoresis' activity, with no other events in between. Conversely, whenever a 'Gel Electrophoresis' event occurs, it must be immediately preceded by a 'PCR Amplify' event, with no other events in between. Additionally, the time between the 'PCR Amplify' and the 'Gel Electrophoresis' events must be between 0 and 15 minutes. The 'PCR Amplify' activity is associated with the 'Sample ID' and 'PCR Primers' attributes, while the 'Gel Electrophoresis' activity is associated with the 'Sample ID' and 'Gel Type' attributes. This tightly coupled sequence enforces a direct cause-and-effect relationship, ensuring each amplification is directly succeeded by electrophoretic separation with no intervening activities, within the specified time window.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+If the 'PCR Amplify' activity occurs, then the 'Gel Electrophoresis' activity must also occur in the same process instance, and vice versa. This mutual obligation ensures that neither event can occur without the other, establishing a conjunction between the two activities. The events can occur multiple times and in any order relative to each other, though the Chain Succession constraint further refines their relationship by requiring immediate succession. If neither event occurs, the constraint is still considered satisfied.
+
+### **Exclusivity Constraints**
+
+#### **Not Co-Existence Constraints**
+The 'Extract Protein' activity and the 'Quantify Protein' activity cannot both occur within the same process instance. This means that if 'Extract Protein' occurs one or more times, 'Quantify Protein' must not occur at all in that process instance, and vice versa. It is acceptable for neither event to occur. This contrast enforces a mutual exclusion between the two activities, maintaining process integrity by preventing conflicting events and allowing for different process variants based on which event, if any, occurs.
+
+#### **Exclusive Choice Constraints**
+Exactly one of the activities 'Clone DNA' or 'Transform Cells' must occur in the process instance. The 'Clone DNA' activity, which involves inserting a DNA fragment into a vector for propagation and further study, is associated with the 'Sample ID' and 'Vector Type' attributes. The 'Transform Cells' activity is associated with the 'Sample ID' attribute. This alternative enforces mutually exclusive pathways, ensuring that the process is compliant if only 'Clone DNA' occurs without any occurrence of 'Transform Cells,' or only 'Transform Cells' occurs without any occurrence of 'Clone DNA.' The process is non-compliant if both activities occur or if neither occurs, thereby enforcing a mandatory and exclusive choice between the two specified activities.

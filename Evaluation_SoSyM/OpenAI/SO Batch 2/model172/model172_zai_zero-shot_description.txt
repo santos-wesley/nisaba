@@ -1,0 +1,43 @@
+This document describes a Multi-Perspective Declare model for retail security management. The model outlines a set of security-related activities, the data attributes associated with them, and the temporal and data-driven constraints governing their execution.
+
+### **Activities and Data Bindings**
+The model consists of 14 distinct security activities. Several of these activities are bound to specific data attributes, which are evaluated during process execution:
+
+*   **Inspect Security Cameras** is bound to **Camera ID** (an integer from 1 to 1000).
+*   **Conduct Bag Check** is bound to **Customer ID** (an integer from 1 to 10000).
+*   **Alert Security Personnel** is bound to **Personnel ID** (an integer from 1 to 500) and **Security Level** (Low, Medium, or High).
+*   **Review Security Footage** is bound to **Camera ID** (an integer from 1 to 1000).
+*   **Report Incident** is bound to **Incident Severity** (a float from 0.1 to 10.0) and **Incident Type** (Theft, Vandalism, or Assault).
+*   **Verify Alarm Trigger** is bound to **Alarm Status** (Active, Inactive, or Triggered).
+*   **Perform Security Audit** is bound to **Audit Score** (a float from 0.0 to 100.0).
+*   **Update Security Protocols** has no data bindings.
+*   **Handle Customer Complaint** is bound to **Customer ID** (an integer from 1 to 10000) and **Complaint Status** (Resolved or Unresolved).
+
+### **Process Execution Constraints**
+The execution flow of these activities is governed by a set of Declare constraints, incorporating data conditions and temporal boundaries.
+
+#### **Initial and Terminal States**
+*   The process must begin with the **Monitor Store Entrance** activity.
+*   The process must end with the **Deactivate Alarm** activity.
+
+#### **Existence and Choice Constraints**
+*   **Report Incident** must be executed at least once during the entire process.
+*   **Conduct Emergency Drill** is strictly forbidden and cannot be executed at all.
+*   **Train Security Staff** and **Conduct Emergency Drill** are mutually exclusive; if one is executed, the other cannot be executed. Since Conduct Emergency Drill is forbidden, this constraint effectively means Train Security Staff can be executed, but not in conjunction with the drill.
+
+#### **Response and Succession Constraints**
+*   **Inspect Security Cameras** must be followed by **Review Security Footage**. This response must occur for the same **Camera ID**.
+*   **Alert Security Personnel** must be immediately followed by **Escort Suspect** (Chain Response). This constraint is only active if the alert occurs at a **High Security Level**, and the suspect must be escorted by the same **Personnel ID** that was alerted. This must occur within a time frame of 0 to 5 minutes.
+*   **Verify Alarm Trigger** must be immediately preceded by **Alert Security Personnel** (Chain Precedence). This constraint is only active if the alarm status is **Triggered**, and the alert must be sent to the same **Personnel ID** that verifies the alarm. This must occur within a time frame of 0 to 10 minutes.
+*   **Conduct Bag Check** must be followed by **Handle Customer Complaint** (Succession). The complaint must be associated with the same **Customer ID** as the bag check. This must occur within a time frame of 0 to 1 hour.
+*   **Escort Suspect** must be preceded by **Report Incident** (Precedence). This constraint is only active if the **Incident Type** is **Theft**.
+
+#### **Co-Existence and Negative Constraints**
+*   **Perform Security Audit** and **Update Security Protocols** must co-exist. If the **Audit Score** is less than 50, both activities must be executed.
+*   **Check Inventory Discrepancies** cannot be immediately followed by **Report Incident** (Not Chain Succession).
+*   **Deactivate Alarm** cannot be preceded by **Verify Alarm Trigger** (Not Precedence). This means the alarm cannot be verified before it is deactivated.
+*   If a **Handle Customer Complaint** activity occurs with a status of **Resolved**, it cannot have been preceded by a **Conduct Bag Check** for the same **Customer ID** (Not Responded Existence).
+*   **Review Security Footage** cannot be followed by **Inspect Security Cameras** (Not Succession). Once footage is reviewed, cameras cannot be inspected again.
+
+### **Summary**
+This model represents a structured security protocol for a retail environment. It begins with monitoring the store entrance and ends with deactivating an alarm. The process ensures that incidents are reported, alarms are verified and handled by the appropriate personnel within strict timeframes, and customer complaints are linked to prior bag checks. The model also enforces data consistency, such as ensuring camera footage is reviewed for the same camera that was inspected, and security personnel escort suspects matching their ID. Emergency drills are strictly prohibited in this process.

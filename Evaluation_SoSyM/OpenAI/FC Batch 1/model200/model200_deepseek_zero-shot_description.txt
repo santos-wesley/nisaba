@@ -1,0 +1,13 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+The process begins with the **Identify Threat** activity, which is mandatory and marks the start of the workflow. Each identified threat is assigned a unique **Threat ID** (an integer from 1 to 999,999) and classified by a **Threat Type** (Phishing, Malware, DDoS, or Ransomware).
+
+Once a threat is identified, the system must **Collect Data** related to that threat within 10 time units (with a medium confidence of 0.10). The collected data is associated with a **Data Source ID** (an integer from 1 to 9,999). Following data collection, the **Analyze Data** activity must occur within 30 time units (medium confidence of 0.30). This analysis produces an **Analysis Result**, which can be "Confirmed", "False Positive", or "Inconclusive".
+
+If the analysis result is **Confirmed**, the model requires a **Report Threat** activity to follow immediately (within 1 time unit, high confidence of 0.1). The report is identified by a **Report ID** (integer from 1 to 999,999). After reporting, the **Mitigate Threat** activity must be performed within 2 time units (high confidence of 0.2). Mitigation is measured by a **Mitigation Success Rate** (a float from 0.0 to 100.0).
+
+Following mitigation, the process splits into two parallel paths:
+1. **Monitor Systems** must be performed, with a **Monitoring Status** of either "Ongoing" or "Completed". This activity marks the **end** of the process.
+2. If the **Mitigation Success Rate** exceeds 90.0, the system must also perform **Update Threat Intelligence**, which is associated with an **Update ID** (integer from 1 to 999,999) and the original **Threat ID**.
+
+In summary, the model enforces a strict sequential chain from identification through data collection, analysis, reporting, and mitigation, with a conditional branch to update threat intelligence only when mitigation is highly successful, and a mandatory monitoring step to close the process.

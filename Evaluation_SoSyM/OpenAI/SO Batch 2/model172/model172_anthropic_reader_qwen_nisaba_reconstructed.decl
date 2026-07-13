@@ -1,0 +1,59 @@
+activity Monitor Store Entrance
+activity Inspect Security Cameras
+activity Conduct Bag Check
+activity Alert Security Personnel
+activity Review Security Footage
+activity Report Incident
+activity Escort Suspect
+activity Verify Alarm Trigger
+activity Perform Security Audit
+activity Update Security Protocols
+activity Train Security Staff
+activity Handle Customer Complaint
+activity Check Inventory Discrepancies
+activity Conduct Emergency Drill
+activity Deactivate Alarm
+bind Inspect Security Cameras: Camera ID
+bind Report Incident: Incident Severity, Incident Type
+bind Verify Alarm Trigger: Alarm Status
+bind Alert Security Personnel: Personnel ID, Security Level
+bind Perform Security Audit: Audit Score
+bind Handle Customer Complaint: Customer ID, Complaint Status
+Camera ID: integer between 1 and 1000
+Incident Severity: float between 0.1 and 10.0
+Alarm Status: Active, Inactive, Triggered
+Security Level: Low, Medium, High
+Personnel ID: integer between 1 and 500
+Incident Type: Theft, Vandalism, Assault
+Customer ID: integer between 1 and 10000
+Audit Score: float between 0.0 and 100.0
+Complaint Status: Resolved, Unresolved
+Init[Monitor Store Entrance] | |
+End[Perform Security Audit] | |
+Existence[Inspect Security Cameras] | |
+Existence[Train Security Staff] | |
+Absence2[Conduct Emergency Drill] | |
+Exactly[Report Incident] |A.Incident Severity > 5.0 |
+Responded Existence[Verify Alarm Trigger, Alert Security Personnel] |A.Alarm Status is Triggered | |
+Precedence[Escort Suspect, Alert Security Personnel] | | |
+Precedence[Deactivate Alarm, Verify Alarm Trigger] |T.Alarm Status is Triggered | |
+Response[Verify Alarm Trigger, Report Incident] |A.Alarm Status is Triggered | |
+Response[Conduct Bag Check, Check Inventory Discrepancies] | | |
+Succession[Report Incident, Alert Security Personnel] |A.Incident Severity > 7.0 | |
+Alternate Precedence[Review Security Footage, Inspect Security Cameras] | | |
+Alternate Response[Handle Customer Complaint, Update Security Protocols] | | |
+Alternate Succession[Alert Security Personnel, Escort Suspect] | | |
+Chain Precedence[Deactivate Alarm, Verify Alarm Trigger] | | |
+Chain Response[Alert Security Personnel, Escort Suspect] |A.Security Level is High | |
+Chain Succession[Conduct Bag Check, Alert Security Personnel] |A.Incident Type is Theft | |
+Co-Existence[Report Incident, Review Security Footage] | | |
+Choice[Verify Alarm Trigger, Inspect Security Cameras] | | |
+Exclusive Choice[Deactivate Alarm, Escort Suspect] |A.Alarm Status is Triggered | |
+Not Co-Existence[Deactivate Alarm, Escort Suspect] |A.Alarm Status is Triggered | |
+Not Responded Existence[Conduct Emergency Drill, Report Incident] | | |
+Not Precedence[Update Security Protocols, Perform Security Audit] | | |
+Not Response[Handle Customer Complaint, Deactivate Alarm] | | |
+Not Succession[Train Security Staff, Conduct Emergency Drill] | | |
+Not Chain Precedence[Handle Customer Complaint, Escort Suspect] | | |
+Not Chain Response[Perform Security Audit, Conduct Bag Check] | | |
+Not Chain Succession[Conduct Emergency Drill, Alert Security Personnel] | | |

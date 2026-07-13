@@ -1,0 +1,46 @@
+activity Analyze International Market
+activity Identify Business Opportunities
+activity Conduct Feasibility Study
+activity Develop Business Plan
+activity Acquire Necessary Permits
+activity Set Up International Office
+activity Hire Local Staff
+activity Negotiate with Local Vendors
+activity Initiate Marketing Campaign
+activity Monitor Market Response
+activity Adjust Strategy
+activity Assess Performance
+activity Manage International Logistics
+activity Report to Headquarters
+bind Analyze International Market: Market Size, Market Attractiveness
+bind Conduct Feasibility Study: Feasibility Result, Investment Amount
+bind Acquire Necessary Permits: Permit Status
+bind Hire Local Staff: Staff Level
+bind Initiate Marketing Campaign: Marketing Budget
+bind Monitor Market Response: Market Response
+bind Adjust Strategy: Adjustment Decision
+bind Assess Performance: Performance Rating
+Market Size: integer between 1000 and 1000000
+Market Attractiveness: High, Medium, Low
+Feasibility Result: Positive, Negative
+Investment Amount: float between 10000.0 and 1000000.0
+Permit Status: Approved, Pending, Rejected
+Staff Level: High, Medium, Low
+Marketing Budget: float between 5000.0 and 500000.0
+Market Response: Positive, Neutral, Negative
+Adjustment Decision: Yes, No
+Performance Rating: Excellent, Good, Fair, Poor
+Init[Analyze International Market] | |
+Alternate Precedence[Identify Business Opportunities, Analyze International Market] | | |
+Precedence[Conduct Feasibility Study, Identify Business Opportunities] | | |
+Precedence[Develop Business Plan, Conduct Feasibility Study] |A.Feasibility Result is Positive | |
+Precedence[Acquire Necessary Permits, Develop Business Plan] | | |
+Chain Response[Acquire Necessary Permits, Set Up International Office] |A.Permit Status is Approved | |0,5,d
+Precedence[Negotiate with Local Vendors, Hire Local Staff] | | |
+Existence[Initiate Marketing Campaign] | |
+Precedence[Monitor Market Response, Initiate Marketing Campaign] | | |
+Response[Monitor Market Response, Adjust Strategy] |A.Market Response is Negative | |0,7,d
+Precedence[Assess Performance, Adjust Strategy] | | |
+Existence[Manage International Logistics] | |
+Chain Response[Assess Performance, Report to Headquarters] | | |0,48,h
+Exactly[Report to Headquarters] | |

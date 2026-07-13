@@ -1,0 +1,46 @@
+# Disaster Response Process Model Description
+
+This Multi-Perspective Declare model describes a disaster management and emergency response process, capturing the coordination between monitoring, warning, response, and recovery activities. The model integrates control-flow, data, and temporal perspectives.
+
+## Activities and Data Perspective
+
+The process consists of ten key activities, each associated with specific data attributes that are recorded when the activity occurs:
+
+- **Monitor Seismic Activity** captures the **Seismic Magnitude** (an integer from 0 to 10, representing earthquake intensity on a standard scale)
+- **Assess Disaster Risk** records a **Risk Score** (a float from 0.0 to 100.0, quantifying the severity of the potential disaster)
+- **Issue Early Warning** logs a **Warning Level** (categorical: Low, Medium, High, or Critical)
+- **Activate Emergency Response** tracks a **Response Status** (categorical: Initiated, Ongoing, or Completed)
+- **Deploy Rescue Teams** counts the **Teams Deployed** (integer, 0 to 50)
+- **Provide Medical Assistance** records the **Injured Count** (integer, 0 to 10,000)
+- **Distribute Relief Supplies** measures **Supplies Distributed** (integer, 0 to 20,000 units)
+- **Evacuate Affected Population** counts **People Evacuated** (integer, 0 to 50,000)
+- **Establish Temporary Shelters** tracks **Shelters Established** (integer, 0 to 20)
+- **Conduct Damage Assessment** estimates the **Damage Estimate** (float, 0.0 to 1,000,000,000.0, representing financial cost)
+
+## Control-Flow and Temporal Perspective
+
+**Process Initialization:**
+The process must begin with **Monitor Seismic Activity**, establishing this as the mandatory starting point of the disaster response workflow.
+
+**Monitoring and Warning Chain:**
+- Whenever **Monitor Seismic Activity** occurs, it must eventually be followed by **Issue Early Warning**, ensuring that seismic observations lead to appropriate alerts.
+- **Issue Early Warning** must be *immediately* followed by **Activate Emergency Response** (a direct chain succession), indicating that once a warning is issued, emergency response activation happens without delay or intervening activities.
+
+**Emergency Response Sequence:**
+- **Activate Emergency Response** must eventually be followed by **Deploy Rescue Teams**, linking activation to actual field deployment.
+- **Deploy Rescue Teams** must eventually be followed by **Provide Medical Assistance**, ensuring rescue efforts lead to medical care.
+- **Provide Medical Assistance** must eventually be followed by **Distribute Relief Supplies**, connecting medical response to logistical support.
+
+**Time-Constrained Relief Distribution:**
+- There is a stricter temporal constraint reinforcing that **Provide Medical Assistance** must be followed by **Distribute Relief Supplies** within a **24-hour window**, emphasizing the urgency of supply distribution after medical care begins.
+
+**Risk-Based Conditional Responses:**
+- If **Assess Disaster Risk** occurs with a **Risk Score greater than 70**, then **Evacuate Affected Population** must eventually follow, triggering large-scale evacuation only for high-risk scenarios.
+- Similarly, if **Assess Disaster Risk** occurs with a **Risk Score greater than 70**, then **Establish Temporary Shelters** must eventually follow, ensuring shelter provisions are activated for severe disasters.
+
+**Damage Assessment and Recovery:**
+- **Conduct Damage Assessment** must be followed in strict succession by **Distribute Relief Supplies** — meaning damage assessment must occur, and importantly, **Distribute Relief Supplies** can only occur after **Conduct Damage Assessment** has taken place (establishing a mandatory precedence and response relationship between these two activities).
+
+## Summary
+
+This model represents a disaster response protocol that begins with seismic monitoring, escalates through risk assessment and warning issuance, triggers immediate emergency activation, and branches into rescue, medical, evacuation, and shelter operations based on risk severity—with strict timing requirements ensuring relief supplies reach affected populations within 24 hours of medical assistance, and formal damage assessment preceding supply distribution.

@@ -1,0 +1,43 @@
+activity Identify Donor
+activity Contact Donor
+activity Request Donation
+activity Receive Donation
+activity Send Thank You Note
+activity Promote Event
+activity Host Event
+activity Report Results
+activity Collect Feedback
+activity Analyze Feedback
+activity Identify Improvement Areas
+activity Implement Improvements
+activity Archive Records
+activity Evaluate Campaign
+bind Identify Donor: Donor ID
+bind Request Donation: Donor ID, Donation Amount
+bind Receive Donation: Donor ID, Donation Type, Donation Amount
+bind Send Thank You Note: Donor ID, Donation Amount
+bind Promote Event: Event Type
+bind Host Event: Event Type
+bind Collect Feedback: Feedback Type
+bind Analyze Feedback: Feedback Type
+Donor ID: integer between 1 and 10000
+Donation Type: Cash, Check, Online Transfer
+Donation Amount: float between 10.0 and 100000.0
+Event Type: Gala, Auction, Online Campaign
+Feedback Type: Positive, Neutral, Negative
+Init[Identify Donor] | |
+End[Evaluate Campaign] | |
+Precedence[Contact Donor, Identify Donor] | | |
+Response[Contact Donor, Request Donation] | | |
+Response[Request Donation, Receive Donation] | | |0,24,d
+Response[Receive Donation, Send Thank You Note] |A.Donation Amount > 100 | |0,48,h
+Exactly[Promote Event] | |
+Precedence[Host Event, Promote Event] | | |
+Response[Host Event, Report Results] | | |
+Existence3[Collect Feedback] | |
+Response[Collect Feedback, Analyze Feedback] | | |
+Response[Analyze Feedback, Identify Improvement Areas] | | |
+Response[Identify Improvement Areas, Implement Improvements] | | |0,7,d
+Precedence[Archive Records, Report Results] | | |
+Precedence[Evaluate Campaign, Archive Records] | | |
+Responded Existence[Host Event, Collect Feedback] | | |

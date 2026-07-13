@@ -1,0 +1,54 @@
+# Multi-Perspective Declare Model Description
+
+## Process Overview
+This model describes a **molecular biology laboratory workflow** encompassing DNA extraction, PCR amplification, sequencing, cloning, cell culture, and protein analysis. Each activity is associated with specific data attributes that must be recorded when the activity is executed.
+
+## Activities and Data Attributes
+
+The process consists of 15 laboratory activities, each requiring a **Sample ID** (an integer between 1 and 99999) to be recorded, along with additional context-specific data:
+
+- **Extract DNA**: records Sample ID
+- **Quantify DNA**: records Sample ID and DNA Concentration (0.1–1000.0)
+- **PCR Amplify**: records Sample ID and PCR Primers (Set A, B, or C)
+- **Gel Electrophoresis**: records Sample ID and Gel Type (Agarose or Polyacrylamide)
+- **Purify PCR Product**: records Sample ID
+- **Sanger Sequence**: records Sample ID and Sequencing Run ID (1–9999)
+- **Analyze Sequences**: records Sample ID and Sequence Quality Score (0.0–100.0)
+- **Clone DNA**: records Sample ID and Vector Type (Plasmid A, B, or C)
+- **Transform Cells**: records Sample ID
+- **Culture Cells**: records Sample ID
+- **Harvest Cells**: records Sample ID and Colony Count (0–1000)
+- **Extract Protein**: records Sample ID and Protein Concentration (0.01–500.0)
+- **Quantify Protein**: records Sample ID and Protein Concentration (0.01–500.0)
+- **Western Blot**: records Sample ID and Antibody Type (Primary Antibody A, B, or C)
+- **Analyze Protein Expression**: records Sample ID
+
+## Control-Flow Rules
+
+### Process Boundaries
+- The process **must always start** with **Extract DNA**.
+- The process **must always end** with **Analyze Protein Expression**.
+
+### Mandatory and Forbidden Activities
+- **Quantify DNA** must occur **at least once** during the process.
+- **Extract Protein** must **never occur** in this process (despite the data binding suggesting a protein pathway, this activity is excluded).
+
+### Ordering Constraints
+- **Purify PCR Product** must happen before **Gel Electrophoresis**, if the latter occurs.
+- Whenever **Sanger Sequence** is performed, it must eventually be followed by **Analyze Sequences**.
+- **Transform Cells** and **Culture Cells** must **always occur together** and in the correct order — if one happens, the other must too, with Transform Cells preceding Culture Cells.
+- **Quantify Protein** must **immediately precede** **Extract Protein** with no other activities in between (chain precedence) — though this is inherently unsatisfiable since Extract Protein is forbidden.
+- Whenever **Western Blot** occurs, it must be **immediately followed** by **Analyze Protein Expression** (no intervening activities).
+
+### Co-occurrence Constraints
+- **PCR Amplify** and **Gel Electrophoresis** must **co-occur**: if one is performed, the other must be performed as well (in either order).
+- **Extract Protein** and **Quantify Protein** must **never co-occur** in the same process instance.
+- **Clone DNA** and **Transform Cells** are **mutually exclusive** — exactly one of them may occur, but not both.
+
+### Alternating Patterns with Time Constraints
+- **Quantify DNA** and **PCR Amplify** must **alternate**, with Quantify DNA preceding each occurrence of PCR Amplify, and this alternation must happen within a maximum time window of **30 minutes**.
+- Each occurrence of **Culture Cells** must be followed by **Harvest Cells** before another Culture Cells can occur, and this response must happen within **1 hour**.
+- **PCR Amplify** must be **immediately and chronologically followed** by **Gel Electrophoresis** (chain succession), and this transition must occur within **15 minutes**.
+
+## Summary
+This model enforces a structured laboratory pipeline that begins with DNA extraction and concludes with protein expression analysis, incorporating strict timing constraints between amplification and gel steps, mandatory quantification checkpoints, and mutually exclusive pathways for cloning versus transformation — while notably excluding the protein extraction step from the otherwise protein-focused final stages.

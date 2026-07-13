@@ -1,0 +1,45 @@
+# Business Continuity Planning Process Description
+
+This process model describes a business continuity management workflow, including data attributes tied to each activity and the constraints governing their execution order and timing.
+
+## Activities and Their Data Attributes
+
+The process consists of ten activities, each associated with specific data attributes recorded upon execution:
+
+- **Identify Risks** – records a **Risk Level** (integer, 1–10)
+- **Develop Continuity Plan** – records **Stakeholder Engagement** (High, Moderate, or Low)
+- **Test Continuity Plan** – records a **Test Outcome** (Pass or Fail)
+- **Review Test Results** – records **Plan Effectiveness** (float, 0.0–100.0)
+- **Implement Improvements** – records an **Improvement Status** (Completed or Pending)
+- **Communicate Plan** – records a **Communication Method** (Email, Meeting, or Newsletter)
+- **Monitor Risks** – records a **Monitoring Frequency** (integer, 1–30, representing days or similar unit)
+- **Conduct Training** – records **Training Hours** (integer, 1–40)
+- **Activate Continuity Plan** – records **Incident Severity** (Low, Medium, or High)
+- **Evaluate Incident Response** – records a **Response Time** (float, 0.0–24.0 hours)
+
+## Process Flow and Boundaries
+
+- The process must **begin with Identify Risks** (the only valid starting activity).
+- The process must **end with Evaluate Incident Response** (the only valid ending activity).
+
+## Behavioral and Data-Driven Constraints
+
+1. **Alternating Testing and Review**: Whenever a Test Continuity Plan occurs with a **Test Outcome of Pass**, it must alternate strictly with Review Test Results — each test must be followed by a review before another test occurs, and vice versa, without gaps (0 to 2 days between them).
+
+2. **Improvement Follow-Up**: If Review Test Results occurs with **Plan Effectiveness below 80.0**, then an Implement Improvements activity must eventually follow (within 0 to 48 hours), and when it occurs, it must have an **Improvement Status of Pending**.
+
+3. **Plan Communication Requirement**: If Develop Continuity Plan occurs with **High Stakeholder Engagement**, then a Communicate Plan activity must follow within 5 to 13 minutes, using either **Email or Meeting** as the communication method.
+
+4. **Training After Meetings**: If a Communicate Plan activity occurs using the **Meeting** method, then a Conduct Training activity must occur in response (before or after, at least once).
+
+5. **Risk Identification Before Activation**: Whenever Activate Continuity Plan occurs with **Medium or High Incident Severity**, it must be preceded by an Identify Risks activity.
+
+6. **Monitoring and Risk Correlation**: If Monitor Risks occurs with a **Monitoring Frequency of 7 or less** (frequent monitoring), then Identify Risks must also occur in the same process instance (co-existence), and vice versa.
+
+7. **High-Severity Incident Handling**: If Activate Continuity Plan occurs with **High Incident Severity**, it must not be immediately and exclusively followed by Evaluate Incident Response in direct succession — some other activity must intervene, and if Evaluate Incident Response does eventually occur, it should happen within 10 to 15 seconds of a different triggering condition.
+
+8. **Mandatory Extensive Training**: At least one occurrence of Conduct Training must have **Training Hours of 8 or more**, ensuring adequate training depth occurs at least once during the process.
+
+## Summary
+
+This model enforces a disciplined business continuity lifecycle: risks must be identified and monitored, plans developed with stakeholder input, tested and reviewed with improvement loops for low-effectiveness outcomes, communicated appropriately (triggering training when meetings are used), and activated only after proper risk assessment—with special handling and timing constraints for high-severity incidents and their subsequent evaluation.

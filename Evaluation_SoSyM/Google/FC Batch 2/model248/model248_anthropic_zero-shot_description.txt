@@ -1,0 +1,50 @@
+# Process Description: Chemical Synthesis and Product Handling
+
+This process model describes a chemical synthesis workflow, from solution preparation through final product storage and waste disposal, governed by both control-flow rules and data constraints.
+
+## Activities and Data Attributes
+
+The process consists of ten activities, several of which are associated with specific data attributes that must be recorded when the activity executes:
+
+- **Prepare Solution**: requires specifying the **Concentration** (a value between 0.1 and 10.0) and the **Solvent Type** (Water, Ethanol, or Toluene).
+- **Heat Mixture**: requires specifying the **Temperature** (between 0.0 and 500.0 degrees) and the **Reaction Time** (an integer between 1 and 600, presumably minutes).
+- **Add Catalyst**: requires specifying the **Catalyst Type** (Platinum, Palladium, Nickel, or Iron).
+- **Monitor Reaction**: requires recording the **Reaction Status** (Initiated, Ongoing, Completed, or Failed) and the **Reaction Time**.
+- **Analyze Sample**: requires recording the **Purity** (an integer percentage between 0 and 100) and the **Yield** (a percentage between 0.0 and 100.0).
+- **Store Product**: requires recording a **Batch Number** (an integer between 1 and 1000).
+
+The activities **Cool Solution**, **Filter Product**, **Dry Product**, and **Dispose Waste** have no associated data attributes.
+
+## Control-Flow Behavior
+
+**Process initiation**: The process must always begin with **Prepare Solution**.
+
+**Mandatory sequencing**: Immediately after preparing the solution, **Heat Mixture** must occur next (strict succession — each must eventually lead to the other in this order).
+
+**Catalyst addition**: Whenever **Heat Mixture** occurs, **Add Catalyst** must eventually follow at some later point.
+
+**Monitoring requirement**: If **Add Catalyst** occurs, then **Monitor Reaction** must also occur at some point in the process (in either order relative to each other).
+
+**Cooling trigger**: Every time **Monitor Reaction** occurs, it must be immediately and directly followed by **Cool Solution**, with no other activities occurring in between.
+
+**Filtering constraint**: **Filter Product** can only occur if **Cool Solution** has already occurred beforehand.
+
+**Drying sequence**: **Filter Product** and **Dry Product** must occur together in strict immediate succession — whenever one occurs, the other must occur adjacently in the correct order (Filter Product directly followed by Dry Product, and this pairing is mandatory both ways).
+
+**Analysis requirement**: Whenever **Dry Product** occurs, **Analyze Sample** must eventually occur afterward.
+
+**Alternating storage**: **Analyze Sample** and **Store Product** must alternate strictly — after each occurrence of Analyze Sample, Store Product must occur before Analyze Sample can happen again, and vice versa.
+
+**Waste disposal precondition**: **Store Product** can only occur if **Dispose Waste** has already occurred beforehand.
+
+## Timing Constraints
+
+Several response relationships carry specific time restrictions, indicating that the responding activity must occur within a bounded time window after its trigger:
+
+- After **Add Catalyst**, **Monitor Reaction** must occur within **10 minutes**.
+- After **Monitor Reaction**, **Cool Solution** must occur within **5 minutes**.
+- After **Cool Solution**, **Filter Product** must occur within **2 hours**.
+- After **Dry Product**, **Analyze Sample** must occur within **1 day**.
+- After **Store Product**, **Dispose Waste** must occur within **1 hour**.
+
+These timing rules ensure the reaction progresses efficiently between critical processing stages, minimizing degradation or safety risks during the chemical synthesis workflow.

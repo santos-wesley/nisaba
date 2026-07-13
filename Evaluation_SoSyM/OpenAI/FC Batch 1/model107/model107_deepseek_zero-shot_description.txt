@@ -1,0 +1,15 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+The process begins with the **Define Requirements** activity, which serves as the starting point. Once requirements are defined, the team must **Develop an Initial Prototype**. This prototype is then subjected to **Test Prototype**, where the outcome is recorded as either "Pass" or "Fail" (the **Test Result** attribute).
+
+After testing, the process moves to **Gather Feedback**, capturing both the **Stakeholder Name** (e.g., John Doe, Jane Smith, or Alice Johnson) and a **Feedback Rating** (an integer from 1 to 10). This feedback is then **Analyzed**, again recording the stakeholder and rating. Based on the analysis, the prototype is **Revised**, with each revision tracked by a **Revision Version** (an integer between 1 and 20) and an **Improvement Cost** (a float between 100.0 and 10,000.0).
+
+Following revision, the prototype undergoes **Final Testing**, which also records a **Test Result** (Pass or Fail). Notably, the model requires that **Test Prototype** occurs at least twice overall (the **Existence2** constraint), ensuring multiple testing rounds before finalization.
+
+The process concludes with a strict sequence: **Present Prototype** must be immediately followed by **Approve Prototype** (the **Chain Response** constraint), and **Approve Prototype** marks the end of the process. All other steps follow a standard **Response** pattern, meaning each activity must eventually lead to the next in the specified order, but other activities may occur in between.
+
+--- 
+
+This description captures both the control-flow (ordering) and the data-perspective (attributes and their allowed values) of the model.

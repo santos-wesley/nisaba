@@ -1,0 +1,33 @@
+## Activities
+- **Assess Initial Condition**: The 'Assess Initial Condition' activity represents the evaluation of a client's initial condition before treatment begins.
+- **Develop Treatment Plan**: The 'Develop Treatment Plan' activity involves creating a personalized treatment plan for the client.
+- **Schedule First Session**: The 'Schedule First Session' activity includes arranging the client's first therapy session.
+- **Conduct Therapy Session**: The 'Conduct Therapy Session' activity represents carrying out a therapy session with the client.
+- **Evaluate Progress**: The 'Evaluate Progress' activity involves assessing the client's progress during treatment.
+- **Adjust Treatment Plan**: The 'Adjust Treatment Plan' activity involves modifying the treatment plan based on the client's progress.
+- **Provide Feedback**: The 'Provide Feedback' activity includes giving feedback to the client regarding their treatment.
+- **Schedule Follow-Up**: The 'Schedule Follow-Up' activity involves arranging a follow-up session for the client.
+- **Complete Treatment**: The 'Complete Treatment' activity represents the conclusion of the client's treatment process.
+- **Conduct Final Assessment**: The 'Conduct Final Assessment' activity involves performing a final evaluation of the client's condition after treatment.
+
+## Attributes
+- **Client ID: Integer between 1 and 999999**: The attribute 'Client ID: Integer between 1 and 999999' represents the unique identification number of the client.
+- **Session Type: Initial, Follow-Up, Crisis**: The attribute 'Session Type: Initial, Follow-Up, Crisis' specifies the type of therapy session being conducted.
+- **Progress Score: Float between 0.0 and 100.0**: The attribute 'Progress Score: Float between 0.0 and 100.0' represents the numeric score indicating the client's progress in treatment.
+- **Therapist ID: Integer between 1 and 9999**: The attribute 'Therapist ID: Integer between 1 and 9999' represents the unique identification number of the therapist.
+- **Feedback Type: Positive, Neutral, Negative**: The attribute 'Feedback Type: Positive, Neutral, Negative' specifies the nature of the feedback provided to the client.
+- **Treatment Status: Ongoing, Adjusted, Completed**: The attribute 'Treatment Status: Ongoing, Adjusted, Completed' specifies the current status of the client's treatment plan.
+
+## Binds
+- **Assess Initial Condition: Client ID**: The bind 'Assess Initial Condition: Client ID' links the 'Assess Initial Condition' activity with the attribute 'Client ID'.
+- **Develop Treatment Plan: Client ID, Therapist ID**: The bind 'Develop Treatment Plan: Client ID, Therapist ID' links the 'Develop Treatment Plan' activity with the attributes 'Client ID' and 'Therapist ID'.
+- **Schedule First Session: Client ID**: The bind 'Schedule First Session: Client ID' links the 'Schedule First Session' activity with the attribute 'Client ID'.
+- **Conduct Therapy Session: Client ID, Session Type**: The bind 'Conduct Therapy Session: Client ID, Session Type' links the 'Conduct Therapy Session' activity with the attributes 'Client ID' and 'Session Type'.
+- **Evaluate Progress: Client ID, Progress Score**: The bind 'Evaluate Progress: Client ID, Progress Score' links the 'Evaluate Progress' activity with the attributes 'Client ID' and 'Progress Score'.
+- **Adjust Treatment Plan: Client ID, Progress Score, Treatment Status**: The bind 'Adjust Treatment Plan: Client ID, Progress Score, Treatment Status' links the 'Adjust Treatment Plan' activity with the attributes 'Client ID', 'Progress Score', and 'Treatment Status'.
+- **Provide Feedback: Client ID, Feedback Type**: The bind 'Provide Feedback: Client ID, Feedback Type' links the 'Provide Feedback' activity with the attributes 'Client ID' and 'Feedback Type'.
+- **Complete Treatment: Client ID**: The bind 'Complete Treatment: Client ID' links the 'Complete Treatment' activity with the attribute 'Client ID'.
+- **Conduct Final Assessment: Client ID, Therapist ID, Progress Score**: The bind 'Conduct Final Assessment: Client ID, Therapist ID, Progress Score' links the 'Conduct Final Assessment' activity with the attributes 'Client ID', 'Therapist ID', and 'Progress Score'.
+
+## Constraints
+

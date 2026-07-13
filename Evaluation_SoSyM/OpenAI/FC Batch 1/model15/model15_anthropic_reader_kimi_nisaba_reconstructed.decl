@@ -1,0 +1,56 @@
+activity Submit Request
+activity Review Request
+activity Approve Request
+activity Reject Request
+activity Setup Remote Access
+activity Update Payroll
+activity Notify Employee
+activity Monitor Performance
+activity Revoke Access
+activity Complete Survey
+bind Submit Request: Request ID, Employee Name, Request Type
+bind Review Request: Request ID, Manager ID
+bind Approve Request: Request ID, Manager ID, Decision
+bind Reject Request: Request ID, Manager ID, Decision
+bind Setup Remote Access: Request ID, Access Status, Manager ID
+bind Update Payroll: Request ID, Payroll Status
+bind Notify Employee: Request ID, Notification Status
+bind Monitor Performance: Manager ID, Performance Rating
+bind Revoke Access: Request ID, Access Status
+bind Complete Survey: Request ID, Survey Score
+Request ID: integer between 1 and 99999
+Employee Name: John Doe, Jane Smith, Alice Johnson
+Request Type: Remote Work, Flexible Hours
+Decision: Approved, Rejected
+Payroll Status: Updated, Pending
+Manager ID: integer between 1 and 9999
+Access Status: Setup, Revoked
+Performance Rating: Excellent, Good, Average, Poor
+Notification Status: Sent, Pending
+Survey Score: float between 0.0 and 10.0
+Init[Submit Request] | |
+End[Complete Survey] | |
+Existence[Review Request] | |
+Absence2[Revoke Access] | |
+Exactly[Approve Request] | |
+Responded Existence[Setup Remote Access, Approve Request] | | |
+Precedence[Approve Request, Review Request] | | |
+Precedence[Setup Remote Access, Approve Request] |A.Decision is Approved | |
+Response[Approve Request, Notify Employee] |A.Decision is Approved |T.Notification Status is Sent |
+Response[Reject Request, Notify Employee] |A.Decision is Rejected |T.Notification Status is Sent |
+Succession[Approve Request, Update Payroll] |A.Decision is Approved |T.Payroll Status is Updated |
+Alternate Response[Submit Request, Review Request] | | |
+Alternate Succession[Approve Request, Setup Remote Access] | | |
+Chain Response[Reject Request, Notify Employee] |A.Decision is Rejected |T.Notification Status is Sent |
+Chain Precedence[Update Payroll, Approve Request] |A.Payroll Status is Updated |T.Decision is Approved |
+Co-Existence[Setup Remote Access, Monitor Performance] | | |
+Choice[Approve Request, Reject Request] | | |
+Exclusive Choice[Approve Request, Reject Request] | | |
+Not Co-Existence[Approve Request, Reject Request] | |A.Request ID == T.Request ID |
+Not Responded Existence[Revoke Access, Setup Remote Access] | | |
+Not Precedence[Notify Employee, Review Request] | | |
+Not Response[Complete Survey, Submit Request] | |A.Request ID == T.Request ID |
+Not Succession[Revoke Access, Setup Remote Access] | |A.Request ID == T.Request ID |
+Not Chain Precedence[Notify Employee, Submit Request] | | |
+Not Chain Response[Submit Request, Notify Employee] | | |
+Not Chain Succession[Setup Remote Access, Revoke Access] | |A.Request ID == T.Request ID |

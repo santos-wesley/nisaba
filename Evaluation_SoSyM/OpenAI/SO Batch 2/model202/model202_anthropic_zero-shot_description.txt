@@ -1,0 +1,41 @@
+# Currency Exchange Process Description
+
+This process model describes a currency exchange transaction workflow with the following characteristics:
+
+## Data Attributes
+The process tracks several key pieces of information:
+- **Amount**: an integer value between 1 and 10,000 (units of currency)
+- **Exchange Rate**: a floating-point value between 0.5 and 1.5
+- **Currency Type**: one of USD, EUR, GBP, or JPY
+- **Exchange Status**: one of Pending, Approved, or Rejected
+- **Transaction ID**: an integer between 1000 and 9999
+
+Each activity is bound to specific data: Receive Currency captures the Amount and Currency Type; Verify Currency Authenticity records the Currency Type; Calculate Exchange Rate captures the Exchange Rate; Approve/Reject Exchange record the Exchange Status; Process Exchange, Issue Receipt, and Record Transaction all reference the Transaction ID; Notify Customer records the Exchange Status; and Update Exchange Rates captures the Exchange Rate.
+
+## Process Flow and Constraints
+
+**Start and End Points**: The process must always begin with **Receive Currency** and must always end with **Issue Receipt**.
+
+**Sequencing Rules**:
+- **Verify Currency Authenticity** must occur before **Approve Exchange** can happen (whenever exchange is approved, authenticity verification must have preceded it).
+- Oddly, **Verify Currency Authenticity** must also occur before **Receive Currency**, meaning currency authenticity checks are logically required prior to the initial receipt activity in the model's ordering logic — though Receive Currency is still the mandatory starting activity.
+- **Calculate Exchange Rate** must occur before **Process Exchange** happens.
+
+**Approval and Rejection Logic**:
+- **Exactly one** occurrence of **Approve Exchange** must happen in every process instance.
+- Whenever an exchange is approved (Exchange Status = Approved), **Process Exchange** must eventually follow, within a time constraint of 0 to 2 time units (using a hold/half-open interval).
+- Whenever an exchange is rejected (Exchange Status = Rejected), **Notify Customer** must eventually follow, within 0 to 1 time units.
+- Interestingly, **Verify Currency Authenticity** and **Approve Exchange** cannot both occur in the same process instance (they are mutually exclusive) — this creates tension with the precedence rule, suggesting Approve Exchange may effectively never be validly enabled unless verification is somehow satisfied through an unusual interpretation.
+- **Receive Currency** and **Reject Exchange** cannot be in a direct succession relationship — once Receive Currency happens, Reject Exchange should not be the eventual necessary follow-up in a strict successive pattern.
+
+**Transaction Recording**:
+- Whenever **Process Exchange** occurs, **Record Transaction** must follow with the *same* Transaction ID, within 0 to 1 time units.
+- **Record Transaction** and **Receive Currency** are linked via a **Chain Succession**: immediately after Receive Currency, Record Transaction must follow (within 0 to 1 days), sharing the same Transaction ID.
+
+**Rate Management**:
+- Whenever **Process Exchange** occurs, **Update Exchange Rates** must also occur at some point in the instance (Responded Existence).
+- **Calculate Exchange Rate** must occur at least once in every process instance.
+- **Calculate Exchange Rate** is immediately and directly followed by **Update Exchange Rates** (Chain Succession), within a window of 0 to 30 minutes.
+
+## Summary
+This model represents a currency exchange operation where currency is received and verified, exchange rates are calculated and updated, exchanges are approved or rejected, and all approved transactions are processed, recorded, and receipted—with strict timing constraints ensuring rapid processing and notification, alongside some inherent logical tensions between verification and approval requirements.

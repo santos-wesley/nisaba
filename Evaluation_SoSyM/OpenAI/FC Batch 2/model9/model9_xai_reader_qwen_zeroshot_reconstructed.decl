@@ -1,0 +1,55 @@
+activity Extract DNA
+activity Quantify DNA
+activity PCR Amplify
+activity Gel Electrophoresis
+activity Purify PCR Product
+activity Sanger Sequence
+activity Analyze Sequences
+activity Clone DNA
+activity Transform Cells
+activity Culture Cells
+activity Harvest Cells
+activity Extract Protein
+activity Quantify Protein
+activity Western Blot
+activity Analyze Protein Expression
+bind Extract DNA: Sample ID
+bind Quantify DNA: Sample ID, DNA Concentration
+bind PCR Amplify: Sample ID, PCR Primers
+bind Gel Electrophoresis: Sample ID, Gel Type
+bind Purify PCR Product: Sample ID
+bind Sanger Sequence: Sample ID
+bind Analyze Sequences: Sample ID, Sequence Quality Score
+bind Clone DNA: Sample ID, Vector Type
+bind Transform Cells: Sample ID
+bind Culture Cells: Sample ID
+bind Harvest Cells: Sample ID, Colony Count
+bind Extract Protein: Sample ID
+bind Quantify Protein: Sample ID, Protein Concentration
+bind Western Blot: Sample ID, Antibody Type
+bind Analyze Protein Expression: Sample ID
+Sample ID: integer between 1 and 99999
+DNA Concentration: float between 0.1 and 1000.0
+Protein Concentration: float between 0.01 and 500.0
+Sequence Quality Score: float between 0.0 and 100.0
+Colony Count: integer between 0 and 1000
+PCR Primers: Forward, Reverse, Universal, Gene-Specific
+Gel Type: Agarose 0.8%, Agarose 1.0%, Agarose 1.5%, Polyacrylamide
+Vector Type: pUC19, pBR322, pGEM-T, pET28
+Antibody Type: Primary, Secondary, Monoclonal, Polyclonal
+Init[Extract DNA] | |
+Existence[Quantify DNA] | |
+Absence[Extract Protein] | |
+End[Analyze Protein Expression] | |
+Precedence[Gel Electrophoresis, Purify PCR Product] | | |
+Response[Sanger Sequence, Analyze Sequences] | | |
+Chain Succession[Transform Cells, Culture Cells] | | |
+Chain Precedence[Quantify Protein, Extract Protein] | | |
+Chain Response[Western Blot, Analyze Protein Expression] | | |
+Co-Existence[PCR Amplify, Gel Electrophoresis] | | |
+Alternate Precedence[PCR Amplify, Quantify DNA] | | |
+Alternate Response[Culture Cells, Harvest Cells] | | |
+Precedence[Gel Electrophoresis, PCR Amplify] | | |0,15,m
+Alternate Response[Culture Cells, Harvest Cells] | | |0,1,h
+Not Co-Existence[Extract Protein, Quantify Protein] | | |
+Exclusive Choice[Clone DNA, Transform Cells] | | |

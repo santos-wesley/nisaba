@@ -1,0 +1,37 @@
+activity Monitor Seismic Activity
+activity Issue Tsunami Alert
+activity Evacuate Coastal Areas
+activity Dispatch Emergency Services
+activity Provide Medical Assistance
+activity Conduct Search and Rescue
+activity Assess Infrastructure Damage
+activity Restore Communication Networks
+activity Establish Emergency Shelters
+activity Distribute Relief Supplies
+bind Monitor Seismic Activity: Magnitude
+bind Issue Tsunami Alert: Alert Level, Estimated Arrival Time, Magnitude
+bind Evacuate Coastal Areas: Number of Evacuees
+bind Dispatch Emergency Services: 
+bind Provide Medical Assistance: Number of Injuries
+bind Conduct Search and Rescue: 
+bind Assess Infrastructure Damage: Damage Severity
+bind Restore Communication Networks: Communication Status
+bind Establish Emergency Shelters: 
+bind Distribute Relief Supplies: Supply Cost
+Magnitude: float between None and None
+Estimated Arrival Time: integer between 0 and 360
+Alert Level: Watch, Warning, Cancel
+Communication Status: Down, Operational
+Number of Evacuees: integer between None and None
+Number of Injuries: integer between None and None
+Damage Severity: float between None and None
+Supply Cost: float between None and None
+Init[Monitor Seismic Activity] | |
+Response[Monitor Seismic Activity, Issue Tsunami Alert] |A.Magnitude > 7.0 | |
+Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |0,60,m
+Precedence[Provide Medical Assistance, Dispatch Emergency Services] | | |
+Not Co-Existence[Conduct Search and Rescue, Assess Infrastructure Damage] | | |
+Response[Restore Communication Networks, Restore Communication Networks] |A.Communication Status is Down |T.Communication Status is Operational |
+Response[Assess Infrastructure Damage, Restore Communication Networks] | | |0,72,h
+Response[Provide Medical Assistance, Dispatch Emergency Services] | | |0,24,h
+Response[Establish Emergency Shelters, Distribute Relief Supplies] | | |0,48,h

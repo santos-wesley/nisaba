@@ -1,0 +1,292 @@
+<notebook cell 25>:343: SyntaxWarning: invalid escape sequence '\A'
+<notebook cell 48>:343: SyntaxWarning: invalid escape sequence '\A'
+Running 160 (model x provider) combos in parallel ...
+  done: model132/zai OK
+  done: model208/deepseek OK
+  done: model35/anthropic OK
+  done: model97/xai OK
+  done: model148/anthropic OK
+  done: model102/anthropic OK
+  done: model248/zai OK
+  done: model148/xai OK
+  done: model132/anthropic OK
+  done: model109/anthropic OK
+  done: model179/xai OK
+  done: model78/zai OK
+  done: model28/deepseek OK
+  done: model102/xai OK
+  done: model28/xai OK
+  done: model208/anthropic OK
+  done: model97/anthropic OK
+  done: model185/deepseek OK
+  done: model179/deepseek OK
+  done: model185/anthropic OK
+  done: model67/xai OK
+  done: model109/deepseek OK
+  done: model35/deepseek OK
+  done: model57/anthropic OK
+  done: model109/xai OK
+  done: model148/zai OK
+  done: model67/deepseek OK
+  done: model102/zai OK
+  done: model97/deepseek OK
+  done: model179/anthropic OK
+  done: model132/xai OK
+  done: model35/zai OK
+  done: model67/zai OK
+  done: model78/xai OK
+  done: model102/deepseek OK
+  done: model57/zai OK
+  done: model35/xai OK
+  done: model248/deepseek OK
+  done: model67/anthropic OK
+  done: model179/zai OK
+  done: model97/zai OK
+  done: model28/anthropic OK
+  done: model57/deepseek OK
+  done: model28/zai OK
+  done: model185/zai OK
+  done: model248/anthropic OK
+  done: model185/xai OK
+  done: model78/deepseek OK
+  done: model248/xai OK
+  done: model57/xai OK
+  done: model132/deepseek OK
+  done: model78/anthropic OK
+  done: model208/xai OK
+  done: model208/zai OK
+  done: model191/anthropic OK
+  done: model109/zai OK
+  done: model70/anthropic OK
+  done: model70/xai OK
+  done: model186/xai OK
+  done: model186/anthropic OK
+  done: model191/xai OK
+  done: model234/zai OK
+  done: model148/deepseek OK
+  done: model191/deepseek OK
+  done: model53/xai OK
+  done: model234/anthropic OK
+  done: model186/zai OK
+  done: model81/deepseek OK
+  done: model234/deepseek OK
+[model221/deepseek] zero-shot reconstruction (from zero-shot description) ...
+  done: model191/zai OK
+  done: model186/deepseek OK
+  done: model15/xai OK
+  done: model53/deepseek OK
+  done: model81/zai OK
+  done: model53/zai OK
+  done: model70/zai OK
+  done: model107/zai OK
+  done: model70/deepseek OK
+  done: model15/zai OK
+  done: model15/anthropic OK
+  done: model81/anthropic OK
+  done: model200/anthropic OK
+  done: model234/xai OK
+  done: model107/deepseek OK
+  done: model107/anthropic OK
+  done: model53/anthropic OK
+  done: model212/anthropic OK
+  done: model200/deepseek OK
+  done: model200/zai OK
+  done: model5/anthropic OK
+  done: model212/zai OK
+  done: model15/deepseek OK
+  done: model5/xai OK
+  done: model5/zai OK
+  done: model81/xai OK
+  done: model200/xai OK
+  done: model107/xai OK
+  done: model212/xai OK
+  done: model16/anthropic OK
+  done: model5/deepseek OK
+  done: model144/xai OK
+  done: model144/zai OK
+  done: model16/xai OK
+  done: model207/zai OK
+  done: model221/zai OK
+  done: model9/xai OK
+  done: model212/deepseek OK
+  done: model207/xai OK
+  done: model144/anthropic OK
+  done: model130/anthropic OK
+  done: model9/deepseek OK
+  done: model16/deepseek OK
+  done: model144/deepseek OK
+  done: model221/xai OK
+  done: model138/deepseek OK
+  done: model9/zai OK
+  done: model130/zai OK
+  done: model9/anthropic OK
+  done: model16/zai OK
+  done: model207/anthropic OK
+  done: model138/anthropic OK
+  done: model192/xai OK
+  done: model172/deepseek OK
+  done: model130/deepseek OK
+  done: model130/xai OK
+  done: model221/anthropic OK
+  done: model138/zai OK
+  done: model10/xai OK
+  done: model207/deepseek OK
+  done: model44/zai OK
+  done: model138/xai OK
+  done: model44/xai OK
+  done: model38/zai OK
+  done: model192/zai OK
+  done: model38/xai OK
+  done: model10/anthropic OK
+  done: model38/anthropic OK
+  done: model192/anthropic OK
+  done: model38/deepseek OK
+  done: model192/deepseek OK
+  done: model172/xai OK
+  done: model10/zai OK
+  done: model44/anthropic OK
+  done: model10/deepseek OK
+  done: model202/anthropic OK
+  done: model44/deepseek OK
+  done: model172/zai OK
+  done: model202/xai OK
+  done: model205/anthropic OK
+  done: model205/deepseek OK
+  done: model202/zai OK
+  done: model247/anthropic OK
+  done: model202/deepseek OK
+  done: model172/anthropic OK
+  done: model205/zai OK
+  done: model247/xai OK
+  done: model247/deepseek OK
+  done: model247/zai OK
+  done: model205/xai OK
+  done: model221/deepseek OK
+
+=== DATA ANALYSIS ===
+  complexity: 360 model jsons
+  readability: 320 descriptions
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/268 [00:00<?, ?it/s]Loading weights: 100%|##########| 268/268 [00:00<00:00, 5149.52it/s]
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  embedder: Alibaba-NLP/gte-large-en-v1.5 tau=0.2
+    model132/anthropic/nisaba: total=0.0
+    model132/anthropic/zeroshot: total=0.04
+    model132/xai/nisaba: total=0.0
+    model132/xai/zeroshot: total=0.6114
+    model132/deepseek/nisaba: total=0.0
+    model132/deepseek/zeroshot: total=0.4831
+    model132/zai/nisaba: total=0.0
+    model132/zai/zeroshot: total=0.04
+    model185/anthropic/nisaba: total=0.0606
+    model185/anthropic/zeroshot: total=0.1538
+    model185/xai/nisaba: total=0.1667
+    model185/xai/zeroshot: total=0.1538
+    model185/deepseek/nisaba: total=1.0
+    model185/deepseek/zeroshot: total=0.1939
+    model185/zai/nisaba: total=0.1538
+    model185/zai/zeroshot: total=0.0
+    model28/anthropic/nisaba: total=0.25
+    model28/anthropic/zeroshot: total=0.4762
+    model28/xai/nisaba: total=0.2955
+    model28/xai/zeroshot: total=0.4242
+    model28/deepseek/nisaba: total=0.2955
+    model28/deepseek/zeroshot: total=0.5118
+    model28/zai/nisaba: total=0.2955
+    model28/zai/zeroshot: total=0.2955
+    model67/anthropic/nisaba: total=0.5935
+    model67/anthropic/zeroshot: total=0.215
+    model67/xai/nisaba: total=0.04
+    model67/xai/zeroshot: total=0.125
+    model67/deepseek/nisaba: total=0.2386
+    model67/deepseek/zeroshot: total=0.3695
+    model67/zai/nisaba: total=0.0667
+    model67/zai/zeroshot: total=0.0333
+    model78/anthropic/nisaba: total=0.5793
+    model78/anthropic/zeroshot: total=0.0364
+    model78/xai/nisaba: total=0.0364
+    model78/xai/zeroshot: total=0.2625
+    model78/deepseek/nisaba: total=0.0364
+    model78/deepseek/zeroshot: total=0.219
+    model78/zai/nisaba: total=0.0364
+    model78/zai/zeroshot: total=0.0
+    model179/anthropic/nisaba: total=0.5854
+    model179/anthropic/zeroshot: total=0.0
+    model179/xai/nisaba: total=0.1641
+    model179/xai/zeroshot: total=0.3114
+    model179/deepseek/nisaba: total=0.0
+    model179/deepseek/zeroshot: total=0.2284
+    model179/zai/nisaba: total=0.0
+    model179/zai/zeroshot: total=0.2476
+    model248/anthropic/nisaba: total=0.5989
+    model248/anthropic/zeroshot: total=0.0625
+    model248/xai/nisaba: total=0.0
+    model248/xai/zeroshot: total=0.1333
+    model248/deepseek/nisaba: total=0.0625
+    model248/deepseek/zeroshot: total=0.2208
+    model248/zai/nisaba: total=0.0625
+    model248/zai/zeroshot: total=0.2969
+    model35/anthropic/nisaba: total=0.0
+    model35/anthropic/zeroshot: total=0.0333
+    model35/xai/nisaba: total=0.0625
+    model35/xai/zeroshot: total=0.5283
+    model35/deepseek/nisaba: total=0.0625
+    model35/deepseek/zeroshot: total=0.471
+    model35/zai/nisaba: total=0.0625
+    model35/zai/zeroshot: total=0.4428
+    model57/anthropic/nisaba: total=0.0
+    model57/anthropic/zeroshot: total=0.2
+    model57/xai/nisaba: total=0.025
+    model57/xai/zeroshot: total=0.4292
+    model57/deepseek/nisaba: total=0.025
+    model57/deepseek/zeroshot: total=0.4833
+    model57/zai/nisaba: total=0.025
+    model57/zai/zeroshot: total=0.4471
+    model97/anthropic/nisaba: total=0.0471
+    model97/anthropic/zeroshot: total=0.0588
+    model97/xai/nisaba: total=0.025
+    model97/xai/zeroshot: total=0.11
+    model97/deepseek/nisaba: total=0.0471
+    model97/deepseek/zeroshot: total=0.5144
+    model97/zai/nisaba: total=0.0471
+    model97/zai/zeroshot: total=0.0588
+    model102/anthropic/nisaba: total=0.5838
+    model102/anthropic/zeroshot: total=0.2364
+    model102/xai/nisaba: total=0.0
+    model102/xai/zeroshot: total=0.4339
+    model102/deepseek/nisaba: total=0.0
+  semantic distance ERR: list index out of range
+Traceback (most recent call last):
+  File "C:\Projects\Nisaba Journal\evaluation_sosym_test\run_test.py", line 177, in data_analysis
+    d = N.compute_semantic_distance(orig, open(rp, encoding="utf-8").read(), embedder, tau=tau)
+  File "<notebook cell 52>", line 296, in compute_semantic_distance
+  File "<notebook cell 52>", line 190, in load_model
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 1273, in parse_from_string
+    self.parse(lines)
+    ~~~~~~~~~~^^^^^^^
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 1334, in parse
+    declare_parsed_model.add_attribute_value(attr, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 1115, in add_attribute_value
+    attribute.set_attr_value(attr_value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 821, in set_attr_value
+    self.attr_value = DeclareModelAttrValue(value, self.value_type)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 659, in __init__
+    self.parse_attr_value()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\wesle\AppData\Roaming\Python\Python313\site-packages\Declare4Py\ProcessModels\DeclareModel.py", line 671, in parse_attr_value
+    self.value = [float(matches[0]), float(matches[1])]
+                        ~~~~~~~^^^
+IndexError: list index out of range
+  RST relation metric: aligned_rate Nisaba 0.84 vs zero-shot 0.64 (160 runs) -> rst_metrics.csv
+  derived_summary.json written
+
+=== DONE in 434s | est $5.624 ===
+   anthropic/claude-sonnet-5          calls=200 in= 729016 out= 269307 $4.1511
+   deepseek/deepseek-v4-flash         calls=205 in= 456457 out= 148313 $0.0633
+   google/gemini-3-flash-preview      calls=  1 in=   6830 out=   1875 $0.0
+   x-ai/grok-4.20                     calls=200 in= 463970 out= 156055 $0.9701
+   z-ai/glm-5.2                       calls=200 in= 460333 out= 210253 $0.4395

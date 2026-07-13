@@ -1,0 +1,40 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Approve Compliance Plan
+activity Implement Controls
+activity Provide Employee Training
+activity Monitor Compliance
+activity Report Violation
+activity Investigate Violation
+activity Take Corrective Action
+activity Review Compliance Plan
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Approve Compliance Plan: Plan Status
+bind Implement Controls: Control Type
+bind Provide Employee Training: Training Hours
+bind Monitor Compliance: Compliance Status
+bind Report Violation: Violation Severity, Number of Violations
+bind Investigate Violation: Financial Impact
+bind Take Corrective Action: 
+bind Review Compliance Plan: Plan Status
+Risk Level: Low, Medium, High
+Assessment Score: float between 0.0 and 100.0
+Plan Status: Draft, Approved, Under Review, Rejected
+Compliance Status: Compliant, Non-Compliant, Partially Compliant
+Violation Severity: Minor, Major, Critical
+Financial Impact: float between 0.0 and 1000000.0
+Control Type: Preventive, Detective, Corrective
+Training Hours: integer between 1 and 100
+Number of Violations: integer between 0 and 1000
+Init[Conduct Risk Assessment] | |
+Existence[Provide Employee Training] | |
+Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d
+Response[Report Violation, Investigate Violation] | | |
+Response[Investigate Violation, Take Corrective Action] | | |
+Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d
+Response[Report Violation, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d
+Response[Investigate Violation, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d
+Alternate Succession[Approve Compliance Plan, Review Compliance Plan] | | |
+Precedence[Approve Compliance Plan, Develop Compliance Plan] | | |
+Precedence[Implement Controls, Approve Compliance Plan] | | |

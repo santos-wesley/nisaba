@@ -1,0 +1,42 @@
+activity activity Submit Benefits Enrollment
+activity activity Verify Employee Eligibility
+activity activity Process Benefits Claim
+activity activity Approve Benefits Claim
+activity activity Deny Benefits Claim
+activity activity Update Benefits Record
+activity activity Audit Benefits Enrollment
+activity activity Send Enrollment Confirmation
+activity activity Receive Employee Inquiry
+activity activity Resolve Employee Inquiry
+activity activity Request Additional Information
+activity activity Review Benefits Options
+activity activity Calculate Premium Cost
+activity activity Process Premium Payment
+activity activity Generate Benefits Report
+bind activity Submit Benefits Enrollment: Employee ID, Enrollment Status, Benefit Plan
+bind activity Process Benefits Claim: Employee ID, Claim Amount, Claim Status
+bind activity Calculate Premium Cost: Premium Rate, Benefit Plan, Deduction Amount
+bind activity Receive Employee Inquiry: Employee ID, Inquiry Type
+Enrollment Status: Submitted, Verified, Approved, Rejected
+Claim Amount: integer between 0 and 10000
+Claim Status: Received, Processed, Approved, Denied, Paid
+Premium Rate: float between 0.0 and 1.0
+Employee ID: integer between 1000 and 9999
+Inquiry Type: Enrollment, Claim, Eligibility, Payment
+Benefit Plan: Health, Dental, Vision, Life
+Deduction Amount: float between 0.0 and 5000.0
+Init[activity Submit Benefits Enrollment] | |
+Response[activity Submit Benefits Enrollment, activity Verify Employee Eligibility] | | |
+Choice[activity Approve Benefits Claim, activity Deny Benefits Claim] | | |
+Precedence[activity Approve Benefits Claim, activity Process Benefits Claim] | | |
+Precedence[activity Deny Benefits Claim, activity Process Benefits Claim] | | |
+Response[activity Submit Benefits Enrollment, activity Send Enrollment Confirmation] | | |0,24,h
+Response[activity Submit Benefits Enrollment, activity Verify Employee Eligibility] | | |0,48,h
+Response[activity Submit Benefits Enrollment, activity Audit Benefits Enrollment] | | |0,7,d
+Response[activity Submit Benefits Enrollment, activity Calculate Premium Cost] | | |0,24,h
+Response[activity Submit Benefits Enrollment, activity Process Premium Payment] | | |0,7,d
+Response[activity Submit Benefits Enrollment, activity Generate Benefits Report] | | |0,30,d
+Response[activity Submit Benefits Enrollment, activity Update Benefits Record] | | |0,7,d
+Response[activity Submit Benefits Enrollment, activity Review Benefits Options] | | |0,24,h
+Response[activity Submit Benefits Enrollment, activity Request Additional Information] | | |0,24,h
+Response[activity Submit Benefits Enrollment, activity Resolve Employee Inquiry] | | |0,24,h

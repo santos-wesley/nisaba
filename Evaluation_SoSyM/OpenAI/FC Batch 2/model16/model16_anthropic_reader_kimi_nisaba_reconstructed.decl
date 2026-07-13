@@ -1,0 +1,55 @@
+activity Identify Donor
+activity Contact Donor
+activity Request Donation
+activity Receive Donation
+activity Send Thank You Note
+activity Plan Fundraiser
+activity Promote Event
+activity Host Event
+activity Collect Feedback
+activity Analyze Feedback
+activity Identify Improvement Areas
+activity Implement Improvements
+activity Report Results
+activity Archive Records
+activity Evaluate Campaign
+bind Identify Donor: Donor ID
+bind Request Donation: Donor ID, Donation Type
+bind Receive Donation: Donation Amount
+bind Promote Event: Event Type
+bind Collect Feedback: Feedback Type
+Donor ID: integer between 1 and 10000
+Donation Type: Cash, Check, Online Transfer
+Donation Amount: float between 10 and 100000
+Event Type: Gala, Auction, Online Campaign
+Feedback Type: Positive, Neutral, Negative
+Init[Identify Donor] | |
+End[Archive Records] | |
+Existence[Receive Donation] | |
+Existence[Host Event] | |
+Absence3[Send Thank You Note] | |
+Absence2[Implement Improvements] | |
+Exactly[Evaluate Campaign] | |
+Responded Existence[Collect Feedback, Analyze Feedback] | | |
+Precedence[Request Donation, Contact Donor] | | |
+Precedence[Implement Improvements, Identify Improvement Areas] | | |
+Precedence[Report Results, Host Event] | | |
+Response[Receive Donation, Send Thank You Note] | | |
+Response[Plan Fundraiser, Promote Event] | | |
+Response[Analyze Feedback, Identify Improvement Areas] | | |
+Succession[Identify Donor, Contact Donor] | | |
+Alternate Response[Request Donation, Receive Donation] | | |
+Alternate Precedence[Send Thank You Note, Receive Donation] | | |
+Chain Response[Host Event, Collect Feedback] | | |
+Chain Precedence[Identify Improvement Areas, Analyze Feedback] | | |
+Co-Existence[Report Results, Archive Records] | | |
+Choice[Plan Fundraiser, Promote Event] | | |
+Exclusive Choice[Identify Improvement Areas, Evaluate Campaign] | | |
+Not Co-Existence[Implement Improvements, Archive Records] | | |
+Not Responded Existence[Contact Donor, Report Results] | | |
+Not Precedence[Send Thank You Note, Receive Donation] | | |
+Not Response[Archive Records, Plan Fundraiser] | | |
+Not Succession[Evaluate Campaign, Identify Donor] | | |
+Not Chain Precedence[Send Thank You Note, Contact Donor] | | |
+Not Chain Response[Identify Donor, Receive Donation] | | |
+Not Chain Succession[Collect Feedback, Plan Fundraiser] | | |

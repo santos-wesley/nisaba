@@ -1,0 +1,47 @@
+# Intelligence Operations Process Model - Description
+
+This process model describes an intelligence gathering and analysis workflow, incorporating both control-flow rules and data attributes attached to specific activities.
+
+## Activities and Their Data Attributes
+
+The process consists of ten activities, five of which carry associated data:
+
+- **Gather Intelligence**: records the *Source Type* (Human, Signal, Open Source, or Cyber) and the *Number of Sources* (an integer between 1 and 50)
+- **Analyze Data**: records the *Analysis Technique* used (Link Analysis, Statistical Analysis, or Pattern Recognition) and a *Confidence Score* (a decimal between 0.0 and 1.0)
+- **Identify Threats**: records the *Threat Level* (an integer from 1 to 10) and the *Risk Factor* (a decimal between 0.0 and 100.0)
+- **Implement Countermeasures**: records the *Cost of Countermeasures* (a monetary value between 100.0 and 1,000,000.0) and *Days to Respond* (an integer between 1 and 365)
+- **Report Findings**: records the *Report Status* (Draft, Review, Final, or Disseminated) and the *Geographic Region* affected (North America, Europe, Asia, Africa, or South America)
+
+The remaining activities—**Assess Credibility**, **Develop Strategies**, **Monitor Activity**, **Review Intelligence**, and **Disseminate Information**—are involved in the control flow but carry no specific data payload.
+
+## Process Flow and Constraints
+
+**Starting Point:**
+The process must begin with **Gather Intelligence**, which is always the first activity to occur.
+
+**Ending Point:**
+The process must conclude with **Disseminate Information**, which must be the last activity performed.
+
+**Sequential Dependencies:**
+
+1. Every time **Gather Intelligence** occurs, it must eventually be followed by **Analyze Data** at some later point.
+
+2. **Analyze Data** and **Identify Threats** are tightly coupled: whenever one occurs, the other must occur as well, respecting their relative order (Analyze Data leads to Identify Threats, and Identify Threats occurring implies Analyze Data happened before).
+
+3. Before **Identify Threats** can take place, **Develop Strategies** must have already occurred at some prior point.
+
+4. **Implement Countermeasures** must be immediately preceded by **Develop Strategies** — there can be no other activities occurring between them, and this relationship must hold every time.
+
+5. **Implement Countermeasures** must be immediately followed by **Monitor Activity** — forming an unbroken sequential chain each time it occurs.
+
+6. **Monitor Activity** and **Report Findings** must alternate with each other: after **Monitor Activity** occurs, **Report Findings** must occur before **Monitor Activity** can happen again, and vice versa.
+
+7. **Disseminate Information** and **Review Intelligence** also alternate, but in a precedence fashion: **Review Intelligence** must occur before **Disseminate Information** can occur again, maintaining an alternating pattern between these two activities.
+
+**Co-occurrence Requirement:**
+
+**Gather Intelligence** and **Analyze Data** must co-exist within the same process instance — if one occurs, the other must also occur somewhere in the trace (regardless of order or number of times).
+
+## Summary
+
+This model represents a structured intelligence lifecycle: intelligence is gathered and analyzed, threats are identified based on strategic groundwork, countermeasures are tightly linked to strategy development and followed immediately by monitoring, and reporting/monitoring alternate in a cyclical fashion. The process concludes with information dissemination, which is itself governed by a recurring review requirement.

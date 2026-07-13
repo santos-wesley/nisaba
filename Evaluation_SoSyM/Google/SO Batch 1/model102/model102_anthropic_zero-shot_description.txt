@@ -1,0 +1,52 @@
+# Payroll Processing Model Description
+
+This model describes a payroll processing workflow with ten activities, each carrying specific data attributes, along with control-flow rules governing their execution order.
+
+## Activities and Data
+
+The process involves the following activities, each associated with relevant data fields:
+
+- **Submit Timesheet**: records the Employee ID, Hours Worked, and Timesheet Status.
+- **Approve Timesheet**: records the Employee ID and Timesheet Status.
+- **Calculate Gross Pay**: uses Hours Worked and Pay Rate to determine Gross Pay.
+- **Calculate Deductions**: uses Gross Pay to determine Tax Deduction and Insurance Deduction.
+- **Calculate Net Pay**: uses Gross Pay, Tax Deduction, and Insurance Deduction to determine Net Pay.
+- **Generate Paystub**: no bound data attributes.
+- **Process Payment**: records the Employee ID, Net Pay, and Payment Method.
+- **Update Payroll Records**: no bound data attributes.
+- **Review Payroll Report**: no bound data attributes.
+- **Distribute Paystub**: no bound data attributes.
+
+### Data Types and Ranges
+
+- **Employee ID**: integer between 1000 and 9999
+- **Hours Worked**: integer between 0 and 80
+- **Pay Rate**: float between 10.0 and 100.0
+- **Gross Pay**: float between 0.0 and 10000.0
+- **Tax Deduction**: float between 0.0 and 5000.0
+- **Insurance Deduction**: float between 0.0 and 1000.0
+- **Net Pay**: float between 0.0 and 10000.0
+- **Timesheet Status**: one of Submitted, Approved, Rejected
+- **Payment Method**: one of Direct Deposit, Check
+
+## Control-Flow Rules
+
+1. **Process initiation**: The case must begin with **Submit Timesheet**.
+
+2. **Sequential dependencies (Response relations)**: Each of the following pairs enforces that once the first activity occurs, the second activity must eventually follow it later in the trace:
+   - After **Submit Timesheet**, an **Approve Timesheet** must eventually occur.
+   - After **Approve Timesheet**, a **Calculate Gross Pay** must eventually occur.
+   - After **Calculate Gross Pay**, a **Calculate Deductions** must eventually occur.
+   - After **Calculate Deductions**, a **Calculate Net Pay** must eventually occur.
+   - After **Calculate Net Pay**, a **Process Payment** must eventually occur.
+   - After **Process Payment**, an **Update Payroll Records** must eventually occur.
+   - After **Update Payroll Records**, a **Review Payroll Report** must eventually occur.
+   - After **Process Payment**, a **Distribute Paystub** must eventually occur.
+
+3. **Conditional exception (data-aware constraint)**: Normally, **Approve Timesheet** would not need to be followed by another **Submit Timesheet**. However, this restriction is lifted specifically when the Timesheet Status is **Rejected** — in that case, a new **Submit Timesheet** is allowed (and expected) to follow, enabling resubmission of a corrected timesheet.
+
+4. **Timing constraint**: The response relation between **Process Payment** and **Distribute Paystub** must be satisfied within a time window of 24 hours — that is, paystub distribution must occur within 24 hours after payment is processed.
+
+## Summary
+
+This model enforces a **linear, sequential payroll process**: timesheets are submitted, approved (or rejected and resubmitted), pay is calculated (gross, deductions, net), payments are processed, records updated, and paystubs distributed within a strict 24-hour window—while payroll reports are reviewed as the final step.

@@ -1,0 +1,41 @@
+This Multi-Perspective Declare (MP-Declare) model describes a process for managing intellectual property applications, specifically covering patents, trademarks, and copyrights. It outlines the lifecycle of these applications from filing to final decision, including data attributes, temporal constraints, and conditions for appeals. 
+
+Below is a detailed natural language description of the model:
+
+### **1. Data Attributes and Bindings**
+The model associates specific data variables with various activities to track the state and details of each application:
+*   **Filing Applications** (Patent, Trademark, Copyright): Each filing activity records an `Application ID` (an integer between 1 and 1,000,000) and an `Application Fee` (a float between 50.0 and 10,000.0).
+*   **Conducting Searches** (Patent and Trademark only): These activities record a `Search Result`, which can be either "Clear" or "Conflict".
+*   **Examinations** (Patent, Trademark, Copyright): These activities track the `Application Status`, which can be "Pending", "Approved", or "Rejected".
+*   **Final Decisions** (Granting or Rejecting for all three types): These activities record a `Decision`, which is either "Granted" or "Rejected".
+*   **Appeals**: The `Appeal Decision` activity is bound to an `Application ID`.
+
+### **2. Process Initiation and Termination**
+*   **Initiation**: The process must begin with the activity **File Patent Application**. 
+*   **Termination**: The entire process must conclude with either the **Grant Patent** activity (successful application) or the **Reject Patent Application** activity (unsuccessful application).
+
+### **3. Process Flow and Constraints**
+The model defines strict temporal and data-driven rules for how each type of application is processed:
+
+**Patents:**
+*   After a **Conduct Patent Search** activity occurs, if the `Search Result` is "Clear", the **Examine Patent Application** activity must be executed within 0 to 2 days.
+*   Once a patent application is examined, a choice is made based on the `Application Status`:
+    *   If the status is "Approved", the **Grant Patent** activity must occur within 1 day.
+    *   If the status is "Rejected", the **Reject Patent Application** activity must occur within 1 day.
+
+**Trademarks:**
+*   After a **Conduct Trademark Search** activity occurs, if the `Search Result` is "Clear", the **Examine Trademark Application** activity must follow within 2 days.
+*   Following the examination, the outcome is determined by the `Application Status`:
+    *   If the status is "Approved", **Grant Trademark** must occur within 1 day.
+    *   If the status is "Rejected", **Reject Trademark Application** must occur within 1 day.
+
+**Copyrights:**
+*   Unlike patents and trademarks, copyrights do not require a search. After **File Copyright Registration** occurs, the **Examine Copyright Application** activity must be executed within 2 days.
+*   Following the examination, the outcome depends on the `Application Status`:
+    *   If the status is "Approved", **Grant Copyright** must occur within 1 day.
+    *   If the status is "Rejected", **Reject Copyright Application** must occur within 1 day.
+
+### **4. Appeals**
+*   An **Appeal Decision** can only be made if a corresponding application has been rejected. 
+*   Specifically, an appeal is valid only if a **Reject Patent Application**, **Reject Trademark Application**, or **Reject Copyright Application** has occurred previously.
+*   Data Consistency: The `Application ID` associated with the **Appeal Decision** must exactly match the `Application ID` of the previously rejected application.

@@ -1,0 +1,41 @@
+activity Monitor Seismic Activity
+activity Issue Early Warning
+activity Activate Emergency Response
+activity Deploy Rescue Teams
+activity Provide Medical Assistance
+activity Distribute Relief Supplies
+activity Assess Disaster Risk
+activity Evacuate Affected Population
+activity Establish Temporary Shelters
+activity Conduct Damage Assessment
+bind Monitor Seismic Activity: Seismic Magnitude
+bind Issue Early Warning: Warning Level
+bind Activate Emergency Response: Response Status
+bind Deploy Rescue Teams: Number of Rescue Teams
+bind Provide Medical Assistance: Number of Injured People
+bind Distribute Relief Supplies: Number of Relief Supplies
+bind Assess Disaster Risk: Risk Score
+bind Evacuate Affected Population: Number of Evacuees
+bind Establish Temporary Shelters: Number of Shelters
+bind Conduct Damage Assessment: Damage Estimate
+Seismic Magnitude: integer between 0 and 10
+Warning Level: Low, Medium, High, Critical
+Response Status: Initiated, Ongoing, Completed
+Number of Rescue Teams: integer between 0 and 50
+Number of Injured People: integer between 0 and 10000
+Number of Relief Supplies: integer between 0 and 20000
+Risk Score: float between 0.0 and 100.0
+Number of Evacuees: integer between 0 and 50000
+Number of Shelters: integer between 0 and 20
+Damage Estimate: float between 0.0 and 1000000000.0
+Init[Monitor Seismic Activity] | |
+Chain Response[Monitor Seismic Activity, Issue Early Warning] | | |
+Chain Succession[Issue Early Warning, Activate Emergency Response] | | |
+Response[Activate Emergency Response, Deploy Rescue Teams] | | |
+Response[Deploy Rescue Teams, Provide Medical Assistance] | | |
+Response[Provide Medical Assistance, Distribute Relief Supplies] | | |0,24,h
+Response[Activate Emergency Response, Assess Disaster Risk] | | |
+Response[Assess Disaster Risk, Evacuate Affected Population] |A.Risk Score > 70 | |
+Response[Assess Disaster Risk, Establish Temporary Shelters] |A.Risk Score > 70 | |
+Precedence[Distribute Relief Supplies, Conduct Damage Assessment] | | |
+Co-Existence[Evacuate Affected Population, Establish Temporary Shelters] | | |

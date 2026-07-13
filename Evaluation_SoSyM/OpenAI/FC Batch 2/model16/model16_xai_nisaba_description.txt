@@ -1,0 +1,87 @@
+#MP-Declare Model
+## Activities
+- **Identify Donor**: The 'Identify Donor' activity represents the identification phase for finding potential donors.
+- **Contact Donor**: The 'Contact Donor' activity involves reaching out to potential donors to build relationships.
+- **Request Donation**: The 'Request Donation' activity includes asking identified donors for contributions.
+- **Receive Donation**: The 'Receive Donation' activity represents the receipt of actual donations from donors.
+- **Send Thank You Note**: The 'Send Thank You Note' activity involves expressing gratitude to donors after receiving their donation.
+- **Plan Fundraiser**: The 'Plan Fundraiser' activity covers the planning phase for organizing fundraising events.
+- **Promote Event**: The 'Promote Event' activity includes marketing and promoting the fundraiser to attract attendees and donors.
+- **Host Event**: The 'Host Event' activity represents the execution of the fundraising event itself.
+- **Collect Feedback**: The 'Collect Feedback' activity involves gathering input from participants and donors about the event.
+- **Analyze Feedback**: The 'Analyze Feedback' activity includes reviewing and interpreting the collected feedback.
+- **Identify Improvement Areas**: The 'Identify Improvement Areas' activity represents pinpointing specific areas for enhancement based on feedback.
+- **Implement Improvements**: The 'Implement Improvements' activity involves applying changes and improvements identified from the feedback.
+- **Report Results**: The 'Report Results' activity covers documenting and reporting the outcomes of the fundraiser.
+- **Archive Records**: The 'Archive Records' activity involves storing all records and documentation for future reference.
+- **Evaluate Campaign**: The 'Evaluate Campaign' activity represents the final assessment of the entire fundraising campaign.
+
+## Attributes
+- **Donor ID: integer between 1 and 10000**: The attribute 'Donor ID: integer between 1 and 10000' represents the unique identification number assigned to each donor.
+- **Donation Type: Cash, Check, Online Transfer**: The attribute 'Donation Type: Cash, Check, Online Transfer' specifies the possible methods through which donations can be made.
+- **Donation Amount: float between 10 and 100000**: The attribute 'Donation Amount: float between 10 and 100000' indicates the monetary value of the donation received.
+- **Event Type: Gala, Auction, Online Campaign**: The attribute 'Event Type: Gala, Auction, Online Campaign' defines the different formats of fundraising events that can be promoted.
+- **Feedback Type: Positive, Neutral, Negative**: The attribute 'Feedback Type: Positive, Neutral, Negative' categorizes the nature of the feedback collected from participants.
+
+## Binds
+- **bind Identify Donor: Donor ID**: The bind 'Identify Donor: Donor ID' specifies that the activity 'Identify Donor' requires the attribute 'Donor ID'.
+- **bind Request Donation: Donor ID, Donation Type**: The bind 'Request Donation: Donor ID, Donation Type' links the 'Request Donation' activity with the attributes 'Donor ID' and 'Donation Type'.
+- **bind Receive Donation: Donation Amount**: The bind 'Receive Donation: Donation Amount' specifies that the activity 'Receive Donation' requires the attribute 'Donation Amount'.
+- **bind Promote Event: Event Type**: The bind 'Promote Event: Event Type' links the 'Promote Event' activity with the attribute 'Event Type'.
+- **bind Collect Feedback: Feedback Type**: The bind 'Collect Feedback: Feedback Type' specifies that the activity 'Collect Feedback' requires the attribute 'Feedback Type'.
+
+## Constraints
+- **Init[Identify Donor] | |**: The 'Identify Donor' must be the first activity to occur in the process.
+- **End[Evaluate Campaign] | |**: The 'Evaluate Campaign' must be the last activity to occur in the process.
+- **Existence3[Collect Feedback] | |**: The 'Collect Feedback' activity must occur at least 3 times in the process.
+- **Response[Contact Donor, Request Donation] | | |**: If a 'Contact Donor' activity occurs, then a 'Request Donation' activity must eventually occur after the 'Contact Donor' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Contact Donor' can be pending at the same time, and a single 'Request Donation' can fulfill the obligation for all preceding 'Contact Donor'. If 'Contact Donor' does not occur, the constraint imposes no obligation on the occurrence of 'Request Donation'.
+- **Chain Response[Receive Donation, Send Thank You Note] | | |0,48,h**: Whenever a 'Receive Donation' activity occurs, it must be immediately followed by a 'Send Thank You Note' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Receive Donation' to 'Send Thank You Note'. Multiple 'Receive Donation'-'Send Thank You Note' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Send Thank You Note' are allowed to happen elsewhere in the process but not between a 'Receive Donation' and its corresponding 'Send Thank You Note'. This constraint is activated when A.Donation Amount > 100 and must be fulfilled within 0 to 48 hours.
+- **Response[Promote Event, Host Event] | | |**: If a 'Promote Event' activity occurs, then a 'Host Event' activity must eventually occur after the 'Promote Event' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Promote Event' can be pending at the same time, and a single 'Host Event' can fulfill the obligation for all preceding 'Promote Event'. If 'Promote Event' does not occur, the constraint imposes no obligation on the occurrence of 'Host Event'.
+- **Response[Collect Feedback, Analyze Feedback] | | |**: If a 'Collect Feedback' activity occurs, then a 'Analyze Feedback' activity must eventually occur after the 'Collect Feedback' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Collect Feedback' can be pending at the same time, and a single 'Analyze Feedback' can fulfill the obligation for all preceding 'Collect Feedback'. If 'Collect Feedback' does not occur, the constraint imposes no obligation on the occurrence of 'Analyze Feedback'.
+- **Response[Analyze Feedback, Identify Improvement Areas] | | |**: If a 'Analyze Feedback' activity occurs, then a 'Identify Improvement Areas' activity must eventually occur after the 'Analyze Feedback' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Analyze Feedback' can be pending at the same time, and a single 'Identify Improvement Areas' can fulfill the obligation for all preceding 'Analyze Feedback'. If 'Analyze Feedback' does not occur, the constraint imposes no obligation on the occurrence of 'Identify Improvement Areas'.
+- **Chain Response[Identify Improvement Areas, Implement Improvements] | | |0,7,d**: Whenever an 'Identify Improvement Areas' activity occurs, it must be immediately followed by a 'Implement Improvements' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Identify Improvement Areas' to 'Implement Improvements'. Multiple 'Identify Improvement Areas'-'Implement Improvements' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Implement Improvements' are allowed to happen elsewhere in the process but not between an 'Identify Improvement Areas' and its corresponding 'Implement Improvements'. This constraint must be fulfilled within 0 to 7 days.
+- **Response[Host Event, Report Results] | | |**: If a 'Host Event' activity occurs, then a 'Report Results' activity must eventually occur after the 'Host Event' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Host Event' can be pending at the same time, and a single 'Report Results' can fulfill the obligation for all preceding 'Host Event'. If 'Host Event' does not occur, the constraint imposes no obligation on the occurrence of 'Report Results'.
+- **Response[Report Results, Archive Records] | | |**: If a 'Report Results' activity occurs, then a 'Archive Records' activity must eventually occur after the 'Report Results' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Report Results' can be pending at the same time, and a single 'Archive Records' can fulfill the obligation for all preceding 'Report Results'. If 'Report Results' does not occur, the constraint imposes no obligation on the occurrence of 'Archive Records'.
+- **Response[Archive Records, Evaluate Campaign] | | |**: If a 'Archive Records' activity occurs, then a 'Evaluate Campaign' activity must eventually occur after the 'Archive Records' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Archive Records' can be pending at the same time, and a single 'Evaluate Campaign' can fulfill the obligation for all preceding 'Archive Records'. If 'Archive Records' does not occur, the constraint imposes no obligation on the occurrence of 'Evaluate Campaign'.
+- **Chain Response[Receive Donation, Send Thank You Note] |A.Donation Amount > 100 | |**: Whenever a 'Receive Donation' activity occurs, it must be immediately followed by a 'Send Thank You Note' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Receive Donation' to 'Send Thank You Note'. Multiple 'Receive Donation'-'Send Thank You Note' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Send Thank You Note' are allowed to happen elsewhere in the process but not between a 'Receive Donation' and its corresponding 'Send Thank You Note'. This constraint is activated when A.Donation Amount > 100.
+- **Exactly[Promote Event] | |**: The 'Promote Event' activity must occur exactly once in the process.
+- **Chain Response[Request Donation, Receive Donation] | | |0,24,d**: Whenever a 'Request Donation' activity occurs, it must be immediately followed by a 'Receive Donation' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Request Donation' to 'Receive Donation'. Multiple 'Request Donation'-'Receive Donation' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Receive Donation' are allowed to happen elsewhere in the process but not between a 'Request Donation' and its corresponding 'Receive Donation'. This constraint must be fulfilled within 0 to 24 days.
+
+
+## Interleaved Description
+The MP-Declare process model for the fundraising campaign is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Identify Donor,' which involves the identification phase for finding potential donors using the 'Donor ID' attribute. This establishes the initial context for the entire fundraising workflow.
+#### **End Constraints**
+The process concludes with the activity 'Evaluate Campaign,' which represents the final assessment of the entire fundraising campaign. This activity must be the last to occur in the process, providing coherent closure to all preceding efforts.
+
+### **Frequency Constraints**
+
+#### **Existence Constraint**
+The 'Collect Feedback' activity must occur at least 3 times in the process. This ensures repeated gathering of input from participants and donors about events using the 'Feedback Type' attribute, adding depth and context regarding the presence of feedback collection within the process.
+
+#### **Exactly Constraint**
+The 'Promote Event' activity must occur exactly once in the process. This sets a fixed boundary on the marketing and promotion of the fundraiser using the 'Event Type' attribute, ensuring precision by allowing only a single occurrence of event promotion.
+
+### **Flexible Ordering Constraints**
+
+#### **Response Constraints**
+1. If the 'Contact Donor' activity occurs, then the 'Request Donation' activity must eventually occur after it. This defines an ordered flow where reaching out to potential donors is followed by asking for contributions using the 'Donor ID' and 'Donation Type' attributes, maintaining a cohesive temporal structure.
+2. If the 'Promote Event' activity occurs with the 'Event Type' attribute, then the 'Host Event' activity must eventually occur after it. This ensures that marketing the fundraiser leads to the execution of the event itself, preserving logical progression.
+3. If the 'Collect Feedback' activity occurs with the 'Feedback Type' attribute, then the 'Analyze Feedback' activity must eventually occur after it. This sequences the review and interpretation of gathered input, supporting a structured feedback loop.
+4. If the 'Analyze Feedback' activity occurs, then the 'Identify Improvement Areas' activity must eventually occur after it. This ordered flow ensures that interpreting feedback leads to pinpointing specific areas for enhancement.
+5. If the 'Host Event' activity occurs, then the 'Report Results' activity must eventually occur after it. This maintains momentum by requiring documentation of outcomes following event execution.
+6. If the 'Report Results' activity occurs, then the 'Archive Records' activity must eventually occur after it. This sequences the storage of documentation for future reference.
+7. If the 'Archive Records' activity occurs, then the 'Evaluate Campaign' activity must eventually occur after it. This final response constraint completes the campaign assessment, ensuring all records inform the ultimate evaluation.
+
+#### **Succession Constraints**
+Whenever a 'Request Donation' activity occurs with the 'Donor ID' and 'Donation Type' attributes, it must be followed by a 'Receive Donation' activity with the 'Donation Amount' attribute. This establishes a causal link between requesting and actually receiving contributions, creating a cohesive progression from solicitation to receipt.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+1. Whenever a 'Receive Donation' activity occurs with the condition that the 'Donation Amount' is greater than 100, it must be immediately followed by a 'Send Thank You Note' activity in the next event position. This captures an immediate cause-and-effect relationship, ensuring direct and uninterrupted gratitude expression within 0 to 48 hours, with no intervening events.
+2. Whenever an 'Identify Improvement Areas' activity occurs, it must be immediately followed by an 'Implement Improvements' activity in the next event position. This enforces a direct causal succession from pinpointing enhancements to applying changes, with no events in between, and must be fulfilled within 0 to 7 days.
+3. Whenever a 'Request Donation' activity occurs, it must be immediately followed by a 'Receive Donation' activity in the next event position. This creates an immediate link between solicitation and receipt of donations, ensuring no intervening activities and fulfillment within 0 to 24 days.

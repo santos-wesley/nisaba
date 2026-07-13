@@ -1,0 +1,52 @@
+# Security Operations Process Description
+
+This process model describes a retail security management system with the following activities and behaviors:
+
+## Process Overview
+
+The process **begins with "Monitor Store Entrance"** and **ends with "Deactivate Alarm"**, establishing the overall boundaries of the security workflow.
+
+## Activities and Their Data Attributes
+
+The process involves 15 distinct activities, several of which carry specific data attributes:
+
+- **Inspect Security Cameras** records a **Camera ID** (an integer from 1 to 1000)
+- **Report Incident** captures **Incident Severity** (a float from 0.1 to 10.0) and **Incident Type** (Theft, Vandalism, or Assault)
+- **Verify Alarm Trigger** records **Alarm Status** (Active, Inactive, or Triggered)
+- **Alert Security Personnel** captures **Personnel ID** (integer 1-500) and **Security Level** (Low, Medium, or High)
+- **Handle Customer Complaint** records **Customer ID** (integer 1-10000) and **Complaint Status** (Resolved or Unresolved)
+- **Perform Security Audit** captures an **Audit Score** (float from 0.0 to 100.0)
+- **Conduct Bag Check** records a **Customer ID**
+
+## Business Rules and Constraints
+
+**Mandatory Occurrences:**
+- **Report Incident** must occur at least once during the process.
+
+**Prohibited Occurrences:**
+- **Conduct Emergency Drill** must never occur.
+
+**Sequential Dependencies:**
+- Whenever **Inspect Security Cameras** occurs, **Review Security Footage** must eventually follow using the *same Camera ID*.
+- Whenever a **High Security Level** alert is issued via **Alert Security Personnel**, an **Escort Suspect** action must directly follow within a time window of 0 to 5 (using matching Personnel ID); this establishes a tightly-coupled chain relationship.
+- Whenever the **Alarm Status is Triggered** during **Verify Alarm Trigger**, this must be directly followed by **Alert Security Personnel** within a time window of 0 to 10.
+- **Conduct Bag Check** must be followed by **Handle Customer Complaint** (with matching Customer ID) within a window of 0 to 1, and conversely, **Handle Customer Complaint** can only occur if **Conduct Bag Check** happened first — establishing a strict succession relationship.
+- If **Escort Suspect** occurs and is linked to a **Theft**-type incident, then **Escort Suspect** must precede **Report Incident**.
+
+**Co-occurrence Rules:**
+- If a **Perform Security Audit** results in an **Audit Score below 50**, then **Update Security Protocols** must also occur somewhere in the process (and vice versa) — the two activities are mutually linked.
+
+**Exclusivity Rules:**
+- Exactly one of **Train Security Staff** or **Conduct Emergency Drill** may occur — never both, and never neither.
+
+**Negative Constraints:**
+- **Check Inventory Discrepancies** must never be immediately followed by **Report Incident**.
+- **Deactivate Alarm** must never be preceded by **Verify Alarm Trigger** (the alarm should not be deactivated after verification checks).
+- **Review Security Footage** and **Inspect Security Cameras** cannot be in a succession relationship — if **Review Security Footage** occurs, **Inspect Security Cameras** should not follow it in the same succession pattern.
+
+**Conditional Response:**
+- If **Handle Customer Complaint** occurs with a **Resolved** status, and this is linked to a specific Customer ID, then **Conduct Bag Check** should have a corresponding relationship with that same Customer ID (not necessarily requiring a strict temporal order, but a data correlation).
+
+## Summary
+
+This model enforces a disciplined security workflow where camera surveillance, incident reporting, alarm verification, and customer complaint handling are tightly coupled through data correlations (especially Customer ID, Personnel ID, and Camera ID matching). The process emphasizes traceability (linking audits to protocol updates), accountability (linking security alerts to personnel escorts), and prevents redundant or contradictory security drill/training combinations.

@@ -1,0 +1,36 @@
+This Multi-Perspective Declare model describes a highly structured, end-to-end process for organizing and executing an event. The model defines 16 specific activities, the data attributes associated with them, and a strict sequential flow of operations. 
+
+Here is a natural language description of the model:
+
+### 1. Process Flow and Constraints
+The model outlines a strictly linear operational sequence. 
+* **Initiation:** The process must begin with the **Plan Event** activity. 
+* **Sequential Execution:** A chain of `Precedence` constraints dictates that each subsequent activity can only occur if the preceding one has already been executed. This creates a mandatory workflow:
+  1. Plan Event
+  2. Book Venue
+  3. Send Invitations
+  4. Arrange Catering
+  5. Hire Staff
+  6. Set Up Venue
+  7. Conduct Rehearsal
+  8. Welcome Guests
+  9. Facilitate Activities
+  10. Deliver Speech
+  11. Serve Meals
+  12. Coordinate Photography
+  13. Distribute Gifts
+  14. Collect Feedback
+* **Termination:** The process must conclude with the **Tear Down Venue** activity. 
+
+### 2. Data Attributes and Bindings
+The model binds specific data attributes to the activities to ensure proper context and resource tracking:
+* **Plan Event** requires an `Event ID` (an integer between 1 and 999,999) and a `Budget` (a decimal value between $1,000 and $50,000).
+* **Book Venue** requires the `Event ID` and the specific `Venue` chosen (restricted to Hall A, Hall B, or Hall C).
+* **Send Invitations** requires the `Event ID`, the `Number of Guests` (an integer between 10 and 500), and the `Invitation Status` (either "Sent" or "Not Sent").
+* **Arrange Catering** and **Serve Meals** both require the `Event ID` and the selected `Catering Service` (which must be either a Buffet, Sit-down Dinner, or Cocktail arrangement).
+* **Hire Staff** requires the `Event ID` and the specific `Staff Role` being hired (limited to Waiter, Coordinator, or Cleaner).
+* **Conduct Rehearsal** requires the `Event ID` and a unique `Rehearsal ID` (an integer between 1 and 9,999).
+* **Collect Feedback** requires the `Event ID` and the `Venue` where the event took place.
+
+### Summary
+In essence, this model enforces a rigid, step-by-step methodology for event management. No step can be skipped or reordered. An event must be planned and budgeted before a venue is booked, invitations must be sent before catering is arranged, and so on, until feedback is collected and the venue is finally torn down. Throughout this lifecycle, specific data constraints ensure that budgets, guest counts, venues, and catering options remain within predefined, realistic parameters.

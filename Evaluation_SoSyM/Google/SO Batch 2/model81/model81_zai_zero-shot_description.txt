@@ -1,0 +1,42 @@
+This natural language description breaks down the Multi-Perspective Declare model into a comprehensive, easy-to-understand process specification. 
+
+### **Overview**
+The model describes an **Integration Lifecycle Process** consisting of 14 distinct activities. The process is flexible, allowing users to start by either planning the integration or designing the system architecture, but it must always conclude with the deployment of the integration. Throughout the process, specific data constraints are attached to track the integration's identity, status, and quality metrics.
+
+### **1. Activities and Data Bindings**
+As the process unfolds, specific data variables are bound to certain activities to track progress and metrics:
+*   **Plan Integration:** Tracks the `Integration ID` (an integer from 1 to 1000) and `Integration Status` (Planned, In Progress, Completed, Failed).
+*   **Design System Architecture:** Tracks the `Integration ID` and `Integration Type` (Data, Application, or Process).
+*   **Test Integration:** Records the `Testing Result` (Passed, Failed, Partial) and `Testing Coverage` (a percentage from 0.0 to 100.0).
+*   **Deploy Integration:** Updates the `Integration Status` and records `Downtime` (a float from 0.0 to 24.0 hours).
+*   **Resolve Integration Issues:** Tracks the `Number of Errors` (an integer from 0 to 100) and the `Integration Status`.
+
+### **2. Start and End Conditions**
+*   **Start:** The process must begin with the **Plan Integration** activity. 
+*   **End:** The process must terminate after the **Deploy Integration** activity. 
+
+### **3. Control Flow Constraints**
+The order and execution of activities are governed by the following behavioral rules:
+
+**Mandatory Sequences & Responses:**
+*   **Design System Architecture** must occur before **Develop Integration Components** can be executed (*Precedence*).
+*   Every time **Develop Integration Components** is executed, **Test Integration** must eventually follow (*Response*).
+*   **Test Integration** and **Deploy Integration** form a strict sequence: Testing must occur before Deployment, and Deployment must eventually follow Testing (*Succession*).
+*   If **Deploy Integration** occurs, **Monitor System Performance** must immediately follow it, with no other activities in between (*Chain Response*).
+*   If **Monitor System Performance** occurs, **Resolve Integration Issues** must eventually occur. Furthermore, every time Monitoring occurs, Issue Resolution must follow before Monitoring can happen again (*Alternate Response*).
+*   **Plan Integration** requires that **Document Integration Process** occurs at some point during the entire process lifecycle (*Responded Existence*).
+*   **Train Users** and **Deploy Integration** must co-exist. If one occurs, the other must also occur at some point in the process (*Co-Existence*).
+
+**Forbidden Sequences (Negative Constraints):**
+*   **Review Integration Plan** can never be immediately followed by **Approve Integration Design** (*Not Chain Succession*).
+*   **Validate Integration Results** can never occur before **Approve Integration Design** (*Not Precedence*).
+*   **Update System Documentation** can never be followed by **Gather User Feedback** (*Not Response*).
+
+**Decision Points (Choices):**
+*   At the beginning of the process, the user must make an **exclusive choice** between **Plan Integration** and **Design System Architecture**. Only one of these can be executed (*Choice*).
+*   Later in the process, there is an **exclusive choice** between **Test Integration** and **Deploy Integration**. Only one of these can be executed (*Exclusive Choice*).
+
+### **4. Data-Driven Constraint (Multi-Perspective Rule)**
+The model includes a specific constraint that bridges control flow and data:
+*   If **Deploy Integration** is executed and the data attribute `A.Integration Status` is recorded as **"Failed"**, then **Resolve Integration Issues** must eventually be executed (*Response*). 
+*   *Time Constraint:* This response must occur within **24 hours** of the failed deployment.

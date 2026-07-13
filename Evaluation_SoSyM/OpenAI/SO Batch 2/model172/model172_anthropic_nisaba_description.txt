@@ -1,0 +1,138 @@
+#MP-Declare Model
+## Activities
+- **Monitor Store Entrance**: The 'Monitor Store Entrance' activity represents the surveillance of the store's entrance to detect and observe incoming and outgoing individuals.
+- **Inspect Security Cameras**: The 'Inspect Security Cameras' activity involves checking the functionality and coverage of security cameras installed in the premises.
+- **Conduct Bag Check**: The 'Conduct Bag Check' activity involves inspecting customer bags to ensure security and prevent theft.
+- **Alert Security Personnel**: The 'Alert Security Personnel' activity involves notifying security staff about a potential security concern requiring their attention.
+- **Review Security Footage**: The 'Review Security Footage' activity involves examining recorded video footage to identify security incidents or irregularities.
+- **Report Incident**: The 'Report Incident' activity involves documenting and formally reporting a security-related incident.
+- **Escort Suspect**: The 'Escort Suspect' activity involves accompanying a suspected individual to ensure security and control during an incident.
+- **Verify Alarm Trigger**: The 'Verify Alarm Trigger' activity involves confirming whether an alarm activation is valid or a false alert.
+- **Perform Security Audit**: The 'Perform Security Audit' activity involves systematically reviewing security measures and procedures to assess their effectiveness.
+- **Update Security Protocols**: The 'Update Security Protocols' activity involves revising and improving existing security procedures and guidelines.
+- **Train Security Staff**: The 'Train Security Staff' activity involves providing training and instructions to security personnel to enhance their skills and readiness.
+- **Handle Customer Complaint**: The 'Handle Customer Complaint' activity involves addressing and resolving complaints raised by customers.
+- **Check Inventory Discrepancies**: The 'Check Inventory Discrepancies' activity involves identifying and investigating differences between recorded and actual inventory.
+- **Conduct Emergency Drill**: The 'Conduct Emergency Drill' activity involves performing a practice exercise to prepare staff for emergency situations.
+- **Deactivate Alarm**: The 'Deactivate Alarm' activity involves turning off an active or triggered alarm system.
+
+## Attributes
+- **Camera ID: Integer between 1 and 1000**: The attribute 'Camera ID: Integer between 1 and 1000' represents the unique identification number of a security camera.
+- **Incident Severity: Float between 0.1 and 10.0**: The attribute 'Incident Severity: Float between 0.1 and 10.0' represents the severity level assigned to a reported security incident.
+- **Alarm Status: Active, Inactive, Triggered**: The attribute 'Alarm Status: Active, Inactive, Triggered' specifies the current state of the alarm system.
+- **Security Level: Low, Medium, High**: The attribute 'Security Level: Low, Medium, High' specifies the degree of security risk or priority associated with a situation.
+- **Personnel ID: Integer between 1 and 500**: The attribute 'Personnel ID: Integer between 1 and 500' represents the unique identification number of a security personnel member.
+- **Incident Type: Theft, Vandalism, Assault**: The attribute 'Incident Type: Theft, Vandalism, Assault' specifies the category of the security incident that occurred.
+- **Customer ID: Integer between 1 and 10000**: The attribute 'Customer ID: Integer between 1 and 10000' represents the unique identification number of a customer.
+- **Audit Score: Float between 0.0 and 100.0**: The attribute 'Audit Score: Float between 0.0 and 100.0' represents the numerical score assigned during a security audit reflecting compliance and effectiveness.
+- **Complaint Status: Resolved, Unresolved**: The attribute 'Complaint Status: Resolved, Unresolved' specifies whether a customer complaint has been addressed and closed or remains open.
+
+## Binds
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the retail security monitoring process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Monitor Store Entrance,' establishing the initial context in which surveillance of incoming and outgoing individuals at the store's entrance is continuously conducted, setting the foundation for all subsequent security operations.
+
+#### **End Constraints**
+The process concludes with the activity 'Perform Security Audit,' which involves a systematic review of security measures and procedures to assess their overall effectiveance. This activity must be the last to occur in the process, ensuring that the model coherently closes with an evaluative measure of the process's success, capturing an 'Audit Score' that reflects final compliance.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Inspect Security Cameras' activity must occur at least once in the process. This ensures that the functionality and coverage of the security cameras, identified by their 'Camera ID,' are verified, adding depth and reliability to the overall surveillance infrastructure. Furthermore, the 'Train Security Staff' activity must also occur at least once, reinforcing the preparedness of personnel and elaborating on the process's commitment to continual readiness.
+
+#### **Absence Constraints**
+In contrast, the 'Conduct Emergency Drill' activity must not occur more than twice within the process. This exclusion highlights the boundaries placed on rehearsal activities, reinforcing process integrity by ensuring that emergency preparedness does not disrupt the core operational flow of daily security monitoring.
+
+#### **Exactly Constraints**
+Summarizing the frequency of critical documentation, the 'Report Incident' activity must occur exactly once whenever a security event with 'Incident Severity' greater than 5.0 is detected. This fixed boundary ensures precision in incident documentation, preventing redundant or missing reports within the process model.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraint**
+Whenever the 'Verify Alarm Trigger' activity occurs with the condition 'Alarm Status is Triggered,' this necessitates that the 'Alert Security Personnel' activity also occurs at some point in the process. This cause-effect relationship establishes that a triggered alarm cannot exist without the corresponding notification of security staff, enhancing coherence in the escalation procedure.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Escort Suspect' is permitted to occur only if an 'Alert Security Personnel' activity has occurred before it. This sets up the initial context that security personnel must be notified before any suspect is escorted, guiding the logical sequence of intervention.
+2. The activity 'Deactivate Alarm' is permitted to occur only if a 'Verify Alarm Trigger' activity has occurred before it, with the condition that 'Alarm Status is Triggered.' This background establishes that alarm verification must precede deactivation, ensuring that no alarm is turned off without proper confirmation.
+
+#### **Response Constraints**
+1. If the 'Verify Alarm Trigger' activity occurs with the condition 'Alarm Status is Triggered,' then the 'Report Incident' activity must occur afterward. This defines an ordered flow ensuring that verified alarm triggers are properly documented in a cohesive temporal structure.
+2. If the 'Conduct Bag Check' activity occurs and reveals a discrepancy, then the 'Check Inventory Discrepancies' activity must occur afterward. This sequence ensures that irregularities detected during bag checks are systematically followed up with inventory investigation.
+
+#### **Succession Constraints**
+Whenever a 'Report Incident' activity occurs with 'Incident Severity' greater than 7.0, it must be causally followed by an 'Alert Security Personnel' activity. This establishes a clear causal link, ensuring that severe incidents always result in the immediate notification of security staff, creating a cohesive progression within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraint**
+Each occurrence of the 'Review Security Footage' activity must be preceded by a distinct 'Inspect Security Cameras' activity, without another 'Review Security Footage' occurring in between. This condition-consequence relationship ensures order consistency, requiring camera functionality to be confirmed before each review of footage, promoting balanced process flow.
+
+#### **Alternate Response Constraint**
+Each occurrence of the 'Handle Customer Complaint' activity must be followed by a unique 'Update Security Protocols' activity before another complaint is handled. This condition-consequence pairing ensures that each complaint leads to a distinct protocol update, supporting clear one-to-one activity pairing.
+
+#### **Alternate Succession Constraint**
+Each occurrence of the 'Alert Security Personnel' activity must be followed by a unique 'Escort Suspect' activity, and each 'Escort Suspect' activity must be preceded by a distinct 'Alert Security Personnel' activity, without intervening occurrences of either. This enforces an ordered structure with unique activity pairings, enhancing process coherence in suspect handling procedures.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraint**
+Each 'Deactivate Alarm' activity must be immediately preceded by a 'Verify Alarm Trigger' activity, with no intervening events. This sequence establishes an immediate dependency, ensuring that alarm deactivation directly and explicitly follows verification.
+
+#### **Chain Response Constraint**
+Whenever an 'Alert Security Personnel' activity occurs with 'Security Level is High,' it must be immediately followed by an 'Escort Suspect' activity. This cause-effect relationship captures immediate succession, ensuring that high-security alerts result directly in suspect escort without delay.
+
+#### **Chain Succession Constraint**
+Whenever a 'Conduct Bag Check' activity occurs and identifies a theft-related concern, it must be immediately followed by an 'Alert Security Personnel' activity, and this alert must always be immediately preceded by such a bag check under these conditions. This tightly coupled sequence ensures a direct cause-and-effect relationship, leaving no room for intervening activities between suspicion and alert.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraint**
+The 'Report Incident' activity and the 'Review Security Footage' activity are conjunctively linked, ensuring that whenever one occurs, the other also occurs within the same process instance. This mutual dependency reflects the necessity of reviewing footage whenever an incident is formally reported, and vice versa.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraint**
+Either the 'Verify Alarm Trigger' activity or the 'Inspect Security Cameras' activity may occur in response to a routine security check, introducing alternative paths that allow flexibility depending on the nature of the triggering event.
+
+#### **Exclusive Choice Constraint**
+Exactly one of the 'Deactivate Alarm' or 'Escort Suspect' activities must occur following a 'Verify Alarm Trigger' event with 'Alarm Status is Triggered.' This alternative structure enforces mutually exclusive pathways, ensuring that a triggered alarm results in either immediate deactivation or suspect escort, but not both simultaneously.
+
+#### **Not Co-Existence Constraint**
+The 'Deactivate Alarm' activity and the 'Escort Suspect' activity cannot both occur within the same process instance when triggered by the same alarm event with 'Alarm Status is Triggered.' This exclusion ensures that these two divergent response paths do not conflict, maintaining process integrity by preventing contradictory security actions.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraint**
+The occurrence of the 'Conduct Emergency Drill' activity must not necessitate the occurrence of the 'Report Incident' activity. This contrast prevents the dependency between routine drills and actual incident reporting, ensuring that practice exercises are not conflated with real security events.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraint**
+The 'Update Security Protocols' activity must not precede the 'Perform Security Audit' activity. This restriction ensures that protocol updates are not made before an audit has assessed the current state of security measures, preserving the intended sequence within the model.
+
+#### **Not Response Constraint**
+The 'Handle Customer Complaint' activity must not be followed by a 'Deactivate Alarm' activity. This contrast ensures that customer complaint resolution does not inadvertently trigger unrelated alarm deactivation, maintaining the integrity of the model's intended progression.
+
+#### **Not Succession Constraint**
+The 'Train Security Staff' activity must not be followed at any point by a 'Conduct Emergency Drill' activity questioning staff readiness immediately after training without proper assessment. This restriction preserves the model's defined flow by separating training from drills unless mediated by other assessment activities.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraint**
+The 'Handle Customer Complaint' activity must not be immediately preceded by the 'Escort Suspect' activity. This enforces non-immediate order restrictions, maintaining separation between suspect handling and customer complaint resolution processes.
+
+#### **Not Chain Response Constraint**
+The 'Perform Security Audit' activity must not be immediately followed by the 'Conduct Bag Check' activity. This contrast prevents immediate succession, preserving structural integrity by ensuring audits are not rushed into operational checks without proper interim analysis.
+
+#### **Not Chain Succession Constraint**
+The 'Conduct Emergency Drill' activity and the 'Alert Security Personnel' activity must not immediately precede or follow one another. This contrast prevents direct succession between simulated drills and real security alerts, refining the process model by excluding the possibility of confusing practice exercises with genuine security responses.

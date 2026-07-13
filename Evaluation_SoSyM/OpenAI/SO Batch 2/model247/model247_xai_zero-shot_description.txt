@@ -1,0 +1,45 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a flexible process for handling three types of intellectual property (IP) applications: **patents**, **trademarks**, and **copyrights**. The process is declarative, meaning it defines constraints that must be satisfied rather than a rigid sequence of steps.
+
+### Core Process Flow
+
+The model supports three parallel IP registration pathways:
+
+**1. Patent Pathway**
+- A user begins by filing a patent application (providing an Application ID and paying an Application Fee).
+- A patent search must then be conducted, producing a Search Result ("Clear" or "Conflict").
+- The patent application is subsequently examined, resulting in an Application Status ("Pending", "Approved", or "Rejected").
+- Based on the examination outcome, the application is either **granted** or **rejected**.
+
+**2. Trademark Pathway**
+- Follows an almost identical structure to patents: filing → trademark search → examination → grant or reject.
+
+**3. Copyright Pathway**
+- Slightly simplified: filing → examination → grant or reject (no mandatory search activity).
+
+### Key Constraints and Rules
+
+**Mandatory Sequences:**
+- A patent or trademark search **must** be performed before the respective examination can occur (with a response constraint allowing up to 2 occurrences and "deviation" handling).
+- Copyright examination must follow filing.
+- After examination, exactly one of "Grant" or "Reject" must occur, depending on whether the Application Status is "Approved" or "Rejected".
+
+**Data-Driven Decisions:**
+- The choice between granting or rejecting an application is **data-dependent**: it is only allowed if the Application Status matches the decision (Approved → Grant, Rejected → Reject).
+- Search results influence the patent and trademark examination paths (examination should respond to a "Clear" search result).
+
+**Appeal Mechanism:**
+- An applicant may file an **Appeal Decision** after any rejection (patent, trademark, or copyright), provided the Application ID matches the rejected application. This allows the process to potentially loop back or be revisited.
+
+**Termination:**
+- The process can legally end in any of the three "Grant" activities or any of the three "Reject" activities.
+
+### Data Perspective
+
+All activities are bound to relevant data parameters:
+- Application ID (integer 1–1,000,000)
+- Application Fee (float between $50 and $10,000)
+- Application Status, Search Result, and Decision fields with enumerated possible values.
+
+This model allows significant flexibility — for example, multiple searches could theoretically be conducted, appeals can be filed after rejections, and the three IP types can be processed independently — while still enforcing essential compliance rules such as "search before examination" for patents and trademarks, and "examination must lead to a clear grant or reject decision."

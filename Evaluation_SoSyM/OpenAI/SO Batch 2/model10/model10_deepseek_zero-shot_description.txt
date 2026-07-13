@@ -1,0 +1,21 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This model describes a structured material testing and approval process, where each sample is tracked by a unique **Sample ID** (an integer between 1 and 1000). The process begins with the **Prepare Sample** activity, which must be the first step. It ends with either **Approve Material** or **Reject Material**, both of which are valid final activities.
+
+The process enforces several behavioral rules between activities, all of which are conditioned on data constraints:
+
+- **X-ray Diffraction and Microstructure Analysis** are linked by a **Response** constraint: if X-ray Diffraction is performed, then Microstructure Analysis must eventually be performed on the same sample (matching Sample ID). This rule has a high confidence (0.2, h).
+
+- **Hardness Measurement** must be immediately followed by a **Tensile Test** on the same sample (Chain Response), with high confidence (0.1, h).
+
+- **Thermal Analysis** and **Corrosion Resistance Evaluation** are in a **Succession** relationship: one must occur before the other, and both must happen for the same sample, with a deterministic confidence (0.1, d).
+
+- **Document Results** must occur before **Review Findings** (Precedence), and both **Approve Material** and **Reject Material** must also be preceded by **Review Findings**—all on the same sample.
+
+- A critical precondition for several testing activities is that **Calibrate Equipment** must occur before them, but only if the **Equipment Status** is "Calibrated". This applies to: X-ray Diffraction, Hardness Measurement, Tensile Test, Thermal Analysis, and Corrosion Resistance Evaluation.
+
+- Finally, **Prepare Report** must be preceded by **Document Results** on the same sample, with deterministic confidence (0.1, d).
+
+Each activity is associated with specific data attributes (e.g., Hardness Value, Tensile Strength, Corrosion Resistance, Approval Status, etc.), and these attributes have defined ranges or allowed values. The entire process ensures that testing is performed in a logical order, equipment is properly calibrated, and results are documented and reviewed before a final approval or rejection decision is made.

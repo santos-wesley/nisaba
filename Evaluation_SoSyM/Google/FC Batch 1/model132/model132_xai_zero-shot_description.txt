@@ -1,0 +1,34 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a **disaster management and emergency response process** that is triggered by seismic events. The process combines mandatory control-flow constraints with data-driven conditions and temporal aspects.
+
+### Process Flow
+
+The process always begins with **Monitor Seismic Activity**. After seismic activity is monitored, an **Early Warning** must eventually be issued. Once the early warning is issued, the **Emergency Response** must be activated, which then triggers a mandatory sequence of relief actions: **Deploy Rescue Teams** → **Provide Medical Assistance** → **Distribute Relief Supplies**.
+
+In parallel, after **Assessing Disaster Risk**, the process may trigger population protection measures. Specifically, if the **Risk Score** exceeds 70, both **Evacuate Affected Population** and **Establish Temporary Shelters** must eventually occur.
+
+Later in the process, **Conduct Damage Assessment** must be performed, and it must occur **before** any further distribution of relief supplies (enforced by the Succession constraint). This implies that once damage assessment has been completed, relief distribution may occur, but damage assessment cannot be repeated after relief distribution has begun.
+
+### Data Perspectives
+
+Each activity is associated with a specific data attribute:
+
+- **Monitor Seismic Activity** records the *Seismic Magnitude* (0–10)
+- **Assess Disaster Risk** produces a *Risk Score* (0.0–100.0)
+- **Issue Early Warning** sets a *Warning Level* (Low, Medium, High, Critical)
+- **Activate Emergency Response** tracks *Response Status* (Initiated, Ongoing, Completed)
+- **Deploy Rescue Teams** records *Teams Deployed* (0–50)
+- **Provide Medical Assistance** tracks *Injured Count* (0–10,000)
+- **Distribute Relief Supplies** records *Supplies Distributed* (0–20,000)
+- **Evacuate Affected Population** tracks *People Evacuated* (0–50,000)
+- **Establish Temporary Shelters** records *Shelters Established* (0–20)
+- **Conduct Damage Assessment** produces a *Damage Estimate* (0.0–1,000,000,000.0)
+
+### Additional Constraints
+
+- The pair **Provide Medical Assistance → Distribute Relief Supplies** has an additional temporal constraint: they must occur within a **24-hour window** (0,24,h).
+
+### Summary
+
+The model represents a structured yet partially flexible disaster response workflow. It enforces a core emergency response chain after an early warning, makes evacuation and sheltering mandatory when risk is high, ensures damage assessment is properly timed relative to relief efforts, and imposes a tight time window between medical aid and relief supply distribution. All activities are data-aware, capturing key metrics relevant to disaster management.

@@ -1,0 +1,32 @@
+Here is a natural language description of the Multi-Perspective Declare model:
+
+### **Overview and Data Attributes**
+The model represents a business process for managing flexible work arrangements, consisting of eight distinct activities. Each activity is bound to specific data attributes that dictate the context of the process:
+
+*   **Submit Application:** Captures the *Arrangement Type* (which can be Remote Work, Flextime, Compressed Workweek, or Job Sharing) and an *Application ID* (an integer between 1 and 1000).
+*   **Review Application:** Records the *Application ID*, the *Application Status* (which can be Submitted, Reviewed, Approved, Rejected, Implemented, or Terminated), and a *Review Score* (an integer from 1 to 5).
+*   **Approve Application & Reject Application:** Both update the *Application ID* and the *Application Status*.
+*   **Implement Arrangement:** Records the *Application ID*, *Application Status*, and *Hours Per Week* (a decimal number between 10.0 and 40.0).
+*   **Monitor Arrangement:** Requires only the *Application ID*.
+*   **Adjust Arrangement:** Updates the *Application ID* and the *Hours Per Week*.
+*   **Terminate Arrangement:** Records the *Application ID* and the *Application Status*.
+
+### **Process Rules and Constraints**
+The behavior of the process is governed by a set of logical rules, some of which are conditional based on the data attribute "Application Status" (referred to here as `A.Application Status`):
+
+**1. Initiation and Submission**
+*   The process must always begin with the **Submit Application** activity. 
+*   Once an application is submitted, a **Review Application** activity is eventually required. However, the same application cannot be submitted and reviewed at the exact same time (Not Co-Existence).
+
+**2. Review and Decision**
+*   An application cannot be reviewed unless it has been submitted first (Precedence: Approve Application cannot precede Review Application, meaning Review must happen before Approval). *Note: Based on standard process logic, this ensures reviews happen prior to approvals.*
+*   After the review, a decision must be made by executing exactly one of the following: **Approve Application** or **Reject Application** (Choice).
+
+**3. Approval Path**
+*   If an application is approved, it triggers the mandatory **Implement Arrangement** activity.
+*   Once implemented, the arrangement must be **Monitored**. This creates a direct succession: Implement Arrangement must be followed by Monitor Arrangement, and Monitor Arrangement cannot occur without prior implementation.
+*   Following the monitoring of an arrangement, an **Adjust Arrangement** activity must eventually occur to modify the hours per week.
+*   Additionally, if the application's status is marked as "Approved", the **Terminate Arrangement** activity must eventually be executed to formally close the process.
+
+**4. Rejection Path**
+*   If an application is rejected, the process takes a strict negative constraint regarding termination: if the application status is "Rejected", the **Terminate Arrangement** activity is strictly forbidden and cannot occur (Not Response).

@@ -1,0 +1,41 @@
+activity Submit Benefits Enrollment
+activity Verify Employee Eligibility
+activity Process Benefits Claim
+activity Approve Benefits Claim
+activity Deny Benefits Claim
+activity Update Benefits Record
+activity Audit Benefits Enrollment
+activity Send Enrollment Confirmation
+activity Receive Employee Inquiry
+activity Resolve Employee Inquiry
+activity Request Additional Information
+activity Review Benefits Options
+activity Calculate Premium Cost
+activity Process Premium Payment
+activity Generate Benefits Report
+bind Submit Benefits Enrollment: Employee ID, Enrollment Status, Benefit Plan
+bind Process Benefits Claim: Employee ID, Claim Amount, Claim Status
+bind Calculate Premium Cost: Premium Rate, Benefit Plan, Deduction Amount
+bind Receive Employee Inquiry: Employee ID, Inquiry Type
+Enrollment Status: Submitted, Verified, Approved, Rejected
+Claim Amount: integer between 0 and 10000
+Claim Status: Received, Processed, Approved, Denied, Paid
+Premium Rate: float between 0.0 and 1.0
+Employee ID: integer between 1000 and 9999
+Inquiry Type: Enrollment, Claim, Eligibility, Payment
+Benefit Plan: Health, Dental, Vision, Life
+Deduction Amount: float between 0.0 and 5000.0
+Init[Submit Benefits Enrollment] | |
+Response[Submit Benefits Enrollment, Verify Employee Eligibility] | | |0,48,h
+Choice[Approve Benefits Claim, Deny Benefits Claim] | | |
+Precedence[Approve Benefits Claim, Process Benefits Claim] | | |
+Precedence[Deny Benefits Claim, Process Benefits Claim] | | |
+Response[Submit Benefits Enrollment, Send Enrollment Confirmation] | | |0,24,h
+Response[Submit Benefits Enrollment, Audit Benefits Enrollment] | | |0,7,d
+Response[Submit Benefits Enrollment, Calculate Premium Cost] | | |0,24,h
+Response[Submit Benefits Enrollment, Process Premium Payment] | | |0,7,d
+Response[Submit Benefits Enrollment, Generate Benefits Report] | | |0,30,d
+Response[Submit Benefits Enrollment, Update Benefits Record] | | |0,7,d
+Response[Submit Benefits Enrollment, Review Benefits Options] | | |0,24,h
+Response[Submit Benefits Enrollment, Request Additional Information] | | |0,24,h
+Response[Submit Benefits Enrollment, Resolve Employee Inquiry] | | |0,24,h

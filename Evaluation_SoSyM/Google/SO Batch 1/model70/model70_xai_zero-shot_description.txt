@@ -1,0 +1,32 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a **disaster response process** triggered by seismic events, with a strong focus on tsunami risk management and subsequent emergency operations.
+
+### Process Flow and Rules:
+
+The process **always begins** with **Monitor Seismic Activity**. 
+
+If the monitored **Magnitude exceeds 7.0**, the activity **Issue Tsunami Alert** must eventually occur. Once a tsunami alert is issued, **Evacuate Coastal Areas** must subsequently be carried out (with a deadline of 60 minutes).
+
+After an alert is issued, two parallel response chains are activated:
+- **Dispatch Emergency Services** must be followed by **Provide Medical Assistance** (within 24 hours).
+- **Establish Emergency Shelters** must be followed by **Distribute Relief Supplies** (within 48 hours).
+
+Additionally, **Assess Infrastructure Damage** must be followed by **Restore Communication Networks** (within 72 hours). If communication networks are **Down**, the system is obligated to **Restore Communication Networks** until its status becomes **Operational**.
+
+### Constraints:
+
+- **Provide Medical Assistance** cannot occur before **Dispatch Emergency Services** (precedence constraint).
+- **Conduct Search and Rescue** and **Assess Infrastructure Damage** **cannot both occur** in the same process instance (they are mutually exclusive).
+- **Issue Tsunami Alert** produces an **Alert Level** which can be *Watch*, *Warning*, or *Cancel*, along with an **Estimated Arrival Time** (in minutes).
+
+### Data Perspectives:
+
+The model tracks various quantitative and qualitative data:
+- Seismic **Magnitude** (0.0–10.0)
+- Number of **Evacuees**, **Injuries**, **Shelters**, **Rescued** persons
+- **Damage Severity** (Minor/Moderate/Severe)
+- **Communication Status** (Operational / Partially Operational / Down)
+- **Supply Cost** of relief distribution
+
+This model ensures a structured, time-sensitive, and data-aware emergency response that prioritizes rapid evacuation and medical care in high-magnitude seismic events with tsunami potential, while enforcing logical dependencies and mutual exclusions between certain recovery activities.

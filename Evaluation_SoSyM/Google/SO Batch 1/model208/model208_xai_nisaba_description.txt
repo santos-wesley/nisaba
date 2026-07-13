@@ -1,0 +1,93 @@
+#MP-Declare Model
+## Activities
+- **Schedule Train**: The 'Schedule Train' activity represents the initial planning and scheduling of a train's route and timetable.
+- **Allocate Resources**: The 'Allocate Resources' activity involves assigning necessary resources such as tracks and crew to the train.
+- **Monitor Train**: The 'Monitor Train' activity includes real-time tracking and observation of the train's progress and status.
+- **Manage Delay**: The 'Manage Delay' activity focuses on handling and mitigating any delays encountered during the train's operation.
+- **Perform Maintenance**: The 'Perform Maintenance' activity entails conducting maintenance work on the train to ensure its operational readiness.
+- **Inspect Track**: The 'Inspect Track' activity involves examining the railway tracks for safety and maintenance needs.
+- **Dispatch Train**: The 'Dispatch Train' activity is the process of sending the train on its journey from the station.
+- **Receive Train**: The 'Receive Train' activity covers the arrival and reception of the train at its destination.
+- **Update Schedule**: The 'Update Schedule' activity includes revising and updating the train's schedule based on current conditions.
+- **Cancel Train**: The 'Cancel Train' activity involves terminating the train service due to specific reasons.
+
+## Attributes
+- **Train ID: integer between 1000 and 9999**: The attribute 'Train ID: integer between 1000 and 9999' uniquely identifies each train within the operational range of 1000 to 9999.
+- **Train Status: On Time, Delayed, Cancelled, Completed**: The attribute 'Train Status: On Time, Delayed, Cancelled, Completed' indicates the current operational status of the train among the possible states: On Time, Delayed, Cancelled, or Completed.
+- **Delay Duration: float between 0.0 and 300.0**: The attribute 'Delay Duration: float between 0.0 and 300.0' measures the extent of any delay in minutes, ranging from 0.0 to 300.0.
+- **Track Number: integer between 1 and 10**: The attribute 'Track Number: integer between 1 and 10' specifies the track assigned to the train, within the range of 1 to 10.
+- **Maintenance Type: Routine, Emergency, Scheduled**: The attribute 'Maintenance Type: Routine, Emergency, Scheduled' categorizes the type of maintenance required or performed on the train as Routine, Emergency, or Scheduled.
+- **Inspection Score: float between 0.0 and 10.0**: The attribute 'Inspection Score: float between 0.0 and 10.0' represents the score from track inspections, on a scale from 0.0 to 10.0.
+- **Priority Level: High, Medium, Low**: The attribute 'Priority Level: High, Medium, Low' denotes the priority assigned to the train's dispatch, which can be High, Medium, or Low.
+- **Passenger Count: integer between 0 and 1500**: The attribute 'Passenger Count: integer between 0 and 1500' records the number of passengers on the train, ranging from 0 to 1500.
+- **Reason Cancel: Weather, Maintenance, Technical Issue**: The attribute 'Reason Cancel: Weather, Maintenance, Technical Issue' specifies the reason for canceling the train, selected from Weather, Maintenance, or Technical Issue.
+- **Schedule Version: integer between 1 and 100**: The attribute 'Schedule Version: integer between 1 and 100' tracks the version number of the train's schedule, ranging from 1 to 100.
+
+## Binds
+- **bind Schedule Train: Train ID, Schedule Version**: The bind 'Schedule Train: Train ID, Schedule Version' specifies that the activity 'Schedule Train' requires the attributes 'Train ID' and 'Schedule Version'.
+- **bind Allocate Resources: Train ID, Track Number**: The bind 'Allocate Resources: Train ID, Track Number' links the 'Allocate Resources' activity with the attributes 'Train ID' and 'Track Number'.
+- **bind Monitor Train: Train ID, Train Status**: The bind 'Monitor Train: Train ID, Train Status' associates the 'Monitor Train' activity with the attributes 'Train ID' and 'Train Status'.
+- **bind Manage Delay: Train ID, Delay Duration**: The bind 'Manage Delay: Train ID, Delay Duration' connects the 'Manage Delay' activity to the attributes 'Train ID' and 'Delay Duration'.
+- **bind Perform Maintenance: Train ID, Maintenance Type**: The bind 'Perform Maintenance: Train ID, Maintenance Type' ties the 'Perform Maintenance' activity to the attributes 'Train ID' and 'Maintenance Type'.
+- **bind Inspect Track: Track Number, Inspection Score**: The bind 'Inspect Track: Track Number, Inspection Score' specifies that the activity 'Inspect Track' uses the attributes 'Track Number' and 'Inspection Score'.
+- **bind Dispatch Train: Train ID, Priority Level**: The bind 'Dispatch Train: Train ID, Priority Level' links the 'Dispatch Train' activity with the attributes 'Train ID' and 'Priority Level'.
+- **bind Receive Train: Train ID, Passenger Count**: The bind 'Receive Train: Train ID, Passenger Count' associates the 'Receive Train' activity with the attributes 'Train ID' and 'Passenger Count'.
+- **bind Update Schedule: Train ID, Schedule Version**: The bind 'Update Schedule: Train ID, Schedule Version' connects the 'Update Schedule' activity to the attributes 'Train ID' and 'Schedule Version'.
+- **bind Cancel Train: Train ID, Reason Cancel**: The bind 'Cancel Train: Train ID, Reason Cancel' ties the 'Cancel Train' activity to the attributes 'Train ID' and 'Reason Cancel'.
+
+## Constraints
+- **Init[Schedule Train] | |**: The 'Schedule Train' must be the first activity to occur in the process.
+- **Precedence[Dispatch Train, Allocate Resources] | | |**: The 'Allocate Resources' activity is permitted to occur only if a 'Dispatch Train' activity has occurred before it within the same process instance.
+- **Response[Monitor Train, Manage Delay] |A.Train Status is Delayed | |**: If a 'Monitor Train' activity occurs, then a 'Manage Delay' activity must eventually occur after the 'Monitor Train' event at some point in the same process instance, but only when A.Train Status is Delayed. There is no requirement on how soon or what events may occur in between. Multiple 'Monitor Train' can be pending at the same time, and a single 'Manage Delay' can fulfill the obligation for all preceding 'Monitor Train'. If 'Monitor Train' does not occur, the constraint imposes no obligation on the occurrence of 'Manage Delay'.
+- **Chain Precedence[Dispatch Train, Perform Maintenance] | | |**: The 'Perform Maintenance' activity can occur only if it is immediately preceded by 'Dispatch Train' activity, with no other activities occurring in between.
+- **Succession[Inspect Track, Allocate Resources] | | |**: An 'Inspect Track' activity must be followed by an 'Allocate Resources' activity at some point later in the same process instance. Conversely, an 'Allocate Resources' event can occur only if an 'Inspect Track' event has occurred before it within the same process instance. This bidirectional and ordered dependency ensures that 'Inspect Track' impose obligations for future 'Allocate Resources', and 'Allocate Resources' cannot occur without prior 'Inspect Track'. Multiple 'Inspect Track' and 'Allocate Resources' are allowed, with each 'Inspect Track' eventually leading to an 'Allocate Resources' and each 'Allocate Resources' being justified by a preceding 'Inspect Track'.
+- **Responded Existence[Dispatch Train, Receive Train] | | |**: If 'Dispatch Train' activity occurs in a process instance, then 'Receive Train' activity must also occur at least once within the same process instance, either before or after the 'Dispatch Train' event. If 'Dispatch Train' does not occur, there is no requirement for 'Receive Train' to occur. Multiple occurrences of 'Dispatch Train' are satisfied by at least one occurrence of 'Receive Train', and multiple 'Receive Train' instances are allowed.
+- **Not Co-Existence[Dispatch Train, Cancel Train] | | |**: The 'Dispatch Train' activity and the 'Cancel Train' activity cannot both occur within the same process instance. This means that if 'Dispatch Train' event occurs one or more times, 'Cancel Train' must not occur at all in that process instance, and vice-versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between 'Dispatch Train' and 'Cancel Train', allowing for different process variants based on which event (if any) occurs.
+- **Not Chain Succession[Update Schedule, Schedule Train] | | |**: An 'Update Schedule' activity cannot be immediately followed by a 'Schedule Train' activity; there must be at least one other event between them. Similarly, a 'Schedule Train' event cannot be immediately preceded by an 'Update Schedule' event. This constraint allows multiple occurrences of 'Update Schedule' and 'Schedule Train' in any order, provided they are not adjacent in the event sequence.
+- **Choice[Dispatch Train, Cancel Train] | | |**: At least one of the activities 'Dispatch Train' or 'Cancel Train' must occur in the process instance. This means that the process is compliant if 'Dispatch Train' event occurs, 'Cancel Train' event occurs, or both occur. There is no restriction on the order or the number of times they occur. However, if neither 'Dispatch Train' nor 'Cancel Train' occurs, the constraint is violated.
+- **Absence2[Cancel Train] | |**: The 'Cancel Train' must not occur 2 times in the process.
+
+
+## Interleaved Description
+The MP-Declare process model for the train operation process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Schedule Train,' which involves the initial planning and scheduling of a train's route and timetable using the 'Train ID' (integer between 1000 and 9999) and 'Schedule Version' (integer between 1 and 100) attributes. This establishes the foundational context for every train instance.
+
+### **Frequency Constraints**
+
+#### **Absence Constraints**
+In contrast to activities that must occur, the 'Cancel Train' activity must not occur 2 times in the process. This exclusion reinforces process integrity by strictly limiting cancellations and preventing excessive disruption to train operations.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+The activity 'Allocate Resources' is permitted to occur only if a 'Dispatch Train' activity has occurred before it within the same process instance. This background condition ensures that resources such as tracks and crew, identified by 'Train ID' and 'Track Number' (integer between 1 and 10), are assigned only after a formal dispatch decision with its associated 'Priority Level' has been established.
+
+#### **Response Constraints**
+If a 'Monitor Train' activity occurs with the condition that 'Train Status is Delayed,' then a 'Manage Delay' activity must eventually occur after it at some point in the same process instance. This sequence defines an ordered flow where real-time tracking, linked to 'Train ID' and 'Train Status' (On Time, Delayed, Cancelled, Completed), triggers delay handling via 'Train ID' and 'Delay Duration' (float between 0.0 and 300.0), with no fixed deadline but a clear obligation to mitigate issues.
+
+#### **Succession Constraints**
+An 'Inspect Track' activity must be followed by an 'Allocate Resources' activity at some point later in the same process instance, while an 'Allocate Resources' event can occur only if an 'Inspect Track' event has occurred before it. This cause-effect relationship, binding 'Track Number' and 'Inspection Score' (float between 0.0 and 10.0) to inspection and 'Train ID' with 'Track Number' to allocation, creates a cohesive progression ensuring track safety always justifies resource assignment.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+The 'Perform Maintenance' activity can occur only if it is immediately preceded by a 'Dispatch Train' activity, with no other activities occurring in between. This sequence establishes an immediate dependency so that maintenance work on 'Train ID' with a chosen 'Maintenance Type' (Routine, Emergency, Scheduled) follows directly after dispatch decisions based on 'Train ID' and 'Priority Level.'
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+In contrast to rigid paths, at least one of the activities 'Dispatch Train' or 'Cancel Train' must occur in the process instance. This introduces alternative paths, allowing flexibility where a train may be sent on its journey (with 'Train ID' and 'Priority Level') or terminated due to 'Reason Cancel' (Weather, Maintenance, Technical Issue), but never leaving the process without a decisive outcome.
+
+#### **Not Co-Existence Constraints**
+The 'Dispatch Train' activity and the 'Cancel Train' activity cannot both occur within the same process instance. This contrast sets a clear exclusion rule so that once a train is dispatched, cancellation is forbidden, and vice versa, thereby maintaining process integrity by preventing conflicting events for the same 'Train ID.'
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Succession Constraints**
+An 'Update Schedule' activity cannot be immediately followed by a 'Schedule Train' activity, and a 'Schedule Train' event cannot be immediately preceded by an 'Update Schedule' event; there must be at least one other event between them. This contrast prevents direct succession between schedule revisions (using 'Train ID' and 'Schedule Version') and initial scheduling, allowing both activities while refining the model by excluding specific immediate sequences.
+
+#### **Responded Existence Constraints**
+If a 'Dispatch Train' activity occurs, then a 'Receive Train' activity must also occur at least once within the same process instance. This cause-effect dependency ensures that any dispatched train, identified by 'Train ID' and 'Priority Level,' eventually arrives and is received with its 'Passenger Count' (integer between 0 and 1500), creating coherence by linking departure to completion regardless of order.

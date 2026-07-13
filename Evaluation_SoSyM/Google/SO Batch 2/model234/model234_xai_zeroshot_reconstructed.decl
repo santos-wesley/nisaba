@@ -1,0 +1,58 @@
+activity Identify Risk
+activity Assess Impact
+activity Evaluate Probability
+activity Prioritize Risks
+activity Develop Mitigation Plan
+activity Approve Mitigation Plan
+activity Implement Mitigation
+activity Monitor Risks
+activity Review Risk Assessment
+activity Update Risk Register
+activity Communicate Risks
+activity Document Lessons Learned
+activity Conduct Risk Workshop
+activity Validate Risk Controls
+activity Escalate Critical Risks
+bind Identify Risk: Risk ID, Risk Category, Risk Status, Risk Owner
+bind Assess Impact: Risk ID, Impact Score
+bind Evaluate Probability: Risk ID, Probability
+bind Prioritize Risks: Risk ID, Exposure Value
+bind Develop Mitigation Plan: Risk ID, Mitigation Strategy, Mitigation Cost
+bind Approve Mitigation Plan: Risk ID
+bind Implement Mitigation: Risk ID, Risk Status
+bind Monitor Risks: Risk ID
+bind Review Risk Assessment: Risk ID, Review Frequency
+bind Update Risk Register: Risk ID
+bind Communicate Risks: Risk ID, Risk Owner
+bind Document Lessons Learned: Risk ID
+bind Conduct Risk Workshop: Risk ID
+bind Validate Risk Controls: Risk ID
+bind Escalate Critical Risks: Risk ID, Impact Score
+Risk ID: integer between 1 and 1000
+Risk Category: Financial, Operational, Compliance, Strategic, Reputational
+Impact Score: integer between 1 and 10
+Probability: float between 0.0 and 1.0
+Exposure Value: float between 0.0 and 1000000.0
+Mitigation Strategy: Avoidance, Transference, Mitigation, Acceptance
+Mitigation Cost: float between 0.0 and 100000.0
+Risk Status: Open, Mitigated, Closed, Accepted
+Review Frequency: integer between 1 and 12
+Risk Owner: John Smith, Alice Johnson, Bob Williams
+Init[Identify Risk] | |
+End[Document Lessons Learned] | |
+Absence3[Escalate Critical Risks] | |
+Precedence[Assess Impact, Identify Risk] | | |
+Precedence[Evaluate Probability, Assess Impact] | | |
+Precedence[Prioritize Risks, Evaluate Probability] | | |
+Precedence[Develop Mitigation Plan, Prioritize Risks] | | |
+Response[Develop Mitigation Plan, Approve Mitigation Plan] | | |
+Precedence[Implement Mitigation, Approve Mitigation Plan] | | |
+Response[Implement Mitigation, Monitor Risks] | | |
+Response[Monitor Risks, Review Risk Assessment] | | |
+Response[Review Risk Assessment, Update Risk Register] | | |
+Response[Update Risk Register, Communicate Risks] | | |
+Response[Communicate Risks, Document Lessons Learned] | | |
+Response[Develop Mitigation Plan, Identify Risk] |A.Risk Category is Financial AND A.Mitigation Cost > 1000 | |
+Chain Response[Identify Risk, Implement Mitigation] |A.Risk Status is Open | |0,30,d
+Response[Monitor Risks, Review Risk Assessment] | | |90,180,d
+Response[Assess Impact, Escalate Critical Risks] |A.Impact Score > 7 | |0,24,h

@@ -1,0 +1,15 @@
+Based on the provided model, here is a natural language description of the process:
+
+The workflow begins with the **Assess Client Needs** activity, which is the mandatory starting point. During this assessment, the client is categorized by their **Client Risk Level** (Low, Medium, or High).
+
+Once the assessment is complete, a **Develop Service Plan** must be created, which includes defining a **Service Plan Duration** (between 1 and 12 months). If the service plan duration exceeds 6 months, the system will trigger a **Refer to Specialist** (choosing from Psychiatrist, Addiction Counselor, or Legal Aid) within 30 days.
+
+After the plan is developed, the process requires **Obtain Funding Approval** (with a **Funding Amount Requested** between $100 and $10,000). Once funding is approved, the system must provide **Provide Counseling Services** (choosing from Individual, Group, or Family counseling). This counseling must then be followed by **Monitor Client Progress** (scored from 0 to 100).
+
+If the client's **Progress Score** drops below 50, the system will trigger an **Adjust Service Plan** (with a reason of Progress, Setback, or New Needs) within 7 days. However, the model explicitly forbids adjusting the service plan immediately after monitoring progress—there must be at least one other activity in between.
+
+For high-risk clients (where **Client Risk Level** is High), the system will trigger a **Conduct Home Visit** (with an outcome of Positive, Neutral, or Negative) within 24 hours of the initial assessment. If the home visit outcome is Negative, the system will then trigger an **Adjust Service Plan** within 3 days.
+
+Additionally, if the **Service Plan Duration** is greater than 6 months, the system will trigger a **Refer to Specialist** within 30 days of developing the service plan.
+
+Throughout the process, after providing counseling services, the system must monitor the client's progress. The process ends with **Close Client File** (with a reason of Goals Met, Client Moved, or Services Declined), which is the mandatory final activity.

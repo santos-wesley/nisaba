@@ -1,0 +1,49 @@
+activity Analyze International Market
+activity Identify Business Opportunities
+activity Conduct Feasibility Study
+activity Develop Business Plan
+activity Acquire Necessary Permits
+activity Set Up International Office
+activity Hire Local Staff
+activity Negotiate with Local Vendors
+activity Initiate Marketing Campaign
+activity Monitor Market Response
+activity Adjust Strategy
+activity Assess Performance
+activity Manage International Logistics
+activity Report to Headquarters
+bind Analyze International Market: Market Size, Market Attractiveness
+bind Conduct Feasibility Study: Feasibility Result, Investment Amount
+bind Acquire Necessary Permits: Permit Status
+bind Hire Local Staff: Staff Level
+bind Initiate Marketing Campaign: Campaign Budget
+bind Monitor Market Response: Market Response
+bind Adjust Strategy: Adjustment Decision
+bind Assess Performance: Performance Rating
+Market Size: integer between 1000 and 1000000
+Market Attractiveness: High, Medium, Low
+Feasibility Result: Positive, Negative
+Investment Amount: float between 10000 and 1000000
+Permit Status: Approved, Pending, Rejected
+Staff Level: High, Medium, Low
+Campaign Budget: float between 5000 and 500000
+Market Response: Positive, Neutral, Negative
+Adjustment Decision: Yes, No
+Performance Rating: Excellent, Good, Fair, Poor
+Init[Analyze International Market] | |
+Responded Existence[Analyze International Market, Identify Business Opportunities] | | |
+Precedence[Identify Business Opportunities, Analyze International Market] | | |
+Response[Identify Business Opportunities, Conduct Feasibility Study] | | |
+Alternate Precedence[Develop Business Plan, Conduct Feasibility Study] |A.Feasibility Result is Positive | |
+Precedence[Develop Business Plan, Conduct Feasibility Study] | | |
+Response[Develop Business Plan, Acquire Necessary Permits] | | |
+Chain Response[Acquire Necessary Permits, Set Up International Office] | | |0,5,d
+Response[Set Up International Office, Hire Local Staff] | | |
+Response[Hire Local Staff, Negotiate with Local Vendors] | | |
+Existence[Initiate Marketing Campaign] | |
+Response[Initiate Marketing Campaign, Monitor Market Response] | | |
+Response[Monitor Market Response, Adjust Strategy] |A.Market Response is Negative | |0,7,d
+Response[Adjust Strategy, Assess Performance] | | |
+Existence[Manage International Logistics] | |
+Chain Response[Assess Performance, Report to Headquarters] | | |0,48,h
+Exactly[Report to Headquarters] | |

@@ -1,0 +1,46 @@
+activity Request Return
+activity Approve Return
+activity Generate Return Label
+activity Ship Item Back
+activity Receive Item
+activity Inspect Item
+activity Determine Refund
+activity Process Refund
+activity Restock Item
+activity Dispose Item
+bind Request Return: Return Status, Return Reason, Return ID
+bind Approve Return: Return Status
+bind Ship Item Back: Return Status, Days to Return, Shipping Method, Shipping Cost
+bind Receive Item: Return Status
+bind Inspect Item: Return Status, Item Condition, Inspection Result
+bind Determine Refund: Return Status, Refund Amount
+bind Process Refund: Return Status, Refund Amount
+bind Restock Item: Return Status, Restock Quantity
+bind Dispose Item: Return Status
+bind Generate Return Label: 
+Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed
+Item Condition: integer between 1 and 5
+Refund Amount: float between 0.0 and 1000.0
+Days to Return: integer between 1 and 60
+Return Reason: Defective, Damaged, Wrong Item, No Longer Needed
+Inspection Result: Acceptable, Damaged, Unacceptable
+Restock Quantity: integer between 1 and 100
+Shipping Cost: float between 0.0 and 50.0
+Shipping Method: UPS, FedEx, USPS
+Return ID: integer between 1000 and 9999
+Init[Request Return] | |
+Response[Request Return, Approve Return] | | |
+Response[Approve Return, Generate Return Label] | | |
+Response[Generate Return Label, Ship Item Back] | | |
+Response[Ship Item Back, Receive Item] | | |
+Response[Receive Item, Inspect Item] | | |
+Response[Inspect Item, Determine Refund] | | |
+Response[Determine Refund, Process Refund] | | |
+Response[Inspect Item, Restock Item] |A.Inspection Result is Acceptable | |
+Response[Inspect Item, Dispose Item] |A.Inspection Result in (Damaged, Unacceptable) | |
+Response[Determine Refund, Process Refund] | | |0,2,d
+Response[Receive Item, Inspect Item] | | |0,48,h
+Response[Approve Return, Ship Item Back] | | |1,14,d
+Response[Request Return, Approve Return] | | |0,24,h
+Response[Approve Return, Generate Return Label] | | |0,30,m
+Not Co-Existence[Restock Item, Dispose Item] | | |

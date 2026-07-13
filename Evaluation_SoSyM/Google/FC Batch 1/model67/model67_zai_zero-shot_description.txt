@@ -1,0 +1,33 @@
+This Multi-Perspective Declare model outlines a comprehensive workflow for handling financial transactions, fraud detection, and security breach management. It defines ten specific activities, the data attributes associated with them, and a set of rules that govern how and when these activities must be executed. 
+
+Here is a natural language description of the model:
+
+### 1. Activities and Data Attributes
+Each activity in the model is bound to specific data attributes that must be recorded when the activity is executed:
+*   **Detect Fraudulent Activity:** Requires data on the *Transaction Type* (Debit, Credit, Wire Transfer, Online Payment), *Transaction Amount* (between $0.01 and $100,000.00), and *Fraud Risk Level* (Low, Medium, High).
+*   **Verify Customer Identity:** Tracks *Verification Attempts* (an integer from 1 to 5) and *Verification Status* (Verified, Not Verified, Pending).
+*   **Review Transaction Details:** Requires the *Transaction Type* and *Transaction Amount*.
+*   **Approve Transaction & Decline Transaction:** Both require the *Transaction Type* and *Transaction Amount* to be specified.
+*   **Report Suspicious Activity:** Also bound to *Transaction Type* and *Transaction Amount*.
+*   **Update Account Security:** Tracks the *Days Since Last Activity* (an integer from 0 to 365).
+*   **Notify Customer:** Records the *Customer Notification Method* (Email, SMS, or Phone Call).
+*   **Investigate Security Breach:** Requires logging the *Breach Severity* (an integer from 1 to 10).
+*   **Implement Security Patch:** Tracks the *Security Patch Status* (Applied, Not Applied, or Scheduled).
+
+### 2. Core Workflow Constraints
+The model enforces several baseline rules that apply regardless of specific data values:
+*   **Customer Notification:** Whenever **Detect Fraudulent Activity** occurs, it must eventually be followed by **Notify Customer**.
+*   **Suspicious Activity Reporting:** If a transaction is declined (**Decline Transaction**), it is mandatory to eventually execute **Report Suspicious Activity**.
+*   **Identity Verification:** A transaction cannot be approved (**Approve Transaction**) unless the customer's identity has been previously verified (**Verify Customer Identity**). 
+*   **Fraud Frequency Limit:** The **Detect Fraudulent Activity** event can occur at most 4 times within a single process instance (enforced by the Absence5 constraint, which prohibits a 5th occurrence).
+
+### 3. Data-Aware and Time-Bound Constraints
+The model introduces dynamic behavior based on specific data values and time limits (indicated in hours 'h', minutes 'm', or days 'd'):
+
+*   **High-Value Transactions:** If **Review Transaction Details** occurs and the *Transaction Amount* is greater than $1,000, the system must execute **Verify Customer Identity** within 10 minutes.
+*   **High-Risk Fraud:** If **Detect Fraudulent Activity** occurs and the *Fraud Risk Level* is "High", the system must execute **Decline Transaction** within 5 minutes.
+*   **SMS Notifications & Security:** If **Notify Customer** occurs and the *Customer Notification Method* is "SMS", the system must execute **Update Account Security** within 24 hours.
+*   **Security Breaches:** 
+    *   Whenever **Investigate Security Breach** occurs, **Implement Security Patch** must generally follow within 72 hours.
+    *   However, if the *Breach Severity* is greater than 7 (indicating a severe breach), the deadline to **Implement Security Patch** is accelerated to 48 hours.
+*   **Patch Iteration:** If **Implement Security Patch** is executed but the *Security Patch Status* is recorded as "Not Applied", the activity must be repeated within 7 days to ensure the patch is successfully applied.

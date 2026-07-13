@@ -1,0 +1,28 @@
+Here is a natural language description of the Multi-Perspective Declare model:
+
+**Overall Process**
+The model describes a structured, iterative prototype development lifecycle. The process always begins with **Define Requirements** and concludes when the **Approve Prototype** activity is completed. 
+
+**Core Workflow and Constraints**
+The process follows a strict, sequential response pattern where each major phase must eventually be followed by the next:
+1. Once **Define Requirements** occurs, **Develop Initial Prototype** must eventually follow.
+2. Developing the initial prototype must eventually be followed by **Test Prototype**.
+3. Testing the prototype must eventually be followed by **Gather Feedback**.
+4. Gathering feedback must eventually be followed by **Analyze Feedback**.
+5. Analyzing feedback must eventually be followed by **Revise Prototype**.
+6. Revising the prototype must eventually be followed by **Final Testing**.
+
+Additionally, there is a strict sequencing rule near the end of the process: if **Present Prototype** occurs, **Approve Prototype** must immediately follow it (Chain Response). 
+
+There is also an existence constraint on testing: the **Test Prototype** activity must occur exactly twice during the entire process execution (Existence2).
+
+**Data and Attributes**
+The model binds specific data attributes to certain activities to track details during execution:
+* **Gather Feedback** and **Analyze Feedback** both capture:
+  * **Stakeholder Name**: Restricted to "John Doe", "Jane Smith", or "Alice Johnson".
+  * **Feedback Rating**: An integer score between 1 and 10.
+* **Revise Prototype** captures:
+  * **Improvement Cost**: A decimal value (float) ranging from 100.0 to 10,000.0.
+  * **Revision Version**: An integer between 1 and 20.
+* **Test Prototype** and **Final Testing** both capture:
+  * **Test Result**: Restricted to the values "Pass" or "Fail".

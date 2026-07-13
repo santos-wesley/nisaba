@@ -1,0 +1,44 @@
+**Multi-Perspective Declare Model: Return Handling Process**
+
+This model describes a structured yet flexible **product return and refund process** with multiple decision points based on data attributes, time constraints, and business rules.
+
+### Process Flow (Control-Flow Perspective)
+
+The process begins when a customer submits a **Request Return**. This request must be followed (Response constraint) by an **Approve Return** decision. Once approved, the system must **Generate Return Label**, which is then necessarily followed by the customer **Ship Item Back**.
+
+After the item arrives, it must be **Receive Item** → **Inspect Item**. Based on the inspection outcome, the process branches:
+- The inspector must **Determine Refund** and subsequently **Process Refund**.
+- Depending on the **Item Condition**, the item is either **Restocked** (if condition > 3) or **Disposed** (if condition ≤ 3).
+
+The model enforces a logical succession from label generation to shipping, and strong response constraints ensure that each step is eventually followed by the next expected activity.
+
+### Data Perspective (Attributes & Bindings)
+
+The following data attributes are captured at specific activities:
+
+- **Request Return**: Captures `Return Status`, `Return Reason`, and `Days Since Purchase`.
+- **Approve Return**: Updates `Return Status`.
+- **Inspect Item**: Records `Item Condition` (1–5) and `Inspection Score` (1–10).
+- **Process Refund**: Sets `Refund Amount` (0.0–1000.0) and final `Return Status`.
+
+Possible values:
+- **Return Status**: Requested → Approved → Rejected → Shipped → Received → Inspected → Refunded → Restocked → Disposed
+- **Return Reason**: Defective, Damaged, Wrong Item, No Longer Needed
+- **Item Condition**: Integer 1–5
+- **Inspection Score**: Integer 1–10
+
+### Temporal Perspective (Time Constraints)
+
+The model includes several timed response constraints:
+- A return request must be **approved within 24 hours**.
+- After receiving the item, **inspection must occur within 48 hours**.
+- The **refund must be processed within 7 days** of receiving the item.
+
+### Conditional & Cross-Perspective Constraints
+
+- **Restocking vs Disposal**: After inspection, the item is restocked only if `Item Condition > 3`; otherwise, it is disposed of.
+- **Special Precedence Rule**: If the `Return Reason` is "Defective" **and** the `Inspection Score` is 5 or lower, then **Inspect Item** cannot occur before **Request Return** (a somewhat unusual but explicit cross-perspective constraint linking data conditions to ordering).
+
+---
+
+This model combines **Declare-style declarative constraints** (response, precedence, succession) with **data-aware conditions**, **temporal deadlines**, and **conditional branching**, making it a rich multi-perspective specification of a customer returns management process.

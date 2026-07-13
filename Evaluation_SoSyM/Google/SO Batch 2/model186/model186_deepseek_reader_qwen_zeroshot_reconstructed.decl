@@ -1,0 +1,48 @@
+activity Report Animal Abuse
+activity Investigate Abuse Report
+activity Rescue Animal
+activity Provide Veterinary Care
+activity Place in Foster Home
+activity Euthanize Animal
+activity Conduct Adoption Screening
+activity Finalize Adoption
+activity Monitor Animal Welfare
+activity Conduct Public Awareness Education
+activity Process Donation
+activity Approve Volunteer Application
+activity Schedule Checkup
+activity Inspect Shelter Facility
+activity Train Staff Members
+bind Report Animal Abuse: Abuse Severity, Animal Species
+bind Rescue Animal: Health, Age
+bind Place in Foster Home: Capacity
+bind Conduct Adoption Screening: Adoption Status
+bind Process Donation: Amount
+bind Approve Volunteer Application: Volunteer Background Check
+bind Schedule Checkup: Checkup Frequency
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Health: Healthy, Injured, Sick
+Age: integer between 0 and 25
+Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Amount: float between 1.0 and 10000.0
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Init[Report Animal Abuse] | |
+Response[Report Animal Abuse, Investigate Abuse Report] | | |
+Chain Response[Investigate Abuse Report, Rescue Animal] |A.Abuse Severity is High | |
+Response[Rescue Animal, Provide Veterinary Care] | | |
+Chain Response[Rescue Animal, Provide Veterinary Care] |A.Health is Injured | |0,24,h
+Response[Provide Veterinary Care, Place in Foster Home] | | |
+Exclusive Choice[Rescue Animal, Euthanize Animal] |A.Health is Sick | |
+Precedence[Finalize Adoption, Conduct Adoption Screening] | | |
+Response[Conduct Adoption Screening, Finalize Adoption] |A.Adoption Status is Approved | |0,7,d
+Response[Finalize Adoption, Monitor Animal Welfare] | | |
+Existence[Conduct Public Awareness Education] | |
+Co-Existence[Report Animal Abuse, Process Donation] | | |
+Response[Approve Volunteer Application, Approve Volunteer Application] |A.Volunteer Background Check is Pass | |
+Not Response[Approve Volunteer Application, Approve Volunteer Application] |A.Volunteer Background Check is Fail | |
+Response[Provide Veterinary Care, Schedule Checkup] | | |0,30,d
+Existence[Inspect Shelter Facility] | |
+Existence[Train Staff Members] | |

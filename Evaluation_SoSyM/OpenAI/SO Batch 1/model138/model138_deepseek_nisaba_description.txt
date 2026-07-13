@@ -1,0 +1,88 @@
+#MP-Declare Model
+## Activities
+- **Identify Risks**: The 'Identify Risks' activity represents the process of identifying potential risks that could affect business continuity.
+- **Develop Continuity Plan**: The 'Develop Continuity Plan' activity involves creating a comprehensive plan to ensure business operations can continue during disruptions.
+- **Test Continuity Plan**: The 'Test Continuity Plan' activity involves executing tests to validate the effectiveness of the continuity plan.
+- **Review Test Results**: The 'Review Test Results' activity includes analyzing the outcomes of continuity plan tests to assess performance.
+- **Implement Improvements**: The 'Implement Improvements' activity involves making necessary changes and enhancements based on test results.
+- **Communicate Plan**: The 'Communicate Plan' activity involves disseminating the continuity plan to relevant stakeholders.
+- **Monitor Risks**: The 'Monitor Risks' activity involves continuously tracking identified risks to detect changes or new threats.
+- **Conduct Training**: The 'Conduct Training' activity involves providing instruction and education to staff on continuity procedures.
+- **Activate Continuity Plan**: The 'Activate Continuity Plan' activity involves putting the continuity plan into action during an incident.
+- **Evaluate Incident Response**: The 'Evaluate Incident Response' activity involves assessing the effectiveness of the response to an incident.
+
+## Attributes
+- **Risk Level: integer between 1 and 10**: The attribute 'Risk Level: integer between 1 and 10' represents the severity level assigned to an identified risk, ranging from low (1) to high (10).
+- **Plan Effectiveness: float between 0.0 and 100.0**: The attribute 'Plan Effectiveness: float between 0.0 and 100.0' represents the measured effectiveness of the continuity plan as a percentage score.
+- **Test Outcome: Pass, Fail**: The attribute 'Test Outcome: Pass, Fail' specifies whether the continuity plan test resulted in a pass or fail.
+- **Improvement Status: Completed, Pending**: The attribute 'Improvement Status: Completed, Pending' indicates whether an improvement action has been completed or is still pending.
+- **Communication Method: Email, Meeting, Newsletter**: The attribute 'Communication Method: Email, Meeting, Newsletter' specifies the method used to communicate the continuity plan to stakeholders.
+- **Training Hours: integer between 1 and 40**: The attribute 'Training Hours: integer between 1 and 40' represents the number of hours allocated for training sessions on continuity procedures.
+- **Incident Severity: Low, Medium, High**: The attribute 'Incident Severity: Low, Medium, High' specifies the severity level of an incident that triggers the activation of the continuity plan.
+- **Response Time: float between 0.0 and 24.0**: The attribute 'Response Time: float between 0.0 and 24.0' represents the time taken to respond to an incident, measured in hours.
+- **Stakeholder Engagement: High, Moderate, Low**: The attribute 'Stakeholder Engagement: High, Moderate, Low' indicates the level of stakeholder involvement in developing the continuity plan.
+- **Monitoring Frequency: integer between 1 and 30**: The attribute 'Monitoring Frequency: integer between 1 and 30' represents the frequency of risk monitoring activities, measured in days.
+
+## Binds
+- **bind Identify Risks: Risk Level**: The bind 'Identify Risks: Risk Level' specifies that the activity 'Identify Risks' requires the attribute 'Risk Level'.
+- **bind Test Continuity Plan: Test Outcome**: The bind 'Test Continuity Plan: Test Outcome' links the 'Test Continuity Plan' activity with the attribute 'Test Outcome'.
+- **bind Review Test Results: Plan Effectiveness**: The bind 'Review Test Results: Plan Effectiveness' links the 'Review Test Results' activity with the attribute 'Plan Effectiveness'.
+- **bind Implement Improvements: Improvement Status**: The bind 'Implement Improvements: Improvement Status' links the 'Implement Improvements' activity with the attribute 'Improvement Status'.
+- **bind Communicate Plan: Communication Method**: The bind 'Communicate Plan: Communication Method' links the 'Communicate Plan' activity with the attribute 'Communication Method'.
+- **bind Conduct Training: Training Hours**: The bind 'Conduct Training: Training Hours' links the 'Conduct Training' activity with the attribute 'Training Hours'.
+- **bind Activate Continuity Plan: Incident Severity**: The bind 'Activate Continuity Plan: Incident Severity' links the 'Activate Continuity Plan' activity with the attribute 'Incident Severity'.
+- **bind Evaluate Incident Response: Response Time**: The bind 'Evaluate Incident Response: Response Time' links the 'Evaluate Incident Response' activity with the attribute 'Response Time'.
+- **bind Monitor Risks: Monitoring Frequency**: The bind 'Monitor Risks: Monitoring Frequency' links the 'Monitor Risks' activity with the attribute 'Monitoring Frequency'.
+- **bind Develop Continuity Plan: Stakeholder Engagement**: The bind 'Develop Continuity Plan: Stakeholder Engagement' links the 'Develop Continuity Plan' activity with the attribute 'Stakeholder Engagement'.
+
+## Constraints
+- **Init[Identify Risks] | |**: The 'Identify Risks' must be the first activity to occur in the process.
+- **End[Evaluate Incident Response] | |**: The 'Evaluate Incident Response' must be the last activity to occur in the process.
+- **Alternate Response[Test Continuity Plan, Review Test Results] |A.Test Outcome is Pass | |0,2,d**: If 'Test Continuity Plan' activity occurs with 'Test Outcome' attribute value 'Pass', then 'Review Test Results' activity must occur after that 'Test Continuity Plan' event and before any subsequent 'Test Continuity Plan' occurs, with no other occurrence of 'Test Continuity Plan' allowed between a 'Test Continuity Plan' and its corresponding 'Review Test Results'. This must be fulfilled within 0 to 2 days.
+- **Chain Response[Review Test Results, Implement Improvements] |A.Plan Effectiveness < 80.0 |A.Improvement Status is Pending |0,48,h**: Whenever a 'Review Test Results' activity occurs with 'Plan Effectiveness' attribute value less than 80.0, it must be immediately followed by an 'Implement Improvements' activity in the next event position, with no other events in between, and the 'Improvement Status' attribute of the 'Implement Improvements' activity must be 'Pending'. This must be fulfilled within 0 to 48 hours.
+- **Response[Develop Continuity Plan, Communicate Plan] |A.Stakeholder Engagement is High |A.Communication Method in (Email, Meeting) |5,13,m**: If a 'Develop Continuity Plan' activity occurs with 'Stakeholder Engagement' attribute value 'High', then a 'Communicate Plan' activity must eventually occur after the 'Develop Continuity Plan' event at some point in the same process instance, and the 'Communication Method' attribute of the 'Communicate Plan' activity must be either 'Email' or 'Meeting'. This must be fulfilled within 5 to 13 minutes.
+- **Responded Existence[Communicate Plan, Conduct Training] |A.Communication Method is Meeting | |**: If 'Communicate Plan' activity occurs in a process instance with 'Communication Method' attribute value 'Meeting', then 'Conduct Training' activity must also occur at least once within the same process instance, either before or after the 'Communicate Plan' event. If 'Communicate Plan' does not occur, there is no requirement for 'Conduct Training' to occur. Multiple occurrences of 'Communicate Plan' are satisfied by at least one occurrence of 'Conduct Training', and multiple 'Conduct Training' instances are allowed.
+- **Precedence[Activate Continuity Plan, Identify Risks] |A.Incident Severity in (Medium, High) | |**: The 'Identify Risks' activity is permitted to occur only if an 'Activate Continuity Plan' activity with 'Incident Severity' attribute value 'Medium' or 'High' has occurred before it within the same process instance.
+- **Co-Existence[Monitor Risks, Identify Risks] |A.Monitoring Frequency <= 7 | |**: If 'Monitor Risks' activity occurs with 'Monitoring Frequency' attribute value less than or equal to 7, then 'Identify Risks' must also occur in the same process instance, and vice-versa.
+- **Not Chain Succession[Activate Continuity Plan, Evaluate Incident Response] |A.Incident Severity is High | |10,15,s**: An 'Activate Continuity Plan' activity with 'Incident Severity' attribute value 'High' cannot be immediately followed by an 'Evaluate Incident Response' activity; there must be at least one other event between them. Similarly, an 'Evaluate Incident Response' event cannot be immediately preceded by an 'Activate Continuity Plan' event with 'Incident Severity' value 'High'. This constraint allows multiple occurrences of 'Activate Continuity Plan' and 'Evaluate Incident Response' in any order, provided they are not adjacent in the event sequence. This must be fulfilled within 10 to 15 seconds.
+- **Existence[Conduct Training] |A.Training Hours >= 8 | |**: The 'Conduct Training' activity must occur at least once in the process, and when it occurs, the 'Training Hours' attribute value must be greater than or equal to 8.
+
+
+## Interleaved Description
+The MP-Declare process model for the business continuity management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Identify Risks,' which involves identifying potential risks that could affect business continuity. This activity requires the attribute 'Risk Level' to specify the severity of each risk, establishing the initial context for the entire model.
+
+#### **End Constraints**
+The process concludes with the activity 'Evaluate Incident Response,' which involves assessing the effectiveness of the response to an incident. This activity must be the last to occur in the process, closing the model coherently with an evaluation of the incident response.
+
+### **Frequency Constraints**
+#### **Existence Constraint**
+The 'Conduct Training' activity must occur at least once in the process. When it occurs, the 'Training Hours' attribute must be greater than or equal to 8, adding depth and context regarding the presence of this activity and ensuring adequate instruction on continuity procedures.
+
+### **Dependency Constraints**
+#### **Responded Existence Constraints**
+If the 'Communicate Plan' activity occurs with the 'Communication Method' attribute value 'Meeting,' then the 'Conduct Training' activity must also occur at least once within the same process instance, either before or after the communication event. This establishes a dependency where the meeting-based communication necessitates staff training, enhancing coherence in the process.
+
+### **Flexible Ordering Constraints**
+#### **Precedence Constraints**
+1. The 'Identify Risks' activity is permitted to occur only if an 'Activate Continuity Plan' activity with the 'Incident Severity' attribute value 'Medium' or 'High' has occurred before it. This sets up an initial context where risk identification follows the activation of the continuity plan due to a significant incident, guiding the logical sequence.
+2. Additionally, if the 'Monitor Risks' activity occurs with the 'Monitoring Frequency' attribute value less than or equal to 7, then 'Identify Risks' must also occur in the same process instance, and vice-versa. This mutual dependency ensures that frequent monitoring is tied to risk identification, guiding the logical sequence.
+
+#### **Response Constraints**
+1. If the 'Develop Continuity Plan' activity occurs with the 'Stakeholder Engagement' attribute value 'High,' then the 'Communicate Plan' activity must eventually occur. The 'Communication Method' attribute must be either 'Email' or 'Meeting,' and this must be fulfilled within 5 to 13 minutes. This defines an ordered flow where high stakeholder engagement leads to timely communication, ensuring a cohesive temporal structure.
+2. If the 'Test Continuity Plan' activity occurs with the 'Test Outcome' attribute value 'Pass,' then the 'Review Test Results' activity must occur after that test event and before any subsequent 'Test Continuity Plan' event. No other test activity is allowed between a test and its review, and this must be fulfilled within 0 to 2 days. This ensures a balanced, one-to-one pairing where each successful test is followed by a review.
+
+#### **Immediate Ordering Constraints**
+#### **Chain Response Constraints**
+Whenever a 'Review Test Results' activity occurs with the 'Plan Effectiveness' attribute value less than 80.0, it must be immediately followed by an 'Implement Improvements' activity in the next event position, with the 'Improvement Status' attribute 'Pending.' This must be fulfilled within 0 to 48 hours, capturing a direct cause-and-effect relationship where poor review results trigger immediate improvements.
+
+### **Mutual Dependency Constraints**
+#### **Co-Existence Constraints**
+The 'Monitor Risks' activity with the 'Monitoring Frequency' attribute value less than or equal to 7 and the 'Identify Risks' activity must both occur together within the process flow. This establishes a mutual dependency, ensuring that frequent risk monitoring is always accompanied by risk identification.
+
+### **Negative Immediate Ordering Constraints**
+#### **Not Chain Succession Constraints**
+An 'Activate Continuity Plan' activity with the 'Incident Severity' attribute value 'High' cannot be immediately followed by an 'Evaluate Incident Response' activity. There must be at least one other event between them, and this must be fulfilled within 10 to 15 seconds. This contrast constraint prevents direct succession, ensuring that a high-severity activation is not immediately evaluated, preserving structural integrity in the sequence.

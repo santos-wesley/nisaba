@@ -1,0 +1,45 @@
+# Event Planning and Execution Process Description
+
+This process model describes the lifecycle of organizing and running an event, from initial planning through post-event feedback collection.
+
+## Activities Involved
+
+The process consists of fifteen activities: **Plan Event**, **Book Venue**, **Send Invitations**, **Arrange Catering**, **Hire Staff**, **Set Up Venue**, **Conduct Rehearsal**, **Welcome Guests**, **Facilitate Activities**, **Deliver Speech**, **Serve Meals**, **Coordinate Photography**, **Distribute Gifts**, **Tear Down Venue**, and **Collect Feedback**.
+
+## Data Perspective
+
+Each activity is associated with specific data attributes:
+
+- **Plan Event** captures the **Event ID** (a unique identifier between 1 and 999999) and the **Budget** (a monetary value ranging from $1,000 to $50,000).
+- **Book Venue** records the **Event ID** and the chosen **Venue**, selected from Hall A, Hall B, or Hall C.
+- **Send Invitations** tracks the **Event ID**, the **Number of Guests** (between 10 and 500), and the **Invitation Status** (either "Sent" or "Not Sent").
+- **Arrange Catering** logs the **Event ID** and the **Catering Service** type (Buffet, Sit-down Dinner, or Cocktail).
+- **Hire Staff** notes the **Event ID** and the **Staff Role** being filled (Waiter, Coordinator, or Cleaner).
+- **Conduct Rehearsal** documents the **Event ID** along with a unique **Rehearsal ID** (ranging from 1 to 9999).
+- **Serve Meals** references the **Event ID** and the **Catering Service** being provided.
+- **Collect Feedback** captures the **Event ID** and the **Venue** where the event took place.
+
+## Control-Flow Behavior
+
+The process follows a strict, linear sequence of execution:
+
+1. **Plan Event** must be the very first activity performed to initiate the process.
+2. Once an event is planned, the **Venue** must be booked before any further steps.
+3. After booking the venue, **Invitations** must be sent to guests.
+4. Following invitations, **Catering** arrangements must be made.
+5. After catering is arranged, **Staff** must be hired.
+6. Once staff are hired, the **Venue Setup** must take place.
+7. Setting up the venue must precede the **Rehearsal**.
+8. The rehearsal must be completed before **Guests are Welcomed**.
+9. After welcoming guests, the process moves to **Facilitating Activities**.
+10. Following activity facilitation, a **Speech** must be delivered.
+11. After the speech, **Meals** are served to guests.
+12. Once meals are served, **Photography Coordination** occurs.
+13. Following photography, **Gifts** are distributed to guests.
+14. Finally, after gifts are distributed, **Feedback** must be collected from participants.
+
+Additionally, **Tear Down Venue** is designated as a terminating activity — meaning that whenever this activity occurs, it must represent the conclusion of the process trace.
+
+## Summary
+
+This model enforces a rigid, sequential workflow where each step logically depends on the completion of the previous one—starting with planning and budgeting, progressing through logistical arrangements (venue, invitations, catering, staffing), continuing through the live event experience (setup, rehearsal, guest welcome, activities, speeches, meals, photography, gifts), and concluding with feedback collection and venue teardown. The data constraints ensure that critical identifiers (like Event ID) and contextual details (such as venue selection, guest counts, and catering choices) are consistently captured and tracked throughout the event's lifecycle.

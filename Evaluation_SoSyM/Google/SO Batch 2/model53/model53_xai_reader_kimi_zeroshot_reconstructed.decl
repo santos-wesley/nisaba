@@ -1,0 +1,53 @@
+activity Write Play Script
+activity Cast Actors
+activity Design Set
+activity Build Set
+activity Design Costumes
+activity Sew Costumes
+activity Rehearse Play
+activity Promote Play
+activity Sell Tickets
+activity Perform Play
+activity Review Performance
+activity Pay Royalties
+activity Strike Set
+activity Store Costumes
+activity Archive Script
+bind Write Play Script: Play Genre
+bind Cast Actors: Actor Count
+bind Design Set: Set Complexity
+bind Build Set: Budget Amount
+bind Design Costumes: Costume Count
+bind Promote Play: Promotion Spend
+bind Rehearse Play: Rehearsal Hours
+bind Sell Tickets: Ticket Price
+bind Perform Play: Performance Quality
+bind Pay Royalties: Royalty Percentage
+Play Genre: Comedy, Drama, Musical, Tragedy
+Actor Count: integer between 2 and 20
+Set Complexity: integer between 1 and 10
+Budget Amount: float between 1000.0 and 50000.0
+Costume Count: integer between 5 and 50
+Promotion Spend: float between 100.0 and 10000.0
+Rehearsal Hours: integer between 10 and 100
+Ticket Price: float between 5.0 and 100.0
+Performance Quality: Excellent, Good, Average, Poor
+Royalty Percentage: integer between 5 and 20
+Init[Write Play Script] | |
+Existence[Perform Play] | |
+Response[Cast Actors, Rehearse Play] | | |
+Precedence[Cast Actors, Rehearse Play] | | |
+Precedence[Cast Actors, Rehearse Play] | | |
+Response[Cast Actors, Rehearse Play] | | |
+Precedence[Rehearse Play, Cast Actors] | | |
+Precedence[Build Set, Design Set] | | |
+Co-Existence[Promote Play, Sell Tickets] | | |
+Not Response[Review Performance, Pay Royalties] | | |
+Response[Write Play Script, Sell Tickets] |A.Play Genre is Comedy |T.Ticket Price <= 50 |
+Response[Perform Play, Pay Royalties] | | |0,7,d
+Response[Perform Play, Strike Set] | | |0,1,d
+Response[Perform Play, Store Costumes] | | |0,1,d
+Response[Write Play Script, Archive Script] | | |0,30,d
+Response[Cast Actors, Rehearse Play] | | |0,1,h
+Response[Design Costumes, Sew Costumes] | | |0,24,h
+Response[Design Set, Build Set] | | |0,7,d

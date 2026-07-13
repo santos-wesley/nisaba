@@ -1,0 +1,131 @@
+#MP-Declare Model
+## Activities
+- **File Patent Application**: The 'File Patent Application' activity represents the submission of a patent application for review.
+- **Conduct Patent Search**: The 'Conduct Patent Search' activity involves searching for prior art or existing patents related to the filed patent application.
+- **Examine Patent Application**: The 'Examine Patent Application' activity represents the examination process of a filed patent application to determine its validity.
+- **Grant Patent**: The 'Grant Patent' activity represents the formal approval and granting of a patent.
+- **Reject Patent Application**: The 'Reject Patent Application' activity represents the formal rejection of a patent application.
+- **File Trademark Application**: The 'File Trademark Application' activity represents the submission of a trademark application for review.
+- **Conduct Trademark Search**: The 'Conduct Trademark Search' activity involves searching for existing trademarks that may conflict with the filed trademark application.
+- **Examine Trademark Application**: The 'Examine Trademark Application' activity represents the examination process of a filed trademark application to determine its validity.
+- **Grant Trademark**: The 'Grant Trademark' activity represents the formal approval and granting of a trademark.
+- **Reject Trademark Application**: The 'Reject Trademark Application' activity represents the formal rejection of a trademark application.
+- **File Copyright Registration**: The 'File Copyright Registration' activity represents the submission of a copyright registration for review.
+- **Examine Copyright Application**: The 'Examine Copyright Application' activity represents the examination process of a filed copyright application to determine its validity.
+- **Grant Copyright**: The 'Grant Copyright' activity represents the formal approval and granting of a copyright.
+- **Reject Copyright Application**: The 'Reject Copyright Application' activity represents the formal rejection of a copyright application.
+- **Appeal Decision**: The 'Appeal Decision' activity represents the process of formally challenging a rejection decision made on an application.
+
+## Attributes
+- **Application ID: Integer between 1 and 1000000**: The attribute 'Application ID: Integer between 1 and 1000000' represents the unique identification number assigned to an application.
+- **Application Fee: Float between 50.0 and 10000.0**: The attribute 'Application Fee: Float between 50.0 and 10000.0' represents the monetary fee charged for filing an application.
+- **Application Status: Pending, Approved, Rejected**: The attribute 'Application Status: Pending, Approved, Rejected' specifies the current status of an application during its examination process.
+- **Search Result: Clear, Conflict**: The attribute 'Search Result: Clear, Conflict' specifies the outcome of a search process, indicating whether a conflict was found or not.
+- **Decision: Granted, Rejected**: The attribute 'Decision: Granted, Rejected' specifies the final decision made regarding an application.
+
+## Binds
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the intellectual property registration process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'File Patent Application,' establishing the initial context in which a patent seeker submits their application, identified by a unique 'Application ID' and accompanied by an 'Application Fee,' for subsequent review.
+
+#### **End Constraints**
+Bringing the process to a coherent close, the model concludes with one of the terminal decision activities—'Grant Patent,' 'Reject Patent Application,' 'Grant Trademark,' 'Reject Trademark Application,' 'Grant Copyright,' or 'Reject Copyright Application'—each representing the final 'Decision' rendered on an application, whether 'Granted' or 'Rejected,' thereby resolving the process definitively.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+Adding depth to the model's structure, the 'Examine Patent Application' activity must occur at least once whenever a patent has been filed, ensuring that every submitted patent application undergoes a validity assessment. Similarly, the 'Examine Trademark Application' activity must occur at least once to guarantee that filed trademarks are properly evaluated, and the 'Examine Copyright Application' activity must occur at least once, reinforcing that copyright submissions are never left unexamined. Furthermore, the 'Appeal Decision' activity may occur, providing applicants the opportunity to challenge unfavorable outcomes, thereby enriching the process with a layer of recourse.
+
+#### **Absence Constraints**
+In contrast to the flexibility afforded to examination and appeal activities, the 'Grant Patent' activity must not occur more than once for the same application, reinforcing the integrity of the process by ensuring that a single patent application cannot be granted redundantly. Likewise, the 'Grant Trademark' and 'Grant Copyright' activities are each restricted from occurring more than once per application, preserving the exclusivity and finality of each granted right.
+
+#### **Exactly Constraints**
+Setting precise boundaries within the model, the 'File Patent Application' activity must occur exactly once for each patent case, summarizing the requirement that only a single initiating submission is permissible per application instance. Similarly, the 'File Trademark Application' and 'File Copyright Registration' activities must each occur exactly once, ensuring strict precision in how registration processes are initiated across all three intellectual property domains.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+Establishing a necessary dependency, if the 'Conduct Patent Search' activity occurs, then the 'File Patent Application' activity must also occur somewhere in the process, effectively causing the existence of a filed application whenever a search has been conducted. In the same vein, if the 'Conduct Trademark Search' activity occurs, the 'File Trademark Application' activity must also be present, reinforcing the cause-effect relationship that links search activities to their originating filings.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+Setting the initial context for the sequence of events, the activity 'Grant Patent' is permitted to occur only if an 'Examine Patent Application' activity has occurred before it, with the condition that the 'Application Status is Approved,' ensuring the patent is thoroughly vetted before formal approval. Likewise, the activity 'Grant Trademark' may only take place if 'Examine Trademark Application' has previously occurred with 'Application Status is Approved,' and the activity 'Grant Copyright' similarly requires that 'Examine Copyright Application' has occurred beforehand under the same approved status condition, guiding the logical progression toward each respective grant.
+
+#### **Response Constraints**
+Defining an ordered flow that follows initial filings, if the 'File Patent Application' activity occurs, then the 'Conduct Patent Search' activity must eventually follow, ensuring that every filed patent undergoes a prior art search as part of the temporal structure of the process. In a similar sequence, if the 'File Trademark Application' activity occurs, the 'Conduct Trademark Search' activity must subsequently occur with the condition 'Search Result is Clear or Conflict,' maintaining a cohesive flow from filing to conflict assessment.
+
+#### **Succession Constraints**
+Establishing a causal progression between examination and final decision, whenever the 'Examine Patent Application' activity occurs with the condition 'Application Status is Rejected,' it must be causally linked to and followed by the 'Reject Patent Application' activity, ensuring that a rejected examination status logically results in a formal rejection. In the same causal manner, whenever the 'Examine Trademark Application' activity results in 'Application Status is Rejected,' the 'Reject Trademark Application' activity must follow, and whenever the 'Examine Copyright Application' activity results in 'Application Status is Rejected,' the 'Reject Copyright Application' activity must ensue, each reinforcing a logical and inevitable progression from examination to rejection.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Precedence Constraints**
+Promoting a balanced process flow, each occurrence of the 'Grant Patent' activity must be preceded by a distinct occurrence of the 'Examine Patent Application' activity, with no other 'Grant Patent' activity intervening, ensuring that every granting decision corresponds to its own unique examination without overlap.
+
+#### **Alternate Response Constraints**
+Supporting clear one-to-one pairing, each occurrence of the 'File Copyright Registration' activity must be followed by a unique occurrence of the 'Examine Copyright Application' activity, with no other 'File Copyright Registration' activity intervening beforehand, ensuring that every filing is matched distinctly to its own examination.
+
+#### **Alternate Succession Constraints**
+Enforcing a fully ordered and coherent structure, each occurrence of the 'File Trademark Application' activity must be followed by a unique occurrence of the 'Examine Trademark Application' activity, and conversely, each 'Examine Trademark Application' activity must be preceded by a distinct 'File Trademark Application' activity, with no intervening occurrences of either, ensuring precise pairing throughout the trademark registration process.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Precedence Constraints**
+Establishing an explicit and immediate dependency, the 'Grant Copyright' activity must be directly preceded by the 'Examine Copyright Application' activity with no intervening events, ensuring that the moment of granting copyright follows seamlessly and immediately from its examination.
+
+#### **Chain Response Constraints**
+Capturing a direct cause-and-effect relationship, whenever the 'Examine Patent Application' activity occurs with the condition 'Application Status is Approved,' it must be immediately followed by the 'Grant Patent' activity, leaving no room for intervening steps between approval and formal granting.
+
+#### **Chain Succession Constraints**
+Enforcing a tightly coupled sequence, whenever the 'File Copyright Registration' activity occurs, it must be immediately succeeded by the 'Examine Copyright Application' activity, and this immediate succession must hold in both directions, ensuring that no other activity interrupts the direct transition from filing to examination in the copyright process.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Establishing mutual dependency between related activities, the 'File Trademark Application' activity and the 'Conduct Trademark Search' activity must occur together within the same process instance, ensuring that neither activity takes place in isolation from the other, thereby reinforcing the interconnected nature of the trademark registration workflow.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing alternative pathways within the model, the process allows for flexibility such that either the 'Grant Patent' activity or the 'Reject Patent Application' activity may occur, permitting the process to proceed along either resolution path depending on the outcome of examination.
+
+#### **Exclusive Choice Constraints**
+Enforcing strict mutual exclusivity, exactly one of the 'Grant Trademark' or 'Reject Trademark Application' activities must occur within the process instance, ensuring that a trademark application reaches one, and only one, definitive resolution. Similarly, exactly one of the 'Grant Copyright' or 'Reject Copyright Application' activities must occur, preserving a singular, unambiguous outcome for every copyright application.
+
+#### **Not Co-Existence Constraints**
+Setting firm exclusion rules to maintain process integrity, the 'Grant Patent' activity and the 'Reject Patent Application' activity cannot both occur within the same process instance, ensuring that a single patent application cannot simultaneously receive contradictory decisions. In the same manner, the 'Grant Trademark' and 'Reject Trademark Application' activities are mutually exclusive, as are the 'Grant Copyright' and 'Reject Copyright Application' activities, each pairing preventing conflicting resolutions from coexisting within a single application's lifecycle.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Refining the model by disallowing certain contingent occurrences, if the 'Reject Copyright Application' activity occurs, then the 'Appeal Decision' activity is not required to occur in response, ensuring that an appeal remains an optional recourse rather than a mandated consequence of rejection.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Preserving the intended sequence within the model, the 'Grant Patent' activity must not precede the 'Examine Patent Application' activity, ensuring that no patent can be granted before its corresponding examination has taken place.
+
+#### **Not Response Constraints**
+Maintaining the integrity of the model's intended progression, if the 'Reject Patent Application' activity occurs, the 'Grant Patent' activity must not subsequently occur for that same application, ensuring that a rejected patent cannot later be reversed into an approval within the same process flow.
+
+#### **Not Succession Constraints**
+Preserving the model's defined flow by restricting overlapping sequences, the 'Reject Trademark Application' activity must not be followed at any point by the 'Grant Trademark' activity, ensuring that once a trademark has been formally rejected, it cannot subsequently be granted within that same process instance.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+Maintaining necessary separation within the sequence, the 'Grant Copyright' activity must not be immediately preceded by the 'File Copyright Registration' activity, ensuring that the examination step cannot be skipped in an immediate transition from filing directly to granting.
+
+#### **Not Chain Response Constraints**
+Preserving structural integrity by preventing immediate succession, the 'Reject Patent Application' activity must not be immediately followed by the 'Appeal Decision' activity, ensuring that a buffer of process steps remains between rejection and any subsequent appeal.
+
+#### **Not Chain Succession Constraints**
+Refining the process model by excluding specific immediate sequences, the 'Examine Trademark Application' activity and the 'File Trademark Application' activity must not immediately precede or follow one another beyond their initial required transition, ensuring that redundant or repeated immediate pairings do not disrupt the clarity and structural soundness of the trademark examination sequence.

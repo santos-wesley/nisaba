@@ -1,0 +1,49 @@
+activity Report Abuse
+activity Investigate
+activity Rescue
+activity Provide Veterinary Care
+activity Place in Foster Home
+activity Euthanize
+activity Adoption Screening
+activity Finalize Adoption
+activity Monitor Welfare
+activity Public Awareness Education
+activity Process Donation
+activity Volunteer Application Review
+activity Approve Volunteer
+activity Schedule Checkup
+activity Inspect Facility
+activity Train Staff
+bind Report Abuse: Abuse Severity, Animal Species
+bind Rescue: Health, Age
+bind Place in Foster Home: Capacity
+bind Adoption Screening: Adoption Status
+bind Process Donation: Donation Amount
+bind Volunteer Application Review: Volunteer Background Check
+bind Schedule Checkup: Checkup Frequency
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Health: Healthy, Injured, Sick
+Age: integer between 0 and 25
+Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Donation Amount: float between 1 and 10000
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Response[Report Abuse, Investigate] | | |
+Response[Report Abuse, Process Donation] | | |
+Response[Investigate, Rescue] |A.Abuse Severity is High | |
+Response[Rescue, Provide Veterinary Care] | | |
+Response[Provide Veterinary Care, Place in Foster Home] | | |
+Response[Provide Veterinary Care, Schedule Checkup] | | |0,30,d
+Response[Rescue, Provide Veterinary Care] |A.Health is Injured | |0,24,h
+Responded Existence[Provide Veterinary Care, Euthanize] | | |
+Precedence[Finalize Adoption, Adoption Screening] | | |
+Response[Adoption Screening, Finalize Adoption] |A.Adoption Status is Approved | |0,7,d
+Response[Finalize Adoption, Monitor Welfare] | | |
+Existence[Public Awareness Education] | |
+Precedence[Approve Volunteer, Volunteer Application Review] | | |
+Response[Volunteer Application Review, Approve Volunteer] |A.Volunteer Background Check is Pass | |
+Not Response[Volunteer Application Review, Approve Volunteer] |A.Volunteer Background Check is Fail | |
+Existence[Inspect Facility] | |
+Existence[Train Staff] | |

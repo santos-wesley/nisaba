@@ -1,0 +1,41 @@
+activity Identify Risks
+activity Evaluate Incident Response
+activity Test Continuity Plan
+activity Review Test Results
+activity Implement Improvements
+activity Develop Continuity Plan
+activity Communicate Plan
+activity Conduct Training
+activity Monitor Risks
+activity Activate Continuity Plan
+bind Identify Risks: Risk Level
+bind Evaluate Incident Response: Response Time Hours
+bind Test Continuity Plan: Test Outcome
+bind Review Test Results: Plan Effectiveness, Improvement Status
+bind Implement Improvements: 
+bind Develop Continuity Plan: Stakeholder Engagement
+bind Communicate Plan: Communication Method
+bind Conduct Training: Training Hours
+bind Monitor Risks: Monitoring Frequency
+bind Activate Continuity Plan: Incident Severity
+Risk Level: integer between 1 and 10
+Response Time Hours: integer between 0 and 1000
+Test Outcome: Pass, Fail
+Plan Effectiveness: float between 0.0 and 100.0
+Improvement Status: Pending, Completed
+Stakeholder Engagement: High, Low
+Communication Method: Email, Meeting
+Training Hours: integer between 0 and 40
+Monitoring Frequency: integer between 1 and 30
+Incident Severity: Low, Medium, High
+Init[Identify Risks] | |
+End[Evaluate Incident Response] | |
+Existence[Conduct Training] | |
+Response[Test Continuity Plan, Review Test Results] |A.Test Outcome is Pass | |
+Chain Response[Review Test Results, Implement Improvements] |(A.Plan Effectiveness < 80.0) AND (A.Improvement Status is Pending) | |0,48,h
+Response[Develop Continuity Plan, Communicate Plan] |A.Stakeholder Engagement is High | |150,390,d
+Response[Communicate Plan, Conduct Training] |A.Communication Method is Meeting | |
+Co-Existence[Monitor Risks, Identify Risks] |A.Monitoring Frequency <= 7 | |
+Precedence[Identify Risks, Activate Continuity Plan] | |A.Incident Severity in (Medium, High) |
+Not Chain Succession[Activate Continuity Plan, Evaluate Incident Response] |A.Incident Severity is High | |10,15,s
+Existence[Conduct Training] | |

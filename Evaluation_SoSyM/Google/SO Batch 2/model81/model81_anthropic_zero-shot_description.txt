@@ -1,0 +1,51 @@
+# Description of the Multi-Perspective Declare Model
+
+## Process Overview
+This model describes an **Integration Management Process** that covers the full lifecycle of a system integration project — from planning through deployment, monitoring, issue resolution, and post-deployment activities like documentation and user feedback.
+
+## Activities
+The process involves the following activities: Plan Integration, Design System Architecture, Develop Integration Components, Configure Integration Environment, Test Integration, Deploy Integration, Monitor System Performance, Resolve Integration Issues, Document Integration Process, Train Users, Review Integration Plan, Approve Integration Design, Validate Integration Results, Update System Documentation, and Gather User Feedback.
+
+## Data Perspective
+Several activities carry associated data attributes:
+
+- **Plan Integration** records an **Integration ID** (integer, 1–1000) and an **Integration Status** (Planned, In Progress, Completed, Failed).
+- **Design System Architecture** records the **Integration ID** and an **Integration Type** (Data, Application, Process).
+- **Test Integration** records a **Testing Result** (Passed, Failed, Partial) and **Testing Coverage** (a percentage, 0.0–100.0).
+- **Deploy Integration** records the **Integration Status** and **Downtime** (a float value between 0.0 and 24.0 hours).
+- **Resolve Integration Issues** records the **Number of Errors** (integer, 0–100) and the **Integration Status**.
+
+## Control-Flow Constraints
+
+1. **Process start and end:** The process must always **start with "Plan Integration"** and always **end with "Deploy Integration"**.
+
+2. **Ordering of development activities:** "Develop Integration Components" must be preceded at some point by "Design System Architecture" (Precedence).
+
+3. **Testing after development:** Whenever "Develop Integration Components" occurs, "Test Integration" must eventually occur afterward (Response).
+
+4. **Testing before deployment:** "Test Integration" and "Deploy Integration" are linked in a strict succession — "Test Integration" must occur before "Deploy Integration", and "Deploy Integration" can only happen if "Test Integration" happened before it.
+
+5. **Monitoring immediately after deployment:** Immediately after every occurrence of "Deploy Integration", "Monitor System Performance" must be the very next activity (Chain Response).
+
+6. **Alternating monitoring and issue resolution:** Every time "Monitor System Performance" occurs, "Resolve Integration Issues" must occur next before "Monitor System Performance" can happen again (Alternate Response).
+
+7. **Documentation requirement:** If "Plan Integration" occurs, then "Document Integration Process" must also occur at some point in the process (Responded Existence).
+
+8. **Training and deployment linkage:** "Train Users" and "Deploy Integration" co-exist — if one occurs, the other must occur as well (Co-Existence).
+
+9. **Review and approval separation:** "Review Integration Plan" cannot be immediately followed by "Approve Integration Design" (Not Chain Succession) — some other activity must occur between them, if both occur.
+
+10. **Validation and approval ordering:** "Validate Integration Results" cannot occur before "Approve Integration Design" (Not Precedence) — i.e., approval cannot follow validation.
+
+11. **Documentation and feedback independence:** "Update System Documentation" cannot be followed by "Gather User Feedback" as a response relation (Not Response) — occurrence of the former does not require the latter afterward.
+
+12. **Planning choice:** At least one of "Plan Integration" or "Design System Architecture" must occur in the process (Choice).
+
+13. **Exclusive testing/deployment choice:** Exactly one of "Test Integration" or "Deploy Integration" must occur, but not both together (Exclusive Choice) — this appears alongside the succession constraint, effectively constraining specific instance patterns.
+
+## Multi-Perspective (Data-Aware) Constraint
+
+14. **Conditional issue resolution after failed deployment:** If "Deploy Integration" occurs **and** its "Integration Status" is **Failed**, then "Resolve Integration Issues" must occur afterward (Response), and this must happen **within 24 hours** of the deployment (time constraint: 0 to 24 hours).
+
+## Summary
+This model enforces a structured integration lifecycle where planning precedes design and development, testing must precede deployment, deployment triggers monitoring, and issues are resolved iteratively. Data conditions add business rules such as mandatory issue resolution within a time window when deployment fails, ensuring both process compliance and timely handling of critical failures.

@@ -1,0 +1,42 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Approve Compliance Plan
+activity Implement Controls
+activity Train Employees
+activity Monitor Compliance
+activity Report Violation
+activity Investigate Violation
+activity Take Corrective Action
+activity Review Compliance Plan
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Approve Compliance Plan: Plan Status
+bind Implement Controls: Control Types
+bind Train Employees: Training Hours
+bind Monitor Compliance: Compliance Status, Number of Violations
+bind Report Violation: Violation Severity
+bind Investigate Violation: Financial Impact
+bind Take Corrective Action: 
+bind Review Compliance Plan: Plan Status
+Risk Level: High, Medium, Low
+Assessment Score: integer between 0 and 100
+Plan Status: Approved, Pending, Reviewed
+Compliance Status: Compliant, Non-Compliant
+Violation Severity: Low, Medium, High
+Financial Impact: float between 0.0 and 1000000.0
+Control Types: Technical, Administrative, Physical
+Training Hours: integer between 1 and 100
+Number of Violations: integer between 0 and 100
+Init[Conduct Risk Assessment] | |
+Response[Develop Compliance Plan, Approve Compliance Plan] | | |
+Response[Approve Compliance Plan, Implement Controls] | | |
+Response[Approve Compliance Plan, Train Employees] | | |
+Response[Implement Controls, Monitor Compliance] | | |
+Response[Report Violation, Investigate Violation] | | |
+Response[Investigate Violation, Take Corrective Action] | | |
+Existence[Train Employees] | |
+Alternate Succession[Approve Compliance Plan, Review Compliance Plan] | | |
+Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d
+Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d
+Response[Monitor Compliance, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d
+Response[Investigate Violation, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d

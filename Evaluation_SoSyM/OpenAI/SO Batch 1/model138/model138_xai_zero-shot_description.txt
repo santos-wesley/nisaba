@@ -1,0 +1,38 @@
+**Multi-Perspective Declare Model: Business Continuity and Risk Management Process**
+
+This model describes a comprehensive business continuity management process that integrates risk management, planning, testing, training, and incident response, enriched with data-driven constraints.
+
+### Process Flow Overview
+
+The process always begins with **Identify Risks** and must eventually reach **Evaluate Incident Response** as the final activity.
+
+### Core Activities
+
+- **Identify Risks** – Initial risk assessment (Risk Level: 1–10)
+- **Develop Continuity Plan** – Creation of the business continuity plan (Stakeholder Engagement: High/Moderate/Low)
+- **Test Continuity Plan** – Execution of tests (Test Outcome: Pass/Fail)
+- **Review Test Results** – Analysis of test outcomes (Plan Effectiveness: 0.0–100.0%)
+- **Implement Improvements** – Addressing identified weaknesses (Improvement Status: Completed/Pending)
+- **Communicate Plan** – Distribution of the plan to stakeholders (Communication Method: Email/Meeting/Newsletter)
+- **Monitor Risks** – Ongoing risk surveillance (Monitoring Frequency: 1–30 days)
+- **Conduct Training** – Staff training on the continuity plan (Training Hours: 1–40)
+- **Activate Continuity Plan** – Triggered during actual incidents (Incident Severity: Low/Medium/High)
+- **Evaluate Incident Response** – Post-incident review (Response Time: 0.0–24.0 hours)
+
+### Declarative Constraints
+
+**Control-Flow & Temporal Constraints:**
+
+- The process must start with **Identify Risks** and end with **Evaluate Incident Response**.
+- **Test Continuity Plan** and **Review Test Results** follow an *Alternate Response* pattern: after a test, a review must eventually occur (but not necessarily immediately), and this can happen up to 2 times. This constraint is **active only when the Test Outcome is Pass**.
+- If **Review Test Results** shows **Plan Effectiveness < 80.0**, then **Implement Improvements** must follow, and the **Improvement Status** must be **Pending**. This must occur within **48 hours**.
+- After **Develop Continuity Plan**, **Communicate Plan** must occur if **Stakeholder Engagement is High**. Communication must happen between **5 and 13 minutes** later and must use either **Email** or **Meeting**.
+- **Communicate Plan** using the **Meeting** method requires that **Conduct Training** occurs at some point afterward (*Responded Existence*).
+- **Activate Continuity Plan** can only occur **after** **Identify Risks** has been performed, and only when **Incident Severity is Medium or High**.
+- **Monitor Risks** and **Identify Risks** must co-exist (both occur or neither occurs) if the **Monitoring Frequency is 7 days or less**.
+- If **Activate Continuity Plan** is executed with **Incident Severity = High**, then **Evaluate Incident Response** must **not** occur immediately afterward. There must be a delay of **10 to 15 seconds** between these activities (*Not Chain Succession*).
+- **Conduct Training** must be executed if **Training Hours ≥ 8**.
+
+---
+
+This model combines traditional Declare constraints (existence, relation, negation, and choice patterns) with **data-aware conditions** (Multi-Perspective Declare), allowing the behavior of the process to change dynamically based on runtime data values such as risk levels, test outcomes, effectiveness scores, and incident severity.

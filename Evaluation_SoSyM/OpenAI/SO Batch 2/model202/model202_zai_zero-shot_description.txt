@@ -1,0 +1,37 @@
+This natural language description outlines the behavior, data constraints, and rules of the provided Multi-Perspective Declare model for a currency exchange process.
+
+### **Process Overview**
+The process begins when a customer hands in currency, and it successfully concludes when a receipt is issued to the customer. Throughout this process, various data attributes are tracked and bound to specific activities to ensure compliance and accurate record-keeping.
+
+### **Data Attributes and Bindings**
+The process relies on five key data attributes, each with specific data types and allowed values:
+*   **Amount:** An integer between 1 and 10,000. It is recorded during the *Receive Currency* activity.
+*   **Currency Type:** Can be USD, EUR, GBP, or JPY. It is recorded during both *Receive Currency* and *Verify Currency Authenticity*.
+*   **Exchange Rate:** A decimal number (float) between 0.5 and 1.5. It is recorded during *Calculate Exchange Rate* and *Update Exchange Rates*.
+*   **Exchange Status:** Can be Pending, Approved, or Rejected. It is recorded during *Approve Exchange*, *Reject Exchange*, and *Notify Customer*.
+*   **Transaction ID:** An integer between 1000 and 9999. It is recorded during *Process Exchange*, *Issue Receipt*, and *Record Transaction*.
+
+### **Control Flow and Temporal Constraints**
+The execution of activities is governed by a strict set of rules regarding ordering and timing:
+
+**Starting and Ending**
+*   The process must start with the *Receive Currency* activity.
+*   The process must end with the *Issue Receipt* activity.
+
+**Ordering and Precedence**
+*   *Verify Currency Authenticity* must occur before *Approve Exchange* can happen. In fact, these two activities can never co-occur in the same trace.
+*   *Receive Currency* must occur before *Verify Currency Authenticity*.
+*   *Calculate Exchange Rate* must occur before *Process Exchange*.
+*   *Receive Currency* can never be immediately or eventually followed by *Reject Exchange*.
+
+**Responses and Triggers**
+*   If *Approve Exchange* occurs, *Process Exchange* must eventually follow. This rule is only activated if the *Exchange Status* is marked as "Approved". It must occur between 0 and 2 hours after the approval.
+*   If *Reject Exchange* occurs, *Notify Customer* must eventually follow. This rule is only activated if the *Exchange Status* is marked as "Rejected". It must occur between 0 and 1 hour after the rejection.
+*   If *Process Exchange* occurs, *Record Transaction* must eventually follow. This requires that the *Transaction ID* for both activities matches exactly. It must occur between 0 and 1 day after the exchange is processed.
+*   If *Process Exchange* occurs, *Update Exchange Rates* must have occurred at some point in the process (past or future).
+
+**Strict Successions and Cardinality**
+*   *Calculate Exchange Rate* must be immediately followed by *Update Exchange Rates*, occurring within 30 minutes.
+*   *Receive Currency* must be immediately followed by *Record Transaction* within 1 day, and both activities must share the exact same *Transaction ID*.
+*   *Calculate Exchange Rate* must occur at least once during the entire process.
+*   *Approve Exchange* must occur exactly once during the entire process.

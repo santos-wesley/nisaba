@@ -1,0 +1,52 @@
+**Multi-Perspective Declare Model: Incident Management Process**
+
+This model describes a structured **incident management lifecycle** with both control-flow constraints and data-aware (multi-perspective) conditions.
+
+### Process Overview
+
+The process begins when an **incident is reported** and must eventually reach a **closed** state. It follows a typical IT incident handling flow with optional escalation and mandatory documentation at the end.
+
+### Activities and Data Attributes
+
+- **Report Incident** → captures initial `Status`
+- **Assess Impact** → records `Impact Level` (1–5) and `Assessment Time`
+- **Prioritize Incident** → assigns `Priority` (Low, Medium, High, Critical)
+- **Assign Incident** → assigns an `Assigned Team ID` (1–100)
+- **Investigate Incident** → records `Investigation Time`
+- **Resolve Incident** → records `Resolution Time`
+- **Verify Resolution** → records `Verification Result` (Successful/Failed)
+- **Close Incident** → updates final `Status`
+- **Escalate Incident** → records `Escalation Level` (None, Level 1–3)
+- **Document Incident** → generates a `Document ID` (1000–9999)
+
+### Declarative Constraints
+
+#### **Control-Flow Constraints**
+
+- The process **must start** with `Report Incident`.
+- The process **must end** with `Close Incident`.
+- `Report Incident` must be **followed eventually** by `Assess Impact` (within 24 hours).
+- `Assess Impact` must be **directly followed** by `Prioritize Incident`.
+- `Resolve Incident` must be **directly preceded** by `Investigate Incident`.
+- `Resolve Incident` must be **followed** by `Verify Resolution` (within 48 hours).
+- `Close Incident` must be **directly followed** by `Document Incident`.
+- `Escalate Incident` can occur **at most once** (Absence2).
+
+#### **Data-Aware & Conditional Constraints**
+
+- **Precedence[Assign Incident, Prioritize Incident]** with condition:  
+  → `Assign Incident` can only occur **before** `Prioritize Incident` **if** the priority is **High or Critical**. This implies that high/critical incidents may require early assignment.
+
+- **Response[Verify Resolution, Escalate Incident]** with condition:  
+  → If `Verification Result` is **Failed**, then `Escalate Incident` must eventually occur.
+
+### Summary
+
+This is a **data-aware declarative incident management model** that:
+- Enforces a core sequence (Report → Assess → Prioritize → Investigate → Resolve → Verify → Close → Document)
+- Allows flexibility in assignment and escalation
+- Uses data conditions (especially Priority and Verification Result) to dynamically influence the required path
+- Imposes strict time windows on initial assessment and post-resolution verification
+- Ensures every incident is properly documented at the end and that escalation is not overused
+
+The model balances structured compliance with the flexibility needed in real-world incident handling.

@@ -1,0 +1,48 @@
+activity Effect Opportunity Identify
+activity Due Diligence Perform
+activity Deal Structure
+activity Funding Secure
+activity Terms Negotiate
+activity Agreement Finalize
+activity Investment Execute
+activity Progress Track
+activity Effect Measure
+activity Effect Document
+activity Investment Exit
+activity Returns Distribute
+activity Efficiency Assess
+activity Response Collect
+activity Next Investment Scheme
+bind Effect Opportunity Identify: Identifier Opportunity
+bind Due Diligence Perform: Identifier Opportunity, Degree Hazard
+bind Funding Secure: Identifier Investor, Amount Investment
+bind Effect Measure: Metric Effect
+bind Returns Distribute: ROI Expected, Identifier Investor
+bind Response Collect: Response Stakeholder
+bind Investment Exit: Strategy Exit
+bind Efficiency Assess: Rating Efficiency
+Identifier Opportunity: integer between 1 and 99999
+ROI Expected: float between 0 and 100
+Degree Hazard: Low, Medium, High
+Identifier Investor: integer between 1 and 9999
+Investment Type: Equity, Debt, Grant
+Amount Investment: float between 1000 and 10000000
+Metric Effect: Social, Environmental, Economic
+Response Stakeholder: Positive, Neutral, Negative
+Strategy Exit: Acquisition, Public Offering, Liquidation
+Rating Efficiency: integer between 1 and 10
+Init[Effect Opportunity Identify] | |
+Response[Effect Opportunity Identify, Due Diligence Perform] | | |
+Absence[Terms Negotiate] | |
+Response[Terms Negotiate, Agreement Finalize] | | |
+Precedence[Funding Secure, Due Diligence Perform] | | |
+Chain Succession[Agreement Finalize, Investment Execute] | | |
+Existence[Progress Track] | |
+Response[Progress Track, Effect Measure] | | |
+Precedence[Effect Measure, Effect Document] | | |0,7,d
+Response[Effect Document, Investment Exit] | | |
+Chain Succession[Investment Exit, Returns Distribute] | | |
+Response[Returns Distribute, Efficiency Assess] | | |
+End[Response Collect] | |
+Response[Response Collect, Next Investment Scheme] | | |
+Not Co-Existence[Agreement Finalize, Funding Secure] | | |

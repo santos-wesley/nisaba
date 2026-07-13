@@ -1,0 +1,69 @@
+activity Submit Benefit Request
+activity Review Benefit Request
+activity Approve Benefit Request
+activity Reject Benefit Request
+activity Notify Employee
+activity Process Payment
+activity Update Employee Record
+activity Audit Benefit Process
+activity Submit Appeal
+activity Review Appeal
+activity Approve Appeal
+activity Reject Appeal
+activity Notify Appeal Decision
+activity Conduct Benefit Orientation
+activity Evaluate Benefit Utilization
+bind Submit Benefit Request: Request ID, Benefit Type, Employee ID
+bind Review Benefit Request: Request ID, Request Status
+bind Approve Benefit Request: Request ID, Request Status
+bind Reject Benefit Request: Request ID, Request Status
+bind Notify Employee: Employee ID, Notification Type
+bind Process Payment: Request ID, Benefit Amount
+bind Update Employee Record: Employee ID, Benefit Type
+bind Audit Benefit Process: Audit ID
+bind Submit Appeal: Request ID, Appeal Status
+bind Review Appeal: Request ID, Appeal Status
+bind Approve Appeal: Request ID, Appeal Status
+bind Reject Appeal: Request ID, Appeal Status
+bind Notify Appeal Decision: Employee ID, Notification Type
+bind Conduct Benefit Orientation: Orientation ID
+bind Evaluate Benefit Utilization: Utilization Rate
+Request ID: integer between 1 and 10000
+Benefit Type: Health Insurance, Retirement Plan, Paid Leave, Education Assistance
+Request Status: Pending, Approved, Rejected
+Benefit Amount: float between 100.0 and 10000.0
+Employee ID: integer between 1 and 5000
+Appeal Status: Pending, Approved, Rejected
+Audit ID: integer between 1 and 1000
+Notification Type: Approval, Rejection, Appeal Decision
+Utilization Rate: float between 0.0 and 100.0
+Orientation ID: integer between 1 and 500
+Init[Submit Benefit Request] | |
+End[Evaluate Benefit Utilization] | |
+Existence[Review Benefit Request] | |
+Existence[Notify Employee] | |
+Exactly[Audit Benefit Process] | |
+Exactly[Conduct Benefit Orientation] | |
+Responded Existence[Submit Appeal, Review Appeal] | | |
+Precedence[Approve Benefit Request, Review Benefit Request] |A.Request Status is Pending |A.Request ID == T.Request ID |
+Precedence[Process Payment, Approve Benefit Request] | |A.Request ID == T.Request ID |
+Precedence[Update Employee Record, Process Payment] | |A.Employee ID == T.Request ID ? wait, better A.Employee ID from Update? but correlation on Request ID or Employee. Let's assume A.Employee ID == something but Process has Request ID. Correlation_condition: A.Employee ID (but need common. Perhaps use Request ID if bound but not. To fix we can omit if not shared or assume shared through process but here use if possible. For this I'll use correlation_condition as A.Employee ID (but according to guidelines it must reference both. So if no common, perhaps not specify but since needed let's use on Request if possible but Update does not bind Request ID. Perhaps add but since fixed, give correlation on common logic but in text no, but for model use A.Employee ID from target? No. For accuracy, since not shared in bind for correlation in this one, but Process and Update share Employee indirectly. But for schema need attributes bound to both. Since Update binds Employee ID, Process binds Request ID, no common so perhaps leave null for correlation if not specified precisely. |
+Response[Review Benefit Request, Approve Benefit Request] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Response[Submit Benefit Request, Notify Employee] | |A.Employee ID == T.Employee ID |
+Response[Approve Appeal, Notify Appeal Decision] |A.Appeal Status is Approved |A.Request ID == T.Employee ID ? no match. Correlation on other common. Perhaps Employee ID for Notify and perhaps assume Request has Employee. But since not bound to Approve Appeal Request ID but wait, Approve Appeal binds Request ID. Notify Appeal binds Employee ID. To have common not direct so perhaps use expression that fits if any but if not common attribute, leave as null. |
+Succession[Approve Benefit Request, Process Payment] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Succession[Submit Appeal, Review Appeal] | |A.Request ID == T.Request ID |
+Alternate Precedence[Approve Benefit Request, Review Benefit Request] | |A.Request ID == T.Request ID |
+Alternate Precedence[Process Payment, Approve Benefit Request] | |A.Request ID == T.Request ID |
+Alternate Response[Review Benefit Request, Approve Benefit Request] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Chain Precedence[Notify Employee, Approve Benefit Request] | |A.Employee ID (but for decision, use not direct but for notification type perhaps. If A.Notification Type is Approval |
+Chain Response[Approve Benefit Request, Process Payment] |A.Request Status is Approved |A.Request ID == T.Request ID |
+Chain Succession[Approve Appeal, Notify Appeal Decision] |A.Appeal Status is Approved |A.Request ID == T.Employee ID ? issue no exact shared, perhaps assume. |
+Co-Existence[Update Employee Record, Process Payment] | |A.Employee ID (bound in both indirectly) but Update has Employee, Process has Request so hard. Leave as null for correlation. |
+Exclusive Choice[Approve Benefit Request, Reject Benefit Request] | |A.Request ID == T.Request ID |
+Not Co-Existence[Process Payment, Reject Benefit Request] | |A.Request ID == T.Request ID |
+Not Responded Existence[Reject Benefit Request, Submit Appeal] | | |
+Not Response[Notify Appeal Decision, Reject Appeal] |A.Notification Type is Approval |A.Employee ID == T.Employee ID |
+Not Chain Succession[Review Benefit Request, Submit Appeal] | |A.Request ID == T.Request ID |
+Not Precedence[Reject Appeal, Submit Appeal] | |A.Request ID == T.Request ID |
+Not Response[Reject Benefit Request, Process Payment] | |A.Request ID == T.Request ID |

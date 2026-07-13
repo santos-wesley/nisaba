@@ -1,0 +1,41 @@
+# Process Description: Construction Project Workflow
+
+This process model describes a construction project workflow with nine key activities, each carrying specific data attributes, along with control-flow rules governing their execution order.
+
+## Activities and Their Data Attributes
+
+The process consists of the following activities:
+
+- **Conduct Survey** – records a **Survey ID** (an integer ranging from 1 to 9999)
+- **Design Blueprint** – no additional data recorded
+- **Acquire Permits** – records a **Permit Type** (one of: Environmental, Zoning, or Safety)
+- **Lay Foundation** – records a **Foundation Material** (one of: Concrete, Reinforced Concrete, or Steel)
+- **Construct Framework** – no additional data recorded
+- **Install Utilities** – records a **Utility Type** (one of: Plumbing, Electrical, or HVAC)
+- **Interior Work** – no additional data recorded
+- **Final Inspection** – records an **Inspection Score** (a floating-point number between 0.0 and 10.0)
+- **Handover Project** – no additional data recorded
+
+## Process Flow and Constraints
+
+**Process Start and End:**
+- The process must **begin** with **Conduct Survey** — this is always the first activity executed.
+- The process must **end** with **Final Inspection** — this is always the last activity executed.
+
+**Ordering Constraints:**
+
+1. **Design Blueprint** can only occur if **Conduct Survey** has already taken place beforehand.
+
+2. **Lay Foundation** can only occur if **Acquire Permits** has already taken place beforehand.
+
+3. Whenever **Lay Foundation** occurs, it must eventually be followed by **Construct Framework**. Additionally, the data condition dictates that at the time of the response, the value in scope must satisfy the constraint "0,3,d" (a data-based correlation between attribute values of the two activities, e.g., ensuring numeric consistency or difference constraints tied to the bound attributes).
+
+4. Every time **Construct Framework** occurs, it must be followed by **Install Utilities** before **Construct Framework** can occur again (alternating pattern), governed by a data condition "0,2,d" relating their attribute values.
+
+5. **Interior Work** can only occur if **Install Utilities** has already taken place beforehand.
+
+6. Whenever **Handover Project** occurs, it must be preceded by **Final Inspection**, with the ordering additionally constrained by the data condition "0,1,d" linking their associated data values.
+
+## Summary
+
+In essence, this model describes a typical building construction lifecycle: it starts with a site **survey**, followed by **blueprint design**, **permit acquisition**, **foundation laying**, **framework construction**, **utility installation**, **interior finishing**, and concludes with a **final inspection** before **project handover**. The data-aware constraints ensure that specific attribute values (such as inspection scores, survey IDs, and material/permit/utility types) are consistently and logically correlated across dependent activities, adding a layer of data integrity to the sequential and alternating behavioral constraints of the process.

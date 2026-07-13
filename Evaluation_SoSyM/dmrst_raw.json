@@ -1,0 +1,4180 @@
+{
+ "model132/anthropic": {
+  "nisaba": {
+   "edus": 71,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 22,
+    "Elaboration": 11,
+    "Other": 2,
+    "Cause-Effect": 13,
+    "Contrast": 4,
+    "Sequence": 4,
+    "Condition-Consequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 106,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 42,
+    "Elaboration": 33,
+    "Cause-Effect": 5,
+    "Other": 9,
+    "Condition-Consequence": 2,
+    "Sequence": 3
+   }
+  }
+ },
+ "model132/deepseek": {
+  "nisaba": {
+   "edus": 59,
+   "profile": {
+    "Background": 6,
+    "Conjunction": 21,
+    "Elaboration": 4,
+    "Other": 3,
+    "Cause-Effect": 15,
+    "Condition-Consequence": 8,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 37,
+   "profile": {
+    "Elaboration": 18,
+    "Sequence": 9,
+    "Background": 3,
+    "Conjunction": 1,
+    "Contrast": 1,
+    "Condition-Consequence": 1,
+    "Other": 3
+   }
+  }
+ },
+ "model132/xai": {
+  "nisaba": {
+   "edus": 66,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 16,
+    "Cause-Effect": 6,
+    "Elaboration": 16,
+    "Other": 12,
+    "Condition-Consequence": 5,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 71,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 28,
+    "Elaboration": 21,
+    "Sequence": 6,
+    "Condition-Consequence": 1,
+    "Contrast": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model132/zai": {
+  "nisaba": {
+   "edus": 137,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 41,
+    "Elaboration": 49,
+    "Cause-Effect": 11,
+    "Contrast": 7,
+    "Other": 7,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 68,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 20,
+    "Elaboration": 18,
+    "Cause-Effect": 1,
+    "Sequence": 3,
+    "Condition-Consequence": 6,
+    "Other": 2,
+    "Summary": 1,
+    "Contrast": 1
+   }
+  }
+ },
+ "model185/anthropic": {
+  "nisaba": {
+   "edus": 110,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 24,
+    "Cause-Effect": 21,
+    "Elaboration": 28,
+    "Other": 10,
+    "Condition-Consequence": 3,
+    "Summary": 1,
+    "Contrast": 2,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 91,
+   "profile": {
+    "Background": 12,
+    "Elaboration": 33,
+    "Conjunction": 22,
+    "Other": 12,
+    "Contrast": 1,
+    "Sequence": 7,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model185/deepseek": {
+  "nisaba": {
+   "edus": 94,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 32,
+    "Elaboration": 13,
+    "Other": 1,
+    "Cause-Effect": 25,
+    "Condition-Consequence": 7,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 67,
+   "profile": {
+    "Elaboration": 30,
+    "Conjunction": 19,
+    "Background": 8,
+    "Sequence": 2,
+    "Other": 6,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model185/xai": {
+  "nisaba": {
+   "edus": 112,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 27,
+    "Elaboration": 31,
+    "Cause-Effect": 20,
+    "Other": 13,
+    "Condition-Consequence": 2,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 109,
+   "profile": {
+    "Elaboration": 31,
+    "Background": 5,
+    "Conjunction": 61,
+    "Other": 2,
+    "Sequence": 7,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model185/zai": {
+  "nisaba": {
+   "edus": 125,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 30,
+    "Elaboration": 39,
+    "Cause-Effect": 17,
+    "Other": 12,
+    "Condition-Consequence": 6,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 93,
+   "profile": {
+    "Elaboration": 36,
+    "Conjunction": 25,
+    "Other": 9,
+    "Background": 11,
+    "Condition-Consequence": 6,
+    "Cause-Effect": 1,
+    "Sequence": 4
+   }
+  }
+ },
+ "model28/anthropic": {
+  "nisaba": {
+   "edus": 112,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 27,
+    "Elaboration": 25,
+    "Sequence": 3,
+    "Contrast": 9,
+    "Cause-Effect": 9,
+    "Condition-Consequence": 10,
+    "Other": 13
+   }
+  },
+  "zeroshot": {
+   "edus": 79,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 23,
+    "Elaboration": 24,
+    "Sequence": 7,
+    "Other": 5,
+    "Cause-Effect": 5,
+    "Condition-Consequence": 2,
+    "Contrast": 1
+   }
+  }
+ },
+ "model28/deepseek": {
+  "nisaba": {
+   "edus": 77,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 20,
+    "Elaboration": 9,
+    "Cause-Effect": 23,
+    "Other": 2,
+    "Condition-Consequence": 5,
+    "Sequence": 1,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 41,
+   "profile": {
+    "Elaboration": 17,
+    "Sequence": 4,
+    "Conjunction": 7,
+    "Contrast": 1,
+    "Background": 4,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 3,
+    "Other": 2
+   }
+  }
+ },
+ "model28/xai": {
+  "nisaba": {
+   "edus": 86,
+   "profile": {
+    "Background": 4,
+    "Conjunction": 33,
+    "Elaboration": 19,
+    "Cause-Effect": 14,
+    "Other": 8,
+    "Condition-Consequence": 6,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 94,
+   "profile": {
+    "Elaboration": 13,
+    "Cause-Effect": 1,
+    "Conjunction": 26,
+    "Background": 11,
+    "Sequence": 16,
+    "Contrast": 1,
+    "Condition-Consequence": 7,
+    "Other": 18
+   }
+  }
+ },
+ "model28/zai": {
+  "nisaba": {
+   "edus": 121,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 38,
+    "Elaboration": 28,
+    "Cause-Effect": 14,
+    "Contrast": 7,
+    "Condition-Consequence": 5,
+    "Other": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 82,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 22,
+    "Elaboration": 22,
+    "Other": 7,
+    "Sequence": 6,
+    "Contrast": 1,
+    "Summary": 2,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 3
+   }
+  }
+ },
+ "model67/anthropic": {
+  "nisaba": {
+   "edus": 166,
+   "profile": {
+    "Background": 34,
+    "Conjunction": 50,
+    "Elaboration": 26,
+    "Cause-Effect": 37,
+    "Other": 13,
+    "Contrast": 1,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 94,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 40,
+    "Elaboration": 30,
+    "Cause-Effect": 3,
+    "Condition-Consequence": 9,
+    "Other": 1
+   }
+  }
+ },
+ "model67/deepseek": {
+  "nisaba": {
+   "edus": 94,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 27,
+    "Elaboration": 13,
+    "Other": 3,
+    "Cause-Effect": 27,
+    "Condition-Consequence": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 60,
+   "profile": {
+    "Conjunction": 12,
+    "Background": 11,
+    "Cause-Effect": 4,
+    "Elaboration": 20,
+    "Condition-Consequence": 5,
+    "Contrast": 2,
+    "Sequence": 1,
+    "Other": 4
+   }
+  }
+ },
+ "model67/xai": {
+  "nisaba": {
+   "edus": 81,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 25,
+    "Elaboration": 21,
+    "Other": 6,
+    "Contrast": 1,
+    "Cause-Effect": 8,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 143,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 66,
+    "Sequence": 2,
+    "Elaboration": 51,
+    "Other": 4,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model67/zai": {
+  "nisaba": {
+   "edus": 109,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 46,
+    "Elaboration": 20,
+    "Cause-Effect": 13,
+    "Other": 4,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 96,
+   "profile": {
+    "Elaboration": 34,
+    "Conjunction": 35,
+    "Cause-Effect": 2,
+    "Background": 8,
+    "Other": 6,
+    "Condition-Consequence": 8,
+    "Contrast": 2
+   }
+  }
+ },
+ "model78/anthropic": {
+  "nisaba": {
+   "edus": 195,
+   "profile": {
+    "Background": 45,
+    "Conjunction": 50,
+    "Elaboration": 36,
+    "Cause-Effect": 38,
+    "Other": 18,
+    "Condition-Consequence": 7
+   }
+  },
+  "zeroshot": {
+   "edus": 80,
+   "profile": {
+    "Background": 15,
+    "Other": 12,
+    "Conjunction": 25,
+    "Elaboration": 20,
+    "Sequence": 2,
+    "Condition-Consequence": 5
+   }
+  }
+ },
+ "model78/deepseek": {
+  "nisaba": {
+   "edus": 70,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 16,
+    "Elaboration": 10,
+    "Cause-Effect": 16,
+    "Other": 2,
+    "Condition-Consequence": 8,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 44,
+   "profile": {
+    "Background": 7,
+    "Sequence": 15,
+    "Elaboration": 14,
+    "Other": 3,
+    "Condition-Consequence": 3,
+    "Contrast": 1
+   }
+  }
+ },
+ "model78/xai": {
+  "nisaba": {
+   "edus": 75,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 13,
+    "Elaboration": 14,
+    "Summary": 1,
+    "Cause-Effect": 11,
+    "Condition-Consequence": 8,
+    "Other": 10,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 68,
+   "profile": {
+    "Background": 16,
+    "Elaboration": 24,
+    "Cause-Effect": 3,
+    "Conjunction": 11,
+    "Other": 3,
+    "Sequence": 8,
+    "Condition-Consequence": 2
+   }
+  }
+ },
+ "model78/zai": {
+  "nisaba": {
+   "edus": 107,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 32,
+    "Elaboration": 34,
+    "Other": 12,
+    "Cause-Effect": 5,
+    "Condition-Consequence": 7
+   }
+  },
+  "zeroshot": {
+   "edus": 77,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 25,
+    "Other": 3,
+    "Elaboration": 28,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model179/anthropic": {
+  "nisaba": {
+   "edus": 220,
+   "profile": {
+    "Background": 33,
+    "Conjunction": 56,
+    "Cause-Effect": 64,
+    "Elaboration": 34,
+    "Other": 24,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 100,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 34,
+    "Elaboration": 23,
+    "Other": 5,
+    "Sequence": 9,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model179/deepseek": {
+  "nisaba": {
+   "edus": 63,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 11,
+    "Elaboration": 7,
+    "Cause-Effect": 15,
+    "Condition-Consequence": 13,
+    "Sequence": 5,
+    "Other": 1,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 48,
+   "profile": {
+    "Background": 5,
+    "Sequence": 8,
+    "Elaboration": 18,
+    "Conjunction": 8,
+    "Other": 4,
+    "Condition-Consequence": 4
+   }
+  }
+ },
+ "model179/xai": {
+  "nisaba": {
+   "edus": 83,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 22,
+    "Elaboration": 15,
+    "Cause-Effect": 8,
+    "Condition-Consequence": 9,
+    "Other": 11,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 85,
+   "profile": {
+    "Elaboration": 17,
+    "Conjunction": 21,
+    "Sequence": 14,
+    "Background": 6,
+    "Other": 19,
+    "Condition-Consequence": 5,
+    "Contrast": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model179/zai": {
+  "nisaba": {
+   "edus": 89,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 24,
+    "Elaboration": 23,
+    "Cause-Effect": 19,
+    "Other": 2,
+    "Condition-Consequence": 7,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 92,
+   "profile": {
+    "Background": 17,
+    "Elaboration": 31,
+    "Conjunction": 22,
+    "Sequence": 12,
+    "Condition-Consequence": 4,
+    "Summary": 1,
+    "Cause-Effect": 2,
+    "Contrast": 1,
+    "Other": 1
+   }
+  }
+ },
+ "model248/anthropic": {
+  "nisaba": {
+   "edus": 222,
+   "profile": {
+    "Background": 48,
+    "Conjunction": 47,
+    "Sequence": 3,
+    "Elaboration": 36,
+    "Other": 17,
+    "Cause-Effect": 58,
+    "Contrast": 3,
+    "Condition-Consequence": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 93,
+   "profile": {
+    "Elaboration": 34,
+    "Background": 16,
+    "Other": 15,
+    "Conjunction": 22,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model248/deepseek": {
+  "nisaba": {
+   "edus": 90,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 27,
+    "Cause-Effect": 26,
+    "Elaboration": 10,
+    "Condition-Consequence": 13,
+    "Sequence": 2,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 66,
+   "profile": {
+    "Background": 8,
+    "Elaboration": 21,
+    "Sequence": 11,
+    "Other": 10,
+    "Summary": 1,
+    "Conjunction": 9,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model248/xai": {
+  "nisaba": {
+   "edus": 116,
+   "profile": {
+    "Background": 22,
+    "Conjunction": 25,
+    "Sequence": 5,
+    "Elaboration": 31,
+    "Cause-Effect": 10,
+    "Other": 12,
+    "Summary": 1,
+    "Condition-Consequence": 8,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 82,
+   "profile": {
+    "Elaboration": 28,
+    "Background": 9,
+    "Conjunction": 32,
+    "Other": 10,
+    "Condition-Consequence": 1,
+    "Sequence": 1
+   }
+  }
+ },
+ "model248/zai": {
+  "nisaba": {
+   "edus": 179,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 51,
+    "Elaboration": 41,
+    "Other": 13,
+    "Cause-Effect": 10,
+    "Summary": 3,
+    "Condition-Consequence": 26,
+    "Contrast": 10
+   }
+  },
+  "zeroshot": {
+   "edus": 155,
+   "profile": {
+    "Background": 28,
+    "Elaboration": 57,
+    "Conjunction": 36,
+    "Other": 9,
+    "Cause-Effect": 5,
+    "Sequence": 15,
+    "Condition-Consequence": 2,
+    "Summary": 2
+   }
+  }
+ },
+ "model35/anthropic": {
+  "nisaba": {
+   "edus": 97,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 26,
+    "Elaboration": 22,
+    "Cause-Effect": 13,
+    "Contrast": 4,
+    "Condition-Consequence": 6,
+    "Sequence": 4,
+    "Summary": 1,
+    "Other": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 86,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 47,
+    "Elaboration": 24,
+    "Other": 2,
+    "Contrast": 1,
+    "Summary": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model35/deepseek": {
+  "nisaba": {
+   "edus": 92,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 27,
+    "Elaboration": 12,
+    "Cause-Effect": 27,
+    "Other": 4,
+    "Condition-Consequence": 12
+   }
+  },
+  "zeroshot": {
+   "edus": 47,
+   "profile": {
+    "Elaboration": 21,
+    "Conjunction": 14,
+    "Other": 4,
+    "Sequence": 2,
+    "Background": 4,
+    "Contrast": 1
+   }
+  }
+ },
+ "model35/xai": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 25,
+    "Elaboration": 20,
+    "Cause-Effect": 5,
+    "Other": 15,
+    "Condition-Consequence": 12
+   }
+  },
+  "zeroshot": {
+   "edus": 100,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 40,
+    "Sequence": 7,
+    "Elaboration": 28,
+    "Contrast": 2,
+    "Other": 7
+   }
+  }
+ },
+ "model35/zai": {
+  "nisaba": {
+   "edus": 104,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 21,
+    "Sequence": 1,
+    "Elaboration": 25,
+    "Cause-Effect": 23,
+    "Other": 8,
+    "Summary": 1,
+    "Contrast": 1,
+    "Condition-Consequence": 13
+   }
+  },
+  "zeroshot": {
+   "edus": 78,
+   "profile": {
+    "Conjunction": 27,
+    "Elaboration": 21,
+    "Background": 16,
+    "Other": 3,
+    "Cause-Effect": 2,
+    "Contrast": 1,
+    "Summary": 1,
+    "Sequence": 3,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model57/anthropic": {
+  "nisaba": {
+   "edus": 153,
+   "profile": {
+    "Background": 20,
+    "Conjunction": 43,
+    "Elaboration": 34,
+    "Cause-Effect": 28,
+    "Other": 16,
+    "Condition-Consequence": 8,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 108,
+   "profile": {
+    "Background": 21,
+    "Conjunction": 30,
+    "Elaboration": 36,
+    "Other": 8,
+    "Cause-Effect": 6,
+    "Summary": 3,
+    "Condition-Consequence": 1,
+    "Contrast": 1,
+    "Sequence": 1
+   }
+  }
+ },
+ "model57/deepseek": {
+  "nisaba": {
+   "edus": 113,
+   "profile": {
+    "Background": 21,
+    "Conjunction": 32,
+    "Cause-Effect": 31,
+    "Elaboration": 20,
+    "Other": 4,
+    "Condition-Consequence": 3,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 55,
+   "profile": {
+    "Background": 5,
+    "Sequence": 5,
+    "Elaboration": 26,
+    "Other": 5,
+    "Conjunction": 12,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model57/xai": {
+  "nisaba": {
+   "edus": 140,
+   "profile": {
+    "Background": 21,
+    "Conjunction": 36,
+    "Other": 18,
+    "Elaboration": 34,
+    "Cause-Effect": 23,
+    "Condition-Consequence": 3,
+    "Sequence": 1,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 83,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 28,
+    "Conjunction": 27,
+    "Sequence": 6,
+    "Other": 3,
+    "Summary": 1,
+    "Condition-Consequence": 2,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model57/zai": {
+  "nisaba": {
+   "edus": 150,
+   "profile": {
+    "Background": 25,
+    "Conjunction": 33,
+    "Elaboration": 37,
+    "Cause-Effect": 31,
+    "Condition-Consequence": 10,
+    "Other": 7,
+    "Sequence": 1,
+    "Contrast": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 94,
+   "profile": {
+    "Conjunction": 18,
+    "Elaboration": 38,
+    "Cause-Effect": 5,
+    "Background": 17,
+    "Sequence": 5,
+    "Other": 6,
+    "Condition-Consequence": 3,
+    "Contrast": 1
+   }
+  }
+ },
+ "model97/anthropic": {
+  "nisaba": {
+   "edus": 129,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 36,
+    "Elaboration": 48,
+    "Cause-Effect": 20,
+    "Other": 8,
+    "Condition-Consequence": 2,
+    "Sequence": 1,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 105,
+   "profile": {
+    "Background": 9,
+    "Elaboration": 39,
+    "Conjunction": 37,
+    "Other": 9,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 5,
+    "Contrast": 2,
+    "Sequence": 2
+   }
+  }
+ },
+ "model97/deepseek": {
+  "nisaba": {
+   "edus": 107,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 38,
+    "Elaboration": 26,
+    "Cause-Effect": 18,
+    "Other": 5,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 51,
+   "profile": {
+    "Conjunction": 23,
+    "Elaboration": 12,
+    "Sequence": 2,
+    "Background": 1,
+    "Cause-Effect": 2,
+    "Other": 5,
+    "Condition-Consequence": 5
+   }
+  }
+ },
+ "model97/xai": {
+  "nisaba": {
+   "edus": 107,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 40,
+    "Cause-Effect": 22,
+    "Elaboration": 20,
+    "Condition-Consequence": 4,
+    "Contrast": 2,
+    "Other": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 126,
+   "profile": {
+    "Background": 11,
+    "Elaboration": 37,
+    "Conjunction": 65,
+    "Condition-Consequence": 3,
+    "Other": 8,
+    "Sequence": 1
+   }
+  }
+ },
+ "model97/zai": {
+  "nisaba": {
+   "edus": 180,
+   "profile": {
+    "Background": 34,
+    "Conjunction": 33,
+    "Elaboration": 57,
+    "Cause-Effect": 25,
+    "Other": 10,
+    "Condition-Consequence": 15,
+    "Contrast": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 117,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 49,
+    "Elaboration": 37,
+    "Summary": 2,
+    "Cause-Effect": 3,
+    "Condition-Consequence": 13
+   }
+  }
+ },
+ "model102/anthropic": {
+  "nisaba": {
+   "edus": 234,
+   "profile": {
+    "Background": 40,
+    "Conjunction": 55,
+    "Elaboration": 53,
+    "Cause-Effect": 49,
+    "Other": 21,
+    "Contrast": 2,
+    "Condition-Consequence": 7,
+    "Sequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 102,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 34,
+    "Other": 15,
+    "Elaboration": 21,
+    "Cause-Effect": 4,
+    "Summary": 3,
+    "Sequence": 12,
+    "Contrast": 1
+   }
+  }
+ },
+ "model102/deepseek": {
+  "nisaba": {
+   "edus": 72,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 18,
+    "Elaboration": 9,
+    "Sequence": 6,
+    "Condition-Consequence": 5,
+    "Cause-Effect": 9,
+    "Other": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 40,
+   "profile": {
+    "Background": 6,
+    "Sequence": 10,
+    "Conjunction": 6,
+    "Elaboration": 9,
+    "Cause-Effect": 2,
+    "Other": 6
+   }
+  }
+ },
+ "model102/xai": {
+  "nisaba": {
+   "edus": 69,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 20,
+    "Elaboration": 17,
+    "Sequence": 4,
+    "Condition-Consequence": 6,
+    "Cause-Effect": 4,
+    "Other": 3,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 86,
+   "profile": {
+    "Background": 14,
+    "Elaboration": 25,
+    "Conjunction": 31,
+    "Sequence": 10,
+    "Other": 4,
+    "Summary": 1
+   }
+  }
+ },
+ "model102/zai": {
+  "nisaba": {
+   "edus": 63,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 18,
+    "Elaboration": 7,
+    "Cause-Effect": 18,
+    "Condition-Consequence": 8,
+    "Other": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 71,
+   "profile": {
+    "Elaboration": 17,
+    "Background": 14,
+    "Conjunction": 29,
+    "Sequence": 1,
+    "Other": 1,
+    "Contrast": 1,
+    "Condition-Consequence": 2,
+    "Cause-Effect": 5
+   }
+  }
+ },
+ "model109/anthropic": {
+  "nisaba": {
+   "edus": 199,
+   "profile": {
+    "Background": 33,
+    "Conjunction": 53,
+    "Elaboration": 38,
+    "Cause-Effect": 39,
+    "Other": 26,
+    "Condition-Consequence": 8,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 89,
+   "profile": {
+    "Conjunction": 39,
+    "Background": 9,
+    "Other": 5,
+    "Elaboration": 20,
+    "Sequence": 2,
+    "Summary": 1,
+    "Condition-Consequence": 5,
+    "Cause-Effect": 7
+   }
+  }
+ },
+ "model109/deepseek": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 20,
+    "Elaboration": 37,
+    "Cause-Effect": 10,
+    "Condition-Consequence": 6,
+    "Other": 5,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 44,
+   "profile": {
+    "Background": 6,
+    "Sequence": 4,
+    "Elaboration": 16,
+    "Condition-Consequence": 4,
+    "Other": 6,
+    "Conjunction": 6,
+    "Contrast": 1
+   }
+  }
+ },
+ "model109/xai": {
+  "nisaba": {
+   "edus": 85,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 27,
+    "Elaboration": 17,
+    "Other": 12,
+    "Cause-Effect": 11,
+    "Condition-Consequence": 7,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 117,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 34,
+    "Conjunction": 49,
+    "Sequence": 4,
+    "Other": 10,
+    "Condition-Consequence": 4,
+    "Summary": 2
+   }
+  }
+ },
+ "model109/zai": {
+  "nisaba": {
+   "edus": 132,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 58,
+    "Elaboration": 34,
+    "Condition-Consequence": 13,
+    "Other": 4,
+    "Cause-Effect": 6,
+    "Contrast": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 130,
+   "profile": {
+    "Conjunction": 52,
+    "Elaboration": 47,
+    "Background": 12,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 9,
+    "Sequence": 2,
+    "Other": 6
+   }
+  }
+ },
+ "model148/anthropic": {
+  "nisaba": {
+   "edus": 212,
+   "profile": {
+    "Background": 32,
+    "Conjunction": 55,
+    "Elaboration": 36,
+    "Cause-Effect": 64,
+    "Other": 16,
+    "Condition-Consequence": 6,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 84,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 31,
+    "Elaboration": 31,
+    "Other": 4,
+    "Sequence": 5,
+    "Condition-Consequence": 4,
+    "Summary": 1
+   }
+  }
+ },
+ "model148/deepseek": {
+  "nisaba": {
+   "edus": 58,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 24,
+    "Elaboration": 7,
+    "Cause-Effect": 14,
+    "Sequence": 1,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 45,
+   "profile": {
+    "Elaboration": 19,
+    "Sequence": 6,
+    "Background": 4,
+    "Contrast": 2,
+    "Conjunction": 7,
+    "Condition-Consequence": 4,
+    "Other": 2
+   }
+  }
+ },
+ "model148/xai": {
+  "nisaba": {
+   "edus": 68,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 27,
+    "Elaboration": 8,
+    "Cause-Effect": 15,
+    "Other": 4,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 51,
+   "profile": {
+    "Background": 7,
+    "Elaboration": 11,
+    "Conjunction": 16,
+    "Sequence": 6,
+    "Condition-Consequence": 4,
+    "Other": 4,
+    "Contrast": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model148/zai": {
+  "nisaba": {
+   "edus": 80,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 32,
+    "Elaboration": 18,
+    "Cause-Effect": 11,
+    "Other": 5,
+    "Contrast": 1,
+    "Condition-Consequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 74,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 31,
+    "Cause-Effect": 1,
+    "Other": 3,
+    "Elaboration": 17,
+    "Sequence": 3,
+    "Condition-Consequence": 5
+   }
+  }
+ },
+ "model208/anthropic": {
+  "nisaba": {
+   "edus": 196,
+   "profile": {
+    "Background": 29,
+    "Conjunction": 56,
+    "Elaboration": 31,
+    "Other": 17,
+    "Sequence": 2,
+    "Cause-Effect": 53,
+    "Condition-Consequence": 7
+   }
+  },
+  "zeroshot": {
+   "edus": 93,
+   "profile": {
+    "Background": 4,
+    "Elaboration": 46,
+    "Conjunction": 29,
+    "Other": 9,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model208/deepseek": {
+  "nisaba": {
+   "edus": 92,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 29,
+    "Elaboration": 18,
+    "Other": 5,
+    "Cause-Effect": 22,
+    "Contrast": 2,
+    "Condition-Consequence": 5,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 70,
+   "profile": {
+    "Elaboration": 27,
+    "Conjunction": 29,
+    "Background": 8,
+    "Condition-Consequence": 2,
+    "Contrast": 1,
+    "Other": 2
+   }
+  }
+ },
+ "model208/xai": {
+  "nisaba": {
+   "edus": 119,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 33,
+    "Cause-Effect": 15,
+    "Elaboration": 32,
+    "Other": 17,
+    "Condition-Consequence": 5,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 121,
+   "profile": {
+    "Elaboration": 34,
+    "Conjunction": 56,
+    "Background": 10,
+    "Other": 15,
+    "Summary": 1,
+    "Condition-Consequence": 2,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model208/zai": {
+  "nisaba": {
+   "edus": 164,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 45,
+    "Other": 12,
+    "Elaboration": 47,
+    "Cause-Effect": 21,
+    "Sequence": 1,
+    "Condition-Consequence": 8,
+    "Contrast": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 86,
+   "profile": {
+    "Elaboration": 32,
+    "Other": 13,
+    "Summary": 1,
+    "Background": 3,
+    "Conjunction": 32,
+    "Contrast": 1,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model70/anthropic": {
+  "nisaba": {
+   "edus": 94,
+   "profile": {
+    "Background": 23,
+    "Conjunction": 18,
+    "Elaboration": 26,
+    "Cause-Effect": 9,
+    "Summary": 4,
+    "Other": 5,
+    "Condition-Consequence": 3,
+    "Sequence": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 81,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 33,
+    "Elaboration": 25,
+    "Other": 1,
+    "Condition-Consequence": 5,
+    "Cause-Effect": 4
+   }
+  }
+ },
+ "model70/deepseek": {
+  "nisaba": {
+   "edus": 72,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 26,
+    "Elaboration": 13,
+    "Cause-Effect": 14,
+    "Condition-Consequence": 7,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 36,
+   "profile": {
+    "Elaboration": 17,
+    "Conjunction": 8,
+    "Sequence": 2,
+    "Background": 4,
+    "Other": 2,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model70/xai": {
+  "nisaba": {
+   "edus": 65,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 22,
+    "Elaboration": 15,
+    "Cause-Effect": 6,
+    "Condition-Consequence": 6,
+    "Other": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 41,
+   "profile": {
+    "Background": 7,
+    "Elaboration": 13,
+    "Conjunction": 13,
+    "Sequence": 4,
+    "Other": 1,
+    "Condition-Consequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model70/zai": {
+  "nisaba": {
+   "edus": 126,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 35,
+    "Elaboration": 43,
+    "Cause-Effect": 13,
+    "Condition-Consequence": 6,
+    "Other": 11,
+    "Summary": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 97,
+   "profile": {
+    "Background": 16,
+    "Elaboration": 31,
+    "Summary": 2,
+    "Conjunction": 38,
+    "Other": 1,
+    "Condition-Consequence": 6,
+    "Sequence": 2
+   }
+  }
+ },
+ "model186/anthropic": {
+  "nisaba": {
+   "edus": 220,
+   "profile": {
+    "Background": 47,
+    "Conjunction": 59,
+    "Elaboration": 29,
+    "Cause-Effect": 52,
+    "Other": 24,
+    "Condition-Consequence": 7,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 126,
+   "profile": {
+    "Background": 23,
+    "Conjunction": 44,
+    "Elaboration": 41,
+    "Other": 6,
+    "Condition-Consequence": 7,
+    "Contrast": 1,
+    "Cause-Effect": 3
+   }
+  }
+ },
+ "model186/deepseek": {
+  "nisaba": {
+   "edus": 117,
+   "profile": {
+    "Background": 18,
+    "Conjunction": 31,
+    "Cause-Effect": 30,
+    "Elaboration": 20,
+    "Other": 5,
+    "Condition-Consequence": 11,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 52,
+   "profile": {
+    "Background": 6,
+    "Elaboration": 18,
+    "Conjunction": 11,
+    "Sequence": 5,
+    "Other": 2,
+    "Condition-Consequence": 7,
+    "Contrast": 2
+   }
+  }
+ },
+ "model186/xai": {
+  "nisaba": {
+   "edus": 101,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 36,
+    "Cause-Effect": 22,
+    "Elaboration": 11,
+    "Condition-Consequence": 7,
+    "Other": 8,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 69,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 26,
+    "Sequence": 5,
+    "Condition-Consequence": 4,
+    "Elaboration": 20,
+    "Contrast": 1,
+    "Other": 3
+   }
+  }
+ },
+ "model186/zai": {
+  "nisaba": {
+   "edus": 166,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 42,
+    "Elaboration": 40,
+    "Cause-Effect": 22,
+    "Other": 13,
+    "Condition-Consequence": 14,
+    "Contrast": 10
+   }
+  },
+  "zeroshot": {
+   "edus": 114,
+   "profile": {
+    "Elaboration": 26,
+    "Conjunction": 37,
+    "Background": 27,
+    "Cause-Effect": 2,
+    "Other": 6,
+    "Sequence": 3,
+    "Condition-Consequence": 10,
+    "Summary": 2
+   }
+  }
+ },
+ "model191/anthropic": {
+  "nisaba": {
+   "edus": 205,
+   "profile": {
+    "Background": 28,
+    "Conjunction": 58,
+    "Elaboration": 37,
+    "Cause-Effect": 46,
+    "Other": 26,
+    "Contrast": 2,
+    "Condition-Consequence": 7
+   }
+  },
+  "zeroshot": {
+   "edus": 96,
+   "profile": {
+    "Background": 20,
+    "Conjunction": 29,
+    "Elaboration": 18,
+    "Other": 10,
+    "Sequence": 12,
+    "Condition-Consequence": 6
+   }
+  }
+ },
+ "model191/deepseek": {
+  "nisaba": {
+   "edus": 58,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 12,
+    "Sequence": 4,
+    "Elaboration": 8,
+    "Cause-Effect": 16,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 87,
+   "profile": {
+    "Background": 12,
+    "Elaboration": 30,
+    "Conjunction": 16,
+    "Sequence": 17,
+    "Other": 10,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model191/xai": {
+  "nisaba": {
+   "edus": 92,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 18,
+    "Elaboration": 34,
+    "Sequence": 1,
+    "Condition-Consequence": 6,
+    "Cause-Effect": 6,
+    "Other": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 126,
+   "profile": {
+    "Elaboration": 29,
+    "Background": 12,
+    "Conjunction": 59,
+    "Sequence": 6,
+    "Other": 9,
+    "Condition-Consequence": 6,
+    "Summary": 2,
+    "Contrast": 2
+   }
+  }
+ },
+ "model191/zai": {
+  "nisaba": {
+   "edus": 77,
+   "profile": {
+    "Background": 6,
+    "Conjunction": 25,
+    "Elaboration": 19,
+    "Cause-Effect": 11,
+    "Condition-Consequence": 10,
+    "Other": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 101,
+   "profile": {
+    "Background": 29,
+    "Elaboration": 30,
+    "Conjunction": 14,
+    "Cause-Effect": 4,
+    "Other": 9,
+    "Sequence": 11,
+    "Summary": 1,
+    "Condition-Consequence": 2
+   }
+  }
+ },
+ "model234/anthropic": {
+  "nisaba": {
+   "edus": 98,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 30,
+    "Elaboration": 22,
+    "Other": 6,
+    "Cause-Effect": 15,
+    "Contrast": 1,
+    "Condition-Consequence": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 75,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 35,
+    "Elaboration": 16,
+    "Other": 8,
+    "Condition-Consequence": 5,
+    "Summary": 1
+   }
+  }
+ },
+ "model234/deepseek": {
+  "nisaba": {
+   "edus": 103,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 27,
+    "Elaboration": 26,
+    "Other": 5,
+    "Cause-Effect": 16,
+    "Condition-Consequence": 10,
+    "Sequence": 1,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 113,
+   "profile": {
+    "Background": 10,
+    "Cause-Effect": 8,
+    "Conjunction": 37,
+    "Elaboration": 47,
+    "Other": 5,
+    "Condition-Consequence": 3,
+    "Sequence": 1,
+    "Summary": 1
+   }
+  }
+ },
+ "model234/xai": {
+  "nisaba": {
+   "edus": 108,
+   "profile": {
+    "Background": 18,
+    "Conjunction": 28,
+    "Elaboration": 30,
+    "Other": 16,
+    "Cause-Effect": 8,
+    "Condition-Consequence": 7
+   }
+  },
+  "zeroshot": {
+   "edus": 150,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 78,
+    "Other": 6,
+    "Summary": 1,
+    "Elaboration": 43,
+    "Sequence": 4,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model234/zai": {
+  "nisaba": {
+   "edus": 100,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 26,
+    "Elaboration": 29,
+    "Cause-Effect": 10,
+    "Other": 10,
+    "Contrast": 1,
+    "Condition-Consequence": 10
+   }
+  },
+  "zeroshot": {
+   "edus": 147,
+   "profile": {
+    "Conjunction": 48,
+    "Elaboration": 49,
+    "Other": 5,
+    "Background": 25,
+    "Cause-Effect": 10,
+    "Contrast": 1,
+    "Sequence": 2,
+    "Condition-Consequence": 5,
+    "Summary": 1
+   }
+  }
+ },
+ "model53/anthropic": {
+  "nisaba": {
+   "edus": 171,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 47,
+    "Elaboration": 37,
+    "Other": 16,
+    "Cause-Effect": 38,
+    "Contrast": 3,
+    "Condition-Consequence": 4,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 98,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 42,
+    "Other": 4,
+    "Elaboration": 29,
+    "Condition-Consequence": 11,
+    "Contrast": 1
+   }
+  }
+ },
+ "model53/deepseek": {
+  "nisaba": {
+   "edus": 93,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 31,
+    "Elaboration": 19,
+    "Cause-Effect": 23,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 78,
+   "profile": {
+    "Elaboration": 29,
+    "Conjunction": 38,
+    "Background": 4,
+    "Other": 3,
+    "Condition-Consequence": 1,
+    "Contrast": 2
+   }
+  }
+ },
+ "model53/xai": {
+  "nisaba": {
+   "edus": 107,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 35,
+    "Cause-Effect": 12,
+    "Elaboration": 26,
+    "Other": 16,
+    "Condition-Consequence": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 120,
+   "profile": {
+    "Background": 14,
+    "Elaboration": 29,
+    "Conjunction": 70,
+    "Sequence": 1,
+    "Other": 3,
+    "Condition-Consequence": 1,
+    "Contrast": 1
+   }
+  }
+ },
+ "model53/zai": {
+  "nisaba": {
+   "edus": 124,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 32,
+    "Elaboration": 42,
+    "Cause-Effect": 19,
+    "Condition-Consequence": 9,
+    "Other": 9,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 106,
+   "profile": {
+    "Conjunction": 50,
+    "Elaboration": 29,
+    "Background": 8,
+    "Condition-Consequence": 15,
+    "Other": 3
+   }
+  }
+ },
+ "model81/anthropic": {
+  "nisaba": {
+   "edus": 140,
+   "profile": {
+    "Background": 22,
+    "Conjunction": 40,
+    "Elaboration": 35,
+    "Cause-Effect": 29,
+    "Other": 9,
+    "Condition-Consequence": 1,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 107,
+   "profile": {
+    "Background": 20,
+    "Conjunction": 33,
+    "Elaboration": 39,
+    "Other": 6,
+    "Sequence": 2,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model81/deepseek": {
+  "nisaba": {
+   "edus": 119,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 34,
+    "Elaboration": 21,
+    "Cause-Effect": 36,
+    "Other": 3,
+    "Condition-Consequence": 7,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 79,
+   "profile": {
+    "Background": 12,
+    "Sequence": 9,
+    "Conjunction": 12,
+    "Elaboration": 28,
+    "Other": 13,
+    "Contrast": 1,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model81/xai": {
+  "nisaba": {
+   "edus": 150,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 42,
+    "Cause-Effect": 40,
+    "Elaboration": 32,
+    "Other": 8,
+    "Contrast": 3,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 86,
+   "profile": {
+    "Background": 12,
+    "Elaboration": 32,
+    "Conjunction": 31,
+    "Sequence": 2,
+    "Other": 7,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model81/zai": {
+  "nisaba": {
+   "edus": 219,
+   "profile": {
+    "Background": 31,
+    "Conjunction": 57,
+    "Elaboration": 59,
+    "Cause-Effect": 34,
+    "Condition-Consequence": 15,
+    "Other": 11,
+    "Contrast": 11
+   }
+  },
+  "zeroshot": {
+   "edus": 105,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 34,
+    "Cause-Effect": 4,
+    "Elaboration": 40,
+    "Contrast": 1,
+    "Other": 3,
+    "Sequence": 3,
+    "Condition-Consequence": 4
+   }
+  }
+ },
+ "model107/anthropic": {
+  "nisaba": {
+   "edus": 83,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 23,
+    "Sequence": 4,
+    "Elaboration": 19,
+    "Other": 15,
+    "Cause-Effect": 6,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 55,
+   "profile": {
+    "Elaboration": 17,
+    "Background": 8,
+    "Conjunction": 15,
+    "Other": 3,
+    "Sequence": 5,
+    "Condition-Consequence": 4,
+    "Summary": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model107/deepseek": {
+  "nisaba": {
+   "edus": 65,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 20,
+    "Elaboration": 13,
+    "Cause-Effect": 16,
+    "Sequence": 5,
+    "Condition-Consequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 40,
+   "profile": {
+    "Elaboration": 21,
+    "Sequence": 6,
+    "Background": 3,
+    "Other": 4,
+    "Conjunction": 3,
+    "Cause-Effect": 1,
+    "Contrast": 1
+   }
+  }
+ },
+ "model107/xai": {
+  "nisaba": {
+   "edus": 69,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 22,
+    "Elaboration": 19,
+    "Cause-Effect": 10,
+    "Sequence": 2,
+    "Condition-Consequence": 3,
+    "Other": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 57,
+   "profile": {
+    "Elaboration": 23,
+    "Conjunction": 12,
+    "Sequence": 9,
+    "Background": 7,
+    "Other": 4,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model107/zai": {
+  "nisaba": {
+   "edus": 99,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 26,
+    "Elaboration": 44,
+    "Cause-Effect": 10,
+    "Other": 7,
+    "Condition-Consequence": 1,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 44,
+   "profile": {
+    "Elaboration": 11,
+    "Conjunction": 21,
+    "Sequence": 5,
+    "Background": 1,
+    "Other": 3,
+    "Condition-Consequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model15/anthropic": {
+  "nisaba": {
+   "edus": 187,
+   "profile": {
+    "Background": 34,
+    "Conjunction": 50,
+    "Cause-Effect": 66,
+    "Elaboration": 20,
+    "Other": 8,
+    "Contrast": 2,
+    "Condition-Consequence": 5,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 90,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 32,
+    "Elaboration": 31,
+    "Other": 5,
+    "Contrast": 4,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model15/deepseek": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 24,
+    "Elaboration": 15,
+    "Cause-Effect": 24,
+    "Other": 4,
+    "Condition-Consequence": 6,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 42,
+   "profile": {
+    "Background": 7,
+    "Elaboration": 15,
+    "Sequence": 6,
+    "Conjunction": 5,
+    "Cause-Effect": 1,
+    "Other": 6,
+    "Contrast": 1
+   }
+  }
+ },
+ "model15/xai": {
+  "nisaba": {
+   "edus": 103,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 33,
+    "Elaboration": 18,
+    "Cause-Effect": 20,
+    "Other": 7,
+    "Summary": 1,
+    "Condition-Consequence": 5,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 69,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 25,
+    "Conjunction": 20,
+    "Sequence": 5,
+    "Condition-Consequence": 2,
+    "Other": 2,
+    "Contrast": 1
+   }
+  }
+ },
+ "model15/zai": {
+  "nisaba": {
+   "edus": 123,
+   "profile": {
+    "Background": 21,
+    "Conjunction": 28,
+    "Cause-Effect": 17,
+    "Elaboration": 32,
+    "Other": 11,
+    "Condition-Consequence": 4,
+    "Sequence": 1,
+    "Contrast": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 94,
+   "profile": {
+    "Conjunction": 34,
+    "Elaboration": 31,
+    "Cause-Effect": 4,
+    "Background": 15,
+    "Other": 5,
+    "Condition-Consequence": 3,
+    "Contrast": 1
+   }
+  }
+ },
+ "model200/anthropic": {
+  "nisaba": {
+   "edus": 69,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 19,
+    "Sequence": 3,
+    "Elaboration": 20,
+    "Cause-Effect": 5,
+    "Other": 5,
+    "Contrast": 2,
+    "Condition-Consequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 82,
+   "profile": {
+    "Background": 5,
+    "Elaboration": 34,
+    "Conjunction": 32,
+    "Other": 8,
+    "Condition-Consequence": 1,
+    "Summary": 1
+   }
+  }
+ },
+ "model200/deepseek": {
+  "nisaba": {
+   "edus": 105,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 30,
+    "Cause-Effect": 34,
+    "Elaboration": 8,
+    "Other": 2,
+    "Condition-Consequence": 10,
+    "Sequence": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 41,
+   "profile": {
+    "Elaboration": 18,
+    "Sequence": 7,
+    "Conjunction": 4,
+    "Background": 6,
+    "Condition-Consequence": 1,
+    "Other": 2,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model200/xai": {
+  "nisaba": {
+   "edus": 75,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 19,
+    "Elaboration": 24,
+    "Cause-Effect": 11,
+    "Other": 2,
+    "Condition-Consequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 101,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 32,
+    "Elaboration": 29,
+    "Other": 13,
+    "Sequence": 11,
+    "Condition-Consequence": 5,
+    "Contrast": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model200/zai": {
+  "nisaba": {
+   "edus": 78,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 23,
+    "Elaboration": 24,
+    "Cause-Effect": 16,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 66,
+   "profile": {
+    "Background": 12,
+    "Elaboration": 29,
+    "Conjunction": 16,
+    "Other": 4,
+    "Sequence": 1,
+    "Condition-Consequence": 3
+   }
+  }
+ },
+ "model212/anthropic": {
+  "nisaba": {
+   "edus": 73,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 26,
+    "Elaboration": 17,
+    "Other": 7,
+    "Contrast": 2,
+    "Cause-Effect": 6,
+    "Condition-Consequence": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 51,
+   "profile": {
+    "Elaboration": 15,
+    "Background": 5,
+    "Conjunction": 23,
+    "Other": 2,
+    "Sequence": 1,
+    "Condition-Consequence": 3,
+    "Contrast": 1
+   }
+  }
+ },
+ "model212/deepseek": {
+  "nisaba": {
+   "edus": 70,
+   "profile": {
+    "Background": 3,
+    "Conjunction": 22,
+    "Elaboration": 25,
+    "Cause-Effect": 11,
+    "Other": 1,
+    "Condition-Consequence": 4,
+    "Sequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 73,
+   "profile": {
+    "Elaboration": 26,
+    "Conjunction": 3,
+    "Background": 8,
+    "Sequence": 25,
+    "Summary": 1,
+    "Other": 8,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model212/xai": {
+  "nisaba": {
+   "edus": 90,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 28,
+    "Elaboration": 31,
+    "Cause-Effect": 5,
+    "Other": 9,
+    "Condition-Consequence": 4,
+    "Sequence": 2,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 93,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 51,
+    "Other": 2,
+    "Elaboration": 25,
+    "Sequence": 1
+   }
+  }
+ },
+ "model212/zai": {
+  "nisaba": {
+   "edus": 118,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 24,
+    "Elaboration": 42,
+    "Cause-Effect": 12,
+    "Other": 15,
+    "Contrast": 5,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 114,
+   "profile": {
+    "Elaboration": 38,
+    "Conjunction": 53,
+    "Background": 9,
+    "Other": 6,
+    "Cause-Effect": 1,
+    "Summary": 2,
+    "Condition-Consequence": 4
+   }
+  }
+ },
+ "model5/anthropic": {
+  "nisaba": {
+   "edus": 76,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 22,
+    "Elaboration": 24,
+    "Cause-Effect": 5,
+    "Other": 3,
+    "Condition-Consequence": 3,
+    "Contrast": 2,
+    "Sequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 74,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 27,
+    "Elaboration": 22,
+    "Other": 6,
+    "Condition-Consequence": 3,
+    "Sequence": 6,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model5/deepseek": {
+  "nisaba": {
+   "edus": 76,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 20,
+    "Elaboration": 25,
+    "Cause-Effect": 9,
+    "Condition-Consequence": 7,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 28,
+   "profile": {
+    "Elaboration": 12,
+    "Sequence": 5,
+    "Conjunction": 5,
+    "Background": 4,
+    "Contrast": 1
+   }
+  }
+ },
+ "model5/xai": {
+  "nisaba": {
+   "edus": 68,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 21,
+    "Elaboration": 21,
+    "Cause-Effect": 4,
+    "Other": 6,
+    "Condition-Consequence": 6,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 84,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 35,
+    "Elaboration": 23,
+    "Sequence": 8,
+    "Other": 2
+   }
+  }
+ },
+ "model5/zai": {
+  "nisaba": {
+   "edus": 85,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 21,
+    "Elaboration": 34,
+    "Cause-Effect": 10,
+    "Other": 1,
+    "Condition-Consequence": 7,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 75,
+   "profile": {
+    "Conjunction": 25,
+    "Elaboration": 25,
+    "Background": 19,
+    "Cause-Effect": 2,
+    "Other": 2,
+    "Sequence": 1
+   }
+  }
+ },
+ "model144/anthropic": {
+  "nisaba": {
+   "edus": 150,
+   "profile": {
+    "Background": 28,
+    "Conjunction": 42,
+    "Cause-Effect": 33,
+    "Elaboration": 31,
+    "Other": 9,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 92,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 44,
+    "Elaboration": 25,
+    "Other": 7,
+    "Contrast": 1,
+    "Sequence": 4,
+    "Condition-Consequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model144/deepseek": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 26,
+    "Elaboration": 23,
+    "Cause-Effect": 16,
+    "Other": 3,
+    "Condition-Consequence": 3,
+    "Sequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 49,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 10,
+    "Elaboration": 29,
+    "Other": 1,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model144/xai": {
+  "nisaba": {
+   "edus": 123,
+   "profile": {
+    "Background": 18,
+    "Conjunction": 32,
+    "Elaboration": 32,
+    "Cause-Effect": 13,
+    "Other": 21,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 80,
+   "profile": {
+    "Background": 15,
+    "Elaboration": 19,
+    "Conjunction": 29,
+    "Sequence": 7,
+    "Condition-Consequence": 3,
+    "Summary": 2,
+    "Other": 4
+   }
+  }
+ },
+ "model144/zai": {
+  "nisaba": {
+   "edus": 132,
+   "profile": {
+    "Background": 24,
+    "Conjunction": 35,
+    "Elaboration": 37,
+    "Cause-Effect": 19,
+    "Other": 6,
+    "Condition-Consequence": 9,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 129,
+   "profile": {
+    "Background": 16,
+    "Elaboration": 53,
+    "Conjunction": 42,
+    "Other": 3,
+    "Sequence": 5,
+    "Summary": 1,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 2,
+    "Contrast": 2
+   }
+  }
+ },
+ "model16/anthropic": {
+  "nisaba": {
+   "edus": 206,
+   "profile": {
+    "Background": 43,
+    "Conjunction": 61,
+    "Elaboration": 32,
+    "Cause-Effect": 41,
+    "Other": 19,
+    "Condition-Consequence": 8,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 74,
+   "profile": {
+    "Background": 6,
+    "Elaboration": 22,
+    "Conjunction": 30,
+    "Other": 4,
+    "Sequence": 1,
+    "Condition-Consequence": 9,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model16/deepseek": {
+  "nisaba": {
+   "edus": 88,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 30,
+    "Elaboration": 16,
+    "Cause-Effect": 19,
+    "Sequence": 4,
+    "Condition-Consequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 59,
+   "profile": {
+    "Conjunction": 13,
+    "Elaboration": 19,
+    "Sequence": 13,
+    "Background": 10,
+    "Condition-Consequence": 1,
+    "Cause-Effect": 1,
+    "Other": 1
+   }
+  }
+ },
+ "model16/xai": {
+  "nisaba": {
+   "edus": 88,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 28,
+    "Cause-Effect": 17,
+    "Elaboration": 13,
+    "Other": 6,
+    "Sequence": 3,
+    "Condition-Consequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 67,
+   "profile": {
+    "Elaboration": 23,
+    "Background": 12,
+    "Conjunction": 17,
+    "Sequence": 11,
+    "Condition-Consequence": 1,
+    "Other": 2
+   }
+  }
+ },
+ "model16/zai": {
+  "nisaba": {
+   "edus": 153,
+   "profile": {
+    "Background": 23,
+    "Conjunction": 40,
+    "Elaboration": 52,
+    "Cause-Effect": 33,
+    "Other": 3,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 63,
+   "profile": {
+    "Background": 17,
+    "Elaboration": 14,
+    "Conjunction": 13,
+    "Sequence": 12,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 2,
+    "Other": 3
+   }
+  }
+ },
+ "model207/anthropic": {
+  "nisaba": {
+   "edus": 86,
+   "profile": {
+    "Background": 20,
+    "Conjunction": 7,
+    "Sequence": 14,
+    "Elaboration": 22,
+    "Other": 11,
+    "Cause-Effect": 9,
+    "Condition-Consequence": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 72,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 11,
+    "Elaboration": 21,
+    "Other": 3,
+    "Sequence": 15,
+    "Cause-Effect": 1,
+    "Summary": 1
+   }
+  }
+ },
+ "model207/deepseek": {
+  "nisaba": {
+   "edus": 80,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 24,
+    "Elaboration": 20,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 13,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 34,
+   "profile": {
+    "Elaboration": 15,
+    "Other": 5,
+    "Sequence": 3,
+    "Conjunction": 8,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model207/xai": {
+  "nisaba": {
+   "edus": 90,
+   "profile": {
+    "Background": 6,
+    "Conjunction": 32,
+    "Cause-Effect": 8,
+    "Elaboration": 25,
+    "Condition-Consequence": 13,
+    "Other": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 62,
+   "profile": {
+    "Background": 6,
+    "Conjunction": 23,
+    "Elaboration": 27,
+    "Other": 3,
+    "Sequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model207/zai": {
+  "nisaba": {
+   "edus": 118,
+   "profile": {
+    "Background": 16,
+    "Conjunction": 20,
+    "Elaboration": 42,
+    "Cause-Effect": 24,
+    "Condition-Consequence": 13,
+    "Other": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 63,
+   "profile": {
+    "Background": 11,
+    "Elaboration": 15,
+    "Conjunction": 28,
+    "Other": 3,
+    "Condition-Consequence": 1,
+    "Cause-Effect": 1,
+    "Sequence": 3
+   }
+  }
+ },
+ "model221/anthropic": {
+  "nisaba": {
+   "edus": 220,
+   "profile": {
+    "Background": 53,
+    "Conjunction": 56,
+    "Elaboration": 29,
+    "Other": 23,
+    "Sequence": 1,
+    "Cause-Effect": 50,
+    "Contrast": 1,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 95,
+   "profile": {
+    "Background": 15,
+    "Elaboration": 36,
+    "Conjunction": 31,
+    "Cause-Effect": 1,
+    "Sequence": 4,
+    "Other": 3,
+    "Condition-Consequence": 3,
+    "Contrast": 1
+   }
+  }
+ },
+ "model221/deepseek": {
+  "nisaba": {
+   "edus": 153,
+   "profile": {
+    "Background": 21,
+    "Conjunction": 52,
+    "Cause-Effect": 25,
+    "Elaboration": 33,
+    "Other": 5,
+    "Contrast": 10,
+    "Condition-Consequence": 5,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 58,
+   "profile": {
+    "Elaboration": 21,
+    "Sequence": 8,
+    "Cause-Effect": 4,
+    "Conjunction": 10,
+    "Background": 5,
+    "Other": 3,
+    "Condition-Consequence": 6
+   }
+  }
+ },
+ "model221/xai": {
+  "nisaba": {
+   "edus": 116,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 32,
+    "Elaboration": 35,
+    "Cause-Effect": 11,
+    "Other": 16,
+    "Summary": 1,
+    "Condition-Consequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 91,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 23,
+    "Conjunction": 24,
+    "Sequence": 17,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1,
+    "Other": 9
+   }
+  }
+ },
+ "model221/zai": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 30,
+    "Elaboration": 24,
+    "Cause-Effect": 12,
+    "Condition-Consequence": 6,
+    "Other": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 113,
+   "profile": {
+    "Conjunction": 32,
+    "Elaboration": 37,
+    "Background": 22,
+    "Sequence": 8,
+    "Contrast": 3,
+    "Condition-Consequence": 2,
+    "Summary": 3,
+    "Other": 2,
+    "Cause-Effect": 3
+   }
+  }
+ },
+ "model9/anthropic": {
+  "nisaba": {
+   "edus": 160,
+   "profile": {
+    "Background": 36,
+    "Conjunction": 37,
+    "Other": 25,
+    "Elaboration": 29,
+    "Cause-Effect": 23,
+    "Sequence": 1,
+    "Condition-Consequence": 4,
+    "Contrast": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 124,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 41,
+    "Elaboration": 50,
+    "Other": 6,
+    "Contrast": 4,
+    "Condition-Consequence": 5,
+    "Cause-Effect": 1,
+    "Sequence": 1
+   }
+  }
+ },
+ "model9/deepseek": {
+  "nisaba": {
+   "edus": 130,
+   "profile": {
+    "Background": 23,
+    "Conjunction": 29,
+    "Cause-Effect": 36,
+    "Elaboration": 25,
+    "Other": 5,
+    "Condition-Consequence": 10,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 74,
+   "profile": {
+    "Elaboration": 23,
+    "Conjunction": 15,
+    "Background": 9,
+    "Contrast": 2,
+    "Condition-Consequence": 5,
+    "Other": 11,
+    "Sequence": 4,
+    "Cause-Effect": 4
+   }
+  }
+ },
+ "model9/xai": {
+  "nisaba": {
+   "edus": 145,
+   "profile": {
+    "Background": 26,
+    "Conjunction": 29,
+    "Cause-Effect": 28,
+    "Elaboration": 40,
+    "Other": 12,
+    "Contrast": 3,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 80,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 43,
+    "Elaboration": 17,
+    "Contrast": 3,
+    "Other": 2,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model9/zai": {
+  "nisaba": {
+   "edus": 193,
+   "profile": {
+    "Background": 35,
+    "Conjunction": 41,
+    "Elaboration": 40,
+    "Cause-Effect": 30,
+    "Other": 24,
+    "Condition-Consequence": 13,
+    "Contrast": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 69,
+   "profile": {
+    "Conjunction": 22,
+    "Elaboration": 16,
+    "Background": 14,
+    "Other": 3,
+    "Summary": 1,
+    "Sequence": 4,
+    "Condition-Consequence": 5,
+    "Contrast": 2,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model130/anthropic": {
+  "nisaba": {
+   "edus": 223,
+   "profile": {
+    "Background": 36,
+    "Conjunction": 57,
+    "Elaboration": 38,
+    "Cause-Effect": 49,
+    "Sequence": 4,
+    "Other": 25,
+    "Condition-Consequence": 10,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 80,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 15,
+    "Elaboration": 25,
+    "Other": 3,
+    "Sequence": 9,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 4
+   }
+  }
+ },
+ "model130/deepseek": {
+  "nisaba": {
+   "edus": 80,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 26,
+    "Cause-Effect": 17,
+    "Elaboration": 16,
+    "Summary": 2,
+    "Condition-Consequence": 7,
+    "Sequence": 1,
+    "Other": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 41,
+   "profile": {
+    "Elaboration": 14,
+    "Conjunction": 10,
+    "Sequence": 2,
+    "Background": 4,
+    "Other": 4,
+    "Condition-Consequence": 5,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model130/xai": {
+  "nisaba": {
+   "edus": 102,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 37,
+    "Cause-Effect": 6,
+    "Elaboration": 32,
+    "Condition-Consequence": 4,
+    "Other": 7,
+    "Sequence": 3,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 65,
+   "profile": {
+    "Elaboration": 17,
+    "Other": 4,
+    "Cause-Effect": 1,
+    "Conjunction": 19,
+    "Background": 11,
+    "Sequence": 10,
+    "Condition-Consequence": 2
+   }
+  }
+ },
+ "model130/zai": {
+  "nisaba": {
+   "edus": 101,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 25,
+    "Elaboration": 28,
+    "Other": 11,
+    "Cause-Effect": 11,
+    "Condition-Consequence": 5,
+    "Sequence": 1,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 71,
+   "profile": {
+    "Background": 19,
+    "Elaboration": 13,
+    "Conjunction": 21,
+    "Other": 2,
+    "Cause-Effect": 2,
+    "Sequence": 5,
+    "Condition-Consequence": 8
+   }
+  }
+ },
+ "model138/anthropic": {
+  "nisaba": {
+   "edus": 201,
+   "profile": {
+    "Background": 39,
+    "Conjunction": 50,
+    "Elaboration": 32,
+    "Cause-Effect": 39,
+    "Other": 28,
+    "Contrast": 2,
+    "Condition-Consequence": 10
+   }
+  },
+  "zeroshot": {
+   "edus": 99,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 35,
+    "Elaboration": 35,
+    "Other": 11,
+    "Condition-Consequence": 6,
+    "Sequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model138/deepseek": {
+  "nisaba": {
+   "edus": 92,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 32,
+    "Elaboration": 22,
+    "Cause-Effect": 20,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 42,
+   "profile": {
+    "Elaboration": 22,
+    "Sequence": 1,
+    "Conjunction": 7,
+    "Background": 2,
+    "Condition-Consequence": 6,
+    "Other": 2,
+    "Contrast": 1
+   }
+  }
+ },
+ "model138/xai": {
+  "nisaba": {
+   "edus": 92,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 26,
+    "Elaboration": 28,
+    "Cause-Effect": 17,
+    "Condition-Consequence": 2,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 111,
+   "profile": {
+    "Conjunction": 37,
+    "Elaboration": 46,
+    "Background": 11,
+    "Sequence": 2,
+    "Other": 8,
+    "Contrast": 1,
+    "Condition-Consequence": 5
+   }
+  }
+ },
+ "model138/zai": {
+  "nisaba": {
+   "edus": 129,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 36,
+    "Elaboration": 43,
+    "Cause-Effect": 14,
+    "Other": 11,
+    "Condition-Consequence": 9,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 114,
+   "profile": {
+    "Conjunction": 41,
+    "Elaboration": 33,
+    "Other": 2,
+    "Cause-Effect": 4,
+    "Sequence": 3,
+    "Background": 15,
+    "Summary": 8,
+    "Condition-Consequence": 6,
+    "Contrast": 1
+   }
+  }
+ },
+ "model192/anthropic": {
+  "nisaba": {
+   "edus": 167,
+   "profile": {
+    "Background": 22,
+    "Conjunction": 44,
+    "Elaboration": 34,
+    "Cause-Effect": 38,
+    "Other": 16,
+    "Contrast": 4,
+    "Condition-Consequence": 8
+   }
+  },
+  "zeroshot": {
+   "edus": 78,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 27,
+    "Elaboration": 29,
+    "Other": 9,
+    "Condition-Consequence": 3,
+    "Sequence": 1
+   }
+  }
+ },
+ "model192/deepseek": {
+  "nisaba": {
+   "edus": 96,
+   "profile": {
+    "Background": 6,
+    "Conjunction": 33,
+    "Elaboration": 17,
+    "Cause-Effect": 29,
+    "Other": 5,
+    "Condition-Consequence": 4,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 34,
+   "profile": {
+    "Conjunction": 8,
+    "Elaboration": 16,
+    "Other": 3,
+    "Condition-Consequence": 4,
+    "Contrast": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model192/xai": {
+  "nisaba": {
+   "edus": 86,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 31,
+    "Elaboration": 17,
+    "Cause-Effect": 23,
+    "Condition-Consequence": 2,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 95,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 46,
+    "Elaboration": 18,
+    "Sequence": 2,
+    "Other": 9,
+    "Cause-Effect": 3,
+    "Contrast": 3,
+    "Condition-Consequence": 4
+   }
+  }
+ },
+ "model192/zai": {
+  "nisaba": {
+   "edus": 127,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 40,
+    "Elaboration": 30,
+    "Cause-Effect": 24,
+    "Other": 4,
+    "Condition-Consequence": 10,
+    "Sequence": 1,
+    "Contrast": 5
+   }
+  },
+  "zeroshot": {
+   "edus": 53,
+   "profile": {
+    "Conjunction": 16,
+    "Elaboration": 15,
+    "Background": 12,
+    "Other": 2,
+    "Condition-Consequence": 5,
+    "Contrast": 1,
+    "Summary": 1
+   }
+  }
+ },
+ "model38/anthropic": {
+  "nisaba": {
+   "edus": 144,
+   "profile": {
+    "Background": 23,
+    "Conjunction": 39,
+    "Cause-Effect": 28,
+    "Elaboration": 34,
+    "Other": 14,
+    "Contrast": 2,
+    "Condition-Consequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 62,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 23,
+    "Elaboration": 25,
+    "Sequence": 1,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model38/deepseek": {
+  "nisaba": {
+   "edus": 81,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 23,
+    "Other": 1,
+    "Elaboration": 13,
+    "Cause-Effect": 19,
+    "Condition-Consequence": 9,
+    "Sequence": 1,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 44,
+   "profile": {
+    "Conjunction": 12,
+    "Elaboration": 12,
+    "Sequence": 4,
+    "Background": 8,
+    "Cause-Effect": 1,
+    "Condition-Consequence": 5,
+    "Contrast": 1
+   }
+  }
+ },
+ "model38/xai": {
+  "nisaba": {
+   "edus": 91,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 31,
+    "Cause-Effect": 16,
+    "Elaboration": 18,
+    "Condition-Consequence": 7,
+    "Other": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 88,
+   "profile": {
+    "Elaboration": 32,
+    "Conjunction": 28,
+    "Background": 10,
+    "Sequence": 6,
+    "Other": 6,
+    "Condition-Consequence": 3,
+    "Summary": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model38/zai": {
+  "nisaba": {
+   "edus": 113,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 33,
+    "Cause-Effect": 9,
+    "Elaboration": 36,
+    "Other": 7,
+    "Condition-Consequence": 10,
+    "Contrast": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 69,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 22,
+    "Conjunction": 21,
+    "Other": 3,
+    "Cause-Effect": 4,
+    "Condition-Consequence": 5
+   }
+  }
+ },
+ "model44/anthropic": {
+  "nisaba": {
+   "edus": 232,
+   "profile": {
+    "Background": 46,
+    "Conjunction": 53,
+    "Elaboration": 47,
+    "Other": 23,
+    "Cause-Effect": 57,
+    "Condition-Consequence": 4,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 96,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 34,
+    "Elaboration": 44,
+    "Other": 3,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model44/deepseek": {
+  "nisaba": {
+   "edus": 73,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 19,
+    "Elaboration": 16,
+    "Other": 8,
+    "Cause-Effect": 11,
+    "Condition-Consequence": 6,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 107,
+   "profile": {
+    "Conjunction": 17,
+    "Elaboration": 36,
+    "Other": 2,
+    "Background": 14,
+    "Sequence": 28,
+    "Contrast": 2,
+    "Condition-Consequence": 6,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model44/xai": {
+  "nisaba": {
+   "edus": 107,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 26,
+    "Elaboration": 39,
+    "Cause-Effect": 6,
+    "Other": 17,
+    "Condition-Consequence": 4,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 99,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 28,
+    "Sequence": 27,
+    "Elaboration": 21,
+    "Other": 5,
+    "Summary": 1,
+    "Condition-Consequence": 2,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model44/zai": {
+  "nisaba": {
+   "edus": 95,
+   "profile": {
+    "Background": 11,
+    "Conjunction": 24,
+    "Elaboration": 35,
+    "Sequence": 2,
+    "Cause-Effect": 13,
+    "Other": 2,
+    "Condition-Consequence": 5,
+    "Contrast": 2
+   }
+  },
+  "zeroshot": {
+   "edus": 80,
+   "profile": {
+    "Conjunction": 21,
+    "Elaboration": 27,
+    "Sequence": 5,
+    "Background": 15,
+    "Other": 3,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 3,
+    "Summary": 1
+   }
+  }
+ },
+ "model10/anthropic": {
+  "nisaba": {
+   "edus": 97,
+   "profile": {
+    "Background": 18,
+    "Conjunction": 20,
+    "Elaboration": 34,
+    "Cause-Effect": 13,
+    "Sequence": 3,
+    "Other": 3,
+    "Contrast": 2,
+    "Condition-Consequence": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 82,
+   "profile": {
+    "Background": 13,
+    "Conjunction": 30,
+    "Elaboration": 29,
+    "Cause-Effect": 3,
+    "Sequence": 1,
+    "Condition-Consequence": 2,
+    "Other": 3
+   }
+  }
+ },
+ "model10/deepseek": {
+  "nisaba": {
+   "edus": 101,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 25,
+    "Elaboration": 29,
+    "Cause-Effect": 13,
+    "Condition-Consequence": 13,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 33,
+   "profile": {
+    "Elaboration": 14,
+    "Sequence": 2,
+    "Conjunction": 13,
+    "Condition-Consequence": 1,
+    "Other": 1,
+    "Contrast": 1
+   }
+  }
+ },
+ "model10/xai": {
+  "nisaba": {
+   "edus": 108,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 33,
+    "Other": 7,
+    "Elaboration": 20,
+    "Condition-Consequence": 23,
+    "Cause-Effect": 6,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 97,
+   "profile": {
+    "Background": 8,
+    "Conjunction": 21,
+    "Elaboration": 27,
+    "Sequence": 35,
+    "Other": 2,
+    "Summary": 2,
+    "Contrast": 1
+   }
+  }
+ },
+ "model10/zai": {
+  "nisaba": {
+   "edus": 113,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 22,
+    "Elaboration": 26,
+    "Cause-Effect": 23,
+    "Contrast": 3,
+    "Condition-Consequence": 18,
+    "Other": 3
+   }
+  },
+  "zeroshot": {
+   "edus": 110,
+   "profile": {
+    "Conjunction": 28,
+    "Elaboration": 33,
+    "Background": 21,
+    "Other": 3,
+    "Sequence": 16,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 3,
+    "Summary": 1
+   }
+  }
+ },
+ "model172/anthropic": {
+  "nisaba": {
+   "edus": 216,
+   "profile": {
+    "Background": 49,
+    "Conjunction": 52,
+    "Elaboration": 38,
+    "Cause-Effect": 56,
+    "Other": 16,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 100,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 43,
+    "Cause-Effect": 5,
+    "Sequence": 1,
+    "Elaboration": 22,
+    "Other": 8,
+    "Condition-Consequence": 7,
+    "Contrast": 1
+   }
+  }
+ },
+ "model172/deepseek": {
+  "nisaba": {
+   "edus": 122,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 32,
+    "Cause-Effect": 36,
+    "Elaboration": 22,
+    "Other": 3,
+    "Condition-Consequence": 8,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 60,
+   "profile": {
+    "Elaboration": 22,
+    "Conjunction": 20,
+    "Sequence": 2,
+    "Contrast": 1,
+    "Cause-Effect": 2,
+    "Other": 8,
+    "Condition-Consequence": 3,
+    "Background": 1
+   }
+  }
+ },
+ "model172/xai": {
+  "nisaba": {
+   "edus": 130,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 44,
+    "Elaboration": 22,
+    "Cause-Effect": 29,
+    "Other": 9,
+    "Condition-Consequence": 5,
+    "Summary": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 82,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 38,
+    "Elaboration": 22,
+    "Other": 7,
+    "Sequence": 1,
+    "Condition-Consequence": 4,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model172/zai": {
+  "nisaba": {
+   "edus": 205,
+   "profile": {
+    "Background": 36,
+    "Conjunction": 48,
+    "Elaboration": 47,
+    "Cause-Effect": 25,
+    "Other": 23,
+    "Contrast": 7,
+    "Condition-Consequence": 18
+   }
+  },
+  "zeroshot": {
+   "edus": 113,
+   "profile": {
+    "Conjunction": 48,
+    "Elaboration": 36,
+    "Background": 10,
+    "Other": 4,
+    "Condition-Consequence": 6,
+    "Cause-Effect": 3,
+    "Summary": 1,
+    "Sequence": 4
+   }
+  }
+ },
+ "model202/anthropic": {
+  "nisaba": {
+   "edus": 202,
+   "profile": {
+    "Background": 36,
+    "Conjunction": 58,
+    "Elaboration": 38,
+    "Cause-Effect": 46,
+    "Other": 19,
+    "Condition-Consequence": 4
+   }
+  },
+  "zeroshot": {
+   "edus": 88,
+   "profile": {
+    "Background": 9,
+    "Conjunction": 34,
+    "Other": 15,
+    "Elaboration": 20,
+    "Sequence": 1,
+    "Contrast": 2,
+    "Summary": 1,
+    "Cause-Effect": 3,
+    "Condition-Consequence": 2
+   }
+  }
+ },
+ "model202/deepseek": {
+  "nisaba": {
+   "edus": 96,
+   "profile": {
+    "Background": 12,
+    "Conjunction": 32,
+    "Cause-Effect": 25,
+    "Elaboration": 18,
+    "Other": 2,
+    "Condition-Consequence": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 69,
+   "profile": {
+    "Conjunction": 21,
+    "Elaboration": 31,
+    "Sequence": 1,
+    "Other": 11,
+    "Summary": 1,
+    "Condition-Consequence": 2,
+    "Contrast": 1
+   }
+  }
+ },
+ "model202/xai": {
+  "nisaba": {
+   "edus": 104,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 32,
+    "Elaboration": 28,
+    "Other": 10,
+    "Cause-Effect": 10,
+    "Condition-Consequence": 9
+   }
+  },
+  "zeroshot": {
+   "edus": 143,
+   "profile": {
+    "Background": 11,
+    "Elaboration": 38,
+    "Conjunction": 78,
+    "Sequence": 6,
+    "Condition-Consequence": 4,
+    "Other": 4,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model202/zai": {
+  "nisaba": {
+   "edus": 165,
+   "profile": {
+    "Background": 20,
+    "Conjunction": 43,
+    "Elaboration": 48,
+    "Cause-Effect": 22,
+    "Other": 13,
+    "Summary": 1,
+    "Condition-Consequence": 16,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 85,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 35,
+    "Sequence": 2,
+    "Cause-Effect": 4,
+    "Elaboration": 19,
+    "Other": 4,
+    "Condition-Consequence": 6
+   }
+  }
+ },
+ "model205/anthropic": {
+  "nisaba": {
+   "edus": 104,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 26,
+    "Elaboration": 22,
+    "Cause-Effect": 15,
+    "Other": 17,
+    "Summary": 2,
+    "Condition-Consequence": 5,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 79,
+   "profile": {
+    "Background": 15,
+    "Conjunction": 30,
+    "Elaboration": 19,
+    "Other": 5,
+    "Contrast": 1,
+    "Sequence": 2,
+    "Cause-Effect": 2,
+    "Condition-Consequence": 4
+   }
+  }
+ },
+ "model205/deepseek": {
+  "nisaba": {
+   "edus": 87,
+   "profile": {
+    "Background": 14,
+    "Conjunction": 24,
+    "Elaboration": 22,
+    "Other": 2,
+    "Cause-Effect": 13,
+    "Condition-Consequence": 10,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 65,
+   "profile": {
+    "Elaboration": 27,
+    "Conjunction": 16,
+    "Other": 1,
+    "Background": 15,
+    "Sequence": 2,
+    "Contrast": 2,
+    "Condition-Consequence": 1
+   }
+  }
+ },
+ "model205/xai": {
+  "nisaba": {
+   "edus": 192,
+   "profile": {
+    "Background": 31,
+    "Conjunction": 53,
+    "Elaboration": 36,
+    "Cause-Effect": 51,
+    "Condition-Consequence": 9,
+    "Other": 9,
+    "Sequence": 1,
+    "Contrast": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 64,
+   "profile": {
+    "Background": 13,
+    "Elaboration": 14,
+    "Conjunction": 19,
+    "Sequence": 6,
+    "Summary": 1,
+    "Other": 5,
+    "Cause-Effect": 3,
+    "Condition-Consequence": 1,
+    "Contrast": 1
+   }
+  }
+ },
+ "model205/zai": {
+  "nisaba": {
+   "edus": 117,
+   "profile": {
+    "Background": 17,
+    "Conjunction": 29,
+    "Elaboration": 34,
+    "Cause-Effect": 19,
+    "Other": 4,
+    "Condition-Consequence": 13
+   }
+  },
+  "zeroshot": {
+   "edus": 92,
+   "profile": {
+    "Background": 19,
+    "Elaboration": 27,
+    "Conjunction": 32,
+    "Summary": 2,
+    "Other": 4,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 4
+   }
+  }
+ },
+ "model247/anthropic": {
+  "nisaba": {
+   "edus": 241,
+   "profile": {
+    "Background": 42,
+    "Conjunction": 63,
+    "Elaboration": 32,
+    "Cause-Effect": 57,
+    "Other": 33,
+    "Contrast": 1,
+    "Condition-Consequence": 11,
+    "Sequence": 1
+   }
+  },
+  "zeroshot": {
+   "edus": 103,
+   "profile": {
+    "Conjunction": 30,
+    "Elaboration": 35,
+    "Background": 10,
+    "Other": 15,
+    "Summary": 1,
+    "Condition-Consequence": 7,
+    "Contrast": 2,
+    "Sequence": 1,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model247/deepseek": {
+  "nisaba": {
+   "edus": 94,
+   "profile": {
+    "Background": 10,
+    "Conjunction": 27,
+    "Elaboration": 21,
+    "Cause-Effect": 17,
+    "Other": 7,
+    "Condition-Consequence": 11
+   }
+  },
+  "zeroshot": {
+   "edus": 119,
+   "profile": {
+    "Conjunction": 29,
+    "Elaboration": 52,
+    "Summary": 1,
+    "Other": 17,
+    "Sequence": 4,
+    "Condition-Consequence": 7,
+    "Contrast": 3,
+    "Background": 3,
+    "Cause-Effect": 2
+   }
+  }
+ },
+ "model247/xai": {
+  "nisaba": {
+   "edus": 97,
+   "profile": {
+    "Background": 19,
+    "Conjunction": 26,
+    "Elaboration": 33,
+    "Cause-Effect": 6,
+    "Condition-Consequence": 6,
+    "Other": 6
+   }
+  },
+  "zeroshot": {
+   "edus": 71,
+   "profile": {
+    "Background": 7,
+    "Conjunction": 30,
+    "Elaboration": 24,
+    "Contrast": 1,
+    "Sequence": 3,
+    "Other": 1,
+    "Condition-Consequence": 3,
+    "Cause-Effect": 1
+   }
+  }
+ },
+ "model247/zai": {
+  "nisaba": {
+   "edus": 192,
+   "profile": {
+    "Background": 27,
+    "Conjunction": 35,
+    "Elaboration": 55,
+    "Cause-Effect": 12,
+    "Contrast": 23,
+    "Condition-Consequence": 18,
+    "Other": 21
+   }
+  },
+  "zeroshot": {
+   "edus": 83,
+   "profile": {
+    "Conjunction": 23,
+    "Elaboration": 24,
+    "Other": 4,
+    "Summary": 1,
+    "Cause-Effect": 4,
+    "Background": 13,
+    "Condition-Consequence": 10,
+    "Contrast": 3
+   }
+  }
+ }
+}

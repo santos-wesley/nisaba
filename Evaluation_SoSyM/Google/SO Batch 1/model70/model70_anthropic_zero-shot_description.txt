@@ -1,0 +1,38 @@
+# Disaster Response Process Description
+
+This process model describes an emergency management workflow for responding to seismic events and potential tsunamis, incorporating both activity sequences and data-driven conditions.
+
+## Activities and Data
+
+The process involves ten key activities, several of which capture specific data attributes:
+
+- **Monitor Seismic Activity** records the earthquake's **Magnitude** (0.0–10.0)
+- **Issue Tsunami Alert** captures the **Alert Level** (Watch, Warning, or Cancel) and **Estimated Arrival Time** (0–360 minutes)
+- **Evacuate Coastal Areas** tracks the **Number of Evacuees** (0–1,000,000)
+- **Assess Infrastructure Damage** records **Damage Severity** (Minor, Moderate, Severe)
+- **Provide Medical Assistance** logs the **Number of Injuries** (0–5,000)
+- **Establish Emergency Shelters** captures the **Number of Shelters** (0–100)
+- **Restore Communication Networks** tracks **Communication Status** (Operational, Partially Operational, Down)
+- **Conduct Search and Rescue** records the **Number of Rescued** (0–1,000)
+- **Distribute Relief Supplies** logs the **Supply Cost** (0.0–1,000,000.0)
+- **Dispatch Emergency Services** has no bound data attribute
+
+## Process Behavior and Constraints
+
+**Initialization:** The process must always begin with **Monitor Seismic Activity**, establishing this as the mandatory starting point of the emergency response.
+
+**Alert and Evacuation Sequence:** Whenever a **Tsunami Alert** is issued, the process must eventually trigger **Evacuation of Coastal Areas**. This response requirement is reinforced by a stricter time constraint: evacuation must occur within 60 minutes of issuing the alert.
+
+**Seismic Trigger for Alerts:** If the monitored seismic magnitude exceeds 7.0, this must eventually be followed by issuing a **Tsunami Alert**, linking the severity of the earthquake directly to the alert process.
+
+**Medical Response Ordering:** **Providing Medical Assistance** cannot happen unless **Dispatch Emergency Services** has occurred beforehand, ensuring proper resource allocation before medical aid is administered. Additionally, once emergency services are dispatched, medical assistance must be provided within 24 hours.
+
+**Communication Restoration Loop:** If communication status is **Down**, this must eventually be followed by another **Restore Communication Networks** activity where the status becomes **Operational**, creating a repair cycle that continues until communications are fully restored.
+
+**Shelter and Supply Timing:** After **Establishing Emergency Shelters**, **Relief Supplies** must be distributed within 48 hours, ensuring timely support for displaced populations.
+
+**Damage Assessment and Communication:** Following **Assessment of Infrastructure Damage**, communication networks must be restored within 72 hours, linking damage evaluation to infrastructure recovery timelines.
+
+**Mutual Exclusivity:** **Conduct Search and Rescue** and **Assess Infrastructure Damage** cannot both occur within the same process instance — these activities are treated as alternative response paths that do not co-exist together.
+
+This model captures a realistic emergency response protocol where seismic detection triggers a cascade of time-sensitive, data-informed actions—from alerts and evacuations to medical care, sheltering, and infrastructure recovery—while enforcing critical ordering and mutual exclusion rules to maintain operational consistency.

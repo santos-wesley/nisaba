@@ -1,0 +1,44 @@
+activity Apparatus Requisition
+activity Requisition Authorize
+activity Apparatus Purchase
+activity Apparatus Accept
+activity Apparatus Examine
+activity up Apparatus Set
+activity Personnel Educate
+activity Apparatus Operate
+activity Apparatus Service
+activity Apparatus Retire
+bind Apparatus Requisition: Identifier Requisition
+bind Requisition Authorize: State Authorization
+bind Apparatus Purchase: Price Apparatus
+bind Apparatus Examine: State Apparatus, Rating Examination
+bind Personnel Educate: Duration Instruction
+bind up Apparatus Set: State Setup
+bind Apparatus Service: State Servicing
+bind Apparatus Retire: Cause Retire
+bind Apparatus Operate: Rate Utilization
+Identifier Requisition: integer between 1 and 10000
+Price Apparatus: float between 100.0 and 100000.0
+State Authorization: Pending, Approved, Rejected
+State Apparatus: New, Good, Damaged
+Duration Instruction: integer between 1 and 40
+State Setup: Not Started, In Progress, Completed
+State Servicing: Up to Date, Due, Overdue
+Rate Utilization: integer between 0 and 100
+Cause Retire: Obsolete, Faulty, Replaced
+Rating Examination: float between 0.0 and 10.0
+Init[Apparatus Requisition] | |
+End[Apparatus Retire] | |
+Existence[Apparatus Examine] | |
+Absence[Apparatus Requisition] | |
+Precedence[Apparatus Purchase, Requisition Authorize] | |A.State Authorization is Approved |
+Chain Response[Apparatus Accept, Apparatus Examine] | | |0,2,d
+Response[up Apparatus Set, Personnel Educate] |A.State Setup is Completed | |
+Precedence[Apparatus Operate, Personnel Educate] | | |
+Precedence[Apparatus Operate, Apparatus Service] | |T.State Servicing is Up to Date |
+Not Chain Succession[Apparatus Operate, Apparatus Retire] | | |
+Responded Existence[Apparatus Examine, Apparatus Retire] |A.State Apparatus is Damaged | |
+Precedence[Apparatus Purchase, Requisition Authorize] |A.Price Apparatus > 1000 |T.State Authorization is Approved |
+Chain Response[Apparatus Operate, Apparatus Service] | | |0,30,d
+Precedence[up Apparatus Set, Apparatus Examine] | | |
+Responded Existence[Apparatus Retire, Apparatus Examine] |A.Cause Retire is Obsolete | |

@@ -1,0 +1,46 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a **product return process** that begins when a customer initiates a return request and ends with either restocking the item or disposing of it. The process is governed by a set of **ordered activities**, each associated with specific **data attributes** and **temporal or conditional constraints**.
+
+### Process Flow Overview
+
+The process starts with **Request Return**, which captures the **Return Reason** (e.g., Defective, Damaged), a unique **Return ID**, and sets the initial **Return Status** to "Requested". Once a request is made, it must eventually be followed by **Approve Return**, which updates the status to "Approved" or "Rejected".
+
+After approval, the system **Generates a Return Label**, and the customer must **Ship the Item Back** within a specified timeframe. The shipping step records the **Shipping Method** (UPS, FedEx, or USPS), **Shipping Cost**, and **Days to Return**. Once the item is shipped, it is **Received** (status becomes "Received"), and then **Inspected** (status becomes "Inspected").
+
+During inspection, the **Item Condition** (rated 1–5) and **Inspection Result** (Acceptable, Damaged, or Unacceptable) are recorded. Based on the inspection result, the process branches:
+
+- If the item is **Acceptable**, the process proceeds to **Restock Item** (recording **Restock Quantity**).
+- If the item is **Damaged** or **Unacceptable**, the process proceeds to **Dispose Item**.
+
+In parallel with the restock/dispose decision, the system **Determines Refund** (recording **Refund Amount**), which must then be followed by **Process Refund** (status becomes "Refunded").
+
+### Data and Attribute Bindings
+
+Each activity is bound to specific data fields that are updated or read during execution. For example:
+- **Request Return** binds Return Status, Return Reason, and Return ID.
+- **Inspect Item** binds Return Status, Item Condition, and Inspection Result.
+- **Process Refund** binds Return Status and Refund Amount.
+
+The **Return Status** attribute acts as a state machine, progressing through: Requested → Approved → Shipped → Received → Inspected → Refunded/Restocked/Disposed.
+
+### Temporal and Conditional Constraints
+
+The model includes several **time-based and repetition constraints**:
+
+- **Response[Receive Item, Inspect Item]** must occur **within 0 to 48 hours** (hourly precision).
+- **Response[Approve Return, Ship Item Back]** must occur **within 1 to 14 days** (daily precision).
+- **Response[Request Return, Approve Return]** must occur **within 0 to 24 hours** (hourly precision).
+- **Response[Approve Return, Generate Return Label]** must occur **within 0 to 30 minutes** (minute precision).
+
+Additionally, a **cardinality constraint** on **Response[Determine Refund, Process Refund]** allows this pair to occur **exactly 2 times** (i.e., the refund may be processed in two separate steps or corrections).
+
+### Conditional Branching
+
+Two **conditional responses** use data-based guards:
+- **Response[Inspect Item, Restock Item]** is only enforced when **Inspection Result is "Acceptable"**.
+- **Response[Inspect Item, Dispose Item]** is only enforced when **Inspection Result is "Damaged" or "Unacceptable"**.
+
+### Summary
+
+This model defines a structured, data-aware return process with strict timing rules, conditional branching based on inspection outcome, and the ability to handle partial or repeated refund processing. It ensures that every return is tracked from request through to final disposition or restocking, with all relevant data captured at each step.

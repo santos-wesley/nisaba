@@ -1,0 +1,131 @@
+#MP-Declare Model
+## Activities
+- **Identify Donor**: The 'Identify Donor' activity represents the process of identifying a potential donor for the fundraising campaign.
+- **Contact Donor**: The 'Contact Donor' activity involves reaching out to a donor to initiate communication regarding a donation.
+- **Request Donation**: The 'Request Donation' activity involves formally asking a donor to make a donation.
+- **Receive Donation**: The 'Receive Donation' activity represents the receipt of a donation from a donor.
+- **Send Thank You Note**: The 'Send Thank You Note' activity involves sending a note of appreciation to a donor for their contribution.
+- **Plan Fundraiser**: The 'Plan Fundraiser' activity represents the planning phase for organizing a fundraising event.
+- **Promote Event**: The 'Promote Event' activity involves advertising and promoting the fundraising event to attract participants and donors.
+- **Host Event**: The 'Host Event' activity represents the execution and hosting of the fundraising event.
+- **Collect Feedback**: The 'Collect Feedback' activity includes gathering feedback from participants and stakeholders about the event.
+- **Analyze Feedback**: The 'Analyze Feedback' activity involves examining the collected feedback to derive insights.
+- **Identify Improvement Areas**: The 'Identify Improvement Areas' activity involves determining aspects of the campaign or event that require improvement based on feedback analysis.
+- **Implement Improvements**: The 'Implement Improvements' activity involves applying changes and enhancements based on identified improvement areas.
+- **Report Results**: The 'Report Results' activity involves compiling and presenting the outcomes of the fundraising event or campaign.
+- **Archive Records**: The 'Archive Records' activity involves storing and preserving documentation and records related to the campaign for future reference.
+- **Evaluate Campaign**: The 'Evaluate Campaign' activity represents the overall assessment of the fundraising campaign's success and outcomes.
+
+## Attributes
+- **Donor ID: Integer between 1 and 10000**: The attribute 'Donor ID: Integer between 1 and 10000' represents the unique identification number assigned to a donor.
+- **Donation Type: Cash, Check, Online Transfer**: The attribute 'Donation Type: Cash, Check, Online Transfer' specifies the method used by the donor to make a donation.
+- **Donation Amount: Float between 10 and 100000**: The attribute 'Donation Amount: Float between 10 and 100000' represents the monetary value of the donation received.
+- **Event Type: Gala, Auction, Online Campaign**: The attribute 'Event Type: Gala, Auction, Online Campaign' specifies the type of fundraising event being organized.
+- **Feedback Type: Positive, Neutral, Negative**: The attribute 'Feedback Type: Positive, Neutral, Negative' specifies the sentiment or nature of the feedback collected from participants.
+
+## Binds
+- **Identify Donor: Donor ID**: The bind 'Identify Donor: Donor ID' specifies that the activity 'Identify Donor' requires the attribute 'Donor ID'.
+- **Request Donation: Donor ID, Donation Type**: The bind 'Request Donation: Donor ID, Donation Type' links the 'Request Donation' activity with the attributes 'Donor ID' and 'Donation Type'.
+- **Receive Donation: Donation Amount**: The bind 'Receive Donation: Donation Amount' specifies that the activity 'Receive Donation' requires the attribute 'Donation Amount'.
+- **Promote Event: Event Type**: The bind 'Promote Event: Event Type' specifies that the activity 'Promote Event' requires the attribute 'Event Type'.
+- **Collect Feedback: Feedback Type**: The bind 'Collect Feedback: Feedback Type' specifies that the activity 'Collect Feedback' requires the attribute 'Feedback Type'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the fundraising campaign process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Identify Donor,' which involves identifying a potential donor for the fundraising campaign and requires the 'Donor ID' attribute. This activity establishes the foundational starting point from which all subsequent donor engagement activities unfold.
+
+#### **End Constraints**
+The process concludes with the activity 'Archive Records,' which involves storing and preserving documentation and records related to the campaign for future reference. This activity must be the last to occur, bringing the entire fundraising cycle to a coherent close after all evaluation and reporting has been completed.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Receive Donation' activity must occur at least once in the process, ensuring that the campaign actually results in tangible contributions bound to a 'Donation Amount,' thereby adding depth and substance to the fundraising effort. Similarly, the 'Host Event' activity must occur at least once, reinforcing that the planned fundraiser is not merely conceptual but is actually executed.
+
+#### **Absence Constraints**
+In contrast, the 'Send Thank You Note' activity is restricted from occurring more than twice within a single process instance, highlighting that excessive repetition of appreciation gestures is not permitted and reinforcing the streamlined nature of donor communication. Likewise, the 'Implement Improvements' activity may occur at most once, excluding redundant improvement cycles within the same campaign iteration and preserving procedural integrity.
+
+#### **Exactly Constraints**
+By way of summary, the 'Evaluate Campaign' activity must occur exactly once in the process, setting a fixed and precise boundary that ensures the campaign is assessed a single, definitive time, without ambiguity or duplication.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+As a consequence of causal dependency, if the 'Collect Feedback' activity occurs, bound to the 'Feedback Type' attribute, then the 'Analyze Feedback' activity must also occur somewhere in the process, establishing that feedback collection necessitates subsequent analysis and reinforcing the coherence of the improvement cycle.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+Setting the initial context for donor engagement, the activity 'Request Donation' is permitted to occur only if a 'Contact Donor' activity has occurred before it, ensuring that no donation is formally requested without prior outreach. Similarly, the activity 'Implement Improvements' is permitted to occur only if an 'Identify Improvement Areas' activity has occurred beforehand, guaranteeing that changes are grounded in a prior diagnostic step. Furthermore, the activity 'Report Results' is permitted to occur only if a 'Host Event' activity has occurred before it, ensuring that outcomes are reported only after the event has actually taken place.
+
+#### **Response Constraints**
+Following a cohesive temporal structure, if the 'Receive Donation' activity occurs with the 'Donation Amount' attribute recorded, then the 'Send Thank You Note' activity must occur afterward, ensuring that every contribution is met with timely appreciation. In sequence, if the 'Plan Fundraiser' activity occurs, then the 'Promote Event' activity, bound to the 'Event Type' attribute, must follow, ensuring that planning is always translated into active promotion. Additionally, if the 'Analyze Feedback' activity occurs, then the 'Identify Improvement Areas' activity must subsequently occur, maintaining the logical flow from insight to action.
+
+#### **Succession Constraints**
+Establishing a causal progression, whenever the 'Identify Donor' activity occurs, bound to the 'Donor ID' attribute, it must be followed at some point by the 'Contact Donor' activity, and conversely, 'Contact Donor' can only occur if 'Identify Donor' has previously taken place. This mutual causal link ensures that donor identification and outreach are inseparably and logically connected within the process.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+To promote balance in the donor communication cycle, each occurrence of the 'Request Donation' activity, bound to 'Donor ID' and 'Donation Type,' must be followed by a 'Receive Donation' activity before another 'Request Donation' can take place, ensuring a clear one-to-one pairing between solicitation and contribution without overlapping requests.
+
+#### **Alternate Precedence Constraints**
+In a condition-consequence relationship that ensures order consistency, each occurrence of the 'Send Thank You Note' activity must be preceded by a 'Receive Donation' activity, with no intervening 'Send Thank You Note' activities allowed in between, thereby promoting a balanced and orderly acknowledgment process.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Capturing an immediate cause-and-effect relationship, whenever the 'Host Event' activity occurs, it must be immediately followed by the 'Collect Feedback' activity, bound to the 'Feedback Type' attribute, with no intervening activities, ensuring that feedback is gathered right at the conclusion of the event while impressions are still fresh.
+
+#### **Chain Precedence Constraints**
+Establishing an explicit and precise immediate dependency, the 'Identify Improvement Areas' activity must be directly preceded by the 'Analyze Feedback' activity with no intervening events, ensuring that improvement areas are derived immediately and directly from the analytical findings.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Reflecting a mutual dependency between reporting and archiving, the 'Report Results' activity and the 'Archive Records' activity are conjoined such that if one occurs, the other must occur as well within the same process instance, ensuring that outcomes are never reported without being subsequently preserved for record-keeping.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing an alternative pathway, either the 'Plan Fundraiser' activity or the 'Promote Event' activity may occur within the process, allowing flexibility in how event-related efforts commence.
+
+#### **Exclusive Choice Constraints**
+Enforcing a mutually exclusive pathway, exactly one of the 'Identify Improvement Areas' or 'Evaluate Campaign' activities may occur as the primary reflective activity following feedback analysis, ensuring the process does not redundantly duplicate assessment efforts.
+
+#### **Not Co-Existence Constraints**
+Setting a firm exclusion rule, the 'Implement Improvements' activity and the 'Archive Records' activity cannot both occur within the same process instance if improvements remain unfinalized, thereby preventing the premature archiving of records before enhancements have been properly implemented.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Refining the model by disallowing specific contingent occurrences, the 'Contact Donor' activity does not necessitate that the 'Report Results' activity occurs in response, ensuring that individual donor outreach is not inappropriately tied to campaign-wide reporting.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Preserving the intended sequence within the model, the 'Send Thank You Note' activity must not precede the 'Receive Donation' activity, ensuring that gratitude is never expressed before a contribution has actually been made.
+
+#### **Not Response Constraints**
+Maintaining the integrity of the model's intended progression, the 'Archive Records' activity must not be followed by the 'Plan Fundraiser' activity, ensuring that once records are archived, the campaign does not illogically loop back into a new planning phase within the same instance.
+
+#### **Not Succession Constraints**
+Preserving the model's defined flow, the 'Evaluate Campaign' activity must not, at any point, be followed by the 'Identify Donor' activity within the same process instance, ensuring that campaign evaluation does not inadvertently trigger the restart of donor identification.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+Maintaining separation within the sequence, the 'Send Thank You Note' activity must not be immediately preceded by the 'Contact Donor' activity, ensuring that a clear procedural distance is kept between initial outreach and final appreciation.
+
+#### **Not Chain Response Constraints**
+Preventing immediate succession to preserve structural integrity, the 'Identify Donor' activity must not be immediately followed by the 'Receive Donation' activity, ensuring that the necessary intermediate steps of contact and request are not skipped.
+
+#### **Not Chain Succession Constraints**
+Refining the process model by excluding specific immediate sequences, the 'Collect Feedback' activity and the 'Plan Fundraiser' activity must not immediately precede or follow one another, ensuring that feedback collection and new event planning remain distinctly separated steps within the overall campaign lifecycle.

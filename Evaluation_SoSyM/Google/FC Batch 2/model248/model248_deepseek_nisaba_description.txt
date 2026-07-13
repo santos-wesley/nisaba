@@ -1,0 +1,92 @@
+#MP-Declare Model
+## Activities
+- **Prepare Solution**: 
+- **Heat Mixture**: 
+- **Add Catalyst**: 
+- **Monitor Reaction**: 
+- **Cool Solution**: 
+- **Filter Product**: 
+- **Dry Product**: 
+- **Analyze Sample**: 
+- **Store Product**: 
+- **Dispose Waste**: 
+
+## Attributes
+- **Temperature: float between 0.0 and 500.0**: 
+- **Reaction Time: integer between 1 and 600**: 
+- **Catalyst Type: Platinum, Palladium, Nickel, Iron**: 
+- **Concentration: float between 0.1 and 10.0**: 
+- **Solvent Type: Water, Ethanol, Toluene**: 
+- **Yield: float between 0.0 and 100.0**: 
+- **Purity: integer between 0 and 100**: 
+- **Reaction Status: Initiated, Ongoing, Completed, Failed**: 
+- **Batch Number: integer between 1 and 1000**: 
+
+## Binds
+- **Prepare Solution: Concentration, Solvent Type**: 
+- **Heat Mixture: Temperature, Reaction Time**: 
+- **Add Catalyst: Catalyst Type**: 
+- **Monitor Reaction: Reaction Status, Reaction Time**: 
+- **Analyze Sample: Purity, Yield**: 
+- **Store Product: Batch Number**: 
+
+## Constraints
+- **Init[Prepare Solution] | |**: 
+- **Succession[Prepare Solution, Heat Mixture] | | |**: 
+- **Response[Heat Mixture, Add Catalyst] | | |**: 
+- **Responded Existence[Add Catalyst, Monitor Reaction] | | |**: 
+- **Chain Response[Monitor Reaction, Cool Solution] | | |**: 
+- **Precedence[Filter Product, Cool Solution] | | |**: 
+- **Chain Succession[Filter Product, Dry Product] | | |**: 
+- **Response[Dry Product, Analyze Sample] | | |**: 
+- **Alternate Response[Analyze Sample, Store Product] | | |**: 
+- **Precedence[Dispose Waste, Store Product] | | |**: 
+- **Response[Add Catalyst, Monitor Reaction] | | |0,10,m**: 
+- **Response[Monitor Reaction, Cool Solution] | | |0,5,m**: 
+- **Response[Cool Solution, Filter Product] | | |0,2,h**: 
+- **Response[Dry Product, Analyze Sample] | | |0,1,d**: 
+- **Response[Store Product, Dispose Waste] | | |0,1,h**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the chemical synthesis process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Prepare Solution,' which involves setting up the initial mixture with 'Concentration' and 'Solvent Type' attributes. This establishes the foundational context for the entire synthesis procedure.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Cool Solution' is permitted to occur only if a 'Filter Product' activity has occurred before it. This ensures that the solution is filtered prior to cooling, guiding the logical sequence of separation and temperature reduction.
+2. The activity 'Store Product' is permitted to occur only if a 'Dispose Waste' activity has occurred before it. This ensures that waste disposal is completed before storage, maintaining a clean and safe final stage.
+
+#### **Response Constraints**
+1. If the 'Heat Mixture' activity occurs, then the 'Add Catalyst' activity must occur. This defines an ordered flow where heating is followed by catalyst addition, ensuring a cohesive temporal structure in the reaction setup.
+2. If the 'Dry Product' activity occurs, then the 'Analyze Sample' activity must occur. This ensures that dried product is subsequently analyzed, maintaining the process's quality control sequence.
+3. If the 'Add Catalyst' activity occurs, then the 'Monitor Reaction' activity must occur within 10 minutes. This enforces a timely response to catalyst addition, ensuring immediate oversight of the reaction.
+4. If the 'Monitor Reaction' activity occurs, then the 'Cool Solution' activity must occur within 5 minutes. This ensures that monitoring is promptly followed by cooling, maintaining a tight temporal link.
+5. If the 'Cool Solution' activity occurs, then the 'Filter Product' activity must occur within 2 hours. This ensures that cooling is followed by filtration within a reasonable timeframe.
+6. If the 'Dry Product' activity occurs, then the 'Analyze Sample' activity must occur within 1 day. This ensures that analysis follows drying within a day, preserving sample integrity.
+7. If the 'Store Product' activity occurs, then the 'Dispose Waste' activity must occur within 1 hour. This ensures that waste disposal follows storage promptly, maintaining process hygiene.
+
+#### **Succession Constraints**
+1. Whenever a 'Prepare Solution' activity occurs, it must be followed by a 'Heat Mixture' activity. This establishes a causal link, ensuring that solution preparation leads logically to heating, creating a cohesive progression.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+1. If the 'Add Catalyst' activity occurs, then the 'Monitor Reaction' activity must also occur. This establishes a dependency where catalyst addition necessitates reaction monitoring, enhancing coherence in the process.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+1. If the 'Monitor Reaction' activity occurs, then the 'Cool Solution' activity must occur immediately after, with no intervening activities. This captures a direct cause-and-effect relationship, ensuring immediate succession from monitoring to cooling.
+
+#### **Chain Succession Constraints**
+1. Whenever a 'Filter Product' activity occurs, it must be immediately followed by a 'Dry Product' activity, with no intervening activities. This enforces a tightly coupled sequence, ensuring that filtration is directly succeeded by drying.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+1. If the 'Analyze Sample' activity occurs, then the 'Store Product' activity must occur, and between any two 'Analyze Sample' activities, there must be exactly one 'Store Product' activity. This promotes balance by ensuring each analysis is paired with a unique storage event, with no intervening analyses.

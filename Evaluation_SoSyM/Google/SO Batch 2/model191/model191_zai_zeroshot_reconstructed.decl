@@ -1,0 +1,41 @@
+activity Request Return
+activity Approve Return
+activity Generate Return Label
+activity Ship Item Back
+activity Receive Item
+activity Inspect Item
+activity Determine Refund
+activity Process Refund
+activity Restock Item
+activity Dispose Item
+bind Request Return: Return ID, Return Reason, Return Status
+bind Approve Return: Return Status
+bind Generate Return Label: Return Status
+bind Ship Item Back: Shipping Method, Shipping Cost, Days to Return, Return Status
+bind Receive Item: Return Status
+bind Inspect Item: Item Condition, Inspection Result, Return Status
+bind Determine Refund: Refund Amount, Return Status
+bind Process Refund: Return Status
+bind Restock Item: Restock Quantity, Return Status
+bind Dispose Item: Return Status
+Return ID: integer between 1000 and 9999
+Return Reason: Defective, Damaged, Wrong Item, No Longer Needed
+Return Status: Requested, Approved, Received, Inspected, Refunded, Restocked, Disposed
+Shipping Method: UPS, FedEx, USPS
+Shipping Cost: float between 0.0 and 50.0
+Days to Return: integer between 1 and 60
+Item Condition: integer between 1 and 5
+Inspection Result: Acceptable, Damaged, Unacceptable
+Refund Amount: float between 0.0 and 1000.0
+Restock Quantity: integer between 1 and 100
+Init[Request Return] | |
+Response[Request Return, Approve Return] | | |0,24,h
+Precedence[Generate Return Label, Approve Return] | | |0,30,m
+Chain Response[Approve Return, Generate Return Label] | | |0,30,m
+Precedence[Ship Item Back, Approve Return] | | |1,14,d
+Response[Ship Item Back, Receive Item] | | |
+Precedence[Inspect Item, Receive Item] | | |0,48,h
+Succession[Determine Refund, Process Refund] | | |0,2,d
+Alternate Precedence[Restock Item, Inspect Item] |A.Inspection Result is Acceptable | |
+Alternate Precedence[Dispose Item, Inspect Item] |A.Inspection Result in (Damaged, Unacceptable) | |
+Exclusive Choice[Restock Item, Dispose Item] |A.Return Status is Inspected | |

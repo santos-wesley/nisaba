@@ -1,0 +1,47 @@
+## Description of the Multi-Perspective Declare Model
+
+This process model describes a **risk management workflow**, covering the identification, assessment, mitigation, and monitoring of organizational risks, along with associated data constraints and timing requirements.
+
+### Activities
+
+The process comprises fifteen activities: **Identify Risk**, **Assess Impact**, **Evaluate Probability**, **Prioritize Risks**, **Develop Mitigation Plan**, **Implement Mitigation**, **Monitor Risks**, **Review Risk Assessment**, **Update Risk Register**, **Communicate Risks**, **Approve Mitigation Plan**, **Document Lessons Learned**, **Escalate Critical Risks**, **Conduct Risk Workshop**, and **Validate Risk Controls**.
+
+### Data Perspective
+
+Several activities are bound to specific data attributes recorded when they occur:
+
+- **Identify Risk** captures the **Risk Category** (Financial, Operational, Compliance, Strategic, or Reputational) and a **Risk ID** (an integer from 1 to 1000).
+- **Assess Impact** records an **Impact Score** (integer 1–10) and the **Risk ID**.
+- **Evaluate Probability** records a **Probability** (float between 0.0 and 1.0) and the **Risk ID**.
+- **Prioritize Risks** records the **Risk ID** and an **Exposure Value** (float, 0.0–1,000,000.0).
+- **Develop Mitigation Plan** records the **Risk ID**, a **Mitigation Strategy** (Avoidance, Transference, Mitigation, or Acceptance), and a **Mitigation Cost** (float, 0.0–100,000.0).
+- **Implement Mitigation** records the **Risk ID** and a **Risk Status** (Open, Mitigated, Closed, or Accepted).
+- **Monitor Risks** records the **Risk ID** and a **Review Frequency** (integer, 1–12).
+- **Review Risk Assessment** records the **Risk ID**.
+- **Update Risk Register** records the **Risk ID** and **Risk Status**.
+- **Communicate Risks** records the **Risk ID** and the **Risk Owner** (John Smith, Alice Johnson, or Bob Williams).
+
+### Control-Flow Perspective
+
+- The process must **start with Identify Risk**.
+- **Assess Impact** must be preceded by **Identify Risk**.
+- Whenever **Assess Impact** occurs, it must eventually be followed by **Evaluate Probability**.
+- **Prioritize Risks** must be preceded by **Evaluate Probability**.
+- Whenever **Prioritize Risks** occurs, it must eventually be followed by **Develop Mitigation Plan**.
+- **Implement Mitigation** must be preceded by **Develop Mitigation Plan**.
+- Whenever **Implement Mitigation** occurs, it must eventually be followed by **Monitor Risks**.
+- **Monitor Risks** and **Review Risk Assessment** are strictly linked in succession: each occurrence of **Monitor Risks** must eventually be followed by **Review Risk Assessment**, and every **Review Risk Assessment** must be preceded by **Monitor Risks**.
+- Whenever **Review Risk Assessment** occurs, it must eventually be followed by **Update Risk Register**.
+- **Update Risk Register** and **Communicate Risks** are similarly linked in succession.
+- **Escalate Critical Risks** may occur **at most three times** throughout the process.
+
+### Time Perspective (Conditional & Time-Constrained Rules)
+
+- If a risk identified through **Identify Risk** falls under the **Financial** category, and a subsequent **Develop Mitigation Plan** records a **Mitigation Cost greater than 1000**, then **Develop Mitigation Plan** must eventually follow **Identify Risk**.
+- If **Identify Risk** results in a **Risk Status of Open**, then **Implement Mitigation** must occur within **0 to 30 days** afterward.
+- Every occurrence of **Monitor Risks** must be followed by **Review Risk Assessment** within **90 to 180 days**.
+- If **Assess Impact** yields an **Impact Score greater than 7**, then **Escalate Critical Risks** must occur within **0 to 24 hours** afterward.
+
+### Summary
+
+Overall, this model enforces a structured, sequential risk management lifecycle — from initial risk identification through impact/probability assessment, prioritization, mitigation planning and implementation, to ongoing monitoring, review, and communication. It incorporates strict data-driven escalation rules for high-impact risks, time-bound mitigation actions for open risks, and periodic review cycles, while limiting how often critical risk escalations can occur.

@@ -1,0 +1,40 @@
+activity Receive Currency
+activity Verify Currency Authenticity
+activity Calculate Exchange Rate
+activity Update Exchange Rates
+activity Approve Exchange
+activity Reject Exchange
+activity Process Exchange
+activity Record Transaction
+activity Notify Customer
+activity Issue Receipt
+bind Receive Currency: Amount, Currency Type, Transaction ID
+bind Verify Currency Authenticity: Transaction ID
+bind Calculate Exchange Rate: Exchange Rate, Currency Type
+bind Update Exchange Rates: Exchange Rate
+bind Approve Exchange: Exchange Status, Transaction ID
+bind Reject Exchange: Exchange Status, Transaction ID
+bind Process Exchange: Amount, Transaction ID
+bind Record Transaction: Transaction ID
+bind Notify Customer: Transaction ID
+bind Issue Receipt: Transaction ID
+Amount: integer between 1 and 10000
+Currency Type: USD, EUR, GBP, JPY
+Exchange Rate: float between 0.5 and 1.5
+Exchange Status: Pending, Approved, Rejected
+Transaction ID: integer between 1000 and 9999
+Init[Receive Currency] | |
+End[Issue Receipt] | |
+Precedence[Approve Exchange, Verify Currency Authenticity] | | |
+Precedence[Verify Currency Authenticity, Receive Currency] | | |
+Precedence[Process Exchange, Calculate Exchange Rate] | | |
+Precedence[Record Transaction, Process Exchange] | |A.Transaction ID == T.Transaction ID |
+Chain Succession[Calculate Exchange Rate, Update Exchange Rates] | |A.Exchange Rate == T.Exchange Rate |0,30,m
+Chain Succession[Receive Currency, Record Transaction] | |A.Transaction ID == T.Transaction ID |0,1,m
+Response[Approve Exchange, Process Exchange] |A.Exchange Status is Approved |A.Transaction ID == T.Transaction ID |0,2,m
+Response[Reject Exchange, Notify Customer] |A.Exchange Status is Rejected |A.Transaction ID == T.Transaction ID |0,1,m
+Existence[Calculate Exchange Rate] | |
+Exactly[Approve Exchange] | |
+Not Co-Existence[Verify Currency Authenticity, Approve Exchange] | | |
+Not Succession[Receive Currency, Reject Exchange] | | |
+Responded Existence[Process Exchange, Update Exchange Rates] | | |

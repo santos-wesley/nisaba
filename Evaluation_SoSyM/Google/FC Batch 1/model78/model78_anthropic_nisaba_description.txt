@@ -1,0 +1,116 @@
+#MP-Declare Model
+## Activities
+- **Report Disease Outbreak**: The 'Report Disease Outbreak' activity represents the initial reporting of a potential disease outbreak.
+- **Verify Outbreak Report**: The 'Verify Outbreak Report' activity involves confirming the validity of a reported disease outbreak.
+- **Initiate Investigation**: The 'Initiate Investigation' activity represents the start of a formal investigation into a confirmed outbreak.
+- **Collect Samples**: The 'Collect Samples' activity involves gathering biological samples for analysis related to the disease outbreak.
+- **Analyze Samples**: The 'Analyze Samples' activity involves laboratory analysis of collected samples to identify the disease.
+- **Confirm Disease**: The 'Confirm Disease' activity represents the official confirmation of the disease causing the outbreak.
+- **Implement Control Measures**: The 'Implement Control Measures' activity involves deploying actions to control and contain the disease outbreak.
+- **Inform Public**: The 'Inform Public' activity involves communicating outbreak information and guidance to the general public.
+- **Monitor Disease Spread**: The 'Monitor Disease Spread' activity involves tracking the progression and spread of the disease over time.
+- **Declare End of Outbreak**: The 'Declare End of Outbreak' activity represents the official declaration that the disease outbreak has ended.
+
+## Attributes
+- **Report Source: Hospital, Clinic, Public, Other**: The attribute 'Report Source: Hospital, Clinic, Public, Other' specifies the origin of the disease outbreak report.
+- **Number of Cases: integer between 1 and 1000**: The attribute 'Number of Cases: integer between 1 and 1000' represents the number of disease cases reported.
+- **Disease Type: Influenza, COVID-19, Measles, Cholera**: The attribute 'Disease Type: Influenza, COVID-19, Measles, Cholera' specifies the type of disease identified in the outbreak.
+- **Mortality Rate: float between 0.0 and 100.0**: The attribute 'Mortality Rate: float between 0.0 and 100.0' represents the percentage of fatalities associated with the disease.
+- **Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing**: The attribute 'Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing' specifies the type of measure implemented to control the outbreak.
+- **Days to Control: integer between 1 and 365**: The attribute 'Days to Control: integer between 1 and 365' represents the number of days taken to control the outbreak.
+- **Investigation Result: Confirmed, False Alarm, Inconclusive**: The attribute 'Investigation Result: Confirmed, False Alarm, Inconclusive' specifies the outcome of the outbreak verification investigation.
+- **Public Response: Cooperative, Anxious, Resistant**: The attribute 'Public Response: Cooperative, Anxious, Resistant' represents the reaction of the public to the outbreak information.
+
+## Binds
+- **Report Disease Outbreak: Report Source, Number of Cases**: The bind 'Report Disease Outbreak: Report Source, Number of Cases' links the 'Report Disease Outbreak' activity with the attributes 'Report Source' and 'Number of Cases'.
+- **Verify Outbreak Report: Investigation Result**: The bind 'Verify Outbreak Report: Investigation Result' links the 'Verify Outbreak Report' activity with the attribute 'Investigation Result'.
+- **Confirm Disease: Disease Type, Mortality Rate**: The bind 'Confirm Disease: Disease Type, Mortality Rate' links the 'Confirm Disease' activity with the attributes 'Disease Type' and 'Mortality Rate'.
+- **Implement Control Measures: Control Measures, Days to Control**: The bind 'Implement Control Measures: Control Measures, Days to Control' links the 'Implement Control Measures' activity with the attributes 'Control Measures' and 'Days to Control'.
+- **Inform Public: Public Response**: The bind 'Inform Public: Public Response' links the 'Inform Public' activity with the attribute 'Public Response'.
+
+## Constraints
+
+
+## Interleaved Description
+# The MP-Declare Process Model for the Disease Outbreak Management Process
+
+The disease outbreak management process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Report Disease Outbreak,' establishing the initial context in which a potential outbreak is first brought to attention. This activity is bound to the attributes 'Report Source' and 'Number of Cases,' capturing both the origin of the alert—whether from a Hospital, Clinic, Public source, or Other—and the scale of the reported cases, setting the stage for all subsequent actions in the model.
+
+#### **End Constraints**
+In conclusion, the process culminates in the activity 'Declare End of Outbreak.' This activity serves as the definitive closure of the outbreak management cycle, officially signaling that the disease threat has subsided and that all monitoring and control efforts can be stood down, thereby bringing coherent finality to the entire process.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+Elaborating on the necessary depth of the process, the 'Collect Samples' activity must occur at least once, ensuring that biological evidence is always gathered to support disease identification. Similarly, the 'Analyze Samples' activity must occur at least once, reinforcing that laboratory investigation is a mandatory component in confirming the nature of the outbreak, adding scientific rigor and contextual depth to the overall response.
+
+#### **Absence Constraints**
+In contrast, the 'Declare End of Outbreak' activity must not occur more than once within the same process instance. This exclusion highlights the importance of a single, authoritative closure to the outbreak, reinforcing process integrity by preventing redundant or contradictory declarations.
+
+#### **Exactly Constraints**
+Providing a precise boundary, the 'Confirm Disease' activity must occur exactly once in the process. This summary constraint ensures that the disease is officially identified a single, definitive time, avoiding ambiguity or repeated confirmations that could destabilize the response effort.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+Establishing a cause-effect relationship, if the 'Implement Control Measures' activity occurs, then the 'Inform Public' activity must also occur at some point in the process. This dependency ensures that whenever containment actions are deployed, the public is correspondingly informed, reinforcing coherence between action and communication.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+Setting up the logical groundwork, the 'Initiate Investigation' activity is permitted to occur only if a 'Verify Outbreak Report' activity has occurred before it, with the condition that the 'Investigation Result is Confirmed.' This background establishes that formal investigations can only proceed once the outbreak report has been validated. Likewise, the 'Confirm Disease' activity is permitted to occur only if an 'Analyze Samples' activity has occurred before it, ensuring that no disease is confirmed without prior laboratory analysis providing the necessary evidentiary foundation.
+
+#### **Response Constraints**
+Following a cohesive temporal structure, if the 'Report Disease Outbreak' activity occurs, then the 'Verify Outbreak Report' activity must occur afterward, ensuring that every report is subject to timely validation. In sequence, if the 'Confirm Disease' activity occurs with the condition 'Mortality Rate' exceeding a critical threshold, then the 'Implement Control Measures' activity must occur afterward, guaranteeing that confirmed high-risk diseases are met with a swift containment response.
+
+#### **Succession Constraints**
+Creating a causal and cohesive progression, whenever a 'Collect Samples' activity occurs, it must eventually be followed by an 'Analyze Samples' activity, and conversely, an 'Analyze Samples' activity must be preceded by a 'Collect Samples' activity. This mutual causal link ensures that sample collection and analysis are always logically and temporally connected, each necessitating the other within the process flow.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Promoting balanced pairing, each occurrence of the 'Implement Control Measures' activity must be followed by a 'Monitor Disease Spread' activity before any other 'Implement Control Measures' activity can occur again. This condition-consequence relationship ensures that every control measure is properly followed by monitoring before any new measures are introduced, supporting a clear one-to-one correspondence between action and observation.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Capturing an immediate cause-and-effect relationship, whenever the 'Verify Outbreak Report' activity occurs with the condition 'Investigation Result is Confirmed,' it must be immediately followed by the 'Initiate Investigation' activity with no intervening activities. This ensures that confirmed reports trigger investigations without delay, preserving the urgency required in outbreak response.
+
+#### **Chain Succession Constraints**
+Enforcing a tightly coupled sequence, whenever a 'Confirm Disease' activity occurs, it must be immediately succeeded by an 'Implement Control Measures' activity, and conversely, every 'Implement Control Measures' activity must be immediately preceded by a 'Confirm Disease' activity. This direct pairing ensures that control measures are deployed the instant a disease is confirmed, with no gap for delay or intervening events.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Establishing mutual dependency, the 'Implement Control Measures' activity and the 'Monitor Disease Spread' activity must occur together within the same process instance. Whenever containment measures are enacted, ongoing monitoring must also be present, and vice versa, ensuring that these two activities are conjunctively bound throughout the process.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing flexibility, either the 'Inform Public' activity or the 'Monitor Disease Spread' activity may occur within the process, allowing alternative paths of action depending on the nature and severity of the outbreak.
+
+#### **Not Co-Existence Constraints**
+Setting firm exclusion rules, the 'Declare End of Outbreak' activity and the 'Implement Control Measures' activity cannot both occur in overlapping fashion once the outbreak has been declared over, given the condition 'Days to Control' has already been finalized. This prevents conflicting signals in which control measures are introduced after the outbreak has already been officially closed, thereby preserving the model's integrity.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Refining the model by disallowing specific contingencies, if the 'Declare End of Outbreak' activity occurs, then the 'Report Disease Outbreak' activity must not occur in response to it within the same instance. This contrast ensures that once an outbreak has been declared over, no new reports are contingently tied back to that closure, preventing a contradictory dependency.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Preserving intended sequence integrity, the 'Declare End of Outbreak' activity must not precede the 'Confirm Disease' activity. This restriction ensures that the outbreak cannot be declared over before the disease has even been officially confirmed, maintaining logical order.
+
+#### **Not Response Constraints**
+Maintaining the model's intended progression, if the 'Declare End of Outbreak' activity occurs, then the 'Initiate Investigation' activity must not occur afterward. This contrast prevents the model from allowing new investigations to be improperly triggered once the outbreak has already been formally closed.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Succession Constraints**
+Excluding specific immediate sequences to refine the process, the 'Report Disease Outbreak' activity and the 'Declare End of Outbreak' activity must not immediately precede or follow one another. This contrast ensures adequate procedural separation between the initial report and the eventual conclusion, safeguarding against premature or unsubstantiated closures that bypass the necessary investigative and control stages.

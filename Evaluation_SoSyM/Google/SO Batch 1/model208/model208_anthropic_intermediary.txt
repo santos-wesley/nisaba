@@ -1,0 +1,38 @@
+## Activities
+- **Schedule Train**: The 'Schedule Train' activity represents the scheduling of a train, including its timing and version details.
+- **Allocate Resources**: The 'Allocate Resources' activity involves assigning resources, such as tracks, to a train.
+- **Monitor Train**: The 'Monitor Train' activity includes tracking the current status of a train during its operation.
+- **Manage Delay**: The 'Manage Delay' activity involves handling and addressing delays experienced by a train.
+- **Perform Maintenance**: The 'Perform Maintenance' activity represents carrying out maintenance tasks on a train.
+- **Inspect Track**: The 'Inspect Track' activity involves examining a track to assess its condition and safety.
+- **Dispatch Train**: The 'Dispatch Train' activity represents releasing a train for its journey.
+- **Receive Train**: The 'Receive Train' activity involves accepting a train upon its arrival, including passenger handling.
+- **Update Schedule**: The 'Update Schedule' activity includes modifying an existing train schedule.
+- **Cancel Train**: The 'Cancel Train' activity represents the cancellation of a scheduled train along with the reason for cancellation.
+
+## Attributes
+- **Train ID: Integer between 1000 and 9999**: The attribute 'Train ID: Integer between 1000 and 9999' represents the unique identification number assigned to a train.
+- **Train Status: On Time, Delayed, Cancelled, Completed**: The attribute 'Train Status: On Time, Delayed, Cancelled, Completed' specifies the current operational status of a train.
+- **Delay Duration: Float between 0.0 and 300.0**: The attribute 'Delay Duration: Float between 0.0 and 300.0' represents the amount of time, in minutes, that a train has been delayed.
+- **Track Number: Integer between 1 and 10**: The attribute 'Track Number: Integer between 1 and 10' represents the identifier of the track allocated or inspected.
+- **Maintenance Type: Routine, Emergency, Scheduled**: The attribute 'Maintenance Type: Routine, Emergency, Scheduled' specifies the category of maintenance performed on a train.
+- **Inspection Score: Float between 0.0 and 10.0**: The attribute 'Inspection Score: Float between 0.0 and 10.0' represents the numeric score given during a track inspection to assess its condition.
+- **Priority Level: High, Medium, Low**: The attribute 'Priority Level: High, Medium, Low' specifies the priority assigned to a train when dispatched.
+- **Passenger Count: Integer between 0 and 1500**: The attribute 'Passenger Count: Integer between 0 and 1500' represents the number of passengers on a received train.
+- **Reason Cancel: Weather, Maintenance, Technical Issue**: The attribute 'Reason Cancel: Weather, Maintenance, Technical Issue' specifies the cause behind the cancellation of a train.
+- **Schedule Version: Integer between 1 and 100**: The attribute 'Schedule Version: Integer between 1 and 100' represents the version number of a train's schedule.
+
+## Binds
+- **Schedule Train: Train ID, Schedule Version**: The bind 'Schedule Train: Train ID, Schedule Version' specifies that the activity 'Schedule Train' requires the attributes 'Train ID' and 'Schedule Version'.
+- **Allocate Resources: Train ID, Track Number**: The bind 'Allocate Resources: Train ID, Track Number' links the 'Allocate Resources' activity with the attributes 'Train ID' and 'Track Number'.
+- **Monitor Train: Train ID, Train Status**: The bind 'Monitor Train: Train ID, Train Status' links the 'Monitor Train' activity with the attributes 'Train ID' and 'Train Status'.
+- **Manage Delay: Train ID, Delay Duration**: The bind 'Manage Delay: Train ID, Delay Duration' links the 'Manage Delay' activity with the attributes 'Train ID' and 'Delay Duration'.
+- **Perform Maintenance: Train ID, Maintenance Type**: The bind 'Perform Maintenance: Train ID, Maintenance Type' links the 'Perform Maintenance' activity with the attributes 'Train ID' and 'Maintenance Type'.
+- **Inspect Track: Track Number, Inspection Score**: The bind 'Inspect Track: Track Number, Inspection Score' links the 'Inspect Track' activity with the attributes 'Track Number' and 'Inspection Score'.
+- **Dispatch Train: Train ID, Priority Level**: The bind 'Dispatch Train: Train ID, Priority Level' links the 'Dispatch Train' activity with the attributes 'Train ID' and 'Priority Level'.
+- **Receive Train: Train ID, Passenger Count**: The bind 'Receive Train: Train ID, Passenger Count' links the 'Receive Train' activity with the attributes 'Train ID' and 'Passenger Count'.
+- **Update Schedule: Train ID, Schedule Version**: The bind 'Update Schedule: Train ID, Schedule Version' links the 'Update Schedule' activity with the attributes 'Train ID' and 'Schedule Version'.
+- **Cancel Train: Train ID, Reason Cancel**: The bind 'Cancel Train: Train ID, Reason Cancel' links the 'Cancel Train' activity with the attributes 'Train ID' and 'Reason Cancel'.
+
+## Constraints
+

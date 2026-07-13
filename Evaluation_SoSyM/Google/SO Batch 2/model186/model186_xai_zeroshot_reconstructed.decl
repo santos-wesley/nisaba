@@ -1,0 +1,47 @@
+activity Report Animal Abuse
+activity Investigation
+activity Rescue the Abused Animal
+activity Veterinary Care
+activity Find a Foster Home
+activity Adoption Screening
+activity Finalize the Animal Adoption
+activity Monitor the Animal’s Welfare
+activity Euthanizing the Animal
+activity Public Education
+activity Process Donation
+activity Volunteer Application
+activity Background Check
+activity Approve Volunteer
+activity Facility Inspection
+activity Schedule Follow-up Checkup
+bind Report Animal Abuse: Abuse Severity, Animal Species, Animal Age
+bind Investigation: Abuse Severity, Animal Health
+bind Rescue the Abused Animal: Animal Health, Shelter Capacity
+bind Veterinary Care: Animal Health, Checkup Frequency
+bind Find a Foster Home: Shelter Capacity
+bind Adoption Screening: Adoption Status
+bind Process Donation: Donation Amount
+bind Volunteer Application: Volunteer Background Check
+bind Facility Inspection: 
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Animal Age: integer between 0 and 25
+Animal Health: Healthy, Injured, Sick
+Shelter Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Donation Amount: float between 1.0 and 10000.0
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Response[Investigation, Rescue the Abused Animal] |A.Abuse Severity is High | |
+Chain Response[Rescue the Abused Animal, Veterinary Care] |A.Animal Health is Injured | |
+Response[Veterinary Care, Find a Foster Home] | | |
+Precedence[Finalize the Animal Adoption, Adoption Screening] | | |
+Response[Adoption Screening, Finalize the Animal Adoption] |A.Adoption Status is Approved | |0,7,d
+Response[Finalize the Animal Adoption, Monitor the Animal’s Welfare] | | |
+Existence[Public Education] | |
+Responded Existence[Report Animal Abuse, Process Donation] | | |
+Not Response[Background Check, Approve Volunteer] |A.Volunteer Background Check is Fail | |
+Response[Veterinary Care, Schedule Follow-up Checkup] | | |0,30,d
+Existence[Facility Inspection] | |0,90,d
+Exclusive Choice[Veterinary Care, Euthanizing the Animal] |A.Animal Health is Sick | |
+Response[Report Animal Abuse, Investigation] | | |

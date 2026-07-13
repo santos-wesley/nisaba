@@ -1,0 +1,68 @@
+#MP-Declare Model
+## Activities
+- **Identify Threat**: The 'Identify Threat' activity represents the initial detection and recognition of potential security threats in the system.
+- **Collect Data**: The 'Collect Data' activity involves gathering relevant information and logs associated with the identified threat from various sources.
+- **Analyze Data**: The 'Analyze Data' activity includes examining the collected data to determine the nature and severity of the threat.
+- **Report Threat**: The 'Report Threat' activity entails documenting and communicating the analyzed threat details to relevant stakeholders.
+- **Mitigate Threat**: The 'Mitigate Threat' activity focuses on implementing measures to reduce or eliminate the impact of the threat.
+- **Monitor Systems**: The 'Monitor Systems' activity involves ongoing surveillance of the systems to ensure the threat has been effectively addressed.
+- **Update Threat Intelligence**: The 'Update Threat Intelligence' activity consists of incorporating lessons learned from the threat into the organization's threat intelligence database.
+- **Conduct Training**: The 'Conduct Training' activity includes educating staff on the latest threat awareness and response procedures.
+- **Perform Incident Response**: The 'Perform Incident Response' activity encompasses the coordinated actions taken to handle and recover from a security incident.
+
+## Attributes
+- **Threat ID: integer between 1 and 999999**: The attribute 'Threat ID: integer between 1 and 999999' represents a unique identifier assigned to each detected threat for tracking purposes.
+- **Threat Type: Phishing, Malware, DDoS, Ransomware**: The attribute 'Threat Type: Phishing, Malware, DDoS, Ransomware' specifies the category of the security threat being addressed.
+- **Data Source ID: integer between 1 and 9999**: The attribute 'Data Source ID: integer between 1 and 9999' identifies the origin or source from which threat-related data is collected.
+- **Analysis Result: Confirmed, False Positive, Inconclusive**: The attribute 'Analysis Result: Confirmed, False Positive, Inconclusive' indicates the outcome of the data analysis regarding the validity of the threat.
+- **Report ID: integer between 1 and 999999**: The attribute 'Report ID: integer between 1 and 999999' represents a unique identifier for the threat report generated.
+- **Mitigation Success Rate: float between 0.0 and 100.0**: The attribute 'Mitigation Success Rate: float between 0.0 and 100.0' quantifies the effectiveness of the mitigation efforts as a percentage.
+- **Monitoring Status: Ongoing, Completed**: The attribute 'Monitoring Status: Ongoing, Completed' reflects the current state of system monitoring post-mitigation.
+- **Update ID: integer between 1 and 999999**: The attribute 'Update ID: integer between 1 and 999999' serves as a unique identifier for updates made to the threat intelligence.
+
+## Binds
+- **bind Identify Threat: Threat ID, Threat Type**: The bind 'Identify Threat: Threat ID, Threat Type' specifies that the activity 'Identify Threat' requires the attributes 'Threat ID' and 'Threat Type'.
+- **bind Collect Data: Threat ID, Data Source ID**: The bind 'Collect Data: Threat ID, Data Source ID' links the 'Collect Data' activity with the attributes 'Threat ID' and 'Data Source ID'.
+- **bind Analyze Data: Threat ID, Analysis Result**: The bind 'Analyze Data: Threat ID, Analysis Result' associates the 'Analyze Data' activity with the attributes 'Threat ID' and 'Analysis Result'.
+- **bind Report Threat: Threat ID, Report ID**: The bind 'Report Threat: Threat ID, Report ID' connects the 'Report Threat' activity to the attributes 'Threat ID' and 'Report ID'.
+- **bind Mitigate Threat: Threat ID, Mitigation Success Rate**: The bind 'Mitigate Threat: Threat ID, Mitigation Success Rate' ties the 'Mitigate Threat' activity to the attributes 'Threat ID' and 'Mitigation Success Rate'.
+- **bind Monitor Systems: Threat ID, Monitoring Status**: The bind 'Monitor Systems: Threat ID, Monitoring Status' links the 'Monitor Systems' activity with the attributes 'Threat ID' and 'Monitoring Status'.
+- **bind Update Threat Intelligence: Update ID, Threat ID**: The bind 'Update Threat Intelligence: Update ID, Threat ID' specifies that the activity 'Update Threat Intelligence' uses the attributes 'Update ID' and 'Threat ID'.
+
+## Constraints
+- **Init[Identify Threat] | |**: The 'Identify Threat' must be the first activity to occur in the process.
+- **Chain Response[Identify Threat, Collect Data] | | |0,10,m**: Whenever an 'Identify Threat' activity occurs, it must be immediately followed by a 'Collect Data' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Identify Threat' to 'Collect Data'. Multiple 'Identify Threat'-'Collect Data' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Collect Data' are allowed to happen elsewhere in the process but not between an 'Identify Threat' and its corresponding 'Collect Data'. The time condition requires that this happens between 0 and 10 minutes.
+- **Chain Response[Collect Data, Analyze Data] | | |0,30,m**: Whenever a 'Collect Data' activity occurs, it must be immediately followed by an 'Analyze Data' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Collect Data' to 'Analyze Data'. Multiple 'Collect Data'-'Analyze Data' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Analyze Data' are allowed to happen elsewhere in the process but not between a 'Collect Data' and its corresponding 'Analyze Data'. The time condition requires that this happens between 0 and 30 minutes.
+- **Chain Response[Analyze Data, Report Threat] |A.Analysis Result is Confirmed | |0,1,h**: Whenever an 'Analyze Data' activity occurs, it must be immediately followed by a 'Report Threat' activity in the next event position, with no other events in between, but only when the activation condition 'A.Analysis Result is Confirmed' is met. This immediate succession ensures a direct and uninterrupted transition from 'Analyze Data' to 'Report Threat' under the specified condition. Multiple 'Analyze Data'-'Report Threat' pairs can exist in a process instance, each adhering to this immediate succession rule when the condition holds. Events of 'Report Threat' are allowed to happen elsewhere in the process but not between an 'Analyze Data' and its corresponding 'Report Threat'. The time condition requires that this happens between 0 and 1 hours.
+- **Chain Response[Report Threat, Mitigate Threat] | | |0,2,h**: Whenever a 'Report Threat' activity occurs, it must be immediately followed by a 'Mitigate Threat' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Report Threat' to 'Mitigate Threat'. Multiple 'Report Threat'-'Mitigate Threat' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Mitigate Threat' are allowed to happen elsewhere in the process but not between a 'Report Threat' and its corresponding 'Mitigate Threat'. The time condition requires that this happens between 0 and 2 hours.
+- **Chain Response[Mitigate Threat, Monitor Systems] | | |**: Whenever a 'Mitigate Threat' activity occurs, it must be immediately followed by a 'Monitor Systems' activity in the next event position, with no other events in between. This immediate succession ensures a direct and uninterrupted transition from 'Mitigate Threat' to 'Monitor Systems'. Multiple 'Mitigate Threat'-'Monitor Systems' pairs can exist in a process instance, each adhering to this immediate succession rule. Events of 'Monitor Systems' are allowed to happen elsewhere in the process but not between a 'Mitigate Threat' and its corresponding 'Monitor Systems'.
+- **End[Monitor Systems] | |**: The 'Monitor Systems' must be the last activity to occur in the process.
+- **Chain Response[Mitigate Threat, Update Threat Intelligence] |A.Mitigation Success Rate > 90.0 | |**: Whenever a 'Mitigate Threat' activity occurs, it must be immediately followed by an 'Update Threat Intelligence' activity in the next event position, with no other events in between, but only when the activation condition 'A.Mitigation Success Rate > 90.0' is met. This immediate succession ensures a direct and uninterrupted transition from 'Mitigate Threat' to 'Update Threat Intelligence' under the specified condition. Multiple 'Mitigate Threat'-'Update Threat Intelligence' pairs can exist in a process instance, each adhering to this immediate succession rule when the condition holds. Events of 'Update Threat Intelligence' are allowed to happen elsewhere in the process but not between a 'Mitigate Threat' and its corresponding 'Update Threat Intelligence'.
+
+
+## Interleaved Description
+The MP-Declare process model for the threat management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Identify Threat,' which involves the initial detection and recognition of potential security threats in the system. This activity is bound to the attributes 'Threat ID' (integer between 1 and 999999) and 'Threat Type' (Phishing, Malware, DDoS, Ransomware), establishing the foundational context for all subsequent threat handling steps.
+#### **End Constraints**
+The process concludes with the activity 'Monitor Systems,' which involves ongoing surveillance of the systems to ensure the threat has been effectively addressed. This activity is bound to the attributes 'Threat ID' and 'Monitoring Status' (Ongoing, Completed) and must be the last to occur in the process, providing coherent closure to the threat lifecycle.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+1. Whenever an 'Identify Threat' activity occurs, it must be immediately followed by a 'Collect Data' activity in the next event position, with no other events in between. This activity is bound to the attributes 'Threat ID' and 'Data Source ID' (integer between 1 and 9999). The immediate succession ensures a direct cause-and-effect relationship from threat detection to data gathering. Multiple 'Identify Threat'-'Collect Data' pairs can exist, each adhering to this rule within 0 to 10 minutes.
+2. Whenever a 'Collect Data' activity occurs, it must be immediately followed by an 'Analyze Data' activity in the next event position, with no other events in between. This activity is bound to the attributes 'Threat ID' and 'Analysis Result' (Confirmed, False Positive, Inconclusive). The direct cause-and-effect link guarantees uninterrupted transition from data collection to examination within 0 to 30 minutes.
+3. Whenever an 'Analyze Data' activity occurs with the condition that 'Analysis Result is Confirmed,' it must be immediately followed by a 'Report Threat' activity in the next event position, with no other events in between. This activity is bound to the attributes 'Threat ID' and 'Report ID' (integer between 1 and 999999). The immediate cause-and-effect relationship ensures prompt documentation and communication of confirmed threats within 0 to 1 hour.
+4. Whenever a 'Report Threat' activity occurs, it must be immediately followed by a 'Mitigate Threat' activity in the next event position, with no other events in between. This activity is bound to the attributes 'Threat ID' and 'Mitigation Success Rate' (float between 0.0 and 100.0). The direct succession creates an unbroken cause-and-effect flow from reporting to remediation within 0 to 2 hours.
+5. Whenever a 'Mitigate Threat' activity occurs, it must be immediately followed by a 'Monitor Systems' activity in the next event position, with no other events in between. This establishes a precise cause-and-effect dependency ensuring that post-mitigation surveillance begins without delay.
+6. Whenever a 'Mitigate Threat' activity occurs with the condition that 'Mitigation Success Rate > 90.0,' it must be immediately followed by an 'Update Threat Intelligence' activity in the next event position, with no other events in between. This activity is bound to the attributes 'Update ID' (integer between 1 and 999999) and 'Threat ID'. The immediate cause-and-effect relationship incorporates high-success lessons into the organization's threat intelligence database without interruption.
+
+### **Flexible Ordering Constraints**
+
+#### **Response Constraints**
+If the 'Analyze Data' activity occurs and the 'Analysis Result is Confirmed,' then the 'Report Threat' activity must occur. This ensures that confirmed threats are always documented and communicated to stakeholders, maintaining process coherence.
+
+#### **Succession Constraints**
+Whenever a 'Mitigate Threat' activity occurs with the condition that 'Mitigation Success Rate > 90.0,' it must be followed by an 'Update Threat Intelligence' activity. This establishes a causal link ensuring that highly effective mitigations logically trigger intelligence updates, creating a cohesive progression in organizational learning.

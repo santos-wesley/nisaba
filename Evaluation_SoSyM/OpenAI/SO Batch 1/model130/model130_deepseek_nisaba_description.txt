@@ -1,0 +1,63 @@
+#MP-Declare Model
+## Activities
+- **Draft Contract**: 
+- **Review Contract**: 
+- **Negotiate Terms**: 
+- **Approve Contract**: 
+- **Sign Contract**: 
+- **Archive Contract**: 
+
+## Attributes
+- **Contract ID: integer between 1000 and 9999**: 
+- **Contract Value: float between 10000.0 and 1000000.0**: 
+- **Approval Status: Pending, Approved, Rejected**: 
+- **Signature Status: Unsigned, Partially Signed, Fully Signed**: 
+- **Review Outcome: Accepted, Requires Changes, Rejected**: 
+
+## Binds
+- **Draft Contract: Contract ID, Contract Value**: 
+- **Review Contract: Review Outcome**: 
+- **Approve Contract: Approval Status**: 
+- **Sign Contract: Signature Status**: 
+
+## Constraints
+- **Init[Draft Contract] | |**: 
+- **End[Archive Contract] | |**: 
+- **Response[Draft Contract, Review Contract] | | |0,2,d**: 
+- **Precedence[Sign Contract, Approve Contract] |A.Signature Status is Unsigned |A.Approval Status is Approved |0,1,d**: 
+- **Response[Review Contract, Negotiate Terms] |A.Review Outcome is Requires Changes | |0,3,d**: 
+- **Response[Negotiate Terms, Approve Contract] | | |0,2,d**: 
+- **Response[Approve Contract, Sign Contract] |A.Approval Status is Approved |A.Signature Status is Unsigned |0,1,d**: 
+- **Response[Sign Contract, Archive Contract] |A.Signature Status is Fully Signed | |**: 
+- **Existence[Review Contract] | |**: 
+- **Not Precedence[Sign Contract, Review Contract] |A.Signature Status is Unsigned |A.Review Outcome is Rejected |**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the contract management process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Draft Contract,' which involves creating the initial contract with 'Contract ID' and 'Contract Value' attributes. This establishes the foundational context for the entire process.
+#### **End Constraints**
+The process concludes with the activity 'Archive Contract,' which involves storing the finalized contract. This activity must be the last to occur, ensuring the process closes coherently after all other steps are completed.
+
+### **Frequency Constraints**
+#### **Existence Constraint**
+The 'Review Contract' activity must occur at least once in the process. This ensures that the contract is examined for accuracy and completeness, adding depth and reliability to the process.
+
+### **Flexible Ordering Constraints**
+#### **Background Constraints (Precedence)**
+1. The activity 'Sign Contract' is permitted to occur only if an 'Approve Contract' activity has occurred before it, with the condition that 'Signature Status is Unsigned' and 'Approval Status is Approved.' This sets up an initial context where the contract must be approved before it can be signed, guiding the logical sequence.
+2. The activity 'Sign Contract' is not permitted to occur before a 'Review Contract' activity if 'Signature Status is Unsigned' and 'Review Outcome is Rejected.' This restricts the order, ensuring that a rejected review prevents signing, preserving the intended sequence.
+
+#### **Sequence Constraints (Response)**
+1. If the 'Draft Contract' activity occurs, then the 'Review Contract' activity must occur within 2 days. This defines an ordered flow where drafting is followed by review, ensuring a cohesive temporal structure.
+2. If the 'Review Contract' activity occurs with the condition 'Review Outcome is Requires Changes,' then the 'Negotiate Terms' activity must occur within 3 days. This ensures that when changes are needed, negotiation follows promptly, maintaining process momentum.
+3. If the 'Negotiate Terms' activity occurs, then the 'Approve Contract' activity must occur within 2 days. This establishes a sequence where negotiation leads to approval, ensuring a logical progression.
+4. If the 'Approve Contract' activity occurs with the condition 'Approval Status is Approved' and 'Signature Status is Unsigned,' then the 'Sign Contract' activity must occur within 1 day. This ensures that approval directly leads to signing, maintaining a cohesive flow.
+5. If the 'Sign Contract' activity occurs with the condition 'Signature Status is Fully Signed,' then the 'Archive Contract' activity must occur. This ensures that a fully signed contract is archived, completing the process.
+
+### **Exclusivity Constraints**
+#### **Contrast Constraints (Not Precedence)**
+The 'Sign Contract' activity is not permitted to occur before a 'Review Contract' activity if 'Signature Status is Unsigned' and 'Review Outcome is Rejected.' This contrast highlights an exclusion, ensuring that a rejected review prevents signing, thereby reinforcing process integrity by disallowing this specific order.

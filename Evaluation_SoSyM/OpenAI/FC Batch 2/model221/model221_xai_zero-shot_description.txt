@@ -1,0 +1,36 @@
+**Multi-Perspective Declare Model: International Market Expansion Process**
+
+This model describes a structured yet flexible business process for expanding operations into an international market. It combines control-flow constraints, data-driven decisions, and temporal requirements.
+
+### Process Overview
+
+The process begins with **Analyze International Market**, which must be the very first activity. After analyzing the market, the company **Identify Business Opportunities**. Depending on the outcome of a **Conduct Feasibility Study**, the organization may proceed to **Develop Business Plan** (only if the feasibility status is *Positive*). Once the plan is ready, the company seeks **Acquire Necessary Permits**.
+
+After permits are obtained, the company must **Set Up International Office** (within 5 days), followed by **Hire Local Staff**. Parallel to these activities, the company must **Initiate Marketing Campaign** at some point during the process. Once local staff are hired, the company can **Negotiate with Local Vendors** and also **Establish Supply Chain** and **Manage International Logistics** (the latter must occur at least once).
+
+After launching the marketing campaign, the company **Monitor Market Response**. If the market response is *Negative*, the company is forced to **Adjust Strategy** within 7 days. Following any strategy adjustments (or directly after monitoring if the response is not negative), the company performs **Assess Performance**, which must lead to **Report to Headquarters** within 48 hours. Reporting to headquarters is the only way the process can end — it must occur **exactly once** and is the designated end activity.
+
+### Data Perspective
+
+The model tracks several key data attributes:
+
+- **Market Size** (1,000 – 1,000,000) and **Market Attractiveness** (High/Medium/Low) are associated with the initial market analysis.
+- **Investment Amount** and **Feasibility Status** (Positive/Negative) are captured during the feasibility study.
+- **Permit Status** (Approved/Pending/Rejected) is updated when acquiring permits.
+- **Staffing Level** (High/Medium/Low) reflects hiring outcomes.
+- **Marketing Budget** is linked to the marketing campaign.
+- **Market Response** (Positive/Neutral/Negative) drives whether strategy adjustment is required.
+- **Strategy Adjustment** (Yes/No) records whether changes were made.
+- **Performance Evaluation** (Excellent/Good/Fair/Poor) is assessed before final reporting.
+
+### Key Constraints
+
+- **Mandatory sequence**: Market analysis → opportunity identification → feasibility study → (if positive) business plan → permits → office setup → hiring.
+- **Conditional behavior**: Strategy adjustment is mandatory only when market response is negative.
+- **Temporal constraints**:
+  - Office must be set up within 5 days of permit approval.
+  - Strategy must be adjusted within 7 days of a negative market response.
+  - Performance assessment must be reported to headquarters within 48 hours.
+- **Cardinality constraints**: Marketing campaign and logistics management must occur at least once; reporting to headquarters must occur exactly once and is the only valid end activity.
+
+This model allows some flexibility (e.g., the exact timing of marketing campaign and logistics setup) while enforcing critical compliance points, data-driven decision gates, and strict temporal deadlines.

@@ -1,0 +1,39 @@
+activity Monitor Seismic Activity
+activity Issue Early Warning
+activity Assess Disaster Risk
+activity Activate Emergency Response
+activity Deploy Rescue Teams
+activity Provide Medical Assistance
+activity Distribute Relief Supplies
+activity Evacuate Affected Population
+activity Establish Temporary Shelters
+activity Conduct Damage Assessment
+bind Monitor Seismic Activity: Seismic Magnitude
+bind Assess Disaster Risk: Risk Score
+bind Issue Early Warning: Warning Level
+bind Activate Emergency Response: Response Status
+bind Deploy Rescue Teams: Teams Deployed
+bind Provide Medical Assistance: Injured Count
+bind Distribute Relief Supplies: Supplies Distributed
+bind Evacuate Affected Population: People Evacuated
+bind Establish Temporary Shelters: Shelters Established
+bind Conduct Damage Assessment: Damage Estimate
+Seismic Magnitude: float between 0 and 10
+Risk Score: float between 0.0 and 100.0
+Warning Level: Low, Medium, High, Critical
+Response Status: Initiated, Ongoing, Completed
+Teams Deployed: integer between 0 and 50
+Injured Count: integer between 0 and 10000
+Supplies Distributed: integer between 0 and 20000
+People Evacuated: integer between 0 and 50000
+Shelters Established: integer between 0 and 20
+Damage Estimate: float between 0.0 and 1000000000.0
+Init[Monitor Seismic Activity] | |
+Response[Monitor Seismic Activity, Issue Early Warning] | | |
+Response[Issue Early Warning, Activate Emergency Response] | | |
+Chain Response[Activate Emergency Response, Deploy Rescue Teams] | | |
+Chain Response[Deploy Rescue Teams, Provide Medical Assistance] | | |
+Chain Response[Provide Medical Assistance, Distribute Relief Supplies] | | |0,24,h
+Response[Assess Disaster Risk, Evacuate Affected Population] |A.Risk Score > 70 | |
+Response[Assess Disaster Risk, Establish Temporary Shelters] |A.Risk Score > 70 | |
+Succession[Conduct Damage Assessment, Distribute Relief Supplies] | | |

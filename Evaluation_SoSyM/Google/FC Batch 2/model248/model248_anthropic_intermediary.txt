@@ -1,0 +1,27 @@
+## Activities
+- **Prepare Solution**: The 'Prepare Solution' activity represents the preparation of a chemical solution prior to further processing.
+- **Heat Mixture**: The 'Heat Mixture' activity involves heating the prepared mixture to reach the required reaction conditions.
+- **Add Catalyst**: The 'Add Catalyst' activity involves introducing a catalyst into the mixture to facilitate the chemical reaction.
+- **Monitor Reaction**: The 'Monitor Reaction' activity includes observing and tracking the progress and status of the ongoing chemical reaction.
+- **Cool Solution**: The 'Cool Solution' activity represents the cooling down of the reacted solution after the reaction process.
+- **Filter Product**: The 'Filter Product' activity involves separating the solid product from the liquid solution.
+- **Dry Product**: The 'Dry Product' activity involves removing residual moisture from the filtered product.
+- **Analyze Sample**: The 'Analyze Sample' activity involves testing a sample of the product to determine its quality characteristics.
+- **Store Product**: The 'Store Product' activity represents the storage of the finished product for future use or distribution.
+- **Dispose Waste**: The 'Dispose Waste' activity involves the proper disposal of waste materials generated during the process.
+
+## Attributes
+- **Temperature: Float between 0.0 and 500.0**: The attribute 'Temperature: Float between 0.0 and 500.0' represents the temperature applied during the heating process.
+- **Reaction Time: Integer between 1 and 600**: The attribute 'Reaction Time: Integer between 1 and 600' represents the duration of the chemical reaction.
+- **Catalyst Type: Platinum, Palladium, Nickel, Iron**: The attribute 'Catalyst Type: Platinum, Palladium, Nickel, Iron' specifies the type of catalyst used to facilitate the reaction.
+- **Concentration: Float between 0.1 and 10.0**: The attribute 'Concentration: Float between 0.1 and 10.0' represents the concentration of the prepared solution.
+- **Solvent Type: Water, Ethanol, Toluene**: The attribute 'Solvent Type: Water, Ethanol, Toluene' specifies the type of solvent used in preparing the solution.
+- **Yield: Float between 0.0 and 100.0**: The attribute 'Yield: Float between 0.0 and 100.0' represents the percentage yield obtained from the process.
+- **Purity: Integer between 0 and 100**: The attribute 'Purity: Integer between 0 and 100' represents the purity percentage of the analyzed sample.
+- **Reaction Status: Initiated, Ongoing, Completed, Failed**: The attribute 'Reaction Status: Initiated, Ongoing, Completed, Failed' specifies the current status of the chemical reaction being monitored.
+- **Batch Number: Integer between 1 and 1000**: The attribute 'Batch Number: Integer between 1 and 1000' represents the identification number assigned to a specific production batch.
+
+## Binds
+
+## Constraints
+

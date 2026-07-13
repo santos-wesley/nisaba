@@ -1,0 +1,43 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This process describes the lifecycle of an incident, starting with its report and ending with its closure. Each activity is associated with specific data attributes, and the flow between activities is governed by constraints that include timing, data conditions, and cardinality.
+
+**Activities and Their Data Attributes:**
+- **Report Incident** sets the initial **Status** (e.g., "New").
+- **Assess Impact** records an **Impact Level** (integer 1–5) and an **Assessment Time** (0.1–24 hours).
+- **Prioritize Incident** assigns a **Priority** (Low, Medium, High, Critical).
+- **Assign Incident** designates an **Assigned Team ID** (integer 1–100).
+- **Investigate Incident** logs an **Investigation Time** (0.5–48 hours).
+- **Resolve Incident** records a **Resolution Time** (0.1–72 hours).
+- **Verify Resolution** produces a **Verification Result** (Successful or Failed).
+- **Close Incident** updates the **Status** (e.g., "Closed").
+- **Escalate Incident** sets an **Escalation Level** (None, Level 1, Level 2, Level 3).
+- **Document Incident** generates a **Document ID** (integer 1000–9999).
+
+**Process Flow and Constraints:**
+
+1. **Start and End:** The process must begin with **Report Incident** and must end with **Close Incident**.
+
+2. **Initial Assessment and Prioritization:**
+   - After reporting, the incident must be assessed (**Response** from Report Incident to Assess Impact). This assessment must occur within 0 to 24 hours.
+   - Once assessed, the incident must be prioritized (**Succession** from Assess Impact to Prioritize Incident).
+
+3. **Assignment Condition:**
+   - The incident can only be assigned (**Assign Incident**) *after* it has been prioritized (**Precedence**). However, this assignment is only required if the priority is **High** or **Critical**. If the priority is Low or Medium, assignment is optional.
+
+4. **Investigation and Resolution:**
+   - The incident must be resolved (**Resolve Incident**) *before* it can be investigated (**Precedence**). This means investigation follows resolution.
+   - After resolution, verification must occur (**Response** from Resolve Incident to Verify Resolution), and this verification must happen within 0 to 48 hours.
+
+5. **Verification Outcome and Escalation:**
+   - If the verification result is **Failed**, the incident must be escalated (**Response** with condition: A.Verification Result is Failed). Escalation can be to Level 1, 2, or 3.
+   - If verification is successful, escalation is not triggered.
+
+6. **Closure and Documentation:**
+   - After the incident is closed, it must be documented (**Succession** from Close Incident to Document Incident).
+
+7. **Cardinality Constraint:**
+   - The **Escalate Incident** activity can occur at most **two times** in the entire process (**Absence2**). This prevents infinite escalation loops.
+
+**Summary of the Typical Flow:**
+Report → Assess (within 24h) → Prioritize → (if High/Critical: Assign) → Resolve → Investigate → Verify (within 48h) → (if Failed: Escalate, up to 2 times) → Close → Document.

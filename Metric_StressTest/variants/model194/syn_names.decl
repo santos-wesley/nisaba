@@ -1,0 +1,33 @@
+activity Collect Information
+activity Examine Information
+activity Compose Document
+activity Assess Document
+activity Edit Document
+activity Authorize Document
+activity Release Document
+activity Gather Response
+activity Formulate Measure Scheme
+activity Execute Measures
+bind Collect Information: Information Identifier, Information Category
+bind Examine Information: Information Identifier, Effect Rating
+bind Assess Document: Reviewer Identifier
+bind Authorize Document: Authorization Identifier
+bind Gather Response: Response Category
+bind Edit Document: Edit Category
+Information Identifier: integer between 1 and 10000
+Information Category: Environmental, Social, Governance
+Reviewer Identifier: integer between 1 and 5000
+Authorization Identifier: integer between 1 and 5000
+Effect Rating: float between 0.0 and 10.0
+Response Category: Positive, Negative, Neutral
+Edit Category: Minor, Major
+Init[Collect Information] | |
+End[Release Document] | |
+Precedence[Examine Information, Collect Information] | | |
+Chain Response[Examine Information, Compose Document] | | |
+Precedence[Assess Document, Compose Document] | | |
+Chain Succession[Assess Document, Edit Document] | | |
+Response[Edit Document, Authorize Document] | | |0,48,h
+Chain Response[Authorize Document, Release Document] | | |0,24,h
+Chain Succession[Gather Response, Formulate Measure Scheme] | | |0,7,d
+Chain Succession[Formulate Measure Scheme, Execute Measures] | | |0,30,d

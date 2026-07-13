@@ -1,0 +1,52 @@
+**Multi-Perspective Declare Model: Building Construction Project**
+
+This model describes a **construction project lifecycle** with strong control-flow constraints and associated data perspectives.
+
+### **Activities**
+The process consists of the following activities (in typical chronological order):
+
+- **Conduct Survey**
+- **Design Blueprint**
+- **Acquire Permits**
+- **Lay Foundation**
+- **Construct Framework**
+- **Install Utilities**
+- **Interior Work**
+- **Final Inspection**
+- **Handover Project**
+
+### **Data Perspective (Bindings)**
+Each activity is associated with specific data attributes:
+
+- **Conduct Survey** requires a **Survey ID** (integer between 1 and 9999)
+- **Acquire Permits** requires a **Permit Type** (Environmental, Zoning, or Safety)
+- **Lay Foundation** requires a **Foundation Material** (Concrete, Reinforced Concrete, or Steel)
+- **Install Utilities** requires a **Utility Type** (Plumbing, Electrical, or HVAC)
+- **Final Inspection** produces an **Inspection Score** (float between 0.0 and 10.0)
+
+### **Control-Flow Constraints**
+
+**Mandatory Start & End:**
+- The process **must start** with **Conduct Survey**.
+- The process **must end** with **Final Inspection**.
+
+**Ordering Constraints:**
+- **Design Blueprint** must be completed **before** **Conduct Survey** can occur (i.e., you cannot survey before designing the blueprint).
+- **Acquire Permits** must precede **Lay Foundation**.
+- **Install Utilities** must be completed before **Interior Work** can begin.
+- **Final Inspection** must be completed before **Handover Project** can occur.
+
+**Response & Milestone Constraints:**
+- After **Lay Foundation** is executed, **Construct Framework** must eventually be executed (Response constraint).
+- After **Construct Framework** is executed, **Install Utilities** must be executed **at most twice** and **at least once** before the end of the process (Alternate Response with cardinality [0,2,d]).
+
+**Cardinality & Time Constraints:**
+- The constraint between **Lay Foundation** and **Construct Framework** allows up to 3 occurrences of the response with a "d" (deadline) modifier.
+- The constraint between **Construct Framework** and **Install Utilities** allows up to 2 occurrences.
+- The final constraint between **Final Inspection** and **Handover Project** allows at most 1 occurrence of Handover with a deadline.
+
+---
+
+**Summary in natural language:**
+
+This is a construction project model that enforces a logical building sequence: you must design before surveying, get permits before laying the foundation, install utilities before doing interior work, and pass a final inspection before handing over the project. The model tracks important data such as survey IDs, permit types, material choices, utility types, and inspection scores. It also ensures that once the foundation is laid, the framework must be constructed, and after the framework is up, utilities must be installed (with limited repetitions allowed). The entire process must begin with a survey and can only be considered complete after a successful final inspection.

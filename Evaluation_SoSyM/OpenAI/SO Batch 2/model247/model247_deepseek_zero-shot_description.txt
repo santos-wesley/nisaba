@@ -1,0 +1,41 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a comprehensive intellectual property (IP) application and examination process, covering patents, trademarks, and copyrights. The process is structured around three distinct but parallel workflows, each following a similar lifecycle: filing, searching, examining, and reaching a final decision (grant or reject). A cross-cutting appeal mechanism is also included.
+
+**1. Core Workflows (Patents, Trademarks, and Copyrights)**
+
+Each IP type follows a similar sequence, though with specific data conditions:
+
+- **Patents:** The process begins with **File Patent Application**, which requires an `Application ID` (integer 1–1,000,000) and an `Application Fee` (float 50.0–10,000.0). This is the only allowed starting activity. Next, **Conduct Patent Search** must occur, producing a `Search Result` (either "Clear" or "Conflict"). If the result is "Clear", the process must eventually proceed to **Examine Patent Application**, which updates the `Application Status` (to "Pending", "Approved", or "Rejected"). Based on this status, a choice is made: if "Approved", the process leads to **Grant Patent**; if "Rejected", it leads to **Reject Patent Application**. The process ends only with either a Grant or a Rejection.
+
+- **Trademarks:** The workflow mirrors patents: **File Trademark Application** (with `Application ID` and `Application Fee`), followed by **Conduct Trademark Search** (producing a `Search Result`). If the result is "Clear", **Examine Trademark Application** must follow. The examination outcome (`Application Status`) then dictates a choice between **Grant Trademark** (if "Approved") or **Reject Trademark Application** (if "Rejected").
+
+- **Copyrights:** The workflow is slightly simpler: **File Copyright Registration** (with `Application ID` and `Application Fee`) is followed by **Examine Copyright Application** (no search step is required). The examination outcome then leads to a choice between **Grant Copyright** (if "Approved") or **Reject Copyright Application** (if "Rejected").
+
+**2. Conditional and Temporal Rules**
+
+- **Response Rules (with Data Conditions):**
+    - For patents and trademarks, a "Clear" search result is a *necessary condition* for the examination to occur. If the search result is "Conflict", the examination cannot proceed.
+    - For copyrights, the examination must always occur after filing, regardless of any search result (as no search activity exists).
+
+- **Choice Rules (with Data Conditions):**
+    - For all three IP types, the examination outcome directly determines the next step. An "Approved" status forces a Grant; a "Rejected" status forces a Rejection. These are exclusive choices—you cannot grant a rejected application or reject an approved one.
+
+- **Precedence Rules (with Data Conditions):**
+    - A **Appeal Decision** activity can occur *before* any rejection (patent, trademark, or copyright), but only if the `Application ID` in the appeal matches the `Application ID` in the original rejection. This means an appeal is specific to a particular application and must happen prior to the rejection being finalized.
+
+**3. Process Boundaries**
+
+- **Init:** The only allowed starting point is **File Patent Application**.
+- **End:** The process can only end with **Grant Patent**, **Reject Patent Application**, **Grant Trademark**, **Reject Trademark Application**, **Grant Copyright**, or **Reject Copyright Application**. No other activity can be the final one.
+
+**4. Data Perspective Summary**
+
+All activities are bound to specific data attributes. The key data elements are:
+- **Application ID:** A unique identifier (1–1,000,000) used to link filings, appeals, and rejections.
+- **Application Fee:** A monetary value (50.0–10,000.0) required at filing.
+- **Application Status:** A state variable ("Pending", "Approved", "Rejected") set during examination.
+- **Search Result:** A binary outcome ("Clear" or "Conflict") from patent and trademark searches.
+- **Decision:** The final outcome ("Granted" or "Rejected") for grants and rejections.
+
+**In summary**, this model enforces a structured, data-driven IP lifecycle where each application type follows a defined path from filing to final decision, with conditional branching based on search results and examination status, and a cross-application appeal mechanism that links rejections to prior appeals by matching Application IDs.

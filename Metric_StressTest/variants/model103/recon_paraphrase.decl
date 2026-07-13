@@ -1,0 +1,55 @@
+activity Security Instruction Perform
+activity Security Apparatus Examine
+activity Security Event Document
+activity Security Conformity Assess
+activity Security Guidelines Revise
+activity Hazard Assessment Conduct
+activity Security Controls Execute
+activity Emergency Exercise Perform
+activity Security Reports Assess
+activity Security Funds Authorize
+activity Security Efficiency Track
+activity Security Violation Probe
+activity Security Updates Convey
+activity Security Review Arrange
+activity Security Personnel Accredit
+bind Security Instruction Perform: Attendees Instruction
+bind Security Apparatus Examine: Apparatus State Security
+bind Security Event Document: Seriousness Event
+bind Security Conformity Assess: State Conformity
+bind Security Guidelines Revise: 
+bind Hazard Assessment Conduct: Degree Hazard
+bind Security Controls Execute: 
+bind Emergency Exercise Perform: Category Exercise
+bind Security Reports Assess: 
+bind Security Funds Authorize: Assignment Funds
+bind Security Efficiency Track: 
+bind Security Violation Probe: Count Violation
+bind Security Updates Convey: 
+bind Security Review Arrange: Rate Review
+bind Security Personnel Accredit: State Accreditation
+Seriousness Event: integer between 1 and 5
+Assignment Funds: float between 1000.0 and 50000.0
+State Conformity: Compliant, Non-Compliant
+Category Exercise: Fire, Earthquake, Evacuation
+Attendees Instruction: integer between 5 and 100
+Apparatus State Security: Operational, Needs Repair
+Degree Hazard: float between 0.1 and 10.0
+Rate Review: Monthly, Quarterly, Annually
+Count Violation: integer between 0 and 10
+State Accreditation: Certified, Not Certified
+Existence[Security Instruction Perform] | |
+Exactly2[Security Apparatus Examine] | |
+Response[Security Event Document, Security Violation Probe] | | |0,2,d
+Co-Existence[Emergency Exercise Perform, Security Reports Assess] | | |
+Precedence[Security Controls Execute, Security Funds Authorize] | | |
+Exclusive Choice[Security Instruction Perform, Security Personnel Accredit] | | |
+Response[Hazard Assessment Conduct, Security Controls Execute] | | |0,48,h
+End[Security Guidelines Revise] | |
+Succession[Security Efficiency Track, Security Reports Assess] | | |
+Chain Response[Security Review Arrange, Security Conformity Assess] | | |
+Not Chain Succession[Security Updates Convey, Security Instruction Perform] | | |
+Responded Existence[Security Event Document, Security Violation Probe] |A.Seriousness Event > 3 | |
+Choice[Emergency Exercise Perform, Security Efficiency Track] | | |
+Responded Existence[Security Apparatus Examine, Security Apparatus Examine] |A.Apparatus State Security is Needs Repair | |
+Response[Security Review Arrange, Security Review Arrange] |A.Rate Review is Monthly | |0,30,d

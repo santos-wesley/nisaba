@@ -1,0 +1,42 @@
+This Multi-Perspective Declare model describes a rigorous, end-to-end laboratory chemical synthesis and manufacturing process. It outlines the sequential execution of activities, the data attributes recorded at each step, and specific time constraints that govern the transitions between tasks. 
+
+Here is a natural language description of the model:
+
+### **1. Activities and Data Attributes**
+The process consists of ten distinct activities, each bound to specific data attributes that must be recorded during execution:
+*   **Prepare Solution:** Requires a *Concentration* (a decimal between 0.1 and 10.0) and a *Solvent Type* (Water, Ethanol, or Toluene).
+*   **Heat Mixture:** Requires a *Temperature* (decimal between 0.0°C and 500.0°C) and a *Reaction Time* (integer between 1 and 600).
+*   **Add Catalyst:** Requires a *Catalyst Type* (Platinum, Palladium, Nickel, or Iron).
+*   **Monitor Reaction:** Requires a *Reaction Status* (Initiated, Ongoing, Completed, or Failed) and a *Reaction Time* (integer between 1 and 600).
+*   **Cool Solution:** No specific data attributes are bound to this activity.
+*   **Filter Product:** No specific data attributes are bound to this activity.
+*   **Dry Product:** No specific data attributes are bound to this activity.
+*   **Analyze Sample:** Requires recording *Purity* (integer 0–100) and *Yield* (decimal 0.0–100.0).
+*   **Store Product:** Requires a *Batch Number* (integer between 1 and 1000).
+*   **Dispose Waste:** No specific data attributes are bound to this activity.
+
+### **2. Control Flow Constraints**
+The model enforces a strict logical order of operations using Declare constraints:
+*   **Starting the Process:** The process must begin with the **Prepare Solution** activity (*Init[Prepare Solution]*).
+*   **Solution to Heating:** Preparing the solution must eventually be followed by Heating the Mixture, and Heating cannot occur until the solution is prepared (*Succession[Prepare Solution, Heat Mixture]*).
+*   **Heating to Catalyst:** Whenever the mixture is heated, a catalyst must eventually be added (*Response[Heat Mixture, Add Catalyst]*).
+*   **Catalyst to Monitoring:** Adding a catalyst requires that the reaction is monitored at some point (*Responded Existence[Add Catalyst, Monitor Reaction]*). Furthermore, every time a catalyst is added, monitoring must follow (*Response[Add Catalyst, Monitor Reaction]*).
+*   **Monitoring to Cooling:** Monitoring the reaction must be immediately followed by Cooling the Solution (*Chain Response[Monitor Reaction, Cool Solution]*).
+*   **Cooling to Filtering:** The solution cannot be cooled until the filtering process has occurred at some point (*Precedence[Filter Product, Cool Solution]*). 
+*   **Filtering to Drying:** Filtering must be immediately followed by Drying the product, and Drying cannot happen unless Filtering just occurred (*Chain Succession[Filter Product, Dry Product]*).
+*   **Drying to Analysis:** Whenever the product is dried, an Analyze Sample activity must eventually follow (*Response[Dry Product, Analyze Sample]*).
+*   **Analysis to Storage:** Every time a sample is analyzed, it must eventually be stored. Furthermore, the product cannot be stored until a sample has been analyzed (*Alternate Response[Analyze Sample, Store Product]*).
+*   **Storage and Waste Disposal:** Storing the product requires that waste disposal occurs at some point in the process (*Precedence[Dispose Waste, Store Product]*). 
+
+### **3. Time Constraints (Multi-Perspective Rules)**
+The model introduces strict time limits (latency) between the execution of specific activities, dictating how quickly the next step must occur:
+*   After **Add Catalyst**, the reaction must be **Monitored** within **10 minutes**.
+*   After **Monitor Reaction**, the solution must be **Cooled** within **5 minutes**.
+*   After **Cool Solution**, the product must be **Filtered** within **2 hours**.
+*   After **Dry Product**, the sample must be **Analyzed** within **1 day** (24 hours).
+*   After **Store Product**, the waste must be **Disposed** within **1 hour**.
+
+### **Summary of the Process Flow**
+A chemist must begin by preparing a solution with specific parameters. This is strictly followed by heating the mixture and adding a catalyst. Once the catalyst is added, the chemist has 10 minutes to begin monitoring the reaction. Monitoring must be immediately followed by cooling the solution (within 5 minutes). 
+
+Interestingly, the model dictates that filtering must have occurred before cooling, and filtering is immediately followed by drying. Once the product is dried, it must be analyzed within 24 hours to record its purity and yield. Following analysis, the product is stored (assigning a batch number), which triggers a mandatory 1-hour window to dispose of any generated waste.

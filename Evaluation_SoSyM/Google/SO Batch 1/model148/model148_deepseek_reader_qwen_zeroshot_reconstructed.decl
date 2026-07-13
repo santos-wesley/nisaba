@@ -1,0 +1,38 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Approve Compliance Plan
+activity Review Compliance Plan
+activity Implement Controls
+activity Train Employees
+activity Monitor Compliance
+activity Take Corrective Action
+activity Report Violations
+activity Investigate Violations
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Implement Controls: Control Type
+bind Train Employees: Training Hours
+bind Monitor Compliance: Compliance Status
+bind Report Violations: Number of Violations, Reporting Channel
+bind Investigate Violations: Violation Severity, Financial Impact
+Risk Level: Low, Medium, High
+Assessment Score: float between 0.0 and 100.0
+Plan Status: Draft, Approved, Implemented
+Control Type: Preventative, Detective, Corrective
+Training Hours: integer between 0 and 40
+Compliance Status: Compliant, Non-Compliant, Pending
+Number of Violations: integer between 0 and 100
+Reporting Channel: Email, Phone, Online Portal
+Violation Severity: integer between 1 and 5
+Financial Impact: float between 0.0 and 1000000.0
+Init[Conduct Risk Assessment] | |
+Succession[Develop Compliance Plan, Approve Compliance Plan] | | |
+Alternate Succession[Approve Compliance Plan, Review Compliance Plan] | | |0,365,d
+Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d
+Existence[Train Employees] | |
+Existence[Monitor Compliance] | |
+Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d
+Chain Response[Report Violations, Investigate Violations] | | |
+Chain Response[Investigate Violations, Take Corrective Action] | | |
+Response[Report Violations, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d
+Response[Investigate Violations, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d

@@ -1,0 +1,177 @@
+<notebook cell 25>:343: SyntaxWarning: invalid escape sequence '\A'
+<notebook cell 48>:343: SyntaxWarning: invalid escape sequence '\A'
+Running 160 (model x provider) combos in parallel ...
+  done: model132/zai OK
+  done: model57/anthropic OK
+  done: model102/zai OK
+  done: model102/xai OK
+  done: model57/zai OK
+  done: model248/anthropic OK
+  done: model148/xai OK
+  done: model97/anthropic OK
+  done: model132/anthropic OK
+  done: model35/zai OK
+  done: model28/xai OK
+  done: model35/deepseek OK
+  done: model179/deepseek OK
+  done: model67/xai OK
+  done: model109/zai OK
+  done: model179/xai OK
+  done: model78/deepseek OK
+  done: model185/deepseek OK
+  done: model35/xai OK
+  done: model57/deepseek OK
+  done: model185/anthropic OK
+  done: model148/anthropic OK
+  done: model57/xai OK
+  done: model78/anthropic OK
+  done: model109/deepseek OK
+  done: model78/xai OK
+  done: model67/anthropic OK
+  done: model97/deepseek OK
+  done: model132/xai OK
+  done: model109/xai OK
+  done: model102/anthropic OK
+  done: model28/zai OK
+  done: model179/zai OK
+[model234/deepseek] zero-shot reconstruction (from zero-shot description) ...
+  done: model28/anthropic OK
+  done: model248/xai OK
+  done: model78/zai OK
+  done: model97/zai OK
+  done: model67/deepseek OK
+  done: model185/zai OK
+  done: model185/xai OK
+  done: model97/xai OK
+  done: model35/anthropic OK
+  done: model248/zai OK
+  done: model248/deepseek OK
+  done: model67/zai OK
+  done: model132/deepseek OK
+  done: model28/deepseek OK
+  done: model179/anthropic OK
+  done: model186/xai OK
+  done: model191/anthropic OK
+  done: model102/deepseek OK
+  done: model208/xai OK
+  done: model208/anthropic OK
+  done: model109/anthropic OK
+  done: model208/deepseek OK
+  done: model70/deepseek OK
+[model221/deepseek] nisaba reconstruction (from final description) ...
+  done: model191/xai OK
+  done: model186/zai OK
+  done: model81/anthropic OK
+[model200/deepseek] nisaba reconstruction (from final description) ...
+  done: model107/anthropic OK
+  done: model70/anthropic OK
+  done: model148/deepseek OK
+  done: model234/xai OK
+  done: model53/deepseek OK
+  done: model53/xai OK
+  done: model148/zai OK
+  done: model70/zai OK
+  done: model70/xai OK
+  done: model191/deepseek OK
+  done: model186/deepseek OK
+  done: model234/zai OK
+  done: model208/zai OK
+  done: model191/zai OK
+  done: model81/xai OK
+  done: model53/anthropic OK
+  done: model15/zai OK
+  done: model186/anthropic OK
+  done: model234/anthropic OK
+  done: model15/anthropic OK
+  done: model81/zai OK
+  done: model5/zai OK
+  done: model81/deepseek OK
+  done: model212/xai OK
+  done: model5/anthropic OK
+  done: model144/anthropic OK
+  done: model53/zai OK
+  done: model212/anthropic OK
+  done: model16/deepseek OK
+  done: model5/deepseek OK
+  done: model15/xai OK
+  done: model107/xai OK
+  done: model107/zai OK
+  done: model144/deepseek OK
+  done: model107/deepseek OK
+  done: model207/xai OK
+  done: model144/xai OK
+  done: model207/anthropic OK
+  done: model15/deepseek OK
+  done: model16/xai OK
+  done: model212/deepseek OK
+  done: model200/xai OK
+  done: model212/zai OK
+  done: model16/zai OK
+  done: model144/zai OK
+  done: model130/zai OK
+  done: model192/zai OK
+  done: model221/zai OK
+  done: model9/zai OK
+  done: model9/anthropic OK
+  done: model221/xai OK
+  done: model130/anthropic OK
+  done: model200/zai OK
+  done: model138/xai OK
+  done: model221/anthropic OK
+  done: model192/anthropic OK
+  done: model5/xai OK
+  done: model207/zai OK
+  done: model207/deepseek OK
+  done: model10/deepseek OK
+  done: model192/deepseek OK
+  done: model44/xai OK
+  done: model38/xai OK
+  done: model172/anthropic OK
+  done: model38/anthropic OK
+  done: model9/xai OK
+  done: model200/anthropic OK
+  done: model138/zai OK
+  done: model16/anthropic OK
+  done: model9/deepseek OK
+  done: model44/zai OK
+  done: model44/anthropic OK
+  done: model192/xai OK
+  done: model10/anthropic OK
+  done: model130/xai OK
+  done: model138/deepseek OK
+  done: model10/zai OK
+  done: model38/deepseek OK
+  done: model44/deepseek OK
+  done: model172/zai OK
+  done: model202/deepseek OK
+  done: model138/anthropic OK
+  done: model130/deepseek OK
+  done: model10/xai OK
+  done: model202/anthropic OK
+  done: model172/xai OK
+  done: model172/deepseek OK
+  done: model202/zai OK
+  done: model205/zai OK
+  done: model247/deepseek OK
+  done: model38/zai OK
+  done: model202/xai OK
+  done: model247/zai OK
+  done: model247/anthropic OK
+  done: model205/deepseek OK
+  done: model247/xai OK
+  done: model205/anthropic OK
+  done: model205/xai OK
+  done: model234/deepseek OK
+[model221/deepseek] zero-shot reconstruction (from zero-shot description) ...
+[model200/deepseek] zero-shot reconstruction (from zero-shot description) ...
+  FAILED model221/deepseek: 'NoneType' object has no attribute 'name'
+  done: model200/deepseek OK
+
+1 combo(s) FAILED -> NOT all 160 complete; SKIPPING data analysis. Resume to reprocess the failed combos; analysis runs automatically once 0 fail.
+
+=== DONE in 363s | est $5.624 ===
+   anthropic/claude-sonnet-5          calls=200 in= 729016 out= 269307 $4.1511
+   deepseek/deepseek-v4-flash         calls=204 in= 456457 out= 148313 $0.0633
+   google/gemini-3-flash-preview      calls=  1 in=   6830 out=   1875 $0.0
+   x-ai/grok-4.20                     calls=200 in= 463970 out= 156055 $0.9701
+   z-ai/glm-5.2                       calls=200 in= 460333 out= 210253 $0.4395

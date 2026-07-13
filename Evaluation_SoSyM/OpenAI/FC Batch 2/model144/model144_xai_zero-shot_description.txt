@@ -1,0 +1,53 @@
+**Multi-Perspective Declare Model: Therapy Process**
+
+This model describes a structured **psychotherapy treatment pathway** that manages the lifecycle of a client’s therapy from intake to completion. It enforces a logical, partially flexible sequence of clinical and administrative activities while incorporating data constraints and cardinality rules.
+
+### Process Overview
+
+The therapy process begins with an **initial assessment** and follows a core sequence of treatment planning, therapy delivery, progress monitoring, and eventual closure. The model allows for iterative treatment adjustments while maintaining strict clinical safeguards.
+
+### Core Activity Flow
+
+1. **Assess Initial Condition** must be the very first activity performed for any new client.
+2. **Develop Treatment Plan** can only occur after the initial assessment has been completed.
+3. Once the treatment plan is developed, the system **must** schedule the first session (**Chain Response**).
+4. Therapy sessions can only be conducted after a session has been scheduled.
+5. After conducting therapy sessions, the therapist **must** evaluate progress.
+6. Based on the progress evaluation, the treatment plan may be adjusted. When an adjustment occurs, the model enforces that **feedback must be provided**, which in turn **must** lead to scheduling a follow-up session (strong chaining).
+7. The process supports multiple therapy sessions and adjustment cycles.
+8. **Complete Treatment** can only occur after a final assessment has been conducted.
+9. **Conduct Final Assessment** is the designated end activity of the process.
+
+### Key Constraints
+
+**Ordering & Control Flow:**
+- Strict precedence: Initial assessment → Treatment plan → First session.
+- Therapy sessions cannot be scheduled before the initial session has been scheduled (**Not Co-Existence** between `Schedule First Session` and `Schedule Follow-Up`).
+- Final assessment cannot occur before treatment is marked as complete, and it must be the last activity.
+
+**Cardinality & Occurrence:**
+- At least **3 therapy sessions** must be conducted (`Existence3[Conduct Therapy Session]`).
+- **Provide Feedback** can occur at most 4 times (`Absence5`).
+
+**Data Perspective (Bindings):**
+- Every activity is linked to a **Client ID** (1–999999).
+- Treatment planning and final assessment require a **Therapist ID** (1–9999).
+- Therapy sessions must specify a **Session Type** (Initial, Follow-Up, or Crisis).
+- Progress evaluations and final assessments record a **Progress Score** (0.0–100.0).
+- Feedback activities must declare a **Feedback Type** (Positive, Neutral, Negative).
+- Treatment adjustments track a **Treatment Status** (Ongoing, Adjusted, Completed).
+
+**Negative Constraints:**
+- Once treatment is completed, no further treatment plan adjustments are allowed (`Not Succession`).
+- The first session and follow-up sessions are mutually exclusive in terms of scheduling logic.
+
+### Summary
+
+The model represents a **clinically governed, iterative therapy workflow** that ensures:
+- Proper intake and planning before treatment begins,
+- Sufficient therapeutic contact (minimum 3 sessions),
+- Mandatory progress evaluation and feedback loops,
+- Clear separation between initial and follow-up scheduling,
+- A formal, documented closure involving a final assessment by a therapist.
+
+The combination of Declare templates with data bindings creates a rich, enforceable model suitable for a clinical management system that balances structure with the natural variability of psychological treatment.

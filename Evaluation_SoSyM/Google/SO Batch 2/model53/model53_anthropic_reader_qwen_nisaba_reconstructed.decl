@@ -1,0 +1,56 @@
+activity Write Play Script
+activity Cast Actors
+activity Design Set
+activity Build Set
+activity Design Costumes
+activity Sew Costumes
+activity Rehearse Play
+activity Promote Play
+activity Sell Tickets
+activity Perform Play
+activity Review Performance
+activity Pay Royalties
+activity Strike Set
+activity Store Costumes
+activity Archive Script
+bind Write Play Script: Play Genre
+bind Cast Actors: Actor Count
+bind Design Set: Set Complexity
+bind Sell Tickets: Ticket Price
+bind Perform Play: Performance Quality
+bind Pay Royalties: Royalty Percentage
+bind Design Costumes: Costume Count
+bind Promote Play: Promotion Spend
+bind Rehearse Play: Rehearsal Hours
+bind Build Set: Budget Amount
+Actor Count: integer between 2 and 20
+Budget Amount: float between 1000.0 and 50000.0
+Play Genre: Comedy, Drama, Musical, Tragedy
+Set Complexity: integer between 1 and 10
+Ticket Price: float between 5.0 and 100.0
+Performance Quality: Excellent, Good, Average, Poor
+Royalty Percentage: integer between 5 and 20
+Costume Count: integer between 5 and 50
+Promotion Spend: float between 100.0 and 10000.0
+Rehearsal Hours: integer between 10 and 100
+Init[Write Play Script] | |
+End[Archive Script] | |
+Existence[Rehearse Play] | |
+Existence[Perform Play] | |
+Absence2[Strike Set] | |
+Responded Existence[Design Costumes, Sew Costumes] | | |
+Precedence[Build Set, Design Set] | | |
+Precedence[Perform Play, Rehearse Play] | | |
+Precedence[Sell Tickets, Promote Play] | | |
+Response[Cast Actors, Rehearse Play] | | |
+Response[Sew Costumes, Perform Play] | | |
+Succession[Perform Play, Review Performance] | | |
+Alternate Response[Perform Play, Pay Royalties] | | |
+Chain Response[Perform Play, Strike Set] | | |
+Chain Precedence[Store Costumes, Perform Play] | | |
+Co-Existence[Design Set, Build Set] | | |
+Choice[Design Costumes, Sew Costumes] | | |
+Not Responded Existence[Archive Script, Design Set] | | |
+Not Precedence[Strike Set, Perform Play] | | |
+Not Response[Review Performance, Rehearse Play] | | |
+Not Chain Succession[Promote Play, Strike Set] | | |

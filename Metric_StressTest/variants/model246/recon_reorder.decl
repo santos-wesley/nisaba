@@ -1,0 +1,44 @@
+activity Equipment Request
+activity Request Approve
+activity Equipment Order
+activity Equipment Receive
+activity Equipment Inspect
+activity Equipment Install
+activity Staff Train
+activity Equipment Use
+activity Equipment Maintain
+activity Equipment Decommission
+bind Equipment Request: ID Request
+bind Request Approve: Status Approval
+bind Equipment Order: Cost Equipment
+bind Equipment Inspect: Condition Equipment, Score Inspection
+bind Staff Train: Hours Training
+bind Equipment Install: Status Installation
+bind Equipment Maintain: Status Maintenance
+bind Equipment Decommission: Reason Decommission
+bind Equipment Use: Frequency Usage
+ID Request: integer between 1 and 10000
+Cost Equipment: float between 100.0 and 100000.0
+Status Approval: Pending, Approved, Rejected
+Condition Equipment: New, Good, Damaged
+Hours Training: integer between 1 and 40
+Status Installation: Not Started, In Progress, Completed
+Status Maintenance: Up to Date, Due, Overdue
+Frequency Usage: integer between 0 and 100
+Reason Decommission: Obsolete, Faulty, Replaced
+Score Inspection: float between 0.0 and 10.0
+Init[Equipment Request] | |
+End[Equipment Decommission] | |
+Existence[Equipment Inspect] | |
+Absence[Equipment Request] | |
+Precedence[Equipment Order, Request Approve] | |A.Status Approval is Approved |
+Chain Response[Equipment Receive, Equipment Inspect] | | |0,2,d
+Response[Equipment Install, Staff Train] |A.Status Installation is Completed | |
+Precedence[Equipment Use, Staff Train] | | |
+Precedence[Equipment Use, Equipment Maintain] | |T.Status Maintenance is Up to Date |
+Not Chain Succession[Equipment Use, Equipment Decommission] | | |
+Responded Existence[Equipment Inspect, Equipment Decommission] |A.Condition Equipment is Damaged | |
+Precedence[Equipment Order, Request Approve] |A.Cost Equipment > 1000 |T.Status Approval is Approved |
+Chain Response[Equipment Use, Equipment Maintain] | | |0,30,d
+Precedence[Equipment Install, Equipment Inspect] | | |
+Responded Existence[Equipment Decommission, Equipment Inspect] |A.Reason Decommission is Obsolete | |

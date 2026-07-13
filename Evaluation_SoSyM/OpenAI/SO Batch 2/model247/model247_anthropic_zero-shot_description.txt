@@ -1,0 +1,49 @@
+# Description of the Multi-Perspective Declare Model
+
+This model represents a process for handling **intellectual property applications**, covering three types: **Patents**, **Trademarks**, and **Copyrights**. It captures the control flow, data conditions, and their interrelations.
+
+## Activities Involved
+
+The process includes filing, searching, examining, and deciding (granting or rejecting) applications for patents, trademarks, and copyrights, as well as a common activity for appealing decisions.
+
+## Data Perspective
+
+Each activity is associated with specific data attributes:
+
+- **Filing activities** (File Patent/Trademark/Copyright Application) require an **Application ID** (integer, 1–1,000,000) and an **Application Fee** (float, 50.0–10,000.0).
+- **Search activities** (Conduct Patent/Trademark Search) record a **Search Result**, which is either **Clear** or **Conflict**.
+- **Examination activities** (Examine Patent/Trademark/Copyright Application) record an **Application Status**: **Pending**, **Approved**, or **Rejected**.
+- **Decision activities** (Grant/Reject for each IP type) record a **Decision**: **Granted** or **Rejected**.
+- **Appeal Decision** is linked to an **Application ID**.
+
+## Process Behavior (Control Flow & Constraints)
+
+1. **Process Start and End**
+   - The process must **start** with **File Patent Application**.
+   - The process can **end** with either **Grant Patent** or **Reject Patent Application**.
+
+2. **Search and Examination Dependencies**
+   - Whenever a **Conduct Patent Search** occurs and its **Search Result is Clear**, an **Examine Patent Application** must eventually follow (response relation).
+   - Similarly, whenever a **Conduct Trademark Search** occurs and its **Search Result is Clear**, an **Examine Trademark Application** must eventually follow.
+   - Every **File Copyright Registration** must eventually be followed by an **Examine Copyright Application** (no data condition restricting it).
+
+3. **Decision-Making Based on Examination Outcomes**
+   - After **Examine Patent Application**, if the **Application Status is Approved**, then **Grant Patent** must occur (and only in that case).
+   - After **Examine Patent Application**, if the **Application Status is Rejected**, then **Reject Patent Application** must occur (and only in that case).
+   - The same pattern applies for trademarks: **Examine Trademark Application** leads to **Grant Trademark** if approved, or **Reject Trademark Application** if rejected.
+   - Likewise, for copyrights: **Examine Copyright Application** leads to **Grant Copyright** if approved, or **Reject Copyright Application** if rejected.
+
+4. **Appeals After Rejections**
+   - If a **Reject Patent Application** occurs, it must have been **preceded** by an **Appeal Decision** with the **same Application ID**.
+   - Similarly, a **Reject Trademark Application** must be preceded by an **Appeal Decision** with the matching **Application ID**.
+   - A **Reject Copyright Application** must also be preceded by an **Appeal Decision** with the matching **Application ID**.
+
+## Summary
+
+In essence, this model describes three parallel but structurally similar IP registration workflows (patents, trademarks, copyrights):
+
+- Each application type follows a **file → search (if applicable) → examine → decide** pattern.
+- Search results (when clear) trigger mandatory examinations.
+- Examination outcomes strictly determine whether the application is granted or rejected.
+- Any rejection must be preceded by an appropriate **appeal** tied to the same application, suggesting the appeal must occur **before** a final rejection is recorded — reflecting a due-process style workflow where rejections require a prior appeal step referencing the same Application ID.
+- The overall process must begin with filing a **patent application** and terminate with the patent being either granted or rejected, while trademark and copyright sub-processes follow similar internal logic without being explicitly required to start or end the overall process themselves.

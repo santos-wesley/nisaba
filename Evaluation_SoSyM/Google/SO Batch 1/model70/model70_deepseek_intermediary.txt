@@ -1,0 +1,47 @@
+## Activities
+- **Monitor Seismic Activity**: 
+- **Issue Tsunami Alert**: 
+- **Evacuate Coastal Areas**: 
+- **Dispatch Emergency Services**: 
+- **Establish Emergency Shelters**: 
+- **Assess Infrastructure Damage**: 
+- **Provide Medical Assistance**: 
+- **Distribute Relief Supplies**: 
+- **Restore Communication Networks**: 
+- **Conduct Search and Rescue**: 
+
+## Attributes
+- **Alert Level: Watch, Warning, Cancel**: 
+- **Magnitude: float between 0.0 and 10.0**: 
+- **Estimated Arrival Time: integer between 0 and 360**: 
+- **Number of Evacuees: integer between 0 and 1000000**: 
+- **Damage Severity: Minor, Moderate, Severe**: 
+- **Number of Injuries: integer between 0 and 5000**: 
+- **Number of Shelters: integer between 0 and 100**: 
+- **Communication Status: Operational, Partially Operational, Down**: 
+- **Number of Rescued: integer between 0 and 1000**: 
+- **Supply Cost: float between 0.0 and 1000000.0**: 
+
+## Binds
+- **Monitor Seismic Activity: Magnitude**: 
+- **Issue Tsunami Alert: Alert Level, Estimated Arrival Time**: 
+- **Evacuate Coastal Areas: Number of Evacuees**: 
+- **Assess Infrastructure Damage: Damage Severity**: 
+- **Provide Medical Assistance: Number of Injuries**: 
+- **Establish Emergency Shelters: Number of Shelters**: 
+- **Restore Communication Networks: Communication Status**: 
+- **Conduct Search and Rescue: Number of Rescued**: 
+- **Distribute Relief Supplies: Supply Cost**: 
+
+## Constraints
+- **Init[Monitor Seismic Activity] | |**: 
+- **Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |**: 
+- **Precedence[Provide Medical Assistance, Dispatch Emergency Services] | | |**: 
+- **Not Co-Existence[Conduct Search and Rescue, Assess Infrastructure Damage] | | |**: 
+- **Response[Restore Communication Networks, Restore Communication Networks] |A.Communication Status is Down |A.Communication Status is Operational |**: 
+- **Response[Monitor Seismic Activity, Issue Tsunami Alert] |A.Magnitude > 7 | |**: 
+- **Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |0,60,m**: 
+- **Response[Dispatch Emergency Services, Provide Medical Assistance] | | |0,24,h**: 
+- **Response[Establish Emergency Shelters, Distribute Relief Supplies] | | |0,48,h**: 
+- **Response[Assess Infrastructure Damage, Restore Communication Networks] | | |0,72,h**: 
+

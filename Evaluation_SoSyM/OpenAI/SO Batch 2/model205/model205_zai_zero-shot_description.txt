@@ -1,0 +1,35 @@
+This Multi-Perspective Declare model describes a comprehensive **Employee Benefit Management Process**, covering the end-to-end lifecycle of a benefit request, the appeals process, and overarching administrative tasks. 
+
+Here is a natural language description of the model:
+
+### 1. Process Overview and Data Context
+The process begins with an employee submitting a benefit request and ends when the employee is notified of the outcome. Throughout the process, various data attributes are tracked and bound to specific activities:
+*   **Request & Employee Data:** Requests are identified by a `Request ID` (1–10000) and linked to an `Employee ID` (1–5000). The `Benefit Type` must be one of: Health Insurance, Retirement Plan, Paid Leave, or Education Assistance.
+*   **Status Tracking:** Both benefit requests and appeals have a status that transitions through "Pending", "Approved", or "Rejected".
+*   **Financial & Audit Data:** Approved benefits involve a `Benefit Amount` (a decimal between 100.0 and 10000.0). Payments are later audited using an `Audit ID` (1–1000).
+*   **Notifications:** Employees can receive notifications regarding "Approval", "Rejection", or "Appeal Decision".
+
+### 2. Core Benefit Request Workflow
+*   **Initiation:** The process strictly starts with the **Submit Benefit Request** activity.
+*   **Review:** Every process instance must include at least one **Review Benefit Request** activity. A request cannot be approved or rejected until it has been reviewed. 
+*   **Decision and Notification:** 
+    *   If a request is **Approve Benefit Request** (with the status "Approved"), the system must subsequently **Notify Employee** of the approval. This notification must happen within 0 to 2 days and must be sent to the same `Employee ID` that submitted the request.
+    *   If a request is **Reject Benefit Request** (with the status "Rejected"), the system must subsequently **Notify Employee** of the rejection within 0 to 2 days, again ensuring the `Employee ID` matches.
+*   **Post-Approval Actions:** Following an approval, two parallel actions are triggered:
+    *   **Process Payment:** Must occur within 0 to 7 days, linked by the same `Request ID`.
+    *   **Update Employee Record:** Must occur within 0 to 5 days, linked by the same `Employee ID`.
+*   **Auditing:** Once a payment is processed, an **Audit Benefit Process** must be conducted within 30 days. The `Audit ID` for the audit must match the `Request ID` of the processed payment.
+*   **Termination:** The main workflow strictly ends when the **Notify Employee** activity is completed.
+
+### 3. Appeals Process
+If a benefit request is rejected, an alternative appeals pathway is available:
+*   An employee may **Submit Appeal** (with an "Pending" appeal status). 
+*   Submitting an appeal mandates that a **Review Appeal** occurs within 0 to 5 days, ensuring both the appeal and the review share the same `Request ID` as the original benefit request.
+*   After the appeal is reviewed, a decision is made:
+    *   If the appeal is **Approve Appeal** (status "Approved"), an **Notify Appeal Decision** must be sent to the matching `Employee ID` within 0 to 2 days.
+    *   If the appeal is **Reject Appeal** (status "Rejected"), an **Notify Appeal Decision** must similarly be sent to the matching `Employee ID` within 0 to 2 days.
+
+### 4. Administrative and Overarching Constraints
+Independent of the individual request workflows, the model enforces two global existence constraints to ensure ongoing HR administration:
+*   **Conduct Benefit Orientation:** This activity (tracked by an `Orientation ID` between 1 and 500) must occur at least once within the scope of this process model.
+*   **Evaluate Benefit Utilization:** This activity (tracked by a `Utilization Rate` percentage between 0.0 and 100.0) must also occur at least once within the scope of this process model.

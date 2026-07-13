@@ -1,0 +1,33 @@
+## Activities
+- **Submit Timesheet**: The 'Submit Timesheet' activity represents an employee submitting their worked hours for a given period.
+- **Approve Timesheet**: The 'Approve Timesheet' activity involves a manager or supervisor reviewing and approving a submitted timesheet.
+- **Calculate Gross Pay**: The 'Calculate Gross Pay' activity involves computing the total earnings of an employee before deductions, based on hours worked and pay rate.
+- **Calculate Deductions**: The 'Calculate Deductions' activity involves determining the tax and insurance deductions to be subtracted from an employee's gross pay.
+- **Calculate Net Pay**: The 'Calculate Net Pay' activity involves computing the final take-home pay for an employee after all deductions have been subtracted from the gross pay.
+- **Generate Paystub**: The 'Generate Paystub' activity involves creating a detailed pay statement document for the employee reflecting earnings and deductions.
+- **Process Payment**: The 'Process Payment' activity involves executing the actual payment transaction to the employee based on the calculated net pay.
+- **Update Payroll Records**: The 'Update Payroll Records' activity involves recording the completed payroll transaction details into the payroll system.
+- **Review Payroll Report**: The 'Review Payroll Report' activity involves examining the payroll report for accuracy and compliance after records have been updated.
+- **Distribute Paystub**: The 'Distribute Paystub' activity involves delivering the generated paystub to the employee.
+
+## Attributes
+- **Hours Worked: integer between 0 and 80**: The attribute 'Hours Worked: Integer between 0 and 80' represents the number of hours an employee has worked in the given pay period.
+- **Pay Rate: float between 10.0 and 100.0**: The attribute 'Pay Rate: Float between 10.0 and 100.0' represents the hourly rate of pay for the employee.
+- **Gross Pay: float between 0.0 and 10000.0**: The attribute 'Gross Pay: Float between 0.0 and 10000.0' represents the total earnings of the employee before any deductions.
+- **Tax Deduction: float between 0.0 and 5000.0**: The attribute 'Tax Deduction: Float between 0.0 and 5000.0' represents the amount deducted from gross pay for taxes.
+- **Insurance Deduction: float between 0.0 and 1000.0**: The attribute 'Insurance Deduction: Float between 0.0 and 1000.0' represents the amount deducted from gross pay for insurance coverage.
+- **Net Pay: float between 0.0 and 10000.0**: The attribute 'Net Pay: Float between 0.0 and 10000.0' represents the final take-home pay for the employee after all deductions are subtracted.
+- **Timesheet Status: Submitted, Approved, Rejected**: The attribute 'Timesheet Status: Submitted, Approved, Rejected' specifies the current approval state of a submitted timesheet.
+- **Payment Method: Direct Deposit, Check**: The attribute 'Payment Method: Direct Deposit, Check' specifies the method by which the employee's payment is delivered.
+- **Employee ID: integer between 1000 and 9999**: The attribute 'Employee ID: Integer between 1000 and 9999' represents the unique identification number assigned to an employee.
+
+## Binds
+- **Submit Timesheet: Employee ID, Hours Worked, Timesheet Status**: The bind 'Submit Timesheet: Employee ID, Hours Worked, Timesheet Status' links the 'Submit Timesheet' activity with the attributes 'Employee ID', 'Hours Worked', and 'Timesheet Status'.
+- **Approve Timesheet: Employee ID, Timesheet Status**: The bind 'Approve Timesheet: Employee ID, Timesheet Status' links the 'Approve Timesheet' activity with the attributes 'Employee ID' and 'Timesheet Status'.
+- **Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay**: The bind 'Calculate Gross Pay: Hours Worked, Pay Rate, Gross Pay' links the 'Calculate Gross Pay' activity with the attributes 'Hours Worked', 'Pay Rate', and 'Gross Pay'.
+- **Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction**: The bind 'Calculate Deductions: Gross Pay, Tax Deduction, Insurance Deduction' links the 'Calculate Deductions' activity with the attributes 'Gross Pay', 'Tax Deduction', and 'Insurance Deduction'.
+- **Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay**: The bind 'Calculate Net Pay: Gross Pay, Tax Deduction, Insurance Deduction, Net Pay' links the 'Calculate Net Pay' activity with the attributes 'Gross Pay', 'Tax Deduction', 'Insurance Deduction', and 'Net Pay'.
+- **Process Payment: Employee ID, Net Pay, Payment Method**: The bind 'Process Payment: Employee ID, Net Pay, Payment Method' links the 'Process Payment' activity with the attributes 'Employee ID', 'Net Pay', and 'Payment Method'.
+
+## Constraints
+

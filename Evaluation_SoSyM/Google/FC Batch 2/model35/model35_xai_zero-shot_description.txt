@@ -1,0 +1,43 @@
+**Natural Language Description:**
+
+The Multi-Perspective Declare model describes a comprehensive **Employee Benefits Management Process** with strong temporal, data, and organizational constraints.
+
+### Process Overview
+
+The process begins when an **Employee** submits their benefits enrollment. Once the enrollment is submitted, the system triggers a series of mandatory and time-bound follow-up activities. The core flow involves verifying the employee's eligibility, processing any benefits claims, and ultimately updating the benefits record. Depending on the outcome of a claim, it will be either approved or denied (but never both). After approval or denial, the claim must be processed.
+
+### Key Behavioral Rules
+
+- **Mandatory Sequence**: Every **Submit Benefits Enrollment** must be followed (at some point) by **Verify Employee Eligibility**.
+- **Mutual Exclusivity**: After processing a claim, the organization must choose exactly one path — either **Approve Benefits Claim** or **Deny Benefits Claim**.
+- **Precedence Constraints**: Neither approval nor denial can occur before the claim has been processed.
+- **Response Obligations with Deadlines**: After an enrollment is submitted, the following activities must eventually occur within strict time windows:
+  - **Send Enrollment Confirmation** (within 24 hours)
+  - **Verify Employee Eligibility** (within 48 hours)
+  - **Audit Benefits Enrollment** (within 7 days)
+  - **Calculate Premium Cost** (within 24 hours)
+  - **Process Premium Payment** (within 7 days)
+  - **Generate Benefits Report** (within 30 days)
+  - **Update Benefits Record** (within 7 days)
+  - **Review Benefits Options**, **Request Additional Information**, and **Resolve Employee Inquiry** (all within 24 hours when triggered)
+
+The model also supports handling employee inquiries. Employees can submit inquiries related to enrollment, claims, eligibility, or payments. These inquiries must be received, reviewed, and resolved according to the defined response rules.
+
+### Data Perspective
+
+The model tracks several key data elements:
+
+- **Employee ID** (1000–9999)
+- **Enrollment Status** (Submitted → Verified → Approved/Rejected)
+- **Claim Amount** (0 to 10,000)
+- **Claim Status** (Received → Processed → Approved/Denied → Paid)
+- **Benefit Plan** (Health, Dental, Vision, Life)
+- **Premium Rate** (0.0 to 1.0)
+- **Deduction Amount** (0.0 to 5,000.0)
+- **Inquiry Type** (Enrollment, Claim, Eligibility, Payment)
+
+Each activity is bound to relevant data attributes. For example, submitting benefits enrollment captures the Employee ID, Enrollment Status, and selected Benefit Plan, while calculating premium cost uses the Premium Rate, Benefit Plan, and Deduction Amount.
+
+### Summary
+
+This is a highly regulated, time-sensitive benefits administration process that ensures every enrollment triggers a comprehensive set of compliance, verification, financial, and reporting activities within defined deadlines. The process maintains strict control over claim handling (exactly one of approval or denial must occur after processing) and supports customer service through structured inquiry management.

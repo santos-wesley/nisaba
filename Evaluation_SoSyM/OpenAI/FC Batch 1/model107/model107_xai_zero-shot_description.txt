@@ -1,0 +1,38 @@
+**Multi-Perspective Declare Model: Prototype Development Process**
+
+This model describes a structured yet iterative process for developing and approving a prototype, incorporating both control-flow constraints and data perspectives.
+
+### Process Flow (Control-Flow Perspective)
+
+The process begins with the **Define Requirements** activity, which serves as the mandatory starting point. Following this, the development proceeds in a largely sequential manner:
+
+1. **Develop Initial Prototype** must be executed after requirements are defined.
+2. **Test Prototype** follows prototype development.
+3. After testing, **Gather Feedback** is collected from stakeholders.
+4. The feedback is then **Analyze Feedback**, which informs the **Revise Prototype** activity.
+5. Once revisions are made, a **Final Testing** round occurs.
+6. After final testing, the **Present Prototype** activity takes place.
+7. The process concludes with **Approve Prototype**, which is the only allowed ending activity.
+
+The model enforces that **Test Prototype** must be executed **at least twice** (Existence2), reflecting the need for both initial and final testing phases.
+
+Additionally, there is a strong **Chain Response** constraint between **Present Prototype** and **Approve Prototype**, meaning that whenever the prototype is presented, approval must occur immediately afterward (as the next activity).
+
+### Data Perspective
+
+The model is enriched with data bindings and domains:
+
+- **Gather Feedback** and **Analyze Feedback** are bound to:
+  - **Stakeholder Name** (from: John Doe, Jane Smith, Alice Johnson)
+  - **Feedback Rating** (integer between 1 and 10)
+
+- **Revise Prototype** is bound to:
+  - **Improvement Cost** (float between 100.0 and 10000.0)
+  - **Revision Version** (integer between 1 and 20)
+
+- **Test Prototype** and **Final Testing** are bound to:
+  - **Test Result** (either "Pass" or "Fail")
+
+### Summary
+
+This is an iterative prototyping lifecycle that starts with requirements definition and follows a feedback-driven revision loop. The process mandates multiple testing rounds, requires stakeholder feedback to be formally analyzed before revisions, and enforces a strict sequence between presenting and approving the final prototype. All key activities are enriched with relevant data attributes to support multi-perspective compliance monitoring.

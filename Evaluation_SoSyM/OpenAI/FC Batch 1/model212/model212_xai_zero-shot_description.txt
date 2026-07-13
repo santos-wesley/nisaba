@@ -1,0 +1,55 @@
+**Multi-Perspective Declare Model: Vendor Management Process**
+
+This model describes a structured **procurement and vendor management** lifecycle with both control-flow constraints and data perspectives.
+
+### Process Activities
+The process consists of the following activities:
+
+- **Identify Needs**
+- **Select Vendor**
+- **Negotiate Contract**
+- **Sign Contract**
+- **Monitor Performance**
+- **Review Compliance**
+- **Issue Payment**
+- **Conduct Review**
+
+### Data Perspective (Bindings)
+Each activity is associated with specific data attributes:
+
+- **Select Vendor** binds: *Vendor ID*, *Vendor Name*
+- **Negotiate Contract** binds: *Vendor ID*, *Contract Amount*
+- **Monitor Performance** binds: *Vendor ID*, *KPI Score*
+- **Review Compliance** binds: *Vendor ID*, *Compliance Status*
+- **Issue Payment** binds: *Vendor ID*, *Payment Status*
+- **Conduct Review** binds: *Vendor ID*, *Review Outcome*
+
+### Data Domains
+- **Vendor ID**: integer between 1 and 9999
+- **Vendor Name**: {Vendor A, Vendor B, Vendor C}
+- **Contract Amount**: integer between 1,000 and 1,000,000
+- **KPI Score**: float between 0.0 and 10.0
+- **Compliance Status**: {Compliant, Non-Compliant}
+- **Payment Status**: {Pending, Completed}
+- **Review Outcome**: {Satisfactory, Unsatisfactory}
+
+### Control-Flow Constraints
+
+**Execution Rules:**
+
+1. The process **must start** with **Identify Needs**.
+2. **Select Vendor** can only be executed **after** Identify Needs has been completed.
+3. **Negotiate Contract** can only occur **after** a vendor has been selected.
+4. **Sign Contract** must **directly follow** Negotiate Contract (Chain Response), and can occur at most 7 days later.
+5. **Monitor Performance** must be executed **within 2 days** after the contract is signed (Chain Response).
+6. **Review Compliance** can only be performed **after** performance has been monitored.
+7. **Issue Payment** can only occur **after** compliance has been reviewed.
+8. **Conduct Review** must be executed **within 2 days** after payment is issued (Chain Response).
+9. The process **must end** with **Conduct Review**.
+
+**Additional Constraint:**
+- **Absence[Select Vendor]**: The activity "Select Vendor" can be executed **at most once** in any process instance (i.e., a vendor is selected only once per case).
+
+---
+
+This model enforces a strict sequential procurement process while allowing data-driven monitoring of vendor performance, compliance, and review outcomes. The temporal constraints (Chain Response with time windows) ensure timely execution of critical contract management steps.

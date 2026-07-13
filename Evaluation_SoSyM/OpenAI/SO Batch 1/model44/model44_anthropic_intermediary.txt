@@ -1,0 +1,38 @@
+## Activities
+- **Report Incident**: The 'Report Incident' activity represents the initial reporting of an incident into the system.
+- **Assess Impact**: The 'Assess Impact' activity involves evaluating the impact level and severity of the reported incident.
+- **Prioritize Incident**: The 'Prioritize Incident' activity involves assigning a priority level to the incident based on its assessed impact.
+- **Assign Incident**: The 'Assign Incident' activity involves designating the incident to a specific team for handling.
+- **Investigate Incident**: The 'Investigate Incident' activity involves analyzing the incident to determine its root cause.
+- **Resolve Incident**: The 'Resolve Incident' activity involves implementing a solution to fix the incident.
+- **Verify Resolution**: The 'Verify Resolution' activity involves confirming whether the implemented solution successfully resolved the incident.
+- **Close Incident**: The 'Close Incident' activity represents the formal closure of the incident in the system.
+- **Escalate Incident**: The 'Escalate Incident' activity involves raising the incident to a higher level of attention or authority.
+- **Document Incident**: The 'Document Incident' activity involves recording detailed information about the incident and its handling.
+
+## Attributes
+- **Impact Level: Integer between 1 and 5**: The attribute 'Impact Level: Integer between 1 and 5' represents the severity level of the incident's impact.
+- **Priority: Low, Medium, High, Critical**: The attribute 'Priority: Low, Medium, High, Critical' specifies the urgency level assigned to the incident.
+- **Resolution Time: Float between 0.1 and 72.0**: The attribute 'Resolution Time: Float between 0.1 and 72.0' represents the time taken, in hours, to resolve the incident.
+- **Status: New, In Progress, Resolved, Closed**: The attribute 'Status: New, In Progress, Resolved, Closed' specifies the current state of the incident within its lifecycle.
+- **Assigned Team ID: Integer between 1 and 100**: The attribute 'Assigned Team ID: Integer between 1 and 100' represents the identification number of the team assigned to handle the incident.
+- **Verification Result: Successful, Failed**: The attribute 'Verification Result: Successful, Failed' specifies the outcome of the resolution verification process.
+- **Investigation Time: Float between 0.5 and 48.0**: The attribute 'Investigation Time: Float between 0.5 and 48.0' represents the time taken, in hours, to investigate the incident.
+- **Escalation Level: None, Level 1, Level 2, Level 3**: The attribute 'Escalation Level: None, Level 1, Level 2, Level 3' specifies the degree to which the incident has been escalated.
+- **Document ID: Integer between 1000 and 9999**: The attribute 'Document ID: Integer between 1000 and 9999' represents the unique identification number of the incident's documentation.
+- **Assessment Time: Float between 0.1 and 24.0**: The attribute 'Assessment Time: Float between 0.1 and 24.0' represents the time taken, in hours, to assess the incident's impact.
+
+## Binds
+- **Report Incident: Status**: The bind 'Report Incident: Status' specifies that the activity 'Report Incident' requires the attribute 'Status'.
+- **Assess Impact: Impact Level, Assessment Time**: The bind 'Assess Impact: Impact Level, Assessment Time' links the 'Assess Impact' activity with the attributes 'Impact Level' and 'Assessment Time'.
+- **Prioritize Incident: Priority**: The bind 'Prioritize Incident: Priority' specifies that the activity 'Prioritize Incident' requires the attribute 'Priority'.
+- **Assign Incident: Assigned Team ID**: The bind 'Assign Incident: Assigned Team ID' specifies that the activity 'Assign Incident' requires the attribute 'Assigned Team ID'.
+- **Investigate Incident: Investigation Time**: The bind 'Investigate Incident: Investigation Time' specifies that the activity 'Investigate Incident' requires the attribute 'Investigation Time'.
+- **Resolve Incident: Resolution Time**: The bind 'Resolve Incident: Resolution Time' specifies that the activity 'Resolve Incident' requires the attribute 'Resolution Time'.
+- **Verify Resolution: Verification Result**: The bind 'Verify Resolution: Verification Result' specifies that the activity 'Verify Resolution' requires the attribute 'Verification Result'.
+- **Close Incident: Status**: The bind 'Close Incident: Status' specifies that the activity 'Close Incident' requires the attribute 'Status'.
+- **Escalate Incident: Escalation Level**: The bind 'Escalate Incident: Escalation Level' specifies that the activity 'Escalate Incident' requires the attribute 'Escalation Level'.
+- **Document Incident: Document ID**: The bind 'Document Incident: Document ID' specifies that the activity 'Document Incident' requires the attribute 'Document ID'.
+
+## Constraints
+

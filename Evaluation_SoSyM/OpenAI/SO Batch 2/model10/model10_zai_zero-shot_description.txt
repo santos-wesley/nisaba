@@ -1,0 +1,41 @@
+This Multi-Perspective Declare model describes a rigorous laboratory workflow for material testing, evaluation, and approval. The process tracks specific data variables for each activity and enforces strict rules regarding task order, data consistency, and equipment readiness. 
+
+Here is a natural language description of the model:
+
+### **Activities and Data Variables**
+The workflow consists of 14 distinct activities. Several of these activities are bound to specific data variables that must be recorded during execution:
+*   **Prepare Sample**: Records a **Sample ID** (an integer between 1 and 1000).
+*   **Conduct X-ray Diffraction**: Records **X-ray Intensity** (an integer between 0 and 10,000).
+*   **Measure Hardness**: Records a **Hardness Value** (a float between 0.0 and 100.0).
+*   **Analyze Microstructure**: Records the **Microstructure Type** (Grain, Fiber, or Amorphous).
+*   **Perform Thermal Analysis**: Records **Thermal Conductivity** (a float between 0.0 and 500.0).
+*   **Conduct Tensile Test**: Records **Tensile Strength** (a float between 0.0 and 2000.0).
+*   **Evaluate Corrosion Resistance**: Records **Corrosion Resistance** (High, Medium, or Low).
+*   **Perform Chemical Analysis**: Records **Chemical Purity** (a float between 0.0 and 100.0).
+*   **Calibrate Equipment**: Records the **Equipment Status** (Calibrated or Not Calibrated).
+*   **Document Results**, **Review Findings**, **Prepare Report**, **Approve Material**, **Reject Material**, and **Store Sample** do not have explicitly bound data variables in this model.
+
+### **Process Start and End**
+*   **Start:** The process always begins with the **Prepare Sample** activity.
+*   **End:** The process terminates if the material is either **Approve Material** or **Reject Material**. 
+
+### **Workflow Constraints and Rules**
+The model enforces several strict behavioral constraints, often linking activities together by requiring that they share the same **Sample ID** to ensure data traceability:
+
+*   **X-ray and Microstructure:** If **Conduct X-ray Diffraction** is performed, **Analyze Microstructure** must eventually follow. Both activities must be performed on the same Sample ID. This must occur within 2 hours.
+*   **Hardness and Tensile Testing:** **Measure Hardness** must be immediately followed by **Conduct Tensile Test**. These activities must share the same Sample ID and be completed within 1 hour.
+*   **Thermal and Corrosion Testing:** **Perform Thermal Analysis** and **Evaluate Corrosion Resistance** operate in a strict succession. This means Thermal Analysis must happen first, and Corrosion Resistance must happen afterward (and vice versa). Both must share the same Sample ID and occur within 1 day of each other.
+*   **Documentation and Review:** **Review Findings** cannot occur unless **Document Results** has happened first for the same Sample ID. 
+*   **Reporting:** **Prepare Report** cannot occur unless **Document Results** has happened first for the same Sample ID. This must occur within 1 day.
+*   **Material Disposition:** Both **Approve Material** and **Reject Material** require that **Review Findings** has already occurred for the same Sample ID. 
+
+### **Equipment Calibration Rules**
+Before any of the five core testing activities can be performed, the **Calibrate Equipment** activity must occur, and the equipment status must be recorded as **Calibrated**. Specifically, calibration is a strict prerequisite for:
+1.  Conduct X-ray Diffraction
+2.  Measure Hardness
+3.  Conduct Tensile Test
+4.  Perform Thermal Analysis
+5.  Evaluate Corrosion Resistance
+
+### **Summary of the Process Flow**
+To summarize the business logic: A sample is prepared and assigned an ID. Before any tests can be run, the testing equipment must be calibrated. A series of tests (X-ray, hardness, tensile, thermal, corrosion, chemical) are then conducted on the sample, with specific timing and ordering rules applied to certain pairs of tests. Once testing is complete, results are documented and a report is prepared. The findings are then reviewed, which allows the laboratory to make a final decision to either approve or reject the material, bringing the process to an end.

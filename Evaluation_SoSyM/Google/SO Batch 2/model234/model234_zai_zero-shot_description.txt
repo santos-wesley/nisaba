@@ -1,0 +1,47 @@
+This document describes a Multi-Perspective Declare model for a comprehensive Risk Management Process. The model outlines the sequence of activities, the data attributes associated with each task, and specific conditional rules (including data conditions and time constraints) that govern the workflow.
+
+### **1. Process Overview and Data Attributes**
+The process consists of 13 activities designed to identify, evaluate, mitigate, and monitor risks. Each activity is bound to specific data attributes that must be recorded during execution:
+
+*   **Identify Risk:** Requires a *Risk ID* (1-1000) and a *Risk Category* (Financial, Operational, Compliance, Strategic, or Reputational).
+*   **Assess Impact:** Requires a *Risk ID* and an *Impact Score* (integer from 1 to 10).
+*   **Evaluate Probability:** Requires a *Risk ID* and a *Probability* (float from 0.0 to 1.0).
+*   **Prioritize Risks:** Requires a *Risk ID* and an *Exposure Value* (float from 0.0 to 1,000,000.0).
+*   **Develop Mitigation Plan:** Requires a *Risk ID*, a *Mitigation Strategy* (Avoidance, Transference, Mitigation, or Acceptance), and a *Mitigation Cost* (float from 0.0 to 100,000.0).
+*   **Implement Mitigation:** Requires a *Risk ID* and a *Risk Status* (Open, Mitigated, Closed, or Accepted).
+*   **Monitor Risks:** Requires a *Risk ID* and a *Review Frequency* (integer from 1 to 12).
+*   **Review Risk Assessment:** Requires a *Risk ID*.
+*   **Update Risk Register:** Requires a *Risk ID* and a *Risk Status*.
+*   **Communicate Risks:** Requires a *Risk ID* and a *Risk Owner* (John Smith, Alice Johnson, or Bob Williams).
+*   *(Note: Activities Approve Mitigation Plan, Document Lessons Learned, Conduct Risk Workshop, and Validate Risk Controls are part of the model but have no specific data bindings or constraints defined in this rule set).*
+
+### **2. Core Workflow Constraints**
+The standard flow of the process is governed by a series of precedence, response, and succession constraints:
+
+*   **Initiation:** The process must begin with the **Identify Risk** activity.
+*   **Assessment Phase:** 
+    *   **Assess Impact** can only occur after **Identify Risk** has been executed (*Precedence*).
+    *   Every time **Assess Impact** is performed, it must eventually be followed by **Evaluate Probability** (*Response*).
+*   **Prioritization Phase:** 
+    *   **Prioritize Risks** can only occur after **Evaluate Probability** (*Precedence*).
+    *   Every time **Prioritize Risks** occurs, it must eventually be followed by **Develop Mitigation Plan** (*Response*).
+*   **Mitigation Phase:** 
+    *   **Implement Mitigation** can only occur after **Develop Mitigation Plan** (*Precedence*).
+    *   Every time **Implement Mitigation** occurs, it must eventually be followed by **Monitor Risks** (*Response*).
+*   **Review and Communication Phase:** 
+    *   **Monitor Risks** must be followed by **Review Risk Assessment**, and conversely, **Review Risk Assessment** cannot happen unless **Monitor Risks** has occurred previously (*Succession*).
+    *   Every time **Review Risk Assessment** occurs, it must be followed by **Update Risk Register** (*Response*).
+    *   **Update Risk Register** must be followed by **Communicate Risks**, and **Communicate Risks** cannot happen unless **Update Risk Register** has occurred previously (*Succession*).
+
+### **3. Conditional and Data-Driven Constraints**
+The model includes advanced rules that trigger specific actions based on data attributes recorded during execution:
+
+*   **Financial Mitigation Rule:** If a risk is identified as *Financial*, executing **Identify Risk** requires that a **Develop Mitigation Plan** is eventually executed. Furthermore, when this mitigation plan is developed, its *Mitigation Cost* must be strictly greater than 1,000.
+*   **Open Risk Mitigation Rule:** If **Identify Risk** is executed and the associated *Risk Status* is *Open*, then **Implement Mitigation** must eventually occur. This response must be fulfilled within **30 days** of the Identify Risk activity.
+*   **Critical Risk Escalation:** If **Assess Impact** is executed and the recorded *Impact Score* is strictly greater than 7 (i.e., 8 or 9), the risk is considered critical. Consequently, **Escalate Critical Risks** must be executed within **24 hours** of the Assess Impact activity.
+
+### **4. Time-Based Constraints**
+*   **Periodic Review:** Every time **Monitor Risks** is executed, a **Review Risk Assessment** must follow. This review must occur between **90 and 180 days** after the Monitor Risks activity.
+
+### **5. Absence Constraints**
+*   **Escalation Limitation:** The activity **Escalate Critical Risks** is subject to an `Absence3` constraint. This means that the escalation of critical risks can occur at most 2 times throughout the entire lifecycle of the process. It cannot be executed a third time.

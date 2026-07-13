@@ -1,0 +1,13 @@
+Looking in indexes: https://download.pytorch.org/whl/cu130
+Collecting torch==2.13.0+cu130
+  Downloading https://download-r2.pytorch.org/whl/cu130/torch-2.13.0%2Bcu130-cp313-cp313-win_amd64.whl.metadata (39 kB)
+Downloading https://download-r2.pytorch.org/whl/cu130/torch-2.13.0%2Bcu130-cp313-cp313-win_amd64.whl (1915.5 MB)
+   ---------------------------------------- 1.9/1.9 GB 9.0 MB/s eta 0:00:00
+Installing collected packages: torch
+  Attempting uninstall: torch
+    Found existing installation: torch 2.13.0
+    Uninstalling torch-2.13.0:
+      Successfully uninstalled torch-2.13.0
+  WARNING: The scripts torchfrtrace.exe and torchrun.exe are installed in 'C:\Users\wesle\AppData\Roaming\Python\Python313\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed torch-2.13.0+cu130

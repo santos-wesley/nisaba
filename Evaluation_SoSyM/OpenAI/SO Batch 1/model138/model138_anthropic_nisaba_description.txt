@@ -1,0 +1,119 @@
+#MP-Declare Model
+## Activities
+- **Identify Risks**: The 'Identify Risks' activity represents the process of identifying potential risks that could impact business continuity.
+- **Develop Continuity Plan**: The 'Develop Continuity Plan' activity involves creating a plan to ensure business continuity in the event of a disruption.
+- **Test Continuity Plan**: The 'Test Continuity Plan' activity includes testing the developed continuity plan to verify its effectiveness.
+- **Review Test Results**: The 'Review Test Results' activity involves analyzing the outcomes of the continuity plan testing.
+- **Implement Improvements**: The 'Implement Improvements' activity involves making enhancements to the continuity plan based on identified deficiencies.
+- **Communicate Plan**: The 'Communicate Plan' activity involves disseminating the continuity plan information to relevant stakeholders.
+- **Monitor Risks**: The 'Monitor Risks' activity involves the ongoing observation and tracking of potential risks.
+- **Conduct Training**: The 'Conduct Training' activity involves providing training sessions to prepare staff for continuity plan execution.
+- **Activate Continuity Plan**: The 'Activate Continuity Plan' activity involves putting the continuity plan into action in response to an incident.
+- **Evaluate Incident Response**: The 'Evaluate Incident Response' activity involves assessing the effectiveness of the response to an incident.
+
+## Attributes
+- **Risk Level: Integer between 1 and 10**: The attribute 'Risk Level: Integer between 1 and 10' represents the severity level of an identified risk.
+- **Plan Effectiveness: Float between 0.0 and 100.0**: The attribute 'Plan Effectiveness: Float between 0.0 and 100.0' represents the measured effectiveness of the continuity plan as a percentage.
+- **Test Outcome: Pass, Fail**: The attribute 'Test Outcome: Pass, Fail' specifies the result of testing the continuity plan.
+- **Improvement Status: Completed, Pending**: The attribute 'Improvement Status: Completed, Pending' specifies the current status of improvements being implemented.
+- **Communication Method: Email, Meeting, Newsletter**: The attribute 'Communication Method: Email, Meeting, Newsletter' specifies the method used to communicate the continuity plan.
+- **Training Hours: Integer between 1 and 40**: The attribute 'Training Hours: Integer between 1 and 40' represents the number of hours dedicated to training.
+- **Incident Severity: Low, Medium, High**: The attribute 'Incident Severity: Low, Medium, High' specifies the severity level of an incident.
+- **Response Time: Float between 0.0 and 24.0**: The attribute 'Response Time: Float between 0.0 and 24.0' represents the time taken to respond to an incident, measured in hours.
+- **Stakeholder Engagement: High, Moderate, Low**: The attribute 'Stakeholder Engagement: High, Moderate, Low' specifies the level of engagement of stakeholders in the continuity planning process.
+- **Monitoring Frequency: Integer between 1 and 30**: The attribute 'Monitoring Frequency: Integer between 1 and 30' represents how often risk monitoring occurs, measured in days.
+
+## Binds
+
+## Constraints
+
+
+## Interleaved Description
+# MP-Declare Process Model Narrative: Business Continuity Management Process
+
+The MP-Declare process model for the business continuity management process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Identify Risks,' establishing the foundational context for the entire continuity management effort. This initial activity captures the 'Risk Level' attribute, ranging from 1 to 10, setting the stage for all subsequent planning and mitigation actions that follow.
+
+#### **End Constraints**
+In conclusion, the process culminates with the activity 'Evaluate Incident Response,' which must be the final activity to occur. This closing activity assesses the effectiveness of how an incident was handled, taking into account the 'Response Time' and 'Incident Severity' attributes, thereby bringing coherent closure to the entire continuity management cycle.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Develop Continuity Plan' activity must occur at least once within the process, adding essential depth to the model by ensuring that a formal plan is always created. Furthermore, the 'Monitor Risks' activity must also occur at least once, reinforcing the ongoing nature of risk oversight; this elaborates on the process by emphasizing that risk monitoring is not a one-time event but a recurring necessity that persists throughout the continuity lifecycle.
+
+#### **Absence Constraints**
+In contrast to activities requiring guaranteed presence, the 'Activate Continuity Plan' activity is constrained to occur at most once when the 'Incident Severity' is 'Low.' This exclusion highlights that low-severity incidents should not trigger repeated activations, reinforcing process integrity by preventing unnecessary or excessive plan activations for minor disruptions.
+
+#### **Exactly Constraints**
+Setting a fixed boundary within the model, the 'Test Continuity Plan' activity must occur exactly twice throughout the process. This precise requirement ensures that the continuity plan undergoes a consistent and defined level of validation, neither insufficiently tested nor excessively repeated.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+Establishing a necessary dependency, if the 'Test Continuity Plan' activity occurs with the condition 'Test Outcome is Fail,' then the 'Implement Improvements' activity must also occur somewhere in the process. This cause-effect relationship ensures that a failed test necessitates corrective action, reinforcing the logical coherence between testing outcomes and improvement efforts.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. Setting up the initial context for plan development, the activity 'Develop Continuity Plan' is permitted to occur only if an 'Identify Risks' activity with 'Risk Level' greater than 5 has occurred before it. This guides the logical sequence, ensuring that only sufficiently significant risks warrant the formulation of a continuity plan.
+2. Similarly, the activity 'Communicate Plan' is permitted to occur only if a 'Review Test Results' activity has occurred before it, with the condition that 'Plan Effectiveness' is greater than 70.0. This background establishes that only a validated, effective plan should be disseminated to stakeholders.
+3. The activity 'Activate Continuity Plan' is permitted to occur only if a 'Conduct Training' activity has occurred before it, with 'Training Hours' greater than or equal to 10. This ensures that adequately trained staff precede any real-world activation of the plan.
+
+#### **Response Constraints**
+1. Defining an ordered flow, if the 'Test Continuity Plan' activity occurs with the condition 'Test Outcome is Fail,' then the 'Review Test Results' activity must occur within 3 days. This sequence ensures that failed tests are promptly analyzed, maintaining temporal cohesion in the improvement cycle.
+2. Following this same logic, if the 'Review Test Results' activity occurs with the condition 'Plan Effectiveness' less than 50.0, then the 'Implement Improvements' activity must occur with the condition 'Improvement Status is Pending' within 7 days. This ordered flow ensures that identified deficiencies are swiftly addressed.
+
+#### **Succession Constraints**
+Establishing a causal link within the model, whenever an 'Identify Risks' activity occurs with the condition 'Risk Level' greater than 7, it must eventually be followed by a 'Monitor Risks' activity with the condition 'Monitoring Frequency' less than or equal to 7. This cause-effect relationship ensures that high-severity risks are followed logically by frequent, vigilant monitoring, creating a cohesive progression from risk identification to active surveillance.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Promoting balanced pairing within the model, each occurrence of the 'Activate Continuity Plan' activity, under the condition 'Incident Severity is High,' must be followed by a unique 'Evaluate Incident Response' activity before any subsequent activation occurs. This condition-consequence relationship ensures a clear one-to-one correspondence between each activation and its corresponding evaluation, without overlapping or intervening activations.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Capturing an immediate cause-and-effect relationship, whenever the 'Approve' step within 'Review Test Results' occurs with the condition 'Plan Effectiveness' greater than 90.0, it must be immediately followed by the 'Communicate Plan' activity with the condition 'Communication Method is Meeting.' This tightly coupled sequence ensures that highly effective plans are communicated to stakeholders without delay or intervening activities.
+
+#### **Chain Precedence Constraints**
+Establishing an explicit and immediate dependency, the 'Implement Improvements' activity, when occurring with the condition 'Improvement Status is Completed,' must be directly preceded by the 'Review Test Results' activity with no intervening events. This sequence makes explicit that improvements are always grounded in an immediately preceding review, eliminating ambiguity in the process flow.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Establishing a mutual dependency between activities, the 'Conduct Training' activity and the 'Communicate Plan' activity must occur together within the same process instance. This conjunction ensures that whenever stakeholders are informed of the plan, corresponding training is also conducted, and vice versa, reinforcing organizational readiness.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing flexibility into the model, either the 'Conduct Training' activity or the 'Communicate Plan' activity may occur within the process, permitting alternative paths depending on organizational needs and circumstances.
+
+#### **Not Co-Existence Constraints**
+In contrast, setting firm exclusion rules, the 'Activate Continuity Plan' activity and the 'Develop Continuity Plan' activity cannot both occur within the same process instance if the conditions 'Incident Severity is High' and 'Improvement Status is Pending' are simultaneously met. This exclusion ensures that a continuity plan is not activated while still under active development with pending improvements, thereby preventing conflicting events and preserving process integrity.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Preventing certain dependencies within the model, if the 'Monitor Risks' activity occurs with the condition 'Monitoring Frequency' greater than 20, then the 'Activate Continuity Plan' activity must not occur in response. This contrast disallows a specific contingent occurrence, ensuring that infrequent monitoring does not inadvertently trigger a full plan activation.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Restricting the intended sequence, the 'Communicate Plan' activity must not precede the 'Develop Continuity Plan' activity under any circumstances. This contrast ensures that stakeholders are never informed of a plan before it has actually been developed, preserving the logical order of the process.
+
+#### **Not Response Constraints**
+Maintaining the integrity of the model's progression, if the 'Evaluate Incident Response' activity occurs with the condition 'Response Time' less than 2.0, then the 'Activate Continuity Plan' activity must not occur afterward. This contrast prevents an unnecessary re-activation following an already rapid and effective incident response.
+
+#### **Not Succession Constraints**
+Preserving the model's defined flow, the 'Implement Improvements' activity, under the condition 'Improvement Status is Pending,' must not be followed at any point by the 'Communicate Plan' activity. This restriction ensures that incomplete improvements are never mistakenly communicated as finalized to stakeholders.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Succession Constraints**
+Refining the process model by excluding specific immediate sequences, the 'Test Continuity Plan' activity, under the condition 'Test Outcome is Fail,' must not be immediately followed or immediately preceded by the 'Communicate Plan' activity. This contrast maintains structural integrity, ensuring that a failed test result is not directly and immediately communicated to stakeholders without the intervening step of review and improvement.

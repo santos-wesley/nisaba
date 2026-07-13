@@ -1,0 +1,38 @@
+# Process Description: Contract Management Workflow
+
+This process model describes a contract lifecycle management workflow involving six key activities: **Draft Contract**, **Review Contract**, **Negotiate Terms**, **Approve Contract**, **Sign Contract**, and **Archive Contract**.
+
+## Data Perspective
+
+Each activity carries specific data attributes:
+- **Draft Contract** records a **Contract ID** (an integer between 1000 and 9999) and a **Contract Value** (a monetary amount between 10,000.0 and 1,000,000.0).
+- **Review Contract** records a **Review Outcome**, which can be *Accepted*, *Requires Changes*, or *Rejected*.
+- **Approve Contract** records an **Approval Status**, which can be *Pending*, *Approved*, or *Rejected*.
+- **Sign Contract** records a **Signature Status**, which can be *Unsigned*, *Partially Signed*, or *Fully Signed*.
+
+## Control-Flow and Behavioral Rules
+
+**Process boundaries:**
+- The process must **start** with the *Draft Contract* activity.
+- The process must **end** with the *Archive Contract* activity.
+- *Review Contract* must occur **at least once** during the process.
+
+**Sequencing and dependency constraints:**
+
+1. **After drafting, a review must eventually follow.** Whenever a contract is drafted, the contract must, at some later point, be reviewed (within the same case).
+
+2. **If contract terms require changes, negotiation must follow.** Whenever a contract is reviewed with the outcome *Requires Changes*, a negotiation of terms must occur at some point afterward.
+
+3. **After negotiating terms, an approval must eventually follow.** Whenever terms are negotiated, the contract must later be approved.
+
+4. **Approval triggers signing.** Whenever a contract is approved (with Approval Status = *Approved*), the contract must later be signed, and at the point of approval the Signature Status must still be *Unsigned* (i.e., approval happens before any signing occurs).
+
+5. **Signing precedes approval, conditionally.** If the contract is signed while still *Unsigned*, this signing activity must be preceded by an approval where the Approval Status is *Approved*. In other words, signing cannot happen out of order — the contract must first be properly approved.
+
+6. **Fully signed contracts must be archived.** Whenever the Signature Status becomes *Fully Signed*, the contract must eventually be archived afterward.
+
+7. **Rejected reviews block signing (ordering restriction).** If a contract's Review Outcome was *Rejected*, then it must **not** be the case that a subsequent Sign Contract activity occurs while the Signature Status is still *Unsigned* — meaning a rejected contract cannot proceed to be signed without adequate resolution first. This effectively prevents signing on a contract that has been previously rejected during review, unless the situation is corrected.
+
+## Summary
+
+In essence, this model describes a controlled contract approval pipeline: contracts are drafted, reviewed, potentially renegotiated if changes are required, then approved and signed, and finally archived once fully signed. The model enforces that rejected reviews cannot lead directly to signing, and that proper approval must precede signing to maintain procedural integrity.

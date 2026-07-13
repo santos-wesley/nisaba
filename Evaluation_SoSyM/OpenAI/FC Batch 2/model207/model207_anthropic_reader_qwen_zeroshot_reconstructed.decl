@@ -1,0 +1,47 @@
+activity Plan Event
+activity Book Venue
+activity Send Invitations
+activity Arrange Catering
+activity Hire Staff
+activity Set Up Venue
+activity Conduct Rehearsal
+activity Welcome Guests
+activity Facilitate Activities
+activity Deliver Speech
+activity Serve Meals
+activity Coordinate Photography
+activity Distribute Gifts
+activity Tear Down Venue
+activity Collect Feedback
+bind Plan Event: Event ID, Budget
+bind Book Venue: Event ID, Venue
+bind Send Invitations: Event ID, Number of Guests, Invitation Status
+bind Arrange Catering: Event ID, Catering Service
+bind Hire Staff: Event ID, Staff Role
+bind Conduct Rehearsal: Event ID, Rehearsal ID
+bind Serve Meals: Event ID, Catering Service
+bind Collect Feedback: Event ID, Venue
+Event ID: integer between 1 and 999999
+Budget: float between 1000.0 and 50000.0
+Venue: Hall A, Hall B, Hall C
+Number of Guests: integer between 10 and 500
+Invitation Status: Sent, Not Sent
+Catering Service: Buffet, Sit-down Dinner, Cocktail
+Staff Role: Waiter, Coordinator, Cleaner
+Rehearsal ID: integer between 1 and 9999
+Init[Plan Event] | |
+End[Tear Down Venue] | |
+Chain Response[Plan Event, Book Venue] | | |
+Chain Response[Book Venue, Send Invitations] | | |
+Chain Response[Send Invitations, Arrange Catering] | | |
+Chain Response[Arrange Catering, Hire Staff] | | |
+Chain Response[Hire Staff, Set Up Venue] | | |
+Chain Response[Set Up Venue, Conduct Rehearsal] | | |
+Chain Response[Conduct Rehearsal, Welcome Guests] | | |
+Chain Response[Welcome Guests, Facilitate Activities] | | |
+Chain Response[Facilitate Activities, Deliver Speech] | | |
+Chain Response[Deliver Speech, Serve Meals] | | |
+Chain Response[Serve Meals, Coordinate Photography] | | |
+Chain Response[Coordinate Photography, Distribute Gifts] | | |
+Chain Response[Distribute Gifts, Collect Feedback] | | |
+Chain Response[Collect Feedback, Tear Down Venue] | | |

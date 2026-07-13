@@ -1,0 +1,50 @@
+activity Analyze International Market
+activity Identify Business Opportunities
+activity Conduct Feasibility Study
+activity Develop Business Plan
+activity Acquire Necessary Permits
+activity Set Up International Office
+activity Hire Local Staff
+activity Initiate Marketing Campaign
+activity Negotiate with Local Vendors
+activity Establish Supply Chain
+activity Manage International Logistics
+activity Monitor Market Response
+activity Adjust Strategy
+activity Assess Performance
+activity Report to Headquarters
+bind Analyze International Market: Market Size, Market Attractiveness
+bind Conduct Feasibility Study: Investment Amount, Feasibility Status
+bind Acquire Necessary Permits: Permit Status
+bind Hire Local Staff: Staffing Level
+bind Initiate Marketing Campaign: Marketing Budget
+bind Monitor Market Response: Market Response
+bind Adjust Strategy: Strategy Adjustment
+bind Assess Performance: Performance Evaluation
+Market Size: integer between 1000 and 1000000
+Market Attractiveness: High, Medium, Low
+Investment Amount: float between 0.0 and 100000000.0
+Feasibility Status: Positive, Negative
+Permit Status: Approved, Pending, Rejected
+Staffing Level: High, Medium, Low
+Marketing Budget: float between 0.0 and 10000000.0
+Market Response: Positive, Neutral, Negative
+Strategy Adjustment: Yes, No
+Performance Evaluation: Excellent, Good, Fair, Poor
+Init[Analyze International Market] | |
+Chain Precedence[Identify Business Opportunities, Analyze International Market] | | |
+Chain Precedence[Conduct Feasibility Study, Identify Business Opportunities] | | |
+Precedence[Develop Business Plan, Conduct Feasibility Study] | |T.Feasibility Status is Positive |
+Chain Precedence[Acquire Necessary Permits, Develop Business Plan] | | |
+Precedence[Set Up International Office, Acquire Necessary Permits] | |T.Permit Status is Approved |0,5,d
+Chain Precedence[Hire Local Staff, Set Up International Office] | | |
+Existence[Initiate Marketing Campaign] | |
+Existence[Manage International Logistics] | |
+Precedence[Negotiate with Local Vendors, Hire Local Staff] | | |
+Precedence[Establish Supply Chain, Hire Local Staff] | | |
+Precedence[Monitor Market Response, Initiate Marketing Campaign] | | |
+Response[Monitor Market Response, Adjust Strategy] |A.Market Response is Negative | |0,7,d
+Precedence[Assess Performance, Monitor Market Response] | | |
+Response[Assess Performance, Report to Headquarters] | | |0,48,h
+Exactly[Report to Headquarters] | |
+End[Report to Headquarters] | |

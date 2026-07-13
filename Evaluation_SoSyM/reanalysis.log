@@ -1,0 +1,40 @@
+<notebook cell 25>:343: SyntaxWarning: invalid escape sequence '\A'
+<notebook cell 48>:343: SyntaxWarning: invalid escape sequence '\A'
+
+=== DATA ANALYSIS ===
+  complexity: 360 model jsons
+  readability: 320 descriptions
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/268 [00:00<?, ?it/s]Loading weights: 100%|##########| 268/268 [00:00<00:00, 3558.96it/s]
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  embedder: Alibaba-NLP/gte-large-en-v1.5 tau=0.2
+    SD skip model102/deepseek/zeroshot: IndexError: list index out of range
+    SD skip model70/deepseek/zeroshot: IndexError: list index out of range
+    SD skip model81/deepseek/zeroshot: KeyError: 'Multiple times the same event name and event type [activity Gather User Feedbac
+    SD skip model144/anthropic/nisaba: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/anthropic/zeroshot: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/xai/nisaba: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/xai/zeroshot: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/deepseek/nisaba: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/deepseek/zeroshot: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/zai/nisaba: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model144/zai/zeroshot: ValueError: Unable to find the event or activity Schedule Follow-Up
+    SD skip model192/anthropic/nisaba: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/anthropic/zeroshot: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/xai/nisaba: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/xai/zeroshot: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/deepseek/nisaba: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/deepseek/zeroshot: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/zai/nisaba: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model192/zai/zeroshot: ValueError: Unable to find the event or activity Plan Eco-Friendly Trip
+    SD skip model10/anthropic/nisaba: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/anthropic/zeroshot: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/xai/nisaba: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/xai/zeroshot: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/deepseek/nisaba: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/deepseek/zeroshot: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/zai/nisaba: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+    SD skip model10/zai/zeroshot: ValueError: Unable to find the event or activity Conduct X-ray Diffraction
+  RST relation metric: aligned_rate Nisaba 0.84 vs zero-shot 0.64 (160 runs) -> rst_metrics.csv
+  derived_summary.json written

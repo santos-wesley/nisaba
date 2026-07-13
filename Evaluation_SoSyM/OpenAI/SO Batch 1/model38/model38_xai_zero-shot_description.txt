@@ -1,0 +1,48 @@
+**Multi-Perspective Declare Model: Report Generation and Review Process**
+
+This model describes a structured workflow for producing and publishing a report, enriched with data constraints, temporal rules, and conditional logic.
+
+### Core Process Flow
+
+The process must begin with **Collect Data**. Eventually, a **Publish Report** activity must occur (the process cannot end without publishing).
+
+The normal sequence is as follows:
+1. **Collect Data**
+2. **Analyze Data**
+3. **Draft Report**
+4. **Review Report**
+5. **Approve Report**
+6. **Publish Report**
+
+After publication, **Gather Feedback** may occur, which can lead to **Revise Report** under certain conditions.
+
+### Data Perspectives (Bindings)
+
+Each activity is linked to specific data attributes:
+
+- **Collect Data** → `Data Points` (integer, 100–10,000)
+- **Analyze Data** → `Report Accuracy` (float, 0.0–100.0)
+- **Approve Report** → `Approval Status` (Pending, Approved, Rejected)
+- **Gather Feedback** → `Feedback Type` (Positive, Negative, Neutral)
+- **Revise Report** → `Revision Count` (integer, 0–10)
+
+### Constraints and Rules
+
+**Control-Flow Constraints:**
+
+- **Precedence[Approve Report, Review Report]**: Approve Report cannot occur before Review Report has occurred.
+- **Response[Approve Report, Publish Report]**: If Approve Report occurs (and Approval Status = Approved), then Publish Report must eventually follow.
+- **Chain Response[Approve Report, Publish Report]**: When Approval Status is "Approved", Publish Report must occur *immediately after* Approve Report (within 0–3 days).
+- **Chain Succession[Draft Report, Review Report]**: Draft Report and Review Report must directly follow each other (Review must immediately follow Draft).
+- **Alternate Succession[Analyze Data, Draft Report]**: Analyze Data and Draft Report must alternate. After Analyze Data, Draft Report must eventually occur, and between any two occurrences of either, the other must happen. This pattern repeats within a 48-hour window.
+- **Precedence[Approve Report, Analyze Data]**: Approve Report cannot occur unless Analyze Data has previously occurred *and* Report Accuracy is at least 90%.
+- **Not Succession[Revise Report, Revise Report]**: Once Revision Count exceeds 3, no further Revise Report activities are allowed.
+
+**Conditional Behavioral Rules:**
+
+- If **Feedback Type** is **Negative** after Gather Feedback, then **Revise Report** must eventually occur (Response constraint with 0–5 day deadline).
+- Revision is limited: once the **Revision Count** exceeds 3, further revisions are forbidden.
+
+### Summary
+
+The model enforces a high-quality, data-driven reporting process. It requires sufficient data collection, strong analytical accuracy (≥90%) before approval, a strict draft–review sequence, and conditional revision only when negative feedback is received. The process is tightly controlled to prevent excessive revisions and to ensure timely publication once approval is granted.

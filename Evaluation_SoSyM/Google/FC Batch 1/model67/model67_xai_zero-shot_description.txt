@@ -1,0 +1,74 @@
+**Multi-Perspective Declare Model: Fraud Detection and Security Management Process**
+
+This model describes a flexible, rule-based process for handling potentially fraudulent transactions and managing security-related activities in a financial or banking context.
+
+### Core Activities
+The process includes the following key activities:
+
+- **Detect Fraudulent Activity**
+- **Verify Customer Identity**
+- **Review Transaction Details**
+- **Approve Transaction**
+- **Decline Transaction**
+- **Report Suspicious Activity**
+- **Update Account Security**
+- **Notify Customer**
+- **Investigate Security Breach**
+- **Implement Security Patch**
+
+### Data Perspectives (Payloads)
+Each activity is associated with relevant data attributes:
+
+- **Detect Fraudulent Activity**: Transaction Type, Transaction Amount, Fraud Risk Level
+- **Verify Customer Identity**: Verification Attempts, Verification Status
+- **Review Transaction Details / Approve / Decline / Report Suspicious Activity**: Transaction Type, Transaction Amount
+- **Update Account Security**: Days Since Last Activity
+- **Notify Customer**: Customer Notification Method
+- **Investigate Security Breach**: Breach Severity
+- **Implement Security Patch**: Security Patch Status
+
+### Data Domains
+- **Transaction Type**: Debit, Credit, Wire Transfer, Online Payment
+- **Transaction Amount**: Real number between 0.01 and 100,000.0
+- **Fraud Risk Level**: Low, Medium, High
+- **Verification Attempts**: Integer (1–5)
+- **Verification Status**: Verified, Not Verified, Pending
+- **Breach Severity**: Integer (1–10)
+- **Security Patch Status**: Applied, Not Applied, Scheduled
+- **Customer Notification Method**: Email, SMS, Phone Call
+- **Days Since Last Activity**: Integer (0–365)
+
+### Constraints (Declare Rules)
+
+**Unconditional Constraints:**
+- **Response[Detect Fraudulent Activity, Notify Customer]**: If fraud is detected, the customer must eventually be notified.
+- **Response[Decline Transaction, Report Suspicious Activity]**: If a transaction is declined, suspicious activity must eventually be reported.
+- **Precedence[Approve Transaction, Verify Customer Identity]**: A transaction cannot be approved before customer identity has been verified.
+- **Absence5[Detect Fraudulent Activity]**: The "Detect Fraudulent Activity" activity can occur **at most 5 times** in a process instance.
+- **Response[Investigate Security Breach, Implement Security Patch]**: Every security breach investigation must eventually lead to the implementation of a security patch.
+
+**Conditional Constraints (with time windows and priorities):**
+
+- **Response[Review Transaction Details, Verify Customer Identity]**  
+  *Condition*: When Transaction Amount > 1000  
+  *Time*: within 10 hours (medium priority)
+
+- **Response[Detect Fraudulent Activity, Decline Transaction]**  
+  *Condition*: When Fraud Risk Level is High  
+  *Time*: within 5 hours (medium priority)
+
+- **Response[Notify Customer, Update Account Security]**  
+  *Condition*: When Customer Notification Method is SMS  
+  *Time*: within 24 hours (high priority)
+
+- **Response[Investigate Security Breach, Implement Security Patch]** (Severity-based)  
+  *Condition*: When Breach Severity > 7  
+  *Time*: within 48 hours (high priority)
+
+- **Response[Implement Security Patch, Implement Security Patch]** (self-response)  
+  *Condition*: When Security Patch Status is Not Applied  
+  *Time*: within 7 days (high priority) — meaning if a patch is not applied, it must be scheduled/implemented again within a week.
+
+---
+
+This model combines **control-flow constraints** (Response, Precedence, Absence) with **data-aware conditions** and **temporal deadlines**, allowing for a dynamic, risk-sensitive security and fraud management process that adapts based on transaction characteristics and severity levels.

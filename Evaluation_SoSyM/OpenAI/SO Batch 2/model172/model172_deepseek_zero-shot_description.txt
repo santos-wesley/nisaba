@@ -1,0 +1,33 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+---
+
+This security and incident management process is modeled with a set of activities, data bindings, and constraints that govern both the order of operations and the data conditions under which they must occur.
+
+The process begins with the **initial activity** "Monitor Store Entrance" and must end with "Deactivate Alarm". At least one "Report Incident" must occur somewhere in the process, while "Conduct Emergency Drill" is strictly forbidden from ever occurring.
+
+Several constraints link activities with specific data conditions:
+
+- **Inspect Security Cameras** and **Review Security Footage** are linked by a **Response** constraint: whenever a camera is inspected (using a Camera ID between 1 and 1000), the same Camera ID must later be used to review the corresponding footage.
+
+- **Alert Security Personnel** and **Escort Suspect** are linked by a **Chain Response** constraint with a time limit of 5 minutes and a medium confidence. This means that if security personnel are alerted (with a Personnel ID between 1 and 500 and a Security Level of High), then immediately afterward, the same personnel must escort a suspect. This chain must occur within 5 minutes.
+
+- **Verify Alarm Trigger** and **Alert Security Personnel** are linked by a **Chain Precedence** constraint with a 10-minute time window and medium confidence. Before any alert can be issued, the alarm must have been verified as "Triggered" immediately prior, and this verification must happen within 10 minutes of the alert.
+
+- **Perform Security Audit** and **Update Security Protocols** are linked by a **Co-Existence** constraint: if an audit is performed and the resulting Audit Score (a float between 0.0 and 100.0) is less than 50, then the security protocols must also be updated (and vice versa).
+
+- **Conduct Bag Check** and **Handle Customer Complaint** are linked by a **Succession** constraint with a time limit of 1 minute and high confidence. Whenever a bag check is conducted for a specific Customer ID (between 1 and 10000), a complaint for that same customer must eventually be handled, and the bag check must occur before the complaint handling. This must happen within 1 minute.
+
+- **Check Inventory Discrepancies** and **Report Incident** are linked by a **Not Chain Succession** constraint: checking inventory discrepancies must never be immediately followed by reporting an incident.
+
+- **Train Security Staff** and **Conduct Emergency Drill** are mutually exclusive (**Exclusive Choice**): exactly one of these two activities must occur, but not both.
+
+- **Escort Suspect** and **Report Incident** are linked by a **Precedence** constraint: if an incident is reported and its type is "Theft", then a suspect must have been escorted before that report.
+
+- **Deactivate Alarm** and **Verify Alarm Trigger** are linked by a **Not Precedence** constraint: deactivating the alarm must never have been preceded by verifying the alarm trigger.
+
+- **Handle Customer Complaint** and **Conduct Bag Check** are linked by a **Not Responded Existence** constraint: if a customer complaint is handled and its status is "Resolved", then a bag check for that same Customer ID must never have occurred anywhere in the process.
+
+- Finally, **Review Security Footage** and **Inspect Security Cameras** are linked by a **Not Succession** constraint: reviewing security footage must never be followed by inspecting security cameras.
+
+In summary, the process enforces strict ordering, data equality, time windows, and conditional exclusions to ensure that security incidents are handled correctly, audits trigger protocol updates, and certain undesirable sequences (like reviewing footage before inspecting cameras, or resolving complaints after bag checks) are prevented.

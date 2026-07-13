@@ -1,0 +1,43 @@
+This Multi-Perspective Declare model describes a structured, end-to-end payroll processing workflow. It defines the sequence of administrative activities, the data attributes associated with each step, the constraints on that data, and the conditional rules governing the process. 
+
+Here is a natural language description of the model:
+
+### 1. Process Overview and Initiation
+The payroll process strictly begins with the **Submit Timesheet** activity. Once this activity is executed, it triggers a chain of dependent events where each subsequent step is mandatory once the previous one is completed. 
+
+### 2. Core Workflow Sequence
+The model enforces a strict linear progression of tasks using "Response" constraints. Once the process is initiated, the following sequence of activities must occur:
+1. **Submit Timesheet** must be followed by **Approve Timesheet**.
+2. **Approve Timesheet** must be followed by **Calculate Gross Pay**.
+3. **Calculate Gross Pay** must be followed by **Calculate Deductions**.
+4. **Calculate Deductions** must be followed by **Calculate Net Pay**.
+5. **Calculate Net Pay** must be followed by **Process Payment**.
+6. **Process Payment** must be followed by **Update Payroll Records**.
+7. **Update Payroll Records** must be followed by **Review Payroll Report**.
+
+Additionally, after the **Process Payment** activity occurs, a **Distribute Paystub** activity must also be executed. This distribution is bound by a time constraint: the paystub must be distributed within 24 hours of processing the payment.
+
+### 3. Conditional Rules and Exceptions
+There is a specific exception to the linear workflow regarding timesheet approvals:
+* Under normal circumstances, an employee cannot submit a new timesheet after their timesheet has been approved (modeled as a "Not Response" constraint). 
+* However, this rule is overridden if the **Timesheet Status** attribute of the *Approve Timesheet* activity is set to **Rejected**. If a timesheet is rejected, the employee is allowed to submit a new timesheet, effectively looping the process back to the beginning.
+
+### 4. Data Bindings and Attributes
+Each activity in the model is tied to specific data attributes that must be recorded or utilized during execution:
+* **Submit Timesheet** requires an Employee ID, Hours Worked, and a Timesheet Status.
+* **Approve Timesheet** requires an Employee ID and updates the Timesheet Status.
+* **Calculate Gross Pay** uses the Hours Worked and Pay Rate to determine the Gross Pay.
+* **Calculate Deductions** uses the Gross Pay to calculate Tax Deductions and Insurance Deductions.
+* **Calculate Net Pay** takes the Gross Pay, Tax Deduction, and Insurance Deduction to determine the final Net Pay.
+* **Process Payment** requires the Employee ID, the calculated Net Pay, and a specified Payment Method.
+
+### 5. Data Constraints
+To ensure data integrity, the model enforces strict boundaries on the values of the attributes:
+* **Employee ID** must be an integer between 1000 and 9999.
+* **Hours Worked** must be an integer between 0 and 80.
+* **Pay Rate** must be a decimal (float) value between $10.00 and $100.00.
+* **Gross Pay** and **Net Pay** must be decimal values between $0.00 and $10,000.00.
+* **Tax Deduction** must be a decimal value between $0.00 and $5,000.00.
+* **Insurance Deduction** must be a decimal value between $0.00 and $1,000.00.
+* **Timesheet Status** is an enumeration that can only be one of three states: *Submitted*, *Approved*, or *Rejected*.
+* **Payment Method** is an enumeration that can only be one of two options: *Direct Deposit* or *Check*.

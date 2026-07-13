@@ -1,0 +1,15 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This compliance process begins with an initial **Conduct Risk Assessment** activity, which must be the first step in the process. The assessment evaluates the **Risk Level** (Low, Medium, or High) and produces an **Assessment Score** (0.0 to 100.0).
+
+After the risk assessment, a **Develop Compliance Plan** activity is performed, tracking the **Plan Status** (Draft, Approved, or Implemented). This plan must eventually be followed by an **Approve Compliance Plan** activity. However, once the plan is approved, it cannot be approved again immediately; instead, the next occurrence must be a **Review Compliance Plan** activity (Alternate Succession), and this review must happen within 365 days.
+
+If the risk assessment determines that the **Risk Level is High**, then **Implement Controls** must occur within 30 days. The type of control (**Control Type**) can be Preventative, Detective, or Corrective.
+
+The process also includes mandatory **Train Employees** activity, which records **Training Hours** (0 to 40).
+
+Throughout the process, **Monitor Compliance** tracks the **Compliance Status** (Compliant, Non-Compliant, or Pending). If the status becomes **Non-Compliant**, a **Take Corrective Action** must be taken within 7 days.
+
+When violations occur, **Report Violations** records the **Number of Violations** (0 to 100) and the **Reporting Channel** (Email, Phone, or Online Portal). Every reported violation must be followed by an **Investigate Violations** activity, which assesses **Violation Severity** (1 to 5) and **Financial Impact** (0.0 to 1,000,000.0). After investigation, **Take Corrective Action** must follow.
+
+Additionally, if the **Number of Violations exceeds 5**, the **Review Compliance Plan** must be triggered within 14 days. Similarly, if the **Financial Impact exceeds 10,000**, the **Review Compliance Plan** must be triggered within 3 days.

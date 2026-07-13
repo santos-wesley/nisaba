@@ -1,0 +1,35 @@
+activity Submit Request
+activity Review Request
+activity Approve Request
+activity Reject Request
+activity Setup Remote Access
+activity Notify Employee
+activity Monitor Performance
+activity Update Payroll
+activity Revoke Remote Access
+activity Complete Survey
+bind Submit Request: Request ID, Employee Name, Request Type
+bind Review Request: Request ID, Decision
+bind Approve Request: Request ID
+bind Reject Request: Request ID
+bind Setup Remote Access: Request ID
+bind Notify Employee: Request ID
+bind Monitor Performance: Employee Name
+bind Update Payroll: Employee Name
+bind Revoke Remote Access: Request ID
+bind Complete Survey: Request ID, Survey Score
+Request ID: integer between None and None
+Request Type: Remote Work, Flexible Hours
+Decision: Approved, Rejected
+Survey Score: float between 0.0 and 10.0
+Employee Name: Employee1, Employee2, Employee3, Employee4, Employee5
+Init[Submit Request] | |
+Absence[Reject Request] | |
+Chain Precedence[Review Request, Submit Request] | | |
+Response[Submit Request, Review Request] | | |0,24,h
+Choice[Approve Request, Reject Request] | | |
+Precedence[Setup Remote Access, Approve Request] | | |
+Chain Succession[Setup Remote Access, Notify Employee] | | |
+Alternate Response[Monitor Performance, Update Payroll] | | |0,48,h
+Not Co-Existence[Setup Remote Access, Revoke Remote Access] | |A.Request ID == T.Request ID |
+Chain Response[Notify Employee, Complete Survey] | | |0,72,h

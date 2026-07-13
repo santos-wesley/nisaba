@@ -1,0 +1,50 @@
+**Multi-Perspective Declare Model: Digital Evidence Lifecycle**
+
+This model describes a formal, auditable process for managing digital evidence in a forensic or legal context. It defines a lifecycle that ensures evidence is collected, preserved, analyzed, and eventually disposed of in a secure, traceable, and compliant manner.
+
+### Core Process Flow
+
+The process **must start** with **Collect Digital Evidence** and **must end** with **Dispose Digital Evidence**.
+
+The expected main sequence is as follows:
+
+1. **Collect Digital Evidence** is performed first.
+2. This is **directly followed** by **Preserve Digital Evidence**.
+3. Once evidence is preserved, **Analyze Digital Evidence** must eventually occur (Response constraint).
+4. After analysis is completed, a **Generate Evidence Report** activity must occur immediately afterwards (Chain Response).
+5. **Document Chain Custody** must occur **before** any analysis takes place.
+6. **Review Evidence Report** and **Authorize Evidence Release** are tightly linked: reviewing a report must eventually lead to an authorization (Alternate Response).
+7. **Preserve Digital Evidence** also triggers a mandatory **Validate Evidence Integrity** check shortly after (Chain Response).
+
+### Mandatory and Optional Activities
+
+- **Analyze Digital Evidence** is mandatory — it must occur at least once in every trace.
+- **Secure Evidence Storage** and **Validate Evidence Integrity** must co-occur (if one happens, the other must also happen).
+- Either **Index Digital Evidence** or **Update Evidence Metadata** (or both) must be performed (Choice).
+- **Authorize Evidence Release** and **Dispose Digital Evidence** are mutually exclusive — only one of them can occur in a valid trace (Exclusive Choice).
+- **Classify Digital Evidence** and **Dispose Digital Evidence** can never both appear in the same case.
+
+### Security and Compliance Rules
+
+- **Audit Evidence Access** is only relevant if the evidence was ever collected **and** a legal hold is active (`Legal Hold = Yes`).
+- **Report Security Breach** cannot be immediately followed by **Dispose Digital Evidence** (Not Chain Succession), preventing hasty disposal after a breach is reported.
+- **Collect Digital Evidence**, **Preserve Digital Evidence**, **Analyze Digital Evidence**, and **Dispose Digital Evidence** are bound to relevant data attributes (Evidence Type, Integrity Score, Security Level, Disposal Method, etc.).
+
+### Data Perspective
+
+The model is enriched with the following data attributes:
+
+- **Evidence Type**: Document, Image, Video, Audio, Log File
+- **Evidence Size**: 1–1000 (units)
+- **Custody Status**: Collected → Preserved → Analyzed → Released → Disposed
+- **Integrity Score**: 0.0 to 1.0 (float)
+- **Security Level**: Confidential, Restricted, Unclassified
+- **Access Count**: 0–100
+- **Legal Hold**: Yes/No
+- **Analysis Time**: 0.1 to 24.0 hours
+- **Retention Period**: 30 to 3650 days
+- **Disposal Method**: Shredding, Wiping, Deletion
+
+### Summary
+
+This Declare model enforces a **secure, auditable, and non-reversible** digital evidence management process. It combines control-flow constraints (Succession, Response, Chain Response, Precedence, Existence, etc.) with data-aware conditions and mutual exclusion rules to ensure forensic soundness, regulatory compliance, and proper chain-of-custody documentation throughout the entire evidence lifecycle.

@@ -1,0 +1,44 @@
+# Fundraising Campaign Process Model Description
+
+This process model describes a donor management and fundraising campaign workflow, incorporating control-flow rules, data conditions, and time constraints.
+
+## Activities Involved
+The process encompasses 15 activities ranging from donor identification and solicitation (Identify Donor, Contact Donor, Request Donation, Receive Donation) through event management (Plan Fundraiser, Promote Event, Host Event) to feedback and improvement cycles (Collect Feedback, Analyze Feedback, Identify Improvement Areas, Implement Improvements) and closing activities (Report Results, Archive Records, Evaluate Campaign).
+
+## Data Perspective
+Several activities capture and use specific data attributes:
+- **Identify Donor** records a **Donor ID** (an integer between 1 and 10000)
+- **Request Donation** captures both the **Donor ID** and the **Donation Type** (Cash, Check, or Online Transfer)
+- **Receive Donation** logs the **Donation Amount** (a float ranging from 10 to 100,000)
+- **Promote Event** specifies the **Event Type** (Gala, Auction, or Online Campaign)
+- **Collect Feedback** records the **Feedback Type** (Positive, Neutral, or Negative)
+
+## Process Constraints
+
+**Start and End Conditions:**
+- The process must **begin** with the **Identify Donor** activity.
+- The process must **end** with the **Evaluate Campaign** activity.
+
+**Mandatory Activities:**
+- **Collect Feedback** must occur **at least three times** during the process.
+- **Promote Event** must occur **exactly once**.
+
+**Sequential Dependencies (Response Constraints):**
+- Whenever **Contact Donor** occurs, it must eventually be followed by **Request Donation**.
+- Whenever **Promote Event** occurs, it must eventually be followed by **Host Event**.
+- Whenever **Collect Feedback** occurs, it must eventually be followed by **Analyze Feedback**.
+- Whenever **Analyze Feedback** occurs, it must eventually be followed by **Identify Improvement Areas**.
+- Whenever **Host Event** occurs, it must eventually be followed by **Report Results**.
+- Whenever **Report Results** occurs, it must eventually be followed by **Archive Records**.
+- Whenever **Archive Records** occurs, it must eventually be followed by **Evaluate Campaign**.
+
+**Immediate Sequential Dependencies (Chain Response Constraints):**
+- Every time **Request Donation** occurs, it must be **immediately** followed by **Receive Donation**, and this must happen within **24 days**.
+- Every time **Identify Improvement Areas** occurs, it must be **immediately** followed by **Implement Improvements**, within **7 days**.
+- Every time **Receive Donation** occurs, it must be **immediately** followed by **Send Thank You Note**, within **48 hours**.
+
+**Conditional Chain Response (Data-Aware Constraint):**
+- Additionally, whenever a donation is received with a **Donation Amount greater than 100**, the **Send Thank You Note** activity must immediately follow, reinforcing prompt donor acknowledgment for significant contributions.
+
+## Summary
+This model represents a structured fundraising lifecycle that starts with donor identification, proceeds through donation solicitation and event promotion, incorporates a continuous feedback and improvement loop (with mandatory multiple feedback collection), and concludes with reporting, archiving, and campaign evaluation. Strict timing rules ensure donations are acknowledged promptly (within 48 hours, or immediately for donations over $100) and that donations are processed within 24 days of being requested, while improvement actions must follow identified areas within a week.

@@ -1,0 +1,44 @@
+activity Conduct Risk Assessment
+activity Develop Compliance Plan
+activity Approve Compliance Plan
+activity Implement Controls
+activity Conduct Employee Training
+activity Monitor Compliance
+activity Report Violation
+activity Conduct Investigation
+activity Take Corrective Action
+activity Review Compliance Plan
+bind Conduct Risk Assessment: Risk Level, Assessment Score
+bind Develop Compliance Plan: Plan Status
+bind Approve Compliance Plan: Plan Status
+bind Implement Controls: Control Type
+bind Conduct Employee Training: Training Hours
+bind Monitor Compliance: Compliance Status, Number of Violations
+bind Report Violation: Violation Severity, Number of Violations
+bind Conduct Investigation: Financial Impact
+bind Take Corrective Action: Violation Severity
+bind Review Compliance Plan: Plan Status
+Risk Level: High, Medium, Low
+Assessment Score: integer between 0 and 100
+Plan Status: Draft, Approved, Under Review
+Compliance Status: Compliant, Non-Compliant
+Violation Severity: Critical, High, Medium, Low
+Financial Impact: float between 0 and 1000000
+Control Type: Preventive, Detective, Corrective
+Training Hours: integer between 1 and 40
+Number of Violations: integer between 0 and 100
+Init[Conduct Risk Assessment] | |
+Existence[Conduct Employee Training] | |
+Response[Conduct Risk Assessment, Develop Compliance Plan] | | |
+Response[Develop Compliance Plan, Approve Compliance Plan] | | |
+Response[Approve Compliance Plan, Implement Controls] | | |
+Response[Implement Controls, Conduct Employee Training] | | |
+Response[Conduct Employee Training, Monitor Compliance] | | |
+Chain Response[Report Violation, Conduct Investigation] | | |
+Chain Response[Conduct Investigation, Take Corrective Action] | | |
+Response[Conduct Risk Assessment, Implement Controls] |A.Risk Level is High | |0,30,d
+Response[Monitor Compliance, Take Corrective Action] |A.Compliance Status is Non-Compliant | |0,7,d
+Response[Monitor Compliance, Review Compliance Plan] |A.Number of Violations > 5 | |0,14,d
+Response[Conduct Investigation, Review Compliance Plan] |A.Financial Impact > 10000 | |0,3,d
+Alternate Succession[Approve Compliance Plan, Review Compliance Plan] | | |
+Response[Review Compliance Plan, Approve Compliance Plan] | | |

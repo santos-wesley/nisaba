@@ -1,0 +1,52 @@
+activity Prepare Sample
+activity Conduct X-ray Diffraction
+activity Measure Hardness
+activity Analyze Microstructure
+activity Perform Thermal Analysis
+activity Conduct Tensile Test
+activity Evaluate Corrosion Resistance
+activity Perform Chemical Analysis
+activity Calibrate Equipment
+activity Document Results
+activity Review Findings
+activity Prepare Report
+activity Approve Material
+activity Reject Material
+activity Store Sample
+bind Prepare Sample: Sample ID
+bind Conduct X-ray Diffraction: Sample ID, X-ray Intensity
+bind Measure Hardness: Sample ID, Hardness Value
+bind Analyze Microstructure: Sample ID, Microstructure Type
+bind Perform Thermal Analysis: Sample ID, Thermal Conductivity
+bind Conduct Tensile Test: Sample ID, Tensile Strength
+bind Evaluate Corrosion Resistance: Sample ID, Corrosion Resistance
+bind Perform Chemical Analysis: Sample ID, Chemical Purity
+bind Calibrate Equipment: Equipment Status
+bind Document Results: Sample ID
+bind Review Findings: Sample ID
+bind Prepare Report: Sample ID
+bind Approve Material: Sample ID
+bind Reject Material: Sample ID
+bind Store Sample: Sample ID
+Sample ID: integer between 1 and 1000
+X-ray Intensity: integer between 0 and 10000
+Hardness Value: float between 0.0 and 100.0
+Microstructure Type: Grain, Fiber, Amorphous
+Thermal Conductivity: float between 0.0 and 500.0
+Tensile Strength: float between 0.0 and 2000.0
+Corrosion Resistance: High, Medium, Low
+Chemical Purity: float between 0.0 and 100.0
+Equipment Status: Calibrated, Not Calibrated
+Init[Prepare Sample] | |
+Response[Conduct X-ray Diffraction, Analyze Microstructure] |A.Equipment Status is Calibrated |A.Sample ID == T.Sample ID |0,2,h
+Chain Succession[Measure Hardness, Conduct Tensile Test] | |A.Sample ID == T.Sample ID |0,1,h
+Succession[Perform Thermal Analysis, Evaluate Corrosion Resistance] | |A.Sample ID == T.Sample ID |0,1,d
+Precedence[Document Results, Review Findings] | |A.Sample ID == T.Sample ID |
+Response[Document Results, Prepare Report] | |A.Sample ID == T.Sample ID |0,1,d
+Precedence[Review Findings, Approve Material] | |A.Sample ID == T.Sample ID |
+Precedence[Review Findings, Reject Material] | |A.Sample ID == T.Sample ID |
+Precedence[Calibrate Equipment, Conduct X-ray Diffraction] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Measure Hardness] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Conduct Tensile Test] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Perform Thermal Analysis] |A.Equipment Status is Calibrated | |
+Precedence[Calibrate Equipment, Evaluate Corrosion Resistance] |A.Equipment Status is Calibrated | |

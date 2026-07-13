@@ -1,0 +1,39 @@
+**Multi-Perspective Declare Model: Contract Lifecycle**
+
+This model describes a formal business process for handling contracts with the following mandatory sequence of activities:
+
+### Core Process Flow
+Every contract must begin with **Draft Contract** and must eventually reach **Archive Contract**. 
+
+The expected lifecycle is:
+1. **Draft Contract** → **Review Contract**
+2. After review, the contract may require **Negotiate Terms** (especially if changes are needed)
+3. Following negotiation (or directly after review), the contract must go through **Approve Contract**
+4. Once approved, the contract must be **Sign Contract**
+5. Finally, the fully signed contract must be **Archive Contract**
+
+### Key Constraints and Rules
+
+**Mandatory Activities & Ordering:**
+- **Review Contract** must occur at least once in every process instance.
+- **Draft Contract** must always be the first activity.
+- **Archive Contract** must always be the last activity.
+
+**Conditional Flows:**
+- If the **Review Contract** results in **"Requires Changes"**, then **Negotiate Terms** must subsequently occur (up to 3 times).
+- After negotiation, the process returns to **Approve Contract** (up to 2 times).
+- **Sign Contract** can only occur after **Approve Contract** has been completed with **Approval Status = "Approved"**.
+- **Archive Contract** can only occur after **Sign Contract** has reached **Signature Status = "Fully Signed"**.
+
+**Compliance Rules:**
+- A contract cannot be signed (**Sign Contract**) before it has been reviewed (**Review Contract**).
+- If a contract is reviewed with outcome **"Rejected"**, it cannot proceed to signing while the signature status remains **"Unsigned"**.
+
+**Data Perspectives:**
+- Each **Draft Contract** captures a **Contract ID** (integer 1000–9999) and **Contract Value** (between 10,000.0 and 1,000,000.0).
+- **Review Contract** produces a **Review Outcome** (Accepted, Requires Changes, or Rejected).
+- **Approve Contract** produces an **Approval Status** (Pending, Approved, or Rejected).
+- **Sign Contract** tracks **Signature Status** (Unsigned, Partially Signed, or Fully Signed).
+
+### Summary
+The model enforces a structured yet flexible contract management process that ensures all contracts are properly drafted, reviewed, negotiated when necessary, approved, signed by all parties, and finally archived. The constraints prevent premature signing of unreviewed or rejected contracts and ensure proper progression through approval and signature stages before archiving.

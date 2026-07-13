@@ -1,0 +1,46 @@
+# Multi-Perspective Declare Model Description
+
+This process model describes a **train scheduling and operations management system**, combining control-flow rules, data constraints, and activity attributes.
+
+## Activities and Data
+
+The model contains **10 activities**, each associated with specific data attributes:
+
+- **Schedule Train**: records Train ID and Schedule Version
+- **Allocate Resources**: records Train ID and Track Number
+- **Monitor Train**: records Train ID and Train Status (On Time, Delayed, Cancelled, Completed)
+- **Manage Delay**: records Train ID and Delay Duration (0.0–300.0)
+- **Perform Maintenance**: records Train ID and Maintenance Type (Routine, Emergency, Scheduled)
+- **Inspect Track**: records Track Number and Inspection Score (0.0–10.0)
+- **Dispatch Train**: records Train ID and Priority Level (High, Medium, Low)
+- **Receive Train**: records Train ID and Passenger Count (0–1500)
+- **Update Schedule**: records Train ID and Schedule Version
+- **Cancel Train**: records Train ID and Reason Cancel (Weather, Maintenance, Technical Issue)
+
+Train IDs are 4-digit integers (1000–9999), and Schedule Version and Track Number are bounded integers.
+
+## Process Behavior (Control-Flow & Data Constraints)
+
+1. **Initialization**: Every process instance must **start with "Schedule Train"**.
+
+2. **Dispatch before Allocation**: "Allocate Resources" can only occur if it is **preceded by "Dispatch Train"** at some earlier point.
+
+3. **Delay Response with Data Condition**: If "Monitor Train" is executed **and its Train Status is "Delayed"**, then "Manage Delay" must **eventually follow**.
+
+4. **Chain Precedence (Maintenance)**: "Perform Maintenance" can only occur **immediately after** "Dispatch Train" — no other activity may occur in between.
+
+5. **Succession (Track Inspection)**: "Inspect Track" and "Allocate Resources" must **mutually succeed** each other: whenever "Inspect Track" occurs, "Allocate Resources" must eventually follow, and "Allocate Resources" must always be preceded by "Inspect Train" at some point.
+
+6. **Responded Existence**: If "Dispatch Train" occurs, then "Receive Train" must **also occur** (in any order) somewhere in the trace.
+
+7. **Mutual Exclusivity**: "Dispatch Train" and "Cancel Train" **cannot both occur** in the same process instance — a train is either dispatched or cancelled, never both.
+
+8. **Not Chain Succession**: "Update Schedule" must **never be immediately followed** by "Schedule Train" — these two activities cannot occur consecutively in that order.
+
+9. **Choice Constraint**: At least **one of "Dispatch Train" or "Cancel Train"** must occur in every process instance.
+
+10. **Bounded Occurrence**: "Cancel Train" can occur **at most twice** (or fewer) throughout the process instance.
+
+## Summary
+
+This model governs a train's lifecycle from scheduling through dispatch, monitoring, and potential delays or cancellations. It enforces strict ordering (e.g., inspection before resource allocation, dispatch before maintenance), data-aware responses (delays trigger delay management), and mutually exclusive outcomes (a train is either dispatched or cancelled, not both), while limiting how often cancellations may occur.

@@ -1,0 +1,33 @@
+## Activities
+- **Receive Currency**: The 'Receive Currency' activity represents the process of accepting currency from a customer for exchange.
+- **Verify Currency Authenticity**: The 'Verify Currency Authenticity' activity involves checking the received currency to confirm it is genuine.
+- **Calculate Exchange Rate**: The 'Calculate Exchange Rate' activity involves determining the applicable exchange rate for the currency exchange transaction.
+- **Approve Exchange**: The 'Approve Exchange' activity represents the authorization of the currency exchange transaction.
+- **Reject Exchange**: The 'Reject Exchange' activity represents the denial of the currency exchange transaction.
+- **Process Exchange**: The 'Process Exchange' activity involves carrying out the approved currency exchange transaction.
+- **Issue Receipt**: The 'Issue Receipt' activity involves generating and providing a receipt for the completed transaction.
+- **Notify Customer**: The 'Notify Customer' activity involves informing the customer about the status of their exchange request.
+- **Record Transaction**: The 'Record Transaction' activity involves logging the details of the completed exchange transaction.
+- **Update Exchange Rates**: The 'Update Exchange Rates' activity involves refreshing the exchange rate values used for currency transactions.
+
+## Attributes
+- **Amount: Integer between 1 and 10000**: The attribute 'Amount: Integer between 1 and 10000' represents the quantity of currency involved in the exchange transaction.
+- **Exchange Rate: Float between 0.5 and 1.5**: The attribute 'Exchange Rate: Float between 0.5 and 1.5' represents the rate used to convert one currency to another.
+- **Currency Type: USD, EUR, GBP, JPY**: The attribute 'Currency Type: USD, EUR, GBP, JPY' specifies the type of currency involved in the transaction.
+- **Exchange Status: Pending, Approved, Rejected**: The attribute 'Exchange Status: Pending, Approved, Rejected' specifies the current status of the currency exchange request.
+- **Transaction ID: Integer between 1000 and 9999**: The attribute 'Transaction ID: Integer between 1000 and 9999' represents the unique identification number assigned to a transaction.
+
+## Binds
+- **Receive Currency: Amount, Currency Type**: The bind 'Receive Currency: Amount, Currency Type' specifies that the activity 'Receive Currency' requires the attributes 'Amount' and 'Currency Type'.
+- **Verify Currency Authenticity: Currency Type**: The bind 'Verify Currency Authenticity: Currency Type' links the 'Verify Currency Authenticity' activity with the attribute 'Currency Type'.
+- **Calculate Exchange Rate: Exchange Rate**: The bind 'Calculate Exchange Rate: Exchange Rate' links the 'Calculate Exchange Rate' activity with the attribute 'Exchange Rate'.
+- **Approve Exchange: Exchange Status**: The bind 'Approve Exchange: Exchange Status' links the 'Approve Exchange' activity with the attribute 'Exchange Status'.
+- **Reject Exchange: Exchange Status**: The bind 'Reject Exchange: Exchange Status' links the 'Reject Exchange' activity with the attribute 'Exchange Status'.
+- **Process Exchange: Transaction ID**: The bind 'Process Exchange: Transaction ID' links the 'Process Exchange' activity with the attribute 'Transaction ID'.
+- **Issue Receipt: Transaction ID**: The bind 'Issue Receipt: Transaction ID' links the 'Issue Receipt' activity with the attribute 'Transaction ID'.
+- **Notify Customer: Exchange Status**: The bind 'Notify Customer: Exchange Status' links the 'Notify Customer' activity with the attribute 'Exchange Status'.
+- **Record Transaction: Transaction ID**: The bind 'Record Transaction: Transaction ID' links the 'Record Transaction' activity with the attribute 'Transaction ID'.
+- **Update Exchange Rates: Exchange Rate**: The bind 'Update Exchange Rates: Exchange Rate' links the 'Update Exchange Rates' activity with the attribute 'Exchange Rate'.
+
+## Constraints
+

@@ -1,0 +1,137 @@
+#MP-Declare Model
+## Activities
+- **Receive Currency**: The 'Receive Currency' activity represents the process of accepting currency from a customer for exchange.
+- **Verify Currency Authenticity**: The 'Verify Currency Authenticity' activity involves checking the received currency to confirm it is genuine.
+- **Calculate Exchange Rate**: The 'Calculate Exchange Rate' activity involves determining the applicable exchange rate for the currency exchange transaction.
+- **Approve Exchange**: The 'Approve Exchange' activity represents the authorization of the currency exchange transaction.
+- **Reject Exchange**: The 'Reject Exchange' activity represents the denial of the currency exchange transaction.
+- **Process Exchange**: The 'Process Exchange' activity involves carrying out the approved currency exchange transaction.
+- **Issue Receipt**: The 'Issue Receipt' activity involves generating and providing a receipt for the completed transaction.
+- **Notify Customer**: The 'Notify Customer' activity involves informing the customer about the status of their exchange request.
+- **Record Transaction**: The 'Record Transaction' activity involves logging the details of the completed exchange transaction.
+- **Update Exchange Rates**: The 'Update Exchange Rates' activity involves refreshing the exchange rate values used for currency transactions.
+
+## Attributes
+- **Amount: Integer between 1 and 10000**: The attribute 'Amount: Integer between 1 and 10000' represents the quantity of currency involved in the exchange transaction.
+- **Exchange Rate: Float between 0.5 and 1.5**: The attribute 'Exchange Rate: Float between 0.5 and 1.5' represents the rate used to convert one currency to another.
+- **Currency Type: USD, EUR, GBP, JPY**: The attribute 'Currency Type: USD, EUR, GBP, JPY' specifies the type of currency involved in the transaction.
+- **Exchange Status: Pending, Approved, Rejected**: The attribute 'Exchange Status: Pending, Approved, Rejected' specifies the current status of the currency exchange request.
+- **Transaction ID: Integer between 1000 and 9999**: The attribute 'Transaction ID: Integer between 1000 and 9999' represents the unique identification number assigned to a transaction.
+
+## Binds
+- **Receive Currency: Amount, Currency Type**: The bind 'Receive Currency: Amount, Currency Type' specifies that the activity 'Receive Currency' requires the attributes 'Amount' and 'Currency Type'.
+- **Verify Currency Authenticity: Currency Type**: The bind 'Verify Currency Authenticity: Currency Type' links the 'Verify Currency Authenticity' activity with the attribute 'Currency Type'.
+- **Calculate Exchange Rate: Exchange Rate**: The bind 'Calculate Exchange Rate: Exchange Rate' links the 'Calculate Exchange Rate' activity with the attribute 'Exchange Rate'.
+- **Approve Exchange: Exchange Status**: The bind 'Approve Exchange: Exchange Status' links the 'Approve Exchange' activity with the attribute 'Exchange Status'.
+- **Reject Exchange: Exchange Status**: The bind 'Reject Exchange: Exchange Status' links the 'Reject Exchange' activity with the attribute 'Exchange Status'.
+- **Process Exchange: Transaction ID**: The bind 'Process Exchange: Transaction ID' links the 'Process Exchange' activity with the attribute 'Transaction ID'.
+- **Issue Receipt: Transaction ID**: The bind 'Issue Receipt: Transaction ID' links the 'Issue Receipt' activity with the attribute 'Transaction ID'.
+- **Notify Customer: Exchange Status**: The bind 'Notify Customer: Exchange Status' links the 'Notify Customer' activity with the attribute 'Exchange Status'.
+- **Record Transaction: Transaction ID**: The bind 'Record Transaction: Transaction ID' links the 'Record Transaction' activity with the attribute 'Transaction ID'.
+- **Update Exchange Rates: Exchange Rate**: The bind 'Update Exchange Rates: Exchange Rate' links the 'Update Exchange Rates' activity with the attribute 'Exchange Rate'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the currency exchange transaction process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Receive Currency,' which involves accepting currency from a customer for exchange, characterized by the 'Amount' and 'Currency Type' attributes. This establishes the initial context, marking the entry point through which all subsequent exchange activities are triggered.
+
+#### **End Constraints**
+The process concludes with the activity 'Record Transaction,' which involves logging the details of the completed exchange transaction, bound to the 'Transaction ID' attribute. As the final act of the process, this constraint ensures that every transaction, once processed, is conclusively documented, thereby closing the model coherently.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Verify Currency Authenticity' activity must occur at least once in the process. This adds depth to the model by ensuring that every currency received is checked for genuineness before any further steps are undertaken, reinforcing the reliability of the exchange process. Similarly, the 'Calculate Exchange Rate' activity must occur at least once, elaborating on the necessity of determining an applicable rate before the transaction can proceed toward approval.
+
+#### **Absence Constraints**
+In contrast, the 'Update Exchange Rates' activity is restricted from occurring more than once within a single transaction instance. This exclusion reinforces process integrity by preventing redundant rate updates from interfering with a single exchange, thereby preserving the coherence of the rate applied within that transaction.
+
+#### **Exactly Constraints**
+In summary, the 'Issue Receipt' activity must occur exactly once per transaction. This sets a fixed boundary, ensuring that each completed exchange results in precisely one receipt, no more and no less, thereby maintaining precision within the process model.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+As a cause-effect relationship, whenever the 'Approve Exchange' activity occurs, the 'Process Exchange' activity must also occur somewhere in the process. This establishes a dependency in which authorization necessitates that the exchange be carried out, enhancing coherence between decision-making and execution.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. Setting up the initial context of verification, the activity 'Approve Exchange' is permitted to occur only if a 'Verify Currency Authenticity' activity has occurred before it. This background ensures that authenticity is confirmed prior to any authorization decision.
+2. Likewise, the activity 'Process Exchange' is permitted to occur only if a 'Calculate Exchange Rate' activity, bound to the 'Exchange Rate' attribute, has occurred before it, guaranteeing that a valid rate underlies the transaction before it is executed.
+3. Furthermore, the activity 'Issue Receipt' is permitted to occur only if a 'Process Exchange' activity, bound to the 'Transaction ID' attribute, has occurred before it, ensuring that a receipt is never generated for a transaction that has not been processed.
+
+#### **Response Constraints**
+1. In sequence, if the 'Receive Currency' activity occurs with the 'Amount' and 'Currency Type' attributes recorded, then the 'Verify Currency Authenticity' activity must eventually occur, ensuring a cohesive temporal structure whereby every received currency is subsequently authenticated.
+2. Similarly, if the 'Approve Exchange' activity occurs with the 'Exchange Status' set to Approved, then the 'Notify Customer' activity must eventually occur with the 'Exchange Status' communicated, ensuring that approval is always followed by timely customer communication.
+
+#### **Succession Constraints**
+Establishing a causal link, whenever the 'Process Exchange' activity occurs with a valid 'Transaction ID,' it must be followed by the 'Record Transaction' activity with the corresponding 'Transaction ID,' and conversely, 'Record Transaction' must be preceded by 'Process Exchange.' This cause-effect relationship ensures that every processed exchange is logically followed by its logging, creating a cohesive progression from execution to documentation.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Promoting balance in the process, each occurrence of the 'Receive Currency' activity must be followed by a unique occurrence of the 'Calculate Exchange Rate' activity before any subsequent 'Receive Currency' activity takes place. This condition-consequence relationship ensures a clear one-to-one pairing between received currencies and their corresponding rate calculations.
+
+#### **Alternate Precedence Constraints**
+Correspondingly, each occurrence of the 'Notify Customer' activity must be preceded by a unique occurrence of either the 'Approve Exchange' or 'Reject Exchange' activity, without an intervening repetition of 'Notify Customer.' This ensures order consistency, guaranteeing that every notification is grounded in a distinct decision outcome.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Capturing immediate succession, whenever the 'Approve Exchange' activity occurs with the 'Exchange Status' set to Approved, it must be immediately followed by the 'Process Exchange' activity with no intervening activities. This cause-and-effect relationship ensures that approved exchanges are acted upon without delay.
+
+#### **Chain Precedence Constraints**
+Establishing immediate dependency, the 'Issue Receipt' activity must be directly preceded by the 'Process Exchange' activity, with no other activity occurring between them, making the sequence explicit and precise in linking processing to receipt issuance.
+
+#### **Chain Succession Constraints**
+Enforcing a tightly coupled sequence, whenever the 'Process Exchange' activity occurs, it must be directly succeeded by the 'Record Transaction' activity, and 'Record Transaction' must be directly preceded by 'Process Exchange,' with no intervening activities in either direction. This ensures an unbroken, immediate link between the execution of the exchange and its official recording.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+Establishing mutual dependency, the 'Calculate Exchange Rate' activity and the 'Process Exchange' activity must occur together within the process flow, as one cannot meaningfully occur without the other in a completed transaction.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Introducing alternative paths, the process permits either the 'Approve Exchange' activity or the 'Reject Exchange' activity to occur, allowing flexibility in how a given currency exchange request is resolved.
+
+#### **Exclusive Choice Constraints**
+Enforcing mutually exclusive pathways, exactly one of 'Approve Exchange' or 'Reject Exchange' must occur for any given transaction, ensuring that a request cannot be simultaneously approved and rejected.
+
+#### **Not Co-Existence Constraints**
+Setting exclusion rules, the 'Approve Exchange' activity and the 'Reject Exchange' activity cannot both occur within the same process instance when tied to the same 'Exchange Status' attribute value, thereby maintaining process integrity by preventing conflicting decisions on a single transaction.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+Preventing certain dependencies, the occurrence of the 'Reject Exchange' activity does not require, and must not necessitate, the occurrence of the 'Process Exchange' activity, refining the model by disallowing execution of a transaction that has been denied.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+Restricting activities from occurring in a specific order, the 'Reject Exchange' activity must not precede the 'Process Exchange' activity, ensuring that a rejected exchange can never be positioned before, and thereby cannot lead into, an execution step.
+
+#### **Not Response Constraints**
+Preventing activities from following a specific sequence, the 'Reject Exchange' activity must not be followed by the 'Process Exchange' activity at any point in the process, maintaining the integrity of the model's intended progression by ensuring rejected requests are never carried out.
+
+#### **Not Succession Constraints**
+Restricting overlapping sequences, the 'Reject Exchange' activity must not be in a successive relationship with the 'Issue Receipt' activity in either direction, preserving the model's defined flow by ensuring that no receipt is ever tied to a denied exchange.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+Enforcing non-immediate order restrictions, the 'Update Exchange Rates' activity must not immediately precede the 'Issue Receipt' activity, maintaining separation within the sequence between rate maintenance operations and transaction closure.
+
+#### **Not Chain Response Constraints**
+Preventing immediate succession, the 'Reject Exchange' activity must not be immediately followed by the 'Record Transaction' activity, preserving structural integrity by ensuring that a rejected transaction is not immediately logged as if it were completed.
+
+#### **Not Chain Succession Constraints**
+Preventing direct succession, the 'Update Exchange Rates' activity and the 'Verify Currency Authenticity' activity must not immediately precede or follow each other, thereby refining the process model by excluding a direct sequential link between rate updates and authenticity verification.

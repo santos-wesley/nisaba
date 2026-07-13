@@ -1,0 +1,60 @@
+**Multi-Perspective Declare Model: Molecular Biology Laboratory Workflow**
+
+This model describes a flexible laboratory process that supports two alternative workflows — **DNA sequencing** and **protein expression analysis** — while enforcing several strict constraints on the order, existence, and mutual exclusion of activities.
+
+### Core Activities
+The process consists of 15 laboratory activities:
+
+**DNA-related path:**
+- Extract DNA
+- Quantify DNA
+- PCR Amplify
+- Gel Electrophoresis
+- Purify PCR Product
+- Sanger Sequence
+- Analyze Sequences
+- Clone DNA
+- Transform Cells
+- Culture Cells
+- Harvest Cells
+
+**Protein-related path:**
+- Extract Protein
+- Quantify Protein
+- Western Blot
+- Analyze Protein Expression
+
+### Data Perspective (Bindings)
+Each activity is associated with specific data parameters:
+- Most activities are linked to a **Sample ID** (integer 1–99999).
+- Quantitative measurements include **DNA Concentration** (0.1–1000.0), **Protein Concentration** (0.01–500.0), **Sequence Quality Score** (0.0–100.0), and **Colony Count** (0–1000).
+- Categorical parameters include **PCR Primers**, **Gel Type**, **Vector Type**, and **Antibody Type**.
+
+### Control-Flow Constraints
+
+**Mandatory & Structural Rules:**
+- The process **must start** with `Extract DNA`.
+- `Quantify DNA` **must occur at least once**.
+- `Extract Protein` **must never occur** (this path is explicitly forbidden in this model).
+- The process **must end** with `Analyze Protein Expression` (note: this creates an interesting tension with the Absence constraint above).
+
+**Ordering & Response Constraints:**
+- `Purify PCR Product` must **precede** `Gel Electrophoresis`.
+- `Sanger Sequence` must be **followed by** `Analyze Sequences` (Response).
+- `Transform Cells` must be **directly followed** by `Culture Cells` (Succession).
+- `Quantify Protein` must be **immediately preceded** by `Extract Protein` (Chain Precedence) — however, this is impossible because `Extract Protein` is forbidden.
+- `Western Blot` must be **immediately followed** by `Analyze Protein Expression` (Chain Response).
+- `PCR Amplify` and `Gel Electrophoresis` **co-occur** (if one happens, the other must too).
+- `Quantify DNA` must **precede** `PCR Amplify`, and they cannot be interleaved with other Quantify DNA instances (Alternate Precedence).
+- `Culture Cells` must be **followed by** `Harvest Cells`, with at most one `Harvest Cells` occurring after each `Culture Cells` (Alternate Response).
+
+**Temporal & Performance Constraints:**
+- Between `PCR Amplify` and `Gel Electrophoresis` there must be **0 to 15 time units** (medium priority).
+- Between `Culture Cells` and `Harvest Cells` there must be **0 to 1 time unit** (high priority).
+
+**Mutual Exclusion & Choice:**
+- `Extract Protein` and `Quantify Protein` **cannot co-occur** (Not Co-Existence).
+- `Clone DNA` and `Transform Cells` are in an **Exclusive Choice** — exactly one of them must be executed, but not both.
+
+### Summary of Process Intent
+The model represents a laboratory protocol that begins with DNA extraction and quantification, proceeds through PCR and sequencing or cloning, but explicitly forbids the standard protein extraction route. Interestingly, it mandates ending with protein expression analysis (`Analyze Protein Expression`) and Western Blot, creating a hybrid workflow that combines DNA manipulation with final protein-level validation, while maintaining strict data binding, temporal windows, and mutual exclusion rules between certain molecular biology techniques.

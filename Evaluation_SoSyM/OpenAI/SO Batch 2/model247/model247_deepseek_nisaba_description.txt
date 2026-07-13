@@ -1,0 +1,93 @@
+#MP-Declare Model
+## Activities
+- **File Patent Application**: The 'File Patent Application' activity represents the submission of a patent application to the intellectual property office.
+- **Conduct Patent Search**: The 'Conduct Patent Search' activity involves searching existing patents to determine the novelty of the invention.
+- **Examine Patent Application**: The 'Examine Patent Application' activity involves reviewing the patent application to assess its compliance with legal requirements.
+- **Grant Patent**: The 'Grant Patent' activity represents the official approval and issuance of a patent.
+- **Reject Patent Application**: The 'Reject Patent Application' activity represents the denial of a patent application.
+- **File Trademark Application**: The 'File Trademark Application' activity represents the submission of a trademark application to the intellectual property office.
+- **Conduct Trademark Search**: The 'Conduct Trademark Search' activity involves searching existing trademarks to determine potential conflicts.
+- **Examine Trademark Application**: The 'Examine Trademark Application' activity involves reviewing the trademark application to assess its compliance with legal requirements.
+- **Grant Trademark**: The 'Grant Trademark' activity represents the official approval and registration of a trademark.
+- **Reject Trademark Application**: The 'Reject Trademark Application' activity represents the denial of a trademark application.
+- **File Copyright Registration**: The 'File Copyright Registration' activity represents the submission of a copyright registration application.
+- **Examine Copyright Application**: The 'Examine Copyright Application' activity involves reviewing the copyright application to assess its compliance with legal requirements.
+- **Grant Copyright**: The 'Grant Copyright' activity represents the official approval and registration of a copyright.
+- **Reject Copyright Application**: The 'Reject Copyright Application' activity represents the denial of a copyright registration application.
+- **Appeal Decision**: The 'Appeal Decision' activity involves challenging a rejected application decision through a formal appeal process.
+
+## Attributes
+- **Application ID: integer between 1 and 1000000**: The attribute 'Application ID: integer between 1 and 1000000' represents the unique identification number assigned to each application.
+- **Application Fee: float between 50.0 and 10000.0**: The attribute 'Application Fee: float between 50.0 and 10000.0' represents the fee amount required to be paid when filing an application.
+- **Application Status: Pending, Approved, Rejected**: The attribute 'Application Status: Pending, Approved, Rejected' specifies the current status of an application, which can be pending review, approved, or rejected.
+- **Search Result: Clear, Conflict**: The attribute 'Search Result: Clear, Conflict' indicates whether a search found no conflicting prior rights (Clear) or identified a potential conflict (Conflict).
+- **Decision: Granted, Rejected**: The attribute 'Decision: Granted, Rejected' specifies the outcome of an examination, which can be either granted or rejected.
+
+## Binds
+- **bind File Patent Application: Application ID, Application Fee**: The bind 'File Patent Application: Application ID, Application Fee' links the 'File Patent Application' activity with the attributes 'Application ID' and 'Application Fee'.
+- **bind Conduct Patent Search: Search Result**: The bind 'Conduct Patent Search: Search Result' links the 'Conduct Patent Search' activity with the attribute 'Search Result'.
+- **bind Examine Patent Application: Application Status**: The bind 'Examine Patent Application: Application Status' links the 'Examine Patent Application' activity with the attribute 'Application Status'.
+- **bind Grant Patent: Decision**: The bind 'Grant Patent: Decision' links the 'Grant Patent' activity with the attribute 'Decision'.
+- **bind Reject Patent Application: Decision**: The bind 'Reject Patent Application: Decision' links the 'Reject Patent Application' activity with the attribute 'Decision'.
+- **bind File Trademark Application: Application ID, Application Fee**: The bind 'File Trademark Application: Application ID, Application Fee' links the 'File Trademark Application' activity with the attributes 'Application ID' and 'Application Fee'.
+- **bind Conduct Trademark Search: Search Result**: The bind 'Conduct Trademark Search: Search Result' links the 'Conduct Trademark Search' activity with the attribute 'Search Result'.
+- **bind Examine Trademark Application: Application Status**: The bind 'Examine Trademark Application: Application Status' links the 'Examine Trademark Application' activity with the attribute 'Application Status'.
+- **bind Grant Trademark: Decision**: The bind 'Grant Trademark: Decision' links the 'Grant Trademark' activity with the attribute 'Decision'.
+- **bind Reject Trademark Application: Decision**: The bind 'Reject Trademark Application: Decision' links the 'Reject Trademark Application' activity with the attribute 'Decision'.
+- **bind File Copyright Registration: Application ID, Application Fee**: The bind 'File Copyright Registration: Application ID, Application Fee' links the 'File Copyright Registration' activity with the attributes 'Application ID' and 'Application Fee'.
+- **bind Examine Copyright Application: Application Status**: The bind 'Examine Copyright Application: Application Status' links the 'Examine Copyright Application' activity with the attribute 'Application Status'.
+- **bind Grant Copyright: Decision**: The bind 'Grant Copyright: Decision' links the 'Grant Copyright' activity with the attribute 'Decision'.
+- **bind Reject Copyright Application: Decision**: The bind 'Reject Copyright Application: Decision' links the 'Reject Copyright Application' activity with the attribute 'Decision'.
+- **bind Appeal Decision: Application ID**: The bind 'Appeal Decision: Application ID' links the 'Appeal Decision' activity with the attribute 'Application ID'.
+
+## Constraints
+- **Init[File Patent Application] | |**: The 'File Patent Application' must be the first activity to occur in the process.
+- **End[Grant Patent] | |**: The 'Grant Patent' must be the last activity to occur in the process.
+- **End[Reject Patent Application] | |**: The 'Reject Patent Application' must be the last activity to occur in the process.
+- **Response[Conduct Patent Search, Examine Patent Application] |A.Search Result is Clear | |0,2,d**: If a 'Conduct Patent Search' activity occurs, then a 'Examine Patent Application' activity must eventually occur after the 'Conduct Patent Search' event at some point in the same process instance, provided that the activation condition is met: the attribute 'Search Result' of the 'Conduct Patent Search' activity is 'Clear'. This must happen within 0 to 2 days.
+- **Response[Conduct Trademark Search, Examine Trademark Application] |A.Search Result is Clear | |0,2,d**: If a 'Conduct Trademark Search' activity occurs, then a 'Examine Trademark Application' activity must eventually occur after the 'Conduct Trademark Search' event at some point in the same process instance, provided that the activation condition is met: the attribute 'Search Result' of the 'Conduct Trademark Search' activity is 'Clear'. This must happen within 0 to 2 days.
+- **Response[File Copyright Registration, Examine Copyright Application] | | |0,2,d**: If a 'File Copyright Registration' activity occurs, then a 'Examine Copyright Application' activity must eventually occur after the 'File Copyright Registration' event at some point in the same process instance. This must happen within 0 to 2 days.
+- **Choice[Examine Patent Application, Grant Patent] |A.Application Status is Approved | |0,1,d**: At least one of the activities 'Examine Patent Application' or 'Grant Patent' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Patent Application' activity is 'Approved'. This must happen within 0 to 1 days.
+- **Choice[Examine Patent Application, Reject Patent Application] |A.Application Status is Rejected | |0,1,d**: At least one of the activities 'Examine Patent Application' or 'Reject Patent Application' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Patent Application' activity is 'Rejected'. This must happen within 0 to 1 days.
+- **Choice[Examine Trademark Application, Grant Trademark] |A.Application Status is Approved | |0,1,d**: At least one of the activities 'Examine Trademark Application' or 'Grant Trademark' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Trademark Application' activity is 'Approved'. This must happen within 0 to 1 days.
+- **Choice[Examine Trademark Application, Reject Trademark Application] |A.Application Status is Rejected | |0,1,d**: At least one of the activities 'Examine Trademark Application' or 'Reject Trademark Application' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Trademark Application' activity is 'Rejected'. This must happen within 0 to 1 days.
+- **Choice[Examine Copyright Application, Grant Copyright] |A.Application Status is Approved | |0,1,d**: At least one of the activities 'Examine Copyright Application' or 'Grant Copyright' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Copyright Application' activity is 'Approved'. This must happen within 0 to 1 days.
+- **Choice[Examine Copyright Application, Reject Copyright Application] |A.Application Status is Rejected | |0,1,d**: At least one of the activities 'Examine Copyright Application' or 'Reject Copyright Application' must occur in the process instance, provided that the activation condition is met: the attribute 'Application Status' of the 'Examine Copyright Application' activity is 'Rejected'. This must happen within 0 to 1 days.
+- **Precedence[Appeal Decision, Reject Patent Application] | |A.Application ID == T.Application ID |**: The 'Reject Patent Application' activity is permitted to occur only if an 'Appeal Decision' activity has occurred before it within the same process instance, and the correlation condition requires that the 'Application ID' attribute of the 'Appeal Decision' activity equals the 'Application ID' attribute of the 'Reject Patent Application' activity.
+- **Precedence[Appeal Decision, Reject Trademark Application] | |A.Application ID == T.Application ID |**: The 'Reject Trademark Application' activity is permitted to occur only if an 'Appeal Decision' activity has occurred before it within the same process instance, and the correlation condition requires that the 'Application ID' attribute of the 'Appeal Decision' activity equals the 'Application ID' attribute of the 'Reject Trademark Application' activity.
+- **Precedence[Appeal Decision, Reject Copyright Application] | |A.Application ID == T.Application ID |**: The 'Reject Copyright Application' activity is permitted to occur only if an 'Appeal Decision' activity has occurred before it within the same process instance, and the correlation condition requires that the 'Application ID' attribute of the 'Appeal Decision' activity equals the 'Application ID' attribute of the 'Reject Copyright Application' activity.
+
+
+## Interleaved Description
+The MP-Declare process model for the intellectual property application process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'File Patent Application,' which involves submitting a patent application to the intellectual property office with a unique 'Application ID' and a required 'Application Fee' attribute.
+
+#### **End Constraints**
+The process concludes with either the activity 'Grant Patent,' representing the official approval and issuance of a patent, or the activity 'Reject Patent Application,' representing the denial of a patent application. Both activities must be the last to occur in the process, ensuring a definitive outcome.
+
+### **Frequency Constraints**
+#### **Existence Constraints**
+The 'Conduct Patent Search' activity must occur at least once in the process. This ensures that a search of existing patents is performed to determine the novelty of the invention, adding depth and reliability to the process.
+
+### **Flexible Ordering Constraints**
+#### **Precedence Constraints**
+1. The activity 'Reject Patent Application' is permitted to occur only if an 'Appeal Decision' activity has occurred before it, with the correlation condition that the 'Application ID' of the 'Appeal Decision' equals the 'Application ID' of the 'Reject Patent Application.' This ensures that a rejection after an appeal is based on a formal review of the same application.
+2. The activity 'Reject Trademark Application' is permitted to occur only if an 'Appeal Decision' activity has occurred before it, with the correlation condition that the 'Application ID' of the 'Appeal Decision' equals the 'Application ID' of the 'Reject Trademark Application.' This ensures that a trademark rejection after an appeal is based on a formal review of the same application.
+3. The activity 'Reject Copyright Application' is permitted to occur only if an 'Appeal Decision' activity has occurred before it, with the correlation condition that the 'Application ID' of the 'Appeal Decision' equals the 'Application ID' of the 'Reject Copyright Application.' This ensures that a copyright rejection after an appeal is based on a formal review of the same application.
+
+#### **Response Constraints**
+1. If the 'Conduct Patent Search' activity occurs with the condition 'Search Result is Clear,' then the 'Examine Patent Application' activity must occur within 0 to 2 days. This ensures a timely examination of the patent application following a clear search result, maintaining the process's momentum.
+2. If the 'Conduct Trademark Search' activity occurs with the condition 'Search Result is Clear,' then the 'Examine Trademark Application' activity must occur within 0 to 2 days. This ensures a timely examination of the trademark application following a clear search result, maintaining the process's momentum.
+3. If the 'File Copyright Registration' activity occurs, then the 'Examine Copyright Application' activity must occur within 0 to 2 days. This ensures a timely examination of the copyright application after filing, maintaining the process's momentum.
+
+### **Exclusivity Constraints**
+#### **Choice Constraints**
+1. If the 'Examine Patent Application' activity occurs with the condition 'Application Status is Approved,' then at least one of the activities 'Examine Patent Application' or 'Grant Patent' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the patent to be granted directly.
+2. If the 'Examine Patent Application' activity occurs with the condition 'Application Status is Rejected,' then at least one of the activities 'Examine Patent Application' or 'Reject Patent Application' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the patent to be rejected directly.
+3. If the 'Examine Trademark Application' activity occurs with the condition 'Application Status is Approved,' then at least one of the activities 'Examine Trademark Application' or 'Grant Trademark' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the trademark to be granted directly.
+4. If the 'Examine Trademark Application' activity occurs with the condition 'Application Status is Rejected,' then at least one of the activities 'Examine Trademark Application' or 'Reject Trademark Application' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the trademark to be rejected directly.
+5. If the 'Examine Copyright Application' activity occurs with the condition 'Application Status is Approved,' then at least one of the activities 'Examine Copyright Application' or 'Grant Copyright' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the copyright to be granted directly.
+6. If the 'Examine Copyright Application' activity occurs with the condition 'Application Status is Rejected,' then at least one of the activities 'Examine Copyright Application' or 'Reject Copyright Application' must occur within 0 to 1 days. This introduces an alternative path, allowing flexibility by permitting either the examination to continue or the copyright to be rejected directly.

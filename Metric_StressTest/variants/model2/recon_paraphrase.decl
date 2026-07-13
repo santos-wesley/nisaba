@@ -1,0 +1,27 @@
+activity Threat Identify
+activity Threat Examine
+activity Threat Prioritize
+activity Threat Mitigate
+activity Threat Document
+activity Threat Assess
+bind Threat Identify: State Threat
+bind Threat Examine: Degree Threat, Rating Effect
+bind Threat Prioritize: Degree Threat
+bind Threat Mitigate: Strategy Mitigation
+bind Threat Document: State Threat
+bind Threat Assess: Time Response
+Degree Threat: integer between 1 and 10
+Rating Effect: float between 0.0 and 100.0
+State Threat: Identified, Analyzed, Mitigated, Reported
+Strategy Mitigation: Isolation, Patch, Monitor
+Time Response: integer between 1 and 72
+Init[Threat Identify] | |
+End[Threat Assess] | |
+Chain Response[Threat Identify, Threat Examine] | | |0,2,h
+Response[Threat Examine, Threat Prioritize] | | |
+Precedence[Threat Mitigate, Threat Prioritize] |A.Degree Threat > 5 | |
+Response[Threat Mitigate, Threat Document] | | |
+Chain Succession[Threat Document, Threat Assess] |A.State Threat is Reported | |
+Existence[Threat Examine] | |
+Chain Response[Threat Mitigate, Threat Assess] | | |0,48,h
+Not Chain Succession[Threat Mitigate, Threat Mitigate] | |A.Strategy Mitigation != T.Strategy Mitigation |

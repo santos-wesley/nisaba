@@ -1,0 +1,43 @@
+**Natural Language Description:**
+
+This Multi-Perspective Declare model describes a complete **payroll processing workflow** that begins when an employee submits their timesheet and ends with the distribution of paystubs and updating of payroll records.
+
+### Process Flow
+
+The process is strictly sequential and follows this mandatory order:
+
+1. An **Employee** must first **Submit Timesheet**, providing their Employee ID, the Hours Worked (0–80), and setting the initial Timesheet Status.
+2. The timesheet must then be **Approved** (or Rejected). Only once the timesheet is **Approved** can the payroll calculation begin.
+3. After approval, the system must **Calculate Gross Pay** (based on Hours Worked and Pay Rate).
+4. Next, **Calculate Deductions** (Tax and Insurance) must occur.
+5. This is followed by **Calculate Net Pay**.
+6. Once net pay is determined, the system **Process Payment** using the chosen Payment Method (Direct Deposit or Check).
+7. After payment processing, the system must **Update Payroll Records**.
+8. A **Payroll Report** must then be **Reviewed**.
+9. Finally, the **Paystub** is **Generated** and **Distributed** to the employee.
+
+### Key Constraints
+
+- **Response constraints** enforce a strict precedence: each activity must eventually be followed by the next activity in the chain. For example, submitting a timesheet must eventually lead to its approval, approval must lead to gross pay calculation, and so on.
+- **Not Response[Approve Timesheet, Submit Timesheet]** combined with the condition *"Timesheet Status is Rejected"* means that once a timesheet has been rejected, the employee **cannot submit another timesheet** in the same process instance (i.e., rejection is final for that cycle).
+- The process **must start** with **Submit Timesheet**.
+
+### Data Perspective
+
+The model tracks the following data elements with their respective domains:
+
+- **Employee ID**: Integer between 1000 and 9999
+- **Hours Worked**: Integer between 0 and 80
+- **Pay Rate**: Float between 10.0 and 100.0
+- **Gross Pay**: Float between 0.0 and 10000.0
+- **Tax Deduction**: Float between 0.0 and 5000.0
+- **Insurance Deduction**: Float between 0.0 and 1000.0
+- **Net Pay**: Float between 0.0 and 10000.0
+- **Timesheet Status**: {Submitted, Approved, Rejected}
+- **Payment Method**: {Direct Deposit, Check}
+
+Each activity is bound to the specific data elements it reads or writes (e.g., `Calculate Gross Pay` reads `Hours Worked` and `Pay Rate` and writes `Gross Pay`).
+
+### Summary
+
+The model represents a **linear, mandatory payroll pipeline** with strong control-flow dependencies, data bindings, and a clear rejection policy. Once a timesheet is rejected, the process cannot continue with a new submission in the same instance. All calculation and payment steps must occur in strict sequence after timesheet approval.

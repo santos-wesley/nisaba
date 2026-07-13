@@ -1,0 +1,35 @@
+activity Report Disease Outbreak
+activity Verify Outbreak Report
+activity Initiate Investigation
+activity Collect Samples
+activity Analyze Samples
+activity Confirm Disease
+activity Implement Control Measures
+activity Inform Public
+activity Monitor Disease Spread
+activity Declare End of Outbreak
+bind Report Disease Outbreak: Report Source, Number of Cases
+bind Verify Outbreak Report: Investigation Result
+bind Confirm Disease: Disease Type, Mortality Rate
+bind Implement Control Measures: Control Measures, Days to Control
+bind Inform Public: Public Response
+Report Source: Hospital, Clinic, Public, Other
+Number of Cases: integer between 1 and 1000
+Investigation Result: Confirmed, False Alarm, Inconclusive
+Disease Type: Influenza, COVID-19, Measles, Cholera
+Mortality Rate: float between 0.0 and 100.0
+Control Measures: Vaccination, Quarantine, Hygiene Campaign, Social Distancing
+Days to Control: integer between 1 and 365
+Public Response: Cooperative, Anxious, Resistant
+Init[Report Disease Outbreak] | |
+End[Declare End of Outbreak] | |
+Response[Report Disease Outbreak, Verify Outbreak Report] | | |
+Response[Verify Outbreak Report, Initiate Investigation] |A.Investigation Result is Confirmed | |
+Response[Initiate Investigation, Collect Samples] | | |
+Response[Collect Samples, Analyze Samples] | | |0,48,h
+Precedence[Analyze Samples, Collect Samples] | | |
+Precedence[Confirm Disease, Analyze Samples] | | |
+Succession[Confirm Disease, Implement Control Measures] | | |
+Response[Implement Control Measures, Inform Public] | | |
+Response[Inform Public, Monitor Disease Spread] | | |
+Response[Report Disease Outbreak, Implement Control Measures] |A.Number of Cases > 500 | |0,24,h

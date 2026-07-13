@@ -1,0 +1,138 @@
+#MP-Declare Model
+## Activities
+- **Submit Request**: The 'Submit Request' activity represents an employee submitting a request, such as for remote work or flexible hours.
+- **Review Request**: The 'Review Request' activity involves a manager reviewing a submitted request.
+- **Approve Request**: The 'Approve Request' activity represents the approval of a request by a manager.
+- **Reject Request**: The 'Reject Request' activity represents the rejection of a request by a manager.
+- **Setup Remote Access**: The 'Setup Remote Access' activity involves configuring remote access for an employee whose request was approved.
+- **Update Payroll**: The 'Update Payroll' activity involves updating the payroll system to reflect changes resulting from the request.
+- **Notify Employee**: The 'Notify Employee' activity involves informing the employee about the status or outcome of their request.
+- **Monitor Performance**: The 'Monitor Performance' activity involves tracking and evaluating an employee's performance.
+- **Revoke Access**: The 'Revoke Access' activity involves removing previously granted remote access for an employee.
+- **Complete Survey**: The 'Complete Survey' activity involves an employee completing a survey related to their request or experience.
+
+## Attributes
+- **Request ID: integer between 1 and 99999**: The attribute 'Request ID: integer between 1 and 99999' represents the unique identification number for a request.
+- **Employee Name: John Doe, Jane Smith, Alice Johnson**: The attribute 'Employee Name: John Doe, Jane Smith, Alice Johnson' specifies the name of the employee associated with the request.
+- **Request Type: Remote Work, Flexible Hours**: The attribute 'Request Type: Remote Work, Flexible Hours' specifies the type of request submitted by the employee.
+- **Decision: Approved, Rejected**: The attribute 'Decision: Approved, Rejected' specifies the outcome decision made regarding a request.
+- **Payroll Status: Updated, Pending**: The attribute 'Payroll Status: Updated, Pending' specifies the current status of the payroll update process.
+- **Manager ID: integer between 1 and 9999**: The attribute 'Manager ID: integer between 1 and 9999' represents the unique identification number of the manager handling the request.
+- **Access Status: Setup, Revoked**: The attribute 'Access Status: Setup, Revoked' specifies the current status of an employee's remote access.
+- **Performance Rating: Excellent, Good, Average, Poor**: The attribute 'Performance Rating: Excellent, Good, Average, Poor' specifies the evaluated performance level of an employee.
+- **Notification Status: Sent, Pending**: The attribute 'Notification Status: Sent, Pending' specifies the current status of the notification sent to the employee.
+- **Survey Score: float between 0.0 and 10.0**: The attribute 'Survey Score: float between 0.0 and 10.0' represents the numeric score given by an employee in a completed survey.
+
+## Binds
+- **Submit Request: Request ID, Employee Name, Request Type**: The bind 'Submit Request: Request ID, Employee Name, Request Type' specifies that the activity 'Submit Request' requires the attributes 'Request ID', 'Employee Name', and 'Request Type'.
+- **Review Request: Request ID, Manager ID**: The bind 'Review Request: Request ID, Manager ID' links the 'Review Request' activity with the attributes 'Request ID' and 'Manager ID'.
+- **Approve Request: Request ID, Manager ID, Decision**: The bind 'Approve Request: Request ID, Manager ID, Decision' links the 'Approve Request' activity with the attributes 'Request ID', 'Manager ID', and 'Decision'.
+- **Reject Request: Request ID, Manager ID, Decision**: The bind 'Reject Request: Request ID, Manager ID, Decision' links the 'Reject Request' activity with the attributes 'Request ID', 'Manager ID', and 'Decision'.
+- **Setup Remote Access: Request ID, Access Status, Manager ID**: The bind 'Setup Remote Access: Request ID, Access Status, Manager ID' links the 'Setup Remote Access' activity with the attributes 'Request ID', 'Access Status', and 'Manager ID'.
+- **Update Payroll: Request ID, Payroll Status**: The bind 'Update Payroll: Request ID, Payroll Status' links the 'Update Payroll' activity with the attributes 'Request ID' and 'Payroll Status'.
+- **Notify Employee: Request ID, Notification Status**: The bind 'Notify Employee: Request ID, Notification Status' links the 'Notify Employee' activity with the attributes 'Request ID' and 'Notification Status'.
+- **Monitor Performance: Manager ID, Performance Rating**: The bind 'Monitor Performance: Manager ID, Performance Rating' links the 'Monitor Performance' activity with the attributes 'Manager ID' and 'Performance Rating'.
+- **Revoke Access: Request ID, Access Status**: The bind 'Revoke Access: Request ID, Access Status' links the 'Revoke Access' activity with the attributes 'Request ID' and 'Access Status'.
+- **Complete Survey: Request ID, Survey Score**: The bind 'Complete Survey: Request ID, Survey Score' links the 'Complete Survey' activity with the attributes 'Request ID' and 'Survey Score'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the employee request management process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Submit Request,' which involves an employee initiating a request—such as for remote work or flexible hours—and capturing the essential 'Request ID,' 'Employee Name,' and 'Request Type' attributes. This establishes the foundational context from which every subsequent activity in the process flows.
+
+#### **End Constraints**
+The process concludes with the activity 'Complete Survey,' whereby the employee provides a 'Survey Score' reflecting their overall experience with the request. As the final activity, it must occur only after the entire request lifecycle has been resolved, thereby bringing coherent closure to the process.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Review Request' activity must occur at least once in the process. This ensures that every submitted request receives managerial scrutiny, adding depth and reliability by guaranteeing that no request proceeds without evaluation.
+
+#### **Absence Constraints**
+In contrast, the 'Revoke Access' activity must not occur more than once for a given request. This exclusion reinforces process integrity, ensuring that access revocation remains a singular, deliberate action rather than a repeated or inconsistent event.
+
+#### **Exactly Constraints**
+Summarizing the boundaries of decision-making, the 'Approve Request' activity must occur exactly once whenever a request is approved. This fixed limit ensures precision, preventing duplicate or redundant approval actions within the same process instance.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+Whenever the 'Setup Remote Access' activity occurs, the 'Approve Request' activity must also occur somewhere in the process. This cause-effect relationship establishes a clear dependency, ensuring that remote access is never configured without a corresponding approval having taken place, thus reinforcing the logical coherence of the model.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Approve Request' is permitted to occur only if a 'Review Request' activity has occurred before it. This sets up the initial context: a manager must review the request, with the 'Manager ID' properly recorded, before any decision to approve can be made.
+2. The activity 'Setup Remote Access' is permitted to occur only if an 'Approve Request' activity has occurred before it, with the condition that 'Decision is Approved.' This guarantees that remote access configuration is always grounded in a legitimate prior approval.
+
+#### **Response Constraints**
+1. If the 'Approve Request' activity occurs with the condition 'Decision is Approved,' then the 'Notify Employee' activity must occur afterward with 'Notification Status is Sent.' This defines an ordered flow, ensuring the employee is promptly informed of the favorable outcome.
+2. If the 'Reject Request' activity occurs with the condition 'Decision is Rejected,' then the 'Notify Employee' activity must occur afterward with 'Notification Status is Sent.' This maintains a cohesive temporal structure, guaranteeing that rejection outcomes are also communicated without delay.
+
+#### **Succession Constraints**
+Whenever an 'Approve Request' activity occurs with the condition 'Decision is Approved,' it must eventually be followed by an 'Update Payroll' activity with 'Payroll Status is Updated.' This establishes a causal link, ensuring that approved requests logically progress toward the necessary payroll adjustments, creating a cohesive progression within the model.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Each occurrence of the 'Submit Request' activity must be followed by a 'Review Request' activity before any subsequent 'Submit Request' activity occurs. This promotes balance by ensuring a clear one-to-one pairing between each submitted request and its corresponding review, preventing overlapping or unresolved requests.
+
+#### **Alternate Succession Constraints**
+Each 'Approve Request' activity must be followed by a 'Setup Remote Access' activity, and each 'Setup Remote Access' activity must be preceded by an 'Approve Request' activity, with no intervening occurrences of either. This enforces an ordered structure with unique activity pairings, enhancing the overall coherence of the access-granting process.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Whenever a 'Reject Request' activity occurs with the condition 'Decision is Rejected,' it must be immediately followed by a 'Notify Employee' activity with 'Notification Status is Sent.' This captures an immediate succession, establishing a direct cause-and-effect relationship that ensures no delay occurs between rejection and communication.
+
+#### **Chain Precedence Constraints**
+The 'Update Payroll' activity must be immediately preceded by an 'Approve Request' activity with 'Decision is Approved.' This establishes an explicit, immediate dependency, ensuring payroll updates are directly and precisely triggered by an approval decision with no intervening events.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Setup Remote Access' activity and the 'Monitor Performance' activity are conjointly dependent: whenever one occurs, the other must also occur within the same process instance. This ensures that granting remote access is always accompanied by ongoing performance oversight, reflecting mutual accountability between the two activities.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Either the 'Approve Request' activity or the 'Reject Request' activity must occur for each submitted request, introducing alternative paths that allow flexibility in how a manager may resolve the request.
+
+#### **Exclusive Choice Constraints**
+Exactly one of 'Approve Request' or 'Reject Request' may occur for a given request—never both. This enforces mutually exclusive pathways, ensuring the decision-making outcome remains unambiguous and internally consistent.
+
+#### **Not Co-Existence Constraints**
+The 'Approve Request' activity and the 'Reject Request' activity cannot both occur within the same process instance for the same 'Request ID.' This exclusion rule maintains process integrity by preventing contradictory managerial decisions from coexisting.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+If the 'Revoke Access' activity occurs, the 'Setup Remote Access' activity must not have occurred in direct response to it. This prevents an improper contingent relationship, refining the model by disallowing revocation from triggering a subsequent, contradictory setup action.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+The 'Notify Employee' activity must not precede the 'Review Request' activity. This restriction ensures that no notification is sent to the employee before the request has actually been reviewed, preserving the intended sequence within the model.
+
+#### **Not Response Constraints**
+The 'Complete Survey' activity must not be followed by a 'Submit Request' activity referencing the same 'Request ID.' This prevents an already resolved request from being reopened, maintaining the integrity of the model's intended progression.
+
+#### **Not Succession Constraints**
+The 'Revoke Access' activity must never be followed at any later point by a 'Setup Remote Access' activity for the same 'Request ID.' This restriction preserves the model's defined flow, ensuring that once access is revoked, it cannot be silently reinstated within the same instance.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+The 'Notify Employee' activity must not be immediately preceded by the 'Submit Request' activity. This enforces a non-immediate order restriction, ensuring that the request undergoes proper review and decision-making before any notification is dispatched.
+
+#### **Not Chain Response Constraints**
+The 'Submit Request' activity must not be immediately followed by the 'Notify Employee' activity. This prevents an improper immediate succession, preserving the structural integrity of the process by requiring intermediate review and decision steps.
+
+#### **Not Chain Succession Constraints**
+The 'Setup Remote Access' activity and the 'Revoke Access' activity must never immediately precede or follow one another for the same 'Request ID.' This refines the process model by excluding an abrupt, contradictory transition between granting and revoking access.

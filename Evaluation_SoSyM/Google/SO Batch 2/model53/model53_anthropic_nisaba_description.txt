@@ -1,0 +1,125 @@
+#MP-Declare Model
+## Activities
+- **Write Play Script**: The 'Write Play Script' activity represents the creation of the script for the play.
+- **Cast Actors**: The 'Cast Actors' activity involves selecting and assigning actors to roles in the play.
+- **Design Set**: The 'Design Set' activity involves creating the design plans for the play's set.
+- **Build Set**: The 'Build Set' activity involves constructing the physical set based on the design.
+- **Design Costumes**: The 'Design Costumes' activity involves creating the design plans for the costumes worn by actors.
+- **Sew Costumes**: The 'Sew Costumes' activity involves manufacturing the costumes based on the design.
+- **Rehearse Play**: The 'Rehearse Play' activity involves practicing the play with the cast prior to performance.
+- **Promote Play**: The 'Promote Play' activity involves marketing and advertising the play to the public.
+- **Sell Tickets**: The 'Sell Tickets' activity involves selling admission tickets to the audience.
+- **Perform Play**: The 'Perform Play' activity represents the live performance of the play in front of an audience.
+- **Review Performance**: The 'Review Performance' activity involves evaluating and critiquing the performance of the play.
+- **Pay Royalties**: The 'Pay Royalties' activity involves paying royalties owed for the use of the play's rights.
+- **Strike Set**: The 'Strike Set' activity involves dismantling and removing the set after the performance.
+- **Store Costumes**: The 'Store Costumes' activity involves storing the costumes for future use after the performance.
+- **Archive Script**: The 'Archive Script' activity involves archiving the play script for record-keeping purposes.
+
+## Attributes
+- **Actor Count: Integer between 2 and 20**: The attribute 'Actor Count: Integer between 2 and 20' represents the number of actors cast for the play.
+- **Budget Amount: Float between 1000.0 and 50000.0**: The attribute 'Budget Amount: Float between 1000.0 and 50000.0' represents the monetary budget allocated for a task.
+- **Play Genre: Comedy, Drama, Musical, Tragedy**: The attribute 'Play Genre: Comedy, Drama, Musical, Tragedy' specifies the genre category of the play.
+- **Set Complexity: Integer between 1 and 10**: The attribute 'Set Complexity: Integer between 1 and 10' represents the level of complexity of the set design.
+- **Ticket Price: Float between 5.0 and 100.0**: The attribute 'Ticket Price: Float between 5.0 and 100.0' represents the price charged per ticket for the play.
+- **Performance Quality: Excellent, Good, Average, Poor**: The attribute 'Performance Quality: Excellent, Good, Average, Poor' specifies the quality rating of the performance.
+- **Royalty Percentage: Integer between 5 and 20**: The attribute 'Royalty Percentage: Integer between 5 and 20' represents the percentage of royalties owed.
+- **Costume Count: Integer between 5 and 50**: The attribute 'Costume Count: Integer between 5 and 50' represents the number of costumes designed for the play.
+- **Promotion Spend: Float between 100.0 and 10000.0**: The attribute 'Promotion Spend: Float between 100.0 and 10000.0' represents the amount of money spent on promoting the play.
+- **Rehearsal Hours: Integer between 10 and 100**: The attribute 'Rehearsal Hours: Integer between 10 and 100' represents the number of hours dedicated to rehearsing the play.
+
+## Binds
+- **bind Write Play Script: Play Genre**: The bind 'Write Play Script: Play Genre' specifies that the activity 'Write Play Script' requires the attribute 'Play Genre'.
+- **bind Cast Actors: Actor Count**: The bind 'Cast Actors: Actor Count' specifies that the activity 'Cast Actors' requires the attribute 'Actor Count'.
+- **bind Design Set: Set Complexity**: The bind 'Design Set: Set Complexity' specifies that the activity 'Design Set' requires the attribute 'Set Complexity'.
+- **bind Sell Tickets: Ticket Price**: The bind 'Sell Tickets: Ticket Price' specifies that the activity 'Sell Tickets' requires the attribute 'Ticket Price'.
+- **bind Perform Play: Performance Quality**: The bind 'Perform Play: Performance Quality' specifies that the activity 'Perform Play' requires the attribute 'Performance Quality'.
+- **bind Pay Royalties: Royalty Percentage**: The bind 'Pay Royalties: Royalty Percentage' specifies that the activity 'Pay Royalties' requires the attribute 'Royalty Percentage'.
+- **bind Design Costumes: Costume Count**: The bind 'Design Costumes: Costume Count' specifies that the activity 'Design Costumes' requires the attribute 'Costume Count'.
+- **bind Promote Play: Promotion Spend**: The bind 'Promote Play: Promotion Spend' specifies that the activity 'Promote Play' requires the attribute 'Promotion Spend'.
+- **bind Rehearse Play: Rehearsal Hours**: The bind 'Rehearse Play: Rehearsal Hours' specifies that the activity 'Rehearse Play' requires the attribute 'Rehearsal Hours'.
+- **bind Build Set: Budget Amount**: The bind 'Build Set: Budget Amount' specifies that the activity 'Build Set' requires the attribute 'Budget Amount'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the theater play production process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Write Play Script,' which establishes the foundational narrative of the production, bound to the attribute 'Play Genre,' setting the creative direction—whether Comedy, Drama, Musical, or Tragedy—for everything that follows.
+
+#### **End Constraints**
+The process concludes with the activity 'Archive Script,' which involves preserving the play script for record-keeping purposes. This activity must be the last to occur, bringing closure to the entire production lifecycle after the performance has been reviewed and all materials have been secured.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Rehearse Play' activity must occur at least once in the process, bound to the 'Rehearsal Hours' attribute. This ensures that adequate preparation, ranging between 10 and 100 hours, takes place before the cast faces a live audience, reinforcing the depth and rigor of the production process. Similarly, the 'Perform Play' activity must occur at least once, bound to 'Performance Quality,' anchoring the process around the central live event that all prior preparation serves.
+
+#### **Absence Constraints**
+In contrast, the 'Strike Set' activity must not occur more than once, reinforcing that the dismantling of the set is a singular, terminal action rather than a repeated or reversible one—highlighting an exclusion that preserves the integrity of the production's closing phase.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+If the 'Design Costumes' activity occurs, bound to 'Costume Count,' then the 'Sew Costumes' activity must also occur somewhere in the process. This establishes a necessary dependency: as a consequence of designing costumes with a specified count between 5 and 50, their manufacture must eventually follow, ensuring coherence between design and execution.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. The activity 'Build Set' is permitted to occur only if a 'Design Set' activity has occurred before it, with 'Design Set' bound to 'Set Complexity.' This sets up the initial context that construction cannot proceed without a prior design blueprint guiding the complexity of the physical set.
+2. The activity 'Perform Play' is permitted to occur only if a 'Rehearse Play' activity has occurred before it, ensuring that the cast is thoroughly prepared through dedicated rehearsal hours before facing an audience.
+3. The activity 'Sell Tickets' is permitted to occur only if a 'Promote Play' activity has occurred before it, bound to 'Promotion Spend.' This establishes that marketing efforts, financed within a budget of 100.0 to 10000.0, must precede any ticket sales, guiding the logical sequence of audience engagement.
+
+#### **Response Constraints**
+1. As a consequence, once the 'Cast Actors' activity occurs, bound to 'Actor Count,' the 'Rehearse Play' activity must follow, ensuring a cohesive temporal structure whereby the assembled cast, numbering between 2 and 20 actors, proceeds directly into rehearsal.
+2. Similarly, once 'Sew Costumes' occurs, the 'Perform Play' activity must eventually follow, ensuring that costume production leads meaningfully toward the staged performance.
+
+#### **Succession Constraints**
+Whenever the 'Perform Play' activity occurs, bound to 'Performance Quality,' it must be causally linked to the subsequent 'Review Performance' activity, establishing that the quality of the live performance is always followed by critical evaluation, creating a cohesive progression from execution to assessment.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Each occurrence of the 'Perform Play' activity must be followed by a unique occurrence of the 'Pay Royalties' activity, bound to 'Royalty Percentage,' before any subsequent performance takes place. This promotes balance, ensuring a one-to-one pairing between each staged performance and the corresponding royalty payment, ranging between 5% and 20%, without overlapping obligations.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Immediately upon the conclusion of the 'Perform Play' activity, the 'Strike Set' activity must occur directly afterward, with no intervening events, capturing an immediate cause-and-effect relationship between the final performance and the teardown of the physical set.
+
+#### **Chain Precedence Constraints**
+The 'Store Costumes' activity must be immediately preceded by the 'Perform Play' activity, with no other activities intervening, establishing an explicit and precise sequence ensuring costumes are stored directly after their final use on stage.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Design Set' and 'Build Set' activities are mutually dependent, ensuring that whenever one occurs, the other occurs as well within the same process instance, reflecting the inseparable relationship between planning the set and physically constructing it.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+Either the 'Design Costumes' activity or the 'Sew Costumes' activity may occur independently at different stages, introducing flexibility while allowing both to coexist within the broader costume preparation phase of the process.
+
+#### **Not Co-Existence Constraints**
+The 'Build Set' activity and the 'Strike Set' activity, though related to the same physical structure, are governed by exclusion rules only insofar as their immediate juxtaposition is concerned—construction and dismantling do not conceptually overlap within the same operational window, maintaining process integrity by preventing conflicting events on the physical set.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+The occurrence of 'Archive Script' does not require nor imply the occurrence of 'Design Set,' preventing an unnecessary dependency between the final archival step and the earlier design phase, thereby refining the model by disallowing this contingent linkage.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+The 'Strike Set' activity must not precede the 'Perform Play' activity, restricting the set from being dismantled before the performance has taken place, thereby preserving the intended sequence of production milestones.
+
+#### **Not Response Constraints**
+The 'Review Performance' activity must not be followed by another 'Rehearse Play' activity, ensuring that critique does not trigger a return to rehearsal within this process instance, thus maintaining the integrity of the model's forward progression.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Succession Constraints**
+The 'Promote Play' activity and the 'Strike Set' activity must not immediately precede or follow one another, ensuring that marketing efforts and set dismantling remain clearly separated in time, thereby refining the process model by excluding this particular immediate sequence.

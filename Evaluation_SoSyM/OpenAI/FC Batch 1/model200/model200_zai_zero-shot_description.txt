@@ -1,0 +1,28 @@
+This Multi-Perspective Declare model outlines a structured, data-driven cybersecurity incident management process. The model defines a strict, sequential workflow with specific time constraints and data conditions. 
+
+Here is a natural language description of the model:
+
+### **Activities and Data Attributes**
+The process consists of nine core activities, each bound to specific data attributes:
+*   **Identify Threat:** Records a `Threat ID` (1–999999) and the `Threat Type` (Phishing, Malware, DDoS, Ransomware).
+*   **Collect Data:** Logs the `Threat ID` and a `Data Source ID` (1–9999).
+*   **Analyze Data:** Captures the `Threat ID` and the `Analysis Result` (Confirmed, False Positive, or Inconclusive).
+*   **Report Threat:** Assigns a `Report ID` (1–999999) linked to the `Threat ID`.
+*   **Mitigate Threat:** Records the `Threat ID` and the `Mitigation Success Rate` (a percentage from 0.0 to 100.0).
+*   **Monitor Systems:** Tracks the `Threat ID` and the `Monitoring Status` (Ongoing or Completed).
+*   **Update Threat Intelligence:** Links an `Update ID` (1–999999) to the `Threat ID`.
+*   *(Note: "Conduct Training" and "Perform Incident Response" are defined activities with no bound data attributes and do not appear in the process constraints).*
+
+### **Process Flow and Constraints**
+The model enforces a strict chain of execution, meaning each activity must be followed by a specific subsequent activity. The process has a defined start and end point:
+
+1.  **Start:** The process always begins with **Identify Threat**.
+2.  **Data Collection:** Once a threat is identified, **Collect Data** must be executed within **10 minutes**.
+3.  **Analysis:** After data collection, **Analyze Data** must occur within **30 minutes**.
+4.  **Conditional Reporting:** If the `Analysis Result` of the Analyze Data event is **"Confirmed"**, a **Report Threat** activity must be executed within **1 hour** of the analysis. (If the result is a False Positive or Inconclusive, the reporting chain is not triggered).
+5.  **Mitigation:** Following a threat report, **Mitigate Threat** must be executed within **2 hours**.
+6.  **End:** The primary process flow terminates with **Monitor Systems**. This is the designated end event of the workflow.
+
+### **Conditional Branching**
+In addition to the main sequential flow, there is a conditional branching rule triggered during the mitigation phase:
+*   If the **Mitigate Threat** activity achieves a **Mitigation Success Rate greater than 90.0%**, it triggers an **Update Threat Intelligence** activity. There is no specified time limit for this update, and it represents a side-task rather than the end of the main workflow (since the process formally ends at Monitor Systems).

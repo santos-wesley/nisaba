@@ -1,0 +1,52 @@
+activity Report Abuse
+activity Investigate Report
+activity Rescue Animal
+activity Provide Veterinary Care
+activity Place in Foster Home
+activity Euthanize Animal
+activity Conduct Adoption Screening
+activity Finalize Adoption
+activity Monitor Welfare
+activity Conduct Public Awareness Education
+activity Process Donation
+activity Approve Volunteer Application
+activity Conduct Background Check
+activity Schedule Checkup
+activity Inspect Facility
+activity Train Staff
+bind Report Abuse: Abuse Severity, Animal Species
+bind Rescue Animal: Health, Age
+bind Place in Foster Home: Capacity
+bind Conduct Adoption Screening: Adoption Status
+bind Process Donation: Amount
+bind Conduct Background Check: Background Check Result
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Health: Healthy, Injured, Sick
+Age: integer between 0 and 25
+Capacity: integer between 0 and 500
+Adoption Status: Pending, Approved, Rejected
+Amount: float between 1.0 and 10000.0
+Background Check Result: Pass, Fail
+Init[Report Abuse] | |
+Response[Report Abuse, Investigate Report] | | |
+Chain Response[Investigate Report, Rescue Animal] |A.Abuse Severity is High | |
+Response[Rescue Animal, Provide Veterinary Care] | | |
+Response[Rescue Animal, Provide Veterinary Care] |A.Health is Injured | |0,24,h
+Response[Provide Veterinary Care, Place in Foster Home] | | |
+Choice[Rescue Animal, Provide Veterinary Care] |A.Health is Sick | |
+Choice[Rescue Animal, Euthanize Animal] |A.Health is Sick | |
+Precedence[Finalize Adoption, Conduct Adoption Screening] | | |
+Response[Conduct Adoption Screening, Finalize Adoption] |A.Adoption Status is Approved | |0,7,d
+Response[Finalize Adoption, Monitor Welfare] | | |
+Existence[Conduct Public Awareness Education] | |
+Responded Existence[Report Abuse, Process Donation] | | |
+Precedence[Approve Volunteer Application, Conduct Background Check] |A.Background Check Result is Pass | |
+Not Responded Existence[Conduct Background Check, Approve Volunteer Application] |A.Background Check Result is Fail | |
+Response[Provide Veterinary Care, Schedule Checkup] | | |0,30,d
+Alternate Succession[Schedule Checkup, Schedule Checkup] | | |
+Alternate Succession[Schedule Checkup, Schedule Checkup] | | |7,365,d
+Existence[Inspect Facility] | |
+Alternate Succession[Inspect Facility, Inspect Facility] | | |
+Alternate Succession[Inspect Facility, Inspect Facility] | | |90,90,d
+Existence[Train Staff] | |

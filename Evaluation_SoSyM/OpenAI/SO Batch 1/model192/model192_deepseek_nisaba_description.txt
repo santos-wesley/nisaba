@@ -1,0 +1,75 @@
+#MP-Declare Model
+## Activities
+- **Plan Eco-Friendly Trip**: 
+- **Book Sustainable Accommodation**: 
+- **Choose Green Transportation**: 
+- **Participate in Local Conservation Efforts**: 
+- **Purchase Local Products**: 
+- **Attend Cultural Workshops**: 
+- **Evaluate Environmental Impact**: 
+- **Provide Feedback to Hosts**: 
+- **Share Sustainable Practices**: 
+
+## Attributes
+- **Accommodation Type: Eco-Lodge, Green Hotel, Hostel**: 
+- **Transportation Mode: Bicycle, Electric Car, Train**: 
+- **Feedback Rating: Excellent, Good, Average, Poor**: 
+
+## Binds
+- **Book Sustainable Accommodation: Accommodation Type**: 
+- **Choose Green Transportation: Transportation Mode**: 
+- **Provide Feedback to Hosts: Feedback Rating**: 
+
+## Constraints
+- **Init[Plan Eco-Friendly Trip] | |**: 
+- **End[Share Sustainable Practices] | |**: 
+- **Chain Response[Book Sustainable Accommodation, Provide Feedback to Hosts] | | |0,2,d**: 
+- **Response[Choose Green Transportation, Evaluate Environmental Impact] | | |**: 
+- **Co-Existence[Participate in Local Conservation Efforts, Attend Cultural Workshops] | | |**: 
+- **Not Chain Response[Plan Eco-Friendly Trip, Purchase Local Products] | | |**: 
+- **Exclusive Choice[Book Sustainable Accommodation, Choose Green Transportation] | | |**: 
+- **Responded Existence[Plan Eco-Friendly Trip, Participate in Local Conservation Efforts] |A.Trip Duration > 7 | |**: 
+- **Not Responded Existence[Provide Feedback to Hosts, Evaluate Environmental Impact] |A.Feedback Rating is Poor | |**: 
+- **Existence[Evaluate Environmental Impact] | |**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the sustainable travel planning process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Plan Eco-Friendly Trip,' which involves outlining the itinerary and setting sustainability goals for the journey. This activity establishes the initial context for the entire process, ensuring that all subsequent actions align with eco-friendly principles.
+#### **End Constraints**
+The process concludes with the activity 'Share Sustainable Practices,' which involves disseminating the lessons learned and tips from the trip to inspire others. This activity must be the last to occur in the process, providing a coherent closure by spreading awareness and reinforcing the model's purpose.
+
+### **Frequency Constraints**
+#### **Existence Constraint**
+The 'Evaluate Environmental Impact' activity must occur at least once in the process. This ensures that the environmental footprint of the trip is assessed, adding depth and context regarding the process's commitment to sustainability.
+
+### **Dependency Constraints**
+#### **Responded Existence Constraints**
+If the 'Plan Eco-Friendly Trip' activity occurs with the condition 'A.Trip Duration > 7,' then the 'Participate in Local Conservation Efforts' activity must also occur. This establishes a causal dependency, where a longer trip necessitates active involvement in conservation, enhancing coherence by linking trip planning to environmental action.
+
+### **Flexible Ordering Constraints**
+#### **Response Constraints**
+If the 'Choose Green Transportation' activity occurs, then the 'Evaluate Environmental Impact' activity must occur afterwards. This defines an ordered flow where the choice of transportation directly leads to an assessment of its environmental effects, ensuring a cohesive temporal structure in the model.
+
+### **Immediate Ordering Constraints**
+#### **Chain Response Constraints**
+If the 'Book Sustainable Accommodation' activity occurs, then the 'Provide Feedback to Hosts' activity must occur immediately afterwards, with no intervening activities. This captures a direct cause-and-effect relationship, ensuring that feedback is provided promptly after booking, reinforcing accountability and immediate succession.
+
+### **Mutual Dependency Constraints**
+#### **Co-Existence Constraints**
+The 'Participate in Local Conservation Efforts' activity and the 'Attend Cultural Workshops' activity must both occur together within the process flow. This establishes a mutual dependency, ensuring that engagement with local communities is holistic, combining environmental and cultural aspects for a richer experience.
+
+### **Exclusivity Constraints**
+#### **Exclusive Choice Constraints**
+Exactly one of the activities 'Book Sustainable Accommodation' or 'Choose Green Transportation' must occur within the process. This enforces mutually exclusive pathways, allowing flexibility by permitting either activity to occur, but ensuring that only one is chosen to maintain focus on a single sustainability action.
+
+### **Negative Dependency Constraints**
+#### **Not Responded Existence Constraints**
+If the 'Provide Feedback to Hosts' activity occurs with the condition 'A.Feedback Rating is Poor,' then the 'Evaluate Environmental Impact' activity must not occur. This prevents a specific dependency, ensuring that poor feedback does not trigger an environmental evaluation, thereby refining the model by disallowing contingent occurrences that could skew assessments.
+
+### **Negative Flexible Ordering Constraints**
+#### **Not Chain Response Constraints**
+The 'Plan Eco-Friendly Trip' activity must not be immediately followed by the 'Purchase Local Products' activity. This prevents immediate succession, ensuring that trip planning does not directly lead to purchasing, preserving structural integrity by allowing other activities to intervene and maintain a logical sequence.

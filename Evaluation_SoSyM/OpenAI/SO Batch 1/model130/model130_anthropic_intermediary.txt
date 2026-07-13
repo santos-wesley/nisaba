@@ -1,0 +1,23 @@
+## Activities
+- **Draft Contract**: The 'Draft Contract' activity represents the creation of an initial version of a contract.
+- **Review Contract**: The 'Review Contract' activity involves examining the contract to assess its content and determine an outcome.
+- **Negotiate Terms**: The 'Negotiate Terms' activity involves discussing and adjusting the terms of the contract between the involved parties.
+- **Approve Contract**: The 'Approve Contract' activity involves granting formal approval for the contract to proceed.
+- **Sign Contract**: The 'Sign Contract' activity involves obtaining the necessary signatures to formalize the contract.
+- **Archive Contract**: The 'Archive Contract' activity involves storing the finalized contract for record-keeping purposes.
+
+## Attributes
+- **Contract ID: Integer between 1000 and 9999**: The attribute 'Contract ID: Integer between 1000 and 9999' represents the unique identification number assigned to a contract.
+- **Contract Value: Float between 10000.0 and 1000000.0**: The attribute 'Contract Value: Float between 10000.0 and 1000000.0' represents the monetary value associated with the contract.
+- **Approval Status: Pending, Approved, Rejected**: The attribute 'Approval Status: Pending, Approved, Rejected' specifies the current approval state of the contract.
+- **Signature Status: Unsigned, Partially Signed, Fully Signed**: The attribute 'Signature Status: Unsigned, Partially Signed, Fully Signed' specifies the current signing state of the contract.
+- **Review Outcome: Accepted, Requires Changes, Rejected**: The attribute 'Review Outcome: Accepted, Requires Changes, Rejected' specifies the result of the contract review process.
+
+## Binds
+- **bind Draft Contract: Contract ID, Contract Value**: The bind 'Draft Contract: Contract ID, Contract Value' specifies that the activity 'Draft Contract' requires the attributes 'Contract ID' and 'Contract Value'.
+- **bind Review Contract: Review Outcome**: The bind 'Review Contract: Review Outcome' links the 'Review Contract' activity with the attribute 'Review Outcome'.
+- **bind Approve Contract: Approval Status**: The bind 'Approve Contract: Approval Status' links the 'Approve Contract' activity with the attribute 'Approval Status'.
+- **bind Sign Contract: Signature Status**: The bind 'Sign Contract: Signature Status' links the 'Sign Contract' activity with the attribute 'Signature Status'.
+
+## Constraints
+

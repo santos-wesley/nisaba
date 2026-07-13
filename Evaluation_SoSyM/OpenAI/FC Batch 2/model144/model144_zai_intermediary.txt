@@ -1,0 +1,48 @@
+## Activities
+- **Assess Initial Condition**: The 'Assess Initial Condition' activity represents the initial evaluation of a client's condition at the start of the therapy process.
+- **Develop Treatment Plan**: The 'Develop Treatment Plan' activity involves creating a tailored treatment plan for the client based on the initial assessment.
+- **Schedule First Session**: The 'Schedule First Session' activity entails arranging the first therapy session for the client.
+- **Conduct Therapy Session**: The 'Conduct Therapy Session' activity involves carrying out a therapy session with the client.
+- **Evaluate Progress**: The 'Evaluate Progress' activity includes assessing the client's progress during the course of treatment.
+- **Adjust Treatment Plan**: The 'Adjust Treatment Plan' activity involves modifying the existing treatment plan based on the client's progress evaluation.
+- **Provide Feedback**: The 'Provide Feedback' activity entails delivering feedback to the client regarding their therapy progress.
+- **Schedule Follow-Up**: The 'Schedule Follow-Up' activity involves arranging a follow-up appointment for the client after feedback has been provided.
+- **Complete Treatment**: The 'Complete Treatment' activity represents the formal completion of the client's treatment process.
+- **Conduct Final Assessment**: The 'Conduct Final Assessment' activity involves performing a final evaluation of the client's overall progress and treatment outcomes.
+
+## Attributes
+- **Client ID: integer between 1 and 999999**: The attribute 'Client ID: integer between 1 and 999999' represents the unique identification number assigned to each client in the therapy process.
+- **Session Type: Initial, Follow-Up, Crisis**: The attribute 'Session Type: Initial, Follow-Up, Crisis' specifies the category of a therapy session, indicating whether it is an initial session, a follow-up session, or a crisis session.
+- **Progress Score: float between 0.0 and 100.0**: The attribute 'Progress Score: float between 0.0 and 100.0' represents a numerical measure of the client's progress in therapy, ranging from 0.0 to 100.0.
+- **Therapist ID: integer between 1 and 9999**: The attribute 'Therapist ID: integer between 1 and 9999' represents the unique identification number assigned to each therapist involved in the treatment process.
+- **Feedback Type: Positive, Neutral, Negative**: The attribute 'Feedback Type: Positive, Neutral, Negative' specifies the nature of the feedback provided to the client, categorizing it as positive, neutral, or negative.
+- **Treatment Status: Ongoing, Adjusted, Completed**: The attribute 'Treatment Status: Ongoing, Adjusted, Completed' indicates the current state of the treatment plan, categorizing it as ongoing, adjusted, or completed.
+
+## Binds
+- **Assess Initial Condition: Client ID**: The bind 'Assess Initial Condition: Client ID' links the 'Assess Initial Condition' activity with the attribute 'Client ID'.
+- **Develop Treatment Plan: Client ID, Therapist ID**: The bind 'Develop Treatment Plan: Client ID, Therapist ID' links the 'Develop Treatment Plan' activity with the attributes 'Client ID' and 'Therapist ID'.
+- **Schedule First Session: Client ID**: The bind 'Schedule First Session: Client ID' links the 'Schedule First Session' activity with the attribute 'Client ID'.
+- **Conduct Therapy Session: Client ID, Session Type**: The bind 'Conduct Therapy Session: Client ID, Session Type' links the 'Conduct Therapy Session' activity with the attributes 'Client ID' and 'Session Type'.
+- **Evaluate Progress: Client ID, Progress Score**: The bind 'Evaluate Progress: Client ID, Progress Score' links the 'Evaluate Progress' activity with the attributes 'Client ID' and 'Progress Score'.
+- **Adjust Treatment Plan: Client ID, Progress Score, Treatment Status**: The bind 'Adjust Treatment Plan: Client ID, Progress Score, Treatment Status' links the 'Adjust Treatment Plan' activity with the attributes 'Client ID', 'Progress Score', and 'Treatment Status'.
+- **Provide Feedback: Client ID, Feedback Type**: The bind 'Provide Feedback: Client ID, Feedback Type' links the 'Provide Feedback' activity with the attributes 'Client ID' and 'Feedback Type'.
+- **Complete Treatment: Client ID**: The bind 'Complete Treatment: Client ID' links the 'Complete Treatment' activity with the attribute 'Client ID'.
+- **Conduct Final Assessment: Client ID, Therapist ID, Progress Score**: The bind 'Conduct Final Assessment: Client ID, Therapist ID, Progress Score' links the 'Conduct Final Assessment' activity with the attributes 'Client ID', 'Therapist ID', and 'Progress Score'.
+
+## Constraints
+- **Init[Assess Initial Condition] | |**: The 'Assess Initial Condition' activity must be the first activity to occur in the process.
+- **Precedence[Develop Treatment Plan, Assess Initial Condition] | | |**: The 'Assess Initial Condition' activity is permitted to occur only if a 'Develop Treatment Plan' activity has occurred before it within the same process instance.
+- **Chain Response[Develop Treatment Plan, Schedule First Session] | | |**: Whenever a 'Develop Treatment Plan' activity occurs, it must be immediately followed by a 'Schedule First Session' activity in the next event position, with no other events in between. The 'Schedule First Session' activity is allowed to happen isolated.
+- **Response[Schedule First Session, Conduct Therapy Session] | | |**: If a 'Schedule First Session' activity occurs, then a 'Conduct Therapy Session' activity must eventually occur after the 'Schedule First Session' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Schedule First Session' can be pending at the same time, and a single 'Conduct Therapy Session' can fulfill the obligation for all preceding 'Schedule First Session'. If 'Schedule First Session' does not occur, the constraint imposes no obligation on the occurrence of 'Conduct Therapy Session'.
+- **Existence3[Conduct Therapy Session] | |**: The 'Conduct Therapy Session' activity must occur at least 3 times in the process.
+- **Precedence[Evaluate Progress, Conduct Therapy Session] | | |**: The 'Conduct Therapy Session' activity is permitted to occur only if a 'Evaluate Progress' activity has occurred before it within the same process instance.
+- **Response[Evaluate Progress, Adjust Treatment Plan] | | |**: If an 'Evaluate Progress' activity occurs, then an 'Adjust Treatment Plan' activity must eventually occur after the 'Evaluate Progress' event at some point in the same process instance. There is no requirement on how soon or what events may occur in between. Multiple 'Evaluate Progress' can be pending at the same time, and a single 'Adjust Treatment Plan' can fulfill the obligation for all preceding 'Evaluate Progress'. If 'Evaluate Progress' does not occur, the constraint imposes no obligation on the occurrence of 'Adjust Treatment Plan'.
+- **Chain Response[Adjust Treatment Plan, Provide Feedback] | | |**: Whenever an 'Adjust Treatment Plan' activity occurs, it must be immediately followed by a 'Provide Feedback' activity in the next event position, with no other events in between. The 'Provide Feedback' activity is allowed to happen isolated.
+- **Chain Response[Provide Feedback, Schedule Follow-Up] | | |0,48,h**: Whenever a 'Provide Feedback' activity occurs, it must be immediately followed by a 'Schedule Follow-Up' activity in the next event position, with no other events in between, and this must occur within at most 48 hours. The 'Schedule Follow-Up' activity is allowed to happen isolated.
+- **Precedence[Conduct Final Assessment, Complete Treatment] | | |**: The 'Complete Treatment' activity is permitted to occur only if a 'Conduct Final Assessment' activity has occurred before it within the same process instance.
+- **End[Conduct Final Assessment] | |**: The 'Conduct Final Assessment' activity must be the last activity to occur in the process.
+- **Not Co-Existence[Schedule First Session, Schedule Follow-Up] | | |**: The 'Schedule First Session' activity and the 'Schedule Follow-Up' activity cannot both occur within the same process instance. This means that if 'Schedule First Session' event occurs one or more times, 'Schedule Follow-Up' must not occur at all in that process instance, and vice-versa. It is acceptable for neither event to occur. The constraint enforces a mutual exclusion between 'Schedule First Session' and 'Schedule Follow-Up', allowing for different process variants based on which event (if any) occurs.
+- **Absence5[Provide Feedback] | |**: The 'Provide Feedback' activity must not occur 5 times in the process.
+- **Not Succession[Adjust Treatment Plan, Complete Treatment] | | |**: The 'Adjust Treatment Plan' activity and 'Complete Treatment' activity must not occur such that the 'Adjust Treatment Plan' event is followed by the 'Complete Treatment' event at any point later in the same process instance. Similarly, a 'Complete Treatment' event must not be preceded by an 'Adjust Treatment Plan' event. This means that once an 'Adjust Treatment Plan' occurs, 'Complete Treatment' cannot occur afterward, and if 'Complete Treatment' event occurs, it cannot have been preceded by an 'Adjust Treatment Plan' event. Both events can occur in the same process instance, but not in the prohibited sequence.
+- **Precedence[Conduct Therapy Session, Schedule First Session] | | |0,30,m**: The 'Schedule First Session' activity is permitted to occur only if a 'Conduct Therapy Session' activity has occurred before it within the same process instance, and the time between the 'Conduct Therapy Session' event and the 'Schedule First Session' event must be between 0 and 30 minutes.
+

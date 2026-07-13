@@ -1,0 +1,45 @@
+# Multi-Perspective Declare Model Description
+
+This model describes a **flexible work arrangement approval and management process**, encompassing application submission, review, decision-making, implementation, and ongoing management of the arrangement.
+
+## Process Activities
+
+The process consists of eight key activities: **Submit Application**, **Review Application**, **Approve Application**, **Reject Application**, **Implement Arrangement**, **Monitor Arrangement**, **Adjust Arrangement**, and **Terminate Arrangement**.
+
+## Data Perspective
+
+Each activity is associated with specific data attributes:
+
+- **Submit Application** captures the requested **Arrangement Type** (Remote Work, Flextime, Compressed Workweek, or Job Sharing) and generates an **Application ID**.
+- **Review Application** records the **Application ID**, updates the **Application Status**, and assigns a **Review Score** (1-5).
+- **Approve Application** and **Reject Application** both reference the **Application ID** and update the **Application Status** accordingly.
+- **Implement Arrangement** links to the **Application ID**, **Application Status**, and defines the **Hours Per Week** (10.0-40.0) for the arrangement.
+- **Monitor Arrangement** tracks the **Application ID** over time.
+- **Adjust Arrangement** allows modification of the **Hours Per Week** for a given **Application ID**.
+- **Terminate Arrangement** closes out the **Application ID** and updates the **Application Status**.
+
+## Control-Flow Rules
+
+1. **Process Initiation**: Every process instance must begin with **Submit Application**.
+
+2. **Mandatory Review**: Every submitted application must eventually be followed by a **Review Application** activity.
+
+3. **Exclusive Decision**: After review, the application must be either **Approved** or **Rejected** — exactly one of these outcomes must occur (not both).
+
+4. **Approval Leads to Implementation**: Whenever an application is approved, the arrangement must eventually be implemented.
+
+5. **Implementation Precedes Monitoring**: **Implement Arrangement** must occur before, and be directly linked to, **Monitor Arrangement** — implementation must happen, and monitoring must follow it (and cannot happen without it).
+
+6. **Monitoring Triggers Adjustment**: Whenever monitoring occurs, it must eventually be followed by an adjustment to the arrangement.
+
+7. **Rejected Applications Are Not Terminated Improperly**: If the application status is **Rejected**, then **Reject Application** must NOT be followed by **Terminate Arrangement** — rejected applications don't proceed to termination.
+
+8. **Approved Applications Must Eventually Terminate**: If the application status is **Approved**, then **Approve Application** must eventually be followed by **Terminate Arrangement** — every approved arrangement must eventually come to an end.
+
+9. **Review Before Approval**: **Review Application** must occur before **Approve Application** can take place — an application cannot be approved without first being reviewed.
+
+10. **Submission and Review Are Distinct**: **Submit Application** and **Review Application** cannot both occur within the same process instance context as defined — these activities are mutually exclusive in co-occurrence (interpreted per the model's constraint), emphasizing that submission and review are handled as separate, non-simultaneous milestones.
+
+## Summary
+
+This model enforces a structured lifecycle for flexible work arrangements: applications are submitted, reviewed, and either approved or rejected. Approved applications are implemented, monitored, and adjusted as needed, ultimately reaching termination, while rejected applications follow a separate path that avoids the termination stage.

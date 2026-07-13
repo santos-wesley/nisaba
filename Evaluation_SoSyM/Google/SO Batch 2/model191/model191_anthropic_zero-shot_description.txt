@@ -1,0 +1,63 @@
+# Product Return Process Model - Natural Language Description
+
+## Overview
+This model describes a product return handling process, from the initial return request through to final disposition of the item (refund, restocking, or disposal). The process tracks various data attributes throughout its lifecycle.
+
+## Activities and Their Data
+
+The process consists of the following activities, each of which records specific data:
+
+1. **Request Return** – captures the Return Status, Return Reason, and Return ID
+2. **Approve Return** – records the Return Status
+3. **Generate Return Label** – (no specific data bindings)
+4. **Ship Item Back** – captures the Return Status, Days to Return, Shipping Method, and Shipping Cost
+5. **Receive Item** – records the Return Status
+6. **Inspect Item** – captures the Return Status, Item Condition, and Inspection Result
+7. **Determine Refund** – captures the Return Status and Refund Amount
+8. **Process Refund** – captures the Return Status and Refund Amount
+9. **Restock Item** – captures the Return Status and Restock Quantity
+10. **Dispose Item** – records the Return Status
+
+## Data Value Domains
+- **Return Status** can be one of: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, or Disposed
+- **Return Reason** can be: Defective, Damaged, Wrong Item, or No Longer Needed
+- **Item Condition** is rated on a scale from 1 to 5
+- **Inspection Result** can be: Acceptable, Damaged, or Unacceptable
+- **Refund Amount** ranges from $0.00 to $1000.00
+- **Days to Return** ranges from 1 to 60 days
+- **Restock Quantity** ranges from 1 to 100 units
+- **Shipping Cost** ranges from $0.00 to $50.00
+- **Shipping Method** can be: UPS, FedEx, or USPS
+- **Return ID** is a unique identifier between 1000 and 9999
+
+## Process Flow and Control Rules
+
+**Process Initiation**
+- The process must begin with the **Request Return** activity.
+
+**Sequential Dependencies (Response Constraints)**
+The following rules establish that whenever the first activity occurs, the second activity must eventually follow:
+
+- Whenever a return is **requested**, it must eventually be **approved**
+- Whenever a return is **approved**, a **return label must eventually be generated**
+- Once a **return label is generated**, the item must eventually be **shipped back**
+- Once the item is **shipped back**, it must eventually be **received**
+- Once the item is **received**, it must eventually be **inspected**
+- Once the item is **inspected**, a **refund determination** must eventually be made
+- Once a **refund is determined**, the **refund must eventually be processed**
+
+**Conditional Outcomes Based on Inspection**
+- If the inspection result is **Acceptable**, the item must eventually be **restocked**
+- If the inspection result is **Damaged** or **Unacceptable**, the item must eventually be **disposed of**
+
+**Time-Constrained Rules**
+Several of the dependencies above have specific timing requirements:
+
+- After a refund is **determined**, the refund must be **processed within 2 days**
+- After an item is **received**, it must be **inspected within 48 hours**
+- After a return is **approved**, the item must be **shipped back between 1 and 14 days** later
+- After a return is **requested**, it must be **approved within 24 hours**
+- After a return is **approved**, the return label must be **generated within 30 minutes**
+
+## Summary
+This model enforces a structured, sequential return process where each stage triggers specific downstream obligations, some with strict time windows (e.g., quick approval and label generation), while the final disposition of the item (restock vs. dispose) branches based on the inspection outcome.

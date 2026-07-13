@@ -1,0 +1,59 @@
+activity Request Return
+activity Approve Return
+activity Generate Return Label
+activity Ship Item Back
+activity Receive Item
+activity Inspect Item
+activity Determine Refund
+activity Process Refund
+activity Restock Item
+activity Dispose Item
+bind Request Return: Return Status, Return Reason, Return ID
+bind Approve Return: Return Status
+bind Ship Item Back: Return Status, Days to Return, Shipping Method, Shipping Cost
+bind Receive Item: Return Status
+bind Inspect Item: Return Status, Item Condition, Inspection Result
+bind Determine Refund: Return Status, Refund Amount
+bind Process Refund: Return Status, Refund Amount
+bind Restock Item: Return Status, Restock Quantity
+bind Dispose Item: Return Status
+Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed
+Item Condition: integer between 1 and 5
+Refund Amount: float between 0.0 and 1000.0
+Days to Return: integer between 1 and 60
+Return Reason: Defective, Damaged, Wrong Item, No Longer Needed
+Inspection Result: Acceptable, Damaged, Unacceptable
+Restock Quantity: integer between 1 and 100
+Shipping Cost: float between 0.0 and 50.0
+Shipping Method: UPS, FedEx, USPS
+Return ID: integer between 1000 and 9999
+Init[Request Return] |A.Return Status is Requested |
+End[Process Refund] | |
+End[Restock Item] | |
+End[Dispose Item] | |
+Existence[Inspect Item] | |
+Absence2[Dispose Item] | |
+Exactly[Determine Refund] |A.Return Status is Refunded |
+Responded Existence[Process Refund, Determine Refund] | | |
+Precedence[Request Return, Approve Return] |A.Return Status is Requested | |
+Precedence[Generate Return Label, Ship Item Back] | | |
+Precedence[Inspect Item, Determine Refund] |A.Inspection Result is Acceptable OR A.Inspection Result is Damaged | |
+Response[Approve Return, Generate Return Label] |A.Return Status is Approved | |
+Response[Receive Item, Inspect Item] |A.Return Status is Received | |
+Response[Inspect Item, Restock Item] |A.Inspection Result is Acceptable | |
+Succession[Ship Item Back, Receive Item] |A.Return Status is Shipped |T.Return Status is Received |
+Alternate Precedence[Determine Refund, Process Refund] | | |
+Alternate Response[Inspect Item, Determine Refund] | | |
+Chain Response[Determine Refund, Process Refund] |A.Return Status is Refunded |A.Refund Amount == T.Refund Amount |
+Chain Precedence[Inspect Item, Restock Item] |A.Inspection Result is Acceptable | |
+Co-Existence[Inspect Item, Determine Refund] | | |
+Choice[Restock Item, Dispose Item] | | |
+Exclusive Choice[Restock Item, Dispose Item] | | |
+Not Co-Existence[Restock Item, Dispose Item] | | |
+Not Responded Existence[Dispose Item, Restock Item] | | |
+Not Precedence[Inspect Item, Process Refund] | | |
+Not Response[Dispose Item, Process Refund] | |T.Return Reason is No Longer Needed |
+Not Succession[Dispose Item, Restock Item] | | |
+Not Chain Precedence[Restock Item, Dispose Item] | | |
+Not Chain Response[Request Return, Process Refund] | | |
+Not Chain Succession[Approve Return, Dispose Item] | | |

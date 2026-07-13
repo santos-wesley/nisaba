@@ -1,0 +1,40 @@
+## Activities
+- **Identify Threat**: The 'Identify Threat' activity represents the initial detection and identification of a potential security threat.
+- **Collect Data**: The 'Collect Data' activity involves gathering relevant data and information related to the identified threat.
+- **Analyze Data**: The 'Analyze Data' activity includes examining and evaluating the collected data to determine the nature of the threat.
+- **Report Threat**: The 'Report Threat' activity involves documenting and communicating the findings about the identified threat.
+- **Mitigate Threat**: The 'Mitigate Threat' activity represents the actions taken to neutralize or reduce the impact of the threat.
+- **Monitor Systems**: The 'Monitor Systems' activity involves overseeing system operations to ensure the threat has been properly handled.
+- **Update Threat Intelligence**: The 'Update Threat Intelligence' activity includes refreshing threat databases and knowledge bases with new threat information.
+- **Conduct Training**: The 'Conduct Training' activity involves educating personnel on threat awareness and response procedures.
+- **Perform Incident Response**: The 'Perform Incident Response' activity represents executing the formal incident response plan to address a security event.
+
+## Attributes
+- **Threat ID: integer between 1 and 999999**: The attribute 'Threat ID: integer between 1 and 999999' represents the unique identifier assigned to each identified threat for tracking purposes.
+- **Threat Type: Phishing, Malware, DDoS, Ransomware**: The attribute 'Threat Type: Phishing, Malware, DDoS, Ransomware' specifies the category of the security threat being handled.
+- **Data Source ID: integer between 1 and 9999**: The attribute 'Data Source ID: integer between 1 and 9999' represents the identifier of the source from which threat data is collected.
+- **Analysis Result: Confirmed, False Positive, Inconclusive**: The attribute 'Analysis Result: Confirmed, False Positive, Inconclusive' indicates the outcome of the data analysis process for the threat.
+- **Report ID: integer between 1 and 999999**: The attribute 'Report ID: integer between 1 and 999999' represents the unique identifier assigned to the threat report.
+- **Mitigation Success Rate: float between 0.0 and 100.0**: The attribute 'Mitigation Success Rate: float between 0.0 and 100.0' represents the percentage indicating how successful the threat mitigation efforts were.
+- **Monitoring Status: Ongoing, Completed**: The attribute 'Monitoring Status: Ongoing, Completed' indicates whether the system monitoring for the threat is still in progress or has been finished.
+- **Update ID: integer between 1 and 999999**: The attribute 'Update ID: integer between 1 and 999999' represents the unique identifier assigned to each threat intelligence update.
+
+## Binds
+- **Identify Threat: Threat ID, Threat Type**: The bind 'Identify Threat: Threat ID, Threat Type' specifies that the activity 'Identify Threat' requires the attributes 'Threat ID' and 'Threat Type'.
+- **Collect Data: Threat ID, Data Source ID**: The bind 'Collect Data: Threat ID, Data Source ID' links the 'Collect Data' activity with the attributes 'Threat ID' and 'Data Source ID'.
+- **Analyze Data: Threat ID, Analysis Result**: The bind 'Analyze Data: Threat ID, Analysis Result' links the 'Analyze Data' activity with the attributes 'Threat ID' and 'Analysis Result'.
+- **Report Threat: Threat ID, Report ID**: The bind 'Report Threat: Threat ID, Report ID' links the 'Report Threat' activity with the attributes 'Threat ID' and 'Report ID'.
+- **Mitigate Threat: Threat ID, Mitigation Success Rate**: The bind 'Mitigate Threat: Threat ID, Mitigation Success Rate' links the 'Mitigate Threat' activity with the attributes 'Threat ID' and 'Mitigation Success Rate'.
+- **Monitor Systems: Threat ID, Monitoring Status**: The bind 'Monitor Systems: Threat ID, Monitoring Status' links the 'Monitor Systems' activity with the attributes 'Threat ID' and 'Monitoring Status'.
+- **Update Threat Intelligence: Update ID, Threat ID**: The bind 'Update Threat Intelligence: Update ID, Threat ID' specifies that the activity 'Update Threat Intelligence' requires the attributes 'Update ID' and 'Threat ID'.
+
+## Constraints
+- **Init[Identify Threat] | |**: The 'Identify Threat' must be the first activity to occur in the process.
+- **Chain Response[Identify Threat, Collect Data] | | |0,10,m**: Whenever a 'Identify Threat' activity occurs, it must be immediately followed by a 'Collect Data' activity in the next event position, with no other events in between. This immediate succession must occur within 0 to 10 minutes.
+- **Chain Response[Collect Data, Analyze Data] | | |0,30,m**: Whenever a 'Collect Data' activity occurs, it must be immediately followed by a 'Analyze Data' activity in the next event position, with no other events in between. This immediate succession must occur within 0 to 30 minutes.
+- **Chain Response[Analyze Data, Report Threat] |A.Analysis Result is Confirmed | |0,1,h**: Whenever a 'Analyze Data' activity occurs with the activation condition that 'Analysis Result is Confirmed', it must be immediately followed by a 'Report Threat' activity in the next event position, with no other events in between. This immediate succession must occur within 0 to 1 hour.
+- **Chain Response[Report Threat, Mitigate Threat] | | |0,2,h**: Whenever a 'Report Threat' activity occurs, it must be immediately followed by a 'Mitigate Threat' activity in the next event position, with no other events in between. This immediate succession must occur within 0 to 2 hours.
+- **Chain Response[Mitigate Threat, Monitor Systems] | | |**: Whenever a 'Mitigate Threat' activity occurs, it must be immediately followed by a 'Monitor Systems' activity in the next event position, with no other events in between.
+- **End[Monitor Systems] | |**: The 'Monitor Systems' must be the last activity to occur in the process.
+- **Chain Response[Mitigate Threat, Update Threat Intelligence] |A.Mitigation Success Rate > 90.0 | |**: Whenever a 'Mitigate Threat' activity occurs with the activation condition that 'Mitigation Success Rate > 90.0', it must be immediately followed by a 'Update Threat Intelligence' activity in the next event position, with no other events in between.
+

@@ -1,0 +1,49 @@
+**Multi-Perspective Declare Model: Client Service Management Process**
+
+This model describes a structured social care or case management process for supporting clients, with strong data dependencies and conditional temporal rules.
+
+### Process Flow (Control-Flow Perspective)
+
+The process begins with **Assess Client Needs** as the mandatory starting activity. After the initial assessment, the case worker must **Develop a Service Plan**. 
+
+The core service delivery loop consists of:
+- **Provide Counseling Services**, which must be followed (eventually) by **Monitor Client Progress**.
+- Monitoring progress can lead to **Adjust Service Plan** under certain conditions.
+- The process may also involve **Coordinate Support Services**, **Conduct Home Visit**, and **Refer to Specialist** as needed.
+- The process terminates with **Close Client File**, which is the only allowed ending activity.
+
+### Key Constraints
+
+**Temporal/Declarative Constraints:**
+- `Precedence`: Develop Service Plan cannot occur before Assess Client Needs.
+- `Response`: Obtain Funding Approval must eventually be followed by Provide Counseling Services.
+- `Succession`: Provide Counseling Services and Monitor Client Progress form a tight coupling — monitoring must follow counseling, and counseling must be followed by monitoring.
+- `Not Chain Succession`: Adjust Service Plan cannot immediately follow Monitor Client Progress (there must be at least one activity in between).
+- Several conditional responses (see below).
+
+**Data Perspective (MP-Declare bindings):**
+Each activity is bound to a specific data attribute:
+
+- **Assess Client Needs** → Client Risk Level (Low, Medium, High)
+- **Develop Service Plan** → Service Plan Duration (1–12 months)
+- **Obtain Funding Approval** → Funding Amount Requested (100.0 – 10000.0)
+- **Provide Counseling Services** → Counseling Type (Individual, Group, Family)
+- **Coordinate Support Services** → Support Service Type (Housing, Job Training, Childcare)
+- **Monitor Client Progress** → Progress Score (0–100)
+- **Adjust Service Plan** → Plan Adjustment Reason (Progress, Setback, New Needs)
+- **Conduct Home Visit** → Home Visit Outcome (Positive, Neutral, Negative)
+- **Close Client File** → File Closure Reason (Goals Met, Client Moved, Services Declined)
+- **Refer to Specialist** → Specialist Type (Psychiatrist, Addiction Counselor, Legal Aid)
+
+### Conditional Rules (Data-Driven Behavior)
+
+The model includes several **conditional response** constraints that become active based on data values:
+
+1. **If Client Risk Level is High**, then after Assess Client Needs, a **Conduct Home Visit** must eventually occur (within 24 hours).
+2. **If Progress Score is below 50**, then after Monitor Client Progress, the case worker must **Adjust Service Plan** within 7 days.
+3. **If Service Plan Duration is greater than 6 months**, then after Develop Service Plan, a **Refer to Specialist** must occur within 30 days.
+4. **If a Home Visit Outcome is Negative**, then an **Adjust Service Plan** must be performed within 3 days.
+
+### Summary
+
+This is a **data-aware declarative process model** for client case management. It combines flexible execution (activities can occur in various orders as long as constraints are satisfied) with strong data-driven decision points. The model ensures that high-risk clients receive home visits, poor progress triggers plan adjustments, and long-term cases involve specialist referrals — all while maintaining a clear beginning (Assessment) and end (File Closure).

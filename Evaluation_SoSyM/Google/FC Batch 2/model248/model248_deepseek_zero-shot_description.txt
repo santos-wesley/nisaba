@@ -1,0 +1,25 @@
+Here is a natural language description of the provided Multi-Perspective Declare model:
+
+This model describes a chemical synthesis workflow with ten activities, each constrained by specific data attributes and temporal rules.
+
+**Process Overview:**
+The process begins with **Prepare Solution**, which requires specifying a **Concentration** (a float between 0.1 and 10.0) and a **Solvent Type** (Water, Ethanol, or Toluene). This activity must be the first step in the process.
+
+After preparation, the solution must be **Heat Mixture** at a **Temperature** (float between 0.0 and 500.0) for a **Reaction Time** (integer between 1 and 600 minutes). Heating must follow preparation, and whenever heating occurs, **Add Catalyst** must eventually happen. The catalyst type is restricted to Platinum, Palladium, Nickel, or Iron.
+
+Once the catalyst is added, **Monitor Reaction** must occur at some point (and vice versa: if monitoring happens, a catalyst must have been added). Monitoring tracks the **Reaction Status** (Initiated, Ongoing, Completed, or Failed) and the **Reaction Time**.
+
+When monitoring is complete, **Cool Solution** must happen immediately afterward (chain response). Cooling must also be preceded by **Filter Product**, meaning filtration must occur before cooling begins.
+
+After cooling, **Filter Product** must be followed immediately by **Dry Product** (chain succession). Drying then requires that **Analyze Sample** eventually occurs, which measures **Purity** (integer 0–100) and **Yield** (float 0.0–100.0).
+
+Analysis must be followed by **Store Product** (with an **Alternate Response** constraint, meaning no other analysis can occur between them). Storing assigns a **Batch Number** (integer 1–1000). Finally, **Dispose Waste** must occur before storage, and storage must eventually be followed by waste disposal.
+
+**Temporal Constraints (with time limits):**
+- **Add Catalyst → Monitor Reaction**: Must occur within 10 minutes (m).
+- **Monitor Reaction → Cool Solution**: Must occur within 5 minutes.
+- **Cool Solution → Filter Product**: Must occur within 2 hours (h).
+- **Dry Product → Analyze Sample**: Must occur within 1 day (d).
+- **Store Product → Dispose Waste**: Must occur within 1 hour.
+
+In summary, this is a tightly controlled batch chemical process where each step has specific data requirements, strict ordering, and time-bound dependencies to ensure quality and safety.

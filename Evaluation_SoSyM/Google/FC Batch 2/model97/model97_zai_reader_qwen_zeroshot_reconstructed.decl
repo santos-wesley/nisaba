@@ -1,0 +1,45 @@
+activity Define Project Scope
+activity Design Database Schema
+activity Develop Frontend Interface
+activity Implement Backend Logic
+activity Integrate Payment Gateway
+activity Test System Functionality
+activity Deploy Application to Server
+activity Monitor System Performance
+activity Gather User Feedback
+activity Update System Based on Feedback
+bind Define Project Scope: Project Status
+bind Design Database Schema: Development Time
+bind Develop Frontend Interface: Budget Allocated
+bind Implement Backend Logic: Payment Method
+bind Integrate Payment Gateway: Number of Users
+bind Test System Functionality: Transaction Volume
+bind Deploy Application to Server: Deployment Environment
+bind Monitor System Performance: Number of Bugs
+bind Gather User Feedback: User Satisfaction, Feedback Type
+bind Update System Based on Feedback: Feedback Type
+Project Status: Initiated, In Progress, Completed, Delayed
+Development Time: integer between 10 and 2000
+Budget Allocated: float between 1000.0 and 500000.0
+Payment Method: Credit Card, PayPal, Stripe
+Number of Users: integer between 0 and 1000000
+Transaction Volume: float between 0.0 and 10000000.0
+Deployment Environment: Development, Staging, Production
+Number of Bugs: integer between 0 and 1000
+User Satisfaction: float between 1.0 and 5.0
+Feedback Type: Bug Report, Feature Request, Improvement Suggestion
+Init[Define Project Scope] | |
+Precedence[Develop Frontend Interface, Design Database Schema] | | |
+Exclusive Choice[Design Database Schema, Develop Frontend Interface] | | |
+Response[Implement Backend Logic, Integrate Payment Gateway] | | |
+Co-Existence[Test System Functionality, Deploy Application to Server] | | |
+Succession[Deploy Application to Server, Monitor System Performance] | | |
+Not Precedence[Define Project Scope, Gather User Feedback] | | |
+Not Succession[Define Project Scope, Update System Based on Feedback] | | |
+Existence[Update System Based on Feedback] | |
+Absence5[Test System Functionality] | |
+Response[Define Project Scope, Design Database Schema] |A.Project Status is Delayed |T.Development Time > 1000 |
+Response[Implement Backend Logic, Integrate Payment Gateway] |A.Payment Method is Credit Card |T.Number of Users > 1000 |0,1,h
+Response[Deploy Application to Server, Monitor System Performance] |A.Deployment Environment is Production |T.Number of Bugs < 10 |0,24,h
+Response[Gather User Feedback, Update System Based on Feedback] |A.User Satisfaction < 3.0 |A.Feedback Type is Bug Report |0,1,d
+Response[Test System Functionality, Integrate Payment Gateway] |A.Transaction Volume > 1000000.0 |T.Number of Users > 10000 |0,7,d

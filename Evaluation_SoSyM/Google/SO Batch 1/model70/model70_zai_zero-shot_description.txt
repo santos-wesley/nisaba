@@ -1,0 +1,38 @@
+This Multi-Perspective Declare model outlines a disaster response and emergency management protocol, specifically tailored for a tsunami scenario. The model defines a set of activities, the data attributes associated with them, and the logical, temporal, and data-driven rules governing their execution. 
+
+Here is a natural language description of the model:
+
+### **1. Activities and Data Attributes (Perspectives)**
+The model tracks nine key emergency response activities, each bound to specific data attributes that provide context during execution:
+*   **Monitor Seismic Activity:** Tracks the earthquake **Magnitude** (a decimal from 0.0 to 10.0).
+*   **Issue Tsunami Alert:** Tracks the **Alert Level** (Watch, Warning, Cancel) and **Estimated Arrival Time** (an integer from 0 to 360 minutes).
+*   **Evacuate Coastal Areas:** Tracks the **Number of Evacuees** (an integer from 0 to 1,000,000).
+*   **Dispatch Emergency Services:** No specific data attributes are bound to this activity.
+*   **Establish Emergency Shelters:** Tracks the **Number of Shelters** opened (an integer from 0 to 100).
+*   **Assess Infrastructure Damage:** Tracks **Damage Severity** (Minor, Moderate, Severe).
+*   **Provide Medical Assistance:** Tracks the **Number of Injuries** (an integer from 0 to 5,000).
+*   **Distribute Relief Supplies:** Tracks the **Supply Cost** (a decimal from 0.0 to 1,000,000.0).
+*   **Restore Communication Networks:** Tracks the **Communication Status** (Operational, Partially Operational, Down).
+*   **Conduct Search and Rescue:** Tracks the **Number of Rescued** individuals (an integer from 0 to 1,000).
+
+### **2. Execution Rules (Constraints)**
+The model defines strict rules for how and when these activities must occur:
+
+**Initial Action:**
+*   The process must begin with **Monitor Seismic Activity**. 
+
+**Cascading Responses and Time Constraints:**
+*   **Seismic to Alert:** If seismic activity is monitored and the **Magnitude is greater than 7.0**, it directly triggers the **Issue Tsunami Alert** activity.
+*   **Alert to Evacuation:** Once a Tsunami Alert is issued, **Evacuate Coastal Areas** must follow. This evacuation must occur within **60 minutes** of the alert being issued.
+*   **Dispatch to Medical:** If **Dispatch Emergency Services** occurs, **Provide Medical Assistance** must eventually follow. Medical assistance must be provided within **24 hours** of dispatching emergency services.
+*   **Shelters to Supplies:** If **Establish Emergency Shelters** occurs, **Distribute Relief Supplies** must follow. Relief supplies must be distributed within **48 hours** of establishing the shelters.
+*   **Damage to Comms:** If **Assess Infrastructure Damage** occurs, **Restore Communication Networks** must follow. Communication restoration must begin within **72 hours** of the damage assessment.
+
+**Precedence (Ordering) Rule:**
+*   **Provide Medical Assistance** cannot occur until **Dispatch Emergency Services** has occurred. Emergency services must be dispatched before medical assistance can be provided.
+
+**Mutual Exclusion (Conflict) Rule:**
+*   **Conduct Search and Rescue** and **Assess Infrastructure Damage** cannot co-exist in the same process trace. If one of these activities occurs, the other is strictly forbidden.
+
+**Data-Driven Iterative Rule:**
+*   **Restoring Communications:** The **Restore Communication Networks** activity is self-triggering based on its own data state. If the activity is executed and the **Communication Status is "Down"**, it triggers the need to execute **Restore Communication Networks** again. This loop continues until the activity is executed and the **Communication Status becomes "Operational"**.

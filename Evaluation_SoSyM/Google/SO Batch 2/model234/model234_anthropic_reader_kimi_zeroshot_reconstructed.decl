@@ -1,0 +1,50 @@
+activity Identify Risk
+activity Assess Impact
+activity Evaluate Probability
+activity Prioritize Risks
+activity Develop Mitigation Plan
+activity Implement Mitigation
+activity Monitor Risks
+activity Review Risk Assessment
+activity Update Risk Register
+activity Communicate Risks
+activity Approve Mitigation Plan
+activity Document Lessons Learned
+activity Escalate Critical Risks
+activity Conduct Risk Workshop
+activity Validate Risk Controls
+bind Identify Risk: Risk Category, Risk ID
+bind Assess Impact: Impact Score, Risk ID
+bind Evaluate Probability: Probability, Risk ID
+bind Prioritize Risks: Risk ID, Exposure Value
+bind Develop Mitigation Plan: Risk ID, Mitigation Strategy, Mitigation Cost
+bind Implement Mitigation: Risk ID, Risk Status
+bind Monitor Risks: Risk ID, Review Frequency
+bind Review Risk Assessment: Risk ID
+bind Update Risk Register: Risk ID, Risk Status
+bind Communicate Risks: Risk ID, Risk Owner
+Risk Category: Financial, Operational, Compliance, Strategic, Reputational
+Risk ID: integer between 1 and 1000
+Impact Score: integer between 1 and 10
+Probability: float between 0.0 and 1.0
+Exposure Value: float between 0.0 and 1000000.0
+Mitigation Strategy: Avoidance, Transference, Mitigation, Acceptance
+Mitigation Cost: float between 0.0 and 100000.0
+Risk Status: Open, Mitigated, Closed, Accepted
+Review Frequency: integer between 1 and 12
+Risk Owner: John Smith, Alice Johnson, Bob Williams
+Init[Identify Risk] | |
+Precedence[Identify Risk, Assess Impact] | | |
+Response[Assess Impact, Evaluate Probability] | | |
+Precedence[Evaluate Probability, Prioritize Risks] | | |
+Response[Prioritize Risks, Develop Mitigation Plan] | | |
+Precedence[Develop Mitigation Plan, Implement Mitigation] | | |
+Response[Implement Mitigation, Monitor Risks] | | |
+Succession[Monitor Risks, Review Risk Assessment] | | |
+Response[Review Risk Assessment, Update Risk Register] | | |
+Succession[Update Risk Register, Communicate Risks] | | |
+Absence3[Escalate Critical Risks] | |
+Response[Identify Risk, Develop Mitigation Plan] |A.Risk Category is Financial |A.Risk ID == T.Risk ID AND T.Mitigation Cost > 1000 |
+Response[Identify Risk, Implement Mitigation] |A.Risk Status is Open |A.Risk ID == T.Risk ID |0,30,d
+Response[Monitor Risks, Review Risk Assessment] | |A.Risk ID == T.Risk ID |90,180,d
+Response[Assess Impact, Escalate Critical Risks] |A.Impact Score > 7 | |0,24,h

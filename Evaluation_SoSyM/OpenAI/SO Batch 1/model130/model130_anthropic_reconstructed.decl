@@ -1,0 +1,41 @@
+activity Draft Contract
+activity Review Contract
+activity Negotiate Terms
+activity Approve Contract
+activity Sign Contract
+activity Archive Contract
+bind Draft Contract: Contract ID, Contract Value
+bind Review Contract: Review Outcome
+bind Approve Contract: Approval Status
+bind Sign Contract: Signature Status
+Contract ID: integer between 1000 and 9999
+Contract Value: float between 10000.0 and 1000000.0
+Approval Status: Pending, Approved, Rejected
+Signature Status: Unsigned, Partially Signed, Fully Signed
+Review Outcome: Accepted, Requires Changes, Rejected
+Init[Draft Contract] | |
+End[Archive Contract] | |
+Existence[Review Contract] | |
+Absence4[Negotiate Terms] | |
+Exactly[Sign Contract] | |
+Responded Existence[Negotiate Terms, Review Contract] | | |
+Precedence[Review Contract, Approve Contract] |A.Review Outcome is Accepted | |
+Precedence[Approve Contract, Sign Contract] |A.Approval Status is Approved | |
+Response[Draft Contract, Review Contract] | | |
+Response[Review Contract, Negotiate Terms] |A.Review Outcome is Requires Changes | |
+Succession[Approve Contract, Sign Contract] |A.Approval Status is Approved | |
+Alternate Response[Draft Contract, Review Contract] | | |
+Alternate Succession[Approve Contract, Sign Contract] | | |
+Chain Response[Approve Contract, Sign Contract] |A.Approval Status is Approved | |
+Chain Succession[Approve Contract, Sign Contract] |A.Approval Status is Approved | |
+Co-Existence[Negotiate Terms, Review Contract] | | |
+Choice[Negotiate Terms, Approve Contract] | | |
+Exclusive Choice[Review Contract, Review Contract] | | |
+Not Co-Existence[Sign Contract, Negotiate Terms] |A.Signature Status is Fully Signed | |
+Not Responded Existence[Archive Contract, Negotiate Terms] | | |
+Not Precedence[Sign Contract, Archive Contract] | | |
+Not Response[Archive Contract, Draft Contract] | |A.Contract ID == T.Contract ID |
+Not Succession[Sign Contract, Draft Contract] | | |
+Not Chain Precedence[Draft Contract, Archive Contract] | | |
+Not Chain Response[Review Contract, Sign Contract] |A.Review Outcome is Rejected | |
+Not Chain Succession[Negotiate Terms, Archive Contract] | | |

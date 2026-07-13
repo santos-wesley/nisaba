@@ -1,0 +1,55 @@
+This Multi-Perspective Declare model represents a structured Vendor Management and Procurement process. It defines the lifecycle of engaging a vendor, from identifying needs to conducting a final review, while enforcing strict execution rules, data bindings, and time constraints. 
+
+Here is a natural language description of the model:
+
+### **1. Process Activities**
+The model consists of eight sequential and administrative activities:
+1. **Identify Needs**: The starting point of the process.
+2. **Select Vendor**: Choosing a vendor to fulfill the identified needs.
+3. **Negotiate Contract**: Agreeing on terms and contract details.
+4. **Sign Contract**: Formalizing the agreement.
+5. **Monitor Performance**: Tracking the vendor's performance against metrics.
+6. **Review Compliance**: Ensuring the vendor meets regulatory or internal standards.
+7. **Issue Payment**: Paying the vendor.
+8. **Conduct Review**: The final activity, evaluating the overall engagement.
+
+### **2. Data Bindings and Attributes**
+Each activity (except for the initial "Identify Needs") is bound to specific data attributes that must be recorded during execution:
+* **Select Vendor**: Captures **Vendor ID** and **Vendor Name**.
+* **Negotiate Contract**: Captures **Vendor ID** and **Contract Amount**.
+* **Monitor Performance**: Captures **Vendor ID** and **KPI Score**.
+* **Review Compliance**: Captures **Vendor ID** and **Compliance Status**.
+* **Issue Payment**: Captures **Vendor ID** and **Payment Status**.
+* **Conduct Review**: Captures **Vendor ID** and **Review Outcome**.
+
+### **3. Data Domains (Constraints)**
+The model restricts the values that can be assigned to the bound attributes:
+* **Vendor ID**: An integer between 1 and 9999.
+* **Vendor Name**: Restricted to one of three options: "Vendor A", "Vendor B", or "Vendor C".
+* **Contract Amount**: An integer between 1,000 and 1,000,000.
+* **KPI Score**: A decimal (float) number between 0.0 and 10.0.
+* **Compliance Status**: Either "Compliant" or "Non-Compliant".
+* **Review Outcome**: Either "Satisfactory" or "Unsatisfactory".
+* **Payment Status**: Either "Pending" or "Completed".
+
+### **4. Control-Flow and Temporal Constraints**
+The rules governing the order and timing of activities are as follows:
+
+**Start and End Rules:**
+* The process must begin with the **Identify Needs** activity.
+* The process must end with the **Conduct Review** activity.
+
+**Ordering Rules (Precedence):**
+* **Select Vendor** can only occur after **Identify Needs** has been completed.
+* **Negotiate Contract** can only occur after **Select Vendor** has been completed.
+* **Review Compliance** can only occur after **Monitor Performance** has been completed.
+* **Issue Payment** can only occur after **Review Compliance** has been completed.
+
+**Timing Rules (Chain Response with Deadlines):**
+The "Chain Response" constraints dictate that if the first activity occurs, the second activity must occur next (immediately following), and it must happen within a specific time frame (measured in days):
+* If **Negotiate Contract** occurs, **Sign Contract** must immediately follow within **7 days**.
+* If **Sign Contract** occurs, **Monitor Performance** must immediately follow within **2 days**.
+* If **Issue Payment** occurs, **Conduct Review** must immediately follow within **2 days**.
+
+**Absence Rule:**
+* There is an **Absence** constraint placed on **Select Vendor**. In the context of this model, this typically means that "Select Vendor" is restricted from occurring outside of its strictly defined precedence rules (i.e., it cannot happen spontaneously or multiple times outside of the allowed flow).

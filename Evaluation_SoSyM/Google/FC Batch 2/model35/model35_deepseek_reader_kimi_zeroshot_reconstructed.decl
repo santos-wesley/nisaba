@@ -1,0 +1,53 @@
+activity Submit Benefits Enrollment
+activity Verify Employee Eligibility
+activity Send Enrollment Confirmation
+activity Calculate Premium Cost
+activity Audit Benefits Enrollment
+activity Process Premium Payment
+activity Generate Benefits Report
+activity Update Benefits Record
+activity Review Benefits Options
+activity Request Additional Information
+activity Resolve Employee Inquiry
+activity Process Benefits Claim
+activity Approve Benefits Claim
+activity Deny Benefits Claim
+activity Receive Employee Inquiry
+bind Submit Benefits Enrollment: Employee ID, Enrollment Status, Benefit Plan
+bind Verify Employee Eligibility: Employee ID
+bind Send Enrollment Confirmation: Employee ID
+bind Calculate Premium Cost: Employee ID, Premium Rate, Benefit Plan, Deduction Amount
+bind Audit Benefits Enrollment: Employee ID
+bind Process Premium Payment: Employee ID
+bind Generate Benefits Report: Employee ID
+bind Update Benefits Record: Employee ID
+bind Review Benefits Options: Employee ID
+bind Request Additional Information: Employee ID
+bind Resolve Employee Inquiry: Employee ID
+bind Process Benefits Claim: Employee ID, Claim Amount, Claim Status
+bind Approve Benefits Claim: Employee ID, Claim Status
+bind Deny Benefits Claim: Employee ID, Claim Status
+bind Receive Employee Inquiry: Employee ID, Inquiry Type
+Employee ID: integer between 1000 and 9999
+Enrollment Status: Submitted, Verified, Approved, Rejected
+Benefit Plan: Health, Dental, Vision, Life
+Premium Rate: float between 0.0 and 1.0
+Deduction Amount: float between 0.0 and 5000.0
+Claim Amount: integer between 0 and 10000
+Claim Status: Received, Processed, Approved, Denied, Paid
+Inquiry Type: Enrollment, Claim, Eligibility, Payment
+Init[Submit Benefits Enrollment] | |
+Response[Submit Benefits Enrollment, Verify Employee Eligibility] | | |0,24,h
+Response[Submit Benefits Enrollment, Send Enrollment Confirmation] | | |0,24,h
+Response[Submit Benefits Enrollment, Calculate Premium Cost] | | |
+Response[Submit Benefits Enrollment, Audit Benefits Enrollment] | | |0,7,d
+Response[Submit Benefits Enrollment, Process Premium Payment] | | |0,7,d
+Response[Submit Benefits Enrollment, Generate Benefits Report] | | |0,30,d
+Response[Submit Benefits Enrollment, Update Benefits Record] | | |0,7,d
+Response[Submit Benefits Enrollment, Review Benefits Options] | | |0,24,h
+Response[Submit Benefits Enrollment, Request Additional Information] | | |0,24,h
+Response[Submit Benefits Enrollment, Resolve Employee Inquiry] | | |0,24,h
+Precedence[Process Benefits Claim, Approve Benefits Claim] | | |
+Precedence[Process Benefits Claim, Deny Benefits Claim] | | |
+Exclusive Choice[Approve Benefits Claim, Deny Benefits Claim] | | |
+Response[Receive Employee Inquiry, Resolve Employee Inquiry] | | |0,24,h

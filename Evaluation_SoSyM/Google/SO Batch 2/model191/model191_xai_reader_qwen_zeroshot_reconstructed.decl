@@ -1,0 +1,36 @@
+activity Request Return
+activity Approve Return
+activity Generate Return Label
+activity Ship Item Back
+activity Receive Item
+activity Inspect Item
+activity Determine Refund
+activity Process Refund
+activity Restock Item
+activity Dispose Item
+bind Request Return: Return ID, Return Reason, Return Status
+bind Approve Return: Return Status
+bind Ship Item Back: Shipping Method, Shipping Cost, Days to Return, Return Status
+bind Inspect Item: Item Condition, Inspection Result
+bind Determine Refund: Refund Amount
+bind Process Refund: Refund Amount
+bind Restock Item: Restock Quantity
+Return ID: integer between 1000 and 9999
+Return Reason: Defective, Damaged, Wrong Item, No Longer Needed
+Return Status: Requested, Approved, Rejected, Shipped, Received, Inspected, Refunded, Restocked, Disposed
+Shipping Method: UPS, FedEx, USPS
+Shipping Cost: float between 0.0 and 50.0
+Days to Return: integer between 1 and 60
+Item Condition: integer between 1 and 5
+Inspection Result: Acceptable, Damaged, Unacceptable
+Refund Amount: float between 0.0 and 1000.0
+Restock Quantity: integer between 1 and 100
+Response[Request Return, Approve Return] | | |0,24,h
+Response[Approve Return, Generate Return Label] | | |0,30,m
+Response[Generate Return Label, Ship Item Back] | | |
+Response[Ship Item Back, Receive Item] | | |
+Response[Receive Item, Inspect Item] | | |0,48,h
+Response[Inspect Item, Determine Refund] | | |
+Response[Determine Refund, Process Refund] | | |0,2,d
+Response[Inspect Item, Restock Item] |A.Inspection Result is Acceptable | |
+Response[Inspect Item, Dispose Item] |A.Inspection Result in (Damaged, Unacceptable) | |

@@ -1,0 +1,81 @@
+#MP-Declare Model
+## Activities
+- **Monitor Seismic Activity**: 
+- **Issue Tsunami Alert**: 
+- **Evacuate Coastal Areas**: 
+- **Dispatch Emergency Services**: 
+- **Establish Emergency Shelters**: 
+- **Assess Infrastructure Damage**: 
+- **Provide Medical Assistance**: 
+- **Distribute Relief Supplies**: 
+- **Restore Communication Networks**: 
+- **Conduct Search and Rescue**: 
+
+## Attributes
+- **Alert Level: Watch, Warning, Cancel**: 
+- **Magnitude: float between 0.0 and 10.0**: 
+- **Estimated Arrival Time: integer between 0 and 360**: 
+- **Number of Evacuees: integer between 0 and 1000000**: 
+- **Damage Severity: Minor, Moderate, Severe**: 
+- **Number of Injuries: integer between 0 and 5000**: 
+- **Number of Shelters: integer between 0 and 100**: 
+- **Communication Status: Operational, Partially Operational, Down**: 
+- **Number of Rescued: integer between 0 and 1000**: 
+- **Supply Cost: float between 0.0 and 1000000.0**: 
+
+## Binds
+- **Monitor Seismic Activity: Magnitude**: 
+- **Issue Tsunami Alert: Alert Level, Estimated Arrival Time**: 
+- **Evacuate Coastal Areas: Number of Evacuees**: 
+- **Assess Infrastructure Damage: Damage Severity**: 
+- **Provide Medical Assistance: Number of Injuries**: 
+- **Establish Emergency Shelters: Number of Shelters**: 
+- **Restore Communication Networks: Communication Status**: 
+- **Conduct Search and Rescue: Number of Rescued**: 
+- **Distribute Relief Supplies: Supply Cost**: 
+
+## Constraints
+- **Init[Monitor Seismic Activity] | |**: 
+- **Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |**: 
+- **Precedence[Provide Medical Assistance, Dispatch Emergency Services] | | |**: 
+- **Not Co-Existence[Conduct Search and Rescue, Assess Infrastructure Damage] | | |**: 
+- **Response[Restore Communication Networks, Restore Communication Networks] |A.Communication Status is Down |A.Communication Status is Operational |**: 
+- **Response[Monitor Seismic Activity, Issue Tsunami Alert] |A.Magnitude > 7 | |**: 
+- **Response[Issue Tsunami Alert, Evacuate Coastal Areas] | | |0,60,m**: 
+- **Response[Dispatch Emergency Services, Provide Medical Assistance] | | |0,24,h**: 
+- **Response[Establish Emergency Shelters, Distribute Relief Supplies] | | |0,48,h**: 
+- **Response[Assess Infrastructure Damage, Restore Communication Networks] | | |0,72,h**: 
+
+
+## Interleaved Description
+The MP-Declare process model for the tsunami response process is described as follows:
+
+### **Trace-Related Constraints**
+#### **Init Constraints**
+The process begins with the activity 'Monitor Seismic Activity,' which involves tracking seismic data and recording the 'Magnitude' attribute. This establishes the initial context for the entire response, as all subsequent actions depend on the detection and assessment of seismic events.
+
+### **Frequency Constraints**
+No Existence, Absence, or Exactly constraints are present in this model.
+
+### **Dependency Constraints**
+No Responded Existence constraints are present in this model.
+
+### **Flexible Ordering Constraints**
+#### **Precedence Constraints**
+1. The activity 'Dispatch Emergency Services' is permitted to occur only if a 'Provide Medical Assistance' activity has occurred before it. This sets up an initial context where medical aid must be underway before emergency services are dispatched, ensuring that resources are coordinated and that medical support is available for the response teams.
+
+#### **Response Constraints**
+1. If the 'Issue Tsunami Alert' activity occurs, then the 'Evacuate Coastal Areas' activity must occur. This defines an ordered flow where the issuance of a tsunami warning directly triggers the evacuation of coastal zones, ensuring a cohesive temporal structure in the response.
+2. If the 'Issue Tsunami Alert' activity occurs, then the 'Evacuate Coastal Areas' activity must occur within 60 minutes. This imposes a strict time limit on the evacuation, ensuring that it is initiated promptly after the alert is issued.
+3. If the 'Dispatch Emergency Services' activity occurs, then the 'Provide Medical Assistance' activity must occur within 24 hours. This ensures that medical support follows the deployment of emergency services within a day, maintaining the process's momentum.
+4. If the 'Establish Emergency Shelters' activity occurs, then the 'Distribute Relief Supplies' activity must occur within 48 hours. This ensures that relief supplies are distributed to shelters within two days, supporting the needs of evacuees.
+5. If the 'Assess Infrastructure Damage' activity occurs, then the 'Restore Communication Networks' activity must occur within 72 hours. This ensures that communication restoration follows damage assessment within three days, enabling coordination and information flow.
+6. If the 'Monitor Seismic Activity' activity occurs with the condition 'Magnitude > 7,' then the 'Issue Tsunami Alert' activity must occur. This establishes a causal link where a high-magnitude seismic event necessitates the issuance of a tsunami alert, ensuring a direct response to significant threats.
+7. If the 'Restore Communication Networks' activity occurs with the condition 'Communication Status is Down,' then the 'Restore Communication Networks' activity must occur again with the condition 'Communication Status is Operational.' This defines a self-referential sequence where a failed communication network must be restored to an operational state, ensuring the process addresses and resolves communication failures.
+
+### **Exclusivity Constraints**
+#### **Not Co-Existence Constraints**
+The 'Conduct Search and Rescue' activity and the 'Assess Infrastructure Damage' activity cannot both occur within the same process instance. This exclusion rule ensures that search and rescue operations and damage assessment are not performed concurrently, maintaining process integrity by preventing conflicting priorities and resource allocation.
+
+### **Immediate Ordering Constraints**
+No Chain Precedence, Chain Response, or Chain Succession constraints are present in this model.

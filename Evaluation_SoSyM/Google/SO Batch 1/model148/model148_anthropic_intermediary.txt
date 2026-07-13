@@ -1,0 +1,38 @@
+## Activities
+- **Conduct Risk Assessment**: The 'Conduct Risk Assessment' activity represents the process of evaluating and identifying potential risks within the organization.
+- **Develop Compliance Plan**: The 'Develop Compliance Plan' activity involves creating a plan to ensure adherence to relevant regulations and standards.
+- **Implement Controls**: The 'Implement Controls' activity includes putting in place mechanisms to manage and mitigate identified risks.
+- **Monitor Compliance**: The 'Monitor Compliance' activity represents the ongoing tracking and verification of adherence to compliance requirements.
+- **Report Violations**: The 'Report Violations' activity involves formally documenting and communicating instances of non-compliance.
+- **Investigate Violations**: The 'Investigate Violations' activity includes examining reported violations to determine their causes and severity.
+- **Take Corrective Action**: The 'Take Corrective Action' activity represents the implementation of measures to address and resolve identified compliance issues.
+- **Review Compliance Plan**: The 'Review Compliance Plan' activity involves examining the compliance plan to assess its effectiveness and relevance.
+- **Approve Compliance Plan**: The 'Approve Compliance Plan' activity represents the formal authorization of the compliance plan by relevant stakeholders.
+- **Train Employees**: The 'Train Employees' activity includes providing training to staff on compliance policies and procedures.
+
+## Attributes
+- **Risk Level: Low, Medium, High**: The attribute 'Risk Level: Low, Medium, High' specifies the level of risk identified during a risk assessment.
+- **Compliance Status: Compliant, Non-Compliant, Pending**: The attribute 'Compliance Status: Compliant, Non-Compliant, Pending' specifies the current compliance state of a process or entity.
+- **Violation Severity: Integer between 1 and 5**: The attribute 'Violation Severity: Integer between 1 and 5' represents the severity level of a reported violation.
+- **Financial Impact: Float between 0.0 and 1000000.0**: The attribute 'Financial Impact: Float between 0.0 and 1000000.0' represents the monetary impact resulting from a violation.
+- **Control Type: Preventative, Detective, Corrective**: The attribute 'Control Type: Preventative, Detective, Corrective' specifies the category of control implemented to manage risk.
+- **Training Hours: Integer between 0 and 40**: The attribute 'Training Hours: Integer between 0 and 40' represents the number of hours dedicated to employee training.
+- **Reporting Channel: Email, Phone, Online Portal**: The attribute 'Reporting Channel: Email, Phone, Online Portal' specifies the medium through which violations are reported.
+- **Assessment Score: Float between 0.0 and 100.0**: The attribute 'Assessment Score: Float between 0.0 and 100.0' represents the numerical score resulting from a risk assessment.
+- **Plan Status: Draft, Approved, Implemented**: The attribute 'Plan Status: Draft, Approved, Implemented' specifies the current stage of the compliance plan's lifecycle.
+- **Number of Violations: Integer between 0 and 100**: The attribute 'Number of Violations: Integer between 0 and 100' represents the count of violations reported.
+
+## Binds
+- **Conduct Risk Assessment: Risk Level, Assessment Score**: The bind 'Conduct Risk Assessment: Risk Level, Assessment Score' specifies that the activity 'Conduct Risk Assessment' requires the attributes 'Risk Level' and 'Assessment Score'.
+- **Develop Compliance Plan: Plan Status**: The bind 'Develop Compliance Plan: Plan Status' links the 'Develop Compliance Plan' activity with the attribute 'Plan Status'.
+- **Implement Controls: Control Type**: The bind 'Implement Controls: Control Type' links the 'Implement Controls' activity with the attribute 'Control Type'.
+- **Monitor Compliance: Compliance Status**: The bind 'Monitor Compliance: Compliance Status' links the 'Monitor Compliance' activity with the attribute 'Compliance Status'.
+- **Report Violations: Number of Violations, Reporting Channel**: The bind 'Report Violations: Number of Violations, Reporting Channel' specifies that the activity 'Report Violations' requires the attributes 'Number of Violations' and 'Reporting Channel'.
+- **Investigate Violations: Violation Severity, Financial Impact**: The bind 'Investigate Violations: Violation Severity, Financial Impact' specifies that the activity 'Investigate Violations' requires the attributes 'Violation Severity' and 'Financial Impact'.
+- **Take Corrective Action: Compliance Status**: The bind 'Take Corrective Action: Compliance Status' links the 'Take Corrective Action' activity with the attribute 'Compliance Status'.
+- **Review Compliance Plan: Plan Status**: The bind 'Review Compliance Plan: Plan Status' links the 'Review Compliance Plan' activity with the attribute 'Plan Status'.
+- **Approve Compliance Plan: Plan Status**: The bind 'Approve Compliance Plan: Plan Status' links the 'Approve Compliance Plan' activity with the attribute 'Plan Status'.
+- **Train Employees: Training Hours**: The bind 'Train Employees: Training Hours' links the 'Train Employees' activity with the attribute 'Training Hours'.
+
+## Constraints
+

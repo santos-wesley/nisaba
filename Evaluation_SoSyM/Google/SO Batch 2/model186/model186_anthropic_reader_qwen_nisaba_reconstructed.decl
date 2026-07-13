@@ -1,0 +1,66 @@
+activity Report Animal Abuse
+activity Investigate Abuse Report
+activity Rescue Abused Animal
+activity Provide Veterinary Care
+activity Find Foster Home
+activity Conduct Adoption Screening
+activity Finalize Animal Adoption
+activity Monitor Animal Welfare
+activity Educate Public Awareness
+activity Process Donation
+activity Train Staff Member
+activity Inspect Shelter Facility
+activity Approve Volunteer Application
+activity Schedule Animal Checkup
+activity Euthanize Animal
+bind Report Animal Abuse: Abuse Severity, Animal Species, Animal Age
+bind Investigate Abuse Report: Abuse Severity
+bind Rescue Abused Animal: Animal Species, Animal Age, Animal Health
+bind Provide Veterinary Care: Animal Health
+bind Find Foster Home: Animal Health, Shelter Capacity
+bind Conduct Adoption Screening: Adoption Status
+bind Finalize Animal Adoption: Animal Species, Animal Age
+bind Process Donation: Donation Amount
+bind Approve Volunteer Application: Volunteer Background Check
+bind Schedule Animal Checkup: Checkup Frequency
+bind Inspect Shelter Facility: Shelter Capacity
+Abuse Severity: Low, Medium, High
+Animal Species: Dog, Cat, Other
+Animal Age: integer between 0 and 25
+Animal Health: Healthy, Injured, Sick
+Donation Amount: float between 1.0 and 10000.0
+Adoption Status: Pending, Approved, Rejected
+Shelter Capacity: integer between 0 and 500
+Volunteer Background Check: Pass, Fail
+Checkup Frequency: integer between 7 and 365
+Init[Report Animal Abuse] | |
+End[Monitor Animal Welfare] | |
+Existence[Investigate Abuse Report] | |
+Existence[Provide Veterinary Care] | |
+Absence[Euthanize Animal] | |
+Exactly[Conduct Adoption Screening] | |
+Responded Existence[Rescue Abused Animal, Provide Veterinary Care] | | |
+Precedence[Rescue Abused Animal, Investigate Abuse Report] |A.Abuse Severity in (High, Medium) | |
+Precedence[Finalize Animal Adoption, Conduct Adoption Screening] |A.Adoption Status is Approved | |
+Precedence[Find Foster Home, Provide Veterinary Care] |A.Animal Health is Healthy | |
+Response[Report Animal Abuse, Investigate Abuse Report] |A.Abuse Severity is High | |
+Response[Rescue Abused Animal, Provide Veterinary Care] | | |
+Response[Finalize Animal Adoption, Monitor Animal Welfare] | | |
+Succession[Investigate Abuse Report, Rescue Abused Animal] |A.Abuse Severity in (High, Medium) | |
+Alternate Precedence[Finalize Animal Adoption, Conduct Adoption Screening] | | |
+Alternate Response[Approve Volunteer Application, Train Staff Member] | | |
+Alternate Succession[Schedule Animal Checkup, Monitor Animal Welfare] | | |
+Chain Precedence[Inspect Shelter Facility, Approve Volunteer Application] | | |
+Chain Response[Rescue Abused Animal, Provide Veterinary Care] |A.Animal Health in (Injured, Sick) | |
+Chain Succession[Conduct Adoption Screening, Finalize Animal Adoption] |A.Adoption Status is Approved | |
+Co-Existence[Process Donation, Educate Public Awareness] | | |
+Choice[Find Foster Home, Finalize Animal Adoption] | | |
+Exclusive Choice[Finalize Animal Adoption, Euthanize Animal] | | |
+Not Co-Existence[Finalize Animal Adoption, Euthanize Animal] | | |
+Not Responded Existence[Process Donation, Euthanize Animal] | | |
+Not Precedence[Euthanize Animal, Provide Veterinary Care] | | |
+Not Response[Process Donation, Euthanize Animal] | | |
+Not Succession[Educate Public Awareness, Euthanize Animal] | | |
+Not Chain Precedence[Euthanize Animal, Report Animal Abuse] | | |
+Not Chain Response[Rescue Abused Animal, Euthanize Animal] | | |
+Not Chain Succession[Process Donation, Inspect Shelter Facility] | | |

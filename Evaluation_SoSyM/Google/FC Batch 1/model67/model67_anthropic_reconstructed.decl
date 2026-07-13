@@ -1,0 +1,52 @@
+activity Detect Fraudulent Activity
+activity Verify Customer Identity
+activity Review Transaction Details
+activity Approve Transaction
+activity Decline Transaction
+activity Report Suspicious Activity
+activity Update Account Security
+activity Notify Customer
+activity Investigate Security Breach
+activity Implement Security Patch
+bind Detect Fraudulent Activity: Transaction Type, Transaction Amount, Fraud Risk Level
+bind Verify Customer Identity: Verification Attempts, Verification Status
+bind Review Transaction Details: Transaction Type, Transaction Amount
+bind Approve Transaction: Transaction Type, Transaction Amount
+bind Decline Transaction: Transaction Type, Transaction Amount
+bind Report Suspicious Activity: Transaction Type, Transaction Amount
+bind Update Account Security: Days Since Last Activity
+bind Notify Customer: Customer Notification Method
+bind Investigate Security Breach: Breach Severity
+bind Implement Security Patch: Security Patch Status
+Transaction Type: Debit, Credit, Wire Transfer, Online Payment
+Transaction Amount: float between 0.01 and 100000.0
+Fraud Risk Level: Low, Medium, High
+Verification Attempts: integer between 1 and 5
+Verification Status: Verified, Not Verified, Pending
+Breach Severity: integer between 1 and 10
+Security Patch Status: Applied, Not Applied, Scheduled
+Customer Notification Method: Email, SMS, Phone Call
+Days Since Last Activity: integer between 0 and 365
+Init[Detect Fraudulent Activity] | |
+End[Notify Customer] | |
+Existence[Verify Customer Identity] | |
+Existence[Review Transaction Details] | |
+Absence2[Implement Security Patch] | |
+Exactly[Investigate Security Breach] | |
+Responded Existence[Report Suspicious Activity, Investigate Security Breach] | | |
+Precedence[Approve Transaction, Verify Customer Identity] | |T.Verification Status is Verified |
+Precedence[Decline Transaction, Detect Fraudulent Activity] | |T.Fraud Risk Level is High |
+Response[Detect Fraudulent Activity, Review Transaction Details] |A.Fraud Risk Level is High | |
+Response[Report Suspicious Activity, Notify Customer] | |T.Customer Notification Method is Email |
+Succession[Verify Customer Identity, Decline Transaction] |A.Verification Status is Not Verified | |
+Alternate Response[Investigate Security Breach, Implement Security Patch] | |T.Security Patch Status is Applied |
+Alternate Precedence[Implement Security Patch, Investigate Security Breach] | | |
+Chain Response[Decline Transaction, Notify Customer] | |T.Customer Notification Method is SMS |
+Chain Precedence[Update Account Security, Investigate Security Breach] | |T.Breach Severity > 7 |
+Co-Existence[Report Suspicious Activity, Update Account Security] | | |
+Exclusive Choice[Approve Transaction, Decline Transaction] | | |
+Not Co-Existence[Approve Transaction, Decline Transaction] | |A.Transaction Amount == T.Transaction Amount |
+Not Responded Existence[Approve Transaction, Report Suspicious Activity] | | |
+Not Precedence[Notify Customer, Detect Fraudulent Activity] | | |
+Not Response[Approve Transaction, Decline Transaction] | |A.Transaction Amount == T.Transaction Amount |
+Not Chain Succession[Approve Transaction, Decline Transaction] | | |

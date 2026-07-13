@@ -1,0 +1,17 @@
+Based on the provided model, here is a natural language description of the process:
+
+This process describes a comprehensive fraud detection and security management workflow. The system is designed to handle financial transactions (Debit, Credit, Wire Transfer, and Online Payments) ranging from $0.01 to $100,000.00, with a focus on identifying and responding to fraudulent activity.
+
+**Core Transaction Flow:**
+The process begins with **Detect Fraudulent Activity**. This activity is constrained by a strict rule: it can only occur a maximum of **five times** in the entire process (Absence5). When fraud is detected, the system must always **Notify the Customer**. If the fraud risk level is **High**, the system must immediately **Decline the Transaction** within **5 minutes**. Whenever a transaction is declined, the system must also **Report Suspicious Activity**.
+
+For transactions to be approved, there is a strict ordering rule: **Approve Transaction** can only happen after **Verify Customer Identity** has been completed. Additionally, if the **Transaction Amount exceeds $1,000**, the system must **Review Transaction Details** before proceeding to **Verify Customer Identity**, and this review must happen within **10 minutes**.
+
+**Security and Patch Management:**
+The process includes a security incident response loop. Whenever an **Investigate Security Breach** occurs, the system must eventually **Implement a Security Patch**. This is a mandatory response, but it has a time constraint: if the **Breach Severity is greater than 7**, the patch must be implemented within **48 hours**. Furthermore, if the **Security Patch Status is "Not Applied"**, the system must repeatedly attempt to apply the patch (Response to itself) until it is successfully applied, with a deadline of **7 days**.
+
+**Customer Notification and Account Updates:**
+When the system notifies a customer, it must also **Update Account Security**. However, this update is time-sensitive: if the notification method is **SMS**, the account security must be updated within **24 hours**.
+
+**Key Data Points:**
+The process relies on several data attributes to make decisions, including the transaction type and amount, fraud risk level (Low, Medium, High), verification attempts (1-5) and status (Verified, Not Verified, Pending), breach severity (1-10), security patch status (Applied, Not Applied, Scheduled), customer notification method (Email, SMS, Phone Call), and days since last activity (0-365).

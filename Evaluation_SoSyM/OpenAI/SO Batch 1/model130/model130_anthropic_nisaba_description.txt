@@ -1,0 +1,123 @@
+#MP-Declare Model
+## Activities
+- **Draft Contract**: The 'Draft Contract' activity represents the creation of an initial version of a contract.
+- **Review Contract**: The 'Review Contract' activity involves examining the contract to assess its content and determine an outcome.
+- **Negotiate Terms**: The 'Negotiate Terms' activity involves discussing and adjusting the terms of the contract between the involved parties.
+- **Approve Contract**: The 'Approve Contract' activity involves granting formal approval for the contract to proceed.
+- **Sign Contract**: The 'Sign Contract' activity involves obtaining the necessary signatures to formalize the contract.
+- **Archive Contract**: The 'Archive Contract' activity involves storing the finalized contract for record-keeping purposes.
+
+## Attributes
+- **Contract ID: Integer between 1000 and 9999**: The attribute 'Contract ID: Integer between 1000 and 9999' represents the unique identification number assigned to a contract.
+- **Contract Value: Float between 10000.0 and 1000000.0**: The attribute 'Contract Value: Float between 10000.0 and 1000000.0' represents the monetary value associated with the contract.
+- **Approval Status: Pending, Approved, Rejected**: The attribute 'Approval Status: Pending, Approved, Rejected' specifies the current approval state of the contract.
+- **Signature Status: Unsigned, Partially Signed, Fully Signed**: The attribute 'Signature Status: Unsigned, Partially Signed, Fully Signed' specifies the current signing state of the contract.
+- **Review Outcome: Accepted, Requires Changes, Rejected**: The attribute 'Review Outcome: Accepted, Requires Changes, Rejected' specifies the result of the contract review process.
+
+## Binds
+- **bind Draft Contract: Contract ID, Contract Value**: The bind 'Draft Contract: Contract ID, Contract Value' specifies that the activity 'Draft Contract' requires the attributes 'Contract ID' and 'Contract Value'.
+- **bind Review Contract: Review Outcome**: The bind 'Review Contract: Review Outcome' links the 'Review Contract' activity with the attribute 'Review Outcome'.
+- **bind Approve Contract: Approval Status**: The bind 'Approve Contract: Approval Status' links the 'Approve Contract' activity with the attribute 'Approval Status'.
+- **bind Sign Contract: Signature Status**: The bind 'Sign Contract: Signature Status' links the 'Sign Contract' activity with the attribute 'Signature Status'.
+
+## Constraints
+
+
+## Interleaved Description
+The MP-Declare process model for the contract management process is described as follows:
+
+### **Trace-Related Constraints**
+
+#### **Init Constraints**
+The process begins with the activity 'Draft Contract,' which establishes the initial context for the entire contract lifecycle. This foundational step involves creating the contract with its 'Contract ID' and 'Contract Value' attributes, setting the stage upon which all subsequent activities depend.
+
+#### **End Constraints**
+The process concludes with the activity 'Archive Contract,' bringing coherent closure to the model. Once the contract has been drafted, reviewed, negotiated, approved, and signed, it is finally stored for record-keeping purposes, marking the definitive end of the contract's active lifecycle.
+
+### **Frequency Constraints**
+
+#### **Existence Constraints**
+The 'Review Contract' activity must occur at least once within the process, adding depth to the model by ensuring that every contract undergoes a formal examination. This elaboration guarantees that the 'Review Outcome' attribute—whether Accepted, Requires Changes, or Rejected—is always assessed before the contract can move forward.
+
+#### **Absence Constraints**
+In contrast to activities that must occur, the 'Negotiate Terms' activity is restricted such that it cannot occur more than a limited number of times within a single process instance. This exclusion reinforces process integrity by preventing excessive, redundant renegotiation cycles that could otherwise stall the contract's progression.
+
+#### **Exactly Constraints**
+As a summary boundary on activity occurrences, the 'Sign Contract' activity must occur exactly once in the process. This precise limitation ensures that formalization through signatures happens a single, definitive time, with the 'Signature Status' attribute transitioning cleanly to 'Fully Signed' without repetition.
+
+### **Dependency Constraints**
+
+#### **Responded Existence Constraints**
+If the 'Negotiate Terms' activity occurs, then the 'Review Contract' activity must also occur somewhere in the process, establishing a clear cause-and-effect dependency. This ensures coherence by tying any renegotiation back to a formal review, so that changes discussed during negotiation are grounded in an assessed outcome.
+
+### **Flexible Ordering Constraints**
+
+#### **Precedence Constraints**
+1. Setting up the initial logical context, the activity 'Approve Contract' is permitted to occur only if a 'Review Contract' activity has occurred before it, with the condition that the 'Review Outcome' is 'Accepted.' This ensures that formal approval is never granted without first confirming the contract's content is acceptable.
+2. Similarly, the activity 'Sign Contract' is permitted to occur only if an 'Approve Contract' activity has occurred before it, with the 'Approval Status' condition being 'Approved.' This background establishes that no signatures may be collected until formal approval has been secured.
+
+#### **Response Constraints**
+1. If the 'Draft Contract' activity occurs, then the 'Review Contract' activity must eventually follow, defining an ordered flow that ensures every drafted contract is subsequently examined, maintaining a cohesive temporal structure across the process.
+2. If the 'Review Contract' activity occurs with the condition 'Review Outcome is Requires Changes,' then the 'Negotiate Terms' activity must follow. This sequence guarantees that any contract requiring modification is properly renegotiated rather than left unresolved.
+
+#### **Succession Constraints**
+The 'Approve Contract' activity and the 'Sign Contract' activity are bound in a causal succession: whenever 'Approve Contract' occurs with 'Approval Status is Approved,' a 'Sign Contract' activity must eventually follow, and conversely, 'Sign Contract' can only happen if 'Approve Contract' has already taken place. This establishes a firm causal link, ensuring each activity follows logically from the previous one and creating a cohesive progression from approval to formalization.
+
+### **Alternate Ordering Constraints**
+
+#### **Alternate Response Constraints**
+Each occurrence of 'Draft Contract' must be followed by a 'Review Contract' activity before any subsequent 'Draft Contract' can occur again, promoting balance through a clear one-to-one pairing. This condition-consequence relationship ensures that no draft goes unreviewed before a new version is created.
+
+#### **Alternate Succession Constraints**
+The 'Approve Contract' and 'Sign Contract' activities are bound in an alternate succession: each 'Approve Contract' occurrence must be followed by a unique 'Sign Contract' occurrence without another 'Approve Contract' intervening, and each 'Sign Contract' must be preceded by a corresponding 'Approve Contract' without repetition. This enforces an orderly, uniquely paired structure that enhances the coherence of the approval-to-signature progression.
+
+### **Immediate Ordering Constraints**
+
+#### **Chain Response Constraints**
+Whenever the 'Approve Contract' activity occurs with the condition 'Approval Status is Approved,' it must be immediately followed by the 'Sign Contract' activity with no intervening activities. This captures an immediate cause-and-effect relationship, ensuring the formalization of the contract happens right after approval is granted, without delay or interruption.
+
+#### **Chain Succession Constraints**
+Reinforcing this tightly coupled sequence, the 'Approve Contract' activity and 'Sign Contract' activity must occur in direct succession: 'Sign Contract' immediately follows 'Approve Contract,' and 'Approve Contract' immediately precedes 'Sign Contract,' with the 'Approval Status' condition being 'Approved' and 'Signature Status' subsequently updated. This enforces an immediate, uninterrupted transition from approval to signing.
+
+### **Mutual Dependency Constraints**
+
+#### **Co-Existence Constraints**
+The 'Negotiate Terms' activity and the 'Review Contract' activity are mutually dependent: if one occurs within the process, the other must occur as well. This conjunction ensures that terms are never negotiated in isolation from a formal review, and vice versa, reinforcing mutual reliance between these two activities.
+
+### **Exclusivity Constraints**
+
+#### **Choice Constraints**
+The process allows flexibility through a choice between 'Negotiate Terms' and 'Approve Contract'—at least one of these activities must occur, permitting either path depending on whether the contract requires further discussion or is ready for immediate approval.
+
+#### **Exclusive Choice Constraints**
+The 'Review Contract' activity outcome enforces mutually exclusive pathways: the 'Review Outcome' attribute must resolve to exactly one of 'Accepted' or 'Rejected' for the process to proceed toward either negotiation/approval or termination, ensuring that these alternatives cannot coexist for a single contract review.
+
+#### **Not Co-Existence Constraints**
+The 'Sign Contract' activity and a subsequent 'Negotiate Terms' activity cannot both occur within the same process instance if the 'Signature Status' has reached 'Fully Signed.' This exclusion rule ensures that once a contract is fully signed, its terms cannot be reopened for negotiation, thereby maintaining the integrity of the finalized agreement.
+
+### **Negative Dependency Constraints**
+
+#### **Not Responded Existence Constraints**
+The 'Archive Contract' activity and the 'Negotiate Terms' activity are restricted from being dependent on one another: the occurrence of 'Archive Contract' does not imply, and must not trigger, a subsequent 'Negotiate Terms' activity. This contrast prevents renegotiation from being contingent on an already archived, finalized contract.
+
+### **Negative Flexible Ordering Constraints**
+
+#### **Not Precedence Constraints**
+The 'Archive Contract' activity is restricted from occurring before the 'Sign Contract' activity. This ensures that a contract is never stored for record-keeping until it has been properly signed, preserving the intended sequence within the model.
+
+#### **Not Response Constraints**
+The 'Archive Contract' activity must not be followed by a 'Draft Contract' activity referencing the same 'Contract ID.' This restriction prevents an already archived contract from being redrafted, maintaining the integrity of the model's intended progression toward finalization.
+
+#### **Not Succession Constraints**
+The 'Sign Contract' activity must not be followed at any point by a 'Draft Contract' activity for the same contract instance, nor can 'Draft Contract' follow 'Sign Contract' later in the trace. This restriction preserves the model's defined flow, ensuring that signing marks an irreversible step forward in the process.
+
+### **Negative Immediate Ordering Constraints**
+
+#### **Not Chain Precedence Constraints**
+The 'Archive Contract' activity must not be immediately preceded by the 'Draft Contract' activity. This enforces a non-immediate order restriction, ensuring a proper sequence of review, approval, and signing activities separates the initial drafting from the final archiving.
+
+#### **Not Chain Response Constraints**
+The 'Review Contract' activity, when resulting in 'Review Outcome is Rejected,' must not be immediately followed by the 'Sign Contract' activity. This prevents an improper immediate succession, preserving structural integrity by disallowing a rejected contract from being signed right away.
+
+#### **Not Chain Succession Constraints**
+The 'Negotiate Terms' activity and the 'Archive Contract' activity must not immediately precede or follow one another in either direction. This refines the process model by excluding any direct, immediate sequence between ongoing negotiation and final archiving, ensuring these two activities remain appropriately separated within the overall flow.

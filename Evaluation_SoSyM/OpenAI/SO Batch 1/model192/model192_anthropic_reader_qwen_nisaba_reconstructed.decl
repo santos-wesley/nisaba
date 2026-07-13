@@ -1,0 +1,34 @@
+activity Plan Eco-Friendly Trip
+activity Book Sustainable Accommodation
+activity Choose Green Transportation
+activity Participate in Local Conservation Efforts
+activity Purchase Local Products
+activity Attend Cultural Workshops
+activity Evaluate Environmental Impact
+activity Provide Feedback to Hosts
+activity Share Sustainable Practices
+bind Book Sustainable Accommodation: Accommodation Type
+bind Choose Green Transportation: Transportation Mode
+bind Provide Feedback to Hosts: Feedback Rating
+Accommodation Type: Eco-Lodge, Green Hotel, Hostel
+Transportation Mode: Bicycle, Electric Car, Train
+Feedback Rating: Excellent, Good, Average, Poor
+Init[Plan Eco-Friendly Trip] | |
+End[Share Sustainable Practices] | |
+Existence[Choose Green Transportation] | |
+Existence[Book Sustainable Accommodation] | |
+Absence2[Evaluate Environmental Impact] | |
+Exactly[Provide Feedback to Hosts] | |
+Responded Existence[Participate in Local Conservation Efforts, Evaluate Environmental Impact] | | |
+Precedence[Attend Cultural Workshops, Plan Eco-Friendly Trip] | | |
+Response[Choose Green Transportation, Evaluate Environmental Impact] |A.Transportation Mode is Electric Car | |
+Succession[Book Sustainable Accommodation, Purchase Local Products] |A.Accommodation Type is Eco-Lodge | |
+Alternate Response[Purchase Local Products, Attend Cultural Workshops] | | |
+Chain Response[Provide Feedback to Hosts, Share Sustainable Practices] |A.Feedback Rating is Excellent | |
+Co-Existence[Choose Green Transportation, Book Sustainable Accommodation] | | |
+Exclusive Choice[Attend Cultural Workshops, Participate in Local Conservation Efforts] | | |
+Not Co-Existence[Evaluate Environmental Impact, Plan Eco-Friendly Trip] | | |
+Not Responded Existence[Purchase Local Products, Evaluate Environmental Impact] | | |
+Not Precedence[Share Sustainable Practices, Attend Cultural Workshops] | | |
+Not Response[Evaluate Environmental Impact, Plan Eco-Friendly Trip] | | |
+Not Chain Succession[Provide Feedback to Hosts, Book Sustainable Accommodation] | | |

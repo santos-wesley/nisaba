@@ -1,0 +1,32 @@
+activity Submit Application
+activity Review Application
+activity Approve Application
+activity Reject Application
+activity Implement Arrangement
+activity Monitor Arrangement
+activity Adjust Arrangement
+activity Terminate Arrangement
+bind Submit Application: Application ID, Arrangement Type
+bind Review Application: Application ID, Review Score, Application Status
+bind Approve Application: Application ID, Application Status
+bind Reject Application: Application ID, Application Status
+bind Implement Arrangement: Application ID, Application Status, Hours Per Week
+bind Monitor Arrangement: Application ID, Application Status
+bind Adjust Arrangement: Application ID, Application Status, Hours Per Week
+bind Terminate Arrangement: Application ID, Application Status
+Application ID: integer between 1 and 1000
+Arrangement Type: Remote Work, Flextime, Compressed Workweek, Job Sharing
+Review Score: integer between 1 and 5
+Application Status: Submitted, Reviewed, Approved, Rejected, Implemented, Terminated
+Hours Per Week: float between 10.0 and 40.0
+Init[Submit Application] | |
+Response[Submit Application, Review Application] | | |
+Precedence[Approve Application, Review Application] | | |
+Precedence[Reject Application, Review Application] | | |
+Not Co-Existence[Submit Application, Review Application] | | |
+Exclusive Choice[Approve Application, Reject Application] | | |
+Response[Approve Application, Implement Arrangement] | | |
+Succession[Implement Arrangement, Monitor Arrangement] | | |
+Response[Monitor Arrangement, Adjust Arrangement] | | |
+Response[Approve Application, Terminate Arrangement] |A.Application Status is Approved | |
+Not Response[Reject Application, Terminate Arrangement] | | |

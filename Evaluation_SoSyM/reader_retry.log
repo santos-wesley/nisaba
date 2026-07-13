@@ -1,0 +1,16 @@
+combos completos: 158/160 | a re-tentar: 2 -> [('model179', 'zai'), ('model234', 'zai')]
+
+=== RETRY round 1/3 sobre 2 combos ===
+<notebook cell 25>:343: SyntaxWarning: invalid escape sequence '\A'
+<notebook cell 48>:343: SyntaxWarning: invalid escape sequence '\A'
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/268 [00:00<?, ?it/s]Loading weights: 100%|##########| 268/268 [00:00<00:00, 6147.15it/s]
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [done]   model179/zai: recon N=0.0 Z=0.3657 | balQA N=0.8865 Z=0.7955 (yes/no=11/11)
+  [done]   model234/zai: recon N=0.0569 Z=0.09 | balQA N=0.8075 Z=0.6345 (yes/no=13/13)
+  round 1: recuperados 2 | ainda falham 0
+
+TODOS recuperados. done agora: 160/160
+
+RETRY DRIVER DONE

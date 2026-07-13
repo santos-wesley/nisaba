@@ -1,0 +1,41 @@
+provider,strategy,batch,model_id,orig_batch,domain,size,n_act,n_con,density,n_templates,n_data,n_temporal,n_corr,n_card,n_attr,enum,int,float,n_binds,has_neg,has_chain,has_alternate,has_unary,templates
+Google,Function Calling,1,model185,Batch 1,Security/Cyber,20,10,10,1.0,10,0,0,0,0,10,4,3,3,5,0,1,1,1,Alternate Precedence|Alternate Response|Chain Precedence|Chain Response|Co-Existence|End|Init|Precedence|Response|Succession
+Google,Function Calling,1,model28,Batch 1,HR/Recruitment,18,8,10,1.25,7,2,0,2,0,5,2,2,1,8,1,0,0,1,Choice|Init|Not Co-Existence|Not Response|Precedence|Response|Succession
+Google,Function Calling,1,model67,Batch 1,Finance/Banking,20,10,10,1.0,3,5,6,0,1,10,5,3,2,10,1,0,0,1,Absence|Precedence|Response
+Google,Function Calling,1,model132,Batch 1,Healthcare,20,10,10,1.0,4,2,1,0,0,10,2,6,2,10,0,1,0,1,Chain Response|Init|Response|Succession
+Google,Function Calling,1,model78,Batch 1,Government/Public,20,10,10,1.0,5,2,2,0,0,10,6,2,2,5,0,0,0,1,End|Init|Precedence|Response|Succession
+Google,Function Calling,2,model57,Batch 2,Legal/Compliance,30,15,15,1.0,14,1,1,0,0,10,5,3,2,5,1,1,1,1,Alternate Response|Chain Response|Choice|Co-Existence|End|Exclusive Choice|Existence|Init|Not Chain Succession|Not Co-Existence|Precedence|Responded Existence|Response|Succession
+Google,Function Calling,2,model179,Batch 1,Customer/Sales,24,10,14,1.4,4,3,3,1,0,6,2,3,1,4,0,0,0,1,Init|Precedence|Response|Succession
+Google,Function Calling,2,model97,Batch 1,IT/Software,25,10,15,1.5,10,5,4,5,1,10,4,3,3,10,1,0,0,1,Absence|Choice|Co-Existence|Existence|Init|Not Precedence|Not Response|Precedence|Response|Succession
+Google,Function Calling,2,model35,Batch 2,Insurance,30,15,15,1.0,4,0,10,0,0,10,5,3,2,4,0,0,0,1,Choice|Init|Precedence|Response
+Google,Function Calling,2,model248,Batch 1,Other,25,10,15,1.5,8,0,5,0,0,10,3,4,3,6,0,1,1,1,Alternate Response|Chain Response|Chain Succession|Init|Precedence|Responded Existence|Response|Succession
+Google,Structured Output,1,model208,Batch 1,Logistics/Supply,20,10,10,1.0,10,1,0,0,1,10,4,4,2,10,1,1,0,1,Absence|Chain Precedence|Choice|Init|Not Chain Succession|Not Co-Existence|Precedence|Responded Existence|Response|Succession
+Google,Structured Output,1,model148,Batch 1,Legal/Compliance,20,10,10,1.0,4,4,5,0,0,10,5,3,2,10,0,0,1,1,Alternate Succession|Existence|Init|Response
+Google,Structured Output,1,model102,Batch 1,Finance/Banking,20,10,10,1.0,3,1,1,0,0,10,3,2,5,6,1,0,0,1,Init|Not Response|Response
+Google,Structured Output,1,model109,Batch 1,HR/Recruitment,20,10,10,1.0,6,4,4,0,0,10,7,2,1,10,1,1,0,1,End|Init|Not Chain Succession|Precedence|Response|Succession
+Google,Structured Output,1,model70,Batch 1,Security/Cyber,20,10,10,1.0,4,2,4,1,0,10,3,5,2,9,1,0,0,1,Init|Not Co-Existence|Precedence|Response
+Google,Structured Output,2,model81,Batch 2,IT/Software,30,15,15,1.0,14,1,1,0,0,10,3,4,3,5,1,1,1,1,Alternate Response|Chain Response|Choice|Co-Existence|End|Exclusive Choice|Init|Not Chain Succession|Not Precedence|Not Response|Precedence|Responded Existence|Response|Succession
+Google,Structured Output,2,model191,Batch 1,Customer/Sales,25,10,15,1.5,2,2,5,0,0,10,4,4,2,9,0,0,0,1,Init|Response
+Google,Structured Output,2,model234,Batch 2,Other,30,15,15,1.0,5,3,3,1,1,10,4,3,3,10,1,0,0,1,Absence|Init|Precedence|Response|Succession
+Google,Structured Output,2,model186,Batch 2,Healthcare,30,15,15,1.0,9,5,4,0,0,10,6,3,1,10,1,1,0,1,Chain Response|Choice|Existence|Init|Not Response|Precedence|Responded Existence|Response|Succession
+Google,Structured Output,2,model53,Batch 2,Manufacturing,30,15,15,1.0,6,1,8,1,0,10,2,5,3,10,1,0,0,1,Co-Existence|Existence|Init|Not Response|Precedence|Response
+OpenAI,Function Calling,1,model15,batch 1,HR/Recruitment,20,10,10,1.0,10,0,3,0,0,10,7,2,1,10,1,1,1,1,Absence|Alternate Response|Chain Precedence|Chain Response|Chain Succession|Choice|Init|Not Co-Existence|Precedence|Response
+OpenAI,Function Calling,1,model5,batch 1,Legal/Compliance,17,9,8,0.8889,5,0,3,0,0,5,3,1,1,5,0,0,1,1,Alternate Response|End|Init|Precedence|Response
+OpenAI,Function Calling,1,model200,batch 1,Security/Cyber,17,9,8,0.8889,3,2,4,0,0,8,3,4,1,7,0,1,0,1,Chain Response|End|Init
+OpenAI,Function Calling,1,model212,batch 1,Finance/Banking,18,8,10,1.25,5,0,3,0,0,7,4,2,1,6,1,1,0,1,Absence|Chain Response|End|Init|Precedence
+OpenAI,Function Calling,1,model107,batch 1,Other,20,10,10,1.0,5,0,0,0,1,5,2,2,1,5,0,1,0,1,Chain Response|End|Existence|Init|Response
+OpenAI,Function Calling,2,model9,batch 2,Manufacturing,30,15,15,1.0,15,0,3,0,0,10,4,3,3,15,1,1,1,1,Absence|Alternate Precedence|Alternate Response|Chain Precedence|Chain Response|Chain Succession|Co-Existence|End|Exclusive Choice|Existence|Init|Not Co-Existence|Precedence|Response|Succession
+OpenAI,Function Calling,2,model144,batch 2,Healthcare,25,10,15,1.5,9,0,2,0,2,6,3,2,1,10,1,1,0,1,Absence|Chain Response|End|Existence|Init|Not Co-Existence|Not Succession|Precedence|Response
+OpenAI,Function Calling,2,model207,batch 2,HR/Recruitment,30,15,15,1.0,3,0,0,0,0,8,4,3,1,8,0,0,0,1,End|Init|Precedence
+OpenAI,Function Calling,2,model16,batch 2,Finance/Banking,30,15,15,1.0,6,1,3,0,1,5,3,1,1,5,0,1,0,1,Chain Response|End|Exactly|Existence|Init|Response
+OpenAI,Function Calling,2,model221,batch 2,Logistics/Supply,30,15,15,1.0,6,2,3,0,0,10,7,1,2,8,0,1,0,1,Chain Response|End|Exactly|Existence|Init|Response
+OpenAI,Structured Output,1,model138,batch 1,HR/Recruitment,20,10,10,1.0,10,8,4,2,0,10,5,3,2,10,1,1,1,1,Alternate Response|Chain Response|Co-Existence|End|Existence|Init|Not Chain Succession|Precedence|Responded Existence|Response
+OpenAI,Structured Output,1,model130,batch 1,Legal/Compliance,16,6,10,1.6667,6,5,5,3,0,5,3,1,1,4,1,0,0,1,End|Existence|Init|Not Precedence|Precedence|Response
+OpenAI,Structured Output,1,model44,batch 1,Security/Cyber,20,10,10,1.0,6,2,2,1,1,10,4,3,3,10,1,0,0,1,Absence|End|Init|Precedence|Response|Succession
+OpenAI,Structured Output,1,model192,batch 1,Energy/Utilities,19,9,10,1.1111,10,2,1,0,0,5,3,1,1,4,1,1,0,1,Chain Response|Co-Existence|End|Exclusive Choice|Existence|Init|Not Chain Response|Not Responded Existence|Responded Existence|Response
+OpenAI,Structured Output,1,model38,batch 1,IT/Software,18,8,10,1.25,8,5,5,0,0,5,2,2,1,5,1,1,1,1,Alternate Succession|Chain Response|Chain Succession|Existence|Init|Not Succession|Precedence|Response
+OpenAI,Structured Output,2,model172,batch 2,Security/Cyber,30,15,15,1.0,15,7,3,5,0,10,4,3,3,7,1,1,0,1,Absence|Chain Precedence|Chain Response|Co-Existence|End|Exclusive Choice|Existence|Init|Not Chain Succession|Not Precedence|Not Responded Existence|Not Succession|Precedence|Response|Succession
+OpenAI,Structured Output,2,model247,batch 2,Legal/Compliance,30,15,15,1.0,5,11,9,3,0,5,3,1,1,15,0,0,0,1,Choice|End|Init|Precedence|Response
+OpenAI,Structured Output,2,model202,batch 2,Finance/Banking,25,10,15,1.5,10,4,5,2,0,5,2,2,1,10,1,1,0,1,Chain Succession|End|Exactly|Existence|Init|Not Co-Existence|Not Succession|Precedence|Responded Existence|Response
+OpenAI,Structured Output,2,model205,batch 2,Legal/Compliance,30,15,15,1.0,5,10,8,10,0,10,4,4,2,15,0,0,0,1,End|Existence|Init|Precedence|Response
+OpenAI,Structured Output,2,model10,batch 2,Manufacturing,30,15,15,1.0,6,12,4,12,0,10,4,2,4,10,0,1,0,1,Chain Response|End|Init|Precedence|Response|Succession

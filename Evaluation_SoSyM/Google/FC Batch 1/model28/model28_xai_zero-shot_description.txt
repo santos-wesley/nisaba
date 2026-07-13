@@ -1,0 +1,45 @@
+**Multi-Perspective Declare Model: Flexible Work Arrangement Process**
+
+This model describes a formal business process for handling employee requests for flexible work arrangements (such as remote work, flextime, compressed workweeks, or job sharing).
+
+### Process Flow
+
+The process begins when an employee **Submits an Application**. Every application must subsequently be **Reviewed**. After the review, the organization must make a decision: it can either **Approve** or **Reject** the application (but not both).
+
+- If the application is **Rejected**, the process ends. A rejected application must **not** lead to a **Termination** of any arrangement.
+- If the application is **Approved**, the organization must **Implement the Arrangement**. Once implemented, the arrangement must be **Monitored**. After monitoring, the organization may **Adjust the Arrangement** if necessary.
+
+At any point after an arrangement has been approved and implemented, the organization may **Terminate the Arrangement**.
+
+### Data Perspective (Bindings)
+
+Each activity works with the following data:
+
+- **Submit Application**: Captures the *Arrangement Type* (Remote Work, Flextime, Compressed Workweek, Job Sharing) and generates a unique *Application ID*.
+- **Review Application**: Records the *Review Score* (1–5) and updates the *Application Status*.
+- **Approve Application** / **Reject Application**: Update the *Application Status*.
+- **Implement Arrangement**: Sets the *Hours Per Week* (10.0–40.0) and marks the status as “Implemented”.
+- **Monitor Arrangement**, **Adjust Arrangement**, and **Terminate Arrangement** operate on the *Application ID* and (where relevant) update *Application Status* and *Hours Per Week*.
+
+### Key Constraints
+
+- **Init**: The process must start with *Submit Application*.
+- **Response**: Every submitted application must be reviewed.
+- **Precedence**: Review must occur before any approval decision.
+- **Not Co-Existence**: Submit Application and Review Application cannot occur together in the same trace (they are strictly sequential).
+- **Choice**: After review, the application must be either approved or rejected.
+- **Response**: Approval must eventually lead to implementation of the arrangement.
+- **Succession**: Implementation must be directly followed (at some point) by monitoring.
+- **Response**: Every monitoring activity must eventually be followed by an adjustment (if needed).
+- **Response (conditional)**: If an application is approved, it may later be terminated.
+- **Not Response (conditional)**: If an application was rejected, it must not be terminated.
+
+### Data Domains
+
+- **Application ID**: Integer between 1 and 1000
+- **Application Status**: Submitted → Reviewed → Approved/Rejected → Implemented → Terminated
+- **Review Score**: 1 to 5
+- **Hours Per Week**: Decimal value between 10.0 and 40.0
+- **Arrangement Type**: One of four flexible work options
+
+This model ensures that all flexible work requests follow a controlled, auditable lifecycle with clear separation between rejection and termination paths, while allowing dynamic adjustment of approved arrangements.

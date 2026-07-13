@@ -1,0 +1,45 @@
+activity Assess Initial Condition
+activity Develop Treatment Plan
+activity Schedule First Session
+activity Conduct Therapy Session
+activity Evaluate Progress
+activity Adjust Treatment Plan
+activity Provide Feedback
+activity Schedule Follow-Up
+activity Complete Treatment
+activity Conduct Final Assessment
+bind Assess Initial Condition: Client ID
+bind Develop Treatment Plan: Client ID, Therapist ID
+bind Schedule First Session: Client ID
+bind Conduct Therapy Session: Client ID, Session Type
+bind Evaluate Progress: Client ID, Progress Score
+bind Adjust Treatment Plan: Client ID, Progress Score, Treatment Status
+bind Provide Feedback: Client ID, Feedback Type
+bind Complete Treatment: Client ID
+bind Conduct Final Assessment: Client ID, Therapist ID, Progress Score
+Client ID: integer between 1 and 999999
+Session Type: Initial, Follow-Up, Crisis
+Progress Score: float between 0.0 and 100.0
+Therapist ID: integer between 1 and 9999
+Feedback Type: Positive, Neutral, Negative
+Treatment Status: Ongoing, Adjusted, Completed
+Init[Assess Initial Condition] | |
+End[Complete Treatment] | |
+Existence[Evaluate Progress] | |
+Existence[Provide Feedback] | |
+Absence2[Conduct Final Assessment] | |
+Exactly[Develop Treatment Plan] | |
+Responded Existence[Adjust Treatment Plan, Evaluate Progress] | | |
+Precedence[Develop Treatment Plan, Assess Initial Condition] | | |
+Precedence[Schedule First Session, Develop Treatment Plan] | | |
+Precedence[Complete Treatment, Conduct Final Assessment] | | |
+Response[Conduct Therapy Session, Evaluate Progress] |A.Session Type is Initial | |
+Response[Evaluate Progress, Adjust Treatment Plan] |A.Progress Score < 50.0 |T.Treatment Status is Adjusted |
+Succession[Evaluate Progress, Provide Feedback] | | |
+Alternate Response[Conduct Therapy Session, Provide Feedback] | | |
+Chain Response[Schedule First Session, Conduct Therapy Session] | |T.Session Type is Initial |
+Chain Succession[Adjust Treatment Plan, Schedule Follow-Up] |A.Treatment Status is Adjusted | |
+Co-Existence[Adjust Treatment Plan, Schedule Follow-Up] | | |
+Not Co-Existence[Complete Treatment, Adjust Treatment Plan] | |T.Treatment Status is Completed |
+Not Responded Existence[Complete Treatment, Assess Initial Condition] | | |
+Not Chain Succession[Complete Treatment, Conduct Therapy Session] | | |

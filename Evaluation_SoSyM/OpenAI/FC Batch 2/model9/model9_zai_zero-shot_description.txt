@@ -1,0 +1,31 @@
+This Multi-Perspective Declare model outlines a comprehensive laboratory workflow for two distinct experimental pathways: a **Genetic/DNA Analysis pathway** and a **Protein Analysis pathway**. The model not only defines the logical order of activities but also binds specific data attributes to each step and enforces strict time constraints.
+
+### 1. Activities and Data Attributes
+Each activity in the workflow tracks specific data bound to it, primarily anchored by an integer `Sample ID` (between 1 and 99999). 
+*   **DNA Workflow Data:** Tracks variables like `DNA Concentration` (0.1 to 1000.0), `PCR Primers` (Set A, B, or C), `Gel Type` (Agarose or Polyacrylamide), `Sequencing Run ID` (1 to 9999), `Sequence Quality Score` (0.0 to 100.0), and `Vector Type` (Plasmid A, B, or C).
+*   **Cell Workflow Data:** Tracks the `Colony Count` (0 to 1000).
+*   **Protein Workflow Data:** Tracks `Protein Concentration` (0.01 to 500.0) and `Antibody Type` (Primary Antibody A, B, or C).
+
+### 2. Workflow Constraints and Logical Rules
+
+**General Process Boundaries:**
+*   The process must **always begin** with the **Extract DNA** activity.
+*   The process must **always end** with the **Analyze Protein Expression** activity.
+*   The activity **Extract Protein** is strictly **forbidden** (Absence constraint) in this specific model.
+
+**The DNA and Cloning Pathway:**
+*   Once DNA is extracted, the **Quantify DNA** step must occur at least once.
+*   **PCR Amplify** and **Gel Electrophoresis** are strictly linked: if one occurs, the other must also occur (Co-Existence). Furthermore, PCR Amplification must be immediately followed by Gel Electrophoresis (Chain Succession) within a strict **15-minute** window.
+*   Gel Electrophoresis cannot occur until the PCR product has been purified (Precedence: Purify PCR Product before Gel Electrophoresis).
+*   **Quantify DNA** must precede **PCR Amplify**. This is an Alternate Precedence, meaning every instance of PCR Amplify requires a unique, preceding instance of Quantify DNA, and there must be a gap of at least **30 minutes** between quantification and amplification.
+*   If **Sanger Sequence** occurs, **Analyze Sequences** must eventually follow (Response).
+*   There is an **Exclusive Choice** between **Clone DNA** and **Transform Cells**; only one of these two activities can be executed in a single process instance, but not both.
+
+**The Cell Culture Pathway:**
+*   **Transform Cells** and **Culture Cells** are bound by a Succession constraint, meaning if one occurs, the other must occur as well.
+*   **Culture Cells** dictates that **Harvest Cells** must eventually happen (Alternate Response). For every instance of culturing, there must be a corresponding harvesting instance, and this must happen within **1 hour** of the culturing step.
+
+**The Protein Analysis Pathway:**
+*   Because **Extract Protein** is forbidden, the model enforces a strict rule that **Extract Protein** and **Quantify Protein** cannot co-exist in the same trace.
+*   **Quantify Protein** must be immediately preceded by **Extract Protein** (Chain Precedence). *Note: In the context of this specific model's constraints, this creates a logical paradox where Quantify Protein requires Extract Protein to happen immediately before it, but the Absence constraint strictly forbids Extract Protein from happening at all.*
+*   If a **Western Blot** is performed, it must be immediately followed by **Analyze Protein Expression** (Chain Response), which successfully brings the process to its defined End state.

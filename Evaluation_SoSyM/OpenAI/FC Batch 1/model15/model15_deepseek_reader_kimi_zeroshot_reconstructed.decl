@@ -1,0 +1,26 @@
+activity Submit Request
+activity Review Request
+activity Approve Request
+activity Reject Request
+activity Set Up Remote Access
+activity Notify Employee
+activity Revoke Remote Access
+activity Monitor Performance
+activity Update Payroll
+activity Complete Survey
+bind Submit Request: Request ID, Employee Name, Request Type
+bind Complete Survey: Survey Score
+Request ID: integer between 1 and 999999
+Employee Name: John Smith, Jane Doe, Michael Brown, Emily Johnson, David Wilson
+Request Type: Remote Work, Flexible Hours
+Survey Score: float between 0.0 and 10.0
+Init[Submit Request] | |
+Absence[Reject Request] | |
+Chain Precedence[Review Request, Submit Request] | | |0,24,h
+Response[Submit Request, Review Request] | | |0,24,h
+Exclusive Choice[Approve Request, Reject Request] | | |
+Precedence[Set Up Remote Access, Approve Request] | | |
+Chain Succession[Set Up Remote Access, Notify Employee] | | |
+Alternate Response[Monitor Performance, Update Payroll] | | |0,48,h
+Not Co-Existence[Set Up Remote Access, Revoke Remote Access] | | |
+Chain Response[Notify Employee, Complete Survey] | | |0,72,h
