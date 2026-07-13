@@ -25,14 +25,17 @@ Nisaba is an LLM framework that **generates natural language descriptions of Mul
 
 ## DMRST parser (not versioned)
 
-The neural discourse parser used to corroborate the lexical RST metric is a third-party project with a ~1 GB checkpoint and is **not versioned here** (see `.gitignore`). To reproduce the `dmrst_*` results:
+The neural discourse parser used to corroborate the lexical RST metric is a third-party project whose ~1.2 GB trained checkpoint is distributed by its authors via Google Drive (it is not in their git repository, and it exceeds GitHub's 100 MB blob limit), so neither is versioned here (see `.gitignore`). The parser **outputs of the reported run are versioned** (`Evaluation_SoSyM/dmrst_raw.json`, `dmrst_batch.csv`, `dmrst_pooled.csv`, `dmrst_run.log`), so the reported numbers can be verified without re-running. To re-run:
 
 ```bash
 git clone https://github.com/seq-to-mind/DMRST_Parser.git "Evaluation_SoSyM/DMRST_Parser"
 cd "Evaluation_SoSyM/DMRST_Parser" && git checkout 231d8c0d28ba8cba074e29a6ff99e858e4742735
+# Checkpoint, as distributed by the DMRST authors (Google Drive file id 12Gc6mC6Qh0R_N_U60mx2jDQqRfuwQzZh):
+pip install gdown && gdown 12Gc6mC6Qh0R_N_U60mx2jDQqRfuwQzZh -O depth_mode/Savings/multi_all_checkpoint.torchsave
 ```
 
-then obtain the released checkpoint (`depth_mode/Savings/multi_all_checkpoint.torchsave`) as distributed by the DMRST authors and run `Evaluation_SoSyM/pipeline/dmrst_probe.py`.
+Verify the artifact is the exact one used in the reported run — SHA-256:
+`7973b183104784d99dec3a90bbb5e58e2ec7c243c0c7126b5be669029e56c246` — then run `Evaluation_SoSyM/pipeline/dmrst_probe.py`. (The DMRST repository declares no license, so we do not mirror the checkpoint ourselves; the hash pins it instead.)
 
 ## Lineage
 
