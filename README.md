@@ -13,15 +13,16 @@ Nisaba is an LLM framework that **generates natural language descriptions of Mul
 | Path | What it is |
 |---|---|
 | `Nisaba_(SoSym_Journal).ipynb` | The execution and evaluation bench for the SoSyM study — the full pipeline as documented, runnable cells (setup → generation → reverse generation → all instruments → analysis). |
-| `Evaluation_SoSyM/` | The SoSyM evaluation data pack: the 40 held-out Terpsichora source models, the pipeline as standalone scripts (`pipeline/`), every generated artifact (intermediary + final descriptions, reconstructions, reader outputs), the aggregated result CSVs, run logs, and the replayable per-request LLM call log (`llm_calls.jsonl`). **See its `README.md` for the full data dictionary.** |
+| `Evaluation_SoSyM/` | The SoSyM evaluation data pack: the 40 held-out Terpsichora source models, the pipeline as standalone scripts (`pipeline/`), every generated artifact (intermediary + final descriptions, reconstructions, reader outputs), the aggregated result CSVs, run logs, and the replayable per-request LLM call logs (`llm_calls.jsonl`, `understandability_calls.jsonl`). **See its `README.md` for the full data dictionary.** |
 | `Metric_StressTest/` | The perturbation suite that calibrates and validates the Semantic Distance metric: 162 controlled edits (synonym/antonym/structural) over the eight calibration models in `base_models/`, plus the τ threshold sweep. See its `README.md`. |
-| `Evaluation_ICPM/`, `Nisaba (ICPM).ipynb` | Historical: the earlier ICPM tool-paper iteration, kept for lineage. |
+| `Evaluation_ICPM/`, `Nisaba (ICPM).ipynb` | Historical: the published ICPM 2024 tool-paper study (see *Lineage* below), kept for reference. |
 
 ## Reproducing
 
-1. **Environment.** Python 3.11+. The setup cells of `Nisaba_(SoSym_Journal).ipynb` install the pinned dependencies; the standalone scripts in `Evaluation_SoSyM/pipeline/` mirror the notebook cell-for-cell.
+1. **Environment.** Python 3.11+. The setup cells of `Nisaba_(SoSym_Journal).ipynb` install the dependencies (version-pinned, except the Colab-side CrewAI/LiteLLM layer); the standalone scripts in `Evaluation_SoSyM/pipeline/` mirror the notebook cell-for-cell.
 2. **API access.** All model calls go through [OpenRouter](https://openrouter.ai) under version-pinned slugs, with reasoning disabled and sampling controls fixed where the model exposes them. Set the key as an environment variable (never in code or notebooks): `OPENROUTER_API_KEY`.
-3. **Audit/replay.** Every request and response of the reported run is logged in `Evaluation_SoSyM/llm_calls.jsonl` (model, messages, response, usage — no credentials), so each reported number can be traced to the calls that produced it even where providers are not bit-exact reproducible.
+3. **Run.** Execute `Nisaba_(SoSym_Journal).ipynb` top-to-bottom, or the `Evaluation_SoSyM/pipeline/` scripts (each script's header states which result files it produces; see the folder's `README.md`).
+4. **Audit/replay.** Every request and response of the reported run is logged in `Evaluation_SoSyM/llm_calls.jsonl` (generation and reconstruction) and `Evaluation_SoSyM/understandability_calls.jsonl` (reader panel) — model, messages, response, usage; no credentials — so each reported number can be traced to the calls that produced it even where providers are not bit-exact reproducible.
 
 ## DMRST parser (not versioned)
 
@@ -41,4 +42,4 @@ Verify the artifact is the exact one used in the reported run — SHA-256:
 
 - **Terpsichora** (source-model collection): da Silva Santos et al., *Terpsichora: A Tool to Generate Synthetic MP-Declare Process Models*, ICPM Workshops 2024, LNBIP 533. doi:10.1007/978-3-031-82225-4_46
 - **MP-Declare metamodel / availability**: da Silva Santos et al., *Enhancing Declarative Business Process Management Availability Through Generative AI*, Process Science 2(21), 2025. doi:10.1007/s44311-025-00029-1
-- The eight-model preliminary (BISE-era) evaluation is superseded by `Evaluation_SoSyM/`; its artifacts are preserved in the repository history, and its eight source models remain in use as the metric calibration set (`Metric_StressTest/base_models/`).
+- **Nisaba preliminary study** (framework concept and the eight calibration models): da Silva Santos et al., *Nisaba: Towards Generating Natural Language Description of Multi-Perspective Declarative Process Models*, ICPM 2024 Workshops. Its eight models serve as the Semantic Distance calibration set (`Metric_StressTest/base_models/`); the forty-model evaluation set in `Evaluation_SoSyM/` is disjoint from them (MD5-verified).

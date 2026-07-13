@@ -1,12 +1,12 @@
-# NOTE: mirror of cell 64 of Nisaba_(BISE_Journal).ipynb. Adopted configuration:
+# NOTE: mirror of the Multi-perspective Semantic Distance cell of Nisaba_(SoSym_Journal).ipynb. Adopted configuration:
 # tau=0.2 (cost threshold in the pairing) + whitening off. `whiten` is an optional
-# knob. Keep this file in sync with cell 64.
+# knob. Keep this file in sync with the Multi-perspective Semantic Distance cell of Nisaba_(SoSym_Journal).ipynb.
 # -*- coding: utf-8 -*-
 """
 MULTI-PERSPECTIVE semantic distance for MP-Declare models, built ON TOP of the
 official declare4py parser (DeclareModel).
 
-Motivation for the embedding (inherited from the first metric): the round-trip
+Motivation for the embedding: the round-trip
 model->NL->model may introduce SYNONYMS/paraphrases (e.g., "Wood Cutting" ->
 "Cut Wood"). Hence we align, via embedding + assignment (Jonker-Volgenant), ALL
 the textual tokens where that makes sense:
@@ -319,5 +319,5 @@ def compute_semantic_distance(decl_original, decl_reconstructed, embedding_model
 
 
 def compute_semantic_similarity(decl_original, decl_reconstructed, embedding_model):
-    """Compat: returns only the total (float), drop-in for the previous metric."""
+    """Convenience wrapper: returns only the total (float)."""
     return compute_semantic_distance(decl_original, decl_reconstructed, embedding_model)['total']

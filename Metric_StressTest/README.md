@@ -1,9 +1,11 @@
 # Stress-test of the Multi-perspective Semantic Distance metric
 
-This directory stress-tests the semantic distance metric (cell 64 of
-`Nisaba_(BISE_Journal).ipynb`, mirrored in [`mp_metric.py`](mp_metric.py)) by
-generating **controlled variants** of every real `.decl` model in
-`base_models/` and measuring the *base → variant* distance.
+This directory calibrates and stress-tests the **Multi-perspective Semantic Distance** metric
+([`mp_metric.py`](mp_metric.py), a faithful mirror of the metric implementation in
+[`../Nisaba_(SoSym_Journal).ipynb`](../Nisaba_(SoSym_Journal).ipynb)) by generating
+**controlled variants** of the eight calibration models in `base_models/`---the models of our
+preliminary study (da Silva Santos et al., ICPM 2024 Workshops)---and measuring the
+*base → variant* distance.
 
 The framing is the real use case: the metric scores models **reconstructed from a
 natural-language description** (round-trip `model → NL → model`). It therefore needs
@@ -71,7 +73,7 @@ per embedder ([`results_gte-large-en-v1.5.csv`](results_gte-large-en-v1.5.csv),
 | `rebind` / `drop_bind` | sensitivity | move/remove an activity↔attribute binding | binds > 0 |
 | `relabel_single` | **limitation** | rename 1 activity to an unrelated term | see §Limitations |
 
-## Results (7 models, 162 applicable variants)
+## Results (8 models, 162 applicable variants)
 
 Raw characterization (`tau=off`):
 
@@ -81,10 +83,8 @@ Raw characterization (`tau=off`):
 | **Sensitivity** | **101/102** | **101/102** |
 | **Limitation** (blindness at tau=off) | 8/8 | 8/8 |
 
-Extra sanity (gte-large): the **7 real pairs** original↔reconstructed give **0.000**
-across all perspectives (consistent with the paper's Semantic Distance = 0 column);
-models from **different domains** give **0.98–1.00** (the metric cleanly separates what
-is genuinely different).
+Extra sanity (gte-large): the **8 real pairs** original↔reconstructed give **0.000**
+across all perspectives (consistent with the paper's Semantic Distance = 0 column).
 
 ### Sensitivity is (almost) perfect — embedder-independent
 Every semantic change fires **only** the right perspective. Examples (model246):
@@ -141,15 +141,16 @@ embedder limitation (anisotropic space) in the threats to validity.
 ## Limitations revealed (threats to validity)
 
 ### 1. Activity pairing is the weak link — and the stronger embedder is worse
-Invariance only fails on `syn_names`/`syn_all`/`recon_paraphrase` (variants that
-**substitute** labels with synonyms). Counterintuitively, **gte-large fails more**
+Invariance failures concentrate on `syn_names`/`syn_all`/`recon_paraphrase` (variants that
+**substitute** labels with synonyms); gte-large additionally misses 3 `syn_values` cases
+(value synonyms), consistent with `inv_easy_ok = 0.893` below. Counterintuitively, **gte-large fails more**
 (28/52) than MiniLM (41/52): the gte-large cosine space is **compressed/anisotropic**
-(high baseline ~0.67–0.75; synonym-vs-unrelated margin ≈ 0.05). On models with
-"templated" labels (model246 = all "`X Equipment`", model103 = "`X Safety Y`"), after
+(a compressed cosine space with a thin synonym-vs-unrelated margin). On models with
+"templated" labels (model246 = mostly "`X Equipment`", model103 = mostly "`X Safety Y`"), after
 synonymizing the shared word the activities become nearly indistinguishable and the
 assignment **mispairs**. Evidence that it is *activity* pairing and not the metric:
-`recon_reorder` (which keeps the *words*, only reordering) gives **0.000** for both
-embedders. A higher MTEB rank does **not** guarantee better pairing here. Possible
+`recon_reorder` (which keeps the *words*, only reordering) stays at or below the 0.10
+invariance threshold for both embedders (0.000 in 6/8 models). A higher MTEB rank does **not** guarantee better pairing here. Possible
 mitigations: a cost threshold in the assignment (Mitigation (a) above), embedding
 whitening, or a more separable embedder.
 
@@ -169,7 +170,7 @@ miss (`val_antonym` on model247). Textual-value matching inherits the embedder's
 
 ## Files
 
-- [`mp_metric.py`](mp_metric.py) — the metric (mirror of notebook cell 64 + `tau`/`whiten` knobs; `DEFAULT_TAU=0.2`).
+- [`mp_metric.py`](mp_metric.py) — the metric (mirror of the notebook's Semantic Distance cell + `tau`/`whiten` knobs; `DEFAULT_TAU=0.2`).
 - [`generate_and_evaluate.py`](generate_and_evaluate.py) — generates and evaluates the variants.
 - [`tau_sweep.py`](tau_sweep.py) — τ / whitening sweep (Mitigation (a)).
 - `variants/<model>/` — `base.decl` + one `.decl` per applicable variant (170 files).

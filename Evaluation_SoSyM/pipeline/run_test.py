@@ -1,5 +1,5 @@
 """
-run_test.py -- MULTI-PROVIDER 2-model flow + data-analysis test of the Nisaba pipeline.
+run_test.py -- multi-provider generation + data-analysis run of the Nisaba pipeline over the full Evaluation_SoSyM set.
 
 Runs the full flow for each of the FOUR generator providers (xAI, Google, DeepSeek, Z-AI), each run
 with reasoning disabled. For each (model x provider):
@@ -29,7 +29,7 @@ LOGJL  = os.path.join(ROOT, "llm_calls.jsonl")
 N.set_log_path(LOGJL)
 
 # Four generators (2 proprietary + 2 open-weight), all run with reasoning disabled. Every generator
-# scores below the weakest reader (see understandability_test.py: gpt-5.6-terra 34.9, kimi-k2.5 34.0),
+# scores below the weakest reader (see understandability_test.py: qwen3.7-plus 34.6, kimi-k2.5 34.0),
 # so descriptions are assessed by models strictly more capable than the one that produced them.
 PROVIDERS = {
     "anthropic": {"gen": "anthropic/claude-sonnet-5", "gp": {"reasoning_effort": "none"}},   # 32.6

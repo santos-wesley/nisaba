@@ -2,7 +2,7 @@
 """
 Stress-test of the multi-perspective semantic distance metric.
 
-Generates controlled VARIANTS of each real .decl model (Evaluation_BISE) and
+Generates controlled VARIANTS of each real .decl model (base_models/) and
 evaluates the base-vs-variant distance, to expose the metric's behavior.
 
 The framing is the real use case: the metric scores models RECONSTRUCTED from a

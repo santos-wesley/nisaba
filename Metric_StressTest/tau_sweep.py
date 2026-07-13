@@ -3,7 +3,7 @@
 Sweep of the pairing cost threshold `tau` (and the 'center' whitening), to calibrate
 mitigation (a): reject bad matches instead of forcing the bijection.
 
-Reuses the already-generated variants (variants/<model>/) + the 7 real pairs.
+Reuses the already-generated variants (variants/<model>/) + the real original↔reconstructed pairs from base_models/.
 Embeddings are CACHED per string, so the tau sweep is cheap (tau/whiten only affect
 the post-processing of the assignment, not the embeddings).
 
@@ -13,7 +13,7 @@ Metrics per (tau, whiten):
                    enum_synonym) that stay ~0                              [want 1.0]
   inv_hard_ok    : same for the hard cases (syn_names/syn_all/recon_paraphrase)
   sens_ok        : fraction of sensitivities still detected               [want ~1.0]
-  realpair_max   : largest distance over the 7 identical real pairs       [must be 0]
+  realpair_max   : largest distance over the identical real pairs       [must be 0]
 
 Usage: [STRESS_EMB=<model>] python tau_sweep.py
 """
@@ -70,7 +70,7 @@ EMB = CachingEmbedder()
 
 
 def read_rows():
-    """(model, variant, category, expected) from the generated variants + 7 real pairs."""
+    """(model, variant, category, expected) from the generated variants + the real pairs."""
     rows = []
     # variants: take the list from the gte CSV (same set for any embedder)
     csvp = os.path.join(HERE, 'results_gte-large-en-v1.5.csv')
@@ -81,7 +81,7 @@ def read_rows():
             if os.path.exists(base) and os.path.exists(var):
                 rows.append((r['model'], r['variant'], r['category'], r['expected'],
                              open(base, encoding='utf-8').read(), open(var, encoding='utf-8').read()))
-    # 7 real pairs
+    # real pairs: each base model vs. its pipeline reconstruction
     for root, _d, files in os.walk(BASE):
         for f in sorted(files):
             if f.endswith('.decl') and 'reconstructed' not in f:

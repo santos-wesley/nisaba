@@ -25,7 +25,7 @@ def nisaba_narrative(text):
     i = text.find("## Interleaved Description")
     return text[i:] if i >= 0 else text
 
-# fixed models (real OpenRouter slugs confirmed in the pilot)
+# fixed models (version-pinned OpenRouter slugs)
 # Reader PANEL (2, cross-vendor, comparable pm-llm-benchmark, reasoning OFF): QA + reconstruction are
 # AVERAGED over both readers so the anchor is not hostage to one reader's idiosyncrasies.
 # The panel avoids OpenAI and Google (they authored the 40 source models being described -> reader

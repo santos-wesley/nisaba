@@ -1,5 +1,5 @@
-"""Low-cost probe: verify each generator supports what the pipeline needs
-(chat + function-calling + structured output)."""
+"""Low-cost probe: verify that candidate providers support what the pipeline needs
+(chat + function-calling + structured output) before committing to a generator lineup."""
 import os, sys
 from pydantic import BaseModel
 import nisaba_port as N

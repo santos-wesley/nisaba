@@ -1,6 +1,6 @@
-# Evaluation_SoSyM — Evaluation dataset **and pipeline run** (SoSyM revision)
+# Evaluation_SoSyM — Evaluation dataset **and pipeline run** (SoSyM study)
 
-This folder contains the **evaluation model set for the SoSyM revision** of the Nisaba study **together with the full pipeline, the generated artifacts, and the aggregated results**. It **replaces** the eight-model set of our preliminary (BISE-era) evaluation --- preserved in the repository history and, as the metric calibration set, in `Metric_StressTest/base_models/` --- whose final benchmark reused a model (`model250`) that had also been part of the preliminary prompt-tuning phase — a train/test contamination that this fresh, held-out set removes.
+This folder is the full empirical basis of the Nisaba study: the **forty held-out MP-Declare source models**, the **pipeline** that generates and assesses their natural-language descriptions ([`pipeline/`](pipeline/)), **every generated artifact** (intermediary and final descriptions, reconstructions, reader outputs), the **aggregated results**, and the **complete LLM call logs**. Every number reported in the paper traces to a file in this folder (see the paper's *Artifact Provenance* appendix).
 
 ## Provenance
 
@@ -25,11 +25,11 @@ The set is **balanced** across the two factors that structure Terpsichora and **
 
 Within each cell, the 10 models were chosen by **maximum-diversity (farthest-point) sampling** over a standardized feature vector — size, density, number of distinct constraint templates, count of data conditions, temporal conditions, correlation conditions, cardinality constraints, attribute count and type mix (enumeration/integer/float), and number of binds — with an added coverage bonus so that distinct **business domains** are represented. The selection is deterministic (fixed seeding and tie-breaking) and reproducible (see `selection_manifest.csv`).
 
-Every selected model was verified to be **byte-distinct from the eight preliminary-evaluation models** (MD5 exclusion), and all 40 model IDs are globally unique.
+The set is **held out by construction**: every selected model is byte-distinct (MD5-verified) from the eight models of our preliminary study (da Silva Santos et al., ICPM 2024 Workshops)---the models used during prompt development, kept as the metric calibration set in [`../Metric_StressTest/base_models/`](../Metric_StressTest/base_models/)---and all 40 model IDs are globally unique, so no evaluation model was seen during the framework's design or tuning.
 
 ### Diversity achieved
 - **25** distinct constraint templates across the set (unary existence/`Init`/`End`, positive relations, `Chain`/`Alternate`, and negative templates).
-- **13** business domains (Security/Cyber, Finance/Banking, Healthcare, Logistics, Manufacturing, HR, IT, Customer/Sales, Legal/Compliance, Energy, Education, Insurance, Government/Public, Other).
+- **13** business domains (Security/Cyber, Finance/Banking, Healthcare, Logistics, Manufacturing, HR, IT, Customer/Sales, Legal/Compliance, Energy, Insurance, Government/Public, Other).
 - **35/40** exercise temporal conditions, **30/40** data conditions, **14/40** correlation conditions, **23/40** negative templates.
 - Model size spans **16–30**.
 
@@ -83,6 +83,7 @@ Evaluation_SoSyM/
   understandability_results_v2.json                       # per-combo reader results (QA/recoverability/AC1)
   llm_calls.jsonl · understandability_calls.jsonl         # FULL LLM request/response logs (transparency/replicability)
   *.log                           # run logs (generation passes, reader run, DMRST, setup)
+  _guidelines_dump.txt · template_audit.txt               # RST-guideline prompt dump · declare4py template-semantics audit
   DMRST_Parser/                   # NOT versioned (gitignored, ~1.2 GB) — see "DMRST" below
 ```
 

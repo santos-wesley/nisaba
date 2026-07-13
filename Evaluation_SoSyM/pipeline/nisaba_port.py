@@ -1,6 +1,6 @@
 """
-nisaba_port.py -- local, provider-agnostic port of the Nisaba pipeline
-(from Github repo/Nisaba_(BISE_Journal).ipynb) for a 2-model flow test.
+nisaba_port.py -- local, provider-agnostic port of the Nisaba pipeline,
+with all definitions loaded verbatim from Nisaba_(SoSym_Journal).ipynb.
 
 Design:
   * All PROMPTS, the reconstruction SCHEMA (MPDeclareModel), the function-calling
